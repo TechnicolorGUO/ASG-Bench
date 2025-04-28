@@ -28,3 +28,35 @@ Here is the information for the task:
 Category: {category}
 Number of topics: {num_topics}
 '''
+
+CATEGORIZE_SURVEY_TITLES = '''
+You are given a list of academic survey papers, each with its title and arXiv id:
+
+{survey_titles}
+
+Your task is to cluster these papers into {num_clusters} coherent and meaningful groups based on their topics or research areas.
+
+For each cluster, provide:
+- A concise, academic topic label (as the key)
+- A list of the survey papers that belong to this cluster (as the value), where each paper is represented by its title and arXiv id in the same dictionary format as above.
+
+Guidelines:
+1. The topic label should accurately summarize the main theme or field covered by the papers in the cluster.
+2. Papers in the same cluster should be closely related in content or research area.
+3. The clusters should be distinct from each other and cover all the provided papers.
+4. Do not create overlapping clusters. Each paper should belong to only one cluster.
+5. Output the result as a valid JSON object, with the topic label as the key and a list of corresponding paper dicts as the value.
+
+Output format example:
+{{
+  "Topic Label 1": [
+    {{"title": "Survey Title A", "arxiv_id": "xxxx.xxxxx"}},
+    {{"title": "Survey Title B", "arxiv_id": "yyyy.yyyyy"}}
+  ],
+  "Topic Label 2": [
+    {{"title": "Survey Title C", "arxiv_id": "zzzz.zzzzz"}}
+  ]
+}}
+You are not allowed to include topic labels like "Other Advanced Topics in xxx" in your output and every cluster should have a meaningful label.
+Now, please return your clustering result for the provided survey papers without any other information.
+'''
