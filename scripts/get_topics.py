@@ -1,11 +1,13 @@
 import argparse
+from datetime import datetime, timedelta
 import json
 import os
+import shutil
 import time
 import requests
 from tqdm import tqdm
 from utils import download_arxiv_pdf, getClient, generateResponse, robust_json_parse
-from prompts import CATEGORIZE_SURVEY_TITLES, EXPAND_CATEGORY_TO_TOPICS
+from prompts import CATEGORIZE_SURVEY_TITLES, CATEGORIZE_SURVEY_TITLES_SINGLE, EXPAND_CATEGORY_TO_TOPICS, CATEGORIZE_SURVEY_TITLES_HEURISTIC
 import arxiv
 
 COARSE_CATEGORIES = [
@@ -202,11 +204,11 @@ FINE_CATEGORIES = [
 
 category_map = {
         "cs": [
-            "cs.AI", "cs.CL", "cs.CC", "cs.CE", "cs.CG", "cs.GT", "cs.CV", "cs.CY",
-            "cs.CR", "cs.DS", "cs.DB", "cs.DL", "cs.DM", "cs.DC", "cs.ET", "cs.FL",
-            "cs.GL", "cs.GR", "cs.HC", "cs.IR", "cs.IT", "cs.LO", "cs.LG", "cs.MA",
-            "cs.MM", "cs.NI", "cs.NE", "cs.NA", "cs.OS", "cs.OH", "cs.PF", "cs.PL",
-            "cs.RO", "cs.SI", "cs.SE", "cs.SD", "cs.SC"
+            "cs.AI", "cs.AR", "cs.CC", "cs.CE", "cs.CG", "cs.CL", "cs.CR", "cs.CV", "cs.CY",
+            "cs.DB", "cs.DC", "cs.DL", "cs.DM", "cs.DS", "cs.ET", "cs.FL", "cs.GL", "cs.GR",
+            "cs.GT", "cs.HC", "cs.IR", "cs.IT", "cs.LG", "cs.LO", "cs.MA", "cs.MM", "cs.MS",
+            "cs.NA", "cs.NE", "cs.NI", "cs.OH", "cs.OS", "cs.PF", "cs.PL", "cs.RO", "cs.SC",
+            "cs.SE", "cs.SI", "cs.SD", "cs.SY"
         ],
         "stat": [
             "stat.AP", "stat.CO", "stat.ML", "stat.ME", "stat.OT", "stat.TH"
@@ -272,100 +274,175 @@ def get_top_survey_papers(cats, num=10):
         })
     return papers
 
-def get_s2_metadata(arxiv_id):
-    url = f"https://api.semanticscholar.org/graph/v1/paper/arXiv:{arxiv_id}?fields=citationCount,venue"
+def get_s2_citation(arxiv_id):
+    url = f"https://api.semanticscholar.org/graph/v1/paper/arXiv:{arxiv_id}?fields=citationCount"
     for _ in range(3):
         try:
             resp = requests.get(url, timeout=10)
             if resp.status_code == 200:
-                return resp.json()
+                # print(f"Fetched citation count for {arxiv_id}: {resp.json().get('citationCount', 0)}")
+                return resp.json().get("citationCount", 0)
             elif resp.status_code == 404:
-                return None
+                # print(f"Paper {arxiv_id} not found on Semantic Scholar.")
+                return 0
             else:
                 time.sleep(1)
         except Exception as e:
             time.sleep(1)
-    return None
+    return 0
 
-def get_top_survey_papers_s2(cats, num=10, min_citations=30, must_have_venue=False):
+def get_top_survey_papers_by_citation(
+    cats, num=10, oversample=10,
+    months_ago_start=36, months_ago_end=3
+):
     """
-    支持传入单个cat字符串，或cat列表(List[str])
-    只返回title和arxiv_id，内部用S2做引用量和venue筛选
+    只考虑发表在 [months_ago_start, months_ago_end] 之间的论文
     """
-    import arxiv
-    if isinstance(cats, str):
-        cats = [cats]
-    cat_query = " OR ".join([f"cat:{c}" for c in cats])
-    query = f"({cat_query}) AND (ti:survey OR ti:review)"
-    search = arxiv.Search(
-        query=query,
-        max_results=num*4,  # 多抓一点以便筛选
-        sort_by=arxiv.SortCriterion.SubmittedDate,
-        sort_order=arxiv.SortOrder.Descending
+    now = datetime.utcnow()
+    start_date = now - timedelta(days=months_ago_start*30)
+    end_date = now - timedelta(days=months_ago_end*30)
+
+    # 1. 抓取足够的论文
+    arxiv_papers = get_arxiv_papers_in_time_range(
+        cats, start_date, end_date, max_results=num*oversample
     )
+
+    # 2. 查询 citation 并排序
     papers = []
-    for result in search.results():
+    for result in arxiv_papers:
         arxiv_id = result.entry_id.split('/')[-1].split('v')[0]
-        s2 = get_s2_metadata(arxiv_id)
-        if not s2:
-            continue
-        if s2.get("citationCount", 0) < min_citations:
-            continue
-        if must_have_venue and not s2.get("venue"):
-            continue
+        citation = get_s2_citation(arxiv_id)
         papers.append({
             "title": result.title.strip(),
-            "arxiv_id": arxiv_id
+            "arxiv_id": arxiv_id,
+            "citationCount": citation
         })
-        if len(papers) >= num:
-            break
-        time.sleep(0.4)  # 避免 API 被限流
-    return papers
+        time.sleep(0.2)
+    papers.sort(key=lambda x: x["citationCount"], reverse=True)
+    return [{"title": p["title"], "arxiv_id": p["arxiv_id"]} for p in papers[:num]]
+
+def is_true_survey_or_review(title, summary):
+    """Heuristically filter for real survey/review papers."""
+    title = title.lower()
+    summary = summary.lower()
+    # Exclude common false positives
+    bad_keywords = [
+        "code reviewer", "reviewer assignment", "reviewer selection", "peer review", "peer-review",
+        "reviewing system", "review process", "reviewer recommendation"
+    ]
+    if any(bad in title for bad in bad_keywords):
+        return False
+    # Strong positive phrases
+    good_phrases = [
+        "a survey of", "an overview of", "a review of", "this survey", "this review",
+        "comprehensive review", "comprehensive survey", "this paper surveys", "this paper reviews",
+        "literature review", "review and prospect", "survey and taxonomy", "survey and analysis"
+    ]
+    if any(phrase in title for phrase in good_phrases):
+        return True
+    if any(phrase in summary for phrase in good_phrases):
+        return True
+    # Allow "survey" in title but require strictness for "review"
+    # if "survey" in title:
+    #     return True
+    return False
+
+def get_arxiv_papers_in_time_range(cats, start_date, end_date, max_results=10):
+
+    """
+    Iterate all categories, fetch survey/review, deduplicate and return within time window,
+    with additional heuristic filtering for true survey/review papers.
+    """
+    client = arxiv.Client()
+    seen_ids = set()
+    unique_papers = []
+    for cat in cats:
+        query = f"cat:{cat} AND (ti:survey OR ti:review)"
+        search = arxiv.Search(
+            query=query,
+            max_results=max_results,
+            sort_by=arxiv.SortCriterion.SubmittedDate,
+            sort_order=arxiv.SortOrder.Descending
+        )
+        for result in client.results(search):
+            arxiv_id = result.entry_id.split('/')[-1].split('v')[0]
+            published = result.published.replace(tzinfo=None)
+            # Heuristic filter here!
+            if (
+                arxiv_id not in seen_ids
+                and start_date <= published <= end_date
+                and is_true_survey_or_review(result.title, result.summary)
+            ):
+                seen_ids.add(arxiv_id)
+                unique_papers.append(result)
+    print(f"Found {len(unique_papers)} unique, filtered papers in the date range across all cats.")
+    return unique_papers
+
+def copy_dataset_to_surveys(systems):
+    src_root = os.path.join("outputs", "dataset")
+    dst_root = "surveys"
+    if os.path.exists(dst_root):
+        shutil.rmtree(dst_root)
+    shutil.copytree(src_root, dst_root)
+    # 遍历 surveys/一级/主题名 目录（即三级目录）
+    for dirpath, dirnames, filenames in os.walk(dst_root):
+        rel_path = os.path.relpath(dirpath, dst_root)
+        parts = rel_path.split(os.sep)
+        # 只在 surveys/一级/主题名 目录下建 system 子文件夹
+        if len(parts) == 2:
+            for sys_name in systems:
+                sys_dir = os.path.join(dirpath, sys_name)
+                os.makedirs(sys_dir, exist_ok=True)
+
+def generate_tasks_json(systems, surveys_root="surveys"):
+    tasks = {}
+    leaf_dirs = []
+    for dirpath, dirnames, filenames in os.walk(surveys_root):
+        rel_path = os.path.relpath(dirpath, surveys_root)
+        parts = rel_path.split(os.sep)
+        if len(parts) == 2:
+            leaf_dirs.append(dirpath)
+
+    for system in systems:
+        system_tasks = []
+        for leaf in leaf_dirs:
+            folder_name = os.path.basename(leaf)
+            system_path = os.path.join(leaf, system)
+            abs_system_path = os.path.abspath(system_path).replace(os.sep, '/')
+            system_tasks.append({folder_name: abs_system_path})
+        tasks[system] = system_tasks
+
+    tasks_json_path = os.path.join(surveys_root, "tasks.json")
+    with open(tasks_json_path, "w", encoding="utf-8") as f:
+        json.dump(tasks, f, indent=2, ensure_ascii=False)
+    print(f"Generated {tasks_json_path}")
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--granularity', choices=['coarse', 'fine'], default='coarse')
-    parser.add_argument('--num-per-cat', type=int, default=5)
     parser.add_argument('--numofsurvey', type=int, default=50)
-    parser.add_argument('--output', type=str, default='topics.json')
-    parser.add_argument('--with-survey', action='store_true', help='Whether to fetch and cluster related survey papers.')
+    parser.add_argument('--systems', nargs='+', default=[], help='List of system names to create subfolders for')
     args = parser.parse_args()
 
-    categories = COARSE_CATEGORIES if args.granularity == 'coarse' else FINE_CATEGORIES
-
-    client = getClient()
-    all_topics = {}
-
-    if not args.with_survey:
-        # 原有逻辑
-        for cat in tqdm(categories, desc="Generating topics"):
-            prompt = EXPAND_CATEGORY_TO_TOPICS.format(category=cat, num_topics=args.num_per_cat)
-            for attempt in range(3):
-                try:
-                    raw_response = generateResponse(client, prompt, max_tokens=1024, temerature=0.3)
-                    topics = robust_json_parse(raw_response)
-                    break
-                except Exception as e:
-                    print(f"\nError for '{cat}' (attempt {attempt+1}): {e}")
-                    if attempt == 2:
-                        print(f"Failed to process category: {cat}, skipping.")
-                        topics = {}
-                    else:
-                        time.sleep(1)
-            all_topics[cat] = topics
-        with open(args.output, 'w', encoding='utf-8') as f:
-            json.dump(all_topics, f, indent=2, ensure_ascii=False)
-        print(f"Saved to {args.output}")
+    dataset_dir = os.path.join("outputs", "dataset")
+    # ======== 检查 dataset 是否已存在 ==========
+    if os.path.exists(dataset_dir):
+        print(f"{dataset_dir} exists, skipping data generation.")
+        copy_dataset_to_surveys(args.systems)
+        generate_tasks_json(args.systems)
+        print("Copied existing dataset to surveys/ and created system subfolders.")
         return
 
-    # =========== 新增 with-survey 逻辑 ==============
+    client = getClient()
+
     if args.granularity == 'coarse':
         # 遍历 category_map 的 key，每个 key 下所有 cat 一起检索
         coarse_surveys_map = {}
         for key in tqdm(category_map, desc="Processing coarse categories"):
             cats = category_map[key]
             print(f"Fetching surveys for categories: {cats}")
-            all_surveys = get_top_survey_papers(cats, args.numofsurvey)
+            # all_surveys = get_top_survey_papers(cats, args.numofsurvey)
+            all_surveys = get_top_survey_papers_by_citation(cats, num=args.numofsurvey, oversample=5)
             # 去重
             seen_ids = set()
             unique_surveys = []
@@ -378,10 +455,18 @@ def main():
 
             # 聚类
             survey_str = json.dumps(unique_surveys, ensure_ascii=False, indent=2)
-            prompt = CATEGORIZE_SURVEY_TITLES.format(
+            # prompt = CATEGORIZE_SURVEY_TITLES.format(
+            #     survey_titles=survey_str,
+            #     num_clusters=args.num_per_cat
+            # )
+            # prompt = CATEGORIZE_SURVEY_TITLES_HEURISTIC.format(
+            #     survey_titles=survey_str,
+            # )
+            prompt = CATEGORIZE_SURVEY_TITLES_SINGLE.format(
                 survey_titles=survey_str,
-                num_clusters=args.num_per_cat
             )
+
+
             for attempt in range(3):
                 try:
                     raw_response = generateResponse(client, prompt, max_tokens=2048, temerature=0.3)
@@ -410,21 +495,37 @@ def main():
                     except Exception as e:
                         print(f"Failed to download {paper['arxiv_id']}: {e}")
         os.makedirs("outputs", exist_ok=True)
-        with open("outputs/coarse_topics_with_surveys.json", "w", encoding="utf-8") as f:
+        with open("outputs/dataset/topics.json", "w", encoding="utf-8") as f:
             json.dump(coarse_surveys_map, f, indent=2, ensure_ascii=False)
-        print("Saved outputs/coarse_topics_with_surveys.json")
+        print("Saved outputs/dataset/topics.json")
 
     elif args.granularity == 'fine':
         fine_surveys_map = {}
         # 遍历 category_map 的 key，每个 key 下每个 cat 单独处理
         for key in tqdm(category_map, desc="Processing fine categories"):
+            fine_surveys_map[key] = {}
             for cat in category_map[key]:
-                all_surveys = get_top_survey_papers(cat, args.numofsurvey)
+                cat_list = [cat]  # get_top_survey_papers_by_citation接收list
+                # all_surveys = get_top_survey_papers(cat_list, args.numofsurvey)
+                all_surveys = get_top_survey_papers_by_citation(cat_list, num=args.numofsurvey, oversample=10)
+                # 去重
+                seen_ids = set()
+                unique_surveys = []
+                for paper in all_surveys:
+                    if paper['arxiv_id'] not in seen_ids:
+                        unique_surveys.append(paper)
+                        seen_ids.add(paper['arxiv_id'])
                 # 聚类
-                survey_str = json.dumps(all_surveys, ensure_ascii=False, indent=2)
-                prompt = CATEGORIZE_SURVEY_TITLES.format(
+                survey_str = json.dumps(unique_surveys, ensure_ascii=False, indent=2)
+                # prompt = CATEGORIZE_SURVEY_TITLES.format(
+                #     survey_titles=survey_str,
+                #     num_clusters=args.num_per_cat
+                # )
+                # prompt = CATEGORIZE_SURVEY_TITLES_HEURISTIC.format(
+                #     survey_titles=survey_str,
+                # )
+                prompt = CATEGORIZE_SURVEY_TITLES_SINGLE.format(
                     survey_titles=survey_str,
-                    num_clusters=args.num_per_cat
                 )
                 for attempt in range(3):
                     try:
@@ -443,6 +544,8 @@ def main():
                 os.makedirs(out_dir, exist_ok=True)
                 with open(os.path.join(out_dir, "clusters.json"), 'w', encoding='utf-8') as f:
                     json.dump(clusters, f, indent=2, ensure_ascii=False)
+                # 保存进fine_surveys_map
+                fine_surveys_map[key][cat] = clusters
                 # 下载PDF
                 for topic, papers in clusters.items():
                     topic_dir = os.path.join(out_dir, topic.replace('/', '_'))
@@ -454,11 +557,14 @@ def main():
                         except Exception as e:
                             print(f"Failed to download {paper['arxiv_id']}: {e}")
         os.makedirs("outputs", exist_ok=True)
-        with open("outputs/fine_topics_with_surveys.json", "w", encoding="utf-8") as f:
+        with open("outputs/dataset/topics.json", "w", encoding="utf-8") as f:
             json.dump(fine_surveys_map, f, indent=2, ensure_ascii=False)
-        print("Saved outputs/fine_topics_with_surveys.json")
-
-    print("All survey clustering and downloads completed.")
+        print("Saved outputs/dataset/topics.json")
+    copy_dataset_to_surveys(args.systems)
+    generate_tasks_json(args.systems)
+    print("Data generation complete. Copied dataset to surveys/ and created system subfolders.")
 
 if __name__ == "__main__":
     main()
+
+#python scripts/main.py --granularity coarse --numofsurvey 10 --systems InteractiveSurvey AutoSurvey SurveyX SurveyForge LLMxMapReduce vanilla

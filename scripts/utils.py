@@ -34,6 +34,11 @@ def generateResponse(client, prompt, max_tokens=768, temerature=0.5):
     return text
 
 def robust_json_parse(raw_response):
+    """
+    Try to parse a JSON object from raw_response.
+    If failed, try to extract the first {...} block and parse again.
+    If still failed, return an empty dict and print a warning.
+    """
     try:
         return json.loads(raw_response)
     except Exception:
@@ -43,7 +48,9 @@ def robust_json_parse(raw_response):
                 return json.loads(match.group(1))
             except Exception:
                 pass
-        raise ValueError("Failed to parse LLM response as JSON:\n" + raw_response)
+        # If all parsing fails, return empty dict and print warning
+        print("Warning: Failed to parse LLM response as JSON, returning empty dict.\nRaw response:", raw_response)
+        return {}
     
 def download_arxiv_pdf(arxiv_id: str, save_dir: str) -> str:
     """
@@ -81,3 +88,97 @@ def download_arxiv_pdf(arxiv_id: str, save_dir: str) -> str:
             os.remove(file_path)
         print(f"Failed to download {arxiv_id}: {e}")
         raise
+
+def extract_and_save_outline_from_md(md_file_path):
+    if not os.path.isfile(md_file_path):
+        raise FileNotFoundError(f"Markdown file not found: {md_file_path}")
+
+    # 1. 读取md文件内容
+    with open(md_file_path, 'r', encoding='utf-8') as file:
+        lines = file.readlines()
+    
+    outline = []
+    pattern = r'^(#{1,6})\s+(.*)'
+
+    # 2. 提取标题
+    for line in lines:
+        match = re.match(pattern, line)
+        if match:
+            level = len(match.group(1))
+            title = match.group(2).strip()
+            outline.append([level, title])
+
+    # 3. 生成json路径
+    json_path = os.path.join(os.path.dirname(md_file_path), "outline.json")
+
+    # 4. 保存为json
+    with open(json_path, 'w', encoding='utf-8') as f:
+        json.dump(outline, f, ensure_ascii=False, indent=2)
+    
+    # 5. 返回结果
+    return outline
+
+def extract_references_from_md(md_path):
+    """
+    Extract the References section from a Markdown file.
+    Returns reference list as a string (one per line), or empty string if not found.
+    """
+    with open(md_path, "r", encoding="utf-8") as f:
+        text = f.read()
+    # Match ## References 或 # Reference 及类似写法，允许多余空格或其他大小写
+    pattern = re.compile(
+        r'^(#{1,6})\s*(References?|Bibliography|参考文献)[\s#]*\n+([\s\S]*?)(?=^#{1,6}\s|\Z)', 
+        re.IGNORECASE | re.MULTILINE
+    )
+    match = pattern.search(text)
+    if match:
+        references_block = match.group(3).strip()
+        # 按行分割，去掉空行
+        references = [line for line in references_block.splitlines() if line.strip()]
+        return references
+    else:
+        return []
+
+def fill_single_criterion_prompt(
+    prompt_template: str,
+    content: str,
+    topic: str,
+    criterion: dict,
+    criteria_name: str,
+    type: str
+) -> str:
+    """
+    自动填充评价 prompt，支持 survey/outline，支持输出 json 格式
+    :param prompt_template: prompt模板
+    :param content: 需要评价的内容
+    :param topic: 主题
+    :param criterion: 评价标准
+    :param criteria_name: 该 criterion 的名称
+    :param content_key: 模板内容字段名
+    :return: prompt字符串
+    """
+    format_args = {
+        "topic": topic,
+        "criterion_description": criterion['description'],
+        "score_1": criterion['score 1'],
+        "score_2": criterion['score 2'],
+        "score_3": criterion['score 3'],
+        "score_4": criterion['score 4'],
+        "score_5": criterion['score 5'],
+        "criteria_name": criteria_name,
+        type: content
+    }
+    return prompt_template.format(**format_args)
+
+def extract_topic_from_path(md_path: str) -> str:
+    # 先绝对路径化，防止不同系统分隔符问题
+    abs_path = os.path.abspath(md_path)
+    # 获取上上级目录名
+    topic = os.path.basename(os.path.dirname(os.path.dirname(abs_path)))
+    return topic
+
+if __name__ == "__main__":
+    # 测试提取大纲
+    md_file_path = "surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"
+    outline = extract_and_save_outline_from_md(md_file_path)
+    print(outline)
