@@ -1,6 +1,9 @@
 import json
 import os
 import re
+import shlex
+import shutil
+import subprocess
 from openai import OpenAI
 
 from dotenv import load_dotenv
@@ -90,32 +93,51 @@ def download_arxiv_pdf(arxiv_id: str, save_dir: str) -> str:
         raise
 
 def extract_and_save_outline_from_md(md_file_path):
+    """
+    只处理#开头的标题。若全是一级标题，则按数字编号决定层级，否则用井号数量决定层级。
+    """
     if not os.path.isfile(md_file_path):
         raise FileNotFoundError(f"Markdown file not found: {md_file_path}")
 
-    # 1. 读取md文件内容
     with open(md_file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
-    
-    outline = []
-    pattern = r'^(#{1,6})\s+(.*)'
 
-    # 2. 提取标题
-    for line in lines:
-        match = re.match(pattern, line)
+    # 1. 找出所有markdown标题
+    pattern_hash = r'^(#{1,6})\s+(.+)'
+    hash_headers = []
+    for i, line in enumerate(lines):
+        match = re.match(pattern_hash, line)
         if match:
             level = len(match.group(1))
             title = match.group(2).strip()
+            hash_headers.append((i, level, title))
+
+    # 2. 判断是否只有一个层级
+    levels = {lvl for _, lvl, _ in hash_headers}
+    use_numbered = (len(levels) == 1 and hash_headers)
+
+    outline = []
+    if use_numbered:
+        # 只遍历所有井号行
+        for _, _, title in hash_headers:
+            # 检查标题内容是否以数字编号开头
+            match = re.match(r'^((?:\d+\.)*\d+)[\s\.]+(.+)', title)
+            if match:
+                number_str = match.group(1)
+                sub_title = match.group(2).strip()
+                level = number_str.count('.') + 1
+                outline.append([level, sub_title])
+            else:
+                # 没有数字编号就是一级
+                outline.append([1, title])
+    else:
+        # 普通模式，井号数决定层级
+        for _, level, title in hash_headers:
             outline.append([level, title])
 
-    # 3. 生成json路径
     json_path = os.path.join(os.path.dirname(md_file_path), "outline.json")
-
-    # 4. 保存为json
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(outline, f, ensure_ascii=False, indent=2)
-    
-    # 5. 返回结果
     return outline
 
 def extract_references_from_md(md_path):
@@ -177,8 +199,209 @@ def extract_topic_from_path(md_path: str) -> str:
     topic = os.path.basename(os.path.dirname(os.path.dirname(abs_path)))
     return topic
 
+def build_outline_tree_from_levels(outline_list):
+    """
+    将 [level, title] 格式的大纲解析为树结构。
+    
+    Args:
+        outline_list: List of [level, title]，层数从1开始，顺序排列。
+
+    Returns:
+        node_objs: 所有节点字典（含children, parent, index）
+        top_nodes: 顶层节点列表
+    """
+    node_objs = []
+    for idx, (level, title) in enumerate(outline_list):
+        node = {
+            "level": level,
+            "title": title,
+            "index": idx,           # 唯一编号，用顺序号
+            "children": [],
+            "parent": None
+        }
+        node_objs.append(node)
+
+    stack = []
+    for node in node_objs:
+        while stack and stack[-1]["level"] >= node["level"]:
+            stack.pop()
+        if stack:
+            node["parent"] = stack[-1]["index"]
+            stack[-1]["children"].append(node)
+        stack.append(node)
+
+    top_nodes = [node for node in node_objs if node["parent"] is None]
+    return node_objs, top_nodes
+
+def pdf2md(pdf_path, output_dir):
+    """
+    调用 magic-pdf 将 PDF 转换为 markdown，并将生成的md移动到output_dir根目录。
+    移动完成后，删除 output_dir/pdf_stem 文件夹（即 'auto' 上层目录）。
+    :param output_dir: 输出目录
+    :param pdf_path: PDF 文件路径，可选
+    :return: (md_new_path, md_content)
+    """
+    # 构造命令
+    cmd = ["magic-pdf"]
+    if pdf_path:
+        cmd += ["-p", pdf_path]
+    cmd += ["-o", output_dir]
+
+    try:
+        print("Running command:", " ".join(shlex.quote(str(x)) for x in cmd))
+        subprocess.run(cmd, check=True)
+        print("Conversion finished!")
+    except subprocess.CalledProcessError as e:
+        print("Error running magic-pdf:", e)
+        return None, None
+
+    pdf_filename = os.path.basename(pdf_path)
+    pdf_stem = pdf_filename.replace(".pdf", "")
+    md_orig_path = os.path.join(output_dir, pdf_stem, "auto", pdf_stem + ".md")
+    md_new_path = os.path.join(output_dir, pdf_stem + ".md")
+    pdf_stem_dir = os.path.join(output_dir, pdf_stem)
+
+    # 读取内容并移动
+    if not os.path.exists(md_orig_path):
+        print(f"Cannot find md file at {md_orig_path}")
+        return None, None
+
+    shutil.move(md_orig_path, md_new_path)
+
+    # 删除整个 output_dir/pdf_stem 文件夹
+    try:
+        shutil.rmtree(pdf_stem_dir)
+        print(f"Removed intermediate directory: {pdf_stem_dir}")
+    except Exception as e:
+        print(f"Failed to remove intermediate directory {pdf_stem_dir}: {e}")
+
+    with open(md_new_path, 'r', encoding='utf-8') as f:
+        md_content = f.read()
+    return md_new_path, md_content
+
+def count_sentences(text):
+    sentences = re.split(r"[.!?\n]+(?:\s|\n|$)", text.strip())
+    sentences = [s for s in sentences if s]
+    return len(sentences)
+
+def count_md_features(md_content):
+    """
+    统计md_content中的图片数、公式数、表格数
+    :param md_content: str, markdown文本
+    :return: dict, {'images': int, 'equations': int, 'tables': int}
+    """
+    # 图片：![](...) 或 <img ...> 或 html <img>
+    img_md = re.findall(r'!\[.*?\]\(.*?\)', md_content)
+    img_html = re.findall(r'<img [^>]*src=[\'"].*?[\'"][^>]*>', md_content, re.IGNORECASE)
+    # 常见图片也可能是 <img ... />
+    img_html2 = re.findall(r'<img [^>]*>', md_content, re.IGNORECASE)
+    image_count = len(img_md) + len(img_html)
+    # 避免重复计数
+    image_count = len(set(img_md + img_html + img_html2))
+
+    # 公式：行内 $...$，块公式 $$...$$，以及 \[...\] 和 \begin{}...\end{}
+    # 块公式
+    block_eq = re.findall(r'\$\$.*?\$\$', md_content, re.DOTALL)
+    block_eq += re.findall(r'\\\[.*?\\\]', md_content, re.DOTALL)
+    block_eq += re.findall(r'\\begin\{.*?\}.*?\\end\{.*?\}', md_content, re.DOTALL)
+    # 行内 $...$，排除 $$...$$ 的情况
+    # 这里匹配$...$但不是$$...$$
+    inline_eq = re.findall(r'(?<!\$)\$(?!\$)(.+?)(?<!\$)\$(?!\$)', md_content)
+    equation_count = len(block_eq) + len(inline_eq)
+
+    # 表格：Markdown表格（至少有一行|---|），或html <table>
+    md_tables = re.findall(
+        r'(?:\|[^\n]*\n)+\|[\s\-:|]+\|(?:\n\|[^\n]*)*', md_content)
+    html_tables = re.findall(r'<table[\s\S]*?</table>', md_content, re.IGNORECASE)
+    table_count = len(md_tables) + len(html_tables)
+
+    # 总句子数
+    sentence_count = count_sentences(md_content)
+    return {
+        'images': image_count,
+        'equations': equation_count,
+        'tables': table_count,
+        'sentences': sentence_count
+    }
+
+def read_md(md_path):
+    with open(md_path, "r", encoding="utf-8") as f:
+        return f.read()
+
+def get_deduplication_prompt(facts_list: list) -> str:
+
+    """
+    生成用于对 facts 列表去重的 Prompt。要求输出需要删除的序号（逗号分隔）。
+    """
+    numbered_facts = "\n".join([f"{i+1}. {fact}" for i, fact in enumerate(facts_list)])
+    return f"""Below is a numbered list of claims. Your task is to identify and group 
+    claims that convey the same information, removing all redundancy.
+
+    [Guidelines]:
+    - Claims that express the same fact or knowledge in different wording or detail are duplicates.
+    - If one claim is fully included within another or repeats the same idea, consider it a duplicate.
+    - Claims with differing details, context, or scope are not duplicates.
+
+    For each group of duplicates, output the serial numbers of the claims to be removed (comma-separated). 
+    Choose one claim to keep.
+
+    Example:
+    If claims 2, 5, and 8 are duplicates and claim 2 is kept, output "5,8".
+
+    List of claims:
+    {numbered_facts}
+
+    Output ONLY the serial numbers to remove. No additional text.
+    """
+
+def get_extraction_prompt(text: str) -> str:
+    """
+    Generate optimized prompt for claim extraction (v2)
+    """
+    return f"""Analyze the following text and decompose it into independent claims following strict consolidation rules:
+
+    [Claim Definition]
+    A verifiable objective factual statement that functions as an independent knowledge unit. Each claim must:
+    1. Contain complete subject-predicate-object structure
+    2. Exist independently without contextual dependency
+    3. Exclude subjective evaluations
+
+    [Merge Rules]→ Should merge when:
+    - Same subject + same predicate + different objects (e.g., "Should measure A / Should measure B" → "Should measure A and B")
+    - Different expressions of the same research conclusion
+    - Parallel elements of the same category (e.g., "A, B and C")
+
+    [Separation Rules]→ Should keep separate when:
+    - Different research subjects/objects
+    - Claims with causal/conditional relationships
+    - Findings across temporal sequences
+    - Conclusions using different verification methods
+
+    [Output Format]
+    Strict numbered list with consolidated claims maintaining grammatical integrity:
+    1. Use "and/or/including" for merged items
+    2. Separate parallel elements with commas
+    3. Prohibit abbreviations or contextual references
+
+    Below is the text you need to extract claims from:
+
+    {text}
+    """
+
+
+
 if __name__ == "__main__":
-    # 测试提取大纲
-    md_file_path = "surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"
+    # # 测试提取大纲
+    md_file_path = "surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques.md"
     outline = extract_and_save_outline_from_md(md_file_path)
-    print(outline)
+    # print(len(outline))
+    # for item in outline:
+    #     print(item)
+    # # 打印大纲
+    # # print("Outline:")
+    # tree, top_nodes = build_outline_tree_from_levels(outline)
+    # print(len(tree))
+
+    # md_path, md_content = pdf2md("surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques.pdf", "surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce")
+    # md_content = read_md("surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques/auto/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques.md")
+    # print(count_md_features(md_content))

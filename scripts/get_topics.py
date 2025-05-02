@@ -292,12 +292,17 @@ def get_s2_citation(arxiv_id):
     return 0
 
 def get_top_survey_papers_by_citation(
-    cats, num=10, oversample=10,
-    months_ago_start=36, months_ago_end=3
+    cats, num=10, oversample=5,
+    months_ago_start=36, months_ago_end=3,
+    seen_ids=None
 ):
     """
-    只考虑发表在 [months_ago_start, months_ago_end] 之间的论文
+    只考虑发表在 [months_ago_start, months_ago_end] 之间的论文，
+    并且实时过滤掉 seen_ids 中已有的 arxiv_id。
     """
+    if seen_ids is None:
+        seen_ids = set()
+
     now = datetime.utcnow()
     start_date = now - timedelta(days=months_ago_start*30)
     end_date = now - timedelta(days=months_ago_end*30)
@@ -311,13 +316,19 @@ def get_top_survey_papers_by_citation(
     papers = []
     for result in arxiv_papers:
         arxiv_id = result.entry_id.split('/')[-1].split('v')[0]
+        if arxiv_id in seen_ids:
+            continue   # 跳过已出现的
         citation = get_s2_citation(arxiv_id)
         papers.append({
             "title": result.title.strip(),
             "arxiv_id": arxiv_id,
             "citationCount": citation
         })
-        time.sleep(0.2)
+        seen_ids.add(arxiv_id)   # 记录已出现
+        # if len(papers) >= num:
+        #     break
+        time.sleep(0.1)
+    # 按引用数降序
     papers.sort(key=lambda x: x["citationCount"], reverse=True)
     return [{"title": p["title"], "arxiv_id": p["arxiv_id"]} for p in papers[:num]]
 
@@ -438,18 +449,19 @@ def main():
     if args.granularity == 'coarse':
         # 遍历 category_map 的 key，每个 key 下所有 cat 一起检索
         coarse_surveys_map = {}
+        seen_ids_global = set()
         for key in tqdm(category_map, desc="Processing coarse categories"):
             cats = category_map[key]
             print(f"Fetching surveys for categories: {cats}")
             # all_surveys = get_top_survey_papers(cats, args.numofsurvey)
-            all_surveys = get_top_survey_papers_by_citation(cats, num=args.numofsurvey, oversample=5)
+            all_surveys = get_top_survey_papers_by_citation(cats, num=args.numofsurvey, oversample=10, seen_ids=seen_ids_global)
             # 去重
-            seen_ids = set()
-            unique_surveys = []
-            for paper in all_surveys:
-                if paper['arxiv_id'] not in seen_ids:
-                    unique_surveys.append(paper)
-                    seen_ids.add(paper['arxiv_id'])
+            # unique_surveys = []
+            # for paper in all_surveys:
+            #     if paper['arxiv_id'] not in seen_ids_global:
+            #         unique_surveys.append(paper)
+            #         seen_ids_global.add(paper['arxiv_id'])
+            unique_surveys = all_surveys
 
             coarse_surveys_map[key] = unique_surveys
 
@@ -500,6 +512,7 @@ def main():
         print("Saved outputs/dataset/topics.json")
 
     elif args.granularity == 'fine':
+        seen_ids_global = set()
         fine_surveys_map = {}
         # 遍历 category_map 的 key，每个 key 下每个 cat 单独处理
         for key in tqdm(category_map, desc="Processing fine categories"):
@@ -507,14 +520,15 @@ def main():
             for cat in category_map[key]:
                 cat_list = [cat]  # get_top_survey_papers_by_citation接收list
                 # all_surveys = get_top_survey_papers(cat_list, args.numofsurvey)
-                all_surveys = get_top_survey_papers_by_citation(cat_list, num=args.numofsurvey, oversample=10)
+                all_surveys = get_top_survey_papers_by_citation(cat_list, num=args.numofsurvey, oversample=10, seen_ids=seen_ids_global)
                 # 去重
-                seen_ids = set()
-                unique_surveys = []
-                for paper in all_surveys:
-                    if paper['arxiv_id'] not in seen_ids:
-                        unique_surveys.append(paper)
-                        seen_ids.add(paper['arxiv_id'])
+                # unique_surveys = []
+                # for paper in all_surveys:
+                #     if paper['arxiv_id'] not in seen_ids_global:
+                #         unique_surveys.append(paper)
+                #         seen_ids_global.add(paper['arxiv_id'])
+                unique_surveys = all_surveys
+
                 # 聚类
                 survey_str = json.dumps(unique_surveys, ensure_ascii=False, indent=2)
                 # prompt = CATEGORIZE_SURVEY_TITLES.format(
@@ -567,4 +581,4 @@ def main():
 if __name__ == "__main__":
     main()
 
-#python scripts/main.py --granularity coarse --numofsurvey 10 --systems InteractiveSurvey AutoSurvey SurveyX SurveyForge LLMxMapReduce vanilla
+#python scripts/get_topics.py --granularity coarse --numofsurvey 10 --systems InteractiveSurvey AutoSurvey SurveyX SurveyForge LLMxMapReduce vanilla

@@ -233,6 +233,70 @@ Score 5 Description: {score_5}
 Return your answer only in JSON format: {{"{criteria_name}": <score>}} without any other information or explanation.
 """
 
+OUTLINE_COVERAGE_PROMPT = """
+You are given the outline of an academic survey on the topic "{topic}":
+
+---
+{outline}
+---
+
+Please match the outline sections (based on their titles or meanings, not exact words) to the following standard academic survey sections. 
+
+A section is considered matched if its title or meaning corresponds to any of the listed templates, even if the wording is not exactly the same.
+
+Here is the checklist of standard sections (with common synonyms):
+
+1. Abstract
+2. Introduction / Background
+3. Related Work / Literature Review
+4. Problem Definition / Scope / Motivation
+5. Methods / Methodology / Taxonomy / Approach
+6. Comparative Analysis / Discussion
+7. Applications / Use Cases
+8. Open Problems / Challenges / Future Directions
+9. Conclusion / Summary
+10. References / Bibliography
+
+Please analyze the outline and return a JSON object in the following format:
+
+{{
+  "matched_count": number of sections matched (an integer from 0 to 10)
+}}
+
+Only return the JSON object. Do not add any explanation.
+"""
+
+OUTLINE_STRUCTURE_PROMPT = """
+Given the following outline structure, analyze the relationship between the parent node and each of its direct child nodes:
+
+- Parent node:
+  Index: {parent_index}
+  Title: {parent_title}
+
+- Direct child nodes:
+{children_list}
+
+For each child node, decide whether it is a *necessary and direct subtopic* of the parent node. Mark as "Yes" only if:
+- The child topic is essential for fully understanding or representing the parent node,
+- It is directly and specifically related to the parent’s core subject,
+- It cannot stand alone as an independent section without losing relevance,
+- It is not a generic or loosely related section (such as reference, acknowledgment, appendix, background, discussion, or future work).
+
+If the child node is only loosely related, optional, or could be attached to many different parent nodes, answer "No".
+If you are unsure, answer "No".
+
+Output only the following JSON format, without any explanation:
+{{
+  "children": [
+    {{
+      "child_index": "{{child_index}}",
+      "child_title": "{{child_title}}",
+      "is_included": "Yes"  // or "No"
+    }}
+  ]
+}}
+"""
+
 REFERENCE_EVALUATION_PROMPT = """
 Below are the references cited at the end of an academic survey about the topic "{topic}":
 ---
@@ -253,4 +317,6 @@ Score 5 Description: {score_5}
 ---
 Return your answer only in JSON format: {{"{criteria_name}": <score>}} without any other information or explanation.
 """
+
+
 
