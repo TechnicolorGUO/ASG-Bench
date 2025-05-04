@@ -6,7 +6,7 @@ import shutil
 import time
 import requests
 from tqdm import tqdm
-from utils import download_arxiv_pdf, getClient, generateResponse, pdf2md, robust_json_parse
+from utils import download_arxiv_pdf, extract_and_save_outline_from_md, getClient, generateResponse, pdf2md, robust_json_parse
 from prompts import CATEGORIZE_SURVEY_TITLES, CATEGORIZE_SURVEY_TITLES_SINGLE, EXPAND_CATEGORY_TO_TOPICS, CATEGORIZE_SURVEY_TITLES_HEURISTIC
 import arxiv
 
@@ -513,6 +513,7 @@ def main():
                         md_path = os.path.join(md_dir, f"{paper['arxiv_id']}.md")
                         if os.path.exists(pdf_path) and not os.path.exists(md_path):
                             pdf2md(pdf_path, md_dir)
+                        extract_and_save_outline_from_md(md_file_path=md_path)
                     except Exception as e:
                         print(f"Failed to convert {paper['arxiv_id']} PDF to MD: {e}")
 
@@ -587,6 +588,7 @@ def main():
                         md_path = os.path.join(md_dir, f"{paper['arxiv_id']}.md")
                         if os.path.exists(pdf_path) and not os.path.exists(md_path):
                             pdf2md(pdf_path, md_dir)
+                        extract_and_save_outline_from_md(md_file_path=md_path)
                     except Exception as e:
                         print(f"Failed to convert {paper['arxiv_id']} PDF to MD: {e}")
         os.makedirs("outputs", exist_ok=True)
