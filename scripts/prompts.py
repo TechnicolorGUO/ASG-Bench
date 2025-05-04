@@ -169,16 +169,15 @@ CRITERIA = {
     },
     'Outline': {
         'description': (
-            'Outline evaluates the clarity, logical hierarchy, and organization of the survey structure based on its outline. '
-            'The outline consists of items formatted as [LEVEL, "Section Title"], where LEVEL is an integer indicating the nesting depth. '
-            'However, LEVEL numbers may be inaccurate due to Markdown or parsing errors. Focus primarily on the semantic and structural coherence reflected by the section titles themselves, '
-            'rather than relying strictly on LEVEL values.'
+            'Outline evaluates the clarity, logical hierarchy, and organization of the survey structure based on its section titles. '
+            'Note: The outline is now provided as a plain list of section titles'
+            'Please focus your evaluation on the semantic coherence, logical grouping, and progression reflected by the section titles themselves.'
         ),
-        'score 1': 'The outline is chaotic or confusing, with unclear section relationships and significant structural gaps. Section titles are vague or repetitive, and the overall flow is hard to follow. LEVEL numbers and hierarchy are highly inconsistent.',
-        'score 2': 'The outline shows basic attempts at organization but contains multiple misplaced or poorly grouped sections. There are obvious hierarchy errors, and the topic progression is unclear or disjointed. Section titles are sometimes ambiguous.',
-        'score 3': 'The outline demonstrates a generally reasonable structure, with some minor misalignments or grouping issues. Most section titles are clear, and topic coverage is mostly logical, despite occasional hierarchy inconsistencies or parsing errors.',
-        'score 4': 'The outline is well-structured, with clear, logically grouped section titles and a coherent progression of topics. Minor hierarchy or LEVEL issues exist but do not significantly affect readability or understanding.',
-        'score 5': 'The outline is exceptionally clear, logically organized, and easy to follow. Section titles are concise and informative, and the structure fully represents the topic’s breadth and depth. Any LEVEL or hierarchy inconsistencies are negligible and do not impact comprehension.'
+        'score 1': 'The outline is chaotic or confusing, with unclear relationships and significant structural gaps. Section titles are vague, repetitive, or lack logical flow.',
+        'score 2': 'The outline shows basic attempts at organization but contains multiple misplaced or poorly grouped sections. The progression is unclear or disjointed. Section titles are sometimes ambiguous.',
+        'score 3': 'The outline demonstrates a generally reasonable structure, with some minor misalignments or grouping issues. Most section titles are clear, and topic coverage is mostly logical.',
+        'score 4': 'The outline is well-structured, with clearly grouped section titles and a coherent progression of topics. Minor issues may exist but do not significantly affect readability or understanding.',
+        'score 5': 'The outline is exceptionally clear, logically organized, and easy to follow. Section titles are concise and informative, and the structure fully represents the topic’s breadth and depth.'
     },
     'Reference': {
         "description": (
@@ -219,12 +218,10 @@ Here is an outline of an academic survey about the topic "{topic}":
 {outline}
 ---
 
-The outline is provided as a list of items, where each item is a two-element array:
-[LEVEL, "Section Title"]
-- LEVEL: An integer indicating the section depth (e.g., 1=top-level, 2=subsection, etc.).
-**Note:** The LEVEL numbers may be inaccurate due to Markdown or parsing errors. Please focus your evaluation primarily on the structure and content described by the section titles, rather than strictly on the LEVEL values.
+The outline is provided as a plain list of section titles.
+Please evaluate the outline based on the clarity, logical grouping, and progression implied by the section titles.
 
-Please evaluate this outline based on the criterion provided below, and give a score from 1 to 5 according to the score description:
+Give a score from 1 to 5 according to the criterion descriptions below:
 ---
 Criterion Description: {criterion_description}
 ---

@@ -481,7 +481,7 @@ def main():
 
             for attempt in range(3):
                 try:
-                    raw_response = generateResponse(client, prompt, max_tokens=2048, temerature=0.3)
+                    raw_response = generateResponse(client, prompt, max_tokens=2048, temperature=0.3)
                     clusters = robust_json_parse(raw_response)
                     break
                 except Exception as e:
@@ -554,7 +554,7 @@ def main():
                 )
                 for attempt in range(3):
                     try:
-                        raw_response = generateResponse(client, prompt, max_tokens=2048, temerature=0.3)
+                        raw_response = generateResponse(client, prompt, max_tokens=2048, temperature=0.3)
                         clusters = robust_json_parse(raw_response)
                         break
                     except Exception as e:
