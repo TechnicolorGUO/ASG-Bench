@@ -1,3 +1,5 @@
+# ---------------- Dataset Prompts --------------
+
 EXPAND_CATEGORY_TO_TOPICS = '''
 Given the category "{category}", your task is to expand it into {num_topics} representative and highly general survey topics. Each topic should be suitable as the main subject of a comprehensive academic survey paper, expressed as a short phrase or noun clause (not a full sentence), accurately reflecting the scope and context of the topic within the given category.
 
@@ -122,6 +124,8 @@ Output format example:
 Return only the JSON object as your answer, with no additional explanation.
 '''
 
+# -------------- Evaluation Prompts --------------
+
 CRITERIA = {
     'Coverage': {
         'description': 'Coverage assesses the extent to which the survey encapsulates all relevant aspects of the topic, ensuring comprehensive discussion on both central and peripheral topics.',
@@ -165,7 +169,7 @@ CRITERIA = {
     },
     'Outline': {
         'description': (
-            'Outline evaluates the clarity, logical hierarchy, and organization of the survey’s structure based on its outline. '
+            'Outline evaluates the clarity, logical hierarchy, and organization of the survey structure based on its outline. '
             'The outline consists of items formatted as [LEVEL, "Section Title"], where LEVEL is an integer indicating the nesting depth. '
             'However, LEVEL numbers may be inaccurate due to Markdown or parsing errors. Focus primarily on the semantic and structural coherence reflected by the section titles themselves, '
             'rather than relying strictly on LEVEL values.'
@@ -318,5 +322,86 @@ Score 5 Description: {score_5}
 Return your answer only in JSON format: {{"{criteria_name}": <score>}} without any other information or explanation.
 """
 
+OUTLINE_REFINE_PROMPT = """
+You are given an academic paper outline, currently with only level-1 headings.
 
+You are only allowed to:
+1. Delete items that are obviously irrelevant or likely artifacts of the outline extraction process (such as empty, meaningless, or non-heading items).
+2. Change the hierarchy level of existing items by modifying the first element of each list from 1 to a higher level (such as 2 or 3), if appropriate.
 
+Do not add any new sections or content. Do not group or merge items. Do not change the order of items.
+
+Your output must be the reorganized outline in JSON array format, where each element is [level, title], with level as an int and title as a string, matching the input format exactly.
+
+Only output the JSON array. Do not include any explanation or commentary.
+
+Here is the original outline:
+{outline}
+"""
+
+# -------------- Generation Prompts --------------
+OUTLINE_GENERATE_PROMPT = """
+You are an expert researcher in scientific writing. Given a topic for a literature survey, generate a detailed and logically organized outline for the survey.
+
+Instructions:
+- The outline should be comprehensive, reflecting the typical structure of a scholarly literature survey, and tailored to the given topic.
+- Format the outline as a Python list of lists, where each sublist has the form: [level, "Section Title"].
+    - level is an integer (1 for main sections, 2 for subsections, 3 for subsubsections).
+    - The section title should be concise and academic, e.g., "1 Introduction", "2 Related Work", "2.1 Methods".
+- The outline should include standard sections such as Introduction, Background, Main Content (with subtopics), Discussion, and Conclusion, as well as any topic-specific sections.
+- The depth of the outline should be exactly 3 levels, e.g., "1.1.1", "2.1.1", "3.1.1".
+- Output only the Python list, nothing else.
+
+Example:
+If the survey topic is "Attention Mechanisms in Neural Networks", your output should look like:
+
+[[1, "1 Abstract"],
+  ...
+  ...
+ [1, "n Conclusion"]]
+
+Do not include any other text or explanation.
+
+Survey topic: {topic}
+"""
+
+CONTENT_GENERATE_BY_OUTLINE_PROMPT = """
+You are a scholarly expert in scientific writing.
+
+Given:
+- The survey topic: "{topic}"
+- The complete outline of the survey: {outline}
+- The current section and its subsections to write: {section_group}
+
+Please write the content for this section group as if for a formal literature survey, following these requirements:
+
+Requirements:
+- Use Markdown headings: "# " for level 1, "## " for level 2, "### " for level 3, etc., matching the provided section titles and hierarchy.
+- Write clear, academic prose, synthesizing key ideas relevant to the topic and each section heading.
+- Where mathematical concepts are important, include appropriate mathematical expressions in LaTeX format (enclosed in $...$ or $$...$$).
+- If a section would benefit from an explanatory figure or diagram, insert a Markdown image placeholder where appropriate (e.g., ![]()).
+- If a section would benefit from a table, insert a Markdown table placeholder where appropriate (e.g., | Column 1 | Column 2 |).
+- The length of the content should be similar to a typical section in a literature survey, with sufficient detail to cover the topic comprehensively.
+- Return **only** a single-line JSON object with the structure: {{"content": "..."}}, where the value is your generated Markdown content of the **current section**.
+
+Do not output anything except the JSON object.
+"""
+
+CONTENT_GENERATE_WITHOUT_OUTLINE_PROMPT = """
+You are a scholarly expert in scientific writing.
+
+Given the survey topic: "{topic}"
+
+Write a comprehensive literature survey in Markdown format on this topic, including an appropriate structure (introduction, main sections, conclusion, etc.) as is standard for such surveys.
+
+Requirements:
+- Use proper Markdown headings and formatting.
+- Write clear, academic prose, synthesizing key ideas relevant to the topic.
+- Where mathematical concepts are important, include appropriate mathematical expressions in LaTeX format (enclosed in $...$ or $$...$$).
+- If a section would benefit from an explanatory figure or diagram, insert a Markdown image placeholder (e.g., ![]()).
+- If a section would benefit from a table, insert a Markdown table placeholder (e.g., | Column 1 | Column 2 |).
+- Return **only** a single-line JSON object with the structure: {{"content": "..."}}, where the value is your generated **Markdown** content.
+
+Do not output anything except the JSON object.
+
+"""

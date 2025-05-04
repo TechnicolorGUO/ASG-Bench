@@ -1,3 +1,4 @@
+import ast
 import json
 import os
 import re
@@ -8,6 +9,8 @@ from openai import OpenAI
 
 from dotenv import load_dotenv
 import requests
+
+from prompts import OUTLINE_REFINE_PROMPT
 load_dotenv()
 
 def getClient(): 
@@ -20,11 +23,11 @@ def getClient():
     )
     return client
 
-def generateResponse(client, prompt, max_tokens=768, temerature=0.5):
+def generateResponse(client, prompt, max_tokens=768, temperature=0.5):
     chat_response = client.chat.completions.create(
         model=os.environ.get("MODEL"),
         max_tokens=max_tokens,
-        temperature=temerature,
+        temperature=temperature,
         stop="<|im_end|>",
         stream=True,
         messages=[{"role": "user", "content": prompt}]
@@ -54,7 +57,42 @@ def robust_json_parse(raw_response):
         # If all parsing fails, return empty dict and print warning
         print("Warning: Failed to parse LLM response as JSON, returning empty dict.\nRaw response:", raw_response)
         return {}
-    
+
+def robust_list_parse(response_str):
+    """
+    Robustly parse a string to a Python list. 
+    Tries JSON, then Python literal. Raises on failure.
+    """
+    # 尝试截断前后的无关内容（只保留第一个以 [ 开头、] 结尾的内容）
+    def extract_most_likely_list(text):
+        start = text.find('[')
+        end = text.rfind(']')
+        if start != -1 and end != -1 and end > start:
+            return text[start:end+1]
+        return text
+
+    cleaned = response_str.strip()
+    cleaned = extract_most_likely_list(cleaned)
+
+    # 1. 尝试 json.loads
+    try:
+        result = json.loads(cleaned)
+        if isinstance(result, list):
+            return result
+    except Exception:
+        pass
+
+    # 2. 尝试 ast.literal_eval
+    try:
+        result = ast.literal_eval(cleaned)
+        if isinstance(result, list):
+            return result
+    except Exception:
+        pass
+
+    # 3. 最后失败就抛出异常
+    raise ValueError("Could not parse response as a list.")
+
 def download_arxiv_pdf(arxiv_id: str, save_dir: str) -> str:
     """
     下载 arXiv 论文 PDF 到指定目录
@@ -94,7 +132,9 @@ def download_arxiv_pdf(arxiv_id: str, save_dir: str) -> str:
 
 def extract_and_save_outline_from_md(md_file_path):
     """
-    只处理#开头的标题。若全是一级标题，则按数字编号决定层级，否则用井号数量决定层级。
+    只处理#开头的标题。
+    - 如果有多层井号，按井号数量决定层级；
+    - 如果只有一层井号，全部视为一级。
     """
     if not os.path.isfile(md_file_path):
         raise FileNotFoundError(f"Markdown file not found: {md_file_path}")
@@ -102,7 +142,6 @@ def extract_and_save_outline_from_md(md_file_path):
     with open(md_file_path, 'r', encoding='utf-8') as file:
         lines = file.readlines()
 
-    # 1. 找出所有markdown标题
     pattern_hash = r'^(#{1,6})\s+(.+)'
     hash_headers = []
     for i, line in enumerate(lines):
@@ -112,33 +151,51 @@ def extract_and_save_outline_from_md(md_file_path):
             title = match.group(2).strip()
             hash_headers.append((i, level, title))
 
-    # 2. 判断是否只有一个层级
+    # 判断是否只有一个井号层级
     levels = {lvl for _, lvl, _ in hash_headers}
-    use_numbered = (len(levels) == 1 and hash_headers)
+    single_level = (len(levels) == 1 and hash_headers)
 
     outline = []
-    if use_numbered:
-        # 只遍历所有井号行
+    if single_level:
+        # 全部视为一级
         for _, _, title in hash_headers:
-            # 检查标题内容是否以数字编号开头
-            match = re.match(r'^((?:\d+\.)*\d+)[\s\.]+(.+)', title)
-            if match:
-                number_str = match.group(1)
-                sub_title = match.group(2).strip()
-                level = number_str.count('.') + 1
-                outline.append([level, sub_title])
-            else:
-                # 没有数字编号就是一级
-                outline.append([1, title])
+            outline.append([1, title])
     else:
-        # 普通模式，井号数决定层级
+        # 按井号层级
         for _, level, title in hash_headers:
             outline.append([level, title])
 
-    json_path = os.path.join(os.path.dirname(md_file_path), "outline.json")
+    json_path = os.path.join(os.path.dirname(md_file_path), "outline_raw.json")
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(outline, f, ensure_ascii=False, indent=2)
     return outline
+
+def refine_outline_if_single_level(
+    raw_outline_path: str,
+    json_path: str,
+):
+    """
+    If the outline is all level-1, call LLM to refine and parse as a list, then save.
+    Otherwise, save as is.
+    """
+    client = getClient()
+    with open(raw_outline_path, "r", encoding="utf-8") as f:
+        outline = json.load(f)
+
+    # Check if all headings are level 1
+    levels = {item[0] for item in outline}
+    if len(levels) == 1 and list(levels)[0] == 1:
+        outline_str = json.dumps(outline, ensure_ascii=False, indent=2)
+        prompt = OUTLINE_REFINE_PROMPT.format(outline=outline_str)
+        raw_response = generateResponse(client, prompt, max_tokens=768, temerature=0.5)
+        refined_outline = robust_list_parse(raw_response)   # Use list parse here!
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(refined_outline, f, ensure_ascii=False, indent=2)
+        return refined_outline
+    else:
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(outline, f, ensure_ascii=False, indent=2)
+        return outline
 
 def extract_references_from_md(md_path):
     """
@@ -279,6 +336,55 @@ def pdf2md(pdf_path, output_dir):
         md_content = f.read()
     return md_new_path, md_content
 
+def batch_pdf2md_in_surveys(surveys_root = "surveys"):
+    """
+    对 surveys/<cat>/<topic>/<system> 下所有 pdf 文件批量转换为 md。
+    如果已存在对应 md 文件则跳过。
+    :param surveys_root: surveys 根目录
+    """
+    total_pdf = 0
+    converted = 0
+    skipped = 0
+    failed = 0
+
+    for cat in os.listdir(surveys_root):
+        cat_path = os.path.join(surveys_root, cat)
+        if not os.path.isdir(cat_path):
+            continue
+        for topic in os.listdir(cat_path):
+            topic_path = os.path.join(cat_path, topic)
+            if not os.path.isdir(topic_path):
+                continue
+            for system in os.listdir(topic_path):
+                system_path = os.path.join(topic_path, system)
+                if not os.path.isdir(system_path):
+                    continue
+                for file in os.listdir(system_path):
+                    if file.lower().endswith(".pdf"):
+                        total_pdf += 1
+                        pdf_path = os.path.join(system_path, file)
+                        md_name = os.path.splitext(file)[0] + ".md"
+                        md_path = os.path.join(system_path, md_name)
+                        if os.path.exists(md_path):
+                            print(f"Skip (md exists): {md_path}")
+                            skipped += 1
+                            continue
+                        # 调用pdf2md
+                        print(f"Converting: {pdf_path}")
+                        md_new_path, md_content = pdf2md(pdf_path, system_path)
+                        if md_new_path:
+                            print(f"Converted: {md_new_path}")
+                            converted += 1
+                        else:
+                            print(f"Failed: {pdf_path}")
+                            failed += 1
+
+    print("\nBatch Summary:")
+    print(f"Total PDF files: {total_pdf}")
+    print(f"Converted: {converted}")
+    print(f"Skipped (md exists): {skipped}")
+    print(f"Failed: {failed}")
+
 def count_sentences(text):
     sentences = re.split(r"[.!?\n]+(?:\s|\n|$)", text.strip())
     sentences = [s for s in sentences if s]
@@ -392,16 +498,18 @@ def get_extraction_prompt(text: str) -> str:
 
 if __name__ == "__main__":
     # # 测试提取大纲
-    md_file_path = "surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques.md"
-    outline = extract_and_save_outline_from_md(md_file_path)
+    # md_file_path = "surveys/cs/Optimization Techniques for Transformer Inference/pdfs/2307.07982.md"
+    # outline = extract_and_save_outline_from_md(md_file_path)
     # print(len(outline))
     # for item in outline:
     #     print(item)
     # # 打印大纲
-    # # print("Outline:")
+    # print("Outline:")
     # tree, top_nodes = build_outline_tree_from_levels(outline)
     # print(len(tree))
 
     # md_path, md_content = pdf2md("surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques.pdf", "surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce")
     # md_content = read_md("surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques/auto/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques.md")
     # print(count_md_features(md_content))
+    # refine_outline_if_single_level("surveys\cs\Optimization Techniques for Transformer Inference\pdfs\outline_raw.json", "surveys\cs\Optimization Techniques for Transformer Inference\pdfs\outline.json")
+    batch_pdf2md_in_surveys()

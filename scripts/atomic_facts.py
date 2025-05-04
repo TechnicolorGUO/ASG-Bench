@@ -332,7 +332,7 @@ def extract_and_deduplicate_facts(survey, topic):
     fact_generator = AtomicFactGenerator("demos")
 
     sections = re.findall(
-        r'(^#+\s*\d+(?:\.\s|\s|$).*?)(?=^#+\s*\d+(?:\.\s|\s|$)|^#+\s*References|\Z)',
+        r'(^#+\s+.*?)(?=^#+\s+|\Z)',
         survey,
         flags=re.DOTALL | re.MULTILINE
     )
@@ -354,7 +354,7 @@ def extract_and_deduplicate_facts(survey, topic):
 
     claims_before_dedup = len(all_atomic_facts)
     density_before_dedup = claims_before_dedup / total_sentences if total_sentences else 0
-    # print(f"[{topic}] Claims Before Dedup: {claims_before_dedup}, Density Before: {density_before_dedup:.4f}")
+    print(f"[{topic}] Claims Before Dedup: {claims_before_dedup}, Density Before: {density_before_dedup:.4f}")
 
     deduplicated_facts = fact_generator.deduplicate_atomic_facts(all_atomic_facts)
     deduplicated_facts = clean_claims(deduplicated_facts)
@@ -362,7 +362,7 @@ def extract_and_deduplicate_facts(survey, topic):
     claims_after_dedup = len(deduplicated_facts)
     density_after_dedup = claims_after_dedup / total_sentences if total_sentences else 0
 
-    # print(f"[{topic}] Claims After Dedup: {claims_after_dedup}, Density After: {density_after_dedup:.4f}")
+    print(f"[{topic}] Claims After Dedup: {claims_after_dedup}, Density After: {density_after_dedup:.4f}")
 
     return {
         "total_sentences": total_sentences,

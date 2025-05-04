@@ -1,10 +1,11 @@
 from concurrent.futures import ThreadPoolExecutor, as_completed
+import glob
 import json
 import math
 import os
 import dotenv
 from prompts import CONTENT_EVALUATION_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT
-from utils import build_outline_tree_from_levels, count_md_features, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, robust_json_parse,fill_single_criterion_prompt, read_md
+from utils import build_outline_tree_from_levels, count_md_features, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
 import logging
 from atomic_facts import extract_and_deduplicate_facts
 
@@ -76,21 +77,75 @@ def evaluate_outline_llm(outline_json_path: str) -> dict:
         results[criteria_name] = 0
     return results
 
+# def evaluate_outline_coverage(
+#     outline_json_path: str,
+#     standard_count: int = 10,
+#     ideal_section_count: int = 30,
+#     sigma: float = 15.0
+# ) -> float:
+#     """
+#     评估大纲综合得分 Q'，融合模板完整度、创新丰富度和长度惩罚。
+
+#     Args:
+#         outline_json_path (str): 大纲JSON路径
+#         standard_count (int): 标准section总数 N
+#         ideal_section_count (int): 理想section总数 M*
+#         sigma (float): 惩罚宽度参数
+
+#     Returns:
+#         float: 综合得分 Q'
+#     """
+#     try:
+#         with open(outline_json_path, "r", encoding="utf-8") as f:
+#             outline_list = json.load(f)
+
+#         total_section_count = len(outline_list)  # M
+
+#         outline_str = "\n".join([json.dumps(item, ensure_ascii=False) for item in outline_list])
+#         topic = extract_topic_from_path(outline_json_path)
+#         prompt = OUTLINE_COVERAGE_PROMPT.format(
+#             outline=outline_str,
+#             topic=topic,
+#         )
+#         response = judge.judge(prompt)
+#         matched_count = response.get("matched_count", 0)   # K
+
+#         K = matched_count
+#         N = standard_count
+#         M = total_section_count
+#         M_star = ideal_section_count
+#         U = max(M - K, 0)
+
+#         R = K / N if N > 0 else 0
+#         O = U / M if M > 0 else 0
+
+#         F_harmonic = 2 * R * O / (R + O) if (R + O) > 0 else 0
+
+#         L = math.exp(-((M - M_star) ** 2) / (2 * sigma ** 2)) if sigma > 0 else (1.0 if M == M_star else 0.0)
+
+#         Q_prime = F_harmonic * L
+
+#         return Q_prime
+
+#     except Exception as e:
+#         print("Error in evaluating outline coverage:", e)
+#         return 0.0
+
 def evaluate_outline_coverage(
     outline_json_path: str,
     standard_count: int = 10,
-    ideal_section_count: int = 30,
-    sigma: float = 15.0
+    ideal_section_count: int = 30,  # 这里参数可以保留，但不再使用
+    sigma: float = 15.0            # 这里参数可以保留，但不再使用
 ) -> float:
     """
-    评估大纲综合得分 Q'，融合模板完整度、创新丰富度和长度惩罚。
-
+    评估大纲综合得分 Q'（无长度惩罚项），融合模板完整度和创新丰富度。
+    
     Args:
         outline_json_path (str): 大纲JSON路径
         standard_count (int): 标准section总数 N
-        ideal_section_count (int): 理想section总数 M*
-        sigma (float): 惩罚宽度参数
-
+        ideal_section_count (int): 理想section总数 M*（无效参数）
+        sigma (float): 惩罚宽度参数（无效参数）
+    
     Returns:
         float: 综合得分 Q'
     """
@@ -112,7 +167,6 @@ def evaluate_outline_coverage(
         K = matched_count
         N = standard_count
         M = total_section_count
-        M_star = ideal_section_count
         U = max(M - K, 0)
 
         R = K / N if N > 0 else 0
@@ -120,14 +174,12 @@ def evaluate_outline_coverage(
 
         F_harmonic = 2 * R * O / (R + O) if (R + O) > 0 else 0
 
-        L = math.exp(-((M - M_star) ** 2) / (2 * sigma ** 2)) if sigma > 0 else (1.0 if M == M_star else 0.0)
-
-        Q_prime = F_harmonic * L
+        Q_prime = F_harmonic
 
         return Q_prime
 
     except Exception as e:
-        print("Error in evaluating outline coverage:", e)
+        print(f"Error evaluating outline coverage: {e}")
         return 0.0
 
 def evaluate_outline_structure(outline_json_path):
@@ -175,20 +227,23 @@ def evaluate_outline(
     do_structure: bool = True
 ) -> dict:
     results = {}
-
-    try:
-        # 1. Extract outline from md
-        extract_and_save_outline_from_md(md_path)
-    except Exception as e:
-        print("Error extracting outline:", e)
-        return results
-
     outline_json_path = os.path.join(os.path.dirname(md_path), "outline.json")
+    # 1. Extract outline from md（如果没有 outline.json 才提取）
+    if not os.path.exists(outline_json_path):
+        try:
+            extract_and_save_outline_from_md(md_path)
+            outline_raw_json_path = os.path.join(os.path.dirname(md_path), "outline_raw.json")
+        except Exception as e:
+            print("Error extracting outline:", e)
+            return results
+    else:
+        print(f"Found {outline_json_path}, skip extraction.")
+        outline_raw_json_path = os.path.join(os.path.dirname(md_path), "outline.json")
 
     # 2. LLM 评测
     if do_llm:
         try:
-            outline_results = evaluate_outline_llm(outline_json_path)
+            outline_results = evaluate_outline_llm(outline_raw_json_path)
             results.update(outline_results)
         except Exception as e:
             print("Error in evaluating outline llm:", e)
@@ -199,7 +254,7 @@ def evaluate_outline(
     # 3. Coverage 评测
     if do_coverage:
         try:
-            coverage_results = evaluate_outline_coverage(outline_json_path)
+            coverage_results = evaluate_outline_coverage(outline_raw_json_path)
             results["Outline_coverage"] = coverage_results
         except Exception as e:
             print("Error in evaluating outline coverage:", e)
@@ -208,6 +263,8 @@ def evaluate_outline(
         print("Skip evaluate_outline_coverage.")
 
     # 4. Structure 评测
+    outline_json_path = os.path.join(os.path.dirname(md_path), "outline.json")
+    refine_outline_if_single_level(outline_raw_json_path, outline_json_path)
     if do_structure:
         try:
             global_score, node_scores = evaluate_outline_structure(outline_json_path)
@@ -326,14 +383,16 @@ def evaluate_content(
         print("Skip evaluate_content_informativeness.")
 
     # 3. 事实性评测部分（暂未实现，先注释）
-    # if do_faithfulness:
-    #     try:
-    #         results.update(evaluate_content_faithfulness(md_path))
-    #     except Exception as e:
-    #         print("Error in evaluating content faithfulness:", e)
-    #         results['faithfulness'] = 0
-    # else:
-    #     print("Skip evaluate_content_faithfulness.")
+    if do_faithfulness:
+        try:
+            # 测试 得分为0
+            results.update({"faithfulness": 0})
+        except Exception as e:
+            print("Error in evaluating content faithfulness:", e)
+            results['faithfulness'] = 0
+    else:
+        print("Skip evaluate_content_faithfulness.")
+
 
     print("Content evaluation scores:", results)
     return results
@@ -382,26 +441,31 @@ def evaluate_reference_llm(md_path: str) -> dict:
 
 def evaluate(
     md_path: str, 
+    model: str,
     do_outline: bool = True, 
     do_content: bool = True, 
     do_reference: bool = True
 ) -> dict:
     """
     Evaluate the given Markdown file by selected criteria.
+    :param md_path: Markdown文件路径
+    :param model: 模型名（如qwen-plus）
     """
-    import os
-    import json
-
     results = {}
-    results_path = os.path.join(os.path.dirname(md_path), "results.json")
+    # 拼接出带模型名的results文件名
+    results_path = os.path.join(
+        os.path.dirname(md_path), 
+        f"results_{model}.json"
+    )
     print("Start evaluating:", md_path)
+    print("Using model:", model)
 
     # 定义每个部分必须存在的key
     outline_keys = ["Outline", "Outline_coverage", "Outline_structure"]
     content_keys = [
         "Coverage", "Structure", "Relevance", "Language", "Criticalness",
         "Images_density", "Equations_density", "Tables_density", "Total_density",
-        "Claim_density_with_deduplication", "Claim_density_after_deduplication"
+        "Claim_density_before_deduplication", "Claim_density_after_deduplication"
     ]
     # reference_keys = [...]
 
@@ -457,14 +521,16 @@ def evaluate(
         print("Error in saving results:", e)
     return results
 
-def process_system(md_path, results_path, topic, system, do_outline, do_content, do_reference):
+def process_system(md_path, model,results_path, topic, system, do_outline, do_content, do_reference):
     print(f"[{topic}/{system}] Evaluating: {md_path}")
     evaluate(md_path, 
+             model=model,
              do_outline=do_outline, 
              do_content=do_content, 
              do_reference=do_reference)
 
 def batch_evaluate_by_cat(cats:list, 
+                  model:str,
                   do_outline=True, 
                   do_content=True, 
                   do_reference=True, 
@@ -493,7 +559,10 @@ def batch_evaluate_by_cat(cats:list,
                             if f.lower().endswith(".md")]
                 pdf_files = [f for f in os.listdir(sys_path) 
                             if f.lower().endswith(".pdf")]
-                results_path = os.path.join(sys_path, "results.json")
+                results_path = os.path.join(
+                    sys_path, 
+                    f"results_{model}.json"
+                )
                 # 2. 如果没有md，尝试用pdf生成
                 if not md_files:
                     if pdf_files:
@@ -509,7 +578,7 @@ def batch_evaluate_by_cat(cats:list,
                 else:
                     md_path = os.path.join(sys_path, md_files[0])
 
-                tasks.append((md_path, results_path, topic, system, do_outline, do_content, do_reference))
+                tasks.append((md_path, model, results_path, topic, system, do_outline, do_content, do_reference))
         
         if num_workers == 1:
             # 串行执行
@@ -528,6 +597,7 @@ def batch_evaluate_by_cat(cats:list,
 
 def batch_evaluate_by_system(
     system_list: list,
+    model: str,
     tasks_json_path: str = "surveys/tasks.json",
     do_outline: bool = True,
     do_content: bool = True,
@@ -558,7 +628,10 @@ def batch_evaluate_by_system(
                 # 寻找 md 或 pdf
                 md_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".md")]
                 pdf_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".pdf")]
-                results_path = os.path.join(sys_path, "results.json")
+                results_path = os.path.join(
+                    sys_path, 
+                    f"results_{model}.json"
+                )
                 if not md_files:
                     if pdf_files:
                         pdf_path = os.path.join(sys_path, pdf_files[0])
@@ -572,7 +645,7 @@ def batch_evaluate_by_system(
                         continue
                 else:
                     md_path = os.path.join(sys_path, md_files[0])
-                tasks_to_run.append((md_path, results_path, topic, system, do_outline, do_content, do_reference))
+                tasks_to_run.append((md_path, model, results_path, topic, system, do_outline, do_content, do_reference))
     
     if num_workers == 1:
         for args in tasks_to_run:
@@ -586,10 +659,121 @@ def batch_evaluate_by_system(
                 except Exception as e:
                     print(f"Exception in thread: {e}")
 
+def calculate_average_score(cat: str, system: str, model: str) -> dict:
+    """
+    计算指定类别、系统、模型的平均分
+    :param cat: 类别名，如"cs"
+    :param system: 系统名，如"InteractiveSurvey"
+    :param model: 模型名，如"qwen-plus"
+    :return: 平均分字典
+    """
+    base_dir = os.path.join("surveys", cat)
+    topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    total_results = {}
+    count = 0
+
+    for topic in topics:
+        topic_path = os.path.join(base_dir, topic)
+        sys_path = os.path.join(topic_path, system)
+        results_path = os.path.join(
+            sys_path, 
+            f"results_{model}.json"
+        )
+        if not os.path.exists(results_path):
+            continue
+        with open(results_path, "r", encoding="utf-8") as f:
+            results = json.load(f)
+        for key, value in results.items():
+            if key not in total_results:
+                total_results[key] = 0
+            total_results[key] += value
+        count += 1
+
+    if count == 0:
+        average_scores = {}
+    else:
+        average_scores = {key: round(value / count, 4) for key, value in total_results.items()}
+
+    # 写入到 average_results.json
+    avg_results_path = os.path.join("surveys", cat, "average_results.json")
+    if os.path.exists(avg_results_path):
+        with open(avg_results_path, "r", encoding="utf-8") as f:
+            avg_results_data = json.load(f)
+    else:
+        avg_results_data = {}
+
+    # 新的结构：系统名->模型名->均值
+    if system not in avg_results_data:
+        avg_results_data[system] = {}
+    avg_results_data[system][model] = average_scores
+
+    with open(avg_results_path, "w", encoding="utf-8") as f:
+        json.dump(avg_results_data, f, ensure_ascii=False, indent=4)
+
+    return average_scores
+
+def clear_scores(cat: str, system: str, model: str):
+    """
+    清除指定类别、系统、模型的所有评测结果
+    :param cat: 类别名，如"cs"
+    :param system: 系统名，如"InteractiveSurvey"
+    :param model: 模型名，如"qwen-plus"
+    """
+    base_dir = os.path.join("surveys", cat)
+    topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    for topic in topics:
+        topic_path = os.path.join(base_dir, topic)
+        sys_path = os.path.join(topic_path, system)
+        results_path = os.path.join(
+            sys_path, 
+            f"results_{model}.json"
+        )
+        if os.path.exists(results_path):
+            os.remove(results_path)
+    
+    # 清理 average_results.json 里的对应系统和模型
+    avg_results_path = os.path.join("surveys", cat, "average_results.json")
+    if os.path.exists(avg_results_path):
+        with open(avg_results_path, "r", encoding="utf-8") as f:
+            avg_results_data = json.load(f)
+        if system in avg_results_data:
+            if model in avg_results_data[system]:
+                del avg_results_data[system][model]
+                # 如果该系统下已经没有模型了，把系统也删掉
+                if not avg_results_data[system]:
+                    del avg_results_data[system]
+        with open(avg_results_path, "w", encoding="utf-8") as f:
+            json.dump(avg_results_data, f, ensure_ascii=False, indent=4)
+
+def clear_all_scores():
+    """
+    清除所有评测结果（所有以results_开头、.json结尾的结果文件）
+    """
+    base_dir = "surveys"
+    for cat in os.listdir(base_dir):
+        cat_path = os.path.join(base_dir, cat)
+        if os.path.isdir(cat_path):
+            for topic in os.listdir(cat_path):
+                topic_path = os.path.join(cat_path, topic)
+                if os.path.isdir(topic_path):
+                    for system in os.listdir(topic_path):
+                        sys_path = os.path.join(topic_path, system)
+                        if os.path.isdir(sys_path):
+                            # 匹配所有 results_*.json 文件
+                            pattern = os.path.join(sys_path, "results_*.json")
+                            for file_path in glob.glob(pattern):
+                                try:
+                                    os.remove(file_path)
+                                    print(f"Removed: {file_path}")
+                                except Exception as e:
+                                    print(f"Failed to remove {file_path}: {e}")
+
 
 if __name__ == "__main__":
     # 测试代码
-    #md_path = "surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"  # 替换为实际的文件路径
+    # md_path = "surveys\cs\Optimization Techniques for Transformer Inference\pdfs/2307.07982.md"  # 替换为实际的文件路径
     # md_path = "surveys\cs\Agent-based Modeling and Simulation using Large Language Models\AutoSurvey\Agent-based Modeling and Simulation using Large Language Models.md"
     # json_path = os.path.join(os.path.dirname(md_path), "outline.json")
     # evaluate_outline(md_path)
@@ -597,8 +781,11 @@ if __name__ == "__main__":
     # evaluate_content(md_path)
     # evaluate_reference(md_path)
     # print(evaluate_outline_coverage(json_path))
-    # evaluate(md_path)
-    batch_evaluate_by_cat(["cs"])
+    # batch_evaluate_by_cat(["cs"])
+    # calculate_average_score("cs", "AutoSurvey", "qwen-plus-2025-04-28")
+    # clear_scores("cs", "AutoSurvey")
+    batch_evaluate_by_system(["vanilla"], "qwen-plus-2025-04-28", num_workers=4)
+    # clear_all_scores()
 
 
 

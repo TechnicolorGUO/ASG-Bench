@@ -6,7 +6,7 @@ import shutil
 import time
 import requests
 from tqdm import tqdm
-from utils import download_arxiv_pdf, getClient, generateResponse, robust_json_parse
+from utils import download_arxiv_pdf, getClient, generateResponse, pdf2md, robust_json_parse
 from prompts import CATEGORIZE_SURVEY_TITLES, CATEGORIZE_SURVEY_TITLES_SINGLE, EXPAND_CATEGORY_TO_TOPICS, CATEGORIZE_SURVEY_TITLES_HEURISTIC
 import arxiv
 
@@ -506,6 +506,16 @@ def main():
                         download_arxiv_pdf(paper['arxiv_id'], pdf_dir)
                     except Exception as e:
                         print(f"Failed to download {paper['arxiv_id']}: {e}")
+                    # 5.4 Add pdf2md
+                    try:
+                        pdf_path = os.path.join(pdf_dir, f"{paper['arxiv_id']}.pdf")
+                        md_dir = pdf_dir
+                        md_path = os.path.join(md_dir, f"{paper['arxiv_id']}.md")
+                        if os.path.exists(pdf_path) and not os.path.exists(md_path):
+                            pdf2md(pdf_path, md_dir)
+                    except Exception as e:
+                        print(f"Failed to convert {paper['arxiv_id']} PDF to MD: {e}")
+
         os.makedirs("outputs", exist_ok=True)
         with open("outputs/dataset/topics.json", "w", encoding="utf-8") as f:
             json.dump(coarse_surveys_map, f, indent=2, ensure_ascii=False)
@@ -570,6 +580,15 @@ def main():
                             download_arxiv_pdf(paper['arxiv_id'], pdf_dir)
                         except Exception as e:
                             print(f"Failed to download {paper['arxiv_id']}: {e}")
+                    # 5.4 Add pdf2md
+                    try:
+                        pdf_path = os.path.join(pdf_dir, f"{paper['arxiv_id']}.pdf")
+                        md_dir = pdf_dir
+                        md_path = os.path.join(md_dir, f"{paper['arxiv_id']}.md")
+                        if os.path.exists(pdf_path) and not os.path.exists(md_path):
+                            pdf2md(pdf_path, md_dir)
+                    except Exception as e:
+                        print(f"Failed to convert {paper['arxiv_id']} PDF to MD: {e}")
         os.makedirs("outputs", exist_ok=True)
         with open("outputs/dataset/topics.json", "w", encoding="utf-8") as f:
             json.dump(fine_surveys_map, f, indent=2, ensure_ascii=False)
