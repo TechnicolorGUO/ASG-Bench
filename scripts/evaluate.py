@@ -133,28 +133,20 @@ def evaluate_outline_llm(outline_json_path: str) -> dict:
 
 def evaluate_outline_coverage(
     outline_json_path: str,
-    standard_count: int = 10,
-    ideal_section_count: int = 30,  # 这里参数可以保留，但不再使用
-    sigma: float = 15.0            # 这里参数可以保留，但不再使用
+    standard_count: int = 10,      # 标准参考section数，用于覆盖率
+    avg_count: int = 30,           # 理想/期望section数，用于长度对数惩罚
+    min_section_count: int = 5     # 最小允许section数
 ) -> float:
     """
-    评估大纲综合得分 Q'（无长度惩罚项），融合模板完整度和创新丰富度。
-    
-    Args:
-        outline_json_path (str): 大纲JSON路径
-        standard_count (int): 标准section总数 N
-        ideal_section_count (int): 理想section总数 M*（无效参数）
-        sigma (float): 惩罚宽度参数（无效参数）
-    
-    Returns:
-        float: 综合得分 Q'
+    评估大纲综合得分 Q'，包含对长度的对数惩罚项。
+    - standard_count: 用于计算匹配覆盖率K/N
+    - avg_count: 用于对数长度惩罚
     """
     try:
         with open(outline_json_path, "r", encoding="utf-8") as f:
             outline_list = json.load(f)
 
-        total_section_count = len(outline_list)  # M
-
+        total_section_count = len(outline_list)
         outline_str = "\n".join([json.dumps(item, ensure_ascii=False) for item in outline_list])
         topic = extract_topic_from_path(outline_json_path)
         prompt = OUTLINE_COVERAGE_PROMPT.format(
@@ -162,19 +154,26 @@ def evaluate_outline_coverage(
             topic=topic,
         )
         response = judge.judge(prompt)
-        matched_count = response.get("matched_count", 0)   # K
+        matched_count = response.get("matched_count", 0)
 
-        K = matched_count
-        N = standard_count
-        M = total_section_count
+        K = matched_count         # 实际匹配到的section数
+        N = standard_count        # 覆盖率参考标准数
+        M = total_section_count   # 实际section数
+        print(f"Matched count: {K}, Total section count: {M}.")
         U = max(M - K, 0)
 
         R = K / N if N > 0 else 0
         O = U / M if M > 0 else 0
-
         F_harmonic = 2 * R * O / (R + O) if (R + O) > 0 else 0
 
-        Q_prime = F_harmonic
+        # 对数惩罚项：以avg_count为基准
+        if M < min_section_count:
+            length_penalty = 0
+        else:
+            length_penalty = min(1.0, math.log(max(M, 1) + 1) / math.log(avg_count + 1))
+            # 这里avg_count是对数归一化的分母
+
+        Q_prime = F_harmonic * length_penalty
 
         return Q_prime
 
@@ -441,7 +440,7 @@ def evaluate_reference_llm(md_path: str) -> dict:
 
 def evaluate(
     md_path: str, 
-    model: str,
+    model: str = "default",
     do_outline: bool = True, 
     do_content: bool = True, 
     do_reference: bool = True
@@ -784,8 +783,10 @@ if __name__ == "__main__":
     # batch_evaluate_by_cat(["cs"])
     # calculate_average_score("cs", "AutoSurvey", "qwen-plus-2025-04-28")
     # clear_scores("cs", "AutoSurvey")
-    batch_evaluate_by_system(["vanilla"], "qwen-plus-2025-04-28", num_workers=4)
+    # batch_evaluate_by_system(["vanilla"], "qwen-plus-2025-04-28", num_workers=4)
     # clear_all_scores()
-
+    # evaluate("surveys/cs/3D Gaussian Splatting Techniques/vanilla_outline/3D Gaussian Splatting Techniques.md")
+    # evaluate("surveys/cs/3D Gaussian Splatting Techniques/vanilla/3D Gaussian Splatting Techniques.md")
+    print(evaluate_outline_coverage("surveys/cs/3D Gaussian Splatting Techniques/vanilla/outline.json"))
 
 

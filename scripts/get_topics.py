@@ -292,13 +292,13 @@ def get_s2_citation(arxiv_id):
     return 0
 
 def get_top_survey_papers_by_citation(
-    cats, num=10, oversample=5,
+    cats, num=10, oversample=3,
     months_ago_start=36, months_ago_end=3,
     seen_ids=None
 ):
     """
     只考虑发表在 [months_ago_start, months_ago_end] 之间的论文，
-    并且实时过滤掉 seen_ids 中已有的 arxiv_id。
+    最终只将前num个选中的arxiv_id放入seen_ids。
     """
     if seen_ids is None:
         seen_ids = set()
@@ -324,13 +324,15 @@ def get_top_survey_papers_by_citation(
             "arxiv_id": arxiv_id,
             "citationCount": citation
         })
-        seen_ids.add(arxiv_id)   # 记录已出现
-        # if len(papers) >= num:
-        #     break
+        # 不在这里加入 seen_ids
         time.sleep(0.1)
     # 按引用数降序
     papers.sort(key=lambda x: x["citationCount"], reverse=True)
-    return [{"title": p["title"], "arxiv_id": p["arxiv_id"]} for p in papers[:num]]
+    selected_papers = papers[:num]
+    # 只把选中的前num个 arxiv_id 放入 seen_ids
+    for p in selected_papers:
+        seen_ids.add(p["arxiv_id"])
+    return [{"title": p["title"], "arxiv_id": p["arxiv_id"]} for p in selected_papers]
 
 def is_true_survey_or_review(title, summary):
     """Heuristically filter for real survey/review papers."""
@@ -454,7 +456,7 @@ def main():
             cats = category_map[key]
             print(f"Fetching surveys for categories: {cats}")
             # all_surveys = get_top_survey_papers(cats, args.numofsurvey)
-            all_surveys = get_top_survey_papers_by_citation(cats, num=args.numofsurvey, oversample=10, seen_ids=seen_ids_global)
+            all_surveys = get_top_survey_papers_by_citation(cats, num=args.numofsurvey, oversample=3, seen_ids=seen_ids_global)
             # 去重
             # unique_surveys = []
             # for paper in all_surveys:
@@ -531,7 +533,7 @@ def main():
             for cat in category_map[key]:
                 cat_list = [cat]  # get_top_survey_papers_by_citation接收list
                 # all_surveys = get_top_survey_papers(cat_list, args.numofsurvey)
-                all_surveys = get_top_survey_papers_by_citation(cat_list, num=args.numofsurvey, oversample=10, seen_ids=seen_ids_global)
+                all_surveys = get_top_survey_papers_by_citation(cat_list, num=args.numofsurvey, oversample=3, seen_ids=seen_ids_global)
                 # 去重
                 # unique_surveys = []
                 # for paper in all_surveys:
