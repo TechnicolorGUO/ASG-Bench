@@ -384,22 +384,35 @@ def parse_markdown(content):
                     if end > current_max:
                         current_max = end
 
-            # 兜底：para 里出现作者名就自动关联引用
-            for k in ref_id_map:
-                m = re.match(r'\[([^\],]+(?: et al\.| et al)?),', k)
-                if m:
-                    author_part = m.group(1)
-                    author_variants = set([
-                        author_part,
-                        author_part.replace('et al.', 'et al'),
-                        author_part.replace('et al', 'et al.')
-                    ])
-                    for au in author_variants:
-                        if au in para and k not in already_handled:
-                            ref_text = ref_id_map[k]
-                            ref_list.append(f"{k} {ref_text}")
-                            already_handled.add(k)
-                            break
+            # 兜底：para 里出现单作者、双作者或多作者（et al.）名就自动关联引用
+
+            author_patterns = [
+                r'\b([A-Z][A-Za-z\-]+ et al\.?)\b',                  # 多作者（et al. 或 et al）
+                r'\b([A-Z][A-Za-z\-]+ and [A-Z][A-Za-z\-]+)\b',      # 双作者
+                r'\b([A-Z][A-Za-z\-]+)\b'                            # 单作者
+            ]
+
+            author_candidates = set()
+            for pat in author_patterns:
+                matches_ = re.findall(pat, para)
+                for m in matches_:
+                    author_candidates.add(m.strip())
+
+            # 兼容 et al. 和 et al 的两种形式
+            all_variants = set()
+            for au in author_candidates:
+                if 'et al' in au:
+                    all_variants.add(au.replace('et al.', 'et al'))
+                    all_variants.add(au.replace('et al', 'et al.'))
+                all_variants.add(au)
+            author_candidates = all_variants
+
+            for au in author_candidates:
+                for k in ref_id_map:
+                    if k.startswith(f"[{au},") and k not in already_handled:
+                        ref_text = ref_id_map[k]
+                        ref_list.append(f"{k} {ref_text}")
+                        already_handled.add(k)
 
             if ref_list:
                 results[para] = ref_list
