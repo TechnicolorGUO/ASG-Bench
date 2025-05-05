@@ -270,11 +270,13 @@ def extract_refs(input_file, output_folder):
     # 写 CSV
     try:
         with open(output_csv, 'w', newline='', encoding='utf-8') as f:
-            writer = csv.writer(f)
+            # 使用转义字符和引号
+            writer = csv.writer(f, quoting=csv.QUOTE_MINIMAL, escapechar='\\')
             writer.writerow(["sentence", "references"])
             for sentence, refs in unique_data.items():
-                refs_str = "；".join(refs)
-                writer.writerow([sentence, refs_str])
+                # 使用 "；" 拼接引用列表
+                refs_str = ";".join(refs)
+                writer.writerow([sentence, refs_str])  # 写入一行
     except PermissionError:
         print(f"错误：没有权限写入文件 {output_csv}，跳过该文件。")
     except Exception as e:
