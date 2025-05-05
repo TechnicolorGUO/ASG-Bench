@@ -180,6 +180,14 @@ def parse_markdown(content):
 
     # 2. 提取参考文献条目（兼容各种编号和无编号，条目间可空行分隔）
     # 检测以[xxx]开头的条目（如 [1] 或 [Agashe et al., 2023]），否则用空行分割
+
+    def standardize_numeric_refs(block):
+        def repl(match):
+            num = match.group(1)
+            return f'[{num}] '
+        return re.sub(r'^\s*(\d+)[\.\)]\s+', repl, block, flags=re.MULTILINE)
+
+    ref_block = standardize_numeric_refs(ref_block)
     lines = [line for line in ref_block.splitlines() if line.strip()]
     bracket_lines = sum(1 for line in lines if line.strip().startswith("["))
     if ref_block and bracket_lines >= len(lines) // 2:
