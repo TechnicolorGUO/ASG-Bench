@@ -171,7 +171,7 @@ def parse_markdown(content):
         references: list，所有参考文献（顺序保存）
     """
     # 1. 最严格：# References
-    ref_header = re.compile(r'^(#{1,3})\s*References', re.IGNORECASE | re.MULTILINE)
+    ref_header = re.compile(r'^(#{1,6})\s*References\s*$', re.IGNORECASE | re.MULTILINE)
     header_match = ref_header.search(content)
 
     if header_match:
