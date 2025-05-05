@@ -127,29 +127,11 @@ def parse_markdown(content):
         results: dict，key为带引用的完整句子，value为该句子用到的参考文献内容列表
         references: list，所有参考文献（顺序保存）
     """
-    # 1. 定位References区块
+    # 1. 优先严格匹配标准 markdown 标题
     ref_header = re.compile(r'^(#{1,3})\s*References', re.IGNORECASE | re.MULTILINE)
     header_match = ref_header.search(content)
-    if not header_match:
-        # 没有 # References 标题，则找全文最后一个 'references'
-        ref_word = re.compile(r'\breferences\b', re.IGNORECASE)
-        matches = list(ref_word.finditer(content))
-        if not matches:
-            # 真的完全找不到 references，全部为正文
-            main_content = content.strip()
-            ref_block = ""
-        else:
-            # 用最后一个 references 作为分界
-            last_ref = matches[-1]
-            start = last_ref.end()
-            # 查找下一个 # 标题
-            next_header = re.search(r'^#{1,6}\s+\S+', content[start:], re.MULTILINE)
-            end = start + next_header.start() if next_header else len(content)
-            main_content = content[:last_ref.start()].strip() + "\n"
-            # 如果存在下一个 header，则正文也包含下一个 header 后的内容
-            main_content += content[start + (next_header.end() if next_header else 0):].strip() if next_header else ""
-            ref_block = content[start:end].strip()
-    else:
+
+    if header_match:
         start = header_match.end()
         # 查找下一个 # 开头的标题
         next_header = re.search(r'^#{1,6}\s+\S+', content[start:], re.MULTILINE)
@@ -157,6 +139,33 @@ def parse_markdown(content):
         main_content = content[:header_match.start()].strip() + "\n"
         main_content += content[start + (next_header.end() if next_header else 0):].strip() if next_header else ""
         ref_block = content[start:end].strip()
+    else:
+        # 2. 次严格：找任何以#开头且本行带reference的标题
+        loose_header = re.compile(r'^#{1,6}.*reference', re.IGNORECASE | re.MULTILINE)
+        loose_match = loose_header.search(content)
+        if loose_match:
+            start = loose_match.end()
+            next_header = re.search(r'^#{1,6}\s+\S+', content[start:], re.MULTILINE)
+            end = start + next_header.start() if next_header else len(content)
+            main_content = content[:loose_match.start()].strip() + "\n"
+            main_content += content[start + (next_header.end() if next_header else 0):].strip() if next_header else ""
+            ref_block = content[start:end].strip()
+        else:
+            # 3. 最宽松：找最后一个 reference(s) 单词
+            ref_word = re.compile(r'\breferences?\b', re.IGNORECASE)
+            matches = list(ref_word.finditer(content))
+            if matches:
+                last_ref = matches[-1]
+                start = last_ref.end()
+                next_header = re.search(r'^#{1,6}\s+\S+', content[start:], re.MULTILINE)
+                end = start + next_header.start() if next_header else len(content)
+                main_content = content[:last_ref.start()].strip() + "\n"
+                main_content += content[start + (next_header.end() if next_header else 0):].strip() if next_header else ""
+                ref_block = content[start:end].strip()
+            else:
+                # 都没找到，视为无参考文献
+                main_content = content.strip()
+                ref_block = ""
 
     # 2. 提取参考文献条目（兼容各种编号和无编号，条目间可空行分隔）
     # 检测以[xxx]开头的条目（如 [1] 或 [Agashe et al., 2023]），否则用空行分割
