@@ -499,7 +499,7 @@ def main():
             with open(os.path.join(out_dir, "clusters.json"), 'w', encoding='utf-8') as f:
                 json.dump(all_clusters, f, indent=2, ensure_ascii=False)
             # 下载PDF
-            for topic, papers in clusters.items():
+            for topic, papers in all_clusters.items():
                 topic_dir = os.path.join(out_dir, topic.replace('/', '_'))
                 pdf_dir = os.path.join(topic_dir, "pdfs")
                 os.makedirs(pdf_dir, exist_ok=True)
@@ -543,38 +543,37 @@ def main():
                 unique_surveys = all_surveys
 
                 # 聚类
-                survey_str = json.dumps(unique_surveys, ensure_ascii=False, indent=2)
-                # prompt = CATEGORIZE_SURVEY_TITLES.format(
-                #     survey_titles=survey_str,
-                #     num_clusters=args.num_per_cat
-                # )
-                # prompt = CATEGORIZE_SURVEY_TITLES_HEURISTIC.format(
-                #     survey_titles=survey_str,
-                # )
-                prompt = CATEGORIZE_SURVEY_TITLES_SINGLE.format(
-                    survey_titles=survey_str,
-                )
-                for attempt in range(3):
-                    try:
-                        raw_response = generateResponse(client, prompt, max_tokens=2048, temperature=0.3)
-                        clusters = robust_json_parse(raw_response)
-                        break
-                    except Exception as e:
-                        print(f"\nError for clustering '{cat}' (attempt {attempt+1}): {e}")
-                        if attempt == 2:
-                            print(f"Failed to cluster category: {cat}, skipping.")
-                            clusters = {}
-                        else:
-                            time.sleep(1)
+                BATCH_SIZE = 10
+                all_clusters = {}
+                for batch_start in range(0, len(unique_surveys), BATCH_SIZE):
+                    batch = unique_surveys[batch_start:batch_start+BATCH_SIZE]
+                    survey_str = json.dumps(batch, ensure_ascii=False, indent=2)
+                    prompt = CATEGORIZE_SURVEY_TITLES_SINGLE.format(
+                        survey_titles=survey_str,
+                    )
+                    for attempt in range(3):
+                        try:
+                            raw_response = generateResponse(client, prompt, max_tokens=2048, temperature=0.3)
+                            clusters = robust_json_parse(raw_response)
+                            break
+                        except Exception as e:
+                            print(f"\nError for clustering '{cat}', batch {batch_start//BATCH_SIZE+1} (attempt {attempt+1}): {e}")
+                            if attempt == 2:
+                                print(f"Failed to cluster category: {cat}, batch {batch_start//BATCH_SIZE+1}, skipping.")
+                                clusters = {}
+                            else:
+                                time.sleep(1)
+                    all_clusters.update(clusters)
+
                 # 保存聚类结果
                 out_dir = os.path.join("outputs", "dataset", key, cat)
                 os.makedirs(out_dir, exist_ok=True)
                 with open(os.path.join(out_dir, "clusters.json"), 'w', encoding='utf-8') as f:
-                    json.dump(clusters, f, indent=2, ensure_ascii=False)
+                    json.dump(all_clusters, f, indent=2, ensure_ascii=False)
                 # 保存进fine_surveys_map
-                fine_surveys_map[key][cat] = clusters
+                fine_surveys_map[key][cat] = all_clusters
                 # 下载PDF
-                for topic, papers in clusters.items():
+                for topic, papers in all_clusters.items():
                     topic_dir = os.path.join(out_dir, topic.replace('/', '_'))
                     pdf_dir = os.path.join(topic_dir, "pdfs")
                     os.makedirs(pdf_dir, exist_ok=True)
