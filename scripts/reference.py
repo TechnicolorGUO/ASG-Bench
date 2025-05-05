@@ -158,8 +158,9 @@ def parse_markdown(content):
                 main_content = content[:start].strip()
                 ref_block = content[start:].strip()
             else:
-                # 4. 最宽松：全文最后一个 reference(s)
-                ref_word = re.compile(r'\breferences?\b', re.IGNORECASE)
+                # 4. 最宽松：全文最后一个 reference(s) 或者bibliography
+                # ref_word = re.compile(r'\breferences?\b', re.IGNORECASE)
+                ref_word = re.compile(r'\b(bibliography|references?)\b', re.IGNORECASE)
                 matches = list(ref_word.finditer(content))
                 if matches:
                     last_ref = matches[-1]
