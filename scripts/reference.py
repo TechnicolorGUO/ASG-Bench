@@ -242,8 +242,8 @@ def parse_markdown(content):
         def repl(match):
             num = match.group(1)
             return f'[{num}] '
-        # 支持“1. ”、“1) ”、“1 A.”等多种编号格式
-        return re.sub(r'^\s*(\d+)(?:[\.\)]\s+|(?=\s+[A-Z]\.))', repl, block, flags=re.MULTILINE)
+        # 支持 1.  1)  1 A.  1 Pleiss 等等
+        return re.sub(r'^\s*(\d+)(?:[\.\)]\s+|\s+(?=[A-Z]))', repl, block, flags=re.MULTILINE)
 
     ref_block = standardize_numeric_refs(ref_block)
     lines = [line for line in ref_block.splitlines() if line.strip()]
