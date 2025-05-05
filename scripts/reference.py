@@ -327,12 +327,16 @@ def parse_markdown(content):
         # 提取所有中括号引用
         author_year_citations = re.findall(r'([A-Z][A-Za-z\-]+(?: et al\.)?)\s*\((20\d{2}[a-z]?|19\d{2}[a-z]?)\)', para)
         for surname, year in author_year_citations:
+            surname = surname.strip()
             key = f"[{surname}, {year}]"
-            if key not in already_handled:
-                ref_text = ref_id_map.get(key)
-                if ref_text:
-                    ref_list.append(f"{key} {ref_text}")
-                    already_handled.add(key)
+            alt_key = f"[{surname.replace('et al.', 'et al')}, {year}]"  # 去掉句点试试
+            for k in (key, alt_key):
+                if k not in already_handled:
+                    ref_text = ref_id_map.get(k)
+                    if ref_text:
+                        ref_list.append(f"{k} {ref_text}")
+                        already_handled.add(k)
+                        break
         citations = extract_citation_spans(para)
         for citation in citations:
             if is_author_year_citation(citation):
@@ -484,4 +488,4 @@ if __name__ == "__main__":
     
     print(acl_ref_to_key("Ilya Loshchilov and Frank Hutter. 2017. Decoupled weight decay regularization. arXiv preprint arXiv:1711.05101.  "))
     print(acl_ref_to_key("Sezer, O. B., Gudelek, M. U., & Ozbayoglu, A. M. (2020). Financial time series forecasting with deep learning: A systematic literature review: 2005–2019. Applied soft computing, 90, 106181. https://doi.org/10.1016/j.asoc.2020.106181"))
-    
+    print(acl_ref_to_key("Eulerich, Marc, and David A. Wood. 2023. “A Demonstration of How ChatGPT Can Be Used in the Internal Auditing Process.” SSRN Scholarly Paper. Rochester, NY. https://doi.org/10.2139/ssrn.4519583."))
