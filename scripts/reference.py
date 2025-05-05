@@ -251,12 +251,12 @@ def parse_markdown(content):
     main_content = re.sub(r'<html>.*?</html>', '', main_content, flags=re.DOTALL)
     # main_content = re.sub(r'\$.*?\$', '', main_content, flags=re.DOTALL)
     # main_content = re.sub(r'^\s*\$\$[\s\S]*?\$\$\s*$', '', main_content, flags=re.MULTILINE)
-    main_content = re.sub(r'^#+\s+.*$', '', main_content, flags=re.MULTILINE)
-    main_content = re.sub(r'\n{2,}', '\n', main_content)  # 合并空行
+    main_content_wo_section = re.sub(r'^#+\s+.*$', '', main_content, flags=re.MULTILINE)
+    main_content_wo_section = re.sub(r'\n{2,}', '\n', main_content_wo_section)  # 合并空行
 
     # 5. 用正则分割句子（适合英文）
     pattern = r'\.(?=\s+[A-Z]|\n|[A-Z])'
-    paragraphs = re.split(pattern, main_content)
+    paragraphs = re.split(pattern, main_content_wo_section)
     paragraphs = [sentence.strip() for sentence in paragraphs if sentence.strip()]
 
 
@@ -298,39 +298,39 @@ def parse_markdown(content):
 
         if ref_list:
             results[para] = ref_list
-        # 只对 Introduction 到结尾做兜底引用识别
-        intro_match = re.search(r'^(#{1,6}\s*)?Introduction\b.*', main_content, re.IGNORECASE | re.MULTILINE)
-        if intro_match:
-            main_content_for_fallback = main_content[intro_match.start():].strip()
-        else:
-            main_content_for_fallback = main_content
+    # 只对 Introduction 到结尾做兜底引用识别
+    intro_match = re.search(r'^(#{1,6}\s*)?Introduction\b.*', main_content, re.IGNORECASE | re.MULTILINE)
+    if intro_match:
+        main_content_for_fallback = main_content[intro_match.start():].strip()
+    else:
+        main_content_for_fallback = main_content
 
-        pattern = r'\.(?=\s+[A-Z]|\n|[A-Z])'
-        fallback_paragraphs = re.split(pattern, main_content_for_fallback)
-        fallback_paragraphs = [p.strip() for p in fallback_paragraphs if p.strip()]
+    pattern = r'\.(?=\s+[A-Z]|\n|[A-Z])'
+    fallback_paragraphs = re.split(pattern, main_content_for_fallback)
+    fallback_paragraphs = [p.strip() for p in fallback_paragraphs if p.strip()]
 
-        if not results:
-            reference_idx = 1  # 或你需要的初始编号
-            for para in fallback_paragraphs:
-                para = para.strip()
-                if not para:
-                    continue
-                inline_refs = find_inline_references(para, reference_idx)
-                if inline_refs:
-                    ref_list = []
-                    already_handled = set()
-                    for start, end in inline_refs:
-                        for rid in range(start, end + 1):
-                            if rid not in already_handled:
-                                ref_text = ref_id_map.get(str(rid))
-                                if ref_text:
-                                    ref_list.append(f"[{rid}] {ref_text}")
-                                    already_handled.add(rid)
-                    if ref_list:
-                        results[para] = ref_list
-                        max_found = max(end for start, end in inline_refs)
-                        if max_found >= reference_idx:
-                            reference_idx = max_found + 1
+    if not results:
+        reference_idx = 1  # 或你需要的初始编号
+        for para in fallback_paragraphs:
+            para = para.strip()
+            if not para:
+                continue
+            inline_refs = find_inline_references(para, reference_idx)
+            if inline_refs:
+                ref_list = []
+                already_handled = set()
+                for start, end in inline_refs:
+                    for rid in range(start, end + 1):
+                        if rid not in already_handled:
+                            ref_text = ref_id_map.get(str(rid))
+                            if ref_text:
+                                ref_list.append(f"[{rid}] {ref_text}")
+                                already_handled.add(rid)
+                if ref_list:
+                    results[para] = ref_list
+                    max_found = max(end for start, end in inline_refs)
+                    if max_found >= reference_idx:
+                        reference_idx = max_found + 1
     return results, references
 
 def extract_refs(input_file, output_folder):
