@@ -131,12 +131,27 @@ def parse_markdown(content):
     ref_header = re.compile(r'^(#{1,3})\s*References', re.IGNORECASE | re.MULTILINE)
     header_match = ref_header.search(content)
     if not header_match:
-        # 没有参考文献区块
-        main_content = content.strip()
-        ref_block = ""
+        # 没有 # References 标题，则找全文最后一个 'references'
+        ref_word = re.compile(r'\breferences\b', re.IGNORECASE)
+        matches = list(ref_word.finditer(content))
+        if not matches:
+            # 真的完全找不到 references，全部为正文
+            main_content = content.strip()
+            ref_block = ""
+        else:
+            # 用最后一个 references 作为分界
+            last_ref = matches[-1]
+            start = last_ref.end()
+            # 查找下一个 # 标题
+            next_header = re.search(r'^#{1,6}\s+\S+', content[start:], re.MULTILINE)
+            end = start + next_header.start() if next_header else len(content)
+            main_content = content[:last_ref.start()].strip() + "\n"
+            # 如果存在下一个 header，则正文也包含下一个 header 后的内容
+            main_content += content[start + (next_header.end() if next_header else 0):].strip() if next_header else ""
+            ref_block = content[start:end].strip()
     else:
         start = header_match.end()
-        # 查找下一个#开头的标题
+        # 查找下一个 # 开头的标题
         next_header = re.search(r'^#{1,6}\s+\S+', content[start:], re.MULTILINE)
         end = start + next_header.start() if next_header else len(content)
         main_content = content[:header_match.start()].strip() + "\n"
