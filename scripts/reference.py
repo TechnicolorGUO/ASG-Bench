@@ -325,6 +325,14 @@ def parse_markdown(content):
 
         # 再处理作者-年份型引用
         # 提取所有中括号引用
+        author_year_citations = re.findall(r'([A-Z][A-Za-z\-]+(?: et al\.)?)\s*\((20\d{2}[a-z]?|19\d{2}[a-z]?)\)', para)
+        for surname, year in author_year_citations:
+            key = f"[{surname}, {year}]"
+            if key not in already_handled:
+                ref_text = ref_id_map.get(key)
+                if ref_text:
+                    ref_list.append(f"{key} {ref_text}")
+                    already_handled.add(key)
         citations = extract_citation_spans(para)
         for citation in citations:
             if is_author_year_citation(citation):
