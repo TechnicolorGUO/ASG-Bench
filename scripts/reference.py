@@ -151,25 +151,32 @@ def get_continuous_refs(matches):
             break  # 没有能承接的区间，停止
     return refs
 
-def find_inline_references(para):
-    """返回para中的所有引用区间和编号，按出现顺序"""
+def find_inline_references(para, initial_max=None):
+    """
+    返回para中的所有引用区间，按出现顺序。
+    每次append后立即用end更新max，只保留end <= current_max + 1的区间。
+    """
     matches = []
     # 先找区间
-    for match in re.finditer(r'(?<=[a-zA-Z])(\d{1,3})\s*[–-]\s*(\d{1,3})\b', para):
+    for match in re.finditer(r'(?<!\d)(\d{1,3})\s*[–-]\s*(\d{1,3})\b', para):
         start, end = int(match.group(1)), int(match.group(2))
         if start < end:
             matches.append((start, end, match.start()))
     # 再找单个
-    for match in re.finditer(r'(?<=[a-zA-Z])(\d{1,3})\b', para):
+    for match in re.finditer(r'(?<!\d)(\d{1,3})\b', para):
         idx = int(match.group(1))
-        # 跳过已被区间包含的
         if not any(start <= idx <= end for start, end, _ in matches):
             matches.append((idx, idx, match.start()))
-    # 按文本顺序排序
     matches.sort(key=lambda x: x[2])
-    # 只保留编号区间
-    matches = [(start, end) for start, end, _ in matches]
-    return matches
+
+    filtered = []
+    current_max = initial_max if initial_max is not None else 0
+    for start, end, _ in matches:
+        if end <= current_max + 1:
+            filtered.append((start, end))
+            if end > current_max:
+                current_max = end
+    return filtered
 
 def parse_markdown(content):
     """
@@ -342,12 +349,13 @@ def parse_markdown(content):
     fallback_paragraphs = [p.strip() for p in fallback_paragraphs if p.strip()]
 
     if not results:
+        current_max = 0  # 或你希望的初始值
         for para in fallback_paragraphs:
             para = para.strip()
             if not para:
                 continue
-            matches = find_inline_references(para)
-            # matches = get_continuous_refs(matches)
+            # 传入当前max
+            matches = find_inline_references(para, initial_max=current_max)
             if matches:
                 ref_list = []
                 already_handled = set()
@@ -358,6 +366,9 @@ def parse_markdown(content):
                             if ref_text:
                                 ref_list.append(f"[{rid}] {ref_text}")
                                 already_handled.add(rid)
+                    # 每append一次更新current_max
+                    if end > current_max:
+                        current_max = end
                 if ref_list:
                     results[para] = ref_list
     return results, references
