@@ -370,9 +370,9 @@ def parse_markdown(content):
                 continue
             # 传入当前max
             matches = find_inline_references(para, initial_max=current_max)
+            ref_list = []
+            already_handled = set()
             if matches:
-                ref_list = []
-                already_handled = set()
                 for start, end in matches:
                     for rid in range(start, end + 1):
                         if rid not in already_handled:
@@ -383,8 +383,26 @@ def parse_markdown(content):
                     # 每append一次更新current_max
                     if end > current_max:
                         current_max = end
-                if ref_list:
-                    results[para] = ref_list
+
+            # 兜底：para 里出现作者名就自动关联引用
+            for k in ref_id_map:
+                m = re.match(r'\[([^\],]+(?: et al\.| et al)?),', k)
+                if m:
+                    author_part = m.group(1)
+                    author_variants = set([
+                        author_part,
+                        author_part.replace('et al.', 'et al'),
+                        author_part.replace('et al', 'et al.')
+                    ])
+                    for au in author_variants:
+                        if au in para and k not in already_handled:
+                            ref_text = ref_id_map[k]
+                            ref_list.append(f"{k} {ref_text}")
+                            already_handled.add(k)
+                            break
+
+            if ref_list:
+                results[para] = ref_list
     return results, references
 
 def extract_refs(input_file, output_folder):
