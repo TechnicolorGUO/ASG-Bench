@@ -161,6 +161,8 @@ def parse_markdown(content):
     # 对于[编号]，编号可为数字或文本，为字符串；无编号则用顺序号
     references = []
     ref_id_map = {}  # key: 编号(str) 或作者-年份key，value: 条目内容
+    auto_id = 1      # 自动编号从1开始
+
     for idx, entry in enumerate(entries):
         m = re.match(r'^\[(.+?)\]\s*(.*)', entry, re.DOTALL)
         if m:
@@ -171,10 +173,18 @@ def parse_markdown(content):
         else:
             # 检查是否ACL风格，如果是就调用acl_ref_to_key
             key = acl_ref_to_key(entry)
-            # key 形如 [Smith et al., 2018a]，存map时去掉方括号和空格
-            ref_id = key.strip('[]').strip()
-            ref_id_map[ref_id] = entry.strip()
-            references.append(entry.strip())
+            if key and key.startswith('[') and key.endswith(']') and ',' in key:
+                # key 形如 [Smith et al., 2018a]，存map时去掉方括号和空格
+                ref_id = key.strip('[]').strip()
+                ref_id_map[ref_id] = entry.strip()
+                references.append(entry.strip())
+            else:
+                # 都不是，就用自动编号
+                ref_id = str(auto_id)
+                ref_text = entry.strip()
+                ref_id_map[ref_id] = ref_text
+                references.append(f'[{ref_id}] {ref_text}')
+                auto_id += 1
 
     # 4. 预处理正文内容（去除图片/公式/html）
     main_content = re.sub(r'!\[.*?\]\(.*?\)', '', main_content)
