@@ -122,21 +122,44 @@ def expand_citation(raw_citation):
                     continue
     return sorted(set(ref_ids))
 
-def find_inline_references(para, max_idx):
-    # 支持区间
+def get_continuous_refs(matches):
+    """从编号1开始，拼接所有能承接的区间，允许重复编号或比最大编号小的编号出现"""
+    refs = []
+    next_idx = 1
+    used = set()  # 已用过的区间下标
+    while True:
+        found = False
+        for i, (start, end) in enumerate(matches):
+            if i in used:
+                continue
+            if start == next_idx:
+                refs.append((start, end))
+                next_idx = end + 1
+                used.add(i)
+                found = True
+                break  # 找到后立即拼接，继续查找下一个
+        if not found:
+            break  # 没有能承接的区间，停止
+    return refs
+
+def find_inline_references(para):
+    """返回para中的所有引用区间和编号，按出现顺序"""
     matches = []
+    # 先找区间
     for match in re.finditer(r'(?<=[a-zA-Z])(\d{1,3})\s*[–-]\s*(\d{1,3})\b', para):
         start, end = int(match.group(1)), int(match.group(2))
-        # 区间最大不能超过max_idx
-        if start <= max_idx and end <= max_idx and start < end:
-            matches.append((start, end))
-    # 单个数字
+        if start < end:
+            matches.append((start, end, match.start()))
+    # 再找单个
     for match in re.finditer(r'(?<=[a-zA-Z])(\d{1,3})\b', para):
         idx = int(match.group(1))
-        if idx <= max_idx:
-            # 跳过已被区间包含的
-            if not any(start <= idx <= end for start, end in matches):
-                matches.append((idx, idx))
+        # 跳过已被区间包含的
+        if not any(start <= idx <= end for start, end, _ in matches):
+            matches.append((idx, idx, match.start()))
+    # 按文本顺序排序
+    matches.sort(key=lambda x: x[2])
+    # 只保留编号区间
+    matches = [(start, end) for start, end, _ in matches]
     return matches
 
 def parse_markdown(content):
@@ -310,16 +333,16 @@ def parse_markdown(content):
     fallback_paragraphs = [p.strip() for p in fallback_paragraphs if p.strip()]
 
     if not results:
-        reference_idx = 1  # 或你需要的初始编号
         for para in fallback_paragraphs:
             para = para.strip()
             if not para:
                 continue
-            inline_refs = find_inline_references(para, reference_idx)
-            if inline_refs:
+            matches = find_inline_references(para)
+            continuous_refs = get_continuous_refs(matches)
+            if continuous_refs:
                 ref_list = []
                 already_handled = set()
-                for start, end in inline_refs:
+                for start, end in continuous_refs:
                     for rid in range(start, end + 1):
                         if rid not in already_handled:
                             ref_text = ref_id_map.get(str(rid))
@@ -328,9 +351,6 @@ def parse_markdown(content):
                                 already_handled.add(rid)
                 if ref_list:
                     results[para] = ref_list
-                    max_found = max(end for start, end in inline_refs)
-                    if max_found >= reference_idx:
-                        reference_idx = max_found + 1
     return results, references
 
 def extract_refs(input_file, output_folder):
