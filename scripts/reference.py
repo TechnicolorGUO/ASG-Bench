@@ -23,7 +23,8 @@ def acl_ref_to_key(ref):
     year = year_match.group(1) if year_match else '????'
 
     # 2. 提取作者段
-    authors_part = ref.split('.')[0].strip()
+    # authors_part = ref.split('.')[0].strip()
+    authors_part = ref[:year_match.start()].strip() if year_match else ref.split('.')[0].strip()
     # 替换 " and " 为逗号，方便统一处理
     authors_part = authors_part.replace(' and ', ', ')
     # 拆分作者
@@ -32,8 +33,10 @@ def acl_ref_to_key(ref):
     # 提取每个人的姓
     surnames = []
     for name in author_names:
-        if name:
-            surnames.append(name.split()[-1])
+        if ',' in name:
+            surnames.append(name.split(',')[0].strip().strip('.'))
+        else:
+            surnames.append(name.split()[-1].strip().strip('.'))
 
     if len(surnames) == 1:
         key = f'[{surnames[0]}, {year}]'
@@ -355,21 +358,23 @@ if __name__ == "__main__":
     # extract_refs(input_file="surveys/cs/Natural Language to Code Generation with Large Language Models/pdfs/2212.09420.md", output_folder="surveys/cs/Natural Language to Code Generation with Large Language Models/pdfs")
 
     # surveys\<category>\<topic>\pdfs\<filename>.md 进行extract_refs
-    for cat in os.listdir("surveys"):
-        cat_path = os.path.join("surveys", cat)
-        if not os.path.isdir(cat_path):
-            continue
-        for topic in os.listdir(cat_path):
-            topic_path = os.path.join(cat_path, topic)
-            if not os.path.isdir(topic_path):
-                continue
-            md_path = os.path.join(topic_path, "pdfs")
-            if not os.path.isdir(md_path):
-                continue
-            for file in os.listdir(md_path):
-                if not file.lower().endswith(".md"):
-                    continue
-                file_path = os.path.join(md_path, file)
-                extract_refs(input_file=file_path, output_folder=md_path)
+    # for cat in os.listdir("surveys"):
+    #     cat_path = os.path.join("surveys", cat)
+    #     if not os.path.isdir(cat_path):
+    #         continue
+    #     for topic in os.listdir(cat_path):
+    #         topic_path = os.path.join(cat_path, topic)
+    #         if not os.path.isdir(topic_path):
+    #             continue
+    #         md_path = os.path.join(topic_path, "pdfs")
+    #         if not os.path.isdir(md_path):
+    #             continue
+    #         for file in os.listdir(md_path):
+    #             if not file.lower().endswith(".md"):
+    #                 continue
+    #             file_path = os.path.join(md_path, file)
+    #             extract_refs(input_file=file_path, output_folder=md_path)
     
+    print(acl_ref_to_key("Ilya Loshchilov and Frank Hutter. 2017. Decoupled weight decay regularization. arXiv preprint arXiv:1711.05101.  "))
+    print(acl_ref_to_key("Sezer, O. B., Gudelek, M. U., & Ozbayoglu, A. M. (2020). Financial time series forecasting with deep learning: A systematic literature review: 2005–2019. Applied soft computing, 90, 106181. https://doi.org/10.1016/j.asoc.2020.106181"))
     
