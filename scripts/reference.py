@@ -64,10 +64,19 @@ def is_numeric_citation(citation):
 
 def is_author_year_citation(citation):
     """
-    判断是否为作者-年份型引用 (如 [Chen et al., 2023c; Xie et al., 2023])
+    判断是否为作者-年份型引用:
+    - 长形式 [Chen et al., 2023c; Xie et al., 2023]
+    - 简缩写形式 [Abé10], [AL18]
     """
-    # 适配诸如 [Chen et al., 2023c; Xie et al., 2023]
-    return bool(re.search(r'[A-Za-z].*?\d{4}', citation))
+    # 形式1: 作者+4位数字年份
+    if re.search(r'[A-Za-z].*?\d{4}', citation):
+        return True
+    # 形式2: 作者+2位数字/字母 (如 [AL18], [Abé10])
+    # 通常是大写字母+2位数字，或包含特殊字符
+    if re.search(r'\[\s*[A-Za-z]{2,}[0-9]{2,}[a-z]?\s*\]', citation):
+        return True
+    # 可以扩展其他变体
+    return False
 
 def merge_all_numeric_citations(sentence):
     ids = []
