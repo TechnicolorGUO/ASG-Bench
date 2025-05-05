@@ -122,6 +122,23 @@ def expand_citation(raw_citation):
                     continue
     return sorted(set(ref_ids))
 
+def find_inline_references(para, max_idx):
+    # 支持区间
+    matches = []
+    for match in re.finditer(r'(?<=[a-zA-Z])(\d{1,3})\s*[–-]\s*(\d{1,3})\b', para):
+        start, end = int(match.group(1)), int(match.group(2))
+        # 区间最大不能超过max_idx
+        if start <= max_idx and end <= max_idx and start < end:
+            matches.append((start, end))
+    # 单个数字
+    for match in re.finditer(r'(?<=[a-zA-Z])(\d{1,3})\b', para):
+        idx = int(match.group(1))
+        if idx <= max_idx:
+            # 跳过已被区间包含的
+            if not any(start <= idx <= end for start, end in matches):
+                matches.append((idx, idx))
+    return matches
+
 def parse_markdown(content):
     """
     解析 Markdown 内容，提取完整句子和引用信息
@@ -281,7 +298,29 @@ def parse_markdown(content):
 
         if ref_list:
             results[para] = ref_list
-
+    # 如果全部没有任何引用，再兜底
+    if not results:
+        reference_idx = 1  # 或你需要的初始编号
+        for para in paragraphs:
+            para = para.strip()
+            if not para:
+                continue
+            inline_refs = find_inline_references(para, reference_idx)
+            if inline_refs:
+                ref_list = []
+                already_handled = set()
+                for start, end in inline_refs:
+                    for rid in range(start, end + 1):
+                        if rid not in already_handled:
+                            ref_text = ref_id_map.get(str(rid))
+                            if ref_text:
+                                ref_list.append(f"[{rid}] {ref_text}")
+                                already_handled.add(rid)
+                if ref_list:
+                    results[para] = ref_list
+                    max_found = max(end for start, end in inline_refs)
+                    if max_found >= reference_idx:
+                        reference_idx = max_found + 1
     return results, references
 
 def extract_refs(input_file, output_folder):
