@@ -352,7 +352,7 @@ def parse_markdown(content):
         if ref_list:
             results[para] = ref_list
     # 只对 Introduction 到结尾做兜底引用识别
-    intro_match = re.search(r'^(#{1,6}\s*)?Introduction\b.*', main_content, re.IGNORECASE | re.MULTILINE)
+    intro_match = re.search(r'^.*#.*introduction.*$', main_content, re.IGNORECASE | re.MULTILINE)
     if intro_match:
         main_content_for_fallback = main_content[intro_match.start():].strip()
     else:
