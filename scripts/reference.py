@@ -338,11 +338,11 @@ def parse_markdown(content):
             if not para:
                 continue
             matches = find_inline_references(para)
-            continuous_refs = get_continuous_refs(matches)
-            if continuous_refs:
+            # matches = get_continuous_refs(matches)
+            if matches:
                 ref_list = []
                 already_handled = set()
-                for start, end in continuous_refs:
+                for start, end in matches:
                     for rid in range(start, end + 1):
                         if rid not in already_handled:
                             ref_text = ref_id_map.get(str(rid))
