@@ -3,6 +3,9 @@ import glob
 import json
 import math
 import os
+from queue import Queue
+import threading
+import time
 import dotenv
 import pandas as pd
 from prompts import CONTENT_EVALUATION_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT
@@ -161,7 +164,7 @@ def evaluate_outline_coverage(
         K = matched_count         # 实际匹配到的section数
         N = standard_count        # 覆盖率参考标准数
         M = total_section_count   # 实际section数
-        print(f"Matched count: {K}, Total section count: {M}.")
+        # print(f"Matched count: {K}, Total section count: {M}.")
         U = max(M - K, 0)
 
         R = K / N if N > 0 else 0
@@ -462,11 +465,11 @@ def evaluate_reference_density(md_path: str) -> dict:
     print("Reference density score:", results)
     return results
 
-def evaluate_reference_quality(md_path: str) -> dict:
+def evaluate_reference_quality(md_path: str):
     results = {}
-    csv_path = os.path.join(os.path.dirname(md_path), os.path.basename(md_path).replace(".md", ".csv"))  
+    csv_path = os.path.join(os.path.dirname(md_path), os.path.basename(md_path).replace(".md", ".csv"))
 
-    # csv columns: [sentence,references]
+    # 1. 解析csv
     refs_mapping = {}
     with open(csv_path, "r", encoding="utf-8") as f:
         reader = pd.read_csv(f)
@@ -475,30 +478,64 @@ def evaluate_reference_quality(md_path: str) -> dict:
             references = row["references"].split(";")
             refs_mapping[sentence] = references
 
-    # Count the number of references that are relevant to the topic
+    topic = extract_topic_from_path(md_path)
     total_count = 0
     supported_count = 0
-    topic = extract_topic_from_path(md_path)
-    for sentence, references in refs_mapping.items():
-        # Call LLM to evaluate the relevance of each reference
-        prompt = REFERENCE_QUALITY_PROMPT.format(
-            sentence=sentence,
-            references="\n".join(references),
-            topic=topic
-        )
-        try:
-            response = judge.judge(prompt)
-            total = response.get("total", 0)
-            supported = response.get("supported", 0)
-            total_count += int(total)
-            supported_count += int(supported)
-            print(f"Sentence: {sentence}, Total: {total}, Supported: {supported}")
-        except Exception as e:
-            total_count += 0
-            supported_count += 0
-            print("Error in evaluating reference quality:", e)
-            continue
-    # Calculate the average scores
+
+    # 2. 线程安全结果 & 完成标志
+    completed = set()
+    completed_lock = threading.Lock()
+    task_queue = Queue()
+    for sentence in refs_mapping:
+        task_queue.put(sentence)
+    results_map = {}
+
+    def worker():
+        while True:
+            try:
+                sentence = task_queue.get(timeout=1)
+            except:
+                return  # 队列空了
+
+            try:
+                references = refs_mapping[sentence]
+                prompt = REFERENCE_QUALITY_PROMPT.format(
+                    sentence=sentence,
+                    references="\n".join(references),
+                    topic=topic
+                )
+                response = judge.judge(prompt)
+                total = response.get("total", 0)
+                supported = response.get("supported", 0)
+                with completed_lock:
+                    if sentence not in completed:
+                        completed.add(sentence)
+                        results_map[sentence] = (total, supported)
+                        print(f"Sentence: {sentence}, Total: {total}, Supported: {supported}")
+                task_queue.task_done()
+            except Exception as e:
+                print(f"Error in evaluating reference quality for '{sentence}': {e}")
+                # 失败就再入队
+                task_queue.put(sentence)
+                task_queue.task_done()
+
+    max_workers = min(32, os.cpu_count() + 4)
+    threads = []
+    for _ in range(max_workers):
+        t = threading.Thread(target=worker)
+        t.start()
+        threads.append(t)
+
+    task_queue.join()  # 阻塞直到所有队列任务成功
+
+    for t in threads:  # 等所有线程退出
+        t.join()
+
+    # 统计
+    for sentence, (total, supported) in results_map.items():
+        total_count += int(total)
+        supported_count += int(supported)
+
     if total_count > 0:
         results["Reference_quality"] = round(supported_count / total_count, 4) * 100
     else:
@@ -557,6 +594,7 @@ def evaluate(
     :param md_path: Markdown文件路径
     :param model: 模型名（如qwen-plus）
     """
+    start_time = time.time()
     results = {}
     # 拼接出带模型名的results文件名
     results_path = os.path.join(
@@ -573,7 +611,7 @@ def evaluate(
         "Images_density", "Equations_density", "Tables_density", "Total_density",
         "Claim_density_before_deduplication", "Claim_density_after_deduplication"
     ]
-    # reference_keys = [...]
+    reference_keys = ["Reference", "Reference_density", "Reference_quality"]
 
     # 先加载旧的结果
     if os.path.exists(results_path):
@@ -608,16 +646,16 @@ def evaluate(
         print("Skip evaluating content.")
 
     # Reference部分同理...
-    # if do_reference:
-    #     if not all(k in results for k in reference_keys):
-    #         try:
-    #             results.update(evaluate_reference(md_path))
-    #         except Exception as e:
-    #             print("Error in evaluating reference:", e)
-    #     else:
-    #         print("Reference already complete, skip.")
-    # else:
-    #     print("Skip evaluating reference.")
+    if do_reference:
+        if not all(k in results for k in reference_keys):
+            try:
+                results.update(evaluate_reference(md_path))
+            except Exception as e:
+                print("Error in evaluating reference:", e)
+        else:
+            print("Reference already complete, skip.")
+    else:
+        print("Skip evaluating reference.")
 
     # 保存
     try:
@@ -625,6 +663,9 @@ def evaluate(
             json.dump(results, f, ensure_ascii=False, indent=4)
     except Exception as e:
         print("Error in saving results:", e)
+    end_time = time.time()
+    elapsed_time = end_time - start_time
+    print(f"Evaluation completed in {elapsed_time:.2f} seconds.")
     return results
 
 def process_system(md_path, model,results_path, topic, system, do_outline, do_content, do_reference):
@@ -895,6 +936,9 @@ if __name__ == "__main__":
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/vanilla_outline/3D Gaussian Splatting Techniques.md")
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/vanilla/3D Gaussian Splatting Techniques.md")
     # print(evaluate_outline_coverage("surveys/cs/3D Gaussian Splatting Techniques/vanilla/outline.json"))
-    evaluate_reference("surveys/cs/3D Gaussian Splatting/pdfs/2401.03890.md")
+    # evaluate_reference("surveys\cs/3D Gaussian Splatting Techniques\AutoSurvey/3D Gaussian Splatting Techniques.md")
+    # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
+    # surveys\cs\3D Gaussian Splatting Techniques\InteractiveSurvey
+    evaluate("surveys/cs/3D Gaussian Splatting Techniques/InteractiveSurvey/survey_3D Gaussian Splatting Techniques.md")
 
 
