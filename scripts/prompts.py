@@ -323,10 +323,10 @@ You are an academic reviewer. Given the topic, a sentence from a paper, and the 
 
 Please return ONLY a JSON object in the following format:
 
-{
+{{
   "total": <int>,      // total number of in-text citations found in the sentence
   "supported": <int>   // number of those citations that are actually supported by the reference list
-}
+}}
 
 Input:
 Topic: {topic}
