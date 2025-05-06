@@ -474,7 +474,6 @@ def evaluate_reference_quality(md_path: str) -> dict:
             sentence = row["sentence"]
             references = row["references"].split(";")
             refs_mapping[sentence] = references
-        reader.close()
 
     # Count the number of references that are relevant to the topic
     total_count = 0

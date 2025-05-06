@@ -316,17 +316,17 @@ Here is the original outline:
 """
 
 REFERENCE_QUALITY_PROMPT = """
-You are an academic reviewer. Given the topic, a sentence from a paper, and the references the sentence cites, please judge the following:
+You are an academic reviewer. Given the topic, a sentence from a paper, and the full reference list, please perform the following:
 
-1. How many references does the sentence cite in total?
-2. How many of these references truly support or are relevant to the content of the sentence?
+1. Carefully examine the sentence and count the number of in-text citation occurrences (for example, [1], [2,3], [Smith et al., 2020], etc.) present in the sentence text.
+2. For each in-text citation found in the sentence, judge whether it is actually supported by a reference in the provided reference list, based on the title and abstract of the references.
 
 Please return ONLY a JSON object in the following format:
 
-{{
-  "total": <int>,
-  "supported": <int>
-}}
+{
+  "total": <int>,      // total number of in-text citations found in the sentence
+  "supported": <int>   // number of those citations that are actually supported by the reference list
+}
 
 Input:
 Topic: {topic}
@@ -337,8 +337,8 @@ References:
 {references}
 
 Instructions:
-- "total_reference_count": The total number of references cited by the sentence (length of the reference list).
-- "supported_reference_count": The number of references that are actually relevant or supporting to the sentence content according to their titles and abstracts.
+- "total": The number of in-text citation occurrences found in the sentence text.
+- "supported": The number of these in-text citations that are actually supported by relevant references in the provided list.
 - Only output the JSON, nothing else.
 """
 
