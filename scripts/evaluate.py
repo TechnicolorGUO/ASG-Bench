@@ -4,8 +4,10 @@ import json
 import math
 import os
 import dotenv
-from prompts import CONTENT_EVALUATION_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT
-from utils import build_outline_tree_from_levels, count_md_features, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
+import pandas as pd
+from prompts import CONTENT_EVALUATION_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT
+from reference import split_markdown_content_and_refs
+from utils import build_outline_tree_from_levels, count_md_features, count_sentences, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
 import logging
 from atomic_facts import extract_and_deduplicate_facts
 
@@ -438,6 +440,112 @@ def evaluate_reference_llm(md_path: str) -> dict:
     print("Reference evaluation score:", results)
     return results
 
+def evaluate_reference_density(md_path: str) -> dict:
+    results = {}
+
+    json_path = os.path.join(os.path.dirname(md_path), "references.json")
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        references = json.load(f)
+    with open(md_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+        
+    main_content, _ = split_markdown_content_and_refs(content)
+    sentence_count = count_sentences(main_content)
+    references_count = len(references)
+
+    if sentence_count > 0:
+        results["Reference_density"] = round(references_count / sentence_count, 4) * 100
+    else:
+        results["Reference_density"] = 0
+    print("Reference density score:", results)
+    return results
+
+def evaluate_reference_quality(md_path: str) -> dict:
+    results = {}
+    csv_path = os.path.join(os.path.dirname(md_path), os.path.basename(md_path).replace(".md", ".csv"))  
+
+    # csv columns: [sentence,references]
+    refs_mapping = {}
+    with open(csv_path, "r", encoding="utf-8") as f:
+        reader = pd.read_csv(f)
+        for index, row in reader.iterrows():
+            sentence = row["sentence"]
+            references = row["references"].split(";")
+            refs_mapping[sentence] = references
+        reader.close()
+
+    # Count the number of references that are relevant to the topic
+    total_count = 0
+    supported_count = 0
+    topic = extract_topic_from_path(md_path)
+    for sentence, references in refs_mapping.items():
+        # Call LLM to evaluate the relevance of each reference
+        prompt = REFERENCE_QUALITY_PROMPT.format(
+            sentence=sentence,
+            references="\n".join(references),
+            topic=topic
+        )
+        try:
+            response = judge.judge(prompt)
+            total = response.get("total", 0)
+            supported = response.get("supported", 0)
+            total_count += int(total)
+            supported_count += int(supported)
+            print(f"Sentence: {sentence}, Total: {total}, Supported: {supported}")
+        except Exception as e:
+            total_count += 0
+            supported_count += 0
+            print("Error in evaluating reference quality:", e)
+            continue
+    # Calculate the average scores
+    if total_count > 0:
+        results["Reference_quality"] = round(supported_count / total_count, 4) * 100
+    else:
+        results["Reference_quality"] = 0
+    print("Reference quality score:", results)
+    return results
+
+def evaluate_reference(
+        md_path: str,
+        do_llm: bool = True,
+        do_density: bool = True,
+        do_quality: bool = True
+) -> dict:
+    results = {}
+    # 1. LLM 评测部分
+    if do_llm:
+        try:
+            results.update(evaluate_reference_llm(md_path))
+        except Exception as e:
+            print("Error in evaluating reference:", e)
+            results["Reference"] = 0
+    else:
+        print("Skip evaluate_reference_llm.")
+
+    # 2. 密度评测部分
+    if do_density:
+        try:
+            results.update(evaluate_reference_density(md_path))
+        except Exception as e:
+            print("Error in evaluating reference density:", e)
+            results["Reference_density"] = 0
+    else:
+        print("Skip evaluate_reference_density.")
+
+    # 3. 质量评测部分
+    if do_quality:
+        try:
+            results.update(evaluate_reference_quality(md_path))
+        except Exception as e:
+            print("Error in evaluating reference quality:", e)
+            results["Reference_quality"] = 0
+    else:
+        print("Skip evaluate_reference_quality.")
+
+    return results
+    
 def evaluate(
     md_path: str, 
     model: str = "default",
@@ -787,6 +895,7 @@ if __name__ == "__main__":
     # clear_all_scores()
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/vanilla_outline/3D Gaussian Splatting Techniques.md")
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/vanilla/3D Gaussian Splatting Techniques.md")
-    print(evaluate_outline_coverage("surveys/cs/3D Gaussian Splatting Techniques/vanilla/outline.json"))
+    # print(evaluate_outline_coverage("surveys/cs/3D Gaussian Splatting Techniques/vanilla/outline.json"))
+    evaluate_reference("surveys\cs\Large Language Model Based Multi-Agent Systems\pdfs/2402.01680.md")
 
 

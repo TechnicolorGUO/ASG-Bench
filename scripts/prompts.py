@@ -298,6 +298,50 @@ Output only the following JSON format, without any explanation:
 }}
 """
 
+OUTLINE_REFINE_PROMPT = """
+You are given an academic paper outline, currently with only level-1 headings.
+
+You are only allowed to:
+1. Delete items that are obviously irrelevant or likely artifacts of the outline extraction process (such as empty, meaningless, or non-heading items).
+2. Change the hierarchy level of existing items by modifying the first element of each list from 1 to a higher level (such as 2 or 3), if appropriate.
+
+Do not add any new sections or content. Do not group or merge items. Do not change the order of items.
+
+Your output must be the reorganized outline in JSON array format, where each element is [level, title], with level as an int and title as a string, matching the input format exactly.
+
+Only output the JSON array. Do not include any explanation or commentary.
+
+Here is the original outline:
+{outline}
+"""
+
+REFERENCE_QUALITY_PROMPT = """
+You are an academic reviewer. Given the topic, a sentence from a paper, and the references the sentence cites, please judge the following:
+
+1. How many references does the sentence cite in total?
+2. How many of these references truly support or are relevant to the content of the sentence?
+
+Please return ONLY a JSON object in the following format:
+
+{{
+  "total": <int>,
+  "supported": <int>
+}}
+
+Input:
+Topic: {topic}
+
+Sentence: {sentence}
+
+References:
+{references}
+
+Instructions:
+- "total_reference_count": The total number of references cited by the sentence (length of the reference list).
+- "supported_reference_count": The number of references that are actually relevant or supporting to the sentence content according to their titles and abstracts.
+- Only output the JSON, nothing else.
+"""
+
 REFERENCE_EVALUATION_PROMPT = """
 Below are the references cited at the end of an academic survey about the topic "{topic}":
 ---
@@ -317,23 +361,6 @@ Score 4 Description: {score_4}
 Score 5 Description: {score_5}
 ---
 Return your answer only in JSON format: {{"{criteria_name}": <score>}} without any other information or explanation.
-"""
-
-OUTLINE_REFINE_PROMPT = """
-You are given an academic paper outline, currently with only level-1 headings.
-
-You are only allowed to:
-1. Delete items that are obviously irrelevant or likely artifacts of the outline extraction process (such as empty, meaningless, or non-heading items).
-2. Change the hierarchy level of existing items by modifying the first element of each list from 1 to a higher level (such as 2 or 3), if appropriate.
-
-Do not add any new sections or content. Do not group or merge items. Do not change the order of items.
-
-Your output must be the reorganized outline in JSON array format, where each element is [level, title], with level as an int and title as a string, matching the input format exactly.
-
-Only output the JSON array. Do not include any explanation or commentary.
-
-Here is the original outline:
-{outline}
 """
 
 # -------------- Generation Prompts --------------

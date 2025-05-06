@@ -178,13 +178,9 @@ def find_inline_references(para, initial_max=None):
                 current_max = end
     return filtered
 
-def parse_markdown(content):
+def split_markdown_content_and_refs(content):
     """
-    解析 Markdown 内容，提取完整句子和引用信息
-    :param content: 输入的 Markdown 内容
-    :return: 
-        results: dict，key为带引用的完整句子，value为该句子用到的参考文献内容列表
-        references: list，所有参考文献（顺序保存）
+    输入 Markdown 内容，返回 (正文内容, 参考文献块) 元组
     """
     # 1. 最严格：# References
     ref_header = re.compile(r'^(#{1,6})\s*References\s*$', re.IGNORECASE | re.MULTILINE)
@@ -218,7 +214,6 @@ def parse_markdown(content):
                 ref_block = content[start:].strip()
             else:
                 # 4. 最宽松：全文最后一个 reference(s) 或者bibliography
-                # ref_word = re.compile(r'\breferences?\b', re.IGNORECASE)
                 ref_word = re.compile(r'\b(bibliography|references?)\b', re.IGNORECASE)
                 matches = list(ref_word.finditer(content))
                 if matches:
@@ -233,6 +228,18 @@ def parse_markdown(content):
                     # 5. 都没有
                     main_content = content.strip()
                     ref_block = ""
+    return main_content, ref_block
+
+def parse_markdown(content):
+    """
+    解析 Markdown 内容，提取完整句子和引用信息
+    :param content: 输入的 Markdown 内容
+    :return: 
+        results: dict，key为带引用的完整句子，value为该句子用到的参考文献内容列表
+        references: list，所有参考文献（顺序保存）
+    """
+    # 1. 抽refs
+    main_content, ref_block = split_markdown_content_and_refs(content)
 
     # 2. 提取参考文献条目（兼容各种编号和无编号，条目间可空行分隔）
     # 检测以[xxx]开头的条目（如 [1] 或 [Agashe et al., 2023]），否则用空行分割
@@ -425,7 +432,7 @@ def extract_refs(input_file, output_folder):
 
     output_file_name = os.path.basename(input_file).replace('.md', '')
     output_csv = os.path.join(output_folder, output_file_name + '.csv')
-    output_ref_list_json = os.path.join(output_folder, output_file_name + '.json')
+    output_ref_list_json = os.path.join(output_folder, 'references.json')
 
     try:
         with open(input_file, 'r', encoding='utf-8') as f:
@@ -489,22 +496,22 @@ if __name__ == "__main__":
     # extract_refs(input_file="surveys/cs/Natural Language to Code Generation with Large Language Models/pdfs/2212.09420.md", output_folder="surveys/cs/Natural Language to Code Generation with Large Language Models/pdfs")
 
     # surveys\<category>\<topic>\pdfs\<filename>.md 进行extract_refs
-    for cat in os.listdir("surveys"):
-        cat_path = os.path.join("surveys", cat)
-        if not os.path.isdir(cat_path):
-            continue
-        for topic in os.listdir(cat_path):
-            topic_path = os.path.join(cat_path, topic)
-            if not os.path.isdir(topic_path):
-                continue
-            md_path = os.path.join(topic_path, "pdfs")
-            if not os.path.isdir(md_path):
-                continue
-            for file in os.listdir(md_path):
-                if not file.lower().endswith(".md"):
-                    continue
-                file_path = os.path.join(md_path, file)
-                extract_refs(input_file=file_path, output_folder=md_path)
+    # for cat in os.listdir("surveys"):
+    #     cat_path = os.path.join("surveys", cat)
+    #     if not os.path.isdir(cat_path):
+    #         continue
+    #     for topic in os.listdir(cat_path):
+    #         topic_path = os.path.join(cat_path, topic)
+    #         if not os.path.isdir(topic_path):
+    #             continue
+    #         md_path = os.path.join(topic_path, "pdfs")
+    #         if not os.path.isdir(md_path):
+    #             continue
+    #         for file in os.listdir(md_path):
+    #             if not file.lower().endswith(".md"):
+    #                 continue
+    #             file_path = os.path.join(md_path, file)
+    #             extract_refs(input_file=file_path, output_folder=md_path)
     
     print(acl_ref_to_key("Ilya Loshchilov and Frank Hutter. 2017. Decoupled weight decay regularization. arXiv preprint arXiv:1711.05101.  "))
     print(acl_ref_to_key("Sezer, O. B., Gudelek, M. U., & Ozbayoglu, A. M. (2020). Financial time series forecasting with deep learning: A systematic literature review: 2005–2019. Applied soft computing, 90, 106181. https://doi.org/10.1016/j.asoc.2020.106181"))

@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 import requests
 
 from prompts import OUTLINE_REFINE_PROMPT
+from reference import split_markdown_content_and_refs
 load_dotenv()
 
 def getClient(): 
@@ -199,24 +200,21 @@ def refine_outline_if_single_level(
 
 def extract_references_from_md(md_path):
     """
-    Extract the References section from a Markdown file.
-    Returns reference list as a string (one per line), or empty string if not found.
+    读取与 md_path 同级目录下的 references.json 文件，并返回参考文献条目列表。
+    如果找不到 json 文件，则返回空列表。
     """
-    with open(md_path, "r", encoding="utf-8") as f:
-        text = f.read()
-    # Match ## References 或 # Reference 及类似写法，允许多余空格或其他大小写
-    pattern = re.compile(
-        r'^(#{1,6})\s*(References?|Bibliography|参考文献)[\s#]*\n+([\s\S]*?)(?=^#{1,6}\s|\Z)', 
-        re.IGNORECASE | re.MULTILINE
-    )
-    match = pattern.search(text)
-    if match:
-        references_block = match.group(3).strip()
-        # 按行分割，去掉空行
-        references = [line for line in references_block.splitlines() if line.strip()]
-        return references
-    else:
+    dir_path = os.path.dirname(md_path)
+    json_path = os.path.join(dir_path, "references.json")
+    if not os.path.isfile(json_path):
         return []
+    with open(json_path, "r", encoding="utf-8") as f:
+        try:
+            refs = json.load(f)
+            # 只保留非空、去除首尾空格的字符串
+            refs = [ref.strip() for ref in refs if ref.strip()]
+            return refs
+        except Exception:
+            return []
 
 def fill_single_criterion_prompt(
     prompt_template: str,
@@ -422,7 +420,13 @@ def count_md_features(md_content):
     table_count = len(md_tables) + len(html_tables)
 
     # 总句子数
-    sentence_count = count_sentences(md_content)
+    main_content, _ = split_markdown_content_and_refs(md_content)
+    # print("main_content:")
+    # print(main_content)
+    # print("refs:")
+    # print(_)
+
+    sentence_count = count_sentences(main_content)
     return {
         'images': image_count,
         'equations': equation_count,
@@ -509,7 +513,7 @@ if __name__ == "__main__":
     # print(len(tree))
 
     # md_path, md_content = pdf2md("surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques.pdf", "surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce")
-    # md_content = read_md("surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques/auto/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques.md")
-    # print(count_md_features(md_content))
+    md_content = read_md("surveys\cs\Large Language Model Based Multi-Agent Systems\pdfs/2402.01680.md")
+    print(count_md_features(md_content))
     # refine_outline_if_single_level("surveys\cs\Optimization Techniques for Transformer Inference\pdfs\outline_raw.json", "surveys\cs\Optimization Techniques for Transformer Inference\pdfs\outline.json")
-    batch_pdf2md_in_surveys()
+    # batch_pdf2md_in_surveys()
