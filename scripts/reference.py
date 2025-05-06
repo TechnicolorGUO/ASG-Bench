@@ -512,7 +512,6 @@ if __name__ == "__main__":
     #                 continue
     #             file_path = os.path.join(md_path, file)
     #             extract_refs(input_file=file_path, output_folder=md_path)
-    
-    print(acl_ref_to_key("Ilya Loshchilov and Frank Hutter. 2017. Decoupled weight decay regularization. arXiv preprint arXiv:1711.05101.  "))
-    print(acl_ref_to_key("Sezer, O. B., Gudelek, M. U., & Ozbayoglu, A. M. (2020). Financial time series forecasting with deep learning: A systematic literature review: 2005–2019. Applied soft computing, 90, 106181. https://doi.org/10.1016/j.asoc.2020.106181"))
-    print(acl_ref_to_key("Eulerich, Marc, and David A. Wood. 2023. “A Demonstration of How ChatGPT Can Be Used in the Internal Auditing Process.” SSRN Scholarly Paper. Rochester, NY. https://doi.org/10.2139/ssrn.4519583."))
+    # extract_refs(input_file="surveys\cs/3D Gaussian Splatting Techniques\AutoSurvey/3D Gaussian Splatting Techniques.md", output_folder="surveys\cs/3D Gaussian Splatting Techniques\AutoSurvey")
+    # surveys\cs\3D Gaussian Splatting Techniques\InteractiveSurvey\survey_3D Gaussian Splatting Techniques.md
+    extract_refs(input_file="surveys/cs/3D Gaussian Splatting Techniques/InteractiveSurvey/survey_3D Gaussian Splatting Techniques.md", output_folder="surveys/cs/3D Gaussian Splatting Techniques/InteractiveSurvey")

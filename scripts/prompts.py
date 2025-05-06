@@ -212,6 +212,33 @@ Score 5 Description: {score_5}
 Return your answer only in JSON format: {{"{criteria_name}": <score>}} without any other information or explanation.
 """
 
+CONTENT_FAITHFULNESS_PROMPT = """
+You are an academic reviewer. Given the topic, a sentence from a paper, and the full reference list, please perform the following:
+
+1. Carefully examine the sentence and count the number of in-text citation occurrences (for example, [1], [2,3], [Smith et al., 2020], etc.) present in the sentence text.
+2. For each in-text citation found in the sentence, judge whether it is actually supported by a reference in the provided reference list, based on the title and abstract of the references.
+
+Please return ONLY a JSON object in the following format:
+
+{{
+  "total": <int>,      // total number of in-text citations found in the sentence
+  "supported": <int>   // number of those citations that are actually supported by the reference list
+}}
+
+Input:
+Topic: {topic}
+
+Sentence: {sentence}
+
+References:
+{references}
+
+Instructions:
+- "total": The number of in-text citation occurrences found in the sentence text.
+- "supported": The number of these in-text citations that are actually supported by relevant references in the provided list.
+- Only output the JSON, nothing else.
+"""
+
 OUTLINE_EVALUATION_PROMPT = """
 Here is an outline of an academic survey about the topic "{topic}":
 ---
@@ -315,33 +342,6 @@ Here is the original outline:
 {outline}
 """
 
-REFERENCE_QUALITY_PROMPT = """
-You are an academic reviewer. Given the topic, a sentence from a paper, and the full reference list, please perform the following:
-
-1. Carefully examine the sentence and count the number of in-text citation occurrences (for example, [1], [2,3], [Smith et al., 2020], etc.) present in the sentence text.
-2. For each in-text citation found in the sentence, judge whether it is actually supported by a reference in the provided reference list, based on the title and abstract of the references.
-
-Please return ONLY a JSON object in the following format:
-
-{{
-  "total": <int>,      // total number of in-text citations found in the sentence
-  "supported": <int>   // number of those citations that are actually supported by the reference list
-}}
-
-Input:
-Topic: {topic}
-
-Sentence: {sentence}
-
-References:
-{references}
-
-Instructions:
-- "total": The number of in-text citation occurrences found in the sentence text.
-- "supported": The number of these in-text citations that are actually supported by relevant references in the provided list.
-- Only output the JSON, nothing else.
-"""
-
 REFERENCE_EVALUATION_PROMPT = """
 Below are the references cited at the end of an academic survey about the topic "{topic}":
 ---
@@ -363,7 +363,24 @@ Score 5 Description: {score_5}
 Return your answer only in JSON format: {{"{criteria_name}": <score>}} without any other information or explanation.
 """
 
+REFERENCE_QUALITY_PROMPT = """
+You are an academic reviewer. Given the following topic and a list of references, please answer:
+
+Topic: {topic}
+
+References:
+{references}
+
+Task:
+1. For the references above, count how many are directly related and provide strong support for the topic (i.e., they are highly relevant and authoritative for the topic).
+2. Output your answer in JSON format like: {{"total": X, "supported": Y}}
+Where "total" is the total number of references, and "supported" is the number of references that strongly support the topic.
+
+Only output the JSON object, nothing else.
+"""
+
 # -------------- Generation Prompts --------------
+
 OUTLINE_GENERATE_PROMPT = """
 You are an expert researcher in scientific writing. Given a topic for a literature survey, generate a detailed and logically organized outline for the survey.
 

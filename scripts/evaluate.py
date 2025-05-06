@@ -8,8 +8,8 @@ import threading
 import time
 import dotenv
 import pandas as pd
-from prompts import CONTENT_EVALUATION_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT
-from reference import split_markdown_content_and_refs
+from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT
+from reference import extract_refs, split_markdown_content_and_refs
 from utils import build_outline_tree_from_levels, count_md_features, count_sentences, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
 import logging
 from atomic_facts import extract_and_deduplicate_facts
@@ -41,13 +41,8 @@ class Judge():
         
 judge = Judge()
 
-def extract_topic_from_path(md_path: str) -> str:
-    """
-    Extract topic from the grandparent folder name of the given path.
-    """
-    abs_path = os.path.abspath(md_path)
-    topic = os.path.basename(os.path.dirname(os.path.dirname(abs_path)))
-    return topic
+
+# ------------- Outline Evaluation Functions ------------
 
 def evaluate_outline_llm(outline_json_path: str) -> dict:
     criteria_name = "Outline"
@@ -81,60 +76,6 @@ def evaluate_outline_llm(outline_json_path: str) -> dict:
     except Exception as e:
         results[criteria_name] = 0
     return results
-
-# def evaluate_outline_coverage(
-#     outline_json_path: str,
-#     standard_count: int = 10,
-#     ideal_section_count: int = 30,
-#     sigma: float = 15.0
-# ) -> float:
-#     """
-#     评估大纲综合得分 Q'，融合模板完整度、创新丰富度和长度惩罚。
-
-#     Args:
-#         outline_json_path (str): 大纲JSON路径
-#         standard_count (int): 标准section总数 N
-#         ideal_section_count (int): 理想section总数 M*
-#         sigma (float): 惩罚宽度参数
-
-#     Returns:
-#         float: 综合得分 Q'
-#     """
-#     try:
-#         with open(outline_json_path, "r", encoding="utf-8") as f:
-#             outline_list = json.load(f)
-
-#         total_section_count = len(outline_list)  # M
-
-#         outline_str = "\n".join([json.dumps(item, ensure_ascii=False) for item in outline_list])
-#         topic = extract_topic_from_path(outline_json_path)
-#         prompt = OUTLINE_COVERAGE_PROMPT.format(
-#             outline=outline_str,
-#             topic=topic,
-#         )
-#         response = judge.judge(prompt)
-#         matched_count = response.get("matched_count", 0)   # K
-
-#         K = matched_count
-#         N = standard_count
-#         M = total_section_count
-#         M_star = ideal_section_count
-#         U = max(M - K, 0)
-
-#         R = K / N if N > 0 else 0
-#         O = U / M if M > 0 else 0
-
-#         F_harmonic = 2 * R * O / (R + O) if (R + O) > 0 else 0
-
-#         L = math.exp(-((M - M_star) ** 2) / (2 * sigma ** 2)) if sigma > 0 else (1.0 if M == M_star else 0.0)
-
-#         Q_prime = F_harmonic * L
-
-#         return Q_prime
-
-#     except Exception as e:
-#         print("Error in evaluating outline coverage:", e)
-#         return 0.0
 
 def evaluate_outline_coverage(
     outline_json_path: str,
@@ -180,7 +121,7 @@ def evaluate_outline_coverage(
 
         Q_prime = F_harmonic * length_penalty
 
-        return Q_prime
+        return round(Q_prime* 100, 4)
 
     except Exception as e:
         print(f"Error evaluating outline coverage: {e}")
@@ -221,8 +162,24 @@ def evaluate_outline_structure(outline_json_path):
             "score": node_score
         })
 
-    global_score = sum(x["score"] for x in node_scores) / len(node_scores) if node_scores else 1.0
+    # global_score = sum(x["score"] for x in node_scores) / len(node_scores) if node_scores else 1.0
+    global_score = round(sum(x["score"] for x in node_scores) / len(node_scores) * 100, 4) if node_scores else 1.0
     return global_score, node_scores
+
+def evaluate_outline_number(outline_json_path: str) -> dict:
+    """
+    评估大纲的数量特征
+    """
+    results = {}
+    try:
+        with open(outline_json_path, "r", encoding="utf-8") as f:
+            outline_list = json.load(f)
+        total_section_count = len(outline_list)
+        results["Outline_no"] = total_section_count
+    except Exception as e:
+        print(f"Error evaluating outline number: {e}")
+        results["Outline_no"] = 0
+    return results
 
 def evaluate_outline(
     md_path: str,
@@ -279,8 +236,18 @@ def evaluate_outline(
     else:
         print("Skip evaluate_outline_structure.")
 
-    print("The score is: ", results)
+    # 5. Number 评测
+    try:
+        number_results = evaluate_outline_number(outline_json_path)
+        results.update(number_results)
+    except Exception as e:
+        print("Error in evaluating outline number:", e)
+        results["Outline_no"] = 0
+
+    # print("The score is: ", results)
     return results
+
+# ------------- Content Evaluation Functions ------------
 
 def evaluate_content_llm(md_path: str) -> dict:
     """
@@ -322,7 +289,7 @@ def evaluate_content_llm(md_path: str) -> dict:
         except Exception as e:
             results[criteria_name] = 0
 
-    print("All content criteria scores:", results)
+    # print("All content criteria scores:", results)
     return results
 
 def evaluate_content_informativeness(md_path: str) -> dict:
@@ -344,9 +311,120 @@ def evaluate_content_informativeness(md_path: str) -> dict:
     # Claim density
     topic = extract_topic_from_path(md_path)
     results_claims = extract_and_deduplicate_facts(md_content, topic)
+    # results_claims = {}
     results["Claim_density_before_deduplication"] = results_claims.get("claim_density_before_dedup", 0) * 100
     results["Claim_density_after_deduplication"] = results_claims.get("claim_density_after_dedup", 0) * 100
-    print("Informativeness scores:", results)
+    # print("Informativeness scores:", results)
+    return results
+
+def evaluate_content_faithfulness(md_path: str) -> dict:
+    results = {}
+    csv_path = os.path.join(os.path.dirname(md_path), os.path.basename(md_path).replace(".md", ".csv"))  
+
+    # csv columns: [sentence,references]
+    refs_mapping = {}
+    with open(csv_path, "r", encoding="utf-8") as f:
+        reader = pd.read_csv(f)
+        for index, row in reader.iterrows():
+            sentence = row["sentence"]
+            references = row["references"].split(";")
+            refs_mapping[sentence] = references
+
+    # Count the number of references that are relevant to the topic
+    total_count = 0
+    supported_count = 0
+    topic = extract_topic_from_path(md_path)
+    for sentence, references in refs_mapping.items():
+        # Call LLM to evaluate the relevance of each reference
+        prompt = CONTENT_FAITHFULNESS_PROMPT.format(
+            sentence=sentence,
+            references="\n".join(references),
+            topic=topic
+        )
+        try:
+            response = judge.judge(prompt)
+            total = response.get("total", 0)
+            supported = response.get("supported", 0)
+            total_count += int(total)
+            supported_count += int(supported)
+            # print(f"Sentence: {sentence}, Total: {total}, Supported: {supported}")
+        except Exception as e:
+            total_count += 0
+            supported_count += 0
+            print("Error in evaluating reference quality:", e)
+            continue
+    # Calculate the average scores
+    if total_count > 0:
+        results["Reference_quality"] = round(supported_count / total_count, 4) * 100
+    else:
+        results["Reference_quality"] = 0
+    print("Reference quality score:", results)
+    return results
+
+def evaluate_content_faithfulness_parallel(md_path: str, max_workers: int = 4) -> dict:
+    results = {}
+    csv_path = os.path.join(os.path.dirname(md_path), os.path.basename(md_path).replace(".md", ".csv"))  
+
+    # csv columns: [sentence,references]
+    refs_mapping = {}
+    with open(csv_path, "r", encoding="utf-8") as f:
+        reader = pd.read_csv(f)
+        for index, row in reader.iterrows():
+            sentence = row["sentence"]
+            references = row["references"].split(";")
+            refs_mapping[sentence] = references
+
+    total_count = 0
+    supported_count = 0
+    topic = extract_topic_from_path(md_path)
+
+    # 定义单条评估任务
+    def evaluate_sentence(sentence, references):
+        prompt = CONTENT_FAITHFULNESS_PROMPT.format(
+            sentence=sentence,
+            references="\n".join(references),
+            topic=topic
+        )
+        try:
+            response = judge.judge(prompt)
+            total = response.get("total", 0)
+            supported = response.get("supported", 0)
+            return int(total), int(supported)
+        except Exception as e:
+            print("Error in evaluating reference quality:", e)
+            return 0, 0
+
+    # 并行处理所有句子
+    futures = []
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        for sentence, references in refs_mapping.items():
+            futures.append(executor.submit(evaluate_sentence, sentence, references))
+
+        for future in as_completed(futures):
+            total, supported = future.result()
+            total_count += total
+            supported_count += supported
+
+    if total_count > 0:
+        results["Reference_quality"] = round(supported_count / total_count * 100, 2)
+    else:
+        results["Reference_quality"] = 0.0
+
+    print("Reference quality score:", results)
+    return results
+
+def evaluate_content_sentence_number(md_path: str) -> dict:
+    results = {}
+    try:
+        with open(md_path, "r", encoding="utf-8") as f:
+            content_str = f.read()
+
+        main_content, _ = split_markdown_content_and_refs(content_str)
+        sentence_count = count_sentences(main_content)
+        results["Sentence_no"] = sentence_count
+    except Exception as e:
+        print("Error in evaluating sentence number:", e)
+        results["Sentence_no"] = 0
     return results
 
 def evaluate_content(
@@ -386,20 +464,27 @@ def evaluate_content(
     else:
         print("Skip evaluate_content_informativeness.")
 
-    # 3. 事实性评测部分（暂未实现，先注释）
+    # 3. 事实性评测部分
     if do_faithfulness:
         try:
-            # 测试 得分为0
-            results.update({"faithfulness": 0})
+            results.update(evaluate_content_faithfulness(md_path))
         except Exception as e:
             print("Error in evaluating content faithfulness:", e)
-            results['faithfulness'] = 0
+            results['Citations_density'] = 0
     else:
         print("Skip evaluate_content_faithfulness.")
 
+    # 4. 句子数量评测部分
+    try:
+        results.update(evaluate_content_sentence_number(md_path))
+    except Exception as e:
+        print("Error in evaluating content sentence number:", e)
+        results["Sentence_no"] = 0
 
-    print("Content evaluation scores:", results)
+    # print("Content evaluation scores:", results)
     return results
+
+# ------------- Reference Evaluation Functions ------------
 
 def evaluate_reference_llm(md_path: str) -> dict:
     """
@@ -440,7 +525,7 @@ def evaluate_reference_llm(md_path: str) -> dict:
     except Exception:
         print("Error in extracting references.")
         results[criteria_name] = 0
-    print("Reference evaluation score:", results)
+    # print("Reference evaluation score:", results)
     return results
 
 def evaluate_reference_density(md_path: str) -> dict:
@@ -462,85 +547,52 @@ def evaluate_reference_density(md_path: str) -> dict:
         results["Reference_density"] = round(references_count / sentence_count, 4) * 100
     else:
         results["Reference_density"] = 0
-    print("Reference density score:", results)
+    # print("Reference density score:", results)
     return results
 
-def evaluate_reference_quality(md_path: str):
+def evaluate_reference_quality(md_path: str) -> dict:
     results = {}
-    csv_path = os.path.join(os.path.dirname(md_path), os.path.basename(md_path).replace(".md", ".csv"))
-
-    # 1. 解析csv
-    refs_mapping = {}
-    with open(csv_path, "r", encoding="utf-8") as f:
-        reader = pd.read_csv(f)
-        for index, row in reader.iterrows():
-            sentence = row["sentence"]
-            references = row["references"].split(";")
-            refs_mapping[sentence] = references
-
+    batch_size = 20
+    ref_path = os.path.join(os.path.dirname(md_path), "references.json")
     topic = extract_topic_from_path(md_path)
     total_count = 0
     supported_count = 0
 
-    # 2. 线程安全结果 & 完成标志
-    completed = set()
-    completed_lock = threading.Lock()
-    task_queue = Queue()
-    for sentence in refs_mapping:
-        task_queue.put(sentence)
-    results_map = {}
-
-    def worker():
-        while True:
-            try:
-                sentence = task_queue.get(timeout=1)
-            except:
-                return  # 队列空了
-
-            try:
-                references = refs_mapping[sentence]
-                prompt = REFERENCE_QUALITY_PROMPT.format(
-                    sentence=sentence,
-                    references="\n".join(references),
-                    topic=topic
-                )
-                response = judge.judge(prompt)
-                total = response.get("total", 0)
-                supported = response.get("supported", 0)
-                with completed_lock:
-                    if sentence not in completed:
-                        completed.add(sentence)
-                        results_map[sentence] = (total, supported)
-                        print(f"Sentence: {sentence}, Total: {total}, Supported: {supported}")
-                task_queue.task_done()
-            except Exception as e:
-                print(f"Error in evaluating reference quality for '{sentence}': {e}")
-                # 失败就再入队
-                task_queue.put(sentence)
-                task_queue.task_done()
-
-    max_workers = min(32, os.cpu_count() + 4)
-    threads = []
-    for _ in range(max_workers):
-        t = threading.Thread(target=worker)
-        t.start()
-        threads.append(t)
-
-    task_queue.join()  # 阻塞直到所有队列任务成功
-
-    for t in threads:  # 等所有线程退出
-        t.join()
-
-    # 统计
-    for sentence, (total, supported) in results_map.items():
-        total_count += int(total)
-        supported_count += int(supported)
+    with open(ref_path, "r", encoding="utf-8") as f:
+        refs = json.load(f)
+    
+    for i in range(0, len(refs), batch_size):
+        batch_refs = refs[i:i + batch_size]
+        prompt = REFERENCE_QUALITY_PROMPT.format(
+            references="\n".join(batch_refs),
+            topic=topic
+        )
+        try:
+            response = judge.judge(prompt)
+            total = response.get("total", 0)
+            supported = response.get("supported", 0)
+            total_count += int(total)
+            supported_count += int(supported)
+        except Exception as e:
+            print("Error in evaluating reference quality:", e)
+            continue
 
     if total_count > 0:
-        results["Reference_quality"] = round(supported_count / total_count, 4) * 100
+        results["Reference_quality"] = round(supported_count / total_count * 100, 2)
     else:
-        results["Reference_quality"] = 0
-    print("Reference quality score:", results)
+        results["Reference_quality"] = 0.0
+
+    return results
+
+def evaluate_reference_number(md_path: str) -> dict:
+    results = {}
+    json_path = os.path.join(os.path.dirname(md_path), "references.json")
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        references = json.load(f)
+    
+    total_count = len(references)
+    results["Reference_no"] = total_count
     return results
 
 def evaluate_reference(
@@ -550,6 +602,13 @@ def evaluate_reference(
         do_quality: bool = True
 ) -> dict:
     results = {}
+
+
+    # 0. extract references
+    reference_path = os.path.join(os.path.dirname(md_path), "references.json")
+    if not os.path.exists(reference_path):
+        extract_refs(input_file=md_path, output_folder=os.path.dirname(md_path))
+
     # 1. LLM 评测部分
     if do_llm:
         try:
@@ -580,8 +639,16 @@ def evaluate_reference(
     else:
         print("Skip evaluate_reference_quality.")
 
+    # 4. 数量评测部分
+    try:
+        results.update(evaluate_reference_number(md_path))
+    except Exception as e:
+        print("Error in evaluating reference number:", e)
+        results["Reference_no"] = 0
     return results
-    
+
+# ------------- Main Evaluation Functions ------------
+
 def evaluate(
     md_path: str, 
     model: str = "default",
@@ -605,13 +672,13 @@ def evaluate(
     print("Using model:", model)
 
     # 定义每个部分必须存在的key
-    outline_keys = ["Outline", "Outline_coverage", "Outline_structure"]
+    outline_keys = ["Outline", "Outline_coverage", "Outline_structure", "Outline_no"]
     content_keys = [
         "Coverage", "Structure", "Relevance", "Language", "Criticalness",
-        "Images_density", "Equations_density", "Tables_density", "Total_density",
+        "Images_density", "Equations_density", "Tables_density", "Total_density", "Citations_density", "Sentence_no",
         "Claim_density_before_deduplication", "Claim_density_after_deduplication"
     ]
-    reference_keys = ["Reference", "Reference_density", "Reference_quality"]
+    reference_keys = ["Reference", "Reference_density", "Reference_quality", "Reference_no"]
 
     # 先加载旧的结果
     if os.path.exists(results_path):
@@ -623,6 +690,7 @@ def evaluate(
 
     # Outline部分，只在关键key不全时才运行
     if do_outline:
+        print("Evaluating outline...")
         if not all(k in results for k in outline_keys):
             try:
                 results.update(evaluate_outline(md_path))
@@ -635,6 +703,7 @@ def evaluate(
 
     # Content部分，只在关键key不全时才运行
     if do_content:
+        print("Evaluating content...")
         if not all(k in results for k in content_keys):
             try:
                 results.update(evaluate_content(md_path))
@@ -647,6 +716,7 @@ def evaluate(
 
     # Reference部分同理...
     if do_reference:
+        print("Evaluating reference...")
         if not all(k in results for k in reference_keys):
             try:
                 results.update(evaluate_reference(md_path))
@@ -939,6 +1009,8 @@ if __name__ == "__main__":
     # evaluate_reference("surveys\cs/3D Gaussian Splatting Techniques\AutoSurvey/3D Gaussian Splatting Techniques.md")
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
     # surveys\cs\3D Gaussian Splatting Techniques\InteractiveSurvey
-    evaluate("surveys/cs/3D Gaussian Splatting Techniques/InteractiveSurvey/survey_3D Gaussian Splatting Techniques.md")
+    # evaluate("surveys/cs/3D Gaussian Splatting Techniques/InteractiveSurvey/survey_3D Gaussian Splatting Techniques.md")
+    # batch_evaluate_by_system(["AutoSurvey"], "qwen-plus-1125", num_workers=4)\
+    evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
 
 
