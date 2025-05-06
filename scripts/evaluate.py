@@ -895,6 +895,6 @@ if __name__ == "__main__":
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/vanilla_outline/3D Gaussian Splatting Techniques.md")
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/vanilla/3D Gaussian Splatting Techniques.md")
     # print(evaluate_outline_coverage("surveys/cs/3D Gaussian Splatting Techniques/vanilla/outline.json"))
-    evaluate_reference("surveys\cs\Large Language Model Based Multi-Agent Systems\pdfs/2402.01680.md")
+    evaluate_reference("surveys/cs/3D Gaussian Splatting/pdfs/2401.03890.md")
 
 
