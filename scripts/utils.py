@@ -24,7 +24,7 @@ def getClient():
     )
     return client
 
-def generateResponse(client, prompt, max_tokens=768, temperature=0.5):
+def generateResponse(client, prompt, max_tokens=4096, temperature=0.5):
     chat_response = client.chat.completions.create(
         model=os.environ.get("MODEL"),
         max_tokens=max_tokens,
@@ -188,7 +188,7 @@ def refine_outline_if_single_level(
     if len(levels) == 1 and list(levels)[0] == 1:
         outline_str = json.dumps(outline, ensure_ascii=False, indent=2)
         prompt = OUTLINE_REFINE_PROMPT.format(outline=outline_str)
-        raw_response = generateResponse(client, prompt, max_tokens=768, temperature=0.5)
+        raw_response = generateResponse(client, prompt, max_tokens=4096, temperature=0.5)
         refined_outline = robust_list_parse(raw_response)   # Use list parse here!
         with open(json_path, "w", encoding="utf-8") as f:
             json.dump(refined_outline, f, ensure_ascii=False, indent=2)
