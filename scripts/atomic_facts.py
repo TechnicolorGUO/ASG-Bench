@@ -127,7 +127,7 @@ class AtomicFactGenerator(object):
                             result = future.result()
                             deduplicated_groups.put(result)
                         except Exception as e:
-                            print(f"Error during cross-group deduplication: {e}")
+                            # print(f"Error during cross-group deduplication: {e}")
                             group_i, group_j = futures[future]
                             deduplicated_groups.put(group_i)
                             deduplicated_groups.put(group_j)
@@ -358,8 +358,11 @@ def extract_and_deduplicate_facts(survey, topic):
 
     deduplicated_facts = fact_generator.deduplicate_atomic_facts(all_atomic_facts)
     deduplicated_facts = clean_claims(deduplicated_facts)
-
     claims_after_dedup = len(deduplicated_facts)
+
+    # 5.7 Test the speed
+    # claims_after_dedup = len(all_atomic_facts)
+
     density_after_dedup = claims_after_dedup / total_sentences if total_sentences else 0
 
     print(f"[{topic}] Claims After Dedup: {claims_after_dedup}, Density After: {density_after_dedup:.4f}")

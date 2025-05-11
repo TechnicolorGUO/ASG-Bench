@@ -8,7 +8,7 @@ from utils import generateResponse, getClient, robust_json_parse, robust_list_pa
 def generate_outline(topic:str) -> list:
     client = getClient()
     prompt = OUTLINE_GENERATE_PROMPT.format(topic=topic)
-    raw_response = generateResponse(client, prompt, max_tokens=768, temperature=0.5)
+    raw_response = generateResponse(client, prompt, max_tokens=4096, temperature=0.5)
     outline = robust_list_parse(raw_response)
     if outline is None:
         print(f"Failed to parse outline for topic: {topic}")
@@ -169,4 +169,4 @@ if __name__ == "__main__":
     # topic = "3D Gaussian Splatting Techniques"
     # save_outline_content(topic, output_dir)
     # save_content(topic, output_dir)
-    generate_content_all_topics()
+    generate_outline_content_all_topics()
