@@ -325,23 +325,6 @@ Output only the following JSON format, without any explanation:
 }}
 """
 
-OUTLINE_REFINE_PROMPT = """
-You are given an academic paper outline, currently with only level-1 headings.
-
-You are only allowed to:
-1. Delete items that are obviously irrelevant or likely artifacts of the outline extraction process (such as empty, meaningless, or non-heading items).
-2. Change the hierarchy level of existing items by modifying the first element of each list from 1 to a higher level (such as 2 or 3), if appropriate.
-
-Do not add any new sections or content. Do not group or merge items. Do not change the order of items.
-
-Your output must be the reorganized outline in JSON array format, where each element is [level, title], with level as an int and title as a string, matching the input format exactly.
-
-Only output the JSON array. Do not include any explanation or commentary.
-
-Here is the original outline:
-{outline}
-"""
-
 REFERENCE_EVALUATION_PROMPT = """
 Below are the references cited at the end of an academic survey about the topic "{topic}":
 ---
@@ -380,6 +363,22 @@ Only output the JSON object, nothing else.
 """
 
 # -------------- Generation Prompts --------------
+OUTLINE_REFINE_PROMPT = """
+You are given an academic paper outline, currently with only level-1 headings.
+
+You are only allowed to:
+1. Delete items that are obviously irrelevant or likely artifacts of the outline extraction process (such as empty, meaningless, or non-heading items).
+2. Change the hierarchy level of existing items by modifying the first element of each list from 1 to a higher level (such as 2 or 3), if appropriate.
+
+Do not add any new sections or content. Do not group or merge items. Do not change the order of items.
+
+Your output must be the reorganized outline in JSON array format, where each element is [level, title], with level as an int and title as a string, matching the input format exactly.
+
+Only output the JSON array. Do not include any explanation or commentary.
+
+Here is the original outline:
+{outline}
+"""
 
 OUTLINE_GENERATE_PROMPT = """
 You are an expert researcher in scientific writing. Given a topic for a literature survey, generate a detailed and logically organized outline for the survey.
