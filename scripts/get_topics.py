@@ -9,6 +9,7 @@ from tqdm import tqdm
 from utils import download_arxiv_pdf, extract_and_save_outline_from_md, getClient, generateResponse, pdf2md, robust_json_parse
 from prompts import CATEGORIZE_SURVEY_TITLES, CATEGORIZE_SURVEY_TITLES_SINGLE, EXPAND_CATEGORY_TO_TOPICS, CATEGORIZE_SURVEY_TITLES_HEURISTIC
 import arxiv
+from reference import extract_refs
 
 COARSE_CATEGORIES = [
     "Computer Science",
@@ -518,6 +519,12 @@ def main():
                         extract_and_save_outline_from_md(md_file_path=md_path)
                     except Exception as e:
                         print(f"Failed to convert {paper['arxiv_id']} PDF to MD: {e}")
+                    
+                    # 5.13 Add extract_refs
+                    try:
+                        extract_refs(input_file=md_path, output_folder=pdf_dir)
+                    except Exception as e:
+                        print(f"Failed to extract references from {paper['arxiv_id']}: {e}")
 
         os.makedirs("outputs", exist_ok=True)
         with open("outputs/dataset/topics.json", "w", encoding="utf-8") as f:
