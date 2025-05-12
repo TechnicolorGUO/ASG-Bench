@@ -328,6 +328,18 @@ def process_section(section, fact_generator):
 
     return atomic_facts, total_sentences
 
+def process_section_with_retry(section, fact_generator, max_retries=3):
+    """Process a section with retry logic"""
+    for attempt in range(max_retries):
+        try:
+            return process_section(section, fact_generator)
+        except Exception as e:
+            if attempt == max_retries - 1:  # Last attempt
+                print(f"Failed to process section after {max_retries} attempts: {str(e)}")
+                return [], 0
+            print(f"Attempt {attempt + 1} failed, retrying...")
+            continue
+
 def extract_and_deduplicate_facts(survey, topic):
     fact_generator = AtomicFactGenerator("demos")
 
@@ -376,10 +388,50 @@ def extract_and_deduplicate_facts(survey, topic):
         "compression_ratio": round(claims_after_dedup / claims_before_dedup, 4) if claims_before_dedup != 0 else 0
     }
 
+def extract_facts_only(survey, topic):
+    fact_generator = AtomicFactGenerator("demos")
+
+    sections = re.findall(
+        r'(^#+\s+.*?)(?=^#+\s+|\Z)',
+        survey,
+        flags=re.DOTALL | re.MULTILINE
+    )
+
+    total_sentences = 0
+    all_atomic_facts = []
+
+    print(f"Processing {len(sections)} sections for topic: {topic}, start get facts")
+    
+    # Process sections in parallel with retry logic
+    with ThreadPoolExecutor() as executor:
+        futures = []
+        for section in sections:
+            futures.append(executor.submit(process_section_with_retry, section, fact_generator))
+        
+        for future in tqdm(as_completed(futures), total=len(futures), desc=f"Processing {topic} sections into atomic facts"):
+            try:
+                section_atomic_facts, section_sentences = future.result()
+                all_atomic_facts.extend(section_atomic_facts)
+                total_sentences += section_sentences
+            except Exception as e:
+                print(f"Error processing section: {str(e)}")
+
+    claims_count = len(all_atomic_facts)
+    density = claims_count / total_sentences if total_sentences else 0
+
+    print(f"[{topic}] Total Claims: {claims_count}, Density: {density:.4f}")
+
+    return {
+        "total_sentences": total_sentences,
+        "claims_count": claims_count,
+        "claim_density": round(density, 4)
+    }
+
 if __name__ == "__main__":
     # Example usage
     survey = read_md("surveys/cs/3D Gaussian Splatting Techniques/LLMxMapReduce/5_1_2025, 6_14_21 PM_3D Gaussian Splatting Techniques.md")
     topic = "3D Gaussian Splatting Techniques"
     
-    results = extract_and_deduplicate_facts(survey, topic)
+    # results = extract_and_deduplicate_facts(survey, topic)
+    results = extract_facts_only(survey, topic)
     print(json.dumps(results, indent=4))

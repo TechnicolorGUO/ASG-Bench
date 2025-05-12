@@ -8,11 +8,11 @@ import threading
 import time
 import dotenv
 import pandas as pd
-from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT
+from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT
 from reference import extract_refs, split_markdown_content_and_refs
 from utils import build_outline_tree_from_levels, count_md_features, count_sentences, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
 import logging
-from atomic_facts import extract_and_deduplicate_facts
+from atomic_facts import extract_and_deduplicate_facts, extract_facts_only
 
 class Judge:
     """
@@ -337,6 +337,67 @@ def evaluate_content_llm(md_path: str) -> dict:
 
     return results
 
+def evaluate_content_llm_simultaneous(md_path: str) -> dict:
+    """
+    Evaluate content using LLM-based criteria simultaneously for all criteria.
+    
+    Args:
+        md_path (str): Path to the markdown file
+        
+    Returns:
+        dict: Dictionary containing evaluation scores for all criteria
+    """
+    content_criteria = ["Coverage", "Structure", "Relevance", "Language", "Criticalness"]
+    results = {}
+
+    try:
+        with open(md_path, "r", encoding="utf-8") as f:
+            content_str = f.read()
+    except Exception as e:
+        for criteria_name in content_criteria:
+            results[criteria_name] = 0
+        print("All content criteria scores:", results)
+        return results
+
+    topic = extract_topic_from_path(md_path)
+    
+    # Prepare prompt parameters for all criteria
+    prompt_params = {
+        "topic": topic,
+        "content": content_str
+    }
+    
+    # Add all criteria descriptions and scores to prompt parameters
+    for criteria_name in content_criteria:
+        criterion = CRITERIA[criteria_name]
+        prompt_params[f"{criteria_name.lower()}_description"] = criterion["description"]
+        for i in range(1, 6):
+            prompt_params[f"{criteria_name.lower()}_score_{i}"] = criterion[f"score {i}"]
+
+    try:
+        # Generate the prompt with all criteria
+        prompt = CONTENT_EVALUATION_SIMULTANEOUS_PROMPT.format(**prompt_params)
+        
+        # Get scores for all criteria at once
+        score_dict = judge.judge(prompt)
+        
+        # Validate and update results
+        if isinstance(score_dict, dict):
+            for criteria_name in content_criteria:
+                if criteria_name in score_dict:
+                    results[criteria_name] = score_dict[criteria_name]
+                else:
+                    results[criteria_name] = 0
+        else:
+            for criteria_name in content_criteria:
+                results[criteria_name] = 0
+    except Exception as e:
+        print(f"Error in simultaneous evaluation: {e}")
+        for criteria_name in content_criteria:
+            results[criteria_name] = 0
+
+    return results
+
 def evaluate_content_informativeness(md_path: str) -> dict:
     """
     Evaluate the informativeness of the content by analyzing various features.
@@ -357,16 +418,31 @@ def evaluate_content_informativeness(md_path: str) -> dict:
     tables_density = counts.get('tables', 0) / sentences
     total_density = (counts.get('images', 0) + counts.get('equations', 0) + counts.get('tables', 0)) / sentences
 
-    results["Images_density"] = images_density * 100
-    results["Equations_density"] = equations_density * 100
-    results["Tables_density"] = tables_density * 100
-    results["Total_density"] = total_density * 100
+    results["Images_density"] = round(images_density * 100, 4)
+    results["Equations_density"] = round(equations_density * 100, 4)
+    results["Tables_density"] = round(tables_density * 100, 4)
+    results["Total_density"] = round(total_density * 100, 4)
+
+    # Citation density
+    total_citations = 0
+    csv_path = os.path.join(os.path.dirname(md_path), os.path.basename(md_path).replace(".md", ".csv"))  
+    with open(csv_path, "r", encoding="utf-8") as f:
+        reader = pd.read_csv(f)
+        for index, row in reader.iterrows():
+            sentence = row["sentence"]
+            references = row["references"].split(";")
+            citations = len(references)
+            total_citations += citations
+    if total_citations > 0:
+        results["Citations_density"] = round(total_citations * 100 / sentences, 4)
+    else:
+        results["Citations_density"] = 0
 
     # Claim density
     topic = extract_topic_from_path(md_path)
-    results_claims = extract_and_deduplicate_facts(md_content, topic)
-    results["Claim_density_before_deduplication"] = results_claims.get("claim_density_before_dedup", 0) * 100
-    results["Claim_density_after_deduplication"] = results_claims.get("claim_density_after_dedup", 0) * 100
+    results_claims = extract_facts_only(md_content, topic)
+    results["Claim_density"] = results_claims.get("claim_density", 0) * 100
+    # results["Claim_density_after_deduplication"] = results_claims.get("claim_density_after_dedup", 0) * 100
     return results
 
 def evaluate_content_faithfulness(md_path: str) -> dict:
@@ -540,14 +616,14 @@ def evaluate_content(
     ]
     info_criteria = [
         "Images_density", "Equations_density", "Tables_density", 
-        "Total_density", "Claim_density_before_deduplication", 
-        "Claim_density_after_deduplication"
+        "Total_density", "Claim_density", 
     ]
     
     # 1. LLM evaluation
     if do_llm:
         try:
-            results.update(evaluate_content_llm(md_path))
+            # Use the new simultaneous evaluation function
+            results.update(evaluate_content_llm_simultaneous(md_path))
         except Exception as e:
             print("Error in evaluating content:", e)
             for criteria_name in content_criteria:
@@ -822,7 +898,7 @@ def evaluate(
     content_keys = [
         "Coverage", "Structure", "Relevance", "Language", "Criticalness",
         "Images_density", "Equations_density", "Tables_density", "Total_density", "Citations_density", "Sentence_no",
-        "Claim_density_before_deduplication", "Claim_density_after_deduplication"
+        "Claim_density"
     ]
     reference_keys = ["Reference", "Reference_density", "Reference_quality", "Reference_no"]
 
@@ -1252,7 +1328,7 @@ if __name__ == "__main__":
     # print(evaluate_outline_coverage(json_path))
     # batch_evaluate_by_cat(["cs"])
     # calculate_average_score("cs", "vanilla_outline", "qwen-plus-2025-04-28")
-    calculate_average_score_by_cat("econ")
+    # calculate_average_score_by_cat("econ")
     # clear_scores("cs", "AutoSurvey")
     # batch_evaluate_by_system(["vanilla"], "qwen-plus-2025-04-28", num_workers=4)
     # clear_all_scores()
@@ -1263,7 +1339,8 @@ if __name__ == "__main__":
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
     # surveys\cs\3D Gaussian Splatting Techniques\InteractiveSurvey
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/InteractiveSurvey/survey_3D Gaussian Splatting Techniques.md")
-    # batch_evaluate_by_system(["vanilla_outline", "pdfs"], "qwen-plus-2025-04-28", num_workers=4)
+    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "SurveyForge", "SurveyX","vanilla","vanilla_outline", "pdfs"], "deepseek-r1", num_workers=4)
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
-
+    # print(evaluate_content_informativeness("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
+    print(evaluate_content_llm_simultaneous("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
 

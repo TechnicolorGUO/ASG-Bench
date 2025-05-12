@@ -177,7 +177,7 @@ CRITERIA = {
         'score 2': 'The outline shows basic attempts at organization but contains multiple misplaced or poorly grouped sections. The progression is unclear or disjointed. Section titles are sometimes ambiguous.',
         'score 3': 'The outline demonstrates a generally reasonable structure, with some minor misalignments or grouping issues. Most section titles are clear, and topic coverage is mostly logical.',
         'score 4': 'The outline is well-structured, with clearly grouped section titles and a coherent progression of topics. Minor issues may exist but do not significantly affect readability or understanding.',
-        'score 5': 'The outline is exceptionally clear, logically organized, and easy to follow. Section titles are concise and informative, and the structure fully represents the topic’s breadth and depth.'
+        'score 5': 'The outline is exceptionally clear, logically organized, and easy to follow. Section titles are concise and informative, and the structure fully represents the topic\'s breadth and depth.'
     },
     'Reference': {
         "description": (
@@ -210,6 +210,65 @@ Score 4 Description: {score_4}
 Score 5 Description: {score_5}
 ---
 Return your answer only in JSON format: {{"{criteria_name}": <score>}} without any other information or explanation.
+"""
+
+CONTENT_EVALUATION_SIMULTANEOUS_PROMPT = """
+Here is an academic survey about the topic "{topic}":
+---
+{content}
+---
+
+Please evaluate this survey based on the following criteria, and give a score from 1 to 5 for each criterion according to their respective score descriptions:
+
+1. Coverage:
+Description: {coverage_description}
+Score 1: {coverage_score_1}
+Score 2: {coverage_score_2}
+Score 3: {coverage_score_3}
+Score 4: {coverage_score_4}
+Score 5: {coverage_score_5}
+
+2. Structure:
+Description: {structure_description}
+Score 1: {structure_score_1}
+Score 2: {structure_score_2}
+Score 3: {structure_score_3}
+Score 4: {structure_score_4}
+Score 5: {structure_score_5}
+
+3. Relevance:
+Description: {relevance_description}
+Score 1: {relevance_score_1}
+Score 2: {relevance_score_2}
+Score 3: {relevance_score_3}
+Score 4: {relevance_score_4}
+Score 5: {relevance_score_5}
+
+4. Language:
+Description: {language_description}
+Score 1: {language_score_1}
+Score 2: {language_score_2}
+Score 3: {language_score_3}
+Score 4: {language_score_4}
+Score 5: {language_score_5}
+
+5. Criticalness:
+Description: {criticalness_description}
+Score 1: {criticalness_score_1}
+Score 2: {criticalness_score_2}
+Score 3: {criticalness_score_3}
+Score 4: {criticalness_score_4}
+Score 5: {criticalness_score_5}
+
+Return your answer only in JSON format:
+{{
+    "Coverage": <score>,
+    "Structure": <score>,
+    "Relevance": <score>,
+    "Language": <score>,
+    "Criticalness": <score>
+}}
+without any other information or explanation.
 """
 
 CONTENT_FAITHFULNESS_PROMPT = """
@@ -306,7 +365,7 @@ Given the following outline structure, analyze the relationship between the pare
 
 For each child node, decide whether it is a *necessary and direct subtopic* of the parent node. Mark as "Yes" only if:
 - The child topic is essential for fully understanding or representing the parent node,
-- It is directly and specifically related to the parent’s core subject,
+- It is directly and specifically related to the parent's core subject,
 - It cannot stand alone as an independent section without losing relevance,
 - It is not a generic or loosely related section (such as reference, acknowledgment, appendix, background, discussion, or future work).
 
