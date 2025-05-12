@@ -1113,6 +1113,73 @@ def calculate_average_score(cat: str, system: str, model: str) -> dict:
 
     return average_scores
 
+def calculate_average_score_by_cat(cat: str) -> dict:
+    """
+    Calculate average scores for all systems in a specific category.
+    
+    Args:
+        cat (str): Category name (e.g., "cs")
+        
+    Returns:
+        dict: Dictionary containing average scores for all systems in the category
+    """
+    base_dir = os.path.join("surveys", cat)
+    topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    # Dictionary to store results for each system and model
+    all_results = {}
+    
+    for topic in topics:
+        topic_path = os.path.join(base_dir, topic)
+        systems = [d for d in os.listdir(topic_path) if os.path.isdir(os.path.join(topic_path, d))]
+        
+        for system in systems:
+            sys_path = os.path.join(topic_path, system)
+            # Find all results files for this system
+            results_files = glob.glob(os.path.join(sys_path, "results_*.json"))
+            
+            for results_file in results_files:
+                # Extract model name from filename (e.g., "results_qwen-plus.json" -> "qwen-plus")
+                model = os.path.basename(results_file).replace("results_", "").replace(".json", "")
+                
+                if system not in all_results:
+                    all_results[system] = {}
+                if model not in all_results[system]:
+                    all_results[system][model] = {"total": {}, "count": 0}
+                
+                try:
+                    with open(results_file, "r", encoding="utf-8") as f:
+                        results = json.load(f)
+                    
+                    # Add scores to total
+                    for key, value in results.items():
+                        if key not in all_results[system][model]["total"]:
+                            all_results[system][model]["total"][key] = 0
+                        all_results[system][model]["total"][key] += value
+                    
+                    all_results[system][model]["count"] += 1
+                except Exception as e:
+                    print(f"Error processing {results_file}: {e}")
+                    continue
+    
+    # Calculate averages for each system and model
+    average_scores = {}
+    for system, models in all_results.items():
+        average_scores[system] = {}
+        for model, data in models.items():
+            if data["count"] > 0:
+                average_scores[system][model] = {
+                    key: round(value / data["count"], 4)
+                    for key, value in data["total"].items()
+                }
+    
+    # Write to average_results.json
+    avg_results_path = os.path.join("surveys", cat, "average_results.json")
+    with open(avg_results_path, "w", encoding="utf-8") as f:
+        json.dump(average_scores, f, ensure_ascii=False, indent=4)
+    
+    return average_scores
+
 def clear_scores(cat: str, system: str, model: str) -> None:
     """
     Clear all evaluation results for a specific category, system, and model.
@@ -1184,7 +1251,8 @@ if __name__ == "__main__":
     # evaluate_reference(md_path)
     # print(evaluate_outline_coverage(json_path))
     # batch_evaluate_by_cat(["cs"])
-    # calculate_average_score("cs", "AutoSurvey", "qwen-plus-2025-04-28")
+    # calculate_average_score("cs", "vanilla_outline", "qwen-plus-2025-04-28")
+    calculate_average_score_by_cat("econ")
     # clear_scores("cs", "AutoSurvey")
     # batch_evaluate_by_system(["vanilla"], "qwen-plus-2025-04-28", num_workers=4)
     # clear_all_scores()
@@ -1195,7 +1263,7 @@ if __name__ == "__main__":
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
     # surveys\cs\3D Gaussian Splatting Techniques\InteractiveSurvey
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/InteractiveSurvey/survey_3D Gaussian Splatting Techniques.md")
-    batch_evaluate_by_system(["AutoSurvey","InteractiveSurvey", "LLMxMapReduce", "SurveyForge", "SurveyX", "vanilla", "vanilla_outline", "pdfs"], "qwen-plus-2025-04-28", num_workers=4)
+    # batch_evaluate_by_system(["vanilla_outline", "pdfs"], "qwen-plus-2025-04-28", num_workers=4)
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
 
 
