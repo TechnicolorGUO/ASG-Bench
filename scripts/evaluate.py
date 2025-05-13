@@ -1549,15 +1549,15 @@ def clear_scores(cat: str, system: str, model: str, target: str = "All") -> None
         except Exception as e:
             print(f"Error processing {avg_results_path}: {e}")
 
-def supplement_missing_scores(cat: str, model: str, system: str = None) -> None:
+def supplement_missing_scores(cat: str = None, model: str = None, system: str = None) -> None:
     """
-    Check and supplement missing scores for specific metrics in a category.
-    For metrics that are 0, re-evaluate using the corresponding evaluation function.
+    Check and supplement missing scores for specific metrics.
+    If any parameter is None, process all items for that parameter.
     
     Args:
-        cat (str): Category name (e.g., "cs")
-        model (str): Model name (e.g., "gpt-4") 
-        system (str, optional): System name to process. If None, process all systems. Defaults to None.
+        cat (str, optional): Category name (e.g., "cs"). If None, process all categories.
+        model (str, optional): Model name (e.g., "gpt-4"). If None, process all models.
+        system (str, optional): System name. If None, process all systems.
     """
     # Define metrics to check and their corresponding evaluation functions
     metric_functions = {
@@ -1569,102 +1569,119 @@ def supplement_missing_scores(cat: str, model: str, system: str = None) -> None:
     # Define content metrics
     content_metrics = ["Coverage", "Structure", "Relevance", "Language", "Criticalness"]
     
-    base_dir = os.path.join("surveys", cat)
-    topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    # Get categories to process
+    base_dir = "surveys"
+    if cat is not None:
+        cats = [cat]
+    else:
+        cats = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
     
-    for topic in topics:
-        topic_path = os.path.join(base_dir, topic)
-        systems = [d for d in os.listdir(topic_path) if os.path.isdir(os.path.join(topic_path, d))]
+    for current_cat in cats:
+        cat_dir = os.path.join(base_dir, current_cat)
+        topics = [d for d in os.listdir(cat_dir) if os.path.isdir(os.path.join(cat_dir, d))]
         
-        # Filter systems if a specific system is specified
-        if system is not None:
-            systems = [s for s in systems if s == system]
-            if not systems:
-                print(f"System {system} not found in {topic}")
-                continue
-        
-        for system in systems:
-            sys_path = os.path.join(topic_path, system)
-            results_path = os.path.join(sys_path, f"results_{model}.json")
+        for topic in topics:
+            topic_path = os.path.join(cat_dir, topic)
+            systems = [d for d in os.listdir(topic_path) if os.path.isdir(os.path.join(topic_path, d))]
             
-            if not os.path.exists(results_path):
-                continue
+            # Filter systems if specified
+            if system is not None:
+                systems = [s for s in systems if s == system]
+                if not systems:
+                    print(f"System {system} not found in {topic}")
+                    continue
+            
+            for current_system in systems:
+                sys_path = os.path.join(topic_path, current_system)
                 
-            try:
-                # Read current results
-                with open(results_path, "r", encoding="utf-8") as f:
-                    results = json.load(f)
+                # Get all results files
+                if model is not None:
+                    results_files = [f"results_{model}.json"]
+                else:
+                    results_files = [f for f in os.listdir(sys_path) if f.startswith("results_") and f.endswith(".json")]
                 
-                needs_update = False
-                
-                # Check each metric group
-                for metric_group, eval_func in metric_functions.items():
-                    if metric_group == "Content":
-                        # Check if any content metric is missing
-                        if any(results.get(metric, 0) == 0 for metric in content_metrics):
-                            print(f"Found missing content scores in {topic}/{system}")
-                            
-                            # Find the markdown file
-                            md_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".md")]
-                            if not md_files:
-                                print(f"No markdown file found in {sys_path}")
-                                continue
-                                
-                            md_path = os.path.join(sys_path, md_files[0])
-                            
-                            # Re-evaluate all content metrics at once
-                            try:
-                                new_scores = eval_func(md_path)
-                                if isinstance(new_scores, dict):
-                                    for metric in content_metrics:
-                                        if metric in new_scores:
-                                            results[metric] = new_scores[metric]
-                                            needs_update = True
-                                            print(f"Updated {metric} score to {new_scores[metric]}")
-                            except Exception as e:
-                                print(f"Error evaluating content metrics for {topic}/{system}: {e}")
-                    else:
-                        # Handle other metrics (Outline and Reference)
-                        if metric_group in results and results[metric_group] == 0:
-                            print(f"Found missing score for {metric_group} in {topic}/{system}")
-                            
-                            # Find the markdown file
-                            md_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".md")]
-                            if not md_files:
-                                print(f"No markdown file found in {sys_path}")
-                                continue
-                                
-                            md_path = os.path.join(sys_path, md_files[0])
-                            
-                            # Re-evaluate the metric
-                            try:
-                                if metric_group == "Outline":
-                                    # For outline, we need to use the outline.json path
-                                    outline_json_path = os.path.join(sys_path, "outline.json")
-                                    new_scores = eval_func(outline_json_path)
-                                else:
-                                    new_scores = eval_func(md_path)
-                                
-                                # Update results
-                                if isinstance(new_scores, dict):
-                                    if metric_group in new_scores:
-                                        results[metric_group] = new_scores[metric_group]
-                                        needs_update = True
-                                        print(f"Updated {metric_group} score to {new_scores[metric_group]}")
-                                else:
-                                    print(f"Unexpected result format for {metric_group}")
+                for results_file in results_files:
+                    results_path = os.path.join(sys_path, results_file)
+                    current_model = results_file.replace("results_", "").replace(".json", "")
+                    
+                    if not os.path.exists(results_path):
+                        continue
+                        
+                    try:
+                        # Read current results
+                        with open(results_path, "r", encoding="utf-8") as f:
+                            results = json.load(f)
+                        
+                        needs_update = False
+                        
+                        # Check each metric group
+                        for metric_group, eval_func in metric_functions.items():
+                            if metric_group == "Content":
+                                # Check if any content metric is missing
+                                if any(results.get(metric, 0) == 0 for metric in content_metrics):
+                                    print(f"Found missing content scores in {current_cat}/{topic}/{current_system}/{current_model}")
                                     
-                            except Exception as e:
-                                print(f"Error evaluating {metric_group} for {topic}/{system}: {e}")
-                
-                # Save updated results if any changes were made
-                if needs_update:
-                    with open(results_path, "w", encoding="utf-8") as f:
-                        json.dump(results, f, ensure_ascii=False, indent=4)
-                    print(f"Updated results saved to {results_path}")
-                
-            except Exception as e:
-                print(f"Error processing {results_path}: {e}")
+                                    # Find the markdown file
+                                    md_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".md")]
+                                    if not md_files:
+                                        print(f"No markdown file found in {sys_path}")
+                                        continue
+                                        
+                                    md_path = os.path.join(sys_path, md_files[0])
+                                    
+                                    # Re-evaluate all content metrics at once
+                                    try:
+                                        new_scores = eval_func(md_path)
+                                        if isinstance(new_scores, dict):
+                                            for metric in content_metrics:
+                                                if metric in new_scores:
+                                                    results[metric] = new_scores[metric]
+                                                    needs_update = True
+                                                    print(f"Updated {metric} score to {new_scores[metric]}")
+                                    except Exception as e:
+                                        print(f"Error evaluating content metrics for {current_cat}/{topic}/{current_system}/{current_model}: {e}")
+                            else:
+                                # Handle other metrics (Outline and Reference)
+                                if metric_group in results and results[metric_group] == 0:
+                                    print(f"Found missing score for {metric_group} in {current_cat}/{topic}/{current_system}/{current_model}")
+                                    
+                                    # Find the markdown file
+                                    md_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".md")]
+                                    if not md_files:
+                                        print(f"No markdown file found in {sys_path}")
+                                        continue
+                                        
+                                    md_path = os.path.join(sys_path, md_files[0])
+                                    
+                                    # Re-evaluate the metric
+                                    try:
+                                        if metric_group == "Outline":
+                                            # For outline, we need to use the outline.json path
+                                            outline_json_path = os.path.join(sys_path, "outline.json")
+                                            new_scores = eval_func(outline_json_path)
+                                        else:
+                                            new_scores = eval_func(md_path)
+                                        
+                                        # Update results
+                                        if isinstance(new_scores, dict):
+                                            if metric_group in new_scores:
+                                                results[metric_group] = new_scores[metric_group]
+                                                needs_update = True
+                                                print(f"Updated {metric_group} score to {new_scores[metric_group]}")
+                                        else:
+                                            print(f"Unexpected result format for {metric_group}")
+                                            
+                                    except Exception as e:
+                                        print(f"Error evaluating {metric_group} for {current_cat}/{topic}/{current_system}/{current_model}: {e}")
+                        
+                        # Save updated results if any changes were made
+                        if needs_update:
+                            with open(results_path, "w", encoding="utf-8") as f:
+                                json.dump(results, f, ensure_ascii=False, indent=4)
+                            print(f"Updated results saved to {results_path}")
+                        
+                    except Exception as e:
+                        print(f"Error processing {results_path}: {e}")
 
 def calculate_category_average_from_csv(cat: str) -> None:
     """
