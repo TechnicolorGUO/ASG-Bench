@@ -1797,8 +1797,10 @@ def calculate_all_scores(
     if cats is None:
         cats = [d for d in os.listdir("surveys") if os.path.isdir(os.path.join("surveys", d))]
     
+    # Prepare tasks for parallel processing
+    tasks = []
     for cat in cats:
-        print(f"\nProcessing category: {cat}")
+        print(f"\nPreparing tasks for category: {cat}")
         if systems is None:
             # Get all systems from the category
             base_dir = os.path.join("surveys", cat)
@@ -1810,7 +1812,6 @@ def calculate_all_scores(
             systems = list(systems)
         
         for system in systems:
-            print(f"Processing system: {system}")
             if models is None:
                 # Get all models from the system's results files
                 base_dir = os.path.join("surveys", cat)
@@ -1825,42 +1826,96 @@ def calculate_all_scores(
                 models = list(models)
             
             for model in models:
-                print(f"Processing model: {model}")
+                tasks.append((cat, system, model))
+    
+    # Process tasks in parallel
+    if num_workers > 1:
+        print(f"\nProcessing {len(tasks)} tasks with {num_workers} workers...")
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
+            futures = []
+            for cat, system, model in tasks:
+                print(f"Submitting task for {cat}/{system}/{model}")
+                futures.append(executor.submit(calculate_average_score, cat, system, model))
+            
+            for future in as_completed(futures):
                 try:
-                    calculate_average_score(cat, system, model)
+                    future.result()
                 except Exception as e:
-                    print(f"Error calculating average score for {cat}/{system}/{model}: {e}")
+                    print(f"Error in task: {e}")
+    else:
+        # Sequential processing
+        for cat, system, model in tasks:
+            print(f"\nProcessing {cat}/{system}/{model}")
+            try:
+                calculate_average_score(cat, system, model)
+            except Exception as e:
+                print(f"Error calculating average score for {cat}/{system}/{model}: {e}")
     
     # Step 2: Supplement missing scores
     print("\nStep 2: Supplementing missing scores...")
-    for cat in cats:
-        print(f"\nProcessing category: {cat}")
-        for system in systems:
-            print(f"Processing system: {system}")
-            for model in models:
-                print(f"Processing model: {model}")
+    if num_workers > 1:
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
+            futures = []
+            for cat, system, model in tasks:
+                print(f"Submitting supplement task for {cat}/{system}/{model}")
+                futures.append(executor.submit(supplement_missing_scores, cat, model, system))
+            
+            for future in as_completed(futures):
                 try:
-                    supplement_missing_scores(cat, model, system)
+                    future.result()
                 except Exception as e:
-                    print(f"Error supplementing scores for {cat}/{system}/{model}: {e}")
+                    print(f"Error in supplement task: {e}")
+    else:
+        for cat, system, model in tasks:
+            print(f"\nProcessing {cat}/{system}/{model}")
+            try:
+                supplement_missing_scores(cat, model, system)
+            except Exception as e:
+                print(f"Error supplementing scores for {cat}/{system}/{model}: {e}")
     
     # Step 3: Aggregate results to CSV
     print("\nStep 3: Aggregating results to CSV...")
-    for cat in cats:
-        print(f"\nProcessing category: {cat}")
-        try:
-            aggregate_results_to_csv(cat)
-        except Exception as e:
-            print(f"Error aggregating results for {cat}: {e}")
+    if num_workers > 1:
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
+            futures = []
+            for cat in cats:
+                print(f"Submitting aggregation task for {cat}")
+                futures.append(executor.submit(aggregate_results_to_csv, cat))
+            
+            for future in as_completed(futures):
+                try:
+                    future.result()
+                except Exception as e:
+                    print(f"Error in aggregation task: {e}")
+    else:
+        for cat in cats:
+            print(f"\nProcessing category: {cat}")
+            try:
+                aggregate_results_to_csv(cat)
+            except Exception as e:
+                print(f"Error aggregating results for {cat}: {e}")
     
     # Step 4: Calculate category averages
     print("\nStep 4: Calculating category averages...")
-    for cat in cats:
-        print(f"\nProcessing category: {cat}")
-        try:
-            calculate_category_average_from_csv(cat)
-        except Exception as e:
-            print(f"Error calculating category average for {cat}: {e}")
+    if num_workers > 1:
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
+            futures = []
+            for cat in cats:
+                print(f"Submitting average calculation task for {cat}")
+                futures.append(executor.submit(calculate_category_average_from_csv, cat))
+            
+            for future in as_completed(futures):
+                try:
+                    future.result()
+                except Exception as e:
+                    print(f"Error in average calculation task: {e}")
+    else:
+        for cat in cats:
+            print(f"\nProcessing category: {cat}")
+            try:
+                calculate_category_average_from_csv(cat)
+            except Exception as e:
+                print(f"Error calculating category average for {cat}: {e}")
     
     # Step 5: Aggregate all categories
     print("\nStep 5: Aggregating all categories...")
