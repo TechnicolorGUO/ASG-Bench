@@ -1398,120 +1398,141 @@ def clear_all_average_scores() -> None:
         except Exception as e:
             print(f"Failed to remove {global_results_path}: {e}")
 
-def clear_scores(cat: str, system: str, model: str) -> None:
+def aggregate_results_to_csv(cat: str, metrics_to_fill: list[str] = ["Outline", "Reference"]) -> None:
     """
-    Clear all evaluation results for a specific category, system, and model.
+    Aggregate all results from a category into a CSV file.
+    For specified metrics, if value is 0, fill with average of the same model.
+    
+    Args:
+        cat (str): Category name (e.g., "cs")
+        metrics_to_fill (list[str]): List of metrics that need to be filled with average if 0
+    """
+    base_dir = os.path.join("surveys", cat)
+    all_results = []
+    
+    # Get all topics
+    topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    # Collect all results
+    for topic in topics:
+        topic_path = os.path.join(base_dir, topic)
+        systems = [d for d in os.listdir(topic_path) if os.path.isdir(os.path.join(topic_path, d))]
+        
+        for system in systems:
+            sys_path = os.path.join(topic_path, system)
+            # Find all results files
+            results_files = glob.glob(os.path.join(sys_path, "results_*.json"))
+            
+            for results_file in results_files:
+                model = os.path.basename(results_file).replace("results_", "").replace(".json", "")
+                try:
+                    with open(results_file, "r", encoding="utf-8") as f:
+                        results = json.load(f)
+                    
+                    # Add basic info
+                    entry = {
+                        "topic": topic,
+                        "system": system,
+                        "model": model
+                    }
+                    # Add all metrics
+                    entry.update(results)
+                    all_results.append(entry)
+                except Exception as e:
+                    print(f"Error processing {results_file}: {e}")
+    
+    # Convert to DataFrame
+    df = pd.DataFrame(all_results)
+    
+    # Fill 0 values with model averages for specified metrics
+    for metric in metrics_to_fill:
+        if metric in df.columns:
+            # Calculate model averages for this metric
+            model_avgs = df[df[metric] != 0].groupby('model')[metric].mean()
+            
+            # Fill 0 values with corresponding model average
+            for model, avg in model_avgs.items():
+                mask = (df['model'] == model) & (df[metric] == 0)
+                df.loc[mask, metric] = avg
+    
+    # Save to CSV
+    output_path = os.path.join(base_dir, f"{cat}_results.csv")
+    df.to_csv(output_path, index=False)
+    print(f"Results saved to {output_path}")
+
+def clear_scores(cat: str, system: str, model: str, target: str = "All") -> None:
+    """
+    Clear evaluation results for a specific category, system, and model.
     
     Args:
         cat (str): Category name (e.g., "cs")
         system (str): System name (e.g., "InteractiveSurvey")
         model (str): Model name (e.g., "qwen-plus")
+        target (str): Target to clear, one of ["Outline", "Content", "Reference", "All"]
     """
+    # Define metric groups
+    metric_groups = {
+        "Outline": ["Outline", "Outline_coverage", "Outline_structure", "Outline_no"],
+        "Content": ["Coverage", "Structure", "Relevance", "Language", "Criticalness",
+                   "Images_density", "Equations_density", "Tables_density", 
+                   "Total_density", "Citations_density", "Sentence_no",
+                   "Claim_density"],
+        "Reference": ["Reference", "Reference_density", "Reference_quality", "Reference_no"]
+    }
+    
     base_dir = os.path.join("surveys", cat)
     topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
     
     for topic in topics:
         topic_path = os.path.join(base_dir, topic)
         sys_path = os.path.join(topic_path, system)
-        results_path = os.path.join(
-            sys_path, 
-            f"results_{model}.json"
-        )
+        results_path = os.path.join(sys_path, f"results_{model}.json")
+        
         if os.path.exists(results_path):
-            os.remove(results_path)
+            try:
+                with open(results_path, "r", encoding="utf-8") as f:
+                    results = json.load(f)
+                
+                if target == "All":
+                    # Remove the entire file
+                    os.remove(results_path)
+                else:
+                    # Remove only specified metrics
+                    metrics_to_remove = metric_groups.get(target, [])
+                    for metric in metrics_to_remove:
+                        if metric in results:
+                            del results[metric]
+                    
+                    # Save updated results
+                    with open(results_path, "w", encoding="utf-8") as f:
+                        json.dump(results, f, ensure_ascii=False, indent=4)
+            except Exception as e:
+                print(f"Error processing {results_path}: {e}")
     
-    # Clear corresponding system and model from average_results.json
+    # Update average_results.json
     avg_results_path = os.path.join("surveys", cat, "average_results.json")
     if os.path.exists(avg_results_path):
-        with open(avg_results_path, "r", encoding="utf-8") as f:
-            avg_results_data = json.load(f)
-        if system in avg_results_data:
-            if model in avg_results_data[system]:
-                del avg_results_data[system][model]
-                # Remove system if no models remain
-                if not avg_results_data[system]:
-                    del avg_results_data[system]
-        with open(avg_results_path, "w", encoding="utf-8") as f:
-            json.dump(avg_results_data, f, ensure_ascii=False, indent=4)
-
-def clear_all_scores() -> None:
-    """
-    Clear all evaluation results (all files starting with 'results_' and ending with '.json').
-    """
-    base_dir = "surveys"
-    for cat in os.listdir(base_dir):
-        cat_path = os.path.join(base_dir, cat)
-        if os.path.isdir(cat_path):
-            for topic in os.listdir(cat_path):
-                topic_path = os.path.join(cat_path, topic)
-                if os.path.isdir(topic_path):
-                    for system in os.listdir(topic_path):
-                        sys_path = os.path.join(topic_path, system)
-                        if os.path.isdir(sys_path):
-                            # Match all results_*.json files
-                            pattern = os.path.join(sys_path, "results_*.json")
-                            for file_path in glob.glob(pattern):
-                                try:
-                                    os.remove(file_path)
-                                    print(f"Removed: {file_path}")
-                                except Exception as e:
-                                    print(f"Failed to remove {file_path}: {e}")
-
-def aggregate_all_cats_average_scores() -> dict:
-    """
-    Aggregate all category average scores into one global file with an additional 'average' key.
-    The results will be stored in 'surveys/global_average_results.json'.
-    
-    Returns:
-        dict: Dictionary containing aggregated scores with global averages
-    """
-    # First calculate all category averages
-    all_cats_results = calculate_all_cats_average_scores()
-    
-    # Initialize global results structure
-    global_results = {
-        "categories": all_cats_results,
-        "average": {}
-    }
-    
-    # Collect all unique systems and models
-    all_systems = set()
-    all_models = set()
-    for cat_results in all_cats_results.values():
-        all_systems.update(cat_results.keys())
-        for system_results in cat_results.values():
-            all_models.update(system_results.keys())
-    
-    # Calculate global averages for each system and model
-    for system in all_systems:
-        global_results["average"][system] = {}
-        for model in all_models:
-            # Collect all scores for this system-model combination across categories
-            scores = {}
-            count = 0
+        try:
+            with open(avg_results_path, "r", encoding="utf-8") as f:
+                avg_results_data = json.load(f)
             
-            for cat_results in all_cats_results.values():
-                if system in cat_results and model in cat_results[system]:
-                    system_model_scores = cat_results[system][model]
-                    for metric, value in system_model_scores.items():
-                        if metric not in scores:
-                            scores[metric] = 0
-                        scores[metric] += value
-                    count += 1
+            if system in avg_results_data and model in avg_results_data[system]:
+                if target == "All":
+                    # Remove the entire system-model entry
+                    del avg_results_data[system][model]
+                    if not avg_results_data[system]:
+                        del avg_results_data[system]
+                else:
+                    # Remove only specified metrics
+                    metrics_to_remove = metric_groups.get(target, [])
+                    for metric in metrics_to_remove:
+                        if metric in avg_results_data[system][model]:
+                            del avg_results_data[system][model][metric]
             
-            # Calculate average if we have data
-            if count > 0:
-                global_results["average"][system][model] = {
-                    metric: round(value / count, 4)
-                    for metric, value in scores.items()
-                }
-    
-    # Save to global average results file
-    global_results_path = os.path.join("surveys", "global_average_results.json")
-    with open(global_results_path, "w", encoding="utf-8") as f:
-        json.dump(global_results, f, ensure_ascii=False, indent=4)
-    
-    return global_results
+            with open(avg_results_path, "w", encoding="utf-8") as f:
+                json.dump(avg_results_data, f, ensure_ascii=False, indent=4)
+        except Exception as e:
+            print(f"Error processing {avg_results_path}: {e}")
 
 if __name__ == "__main__":
     # 测试代码
