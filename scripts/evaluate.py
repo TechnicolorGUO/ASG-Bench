@@ -1256,6 +1256,148 @@ def calculate_average_score_by_cat(cat: str) -> dict:
     
     return average_scores
 
+def calculate_average_score_by_system(system: str, model: str) -> dict:
+    """
+    Calculate average scores for a specific system and model across all categories.
+    
+    Args:
+        system (str): System name (e.g., "AutoSurvey")
+        model (str): Model name (e.g., "gpt-4")
+        
+    Returns:
+        dict: Dictionary containing average scores for the system-model combination
+    """
+    base_dir = "surveys"
+    all_scores = {}
+    count = 0
+    
+    # Get all category directories
+    cats = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    for cat in cats:
+        cat_path = os.path.join(base_dir, cat)
+        avg_results_path = os.path.join(cat_path, "average_results.json")
+        
+        if os.path.exists(avg_results_path):
+            try:
+                with open(avg_results_path, "r", encoding="utf-8") as f:
+                    cat_results = json.load(f)
+                
+                if system in cat_results and model in cat_results[system]:
+                    system_model_scores = cat_results[system][model]
+                    for metric, value in system_model_scores.items():
+                        if metric not in all_scores:
+                            all_scores[metric] = 0
+                        all_scores[metric] += value
+                    count += 1
+            except Exception as e:
+                print(f"Error processing {avg_results_path}: {e}")
+                continue
+    
+    # Calculate averages if we have data
+    if count > 0:
+        average_scores = {
+            metric: round(value / count, 4)
+            for metric, value in all_scores.items()
+        }
+    else:
+        average_scores = {}
+    
+    return average_scores
+
+def calculate_all_cats_average_scores() -> dict:
+    """
+    Calculate average scores for all categories and store them in their respective average_results.json files.
+    
+    Returns:
+        dict: Dictionary containing average scores for all categories
+    """
+    base_dir = "surveys"
+    all_cats_results = {}
+    
+    # Get all category directories
+    cats = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    for cat in cats:
+        print(f"Calculating average scores for category: {cat}")
+        cat_results = calculate_average_score_by_cat(cat)
+        all_cats_results[cat] = cat_results
+    
+    return all_cats_results
+
+def clear_average_score_by_cat(cat: str) -> None:
+    """
+    Clear average results for a specific category.
+    
+    Args:
+        cat (str): Category name (e.g., "cs")
+    """
+    avg_results_path = os.path.join("surveys", cat, "average_results.json")
+    if os.path.exists(avg_results_path):
+        try:
+            os.remove(avg_results_path)
+            print(f"Removed average results for category: {cat}")
+        except Exception as e:
+            print(f"Failed to remove {avg_results_path}: {e}")
+
+def clear_average_score_by_system(system: str, model: str) -> None:
+    """
+    Clear average results for a specific system and model from all category average results.
+    
+    Args:
+        system (str): System name (e.g., "AutoSurvey")
+        model (str): Model name (e.g., "gpt-4")
+    """
+    base_dir = "surveys"
+    cats = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    for cat in cats:
+        avg_results_path = os.path.join(base_dir, cat, "average_results.json")
+        if os.path.exists(avg_results_path):
+            try:
+                with open(avg_results_path, "r", encoding="utf-8") as f:
+                    avg_results = json.load(f)
+                
+                if system in avg_results:
+                    if model in avg_results[system]:
+                        del avg_results[system][model]
+                        # Remove system if no models remain
+                        if not avg_results[system]:
+                            del avg_results[system]
+                
+                with open(avg_results_path, "w", encoding="utf-8") as f:
+                    json.dump(avg_results, f, ensure_ascii=False, indent=4)
+                
+                print(f"Cleared {system}/{model} from {cat} average results")
+            except Exception as e:
+                print(f"Error processing {avg_results_path}: {e}")
+
+def clear_all_average_scores() -> None:
+    """
+    Clear all average results files (average_results.json and global_average_results.json).
+    """
+    base_dir = "surveys"
+    
+    # Clear category average results
+    cats = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    for cat in cats:
+        avg_results_path = os.path.join(base_dir, cat, "average_results.json")
+        if os.path.exists(avg_results_path):
+            try:
+                os.remove(avg_results_path)
+                print(f"Removed average results for category: {cat}")
+            except Exception as e:
+                print(f"Failed to remove {avg_results_path}: {e}")
+    
+    # Clear global average results
+    global_results_path = os.path.join(base_dir, "global_average_results.json")
+    if os.path.exists(global_results_path):
+        try:
+            os.remove(global_results_path)
+            print("Removed global average results")
+        except Exception as e:
+            print(f"Failed to remove {global_results_path}: {e}")
+
 def clear_scores(cat: str, system: str, model: str) -> None:
     """
     Clear all evaluation results for a specific category, system, and model.
@@ -1315,6 +1457,61 @@ def clear_all_scores() -> None:
                                 except Exception as e:
                                     print(f"Failed to remove {file_path}: {e}")
 
+def aggregate_all_cats_average_scores() -> dict:
+    """
+    Aggregate all category average scores into one global file with an additional 'average' key.
+    The results will be stored in 'surveys/global_average_results.json'.
+    
+    Returns:
+        dict: Dictionary containing aggregated scores with global averages
+    """
+    # First calculate all category averages
+    all_cats_results = calculate_all_cats_average_scores()
+    
+    # Initialize global results structure
+    global_results = {
+        "categories": all_cats_results,
+        "average": {}
+    }
+    
+    # Collect all unique systems and models
+    all_systems = set()
+    all_models = set()
+    for cat_results in all_cats_results.values():
+        all_systems.update(cat_results.keys())
+        for system_results in cat_results.values():
+            all_models.update(system_results.keys())
+    
+    # Calculate global averages for each system and model
+    for system in all_systems:
+        global_results["average"][system] = {}
+        for model in all_models:
+            # Collect all scores for this system-model combination across categories
+            scores = {}
+            count = 0
+            
+            for cat_results in all_cats_results.values():
+                if system in cat_results and model in cat_results[system]:
+                    system_model_scores = cat_results[system][model]
+                    for metric, value in system_model_scores.items():
+                        if metric not in scores:
+                            scores[metric] = 0
+                        scores[metric] += value
+                    count += 1
+            
+            # Calculate average if we have data
+            if count > 0:
+                global_results["average"][system][model] = {
+                    metric: round(value / count, 4)
+                    for metric, value in scores.items()
+                }
+    
+    # Save to global average results file
+    global_results_path = os.path.join("surveys", "global_average_results.json")
+    with open(global_results_path, "w", encoding="utf-8") as f:
+        json.dump(global_results, f, ensure_ascii=False, indent=4)
+    
+    return global_results
 
 if __name__ == "__main__":
     # 测试代码
@@ -1339,8 +1536,9 @@ if __name__ == "__main__":
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
     # surveys\cs\3D Gaussian Splatting Techniques\InteractiveSurvey
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/InteractiveSurvey/survey_3D Gaussian Splatting Techniques.md")
-    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "SurveyForge", "SurveyX","vanilla","vanilla_outline", "pdfs"], "deepseek-r1", num_workers=4)
+    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "SurveyForge", "SurveyX","vanilla","vanilla_outline", "pdfs"], "gpt-4o", num_workers=4)
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
     # print(evaluate_content_informativeness("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
-    print(evaluate_content_llm_simultaneous("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
+    # print(evaluate_content_llm_simultaneous("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
+    calculate_all_cats_average_scores()
 
