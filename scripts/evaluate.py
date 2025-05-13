@@ -1769,6 +1769,108 @@ def aggregate_all_categories_average() -> None:
     except Exception as e:
         print(f"Error processing global averages: {e}")
 
+def calculate_all_scores(
+    cats: list[str] = None,
+    systems: list[str] = None,
+    models: list[str] = None,
+    num_workers: int = 1
+) -> None:
+    """
+    Comprehensive function to calculate and aggregate all scores.
+    This function performs the following steps in sequence:
+    1. Calculate average scores for all specified categories/systems/models
+    2. Supplement any missing scores
+    3. Aggregate results to CSV files
+    4. Calculate category averages
+    5. Aggregate all categories into global results
+    
+    Args:
+        cats (list[str], optional): List of categories to process. If None, process all categories.
+        systems (list[str], optional): List of systems to process. If None, process all systems.
+        models (list[str], optional): List of models to process. If None, process all models.
+        num_workers (int, optional): Number of worker threads for parallel processing. Defaults to 1.
+    """
+    print("Starting comprehensive score calculation process...")
+    
+    # Step 1: Calculate average scores
+    print("\nStep 1: Calculating average scores...")
+    if cats is None:
+        cats = [d for d in os.listdir("surveys") if os.path.isdir(os.path.join("surveys", d))]
+    
+    for cat in cats:
+        print(f"\nProcessing category: {cat}")
+        if systems is None:
+            # Get all systems from the category
+            base_dir = os.path.join("surveys", cat)
+            topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+            systems = set()
+            for topic in topics:
+                topic_path = os.path.join(base_dir, topic)
+                systems.update([d for d in os.listdir(topic_path) if os.path.isdir(os.path.join(topic_path, d))])
+            systems = list(systems)
+        
+        for system in systems:
+            print(f"Processing system: {system}")
+            if models is None:
+                # Get all models from the system's results files
+                base_dir = os.path.join("surveys", cat)
+                topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+                models = set()
+                for topic in topics:
+                    topic_path = os.path.join(base_dir, topic)
+                    sys_path = os.path.join(topic_path, system)
+                    if os.path.exists(sys_path):
+                        results_files = [f for f in os.listdir(sys_path) if f.startswith("results_") and f.endswith(".json")]
+                        models.update([f.replace("results_", "").replace(".json", "") for f in results_files])
+                models = list(models)
+            
+            for model in models:
+                print(f"Processing model: {model}")
+                try:
+                    calculate_average_score(cat, system, model)
+                except Exception as e:
+                    print(f"Error calculating average score for {cat}/{system}/{model}: {e}")
+    
+    # Step 2: Supplement missing scores
+    print("\nStep 2: Supplementing missing scores...")
+    for cat in cats:
+        print(f"\nProcessing category: {cat}")
+        for system in systems:
+            print(f"Processing system: {system}")
+            for model in models:
+                print(f"Processing model: {model}")
+                try:
+                    supplement_missing_scores(cat, model, system)
+                except Exception as e:
+                    print(f"Error supplementing scores for {cat}/{system}/{model}: {e}")
+    
+    # Step 3: Aggregate results to CSV
+    print("\nStep 3: Aggregating results to CSV...")
+    for cat in cats:
+        print(f"\nProcessing category: {cat}")
+        try:
+            aggregate_results_to_csv(cat)
+        except Exception as e:
+            print(f"Error aggregating results for {cat}: {e}")
+    
+    # Step 4: Calculate category averages
+    print("\nStep 4: Calculating category averages...")
+    for cat in cats:
+        print(f"\nProcessing category: {cat}")
+        try:
+            calculate_category_average_from_csv(cat)
+        except Exception as e:
+            print(f"Error calculating category average for {cat}: {e}")
+    
+    # Step 5: Aggregate all categories
+    print("\nStep 5: Aggregating all categories...")
+    try:
+        aggregate_all_categories_average()
+    except Exception as e:
+        print(f"Error aggregating all categories: {e}")
+    
+    print("\nComprehensive score calculation completed!")
+
 if __name__ == "__main__":
     # 测试代码
     # md_path = "surveys\cs\Optimization Techniques for Transformer Inference\pdfs/2307.07982.md"  # 替换为实际的文件路径
