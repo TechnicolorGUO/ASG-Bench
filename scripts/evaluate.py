@@ -1459,15 +1459,15 @@ def aggregate_results_to_csv(cat: str) -> None:
     # Convert to DataFrame
     df = pd.DataFrame(all_results)
     
-    # Fill 0 values with model averages for specified metrics
+    # Fill 0 values with system averages for specified metrics
     for metric in metrics_to_fill:
         if metric in df.columns:
-            # Calculate model averages for this metric
-            model_avgs = df[df[metric] != 0].groupby('model')[metric].mean()
+            # Calculate system averages for this metric
+            system_avgs = df[df[metric] != 0].groupby('system')[metric].mean()
             
-            # Fill 0 values with corresponding model average
-            for model, avg in model_avgs.items():
-                mask = (df['model'] == model) & (df[metric] == 0)
+            # Fill 0 values with corresponding system average
+            for system, avg in system_avgs.items():
+                mask = (df['system'] == system) & (df[metric] == 0)
                 df.loc[mask, metric] = avg
     
     # Save to CSV
