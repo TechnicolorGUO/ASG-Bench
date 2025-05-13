@@ -1131,6 +1131,8 @@ def batch_evaluate_by_system(
                 except Exception as e:
                     print(f"Exception in thread: {e}")
 
+# ------------- Average Score Calculation -------------
+
 def calculate_average_score(cat: str, system: str, model: str) -> dict:
     """
     Calculate average scores for a specific category, system, and model.
@@ -1398,17 +1400,30 @@ def clear_all_average_scores() -> None:
         except Exception as e:
             print(f"Failed to remove {global_results_path}: {e}")
 
-def aggregate_results_to_csv(cat: str, metrics_to_fill: list[str] = ["Outline", "Reference"]) -> None:
+def aggregate_results_to_csv(cat: str) -> None:
     """
     Aggregate all results from a category into a CSV file.
     For specified metrics, if value is 0, fill with average of the same model.
+    The metrics that need to be filled with average if 0 are:
+    - Outline, Outline_coverage, Outline_structure, Outline_no
+    - Reference, Reference_density, Reference_quality, Reference_no
+    - Coverage, Structure, Relevance, Language, Criticalness
+    - Images_density, Equations_density, Tables_density, Total_density
+    - Citations_density, Sentence_no, Claim_density
     
     Args:
         cat (str): Category name (e.g., "cs")
-        metrics_to_fill (list[str]): List of metrics that need to be filled with average if 0
     """
     base_dir = os.path.join("surveys", cat)
     all_results = []
+    
+    metrics_to_fill = [
+        "Outline", "Outline_coverage", "Outline_structure", "Outline_no",
+        "Reference", "Reference_density", "Reference_quality", "Reference_no",
+        "Coverage", "Structure", "Relevance", "Language", "Criticalness",
+        "Images_density", "Equations_density", "Tables_density", "Total_density",
+        "Citations_density", "Sentence_no", "Claim_density"
+    ]
     
     # Get all topics
     topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
@@ -1534,6 +1549,176 @@ def clear_scores(cat: str, system: str, model: str, target: str = "All") -> None
         except Exception as e:
             print(f"Error processing {avg_results_path}: {e}")
 
+def supplement_missing_scores(cat: str, model: str) -> None:
+    """
+    Check and supplement missing scores for specific metrics in a category.
+    For metrics that are 0, re-evaluate using the corresponding evaluation function.
+    
+    Args:
+        cat (str): Category name (e.g., "cs")
+        model (str): Model name (e.g., "gpt-4")
+    """
+    # Define metrics to check and their corresponding evaluation functions
+    metric_functions = {
+        "Outline": evaluate_outline_llm,
+        "Reference": evaluate_reference_llm,
+        "Coverage": evaluate_content_llm,
+        "Structure": evaluate_content_llm,
+        "Relevance": evaluate_content_llm,
+        "Language": evaluate_content_llm,
+        "Criticalness": evaluate_content_llm
+    }
+    
+    base_dir = os.path.join("surveys", cat)
+    topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    for topic in topics:
+        topic_path = os.path.join(base_dir, topic)
+        systems = [d for d in os.listdir(topic_path) if os.path.isdir(os.path.join(topic_path, d))]
+        
+        for system in systems:
+            sys_path = os.path.join(topic_path, system)
+            results_path = os.path.join(sys_path, f"results_{model}.json")
+            
+            if not os.path.exists(results_path):
+                continue
+                
+            try:
+                # Read current results
+                with open(results_path, "r", encoding="utf-8") as f:
+                    results = json.load(f)
+                
+                needs_update = False
+                
+                # Check each metric
+                for metric, eval_func in metric_functions.items():
+                    if metric in results and results[metric] == 0:
+                        print(f"Found missing score for {metric} in {topic}/{system}")
+                        
+                        # Find the markdown file
+                        md_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".md")]
+                        if not md_files:
+                            print(f"No markdown file found in {sys_path}")
+                            continue
+                            
+                        md_path = os.path.join(sys_path, md_files[0])
+                        
+                        # Re-evaluate the metric
+                        try:
+                            if metric == "Outline":
+                                # For outline, we need to use the outline.json path
+                                outline_json_path = os.path.join(sys_path, "outline.json")
+                                new_scores = eval_func(outline_json_path)
+                            else:
+                                new_scores = eval_func(md_path)
+                            
+                            # Update results
+                            if isinstance(new_scores, dict):
+                                if metric in new_scores:
+                                    results[metric] = new_scores[metric]
+                                    needs_update = True
+                                    print(f"Updated {metric} score to {new_scores[metric]}")
+                            else:
+                                print(f"Unexpected result format for {metric}")
+                                
+                        except Exception as e:
+                            print(f"Error evaluating {metric} for {topic}/{system}: {e}")
+                
+                # Save updated results if any changes were made
+                if needs_update:
+                    with open(results_path, "w", encoding="utf-8") as f:
+                        json.dump(results, f, ensure_ascii=False, indent=4)
+                    print(f"Updated results saved to {results_path}")
+                
+            except Exception as e:
+                print(f"Error processing {results_path}: {e}")
+
+def calculate_category_average_from_csv(cat: str) -> None:
+    """
+    Calculate average scores from category results CSV and save as a new CSV.
+    Uses system+model as the primary key.
+    
+    Args:
+        cat (str): Category name (e.g., "cs")
+    """
+    base_dir = os.path.join("surveys", cat)
+    input_csv = os.path.join(base_dir, f"{cat}_results.csv")
+    
+    if not os.path.exists(input_csv):
+        print(f"Input CSV file not found: {input_csv}")
+        return
+    
+    try:
+        # Read the results CSV
+        df = pd.read_csv(input_csv)
+        
+        # Group by system and model, calculate mean for all numeric columns
+        avg_df = df.groupby(['system', 'model']).mean(numeric_only=True).reset_index()
+        
+        # Round numeric columns to 4 decimal places
+        numeric_cols = avg_df.select_dtypes(include=['float64', 'int64']).columns
+        avg_df[numeric_cols] = avg_df[numeric_cols].round(4)
+        
+        # Save to new CSV
+        output_csv = os.path.join(base_dir, f"{cat}_average.csv")
+        avg_df.to_csv(output_csv, index=False)
+        print(f"Category averages saved to {output_csv}")
+        
+    except Exception as e:
+        print(f"Error processing CSV for category {cat}: {e}")
+
+def aggregate_all_categories_average() -> None:
+    """
+    Aggregate all category average CSVs and calculate global averages.
+    Creates two files in the surveys directory:
+    1. all_categories_results.csv - Combined results from all categories
+    2. global_average.csv - Global averages across all categories
+    """
+    base_dir = "surveys"
+    all_cats_data = []
+    
+    # Get all category directories
+    cats = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    # Collect data from each category
+    for cat in cats:
+        cat_avg_csv = os.path.join(base_dir, cat, f"{cat}_average.csv")
+        if os.path.exists(cat_avg_csv):
+            try:
+                df = pd.read_csv(cat_avg_csv)
+                df['category'] = cat  # Add category column
+                all_cats_data.append(df)
+            except Exception as e:
+                print(f"Error reading {cat_avg_csv}: {e}")
+    
+    if not all_cats_data:
+        print("No category average data found")
+        return
+    
+    try:
+        # Combine all category data
+        combined_df = pd.concat(all_cats_data, ignore_index=True)
+        
+        # Save combined results
+        combined_csv = os.path.join(base_dir, "all_categories_results.csv")
+        combined_df.to_csv(combined_csv, index=False)
+        print(f"Combined results saved to {combined_csv}")
+        
+        # Calculate global averages
+        avg_df = combined_df.groupby(['system', 'model']).mean(numeric_only=True).reset_index()
+        
+        # Round numeric columns to 4 decimal places
+        numeric_cols = avg_df.select_dtypes(include=['float64', 'int64']).columns
+        avg_df[numeric_cols] = avg_df[numeric_cols].round(4)
+        
+        # Save global averages
+        global_avg_csv = os.path.join(base_dir, "global_average.csv")
+        avg_df.to_csv(global_avg_csv, index=False)
+        print(f"Global averages saved to {global_avg_csv}")
+        
+    except Exception as e:
+        print(f"Error processing global averages: {e}")
+
 if __name__ == "__main__":
     # 测试代码
     # md_path = "surveys\cs\Optimization Techniques for Transformer Inference\pdfs/2307.07982.md"  # 替换为实际的文件路径
@@ -1561,5 +1746,8 @@ if __name__ == "__main__":
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
     # print(evaluate_content_informativeness("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
     # print(evaluate_content_llm_simultaneous("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
-    calculate_all_cats_average_scores()
+    # calculate_all_cats_average_scores()
+    aggregate_results_to_csv("cs")
+    calculate_category_average_from_csv("cs")
+    aggregate_all_categories_average()
 
