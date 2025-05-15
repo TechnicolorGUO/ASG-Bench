@@ -8,7 +8,7 @@ import threading
 import time
 import dotenv
 import pandas as pd
-from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA, CONTENT_DOMAIN_CRITERIA
+from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA, CONTENT_DOMAIN_CRITERIA, COVERAGE_DOMAIN_PROMPT, STRUCTURE_DOMAIN_PROMPT, RELEVANCE_DOMAIN_PROMPT, LANGUAGE_DOMAIN_PROMPT, CRITICALNESS_DOMAIN_PROMPT
 from reference import extract_refs, split_markdown_content_and_refs
 from utils import build_outline_tree_from_levels, count_md_features, count_sentences, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
 import logging
@@ -355,17 +355,22 @@ def evaluate_content_llm(md_path: str, criteria_type: str = "general") -> dict:
         path_parts = md_path.split(os.sep)
         if len(path_parts) > 1:
             domain = path_parts[1]  # Get domain from path
-            if domain in CONTENT_DOMAIN_CRITERIA:
-                domain_criteria = CONTENT_DOMAIN_CRITERIA[domain]
-            else:
-                domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+            # Use domain-specific prompts for each criterion
+            domain_prompts = {
+                "Coverage": COVERAGE_DOMAIN_PROMPT,
+                "Structure": STRUCTURE_DOMAIN_PROMPT,
+                "Relevance": RELEVANCE_DOMAIN_PROMPT,
+                "Language": LANGUAGE_DOMAIN_PROMPT,
+                "Criticalness": CRITICALNESS_DOMAIN_PROMPT
+            }
         else:
-            domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+            # Fallback to general criteria if domain not found
+            domain_prompts = {name: CRITERIA[name] for name in content_criteria}
     else:
-        domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+        domain_prompts = {name: CRITERIA[name] for name in content_criteria}
 
     for criteria_name in content_criteria:
-        criterion = domain_criteria[criteria_name]
+        criterion = domain_prompts[criteria_name]
         prompt = fill_single_criterion_prompt(
             prompt_template=CONTENT_EVALUATION_PROMPT,
             content=content_str,
@@ -428,14 +433,19 @@ def evaluate_content_llm_simultaneous(md_path: str, criteria_type: str = "genera
         path_parts = md_path.split(os.sep)
         if len(path_parts) > 1:
             domain = path_parts[1]  # Get domain from path
-            if domain in CONTENT_DOMAIN_CRITERIA:
-                domain_criteria = CONTENT_DOMAIN_CRITERIA[domain]
-            else:
-                domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+            # Use domain-specific prompts for each criterion
+            domain_prompts = {
+                "Coverage": COVERAGE_DOMAIN_PROMPT,
+                "Structure": STRUCTURE_DOMAIN_PROMPT,
+                "Relevance": RELEVANCE_DOMAIN_PROMPT,
+                "Language": LANGUAGE_DOMAIN_PROMPT,
+                "Criticalness": CRITICALNESS_DOMAIN_PROMPT
+            }
         else:
-            domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+            # Fallback to general criteria if domain not found
+            domain_prompts = {name: CRITERIA[name] for name in content_criteria}
     else:
-        domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+        domain_prompts = {name: CRITERIA[name] for name in content_criteria}
     
     # Prepare prompt parameters for all criteria
     prompt_params = {
@@ -445,7 +455,7 @@ def evaluate_content_llm_simultaneous(md_path: str, criteria_type: str = "genera
     
     # Add all criteria descriptions and scores to prompt parameters
     for criteria_name in content_criteria:
-        criterion = domain_criteria[criteria_name]
+        criterion = domain_prompts[criteria_name]
         prompt_params[f"{criteria_name.lower()}_description"] = criterion["description"]
         for i in range(1, 6):
             prompt_params[f"{criteria_name.lower()}_score_{i}"] = criterion[f"score {i}"]
