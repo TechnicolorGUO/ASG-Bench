@@ -2370,6 +2370,10 @@ def convert_to_latex() -> None:
                     # Format the line
                     values = []
                     for col in df.columns[2:]:  # Skip system and model columns
+                        # Skip the category column as we're using it for the row label
+                        if col == 'category':
+                            continue
+                            
                         val = row[col]
                         if pd.isna(val) or val == "":
                             values.append("")
