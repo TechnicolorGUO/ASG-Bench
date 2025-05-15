@@ -8,7 +8,7 @@ import threading
 import time
 import dotenv
 import pandas as pd
-from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA
+from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA, CONTENT_DOMAIN_CRITERIA
 from reference import extract_refs, split_markdown_content_and_refs
 from utils import build_outline_tree_from_levels, count_md_features, count_sentences, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
 import logging
@@ -322,12 +322,13 @@ def evaluate_outline(
 
 # ------------- Content Evaluation Functions ------------
 
-def evaluate_content_llm(md_path: str) -> dict:
+def evaluate_content_llm(md_path: str, criteria_type: str = "general") -> dict:
     """
     Evaluate content using LLM-based criteria.
     
     Args:
         md_path (str): Path to the markdown file
+        criteria_type (str, optional): Type of criteria to use ("general" or "domain"). Defaults to "general".
         
     Returns:
         dict: Dictionary containing evaluation scores for each criterion
@@ -340,14 +341,31 @@ def evaluate_content_llm(md_path: str) -> dict:
             content_str = f.read()
     except Exception as e:
         for criteria_name in content_criteria:
-            results[criteria_name] = 0
+            if criteria_type == "domain":
+                results[f"{criteria_name}_domain"] = 0
+            else:
+                results[criteria_name] = 0
         print("All content criteria scores:", results)
         return results
 
     topic = extract_topic_from_path(md_path)
 
+    if criteria_type == "domain":
+        # Extract domain from path (assuming format: surveys/domain/topic/...)
+        path_parts = md_path.split(os.sep)
+        if len(path_parts) > 1:
+            domain = path_parts[1]  # Get domain from path
+            if domain in CONTENT_DOMAIN_CRITERIA:
+                domain_criteria = CONTENT_DOMAIN_CRITERIA[domain]
+            else:
+                domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+        else:
+            domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+    else:
+        domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+
     for criteria_name in content_criteria:
-        criterion = CRITERIA[criteria_name]
+        criterion = domain_criteria[criteria_name]
         prompt = fill_single_criterion_prompt(
             prompt_template=CONTENT_EVALUATION_PROMPT,
             content=content_str,
@@ -359,20 +377,30 @@ def evaluate_content_llm(md_path: str) -> dict:
         try:
             score_dict = judge.judge(prompt)
             if not (isinstance(score_dict, dict) and criteria_name in score_dict):
-                results[criteria_name] = 0
+                if criteria_type == "domain":
+                    results[f"{criteria_name}_domain"] = 0
+                else:
+                    results[criteria_name] = 0
             else:
-                results.update(score_dict)
+                if criteria_type == "domain":
+                    results[f"{criteria_name}_domain"] = score_dict[criteria_name]
+                else:
+                    results.update(score_dict)
         except Exception as e:
-            results[criteria_name] = 0
+            if criteria_type == "domain":
+                results[f"{criteria_name}_domain"] = 0
+            else:
+                results[criteria_name] = 0
 
     return results
 
-def evaluate_content_llm_simultaneous(md_path: str) -> dict:
+def evaluate_content_llm_simultaneous(md_path: str, criteria_type: str = "general") -> dict:
     """
     Evaluate content using LLM-based criteria simultaneously for all criteria.
     
     Args:
         md_path (str): Path to the markdown file
+        criteria_type (str, optional): Type of criteria to use ("general" or "domain"). Defaults to "general".
         
     Returns:
         dict: Dictionary containing evaluation scores for all criteria
@@ -385,11 +413,29 @@ def evaluate_content_llm_simultaneous(md_path: str) -> dict:
             content_str = f.read()
     except Exception as e:
         for criteria_name in content_criteria:
-            results[criteria_name] = 0
+            if criteria_type == "domain":
+                results[f"{criteria_name}_domain"] = 0
+            else:
+                results[criteria_name] = 0
         print("All content criteria scores:", results)
         return results
 
     topic = extract_topic_from_path(md_path)
+    
+    # Get domain-specific criteria if needed
+    if criteria_type == "domain":
+        # Extract domain from path (assuming format: surveys/domain/topic/...)
+        path_parts = md_path.split(os.sep)
+        if len(path_parts) > 1:
+            domain = path_parts[1]  # Get domain from path
+            if domain in CONTENT_DOMAIN_CRITERIA:
+                domain_criteria = CONTENT_DOMAIN_CRITERIA[domain]
+            else:
+                domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+        else:
+            domain_criteria = {name: CRITERIA[name] for name in content_criteria}
+    else:
+        domain_criteria = {name: CRITERIA[name] for name in content_criteria}
     
     # Prepare prompt parameters for all criteria
     prompt_params = {
@@ -399,7 +445,7 @@ def evaluate_content_llm_simultaneous(md_path: str) -> dict:
     
     # Add all criteria descriptions and scores to prompt parameters
     for criteria_name in content_criteria:
-        criterion = CRITERIA[criteria_name]
+        criterion = domain_criteria[criteria_name]
         prompt_params[f"{criteria_name.lower()}_description"] = criterion["description"]
         for i in range(1, 6):
             prompt_params[f"{criteria_name.lower()}_score_{i}"] = criterion[f"score {i}"]
@@ -415,16 +461,28 @@ def evaluate_content_llm_simultaneous(md_path: str) -> dict:
         if isinstance(score_dict, dict):
             for criteria_name in content_criteria:
                 if criteria_name in score_dict:
-                    results[criteria_name] = score_dict[criteria_name]
+                    if criteria_type == "domain":
+                        results[f"{criteria_name}_domain"] = score_dict[criteria_name]
+                    else:
+                        results[criteria_name] = score_dict[criteria_name]
                 else:
-                    results[criteria_name] = 0
+                    if criteria_type == "domain":
+                        results[f"{criteria_name}_domain"] = 0
+                    else:
+                        results[criteria_name] = 0
         else:
             for criteria_name in content_criteria:
-                results[criteria_name] = 0
+                if criteria_type == "domain":
+                    results[f"{criteria_name}_domain"] = 0
+                else:
+                    results[criteria_name] = 0
     except Exception as e:
         print(f"Error in simultaneous evaluation: {e}")
         for criteria_name in content_criteria:
-            results[criteria_name] = 0
+            if criteria_type == "domain":
+                results[f"{criteria_name}_domain"] = 0
+            else:
+                results[criteria_name] = 0
 
     return results
 
@@ -626,7 +684,8 @@ def evaluate_content(
     md_path: str,
     do_llm: bool = True,
     do_info: bool = True,
-    do_faithfulness: bool = True
+    do_faithfulness: bool = True,
+    criteria_type: str = "general"
 ) -> dict:
     """
     Evaluate content using multiple criteria.
@@ -636,6 +695,7 @@ def evaluate_content(
         do_llm (bool, optional): Whether to perform LLM evaluation. Defaults to True.
         do_info (bool, optional): Whether to evaluate informativeness. Defaults to True.
         do_faithfulness (bool, optional): Whether to evaluate faithfulness. Defaults to True.
+        criteria_type (str, optional): Type of criteria to use ("general" or "domain"). Defaults to "general".
         
     Returns:
         dict: Dictionary containing all evaluation results
@@ -653,11 +713,14 @@ def evaluate_content(
     if do_llm:
         try:
             # Use the new simultaneous evaluation function
-            results.update(evaluate_content_llm_simultaneous(md_path))
+            results.update(evaluate_content_llm_simultaneous(md_path, criteria_type))
         except Exception as e:
             print("Error in evaluating content:", e)
             for criteria_name in content_criteria:
-                results[criteria_name] = 0
+                if criteria_type == "domain":
+                    results[f"{criteria_name}_domain"] = 0
+                else:
+                    results[criteria_name] = 0
     else:
         print("Skip evaluate_content_llm.")
 
@@ -968,12 +1031,14 @@ def evaluate(
     elif criteria_type == "domain":
         outline_keys = ["Outline_domain"]
         content_keys = [
+            "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain", "Criticalness_domain"
         ]
         reference_keys = [
             "Reference_domain"
         ]
     else:
         raise ValueError(f"Invalid criteria type: {criteria_type}")
+
     # Load existing results if available
     if os.path.exists(results_path):
         try:
@@ -1000,7 +1065,7 @@ def evaluate(
         print("Evaluating content...")
         if not all(k in results for k in content_keys):
             try:
-                results.update(evaluate_content(md_path))
+                results.update(evaluate_content(md_path, criteria_type=criteria_type))
             except Exception as e:
                 print("Error in evaluating content:", e)
         else:
@@ -1652,6 +1717,7 @@ def supplement_missing_scores(cat: str = None, model: str = None, system: str = 
     
     # Define content metrics
     content_metrics = ["Coverage", "Structure", "Relevance", "Language", "Criticalness"]
+    content_metrics_domain = [f"{metric}_domain" for metric in content_metrics]
     
     # Get categories to process
     base_dir = "surveys"
@@ -1701,8 +1767,9 @@ def supplement_missing_scores(cat: str = None, model: str = None, system: str = 
                         # Check each metric group
                         for metric_group, eval_func in metric_functions.items():
                             if metric_group == "Content":
-                                # Check if any content metric is missing
-                                if any(results.get(metric, 0) == 0 for metric in content_metrics):
+                                # Check if any content metric is missing (both general and domain-specific)
+                                if any(results.get(metric, 0) == 0 for metric in content_metrics) or \
+                                   any(results.get(metric, 0) == 0 for metric in content_metrics_domain):
                                     print(f"Found missing content scores in {current_cat}/{topic}/{current_system}/{current_model}")
                                     
                                     # Find the markdown file
@@ -1715,13 +1782,24 @@ def supplement_missing_scores(cat: str = None, model: str = None, system: str = 
                                     
                                     # Re-evaluate all content metrics at once
                                     try:
-                                        new_scores = eval_func(md_path)
+                                        # Evaluate general metrics
+                                        new_scores = eval_func(md_path, criteria_type="general")
                                         if isinstance(new_scores, dict):
                                             for metric in content_metrics:
                                                 if metric in new_scores:
                                                     results[metric] = new_scores[metric]
                                                     needs_update = True
                                                     print(f"Updated {metric} score to {new_scores[metric]}")
+                                        
+                                        # Evaluate domain-specific metrics
+                                        new_scores = eval_func(md_path, criteria_type="domain")
+                                        if isinstance(new_scores, dict):
+                                            for metric in content_metrics:
+                                                domain_metric = f"{metric}_domain"
+                                                if domain_metric in new_scores:
+                                                    results[domain_metric] = new_scores[domain_metric]
+                                                    needs_update = True
+                                                    print(f"Updated {domain_metric} score to {new_scores[domain_metric]}")
                                     except Exception as e:
                                         print(f"Error evaluating content metrics for {current_cat}/{topic}/{current_system}/{current_model}: {e}")
                             elif metric_group in ["Outline_coverage", "Outline_structure"]:
