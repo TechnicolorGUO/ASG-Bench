@@ -8,7 +8,7 @@ import threading
 import time
 import dotenv
 import pandas as pd
-from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA, COVERAGE_DOMAIN_CRITERIA, STRUCTURE_DOMAIN_PCRITERIA, RELEVANCE_DOMAIN_CRITERIA, LANGUAGE_DOMAIN_CRITERIA, CRITICALNESS_DOMAIN_CRITERIA
+from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA, COVERAGE_DOMAIN_CRITERIA, STRUCTURE_DOMAIN_CRITERIA, RELEVANCE_DOMAIN_CRITERIA, LANGUAGE_DOMAIN_CRITERIA, CRITICALNESS_DOMAIN_CRITERIA
 from reference import extract_refs, split_markdown_content_and_refs
 from utils import build_outline_tree_from_levels, count_md_features, count_sentences, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
 import logging
@@ -360,11 +360,11 @@ def evaluate_content_llm(md_path: str, criteria_type: str = "general") -> dict:
             domain = path_parts[1]  # Get domain from path
             # Use domain-specific criteria for each criterion
             domain_criteria = {
-                "Coverage": COVERAGE_DOMAIN_CRITERIA,
-                "Structure": STRUCTURE_DOMAIN_PCRITERIA,
-                "Relevance": RELEVANCE_DOMAIN_CRITERIA,
-                "Language": LANGUAGE_DOMAIN_CRITERIA,
-                "Criticalness": CRITICALNESS_DOMAIN_CRITERIA
+                "Coverage": COVERAGE_DOMAIN_CRITERIA[domain],
+                "Structure": STRUCTURE_DOMAIN_CRITERIA[domain],
+                "Relevance": RELEVANCE_DOMAIN_CRITERIA[domain],
+                "Language": LANGUAGE_DOMAIN_CRITERIA[domain],
+                "Criticalness": CRITICALNESS_DOMAIN_CRITERIA[domain]
             }
         else:
             # Fallback to general criteria if domain not found
@@ -438,11 +438,11 @@ def evaluate_content_llm_simultaneous(md_path: str, criteria_type: str = "genera
             domain = path_parts[1]  # Get domain from path
             # Use domain-specific criteria for each criterion
             domain_criteria = {
-                "Coverage": COVERAGE_DOMAIN_CRITERIA,
-                "Structure": STRUCTURE_DOMAIN_PCRITERIA,
-                "Relevance": RELEVANCE_DOMAIN_CRITERIA,
-                "Language": LANGUAGE_DOMAIN_CRITERIA,
-                "Criticalness": CRITICALNESS_DOMAIN_CRITERIA
+                "Coverage": COVERAGE_DOMAIN_CRITERIA[domain],
+                "Structure": STRUCTURE_DOMAIN_CRITERIA[domain],
+                "Relevance": RELEVANCE_DOMAIN_CRITERIA[domain],
+                "Language": LANGUAGE_DOMAIN_CRITERIA[domain],
+                "Criticalness": CRITICALNESS_DOMAIN_CRITERIA[domain]
             }
         else:
             # Fallback to general criteria if domain not found
@@ -2007,7 +2007,7 @@ def supplement_domain_specific_scores(cat: str = None, model: str = None, system
     # Define content metrics and their domain-specific criteria
     content_metrics = {
         "Coverage": COVERAGE_DOMAIN_CRITERIA,
-        "Structure": STRUCTURE_DOMAIN_PCRITERIA,
+        "Structure": STRUCTURE_DOMAIN_CRITERIA,
         "Relevance": RELEVANCE_DOMAIN_CRITERIA,
         "Language": LANGUAGE_DOMAIN_CRITERIA,
         "Criticalness": CRITICALNESS_DOMAIN_CRITERIA
