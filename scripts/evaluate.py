@@ -2473,9 +2473,9 @@ def convert_to_latex() -> None:
             for system in sorted(df['system'].unique()):
                 system_df = df[df['system'] == system]
                 
-                # Add system header
+                # Add system header and hline if not first system
                 if current_system is not None:
-                    latex_lines.append("")  # Add empty line between systems
+                    latex_lines.append("\\hline")  # Add hline between systems
                 latex_lines.append(f"\\textbf{{{system}}}")
                 current_system = system
                 
@@ -2507,6 +2507,31 @@ def convert_to_latex() -> None:
                     # Create the line
                     line = f"& \\textit{{{category}}} & {' & '.join(values)}\\\\"
                     latex_lines.append(line)
+                
+                # Add Area-aware ASG-Bench row for this system
+                avg_values = []
+                for col in df.columns[2:]:  # Skip system and model columns
+                    if col == 'category':
+                        continue
+                    
+                    # Calculate average for numeric columns
+                    if col not in non_numeric_columns:
+                        # Convert to float, ignoring empty strings and NaN
+                        valid_values = [float(val) for val in system_df[col] if val != "" and not pd.isna(val)]
+                        if valid_values:
+                            avg = sum(valid_values) / len(valid_values)
+                            if col in percentage_columns:
+                                avg_values.append(f"{avg:.2f}\\%")
+                            else:
+                                avg_values.append(f"{avg:.2f}")
+                        else:
+                            avg_values.append("")
+                    else:
+                        avg_values.append("")
+                
+                # Add the Area-aware ASG-Bench line
+                line = f"& Area-aware ASG-Bench & {' & '.join(avg_values)}\\\\"
+                latex_lines.append(line)
             
             # Save to file
             output_path = os.path.join(base_dir, "category_average.tex")
