@@ -2004,14 +2004,8 @@ def supplement_domain_specific_scores(cat: str = None, model: str = None, system
         "Content": evaluate_content_llm_simultaneous,  # Added content evaluation
     }
     
-    # Define content metrics and their domain-specific criteria
-    content_metrics = {
-        "Coverage": COVERAGE_DOMAIN_CRITERIA,
-        "Structure": STRUCTURE_DOMAIN_CRITERIA,
-        "Relevance": RELEVANCE_DOMAIN_CRITERIA,
-        "Language": LANGUAGE_DOMAIN_CRITERIA,
-        "Criticalness": CRITICALNESS_DOMAIN_CRITERIA
-    }
+    # Define content metrics
+    content_metrics = ["Coverage", "Structure", "Relevance", "Language", "Criticalness"]
     
     # Get categories to process
     base_dir = "surveys"
@@ -2062,28 +2056,31 @@ def supplement_domain_specific_scores(cat: str = None, model: str = None, system
                         for metric_group, eval_func in metric_functions.items():
                             if metric_group == "Content":
                                 # Check if any content metric is missing
-                                for metric_name in content_metrics:
-                                    domain_key = f"{metric_name}_domain"
-                                    if domain_key in results and results[domain_key] == 0:
-                                        print(f"Found missing domain-specific score for {domain_key} in {current_cat}/{topic}/{current_system}/{current_model}")
+                                missing_metrics = [f"{metric}_domain" for metric in content_metrics 
+                                                 if f"{metric}_domain" in results and results[f"{metric}_domain"] == 0]
+                                if missing_metrics:
+                                    print(f"Found missing domain-specific scores for {', '.join(missing_metrics)} in {current_cat}/{topic}/{current_system}/{current_model}")
+                                    
+                                    # Find the markdown file
+                                    md_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".md")]
+                                    if not md_files:
+                                        print(f"No markdown file found in {sys_path}")
+                                        continue
                                         
-                                        # Find the markdown file
-                                        md_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".md")]
-                                        if not md_files:
-                                            print(f"No markdown file found in {sys_path}")
-                                            continue
-                                            
-                                        md_path = os.path.join(sys_path, md_files[0])
-                                        
-                                        # Re-evaluate the metric with domain-specific criteria
-                                        try:
-                                            new_scores = eval_func(md_path, criteria_type="domain")
-                                            if isinstance(new_scores, dict) and domain_key in new_scores:
-                                                results[domain_key] = new_scores[domain_key]
-                                                needs_update = True
-                                                print(f"Updated {domain_key} score to {new_scores[domain_key]}")
-                                        except Exception as e:
-                                            print(f"Error evaluating {domain_key} for {current_cat}/{topic}/{current_system}/{current_model}: {e}")
+                                    md_path = os.path.join(sys_path, md_files[0])
+                                    
+                                    # Re-evaluate all content metrics at once
+                                    try:
+                                        new_scores = eval_func(md_path, criteria_type="domain")
+                                        if isinstance(new_scores, dict):
+                                            for metric in content_metrics:
+                                                domain_key = f"{metric}_domain"
+                                                if domain_key in new_scores:
+                                                    results[domain_key] = new_scores[domain_key]
+                                                    needs_update = True
+                                                    print(f"Updated {domain_key} score to {new_scores[domain_key]}")
+                                    except Exception as e:
+                                        print(f"Error evaluating content metrics for {current_cat}/{topic}/{current_system}/{current_model}: {e}")
                             else:
                                 domain_key = f"{metric_group}_domain"
                                 if domain_key in results and results[domain_key] == 0:
