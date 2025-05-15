@@ -8,7 +8,7 @@ import threading
 import time
 import dotenv
 import pandas as pd
-from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT
+from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA
 from reference import extract_refs, split_markdown_content_and_refs
 from utils import build_outline_tree_from_levels, count_md_features, count_sentences, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
 import logging
@@ -55,12 +55,13 @@ judge = Judge()
 
 # ------------- Outline Evaluation Functions ------------
 
-def evaluate_outline_llm(outline_json_path: str) -> dict:
+def evaluate_outline_llm(outline_json_path: str, criteria_type: str = "general") -> dict:
     """
     Evaluate the outline using LLM-based criteria.
     
     Args:
         outline_json_path (str): Path to the outline JSON file
+        criteria_type (str, optional): Type of criteria to use ("general" or "domain"). Defaults to "general".
         
     Returns:
         dict: Dictionary containing evaluation scores
@@ -79,7 +80,20 @@ def evaluate_outline_llm(outline_json_path: str) -> dict:
         topic = extract_topic_from_path(outline_json_path)
 
         # 4. Build prompt and get score
-        criterion = CRITERIA[criteria_name]
+        if criteria_type == "domain":
+            # Extract domain from path (assuming format: surveys/domain/topic/...)
+            path_parts = outline_json_path.split(os.sep)
+            if len(path_parts) > 1:
+                domain = path_parts[1]  # Get domain from path
+                if domain in OUTLINE_DOMAIN_CRITERIA:
+                    criterion = OUTLINE_DOMAIN_CRITERIA[domain]
+                else:
+                    criterion = CRITERIA[criteria_name]
+            else:
+                criterion = CRITERIA[criteria_name]
+        else:
+            criterion = CRITERIA[criteria_name]
+
         prompt = fill_single_criterion_prompt(
             prompt_template=OUTLINE_EVALUATION_PROMPT,
             content=outline_str,
@@ -95,6 +109,16 @@ def evaluate_outline_llm(outline_json_path: str) -> dict:
             results.update(score_dict)
     except Exception as e:
         results[criteria_name] = 0
+
+    # Add domain suffix to key if using domain-specific criteria
+    if criteria_type == "domain":
+        new_results = {}
+        for key, value in results.items():
+            if key == "Outline":
+                new_results["Outline_domain"] = value
+            else:
+                new_results[key] = value
+        return new_results
     return results
 
 def evaluate_outline_coverage(
@@ -216,7 +240,8 @@ def evaluate_outline(
     md_path: str,
     do_llm: bool = True,
     do_coverage: bool = True,
-    do_structure: bool = True
+    do_structure: bool = True,
+    criteria_type: str = "general"
 ) -> dict:
     """
     Evaluate the outline of a markdown file.
@@ -226,6 +251,7 @@ def evaluate_outline(
         do_llm (bool, optional): Whether to perform LLM evaluation. Defaults to True.
         do_coverage (bool, optional): Whether to evaluate coverage. Defaults to True.
         do_structure (bool, optional): Whether to evaluate structure. Defaults to True.
+        criteria_type (str, optional): Type of criteria to use ("general" or "domain"). Defaults to "general".
         
     Returns:
         dict: Dictionary containing evaluation results
@@ -248,11 +274,15 @@ def evaluate_outline(
     # 2. LLM evaluation
     if do_llm:
         try:
-            outline_results = evaluate_outline_llm(outline_raw_json_path)
+            outline_results = evaluate_outline_llm(outline_raw_json_path, criteria_type)
             results.update(outline_results)
         except Exception as e:
             print("Error in evaluating outline llm:", e)
-            results["Outline"] = 0
+            if criteria_type == "domain":
+                results["Outline_domain"] = 0
+                return results
+            else:
+                results["Outline"] = 0
     else:
         print("Skip evaluate_outline_llm.")
 
@@ -663,12 +693,13 @@ def evaluate_content(
 
 # ------------- Reference Evaluation Functions -------------
 
-def evaluate_reference_llm(md_path: str) -> dict:
+def evaluate_reference_llm(md_path: str, criteria_type: str = "general") -> dict:
     """
     Evaluate references using LLM-based criteria.
     
     Args:
         md_path (str): Path to the markdown file
+        criteria_type (str, optional): Type of criteria to use ("general" or "domain"). Defaults to "general".
         
     Returns:
         dict: Dictionary containing reference evaluation scores
@@ -683,7 +714,21 @@ def evaluate_reference_llm(md_path: str) -> dict:
             return results
 
         topic = extract_topic_from_path(md_path)
-        criterion = CRITERIA[criteria_name]
+        
+        if criteria_type == "domain":
+            # Extract domain from path (assuming format: surveys/domain/topic/...)
+            path_parts = md_path.split(os.sep)
+            if len(path_parts) > 1:
+                domain = path_parts[1]  # Get domain from path
+                if domain in REFERENCE_DOMAIN_CRITERIA:
+                    criterion = REFERENCE_DOMAIN_CRITERIA[domain]
+                else:
+                    criterion = CRITERIA[criteria_name]
+            else:
+                criterion = CRITERIA[criteria_name]
+        else:
+            criterion = CRITERIA[criteria_name]
+
         references_str = "\n".join(references)
         prompt = fill_single_criterion_prompt(
             prompt_template=REFERENCE_EVALUATION_PROMPT,
@@ -705,6 +750,16 @@ def evaluate_reference_llm(md_path: str) -> dict:
     except Exception:
         print("Error in extracting references.")
         results[criteria_name] = 0
+
+    # Add domain suffix to key if using domain-specific criteria
+    if criteria_type == "domain":
+        new_results = {}
+        for key, value in results.items():
+            if key == "Reference":
+                new_results["Reference_domain"] = value
+            else:
+                new_results[key] = value
+        return new_results
     return results
 
 def evaluate_reference_density(md_path: str) -> dict:
@@ -803,7 +858,8 @@ def evaluate_reference(
     md_path: str,
     do_llm: bool = True,
     do_density: bool = True,
-    do_quality: bool = True
+    do_quality: bool = True,
+    criteria_type: str = "general"
 ) -> dict:
     """
     Evaluate references using multiple criteria.
@@ -813,6 +869,7 @@ def evaluate_reference(
         do_llm (bool, optional): Whether to perform LLM evaluation. Defaults to True.
         do_density (bool, optional): Whether to evaluate density. Defaults to True.
         do_quality (bool, optional): Whether to evaluate quality. Defaults to True.
+        criteria_type (str, optional): Type of criteria to use ("general" or "domain"). Defaults to "general".
         
     Returns:
         dict: Dictionary containing all reference evaluation results
@@ -827,10 +884,14 @@ def evaluate_reference(
     # 1. LLM evaluation
     if do_llm:
         try:
-            results.update(evaluate_reference_llm(md_path))
+            results.update(evaluate_reference_llm(md_path, criteria_type))
         except Exception as e:
             print("Error in evaluating reference:", e)
-            results["Reference"] = 0
+            if criteria_type == "domain":
+                results["Reference_domain"] = 0
+                return results
+            else:
+                results["Reference"] = 0
     else:
         print("Skip evaluate_reference_llm.")
 
@@ -869,7 +930,8 @@ def evaluate(
     model: str = "default",
     do_outline: bool = True, 
     do_content: bool = True, 
-    do_reference: bool = True
+    do_reference: bool = True,
+    criteria_type: str = "general"
 ) -> dict:
     """
     Evaluate a markdown file using specified criteria and model.
@@ -880,6 +942,7 @@ def evaluate(
         do_outline (bool, optional): Whether to evaluate outline. Defaults to True.
         do_content (bool, optional): Whether to evaluate content. Defaults to True.
         do_reference (bool, optional): Whether to evaluate references. Defaults to True.
+        criteria_type (str, optional): Type of criteria to use ("general" or "domain"). Defaults to "general".
         
     Returns:
         dict: Dictionary containing all evaluation results
@@ -894,14 +957,23 @@ def evaluate(
     print("Using model:", model)
 
     # Define required keys for each evaluation section
-    outline_keys = ["Outline", "Outline_coverage", "Outline_structure", "Outline_no"]
-    content_keys = [
-        "Coverage", "Structure", "Relevance", "Language", "Criticalness",
-        "Images_density", "Equations_density", "Tables_density", "Total_density", "Citations_density", "Sentence_no",
-        "Claim_density"
-    ]
-    reference_keys = ["Reference", "Reference_density", "Reference_quality", "Reference_no"]
-
+    if criteria_type == "general":
+        outline_keys = ["Outline", "Outline_coverage", "Outline_structure", "Outline_no"]
+        content_keys = [
+            "Coverage", "Structure", "Relevance", "Language", "Criticalness",
+            "Images_density", "Equations_density", "Tables_density", "Total_density", "Citations_density", "Sentence_no",
+            "Claim_density"
+        ]
+        reference_keys = ["Reference", "Reference_density", "Reference_quality", "Reference_no"]
+    elif criteria_type == "domain":
+        outline_keys = ["Outline_domain"]
+        content_keys = [
+        ]
+        reference_keys = [
+            "Reference_domain"
+        ]
+    else:
+        raise ValueError(f"Invalid criteria type: {criteria_type}")
     # Load existing results if available
     if os.path.exists(results_path):
         try:
@@ -915,7 +987,7 @@ def evaluate(
         print("Evaluating outline...")
         if not all(k in results for k in outline_keys):
             try:
-                results.update(evaluate_outline(md_path))
+                results.update(evaluate_outline(md_path, criteria_type=criteria_type))
             except Exception as e:
                 print("Error in evaluating outline:", e)
         else:
@@ -941,7 +1013,7 @@ def evaluate(
         print("Evaluating reference...")
         if not all(k in results for k in reference_keys):
             try:
-                results.update(evaluate_reference(md_path))
+                results.update(evaluate_reference(md_path, criteria_type=criteria_type))
             except Exception as e:
                 print("Error in evaluating reference:", e)
         else:
@@ -968,7 +1040,8 @@ def process_system(
     system: str,
     do_outline: bool,
     do_content: bool,
-    do_reference: bool
+    do_reference: bool,
+    criteria_type: str
 ) -> None:
     """
     Process a single system's evaluation.
@@ -982,13 +1055,15 @@ def process_system(
         do_outline (bool): Whether to evaluate outline
         do_content (bool): Whether to evaluate content
         do_reference (bool): Whether to evaluate references
+        criteria_type (str): Type of criteria to use ("general" or "domain"). Defaults to "general".
     """
     print(f"[{topic}/{system}] Evaluating: {md_path}")
     evaluate(md_path, 
              model=model,
              do_outline=do_outline, 
              do_content=do_content, 
-             do_reference=do_reference)
+             do_reference=do_reference,
+             criteria_type=criteria_type)
 
 def batch_evaluate_by_cat(
     cats: list[str],
@@ -996,7 +1071,8 @@ def batch_evaluate_by_cat(
     do_outline: bool = True,
     do_content: bool = True,
     do_reference: bool = True,
-    num_workers: int = 1
+    num_workers: int = 1,
+    criteria_type: str = "general"
 ) -> None:
     """
     Batch evaluate all markdown files in specified categories.
@@ -1008,6 +1084,7 @@ def batch_evaluate_by_cat(
         do_content (bool, optional): Whether to evaluate content. Defaults to True.
         do_reference (bool, optional): Whether to evaluate references. Defaults to True.
         num_workers (int, optional): Number of worker threads. Defaults to 1.
+        criteria_type (str, optional): Type of criteria to use ("general" or "domain"). Defaults to "general".
     """
     for cat in cats:
         base_dir = os.path.join("surveys", cat)
@@ -1048,7 +1125,7 @@ def batch_evaluate_by_cat(
                 else:
                     md_path = os.path.join(sys_path, md_files[0])
 
-                tasks.append((md_path, model, results_path, topic, system, do_outline, do_content, do_reference))
+                tasks.append((md_path, model, results_path, topic, system, do_outline, do_content, do_reference, criteria_type))
         
         if num_workers == 1:
             # Sequential execution
@@ -1069,9 +1146,10 @@ def batch_evaluate_by_system(
     model: str,
     tasks_json_path: str = "surveys/tasks.json",
     do_outline: bool = True,
-    do_content: bool = False,
+    do_content: bool = True,
     do_reference: bool = True,
-    num_workers: int = 1
+    num_workers: int = 1,
+    criteria_type: str = "general"
 ) -> None:
     """
     Batch evaluate all tasks for specified systems.
@@ -1084,6 +1162,7 @@ def batch_evaluate_by_system(
         do_content (bool, optional): Whether to evaluate content. Defaults to True.
         do_reference (bool, optional): Whether to evaluate references. Defaults to True.
         num_workers (int, optional): Number of worker threads. Defaults to 1.
+        criteria_type (str, optional): Type of criteria to use ("general" or "domain"). Defaults to "general".
     """
     # Read tasks.json
     with open(tasks_json_path, 'r', encoding='utf-8') as f:
@@ -1117,7 +1196,7 @@ def batch_evaluate_by_system(
                         continue
                 else:
                     md_path = os.path.join(sys_path, md_files[0])
-                tasks_to_run.append((md_path, model, results_path, topic, system, do_outline, do_content, do_reference))
+                tasks_to_run.append((md_path, model, results_path, topic, system, do_outline, do_content, do_reference, criteria_type))
     
     if num_workers == 1:
         for args in tasks_to_run:
@@ -1163,6 +1242,7 @@ def calculate_average_score(cat: str, system: str, model: str) -> dict:
         with open(results_path, "r", encoding="utf-8") as f:
             results = json.load(f)
         for key, value in results.items():
+            # Handle both general and domain-specific keys
             if key not in total_results:
                 total_results[key] = 0
             total_results[key] += value
@@ -1418,8 +1498,8 @@ def aggregate_results_to_csv(cat: str) -> None:
     all_results = []
     
     metrics_to_fill = [
-        "Outline", "Outline_coverage", "Outline_structure", "Outline_no",
-        "Reference", "Reference_density", "Reference_quality", "Reference_no",
+        "Outline", "Outline_domain", "Outline_coverage", "Outline_structure", "Outline_no",
+        "Reference", "Reference_domain", "Reference_density", "Reference_quality", "Reference_no",
         "Coverage", "Structure", "Relevance", "Language", "Criticalness",
         "Images_density", "Equations_density", "Tables_density", "Total_density",
         "Citations_density", "Sentence_no", "Claim_density"
@@ -1487,12 +1567,12 @@ def clear_scores(cat: str, system: str, model: str, target: str = "All") -> None
     """
     # Define metric groups
     metric_groups = {
-        "Outline": ["Outline", "Outline_coverage", "Outline_structure", "Outline_no"],
+        "Outline": ["Outline", "Outline_domain", "Outline_coverage", "Outline_structure", "Outline_no"],
         "Content": ["Coverage", "Structure", "Relevance", "Language", "Criticalness",
                    "Images_density", "Equations_density", "Tables_density", 
                    "Total_density", "Citations_density", "Sentence_no",
                    "Claim_density"],
-        "Reference": ["Reference", "Reference_density", "Reference_quality", "Reference_no"]
+        "Reference": ["Reference", "Reference_domain", "Reference_density", "Reference_quality", "Reference_no"]
     }
     
     base_dir = os.path.join("surveys", cat)
@@ -1563,7 +1643,10 @@ def supplement_missing_scores(cat: str = None, model: str = None, system: str = 
     metric_functions = {
         "Outline": evaluate_outline_llm,
         "Reference": evaluate_reference_llm,
-        "Content": evaluate_content_llm  # Changed to handle all content metrics at once
+        "Content": evaluate_content_llm,  # Changed to handle all content metrics at once
+        "Outline_coverage": evaluate_outline_coverage,
+        "Outline_structure": evaluate_outline_structure,
+        "Reference_quality": evaluate_reference_quality
     }
     
     # Define content metrics
@@ -1640,6 +1723,51 @@ def supplement_missing_scores(cat: str = None, model: str = None, system: str = 
                                                     print(f"Updated {metric} score to {new_scores[metric]}")
                                     except Exception as e:
                                         print(f"Error evaluating content metrics for {current_cat}/{topic}/{current_system}/{current_model}: {e}")
+                            elif metric_group in ["Outline_coverage", "Outline_structure"]:
+                                # Handle outline-specific metrics
+                                if metric_group in results and results[metric_group] == 0:
+                                    print(f"Found missing score for {metric_group} in {current_cat}/{topic}/{current_system}/{current_model}")
+                                    
+                                    # Find the outline.json file
+                                    outline_json_path = os.path.join(sys_path, "outline.json")
+                                    if not os.path.exists(outline_json_path):
+                                        print(f"No outline.json found in {sys_path}")
+                                        continue
+                                    
+                                    # Re-evaluate the metric
+                                    try:
+                                        if metric_group == "Outline_coverage":
+                                            new_score = eval_func(outline_json_path)
+                                            results[metric_group] = new_score
+                                        else:  # Outline_structure
+                                            new_score, _ = eval_func(outline_json_path)
+                                            results[metric_group] = new_score
+                                        needs_update = True
+                                        print(f"Updated {metric_group} score to {new_score}")
+                                    except Exception as e:
+                                        print(f"Error evaluating {metric_group} for {current_cat}/{topic}/{current_system}/{current_model}: {e}")
+                            elif metric_group == "Reference_quality":
+                                # Handle reference quality metric
+                                if metric_group in results and results[metric_group] == 0:
+                                    print(f"Found missing score for {metric_group} in {current_cat}/{topic}/{current_system}/{current_model}")
+                                    
+                                    # Find the markdown file
+                                    md_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".md")]
+                                    if not md_files:
+                                        print(f"No markdown file found in {sys_path}")
+                                        continue
+                                        
+                                    md_path = os.path.join(sys_path, md_files[0])
+                                    
+                                    # Re-evaluate the metric
+                                    try:
+                                        new_scores = eval_func(md_path)
+                                        if isinstance(new_scores, dict) and metric_group in new_scores:
+                                            results[metric_group] = new_scores[metric_group]
+                                            needs_update = True
+                                            print(f"Updated {metric_group} score to {new_scores[metric_group]}")
+                                    except Exception as e:
+                                        print(f"Error evaluating {metric_group} for {current_cat}/{topic}/{current_system}/{current_model}: {e}")
                             else:
                                 # Handle other metrics (Outline and Reference)
                                 if metric_group in results and results[metric_group] == 0:
@@ -1723,6 +1851,7 @@ def aggregate_all_categories_average() -> None:
     Creates two files in the surveys directory:
     1. all_categories_results.csv - Combined results from all categories
     2. global_average.csv - Global averages across all categories
+    All numeric values are rounded to 2 decimal places.
     """
     base_dir = "surveys"
     all_cats_data = []
@@ -1736,6 +1865,9 @@ def aggregate_all_categories_average() -> None:
         if os.path.exists(cat_avg_csv):
             try:
                 df = pd.read_csv(cat_avg_csv)
+                # Round all numeric columns to 2 decimal places and ensure 2 decimal places display
+                numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
+                df[numeric_cols] = df[numeric_cols].round(2).applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else "")
                 df['category'] = cat  # Add category column
                 all_cats_data.append(df)
             except Exception as e:
@@ -1757,9 +1889,9 @@ def aggregate_all_categories_average() -> None:
         # Calculate global averages
         avg_df = combined_df.groupby(['system', 'model']).mean(numeric_only=True).reset_index()
         
-        # Round numeric columns to 4 decimal places
+        # Round all numeric columns to 2 decimal places and ensure 2 decimal places display
         numeric_cols = avg_df.select_dtypes(include=['float64', 'int64']).columns
-        avg_df[numeric_cols] = avg_df[numeric_cols].round(4)
+        avg_df[numeric_cols] = avg_df[numeric_cols].round(2).applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else "")
         
         # Save global averages
         global_avg_csv = os.path.join(base_dir, "global_average.csv")
@@ -1768,6 +1900,112 @@ def aggregate_all_categories_average() -> None:
         
     except Exception as e:
         print(f"Error processing global averages: {e}")
+
+def supplement_domain_specific_scores(cat: str = None, model: str = None, system: str = None) -> None:
+    """
+    Check and supplement missing domain-specific scores for specific metrics.
+    If any parameter is None, process all items for that parameter.
+    
+    Args:
+        cat (str, optional): Category name (e.g., "cs"). If None, process all categories.
+        model (str, optional): Model name (e.g., "gpt-4"). If None, process all models.
+        system (str, optional): System name. If None, process all systems.
+    """
+    # Define metrics to check and their corresponding evaluation functions
+    metric_functions = {
+        "Outline": evaluate_outline_llm,
+        "Reference": evaluate_reference_llm,
+    }
+    
+    # Get categories to process
+    base_dir = "surveys"
+    if cat is not None:
+        cats = [cat]
+    else:
+        cats = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    for current_cat in cats:
+        cat_dir = os.path.join(base_dir, current_cat)
+        topics = [d for d in os.listdir(cat_dir) if os.path.isdir(os.path.join(cat_dir, d))]
+        
+        for topic in topics:
+            topic_path = os.path.join(cat_dir, topic)
+            systems = [d for d in os.listdir(topic_path) if os.path.isdir(os.path.join(topic_path, d))]
+            
+            # Filter systems if specified
+            if system is not None:
+                systems = [s for s in systems if s == system]
+                if not systems:
+                    print(f"System {system} not found in {topic}")
+                    continue
+            
+            for current_system in systems:
+                sys_path = os.path.join(topic_path, current_system)
+                
+                # Get all results files
+                if model is not None:
+                    results_files = [f"results_{model}.json"]
+                else:
+                    results_files = [f for f in os.listdir(sys_path) if f.startswith("results_") and f.endswith(".json")]
+                
+                for results_file in results_files:
+                    results_path = os.path.join(sys_path, results_file)
+                    current_model = results_file.replace("results_", "").replace(".json", "")
+                    
+                    if not os.path.exists(results_path):
+                        continue
+                        
+                    try:
+                        # Read current results
+                        with open(results_path, "r", encoding="utf-8") as f:
+                            results = json.load(f)
+                        
+                        needs_update = False
+                        
+                        # Check each metric group
+                        for metric_group, eval_func in metric_functions.items():
+                            domain_key = f"{metric_group}_domain"
+                            
+                            if domain_key in results and results[domain_key] == 0:
+                                print(f"Found missing domain-specific score for {domain_key} in {current_cat}/{topic}/{current_system}/{current_model}")
+                                
+                                # Find the markdown file
+                                md_files = [f for f in os.listdir(sys_path) if f.lower().endswith(".md")]
+                                if not md_files:
+                                    print(f"No markdown file found in {sys_path}")
+                                    continue
+                                    
+                                md_path = os.path.join(sys_path, md_files[0])
+                                
+                                # Re-evaluate the metric with domain-specific criteria
+                                try:
+                                    if metric_group == "Outline":
+                                        # For outline, we need to use the outline.json path
+                                        outline_json_path = os.path.join(sys_path, "outline.json")
+                                        new_scores = eval_func(outline_json_path, criteria_type="domain")
+                                    else:
+                                        new_scores = eval_func(md_path, criteria_type="domain")
+                                    
+                                    # Update results
+                                    if isinstance(new_scores, dict):
+                                        if domain_key in new_scores:
+                                            results[domain_key] = new_scores[domain_key]
+                                            needs_update = True
+                                            print(f"Updated {domain_key} score to {new_scores[domain_key]}")
+                                    else:
+                                        print(f"Unexpected result format for {domain_key}")
+                                        
+                                except Exception as e:
+                                    print(f"Error evaluating {domain_key} for {current_cat}/{topic}/{current_system}/{current_model}: {e}")
+                        
+                        # Save updated results if any changes were made
+                        if needs_update:
+                            with open(results_path, "w", encoding="utf-8") as f:
+                                json.dump(results, f, ensure_ascii=False, indent=4)
+                            print(f"Updated results saved to {results_path}")
+                        
+                    except Exception as e:
+                        print(f"Error processing {results_path}: {e}")
 
 def calculate_all_scores(
     cats: list[str] = None,
@@ -1780,9 +2018,11 @@ def calculate_all_scores(
     This function performs the following steps in sequence:
     1. Calculate average scores for all specified categories/systems/models
     2. Supplement any missing scores
-    3. Aggregate results to CSV files
-    4. Calculate category averages
-    5. Aggregate all categories into global results
+    3. Supplement any missing domain-specific scores
+    4. Aggregate results to CSV files
+    5. Calculate category averages
+    6. Aggregate all categories into global results
+    7. Reorganize results columns
     
     Args:
         cats (list[str], optional): List of categories to process. If None, process all categories.
@@ -1872,9 +2112,31 @@ def calculate_all_scores(
                 supplement_missing_scores(cat, model, system)
             except Exception as e:
                 print(f"Error supplementing scores for {cat}/{system}/{model}: {e}")
+
+    # Step 3: Supplement missing domain-specific scores
+    print("\nStep 3: Supplementing missing domain-specific scores...")
+    if num_workers > 1:
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
+            futures = []
+            for cat, system, model in tasks:
+                print(f"Submitting domain-specific supplement task for {cat}/{system}/{model}")
+                futures.append(executor.submit(supplement_domain_specific_scores, cat, model, system))
+            
+            for future in as_completed(futures):
+                try:
+                    future.result()
+                except Exception as e:
+                    print(f"Error in domain-specific supplement task: {e}")
+    else:
+        for cat, system, model in tasks:
+            print(f"\nProcessing {cat}/{system}/{model}")
+            try:
+                supplement_domain_specific_scores(cat, model, system)
+            except Exception as e:
+                print(f"Error supplementing domain-specific scores for {cat}/{system}/{model}: {e}")
     
-    # Step 3: Aggregate results to CSV
-    print("\nStep 3: Aggregating results to CSV...")
+    # Step 4: Aggregate results to CSV
+    print("\nStep 4: Aggregating results to CSV...")
     if num_workers > 1:
         with ThreadPoolExecutor(max_workers=num_workers) as executor:
             futures = []
@@ -1895,8 +2157,8 @@ def calculate_all_scores(
             except Exception as e:
                 print(f"Error aggregating results for {cat}: {e}")
     
-    # Step 4: Calculate category averages
-    print("\nStep 4: Calculating category averages...")
+    # Step 5: Calculate category averages
+    print("\nStep 5: Calculating category averages...")
     if num_workers > 1:
         with ThreadPoolExecutor(max_workers=num_workers) as executor:
             futures = []
@@ -1917,14 +2179,85 @@ def calculate_all_scores(
             except Exception as e:
                 print(f"Error calculating category average for {cat}: {e}")
     
-    # Step 5: Aggregate all categories
-    print("\nStep 5: Aggregating all categories...")
+    # Step 6: Aggregate all categories
+    print("\nStep 6: Aggregating all categories...")
     try:
         aggregate_all_categories_average()
     except Exception as e:
         print(f"Error aggregating all categories: {e}")
     
+    # Step 7: Reorganize results columns
+    print("\nStep 7: Reorganizing results columns...")
+    try:
+        reorganize_results_columns()
+    except Exception as e:
+        print(f"Error reorganizing results columns: {e}")
+    
     print("\nComprehensive score calculation completed!")
+
+def reorganize_results_columns() -> None:
+    """
+    Reorganize the columns in global_average.csv and all_categories_results.csv
+    according to specified order and save to new files.
+    """
+    base_dir = "surveys"
+    
+    # Define column orders
+    global_columns = [
+        "Outline", "Outline_coverage", "Outline_structure", "Outline_no",
+        "Coverage", "Structure", "Relevance", "Language", "Criticalness",
+        "Images_density", "Equations_density", "Tables_density", "Citations_density",
+        "Claim_density", "Sentence_no",
+        "Reference", "Reference_density", "Reference_quality", "Reference_no"
+    ]
+    
+    category_columns = [
+        "Outline_domain", "Outline_coverage", "Outline_structure", "Outline_no",
+        "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain",
+        "Criticalness_domain", "Images_density", "Equations_density", "Tables_density",
+        "Citations_density", "Claim_density", "Sentence_no",
+        "Reference_domain", "Reference_density", "Reference_quality", "Reference_no"
+    ]
+    
+    # Process global_average.csv
+    global_avg_path = os.path.join(base_dir, "global_average.csv")
+    if os.path.exists(global_avg_path):
+        try:
+            df = pd.read_csv(global_avg_path)
+            # Create new DataFrame with only required columns
+            new_df = pd.DataFrame()
+            for col in global_columns:
+                if col in df.columns:
+                    new_df[col] = df[col]
+                else:
+                    new_df[col] = ""
+            
+            # Save to new file
+            output_path = os.path.join(base_dir, "global_average_reorganized.csv")
+            new_df.to_csv(output_path, index=False)
+            print(f"Reorganized global averages saved to {output_path}")
+        except Exception as e:
+            print(f"Error processing global_average.csv: {e}")
+    
+    # Process all_categories_results.csv
+    all_cats_path = os.path.join(base_dir, "all_categories_results.csv")
+    if os.path.exists(all_cats_path):
+        try:
+            df = pd.read_csv(all_cats_path)
+            # Create new DataFrame with only required columns
+            new_df = pd.DataFrame()
+            for col in category_columns:
+                if col in df.columns:
+                    new_df[col] = df[col]
+                else:
+                    new_df[col] = ""
+            
+            # Save to new file
+            output_path = os.path.join(base_dir, "all_categories_results_reorganized.csv")
+            new_df.to_csv(output_path, index=False)
+            print(f"Reorganized category results saved to {output_path}")
+        except Exception as e:
+            print(f"Error processing all_categories_results.csv: {e}")
 
 if __name__ == "__main__":
     # 测试代码
@@ -1949,12 +2282,16 @@ if __name__ == "__main__":
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
     # surveys\cs\3D Gaussian Splatting Techniques\InteractiveSurvey
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/InteractiveSurvey/survey_3D Gaussian Splatting Techniques.md")
-    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "SurveyForge", "SurveyX","vanilla","vanilla_outline", "pdfs"], "gpt-4o", num_workers=4)
+    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "SurveyForge", "SurveyX","vanilla","vanilla_outline", "pdfs"], "gpt-4o-1", num_workers=4)
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
     # print(evaluate_content_informativeness("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
     # print(evaluate_content_llm_simultaneous("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
     # calculate_all_cats_average_scores()
-    aggregate_results_to_csv("cs")
-    calculate_category_average_from_csv("cs")
-    aggregate_all_categories_average()
+    # aggregate_results_to_csv("cs")
+    # calculate_category_average_from_csv("cs")
+    # aggregate_all_categories_average()
+    # calculate_all_scores(models=["deepseek-r1"])
+    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "pdfs", "SurveyForge", "SurveyX"], "Qwen2.5-72B-Instruct", num_workers=4)
+    calculate_all_scores()
+
 
