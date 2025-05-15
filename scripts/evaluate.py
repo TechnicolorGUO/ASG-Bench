@@ -2023,6 +2023,7 @@ def calculate_all_scores(
     5. Calculate category averages
     6. Aggregate all categories into global results
     7. Reorganize results columns
+    8. Convert to LaTeX format
     
     Args:
         cats (list[str], optional): List of categories to process. If None, process all categories.
@@ -2193,6 +2194,13 @@ def calculate_all_scores(
     except Exception as e:
         print(f"Error reorganizing results columns: {e}")
     
+    # Step 8: Convert to LaTeX format
+    print("\nStep 8: Converting to LaTeX format...")
+    try:
+        convert_to_latex()
+    except Exception as e:
+        print(f"Error converting to LaTeX format: {e}")
+    
     print("\nComprehensive score calculation completed!")
 
 def reorganize_results_columns() -> None:
@@ -2268,6 +2276,105 @@ def reorganize_results_columns() -> None:
             print(f"Reorganized category results saved to {output_path}")
         except Exception as e:
             print(f"Error processing all_categories_results.csv: {e}")
+
+def convert_to_latex() -> None:
+    """
+    Convert reorganized CSV files to LaTeX format.
+    Creates two files:
+    1. global_average.tex - LaTeX format for global averages
+    2. category_average.tex - LaTeX format for category averages
+    """
+    base_dir = "surveys"
+    
+    # Process global average
+    global_avg_path = os.path.join(base_dir, "global_average_reorganized.csv")
+    if os.path.exists(global_avg_path):
+        try:
+            df = pd.read_csv(global_avg_path)
+            latex_lines = []
+            current_system = None
+            
+            for _, row in df.iterrows():
+                system = row['system']
+                model = row['model']
+                
+                # Start new system group if system changes
+                if system != current_system:
+                    if current_system is not None:
+                        latex_lines.append("")  # Add empty line between systems
+                    latex_lines.append(f"\\textbf{{{system}}}")
+                    current_system = system
+                
+                # Format the line
+                values = []
+                for col in df.columns[2:]:  # Skip system and model columns
+                    val = row[col]
+                    if pd.isna(val) or val == "":
+                        values.append("")
+                    else:
+                        # Add % for percentage columns
+                        if any(x in col.lower() for x in ['density', 'coverage', 'quality']):
+                            values.append(f"{float(val):.2f}\\%")
+                        else:
+                            values.append(f"{float(val):.2f}")
+                
+                # Create the line
+                line = f"& \\textit{{{model}}} & {' & '.join(values)}\\\\"
+                latex_lines.append(line)
+            
+            # Save to file
+            output_path = os.path.join(base_dir, "global_average.tex")
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write('\n'.join(latex_lines))
+            print(f"Global average LaTeX saved to {output_path}")
+            
+        except Exception as e:
+            print(f"Error processing global average: {e}")
+    
+    # Process category average
+    category_avg_path = os.path.join(base_dir, "all_categories_results_reorganized.csv")
+    if os.path.exists(category_avg_path):
+        try:
+            df = pd.read_csv(category_avg_path)
+            latex_lines = []
+            current_system = None
+            
+            for _, row in df.iterrows():
+                system = row['system']
+                model = row['model']
+                
+                # Start new system group if system changes
+                if system != current_system:
+                    if current_system is not None:
+                        latex_lines.append("")  # Add empty line between systems
+                    latex_lines.append(f"\\textbf{{{system}}}")
+                    current_system = system
+                
+                # Format the line
+                values = []
+                for col in df.columns[2:]:  # Skip system and model columns
+                    val = row[col]
+                    if pd.isna(val) or val == "":
+                        values.append("")
+                    else:
+                        # Add % for percentage columns
+                        if any(x in col.lower() for x in ['density', 'coverage', 'quality']):
+                            values.append(f"{float(val):.2f}\\%")
+                        else:
+                            values.append(f"{float(val):.2f}")
+                
+                # Create the line
+                line = f"& \\textit{{{model}}} & {' & '.join(values)}\\\\"
+                latex_lines.append(line)
+            
+            # Save to file
+            output_path = os.path.join(base_dir, "category_average.tex")
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write('\n'.join(latex_lines))
+            print(f"Category average LaTeX saved to {output_path}")
+            
+        except Exception as e:
+            print(f"Error processing category average: {e}")
 
 if __name__ == "__main__":
     # 测试代码
