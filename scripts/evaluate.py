@@ -2204,6 +2204,7 @@ def reorganize_results_columns() -> None:
     
     # Define column orders
     global_columns = [
+        "System", "Model",
         "Outline", "Outline_coverage", "Outline_structure", "Outline_no",
         "Coverage", "Structure", "Relevance", "Language", "Criticalness",
         "Images_density", "Equations_density", "Tables_density", "Citations_density",
@@ -2212,6 +2213,7 @@ def reorganize_results_columns() -> None:
     ]
     
     category_columns = [
+        "System", "Model",
         "Outline_domain", "Outline_coverage", "Outline_structure", "Outline_no",
         "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain",
         "Criticalness_domain", "Images_density", "Equations_density", "Tables_density",
