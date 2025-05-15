@@ -1719,7 +1719,7 @@ def supplement_missing_scores(cat: str = None, model: str = None, system: str = 
     metric_functions = {
         "Outline": evaluate_outline_llm,
         "Reference": evaluate_reference_llm,
-        "Content": evaluate_content_llm,  # Changed to handle all content metrics at once
+        "Content": evaluate_content_llm_simultaneous,  # Changed to handle all content metrics at once
         "Outline_coverage": evaluate_outline_coverage,
         "Outline_structure": evaluate_outline_structure,
         "Reference_quality": evaluate_reference_quality
