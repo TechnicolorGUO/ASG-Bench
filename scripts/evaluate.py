@@ -1865,9 +1865,9 @@ def aggregate_all_categories_average() -> None:
         if os.path.exists(cat_avg_csv):
             try:
                 df = pd.read_csv(cat_avg_csv)
-                # Round all numeric columns to 2 decimal places and ensure 2 decimal places display
+                # Round all numeric columns to 2 decimal places
                 numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
-                df[numeric_cols] = df[numeric_cols].round(2).applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else "")
+                df[numeric_cols] = df[numeric_cols].round(2)
                 df['category'] = cat  # Add category column
                 all_cats_data.append(df)
             except Exception as e:
@@ -1889,9 +1889,9 @@ def aggregate_all_categories_average() -> None:
         # Calculate global averages
         avg_df = combined_df.groupby(['system', 'model']).mean(numeric_only=True).reset_index()
         
-        # Round all numeric columns to 2 decimal places and ensure 2 decimal places display
+        # Round all numeric columns to 2 decimal places
         numeric_cols = avg_df.select_dtypes(include=['float64', 'int64']).columns
-        avg_df[numeric_cols] = avg_df[numeric_cols].round(2).applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else "")
+        avg_df[numeric_cols] = avg_df[numeric_cols].round(2)
         
         # Save global averages
         global_avg_csv = os.path.join(base_dir, "global_average.csv")
@@ -2204,7 +2204,7 @@ def reorganize_results_columns() -> None:
     
     # Define column orders
     global_columns = [
-        "System", "Model",
+        "system", "model",
         "Outline", "Outline_coverage", "Outline_structure", "Outline_no",
         "Coverage", "Structure", "Relevance", "Language", "Criticalness",
         "Images_density", "Equations_density", "Tables_density", "Citations_density",
@@ -2213,7 +2213,7 @@ def reorganize_results_columns() -> None:
     ]
     
     category_columns = [
-        "System", "Model",
+        "system", "model",
         "Outline_domain", "Outline_coverage", "Outline_structure", "Outline_no",
         "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain",
         "Criticalness_domain", "Images_density", "Equations_density", "Tables_density",
@@ -2234,6 +2234,10 @@ def reorganize_results_columns() -> None:
                 else:
                     new_df[col] = ""
             
+            # Format numeric columns to 2 decimal places
+            numeric_cols = new_df.select_dtypes(include=['float64', 'int64']).columns
+            new_df[numeric_cols] = new_df[numeric_cols].round(2).applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else "")
+            
             # Save to new file
             output_path = os.path.join(base_dir, "global_average_reorganized.csv")
             new_df.to_csv(output_path, index=False)
@@ -2253,6 +2257,10 @@ def reorganize_results_columns() -> None:
                     new_df[col] = df[col]
                 else:
                     new_df[col] = ""
+            
+            # Format numeric columns to 2 decimal places
+            numeric_cols = new_df.select_dtypes(include=['float64', 'int64']).columns
+            new_df[numeric_cols] = new_df[numeric_cols].round(2).applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else "")
             
             # Save to new file
             output_path = os.path.join(base_dir, "all_categories_results_reorganized.csv")
