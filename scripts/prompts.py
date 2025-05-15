@@ -641,7 +641,7 @@ REFERENCE_DOMAIN_CRITERIA = {
     }
 }
 
-COVERAGE_DOMAIN_PROMPT = {
+COVERAGE_DOMAIN_CRITERIA = {
     "cs": {
         'description': 'Coverage evaluation specific to Computer Science surveys, focusing on technical breadth, depth, and interdisciplinary connections.',
         'score 1': 'Very Limited Coverage\nSurveys only address isolated technical components (e.g., a single algorithm or framework) without contextualizing their role in broader research landscapes.\nMajor subfields (e.g., "efficient inference" vs. "model alignment" in LLMs) are omitted.\nNo discussion of interdisciplinary connections (e.g., AI ethics, hardware-software co-design).\nFails to include recent advancements (past 2-3 years), critical in fast-moving fields like generative AI.',
@@ -708,7 +708,7 @@ COVERAGE_DOMAIN_PROMPT = {
     }
 }
 
-STRUCTURE_DOMAIN_PROMPT = {
+STRUCTURE_DOMAIN_CRITERIA = {
     "cs": {
         'description': 'Structure evaluation specific to Computer Science surveys, focusing on technical organization, methodological frameworks, and computational approaches.',
         'score 1': 'Disjointed Technical Narrative\nLacks fundamental CS survey components (e.g., problem taxonomies, methodology comparison tables, algorithmic analysis)\nPresents technical concepts in isolation without connecting foundational theories to modern applications\nFails to distinguish between computer science subdomains (e.g., conflating machine learning principles with cybersecurity architectures)\nContains redundant technical explanations across sections without progressive complexity',
@@ -775,7 +775,7 @@ STRUCTURE_DOMAIN_PROMPT = {
     }
 }
 
-RELEVANCE_DOMAIN_PROMPT = {
+RELEVANCE_DOMAIN_CRITERIA = {
     "cs": {
         'description': 'Relevance evaluation specific to Computer Science surveys, focusing on technical accuracy, current methodologies, and field-specific applications.',
         'score 1': 'Irrelevant or Obsolete\nThe survey fails to address the core subject area or relies on outdated methodologies, frameworks, or technologies. Key subfields or seminal works are omitted, and the content diverges significantly from the stated scope. Examples include:\n-Surveys on machine learning that ignore foundational algorithms (e.g., transformers, reinforcement learning) in favor of deprecated techniques.\n-Reviews of cybersecurity that lack coverage of zero-day exploits or modern encryption standards.',
@@ -842,7 +842,7 @@ RELEVANCE_DOMAIN_PROMPT = {
     }
 }
 
-LANGUAGE_DOMAIN_PROMPT = {
+LANGUAGE_DOMAIN_CRITERIA = {
     "cs": {
         'description': 'Language evaluation specific to Computer Science surveys, focusing on technical precision, mathematical notation, and scholarly communication.',
         'score 1': 'Non-Academic Technical Communication\nLanguage informality: Contains colloquial expressions ("Let\'s dive into..."), first-person anecdotes, or conversational phrasings incompatible with scholarly discourse.\nTechnical deficiencies: Misuses fundamental CS terminology (e.g., conflating "algorithm" with "heuristic"), contains critical mathematical notation errors, or demonstrates misunderstanding of core concepts.\nStructural issues: Lacks standard survey components (taxonomies, comparative tables, research timelines), with incoherent flow between technical sections\nCitation malpractice: Fails to properly reference seminal works (e.g., omitting Knuth\'s algorithms or Turing Award papers in relevant domains).',
@@ -909,7 +909,7 @@ LANGUAGE_DOMAIN_PROMPT = {
     }
 }
 
-CRITICALNESS_DOMAIN_PROMPT = {
+CRITICALNESS_DOMAIN_CRITERIA = {
     "cs": {
         'description': 'Criticalness evaluation specific to Computer Science surveys, focusing on technical analysis, methodological critique, and future research directions.',
         'score 1': 'Minimal or No Criticalness\nThe survey primarily summarizes existing work without any evaluative commentary.\nDoes not identify methodological limitations, inconsistencies, or gaps in the literature.\nLacks discussion on challenges or unresolved problems in the field.\nNo original insights or novel perspectives are presented.\nFuture research directions, if present, are absent or purely generic (e.g., "more work needed").',
