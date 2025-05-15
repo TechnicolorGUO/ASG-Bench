@@ -1528,7 +1528,8 @@ def aggregate_results_to_csv(cat: str) -> None:
                     entry = {
                         "topic": topic,
                         "system": system,
-                        "model": model
+                        "model": model,
+                        "category": cat  # Add category column
                     }
                     # Add all metrics
                     entry.update(results)
@@ -2221,7 +2222,7 @@ def reorganize_results_columns() -> None:
     ]
     
     category_columns = [
-        "system", "model",
+        "system", "model", "category",
         "Outline_domain", "Outline_coverage", "Outline_structure", "Outline_no",
         "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain",
         "Criticalness_domain", "Images_density", "Equations_density", "Tables_density",
