@@ -2289,7 +2289,7 @@ def convert_to_latex() -> None:
     # Define columns that should have percentage
     percentage_columns = {
         'Images_density', 'Equations_density', 'Tables_density', 
-        'Citations_density', 'Claim_density', 'Reference_density', 
+        'Citations_density', 'Claim_density', 'Reference_density'
     }
     
     # Process global average
@@ -2357,7 +2357,7 @@ def convert_to_latex() -> None:
                 
                 # Process each category for this system
                 for _, row in system_df.iterrows():
-                    category = row['model']  # Using model column for category
+                    category = row['category']  # Using category column instead of model
                     
                     # Format the line
                     values = []
