@@ -2286,6 +2286,12 @@ def convert_to_latex() -> None:
     """
     base_dir = "surveys"
     
+    # Define columns that should have percentage
+    percentage_columns = {
+        'Images_density', 'Equations_density', 'Tables_density', 
+        'Citations_density', 'Claim_density', 'Reference_density', 
+    }
+    
     # Process global average
     global_avg_path = os.path.join(base_dir, "global_average_reorganized.csv")
     if os.path.exists(global_avg_path):
@@ -2312,8 +2318,8 @@ def convert_to_latex() -> None:
                     if pd.isna(val) or val == "":
                         values.append("")
                     else:
-                        # Add % for percentage columns
-                        if any(x in col.lower() for x in ['density', 'coverage', 'quality']):
+                        # Add % only for specific columns
+                        if col in percentage_columns:
                             values.append(f"{float(val):.2f}\\%")
                         else:
                             values.append(f"{float(val):.2f}")
@@ -2339,33 +2345,36 @@ def convert_to_latex() -> None:
             latex_lines = []
             current_system = None
             
-            for _, row in df.iterrows():
-                system = row['system']
-                model = row['model']
+            # Group by system and sort by category
+            for system in sorted(df['system'].unique()):
+                system_df = df[df['system'] == system]
                 
-                # Start new system group if system changes
-                if system != current_system:
-                    if current_system is not None:
-                        latex_lines.append("")  # Add empty line between systems
-                    latex_lines.append(f"\\textbf{{{system}}}")
-                    current_system = system
+                # Add system header
+                if current_system is not None:
+                    latex_lines.append("")  # Add empty line between systems
+                latex_lines.append(f"\\textbf{{{system}}}")
+                current_system = system
                 
-                # Format the line
-                values = []
-                for col in df.columns[2:]:  # Skip system and model columns
-                    val = row[col]
-                    if pd.isna(val) or val == "":
-                        values.append("")
-                    else:
-                        # Add % for percentage columns
-                        if any(x in col.lower() for x in ['density', 'coverage', 'quality']):
-                            values.append(f"{float(val):.2f}\\%")
+                # Process each category for this system
+                for _, row in system_df.iterrows():
+                    category = row['model']  # Using model column for category
+                    
+                    # Format the line
+                    values = []
+                    for col in df.columns[2:]:  # Skip system and model columns
+                        val = row[col]
+                        if pd.isna(val) or val == "":
+                            values.append("")
                         else:
-                            values.append(f"{float(val):.2f}")
-                
-                # Create the line
-                line = f"& \\textit{{{model}}} & {' & '.join(values)}\\\\"
-                latex_lines.append(line)
+                            # Add % only for specific columns
+                            if col in percentage_columns:
+                                values.append(f"{float(val):.2f}\\%")
+                            else:
+                                values.append(f"{float(val):.2f}")
+                    
+                    # Create the line
+                    line = f"& \\textit{{{category}}} & {' & '.join(values)}\\\\"
+                    latex_lines.append(line)
             
             # Save to file
             output_path = os.path.join(base_dir, "category_average.tex")
