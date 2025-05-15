@@ -276,6 +276,8 @@ def evaluate_outline(
         try:
             outline_results = evaluate_outline_llm(outline_raw_json_path, criteria_type)
             results.update(outline_results)
+            if criteria_type == "domain":
+                return results
         except Exception as e:
             print("Error in evaluating outline llm:", e)
             if criteria_type == "domain":
@@ -283,6 +285,7 @@ def evaluate_outline(
                 return results
             else:
                 results["Outline"] = 0
+                return results
     else:
         print("Skip evaluate_outline_llm.")
 
@@ -724,6 +727,8 @@ def evaluate_content(
         try:
             # Use the new simultaneous evaluation function
             results.update(evaluate_content_llm_simultaneous(md_path, criteria_type))
+            if criteria_type == "domain":
+                return results
         except Exception as e:
             print("Error in evaluating content:", e)
             for criteria_name in content_criteria:
@@ -731,6 +736,7 @@ def evaluate_content(
                     results[f"{criteria_name}_domain"] = 0
                 else:
                     results[criteria_name] = 0
+            return results
     else:
         print("Skip evaluate_content_llm.")
 
@@ -958,6 +964,8 @@ def evaluate_reference(
     if do_llm:
         try:
             results.update(evaluate_reference_llm(md_path, criteria_type))
+            if criteria_type == "domain":
+                return results
         except Exception as e:
             print("Error in evaluating reference:", e)
             if criteria_type == "domain":
@@ -965,6 +973,7 @@ def evaluate_reference(
                 return results
             else:
                 results["Reference"] = 0
+                return results
     else:
         print("Skip evaluate_reference_llm.")
 
@@ -1997,11 +2006,11 @@ def supplement_domain_specific_scores(cat: str = None, model: str = None, system
     
     # Define content metrics and their domain-specific criteria
     content_metrics = {
-        "Coverage_domain": COVERAGE_DOMAIN_CRITERIA,
-        "Structure_domain": STRUCTURE_DOMAIN_PCRITERIA,
-        "Relevance_domain": RELEVANCE_DOMAIN_CRITERIA,
-        "Language_domain": LANGUAGE_DOMAIN_CRITERIA,
-        "Criticalness_domain": CRITICALNESS_DOMAIN_CRITERIA
+        "Coverage": COVERAGE_DOMAIN_CRITERIA,
+        "Structure": STRUCTURE_DOMAIN_PCRITERIA,
+        "Relevance": RELEVANCE_DOMAIN_CRITERIA,
+        "Language": LANGUAGE_DOMAIN_CRITERIA,
+        "Criticalness": CRITICALNESS_DOMAIN_CRITERIA
     }
     
     # Get categories to process
