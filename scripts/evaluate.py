@@ -2293,6 +2293,9 @@ def convert_to_latex() -> None:
         'Citations_density', 'Claim_density', 'Reference_density'
     }
     
+    # Define non-numeric columns
+    non_numeric_columns = {'system', 'model', 'category'}
+    
     # Process global average
     global_avg_path = os.path.join(base_dir, "global_average_reorganized.csv")
     if os.path.exists(global_avg_path):
@@ -2319,11 +2322,15 @@ def convert_to_latex() -> None:
                     if pd.isna(val) or val == "":
                         values.append("")
                     else:
-                        # Add % only for specific columns
-                        if col in percentage_columns:
-                            values.append(f"{float(val):.2f}\\%")
+                        # Skip formatting for non-numeric columns
+                        if col in non_numeric_columns:
+                            values.append(str(val))
                         else:
-                            values.append(f"{float(val):.2f}")
+                            # Add % only for specific columns
+                            if col in percentage_columns:
+                                values.append(f"{float(val):.2f}\\%")
+                            else:
+                                values.append(f"{float(val):.2f}")
                 
                 # Create the line
                 line = f"& \\textit{{{model}}} & {' & '.join(values)}\\\\"
@@ -2367,11 +2374,15 @@ def convert_to_latex() -> None:
                         if pd.isna(val) or val == "":
                             values.append("")
                         else:
-                            # Add % only for specific columns
-                            if col in percentage_columns:
-                                values.append(f"{float(val):.2f}\\%")
+                            # Skip formatting for non-numeric columns
+                            if col in non_numeric_columns:
+                                values.append(str(val))
                             else:
-                                values.append(f"{float(val):.2f}")
+                                # Add % only for specific columns
+                                if col in percentage_columns:
+                                    values.append(f"{float(val):.2f}\\%")
+                                else:
+                                    values.append(f"{float(val):.2f}")
                     
                     # Create the line
                     line = f"& \\textit{{{category}}} & {' & '.join(values)}\\\\"
