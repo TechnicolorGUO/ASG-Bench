@@ -1586,7 +1586,9 @@ def aggregate_results_to_csv(cat: str) -> None:
         "Reference", "Reference_domain", "Reference_density", "Reference_quality", "Reference_no",
         "Coverage", "Structure", "Relevance", "Language", "Criticalness",
         "Images_density", "Equations_density", "Tables_density", "Total_density",
-        "Citations_density", "Sentence_no", "Claim_density"
+        "Citations_density", "Sentence_no", "Claim_density",
+        "Outline_domain", "Reference_domain",
+        "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain", "Criticalness_domain"
     ]
     
     # Get all topics
