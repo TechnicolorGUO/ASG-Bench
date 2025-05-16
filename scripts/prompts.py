@@ -179,17 +179,19 @@ CRITERIA = {
         'score 4': 'The outline is well-structured, with clearly grouped section titles and a coherent progression of topics. Minor issues may exist but do not significantly affect readability or understanding.',
         'score 5': 'The outline is exceptionally clear, logically organized, and easy to follow. Section titles are concise and informative, and the structure fully represents the topic\'s breadth and depth.'
     },
-    'Reference': {
+    "Reference": {
         "description": (
             "Reference relevance evaluates whether the references listed in the References section are closely related to the survey's topic. "
             "A high-quality References section should primarily include publications, articles, or works that are directly relevant to the subject matter. "
-            "The score depends on the proportion of irrelevant or tangential entries as identified by the model."
+            "The score depends on the proportion of irrelevant or tangential entries as identified by the model. "
+            "Additionally, the formatting of the references should adhere to standard citation guidelines (e.g., APA, MLA, Chicago), ensuring consistency, accuracy, and completeness. "
+            "Poor formatting, missing information, or inconsistencies in style will negatively impact the score."
         ),
-        "score 1": "Most references (over 60%) are irrelevant or only marginally related to the topic.",
-        "score 2": "A significant portion (40-60%) of references are not closely related to the topic.",
-        "score 3": "Some references (20-40%) are not relevant to the topic, but the majority are appropriate.",
-        "score 4": "A small number (5-20%) of references are not well aligned, but most are relevant.",
-        "score 5": "Nearly all references (over 95%) are relevant and directly related to the topic."
+        "score 1": "Most references (over 60%) are irrelevant or only marginally related to the topic and/or the references are poorly formatted, with significant inconsistencies or missing details.",
+        "score 2": "A significant portion (40-60%) of references are not closely related to the topic and/or the references show notable formatting issues, such as missing key information or inconsistent citation styles.",
+        "score 3": "Some references (20-40%) are not relevant to the topic, but the majority are appropriate. Formatting may have minor issues, but does not significantly detract from the overall quality.",
+        "score 4": "A small number (5-20%) of references are not well aligned, but most are relevant. The formatting is mostly consistent, with only occasional minor errors.",
+        "score 5": "Nearly all references (over 95%) are relevant and directly related to the topic. The formatting is consistent, accurate, and adheres to standard citation guidelines."
     }
 }
 
@@ -321,22 +323,25 @@ Return your answer only in JSON format: {{"{criteria_name}": <score>}} without a
 """
 
 OUTLINE_COVERAGE_PROMPT = """
-You are given the outline of an academic survey on the topic "{topic}":
+You are given the outline of an academic survey on the topic "{topic}". Focus on identifying logical, domain-specific, and practically relevant sections that align with real academic outlines.
 
 ---
 {outline}
 ---
 
-Please match the outline sections (based on their titles or meanings, not exact words) to the following standard academic survey sections. 
+Please match the outline sections (based on their titles, meanings, and relevance, not just exact words) to the following standard academic survey sections. Emphasize accurate alignment with standard academic structures commonly found in literature surveys.
 
-A section is considered matched if its title or meaning corresponds to any of the listed templates, even if the wording is not exactly the same.
-
+A section is considered matched only if:
+- Its title or meaning corresponds directly and specifically to any of the listed templates below, even if the wording differs,
+- It demonstrates clear logical flow and relevance to the academic survey topic,
+- It reflects practical relevance and grounded domain expertise,
+- It avoids speculative, overly broad, or tangential interpretations.
 Here is the checklist of standard sections (with common synonyms):
 
 1. Abstract
 2. Introduction / Background
 3. Related Work / Literature Review
-4. Problem Definition / Scope / Motivation
+4. Problem Definition / Scope / Motivation / Objectives / Goals
 5. Methods / Methodology / Taxonomy / Approach
 6. Comparative Analysis / Discussion
 7. Applications / Use Cases
@@ -354,7 +359,7 @@ Only return the JSON object. Do not add any explanation.
 """
 
 OUTLINE_STRUCTURE_PROMPT = """
-Given the following outline structure, analyze the relationship between the parent node and each of its direct child nodes:
+Given the survey topic "{topic}" and the following outline structure, analyze the relationship between the parent node and each of its direct child nodes. Prioritize the logical flow, domain expertise, and practical relevance commonly found in literature surveys:
 
 - Parent node:
   Index: {parent_index}
@@ -363,13 +368,14 @@ Given the following outline structure, analyze the relationship between the pare
 - Direct child nodes:
 {children_list}
 
-For each child node, decide whether it is a *necessary and direct subtopic* of the parent node. Mark as "Yes" only if:
-- The child topic is essential for fully understanding or representing the parent node,
-- It is directly and specifically related to the parent's core subject,
-- It cannot stand alone as an independent section without losing relevance,
-- It is not a generic or loosely related section (such as reference, acknowledgment, appendix, background, discussion, or future work).
+For each child node, decide whether it is a *necessary and direct subtopic* of the parent node. Mark as "Yes" if:
+- The child topic is critical for fully understanding or representing the parent node **OR** it represents a key application or real-world use case that highlights the parent node's practical relevance,
+- It reflects practical relevance and is grounded in the domain expertise of the subject,
+- It directly supports, expands, **or demonstrates the application** of the parent's core subject, avoiding speculative or overly broad topics,
+- It aligns with the logical structure and flow of well-crafted human-generated surveys,
+- It cannot stand alone as an independent section without losing connection to the parent topic, **unless its inclusion strengthens the overall relevance of the parent node by demonstrating real-world use cases.**
 
-If the child node is only loosely related, optional, or could be attached to many different parent nodes, answer "No".
+If the child node is only loosely related, optional, speculative, or could fit under multiple different parent nodes, answer "No".
 If you are unsure, answer "No".
 
 Output only the following JSON format, without any explanation:

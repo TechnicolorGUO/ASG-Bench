@@ -10,6 +10,8 @@ from utils import download_arxiv_pdf, extract_and_save_outline_from_md, getClien
 from prompts import CATEGORIZE_SURVEY_TITLES, CATEGORIZE_SURVEY_TITLES_SINGLE, EXPAND_CATEGORY_TO_TOPICS, CATEGORIZE_SURVEY_TITLES_HEURISTIC
 import arxiv
 from reference import extract_refs
+import concurrent.futures
+from typing import List, Dict, Set, Optional
 
 COARSE_CATEGORIES = [
     "Computer Science",
@@ -275,16 +277,23 @@ def get_top_survey_papers(cats, num=10):
         })
     return papers
 
-def get_s2_citation(arxiv_id):
+def get_s2_citation(arxiv_id: str) -> int:
+    """
+    Fetch citation count for a paper from Semantic Scholar API.
+    
+    Args:
+        arxiv_id: The arXiv ID of the paper
+        
+    Returns:
+        int: Number of citations, 0 if not found or error
+    """
     url = f"https://api.semanticscholar.org/graph/v1/paper/arXiv:{arxiv_id}?fields=citationCount"
     for _ in range(3):
         try:
             resp = requests.get(url, timeout=10)
             if resp.status_code == 200:
-                # print(f"Fetched citation count for {arxiv_id}: {resp.json().get('citationCount', 0)}")
                 return resp.json().get("citationCount", 0)
             elif resp.status_code == 404:
-                # print(f"Paper {arxiv_id} not found on Semantic Scholar.")
                 return 0
             else:
                 time.sleep(1)
@@ -293,13 +302,33 @@ def get_s2_citation(arxiv_id):
     return 0
 
 def get_top_survey_papers_by_citation(
-    cats, num=10, oversample=3,
-    months_ago_start=36, months_ago_end=3,
-    seen_ids=None
-):
+    cats: List[str], 
+    num: int = 10, 
+    oversample: int = 3,
+    months_ago_start: int = 36, 
+    months_ago_end: int = 3,
+    seen_ids: Optional[Set[str]] = None,
+    allow_duplicates: bool = False,
+    allow_cross_category: bool = False,
+    max_attempts: int = 10
+) -> List[Dict]:
     """
-    只考虑发表在 [months_ago_start, months_ago_end] 之间的论文，
-    最终只将前num个选中的arxiv_id放入seen_ids。
+    Get top survey papers by citation count within a time range.
+    If not enough papers are found, extends the time window and tries again.
+    
+    Args:
+        cats: List of arXiv categories to search
+        num: Target number of papers to return
+        oversample: Number of papers to fetch initially (num * oversample)
+        months_ago_start: Start of time range in months ago
+        months_ago_end: End of time range in months ago
+        seen_ids: Set of already seen arXiv IDs
+        allow_duplicates: Whether to allow papers that exist in seen_ids
+        allow_cross_category: Whether to allow papers that exist in other categories
+        max_attempts: Maximum number of time window extensions to try
+        
+    Returns:
+        List of paper dictionaries with title and arxiv_id
     """
     if seen_ids is None:
         seen_ids = set()
@@ -307,36 +336,81 @@ def get_top_survey_papers_by_citation(
     now = datetime.utcnow()
     start_date = now - timedelta(days=months_ago_start*30)
     end_date = now - timedelta(days=months_ago_end*30)
+    
+    all_papers = []  # Store all papers found across time windows
+    current_start_date = start_date
+    current_end_date = end_date
+    attempt = 0
 
-    # 1. 抓取足够的论文
-    arxiv_papers = get_arxiv_papers_in_time_range(
-        cats, start_date, end_date, max_results=num*oversample
-    )
+    while len(all_papers) < num and attempt < max_attempts:
+        # 1. Fetch papers for current time window
+        arxiv_papers = get_arxiv_papers_in_time_range(
+            cats, current_start_date, current_end_date, max_results=num*oversample
+        )
 
-    # 2. 查询 citation 并排序
-    papers = []
-    for result in arxiv_papers:
-        arxiv_id = result.entry_id.split('/')[-1].split('v')[0]
-        if arxiv_id in seen_ids:
-            continue   # 跳过已出现的
-        citation = get_s2_citation(arxiv_id)
-        papers.append({
-            "title": result.title.strip(),
-            "arxiv_id": arxiv_id,
-            "citationCount": citation
-        })
-        # 不在这里加入 seen_ids
-        time.sleep(0.1)
-    # 按引用数降序
-    papers.sort(key=lambda x: x["citationCount"], reverse=True)
-    selected_papers = papers[:num]
-    # 只把选中的前num个 arxiv_id 放入 seen_ids
-    for p in selected_papers:
-        seen_ids.add(p["arxiv_id"])
+        # 2. Get citations in parallel with progress bar
+        papers = []
+        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+            future_to_paper = {}
+            for result in arxiv_papers:
+                arxiv_id = result.entry_id.split('/')[-1].split('v')[0]
+                if not allow_cross_category and not allow_duplicates and arxiv_id in seen_ids:
+                    continue
+                future = executor.submit(get_s2_citation, arxiv_id)
+                future_to_paper[future] = {
+                    "title": result.title.strip(),
+                    "arxiv_id": arxiv_id
+                }
+                time.sleep(0.1)  # Rate limiting
+
+            # Add progress bar for citation fetching
+            with tqdm(total=len(future_to_paper), desc="Fetching citations") as pbar:
+                for future in concurrent.futures.as_completed(future_to_paper):
+                    paper = future_to_paper[future]
+                    try:
+                        citation = future.result()
+                        paper["citationCount"] = citation
+                        papers.append(paper)
+                    except Exception as e:
+                        print(f"Error getting citation for {paper['arxiv_id']}: {e}")
+                    pbar.update(1)
+
+        # Sort by citation count
+        papers.sort(key=lambda x: x["citationCount"], reverse=True)
+        
+        # Add new papers to all_papers
+        for paper in papers:
+            if paper["arxiv_id"] not in {p["arxiv_id"] for p in all_papers}:
+                all_papers.append(paper)
+                if not allow_cross_category:
+                    seen_ids.add(paper["arxiv_id"])
+
+        # If still not enough papers, extend time window
+        if len(all_papers) < num:
+            print(f"\nNot enough papers found ({len(all_papers)}/{num}). Extending time window...")
+            # Move the end date to the start date, and extend start date back
+            current_end_date = current_start_date
+            current_start_date = current_start_date - timedelta(days=365)  # Extend by 1 year
+            attempt += 1
+            continue
+
+    # Sort all papers by citation count and take top num
+    all_papers.sort(key=lambda x: x["citationCount"], reverse=True)
+    selected_papers = all_papers[:num]
+    
     return [{"title": p["title"], "arxiv_id": p["arxiv_id"]} for p in selected_papers]
 
-def is_true_survey_or_review(title, summary):
-    """Heuristically filter for real survey/review papers."""
+def is_true_survey_or_review(title: str, summary: str) -> bool:
+    """
+    Heuristically determine if a paper is a true survey/review paper.
+    
+    Args:
+        title: Paper title
+        summary: Paper abstract/summary
+        
+    Returns:
+        bool: True if paper appears to be a survey/review
+    """
     title = title.lower()
     summary = summary.lower()
     # Exclude common false positives
@@ -350,22 +424,35 @@ def is_true_survey_or_review(title, summary):
     good_phrases = [
         "a survey of", "an overview of", "a review of", "this survey", "this review",
         "comprehensive review", "comprehensive survey", "this paper surveys", "this paper reviews",
-        "literature review", "review and prospect", "survey and taxonomy", "survey and analysis"
+        "literature review", "review and prospect", "survey and taxonomy", "survey and analysis",
+        "state of the art", "state-of-the-art review", "systematic review", "meta-analysis",
+        "comparative study", "comparative analysis", "critical review", "tutorial survey",
+        "empirical review", "empirical survey", "recent advances in", "recent progress in",
+        "progress and challenges", "trends and challenges", "past, present and future",
+        "perspectives and challenges", "review and future directions", "survey and future directions",
+        "review and opportunities", "survey and opportunities", "review and trends",
+        "survey and trends", "review and challenges", "survey and challenges",
+        "review and perspectives", "survey and perspectives", "review and roadmap",
+        "survey and roadmap", "review and outlook", "survey and outlook"
     ]
     if any(phrase in title for phrase in good_phrases):
         return True
     if any(phrase in summary for phrase in good_phrases):
         return True
-    # Allow "survey" in title but require strictness for "review"
-    # if "survey" in title:
-    #     return True
     return False
 
-def get_arxiv_papers_in_time_range(cats, start_date, end_date, max_results=10):
-
+def get_arxiv_papers_in_time_range(cats: List[str], start_date: datetime, end_date: datetime, max_results: int = 10) -> List:
     """
-    Iterate all categories, fetch survey/review, deduplicate and return within time window,
-    with additional heuristic filtering for true survey/review papers.
+    Get survey/review papers from arXiv within a time range.
+    
+    Args:
+        cats: List of arXiv categories
+        start_date: Start of time range
+        end_date: End of time range
+        max_results: Maximum number of results per category
+        
+    Returns:
+        List of arXiv paper results
     """
     client = arxiv.Client()
     seen_ids = set()
@@ -381,7 +468,6 @@ def get_arxiv_papers_in_time_range(cats, start_date, end_date, max_results=10):
         for result in client.results(search):
             arxiv_id = result.entry_id.split('/')[-1].split('v')[0]
             published = result.published.replace(tzinfo=None)
-            # Heuristic filter here!
             if (
                 arxiv_id not in seen_ids
                 and start_date <= published <= end_date
@@ -392,23 +478,34 @@ def get_arxiv_papers_in_time_range(cats, start_date, end_date, max_results=10):
     print(f"Found {len(unique_papers)} unique, filtered papers in the date range across all cats.")
     return unique_papers
 
-def copy_dataset_to_surveys(systems):
+def copy_dataset_to_surveys(systems: List[str]) -> None:
+    """
+    Copy dataset to surveys directory and create system subfolders.
+    
+    Args:
+        systems: List of system names to create subfolders for
+    """
     src_root = os.path.join("outputs", "dataset")
     dst_root = "surveys"
     if os.path.exists(dst_root):
         shutil.rmtree(dst_root)
     shutil.copytree(src_root, dst_root)
-    # 遍历 surveys/一级/主题名 目录（即三级目录）
     for dirpath, dirnames, filenames in os.walk(dst_root):
         rel_path = os.path.relpath(dirpath, dst_root)
         parts = rel_path.split(os.sep)
-        # 只在 surveys/一级/主题名 目录下建 system 子文件夹
         if len(parts) == 2:
             for sys_name in systems:
                 sys_dir = os.path.join(dirpath, sys_name)
                 os.makedirs(sys_dir, exist_ok=True)
 
-def generate_tasks_json(systems, surveys_root="surveys"):
+def generate_tasks_json(systems: List[str], surveys_root: str = "surveys") -> None:
+    """
+    Generate tasks.json file for the survey dataset.
+    
+    Args:
+        systems: List of system names
+        surveys_root: Root directory for surveys
+    """
     tasks = {}
     leaf_dirs = []
     for dirpath, dirnames, filenames in os.walk(surveys_root):
@@ -431,178 +528,214 @@ def generate_tasks_json(systems, surveys_root="surveys"):
         json.dump(tasks, f, indent=2, ensure_ascii=False)
     print(f"Generated {tasks_json_path}")
 
+def get_existing_papers(cat: str) -> List[Dict]:
+    """
+    Get existing papers for a category from arxiv_ids.json.
+    
+    Args:
+        cat: Category name
+        
+    Returns:
+        List of paper dictionaries with title and arxiv_id
+    """
+    cat_dir = os.path.join("outputs", "dataset", cat)
+    arxiv_ids_path = os.path.join(cat_dir, "arxiv_ids.json")
+    
+    if not os.path.exists(arxiv_ids_path):
+        return []
+    
+    papers = []
+    try:
+        with open(arxiv_ids_path, 'r', encoding='utf-8') as f:
+            arxiv_urls = json.load(f)
+            for url in arxiv_urls:
+                arxiv_id = url.split('/')[-1]
+                papers.append({
+                    "arxiv_id": arxiv_id,
+                    "title": ""  # Title will be filled in during processing
+                })
+    except Exception as e:
+        print(f"Error reading arxiv_ids.json for {cat}: {e}")
+        return []
+        
+    return papers
+
+def save_arxiv_ids(cat: str, papers: List[Dict]) -> None:
+    """
+    Save arxiv URLs to a JSON file for a category.
+    
+    Args:
+        cat: Category name
+        papers: List of paper dictionaries
+    """
+    cat_dir = os.path.join("outputs", "dataset", cat)
+    os.makedirs(cat_dir, exist_ok=True)
+    
+    arxiv_urls = [f"https://arxiv.org/abs/{paper['arxiv_id']}" for paper in papers]
+    with open(os.path.join(cat_dir, "arxiv_ids.json"), 'w', encoding='utf-8') as f:
+        json.dump(arxiv_urls, f, indent=2, ensure_ascii=False)
+
+def process_papers_for_category(cat: str, papers: List[Dict], client) -> None:
+    """
+    Process papers for a category (download PDFs, convert to MD, extract refs).
+    Also updates arxiv_ids.json and clusters.json with new papers.
+    
+    Args:
+        cat: Category name
+        papers: List of paper dictionaries
+        client: OpenAI client instance
+    """
+    cat_dir = os.path.join("outputs", "dataset", cat)
+    
+    # Load existing clusters if any
+    clusters_path = os.path.join(cat_dir, "clusters.json")
+    existing_clusters = {}
+    if os.path.exists(clusters_path):
+        try:
+            with open(clusters_path, 'r', encoding='utf-8') as f:
+                existing_clusters = json.load(f)
+        except Exception as e:
+            print(f"Error reading existing clusters.json for {cat}: {e}")
+    
+    # Process surveys in batches for clustering
+    BATCH_SIZE = 10
+    all_clusters = {}
+    
+    for batch_start in range(0, len(papers), BATCH_SIZE):
+        batch = papers[batch_start:batch_start+BATCH_SIZE]
+        survey_str = json.dumps(batch, ensure_ascii=False, indent=2)
+        prompt = CATEGORIZE_SURVEY_TITLES_SINGLE.format(
+            survey_titles=survey_str,
+        )
+
+        for attempt in range(3):
+            try:
+                raw_response = generateResponse(client, prompt, max_tokens=2048, temperature=0.3)
+                clusters = robust_json_parse(raw_response)
+                break
+            except Exception as e:
+                print(f"\nError for clustering '{cat}', batch {batch_start//BATCH_SIZE+1} (attempt {attempt+1}): {e}")
+                if attempt == 2:
+                    print(f"Failed to cluster category: {cat}, batch {batch_start//BATCH_SIZE+1}, skipping.")
+                    clusters = {}
+                else:
+                    time.sleep(1)
+        all_clusters.update(clusters)
+
+    # Merge new clusters with existing ones
+    merged_clusters = existing_clusters.copy()
+    for topic, topic_papers in all_clusters.items():
+        if topic in merged_clusters:
+            # Add only new papers to existing topic
+            existing_ids = {p['arxiv_id'] for p in merged_clusters[topic]}
+            new_papers = [p for p in topic_papers if p['arxiv_id'] not in existing_ids]
+            merged_clusters[topic].extend(new_papers)
+        else:
+            # Add new topic
+            merged_clusters[topic] = topic_papers
+
+    # Save updated clusters
+    with open(clusters_path, 'w', encoding='utf-8') as f:
+        json.dump(merged_clusters, f, indent=2, ensure_ascii=False)
+
+    # Update arxiv_ids.json
+    all_papers = []
+    for topic_papers in merged_clusters.values():
+        all_papers.extend(topic_papers)
+    arxiv_urls = [f"https://arxiv.org/abs/{paper['arxiv_id']}" for paper in all_papers]
+    with open(os.path.join(cat_dir, "arxiv_ids.json"), 'w', encoding='utf-8') as f:
+        json.dump(arxiv_urls, f, indent=2, ensure_ascii=False)
+
+    # Download and process PDFs for new papers only
+    for topic, topic_papers in all_clusters.items():
+        topic_dir = os.path.join(cat_dir, topic.replace('/', '_'))
+        pdf_dir = os.path.join(topic_dir, "pdfs")
+        os.makedirs(pdf_dir, exist_ok=True)
+        
+        for paper in topic_papers:
+            try:
+                download_arxiv_pdf(paper['arxiv_id'], pdf_dir)
+            except Exception as e:
+                print(f"Failed to download {paper['arxiv_id']}: {e}")
+                
+            try:
+                pdf_path = os.path.join(pdf_dir, f"{paper['arxiv_id']}.pdf")
+                md_dir = pdf_dir
+                md_path = os.path.join(md_dir, f"{paper['arxiv_id']}.md")
+                if os.path.exists(pdf_path) and not os.path.exists(md_path):
+                    pdf2md(pdf_path, md_dir)
+                extract_and_save_outline_from_md(md_file_path=md_path)
+            except Exception as e:
+                print(f"Failed to convert {paper['arxiv_id']} PDF to MD: {e}")
+                
+            try:
+                extract_refs(input_file=md_path, output_folder=pdf_dir)
+            except Exception as e:
+                print(f"Failed to extract references from {paper['arxiv_id']}: {e}")
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--granularity', choices=['coarse', 'fine'], default='coarse')
     parser.add_argument('--numofsurvey', type=int, default=50)
     parser.add_argument('--systems', nargs='+', default=[], help='List of system names to create subfolders for')
+    parser.add_argument('--allow_cross_category', action='store_true', help='Allow papers to be used in multiple categories')
     args = parser.parse_args()
 
     dataset_dir = os.path.join("outputs", "dataset")
-    # ======== 检查 dataset 是否已存在 ==========
     if os.path.exists(dataset_dir):
-        print(f"{dataset_dir} exists, skipping data generation.")
-        copy_dataset_to_surveys(args.systems)
-        generate_tasks_json(args.systems)
-        print("Copied existing dataset to surveys/ and created system subfolders.")
-        return
+        print(f"{dataset_dir} exists, checking existing papers...")
+    else:
+        os.makedirs(dataset_dir, exist_ok=True)
 
     client = getClient()
+    coarse_surveys_map = {}
+    seen_ids_global = set()
 
-    if args.granularity == 'coarse':
-        # 遍历 category_map 的 key，每个 key 下所有 cat 一起检索
-        coarse_surveys_map = {}
-        seen_ids_global = set()
-        for key in tqdm(category_map, desc="Processing coarse categories"):
-            cats = category_map[key]
-            print(f"Fetching surveys for categories: {cats}")
-            # all_surveys = get_top_survey_papers(cats, args.numofsurvey)
-            all_surveys = get_top_survey_papers_by_citation(cats, num=args.numofsurvey, oversample=3, seen_ids=seen_ids_global)
-            # 去重
-            # unique_surveys = []
-            # for paper in all_surveys:
-            #     if paper['arxiv_id'] not in seen_ids_global:
-            #         unique_surveys.append(paper)
-            #         seen_ids_global.add(paper['arxiv_id'])
-            unique_surveys = all_surveys
+    # First pass: Collect all arxiv IDs
+    for key in tqdm(category_map, desc="Collecting papers"):
+        cats = category_map[key]
+        print(f"Processing category: {key}")
+        
+        # Get existing papers
+        existing_papers = get_existing_papers(key)
+        existing_ids = {paper['arxiv_id'] for paper in existing_papers}
+        seen_ids_global.update(existing_ids)
+        
+        if len(existing_papers) >= args.numofsurvey:
+            print(f"Category {key} already has enough papers ({len(existing_papers)}/{args.numofsurvey})")
+            coarse_surveys_map[key] = existing_papers
+            continue
+            
+        # Calculate how many more papers we need
+        needed = args.numofsurvey - len(existing_papers)
+        print(f"Category {key} needs {needed} more papers")
+        
+        # Get additional papers
+        new_papers = get_top_survey_papers_by_citation(
+            cats,
+            num=needed,
+            oversample=2,
+            seen_ids=seen_ids_global,
+            allow_duplicates=False,
+            allow_cross_category=args.allow_cross_category
+        )
+        
+        # Combine existing and new papers
+        all_papers = existing_papers + new_papers
+        coarse_surveys_map[key] = all_papers
+        
+        # Save arxiv IDs
+        save_arxiv_ids(key, all_papers)
 
-            coarse_surveys_map[key] = unique_surveys
+    # Save the complete paper list
+    with open("outputs/dataset/topics.json", "w", encoding="utf-8") as f:
+        json.dump(coarse_surveys_map, f, indent=2, ensure_ascii=False)
+    print("Saved outputs/dataset/topics.json")
 
-            BATCH_SIZE = 10
-            all_clusters = {}
+    # Second pass: Process all papers
+    for key in tqdm(category_map, desc="Processing papers"):
+        papers = coarse_surveys_map[key]
+        process_papers_for_category(key, papers, client)
 
-            # 分批处理 unique_surveys
-            for batch_start in range(0, len(unique_surveys), BATCH_SIZE):
-                batch = unique_surveys[batch_start:batch_start+BATCH_SIZE]
-                survey_str = json.dumps(batch, ensure_ascii=False, indent=2)
-                prompt = CATEGORIZE_SURVEY_TITLES_SINGLE.format(
-                    survey_titles=survey_str,
-                )
-
-                for attempt in range(3):
-                    try:
-                        raw_response = generateResponse(client, prompt, max_tokens=2048, temperature=0.3)
-                        clusters = robust_json_parse(raw_response)
-                        break
-                    except Exception as e:
-                        print(f"\nError for clustering '{key}', batch {batch_start//BATCH_SIZE+1} (attempt {attempt+1}): {e}")
-                        if attempt == 2:
-                            print(f"Failed to cluster category: {key}, batch {batch_start//BATCH_SIZE+1}, skipping.")
-                            clusters = {}
-                        else:
-                            time.sleep(1)
-                # 合并到总结果
-                all_clusters.update(clusters)
-
-            # 保存聚类结果
-            out_dir = os.path.join("outputs", "dataset", key)
-            os.makedirs(out_dir, exist_ok=True)
-            with open(os.path.join(out_dir, "clusters.json"), 'w', encoding='utf-8') as f:
-                json.dump(all_clusters, f, indent=2, ensure_ascii=False)
-            # 下载PDF
-            for topic, papers in all_clusters.items():
-                topic_dir = os.path.join(out_dir, topic.replace('/', '_'))
-                pdf_dir = os.path.join(topic_dir, "pdfs")
-                os.makedirs(pdf_dir, exist_ok=True)
-                for paper in papers:
-                    try:
-                        download_arxiv_pdf(paper['arxiv_id'], pdf_dir)
-                    except Exception as e:
-                        print(f"Failed to download {paper['arxiv_id']}: {e}")
-                    # 5.4 Add pdf2md
-                    try:
-                        pdf_path = os.path.join(pdf_dir, f"{paper['arxiv_id']}.pdf")
-                        md_dir = pdf_dir
-                        md_path = os.path.join(md_dir, f"{paper['arxiv_id']}.md")
-                        if os.path.exists(pdf_path) and not os.path.exists(md_path):
-                            pdf2md(pdf_path, md_dir)
-                        extract_and_save_outline_from_md(md_file_path=md_path)
-                    except Exception as e:
-                        print(f"Failed to convert {paper['arxiv_id']} PDF to MD: {e}")
-                    
-                    # 5.13 Add extract_refs
-                    try:
-                        extract_refs(input_file=md_path, output_folder=pdf_dir)
-                    except Exception as e:
-                        print(f"Failed to extract references from {paper['arxiv_id']}: {e}")
-
-        os.makedirs("outputs", exist_ok=True)
-        with open("outputs/dataset/topics.json", "w", encoding="utf-8") as f:
-            json.dump(coarse_surveys_map, f, indent=2, ensure_ascii=False)
-        print("Saved outputs/dataset/topics.json")
-
-    elif args.granularity == 'fine':
-        seen_ids_global = set()
-        fine_surveys_map = {}
-        # 遍历 category_map 的 key，每个 key 下每个 cat 单独处理
-        for key in tqdm(category_map, desc="Processing fine categories"):
-            fine_surveys_map[key] = {}
-            for cat in category_map[key]:
-                cat_list = [cat]  # get_top_survey_papers_by_citation接收list
-                # all_surveys = get_top_survey_papers(cat_list, args.numofsurvey)
-                all_surveys = get_top_survey_papers_by_citation(cat_list, num=args.numofsurvey, oversample=3, seen_ids=seen_ids_global)
-                # 去重
-                # unique_surveys = []
-                # for paper in all_surveys:
-                #     if paper['arxiv_id'] not in seen_ids_global:
-                #         unique_surveys.append(paper)
-                #         seen_ids_global.add(paper['arxiv_id'])
-                unique_surveys = all_surveys
-
-                # 聚类
-                BATCH_SIZE = 10
-                all_clusters = {}
-                for batch_start in range(0, len(unique_surveys), BATCH_SIZE):
-                    batch = unique_surveys[batch_start:batch_start+BATCH_SIZE]
-                    survey_str = json.dumps(batch, ensure_ascii=False, indent=2)
-                    prompt = CATEGORIZE_SURVEY_TITLES_SINGLE.format(
-                        survey_titles=survey_str,
-                    )
-                    for attempt in range(3):
-                        try:
-                            raw_response = generateResponse(client, prompt, max_tokens=2048, temperature=0.3)
-                            clusters = robust_json_parse(raw_response)
-                            break
-                        except Exception as e:
-                            print(f"\nError for clustering '{cat}', batch {batch_start//BATCH_SIZE+1} (attempt {attempt+1}): {e}")
-                            if attempt == 2:
-                                print(f"Failed to cluster category: {cat}, batch {batch_start//BATCH_SIZE+1}, skipping.")
-                                clusters = {}
-                            else:
-                                time.sleep(1)
-                    all_clusters.update(clusters)
-
-                # 保存聚类结果
-                out_dir = os.path.join("outputs", "dataset", key, cat)
-                os.makedirs(out_dir, exist_ok=True)
-                with open(os.path.join(out_dir, "clusters.json"), 'w', encoding='utf-8') as f:
-                    json.dump(all_clusters, f, indent=2, ensure_ascii=False)
-                # 保存进fine_surveys_map
-                fine_surveys_map[key][cat] = all_clusters
-                # 下载PDF
-                for topic, papers in all_clusters.items():
-                    topic_dir = os.path.join(out_dir, topic.replace('/', '_'))
-                    pdf_dir = os.path.join(topic_dir, "pdfs")
-                    os.makedirs(pdf_dir, exist_ok=True)
-                    for paper in papers:
-                        try:
-                            download_arxiv_pdf(paper['arxiv_id'], pdf_dir)
-                        except Exception as e:
-                            print(f"Failed to download {paper['arxiv_id']}: {e}")
-                    # 5.4 Add pdf2md
-                    try:
-                        pdf_path = os.path.join(pdf_dir, f"{paper['arxiv_id']}.pdf")
-                        md_dir = pdf_dir
-                        md_path = os.path.join(md_dir, f"{paper['arxiv_id']}.md")
-                        if os.path.exists(pdf_path) and not os.path.exists(md_path):
-                            pdf2md(pdf_path, md_dir)
-                        extract_and_save_outline_from_md(md_file_path=md_path)
-                    except Exception as e:
-                        print(f"Failed to convert {paper['arxiv_id']} PDF to MD: {e}")
-        os.makedirs("outputs", exist_ok=True)
-        with open("outputs/dataset/topics.json", "w", encoding="utf-8") as f:
-            json.dump(fine_surveys_map, f, indent=2, ensure_ascii=False)
-        print("Saved outputs/dataset/topics.json")
     copy_dataset_to_surveys(args.systems)
     generate_tasks_json(args.systems)
     print("Data generation complete. Copied dataset to surveys/ and created system subfolders.")

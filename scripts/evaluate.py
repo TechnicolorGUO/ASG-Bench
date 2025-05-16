@@ -182,6 +182,7 @@ def evaluate_outline_coverage(
 def evaluate_outline_structure(outline_json_path: str) -> tuple[float, list[dict]]:
     """
     Evaluate the hierarchical structure of the outline.
+    Uses depth-based weighted scoring where nodes closer to root have higher weights.
     
     Args:
         outline_json_path (str): Path to the outline JSON file
@@ -189,17 +190,23 @@ def evaluate_outline_structure(outline_json_path: str) -> tuple[float, list[dict
     Returns:
         tuple[float, list[dict]]: (global structure score, list of node scores)
     """
+    topic = extract_topic_from_path(outline_json_path)
     with open(outline_json_path, "r", encoding="utf-8") as f:
         outline_list = json.load(f)
     node_objs, _ = build_outline_tree_from_levels(outline_list)
     non_leaf_nodes = [node for node in node_objs if node["children"]]
     node_scores = []
+    
+    # Calculate max depth for weight normalization
+    max_depth = max(node["level"] for node in node_objs) if node_objs else 1
+    
     for parent in non_leaf_nodes:
         children_list = "\n".join([
             f'  - Index: {child["index"]}, Title: {child["title"]}'
             for child in parent["children"]
         ])
         prompt = OUTLINE_STRUCTURE_PROMPT.format(
+            topic = topic,
             parent_index=parent["index"],
             parent_title=parent["title"],
             children_list=children_list
@@ -209,13 +216,28 @@ def evaluate_outline_structure(outline_json_path: str) -> tuple[float, list[dict
         yes_count = sum(1 for child in result if str(child.get("is_included", "")).lower() == "yes")
         total = len(result)
         node_score = yes_count / total if total > 0 else 1.0  # Full score if no children
+        
+        # Calculate weight based on depth (inverse of depth)
+        # Nodes closer to root (lower depth) get higher weights
+        depth = parent["level"]
+        weight = (max_depth - depth + 1) / max_depth
+        
         node_scores.append({
             "parent_index": parent["index"],
             "parent_title": parent["title"],
-            "score": node_score
+            "score": node_score,
+            "weight": weight,
+            "depth": depth
         })
 
-    global_score = round(sum(x["score"] for x in node_scores) / len(node_scores) * 100, 4) if node_scores else 1.0
+    # Calculate weighted average
+    if node_scores:
+        weighted_sum = sum(x["score"] * x["weight"] for x in node_scores)
+        total_weight = sum(x["weight"] for x in node_scores)
+        global_score = round(weighted_sum / total_weight * 100, 4)
+    else:
+        global_score = 100.0  # Full score if no nodes to evaluate
+        
     return global_score, node_scores
 
 def evaluate_outline_number(outline_json_path: str) -> dict:
@@ -239,11 +261,42 @@ def evaluate_outline_number(outline_json_path: str) -> dict:
         results["Outline_no"] = 0
     return results
 
+def evaluate_outline_density(md_path: str) -> dict:
+    """
+    Calculate the density of sections in the outline.
+    
+    Args:
+        md_path (str): Path to the markdown file
+        
+    Returns:
+        dict: Dictionary containing outline density score
+    """
+    results = {}
+
+    json_path = os.path.join(os.path.dirname(md_path), "outline.json")
+
+    with open(json_path, "r", encoding="utf-8") as f:
+        outline = json.load(f)
+    with open(md_path, "r", encoding="utf-8") as f:
+        content = f.read()
+
+    main_content, _ = split_markdown_content_and_refs(content)
+    sentence_count = count_sentences(main_content)
+    outline_count = len(outline)
+
+    if sentence_count > 0:
+        results["Outline_density"] = round(outline_count / sentence_count, 4) * 100
+    else:
+        results["Outline_density"] = 0
+    return results
+
 def evaluate_outline(
     md_path: str,
     do_llm: bool = True,
     do_coverage: bool = True,
     do_structure: bool = True,
+    do_number: bool = True,
+    do_density: bool = True,
     criteria_type: str = "general"
 ) -> dict:
     """
@@ -304,9 +357,9 @@ def evaluate_outline(
         print("Skip evaluate_outline_coverage.")
 
     # 4. Structure evaluation
-    outline_json_path = os.path.join(os.path.dirname(md_path), "outline.json")
-    refine_outline_if_single_level(outline_raw_json_path, outline_json_path)
     if do_structure:
+        outline_json_path = os.path.join(os.path.dirname(md_path), "outline.json")
+        refine_outline_if_single_level(outline_raw_json_path, outline_json_path)
         try:
             global_score, node_scores = evaluate_outline_structure(outline_json_path)
             results["Outline_structure"] = global_score
@@ -317,12 +370,26 @@ def evaluate_outline(
         print("Skip evaluate_outline_structure.")
 
     # 5. Number evaluation
-    try:
-        number_results = evaluate_outline_number(outline_json_path)
-        results.update(number_results)
-    except Exception as e:
-        print("Error in evaluating outline number:", e)
-        results["Outline_no"] = 0
+    if do_number:
+        try:
+            number_results = evaluate_outline_number(outline_json_path)
+            results.update(number_results)
+        except Exception as e:
+            print("Error in evaluating outline number:", e)
+            results["Outline_no"] = 0
+    else:
+        print("Skip evaluate_outline_number.")
+
+    # 6. Density evaluation
+    if do_density:
+        try:
+            density_results = evaluate_outline_density(md_path)
+            results.update(density_results)
+        except Exception as e:
+            print("Error in evaluating outline density:", e)
+            results["Outline_density"] = 0
+    else:
+        print("Skip evaluate_outline_density.")
 
     return results
 
@@ -344,7 +411,8 @@ def evaluate_content_llm(md_path: str, criteria_type: str = "general") -> dict:
 
     try:
         with open(md_path, "r", encoding="utf-8") as f:
-            content_str = f.read()
+            content = f.read()
+        content_str, _ = split_markdown_content_and_refs(content)
     except Exception as e:
         for criteria_name in content_criteria:
             if criteria_type == "domain":
@@ -421,7 +489,8 @@ def evaluate_content_llm_simultaneous(md_path: str, criteria_type: str = "genera
 
     try:
         with open(md_path, "r", encoding="utf-8") as f:
-            content_str = f.read()
+            content = f.read()
+        content_str, _ = split_markdown_content_and_refs(content)
     except Exception as e:
         for criteria_name in content_criteria:
             if criteria_type == "domain":
@@ -512,8 +581,10 @@ def evaluate_content_informativeness(md_path: str) -> dict:
     Returns:
         dict: Dictionary containing density scores for various content features
     """
-    md_content = read_md(md_path)
-    counts = count_md_features(md_content)
+    with open(md_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    content_str, _ = split_markdown_content_and_refs(content)
+    counts = count_md_features(content_str)
     sentences = counts.get('sentences', 1)
     results = {}    
 
@@ -544,7 +615,7 @@ def evaluate_content_informativeness(md_path: str) -> dict:
 
     # Claim density
     topic = extract_topic_from_path(md_path)
-    results_claims = extract_facts_only(md_content, topic)
+    results_claims = extract_facts_only(content_str, topic)
     results["Claim_density"] = results_claims.get("claim_density", 0) * 100
     # results["Claim_density_after_deduplication"] = results_claims.get("claim_density_after_dedup", 0) * 100
     return results
@@ -939,6 +1010,7 @@ def evaluate_reference_number(md_path: str) -> dict:
 def evaluate_reference(
     md_path: str,
     do_llm: bool = True,
+    do_number: bool = True,
     do_density: bool = True,
     do_quality: bool = True,
     criteria_type: str = "general"
@@ -1001,11 +1073,14 @@ def evaluate_reference(
         print("Skip evaluate_reference_quality.")
 
     # 4. Number evaluation
-    try:
-        results.update(evaluate_reference_number(md_path))
-    except Exception as e:
-        print("Error in evaluating reference number:", e)
-        results["Reference_no"] = 0
+    if do_number:
+        try:
+            results.update(evaluate_reference_number(md_path))
+        except Exception as e:
+            print("Error in evaluating reference number:", e)
+            results["Reference_no"] = 0
+    else:
+        print("Skip evaluate_reference_number.")
     return results
 
 # ------------- Main Evaluation Functions -------------
@@ -1043,10 +1118,11 @@ def evaluate(
 
     # Define required keys for each evaluation section
     if criteria_type == "general":
-        outline_keys = ["Outline", "Outline_coverage", "Outline_structure", "Outline_no"]
+        outline_keys = ["Outline", "Outline_coverage", "Outline_structure", "Outline_no", "Outline_density"]
         content_keys = [
             "Coverage", "Structure", "Relevance", "Language", "Criticalness",
-            "Images_density", "Equations_density", "Tables_density", "Total_density", "Citations_density", "Sentence_no",
+            "Faithfulness",
+            "Images_density", "Equations_density", "Tables_density", "Citations_density", "Sentence_no",
             "Claim_density"
         ]
         reference_keys = ["Reference", "Reference_density", "Reference_quality", "Reference_no"]
@@ -1198,7 +1274,6 @@ def evaluate_pairs(topic_dir: str, system: str, metrics: list[str]) -> dict:
                     print(f"{key}: {pdfs_content[key]:+.4f} | {system_content[key]:+.4f} | {diff:+.4f}")
     
     return results
-
 
 def process_system(
     md_path: str,
@@ -1666,10 +1741,10 @@ def aggregate_results_to_csv(cat: str) -> None:
     all_results = []
     
     metrics_to_fill = [
-        "Outline", "Outline_domain", "Outline_coverage", "Outline_structure", "Outline_no",
-        "Reference", "Reference_domain", "Reference_density", "Reference_quality", "Reference_no",
-        "Coverage", "Structure", "Relevance", "Language", "Criticalness",
-        "Images_density", "Equations_density", "Tables_density", "Total_density",
+        "Outline",  "Outline_coverage", "Outline_structure", "Outline_no", "Outline_density",
+        "Reference", "Reference_density", "Reference_quality", "Reference_no",
+        "Coverage", "Structure", "Relevance", "Language", "Criticalness", "Faithfulness",
+        "Images_density", "Equations_density", "Tables_density", 
         "Citations_density", "Sentence_no", "Claim_density",
         "Outline_domain", "Reference_domain",
         "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain", "Criticalness_domain"
@@ -1983,96 +2058,6 @@ def supplement_missing_scores(cat: str = None, model: str = None, system: str = 
                     except Exception as e:
                         print(f"Error processing {results_path}: {e}")
 
-def calculate_category_average_from_csv(cat: str) -> None:
-    """
-    Calculate average scores from category results CSV and save as a new CSV.
-    Uses system+model as the primary key.
-    
-    Args:
-        cat (str): Category name (e.g., "cs")
-    """
-    base_dir = os.path.join("surveys", cat)
-    input_csv = os.path.join(base_dir, f"{cat}_results.csv")
-    
-    if not os.path.exists(input_csv):
-        print(f"Input CSV file not found: {input_csv}")
-        return
-    
-    try:
-        # Read the results CSV
-        df = pd.read_csv(input_csv)
-        
-        # Group by system and model, calculate mean for all numeric columns
-        avg_df = df.groupby(['system', 'model']).mean(numeric_only=True).reset_index()
-        
-        # Round numeric columns to 4 decimal places
-        numeric_cols = avg_df.select_dtypes(include=['float64', 'int64']).columns
-        avg_df[numeric_cols] = avg_df[numeric_cols].round(4)
-        
-        # Save to new CSV
-        output_csv = os.path.join(base_dir, f"{cat}_average.csv")
-        avg_df.to_csv(output_csv, index=False)
-        print(f"Category averages saved to {output_csv}")
-        
-    except Exception as e:
-        print(f"Error processing CSV for category {cat}: {e}")
-
-def aggregate_all_categories_average() -> None:
-    """
-    Aggregate all category average CSVs and calculate global averages.
-    Creates two files in the surveys directory:
-    1. all_categories_results.csv - Combined results from all categories
-    2. global_average.csv - Global averages across all categories
-    All numeric values are rounded to 2 decimal places.
-    """
-    base_dir = "surveys"
-    all_cats_data = []
-    
-    # Get all category directories
-    cats = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
-    
-    # Collect data from each category
-    for cat in cats:
-        cat_avg_csv = os.path.join(base_dir, cat, f"{cat}_average.csv")
-        if os.path.exists(cat_avg_csv):
-            try:
-                df = pd.read_csv(cat_avg_csv)
-                # Round all numeric columns to 2 decimal places
-                numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
-                df[numeric_cols] = df[numeric_cols].round(2)
-                df['category'] = cat  # Add category column
-                all_cats_data.append(df)
-            except Exception as e:
-                print(f"Error reading {cat_avg_csv}: {e}")
-    
-    if not all_cats_data:
-        print("No category average data found")
-        return
-    
-    try:
-        # Combine all category data
-        combined_df = pd.concat(all_cats_data, ignore_index=True)
-        
-        # Save combined results
-        combined_csv = os.path.join(base_dir, "all_categories_results.csv")
-        combined_df.to_csv(combined_csv, index=False)
-        print(f"Combined results saved to {combined_csv}")
-        
-        # Calculate global averages
-        avg_df = combined_df.groupby(['system', 'model']).mean(numeric_only=True).reset_index()
-        
-        # Round all numeric columns to 2 decimal places
-        numeric_cols = avg_df.select_dtypes(include=['float64', 'int64']).columns
-        avg_df[numeric_cols] = avg_df[numeric_cols].round(2)
-        
-        # Save global averages
-        global_avg_csv = os.path.join(base_dir, "global_average.csv")
-        avg_df.to_csv(global_avg_csv, index=False)
-        print(f"Global averages saved to {global_avg_csv}")
-        
-    except Exception as e:
-        print(f"Error processing global averages: {e}")
-
 def supplement_domain_specific_scores(cat: str = None, model: str = None, system: str = None) -> None:
     """
     Check and supplement missing domain-specific scores for specific metrics.
@@ -2209,6 +2194,96 @@ def supplement_domain_specific_scores(cat: str = None, model: str = None, system
                         
                     except Exception as e:
                         print(f"Error processing {results_path}: {e}")
+
+def calculate_category_average_from_csv(cat: str) -> None:
+    """
+    Calculate average scores from category results CSV and save as a new CSV.
+    Uses system+model as the primary key.
+    
+    Args:
+        cat (str): Category name (e.g., "cs")
+    """
+    base_dir = os.path.join("surveys", cat)
+    input_csv = os.path.join(base_dir, f"{cat}_results.csv")
+    
+    if not os.path.exists(input_csv):
+        print(f"Input CSV file not found: {input_csv}")
+        return
+    
+    try:
+        # Read the results CSV
+        df = pd.read_csv(input_csv)
+        
+        # Group by system and model, calculate mean for all numeric columns
+        avg_df = df.groupby(['system', 'model']).mean(numeric_only=True).reset_index()
+        
+        # Round numeric columns to 4 decimal places
+        numeric_cols = avg_df.select_dtypes(include=['float64', 'int64']).columns
+        avg_df[numeric_cols] = avg_df[numeric_cols].round(4)
+        
+        # Save to new CSV
+        output_csv = os.path.join(base_dir, f"{cat}_average.csv")
+        avg_df.to_csv(output_csv, index=False)
+        print(f"Category averages saved to {output_csv}")
+        
+    except Exception as e:
+        print(f"Error processing CSV for category {cat}: {e}")
+
+def aggregate_all_categories_average() -> None:
+    """
+    Aggregate all category average CSVs and calculate global averages.
+    Creates two files in the surveys directory:
+    1. all_categories_results.csv - Combined results from all categories
+    2. global_average.csv - Global averages across all categories
+    All numeric values are rounded to 2 decimal places.
+    """
+    base_dir = "surveys"
+    all_cats_data = []
+    
+    # Get all category directories
+    cats = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    # Collect data from each category
+    for cat in cats:
+        cat_avg_csv = os.path.join(base_dir, cat, f"{cat}_average.csv")
+        if os.path.exists(cat_avg_csv):
+            try:
+                df = pd.read_csv(cat_avg_csv)
+                # Round all numeric columns to 2 decimal places
+                numeric_cols = df.select_dtypes(include=['float64', 'int64']).columns
+                df[numeric_cols] = df[numeric_cols].round(2)
+                df['category'] = cat  # Add category column
+                all_cats_data.append(df)
+            except Exception as e:
+                print(f"Error reading {cat_avg_csv}: {e}")
+    
+    if not all_cats_data:
+        print("No category average data found")
+        return
+    
+    try:
+        # Combine all category data
+        combined_df = pd.concat(all_cats_data, ignore_index=True)
+        
+        # Save combined results
+        combined_csv = os.path.join(base_dir, "all_categories_results.csv")
+        combined_df.to_csv(combined_csv, index=False)
+        print(f"Combined results saved to {combined_csv}")
+        
+        # Calculate global averages
+        avg_df = combined_df.groupby(['system', 'model']).mean(numeric_only=True).reset_index()
+        
+        # Round all numeric columns to 2 decimal places
+        numeric_cols = avg_df.select_dtypes(include=['float64', 'int64']).columns
+        avg_df[numeric_cols] = avg_df[numeric_cols].round(2)
+        
+        # Save global averages
+        global_avg_csv = os.path.join(base_dir, "global_average.csv")
+        avg_df.to_csv(global_avg_csv, index=False)
+        print(f"Global averages saved to {global_avg_csv}")
+        
+    except Exception as e:
+        print(f"Error processing global averages: {e}")
 
 def calculate_all_scores(
     cats: list[str] = None,
@@ -2410,26 +2485,41 @@ def reorganize_results_columns() -> None:
     """
     Reorganize the columns in global_average.csv and all_categories_results.csv
     according to specified order and save to new files.
+    Also calculate relative ratios for quantitative columns.
     """
     base_dir = "surveys"
     
     # Define column orders
     global_columns = [
         "system", "model",
-        "Outline", "Outline_coverage", "Outline_structure", "Outline_no",
+        "Outline", 
+        "Outline_no", "Outline_density", 
+        "Outline_coverage", "Outline_structure", 
         "Coverage", "Structure", "Relevance", "Language", "Criticalness",
-        "Images_density", "Equations_density", "Tables_density", "Citations_density",
-        "Claim_density", "Sentence_no",
-        "Reference", "Reference_density", "Reference_quality", "Reference_no"
+        "Sentence_no", "Images_density", "Equations_density", "Tables_density", "Citations_density","Claim_density", 
+        "Faithfulness",
+        "Reference", 
+        "Reference_no", "Reference_density", 
+        "Reference_quality", 
     ]
     
     category_columns = [
         "system", "model", "category",
-        "Outline_domain", "Outline_coverage", "Outline_structure", "Outline_no",
-        "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain",
-        "Criticalness_domain", "Images_density", "Equations_density", "Tables_density",
-        "Citations_density", "Claim_density", "Sentence_no",
-        "Reference_domain", "Reference_density", "Reference_quality", "Reference_no"
+        "Outline_domain", 
+        "Outline_no", "Outline_density", 
+        "Outline_coverage", "Outline_structure", 
+        "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain", "Criticalness_domain",
+        "Sentence_no", "Images_density", "Equations_density", "Tables_density", "Citations_density","Claim_density", 
+        "Faithfulness",
+        "Reference_domain", 
+        "Reference_no", "Reference_density", 
+        "Reference_quality", 
+    ]
+
+    relative_quantitative_columns = [
+        "Outline_no","Outline_density", 
+        "Sentence_no", "Images_density", "Equations_density", "Tables_density", "Citations_density", "Claim_density",
+        "Reference_no", "Reference_density",
     ]
     
     # Process global_average.csv
@@ -2437,6 +2527,7 @@ def reorganize_results_columns() -> None:
     if os.path.exists(global_avg_path):
         try:
             df = pd.read_csv(global_avg_path)
+            
             # Create new DataFrame with only required columns
             new_df = pd.DataFrame()
             for col in global_columns:
@@ -2444,6 +2535,24 @@ def reorganize_results_columns() -> None:
                     new_df[col] = df[col]
                 else:
                     new_df[col] = ""
+            
+            # Calculate relative ratios for global average
+            for col in relative_quantitative_columns:
+                if col in new_df.columns:
+                    # Get pdfs values for each model
+                    pdfs_values = {}
+                    for model in new_df['model'].unique():
+                        pdfs_row = new_df[(new_df['system'] == 'pdfs') & (new_df['model'] == model)]
+                        if not pdfs_row.empty:
+                            pdfs_values[model] = pdfs_row[col].iloc[0]
+                    
+                    # Calculate relative ratios
+                    new_df[f'{col}_ratio'] = new_df.apply(
+                        lambda row: round(float(row[col]) / float(pdfs_values[row['model']]), 2) 
+                        if row['system'] != 'pdfs' and row[col] != "" and pdfs_values.get(row['model']) != "" 
+                        else "", 
+                        axis=1
+                    )
             
             # Format numeric columns to 2 decimal places
             numeric_cols = new_df.select_dtypes(include=['float64', 'int64']).columns
@@ -2461,6 +2570,7 @@ def reorganize_results_columns() -> None:
     if os.path.exists(all_cats_path):
         try:
             df = pd.read_csv(all_cats_path)
+            
             # Create new DataFrame with only required columns
             new_df = pd.DataFrame()
             for col in category_columns:
@@ -2468,6 +2578,27 @@ def reorganize_results_columns() -> None:
                     new_df[col] = df[col]
                 else:
                     new_df[col] = ""
+            
+            # Calculate relative ratios for category results
+            for col in relative_quantitative_columns:
+                if col in new_df.columns:
+                    # Get pdfs values for each model and category
+                    pdfs_values = {}
+                    for model in new_df['model'].unique():
+                        for category in new_df['category'].unique():
+                            pdfs_row = new_df[(new_df['system'] == 'pdfs') & 
+                                            (new_df['model'] == model) & 
+                                            (new_df['category'] == category)]
+                            if not pdfs_row.empty:
+                                pdfs_values[(model, category)] = pdfs_row[col].iloc[0]
+                    
+                    # Calculate relative ratios
+                    new_df[f'{col}_ratio'] = new_df.apply(
+                        lambda row: round(float(row[col]) / float(pdfs_values.get((row['model'], row['category']), "")), 2)
+                        if row['system'] != 'pdfs' and row[col] != "" and pdfs_values.get((row['model'], row['category'])) != ""
+                        else "",
+                        axis=1
+                    )
             
             # Format numeric columns to 2 decimal places
             numeric_cols = new_df.select_dtypes(include=['float64', 'int64']).columns
@@ -2486,14 +2617,9 @@ def convert_to_latex() -> None:
     Creates two files:
     1. global_average.tex - LaTeX format for global averages
     2. category_average.tex - LaTeX format for category averages
+    Only shows ratio values for quantitative columns.
     """
     base_dir = "surveys"
-    
-    # Define columns that should have percentage
-    percentage_columns = {
-        'Images_density', 'Equations_density', 'Tables_density', 
-        'Citations_density', 'Claim_density', 'Reference_density'
-    }
     
     # Define non-numeric columns
     non_numeric_columns = {'system', 'model', 'category'}
@@ -2528,9 +2654,13 @@ def convert_to_latex() -> None:
                         if col in non_numeric_columns:
                             values.append(str(val))
                         else:
-                            # Add % only for specific columns
-                            if col in percentage_columns:
-                                values.append(f"{float(val):.2f}\\%")
+                            # Use ratio value if it exists
+                            if f"{col}_ratio" in df.columns:
+                                ratio = row[f"{col}_ratio"]
+                                if ratio != "":
+                                    values.append(f"{float(ratio):.2f}")
+                                else:
+                                    values.append("")
                             else:
                                 values.append(f"{float(val):.2f}")
                 
@@ -2584,9 +2714,13 @@ def convert_to_latex() -> None:
                             if col in non_numeric_columns:
                                 values.append(str(val))
                             else:
-                                # Add % only for specific columns
-                                if col in percentage_columns:
-                                    values.append(f"{float(val):.2f}\\%")
+                                # Use ratio value if it exists
+                                if f"{col}_ratio" in df.columns:
+                                    ratio = row[f"{col}_ratio"]
+                                    if ratio != "":
+                                        values.append(f"{float(ratio):.2f}")
+                                    else:
+                                        values.append("")
                                 else:
                                     values.append(f"{float(val):.2f}")
                     
@@ -2602,16 +2736,23 @@ def convert_to_latex() -> None:
                     
                     # Calculate average for numeric columns
                     if col not in non_numeric_columns:
-                        # Convert to float, ignoring empty strings and NaN
-                        valid_values = [float(val) for val in system_df[col] if val != "" and not pd.isna(val)]
-                        if valid_values:
-                            avg = sum(valid_values) / len(valid_values)
-                            if col in percentage_columns:
-                                avg_values.append(f"{avg:.2f}\\%")
+                        # For ratio columns, calculate average of ratios
+                        if f"{col}_ratio" in df.columns:
+                            ratio_col = f"{col}_ratio"
+                            valid_ratios = [float(val) for val in system_df[ratio_col] if val != "" and not pd.isna(val)]
+                            if valid_ratios:
+                                ratio_avg = sum(valid_ratios) / len(valid_ratios)
+                                avg_values.append(f"{ratio_avg:.2f}")
                             else:
-                                avg_values.append(f"{avg:.2f}")
+                                avg_values.append("")
                         else:
-                            avg_values.append("")
+                            # For non-ratio columns, calculate average of original values
+                            valid_values = [float(val) for val in system_df[col] if val != "" and not pd.isna(val)]
+                            if valid_values:
+                                avg = sum(valid_values) / len(valid_values)
+                                avg_values.append(f"{avg:.2f}")
+                            else:
+                                avg_values.append("")
                     else:
                         avg_values.append("")
                 
@@ -2662,6 +2803,7 @@ if __name__ == "__main__":
     # calculate_all_scores(models=["deepseek-r1"])
     # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "pdfs", "SurveyForge", "SurveyX"], "Qwen2.5-72B-Instruct", num_workers=4)
     # calculate_all_scores()
-    evaluate_pairs("surveys/cs/Agent-based Modeling and Simulation using Large Language Models", "AutoSurvey", ["Outline"])
+    evaluate_pairs("surveys/cs/3D Gaussian Splatting Techniques", "AutoSurvey", ["Reference"])
+    # print(evaluate_outline_density("surveys/physics/Modeling Thermodynamic Properties of Deep Eutectic Solvents/pdfs/2303.17159.md"))
 
 
