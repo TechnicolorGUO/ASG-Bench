@@ -2485,7 +2485,7 @@ def reorganize_results_columns() -> None:
     """
     Reorganize the columns in global_average.csv and all_categories_results.csv
     according to specified order and save to new files.
-    Also calculate relative ratios for quantitative columns.
+    Replace original values with ratio values for quantitative columns.
     """
     base_dir = "surveys"
     
@@ -2536,7 +2536,7 @@ def reorganize_results_columns() -> None:
                 else:
                     new_df[col] = ""
             
-            # Calculate relative ratios for global average
+            # Calculate and replace with relative ratios for global average
             for col in relative_quantitative_columns:
                 if col in new_df.columns:
                     # Get pdfs values for each model
@@ -2546,10 +2546,11 @@ def reorganize_results_columns() -> None:
                         if not pdfs_row.empty:
                             pdfs_values[model] = pdfs_row[col].iloc[0]
                     
-                    # Calculate relative ratios
-                    new_df[f'{col}_ratio'] = new_df.apply(
-                        lambda row: round(float(row[col]) / float(pdfs_values[row['model']]), 2) 
-                        if row['system'] != 'pdfs' and row[col] != "" and pdfs_values.get(row['model']) != "" 
+                    # Replace values with ratios
+                    new_df[col] = new_df.apply(
+                        lambda row: 1.00 if row['system'] == 'pdfs' 
+                        else round(float(row[col]) / float(pdfs_values[row['model']]), 2) 
+                        if row[col] != "" and pdfs_values.get(row['model']) != "" 
                         else "", 
                         axis=1
                     )
@@ -2579,7 +2580,7 @@ def reorganize_results_columns() -> None:
                 else:
                     new_df[col] = ""
             
-            # Calculate relative ratios for category results
+            # Calculate and replace with relative ratios for category results
             for col in relative_quantitative_columns:
                 if col in new_df.columns:
                     # Get pdfs values for each model and category
@@ -2592,10 +2593,11 @@ def reorganize_results_columns() -> None:
                             if not pdfs_row.empty:
                                 pdfs_values[(model, category)] = pdfs_row[col].iloc[0]
                     
-                    # Calculate relative ratios
-                    new_df[f'{col}_ratio'] = new_df.apply(
-                        lambda row: round(float(row[col]) / float(pdfs_values.get((row['model'], row['category']), "")), 2)
-                        if row['system'] != 'pdfs' and row[col] != "" and pdfs_values.get((row['model'], row['category'])) != ""
+                    # Replace values with ratios
+                    new_df[col] = new_df.apply(
+                        lambda row: 1.00 if row['system'] == 'pdfs'
+                        else round(float(row[col]) / float(pdfs_values.get((row['model'], row['category']), "")), 2)
+                        if row[col] != "" and pdfs_values.get((row['model'], row['category'])) != ""
                         else "",
                         axis=1
                     )
@@ -2617,9 +2619,36 @@ def convert_to_latex() -> None:
     Creates two files:
     1. global_average.tex - LaTeX format for global averages
     2. category_average.tex - LaTeX format for category averages
-    Only shows ratio values for quantitative columns.
+    Uses the same column order as reorganize_results_columns.
     """
     base_dir = "surveys"
+    
+    # Define column orders (same as in reorganize_results_columns)
+    global_columns = [
+        "system", "model",
+        "Outline", 
+        "Outline_no", "Outline_density", 
+        "Outline_coverage", "Outline_structure", 
+        "Coverage", "Structure", "Relevance", "Language", "Criticalness",
+        "Sentence_no", "Images_density", "Equations_density", "Tables_density", "Citations_density","Claim_density", 
+        "Faithfulness",
+        "Reference", 
+        "Reference_no", "Reference_density", 
+        "Reference_quality", 
+    ]
+    
+    category_columns = [
+        "system", "model", "category",
+        "Outline_domain", 
+        "Outline_no", "Outline_density", 
+        "Outline_coverage", "Outline_structure", 
+        "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain", "Criticalness_domain",
+        "Sentence_no", "Images_density", "Equations_density", "Tables_density", "Citations_density","Claim_density", 
+        "Faithfulness",
+        "Reference_domain", 
+        "Reference_no", "Reference_density", 
+        "Reference_quality", 
+    ]
     
     # Define non-numeric columns
     non_numeric_columns = {'system', 'model', 'category'}
@@ -2643,9 +2672,9 @@ def convert_to_latex() -> None:
                     latex_lines.append(f"\\textbf{{{system}}}")
                     current_system = system
                 
-                # Format the line
+                # Format the line using global_columns order
                 values = []
-                for col in df.columns[2:]:  # Skip system and model columns
+                for col in global_columns[2:]:  # Skip system and model columns
                     val = row[col]
                     if pd.isna(val) or val == "":
                         values.append("")
@@ -2654,15 +2683,7 @@ def convert_to_latex() -> None:
                         if col in non_numeric_columns:
                             values.append(str(val))
                         else:
-                            # Use ratio value if it exists
-                            if f"{col}_ratio" in df.columns:
-                                ratio = row[f"{col}_ratio"]
-                                if ratio != "":
-                                    values.append(f"{float(ratio):.2f}")
-                                else:
-                                    values.append("")
-                            else:
-                                values.append(f"{float(val):.2f}")
+                            values.append(f"{float(val):.2f}")
                 
                 # Create the line
                 line = f"& \\textit{{{model}}} & {' & '.join(values)}\\\\"
@@ -2699,13 +2720,9 @@ def convert_to_latex() -> None:
                 for _, row in system_df.iterrows():
                     category = row['category']  # Using category column instead of model
                     
-                    # Format the line
+                    # Format the line using category_columns order
                     values = []
-                    for col in df.columns[2:]:  # Skip system and model columns
-                        # Skip the category column as we're using it for the row label
-                        if col == 'category':
-                            continue
-                            
+                    for col in category_columns[3:]:  # Skip system, model, and category columns
                         val = row[col]
                         if pd.isna(val) or val == "":
                             values.append("")
@@ -2714,15 +2731,7 @@ def convert_to_latex() -> None:
                             if col in non_numeric_columns:
                                 values.append(str(val))
                             else:
-                                # Use ratio value if it exists
-                                if f"{col}_ratio" in df.columns:
-                                    ratio = row[f"{col}_ratio"]
-                                    if ratio != "":
-                                        values.append(f"{float(ratio):.2f}")
-                                    else:
-                                        values.append("")
-                                else:
-                                    values.append(f"{float(val):.2f}")
+                                values.append(f"{float(val):.2f}")
                     
                     # Create the line
                     line = f"& \\textit{{{category}}} & {' & '.join(values)}\\\\"
@@ -2730,29 +2739,15 @@ def convert_to_latex() -> None:
                 
                 # Add Area-aware ASG-Bench row for this system
                 avg_values = []
-                for col in df.columns[2:]:  # Skip system and model columns
-                    if col == 'category':
-                        continue
-                    
+                for col in category_columns[3:]:  # Skip system, model, and category columns
                     # Calculate average for numeric columns
                     if col not in non_numeric_columns:
-                        # For ratio columns, calculate average of ratios
-                        if f"{col}_ratio" in df.columns:
-                            ratio_col = f"{col}_ratio"
-                            valid_ratios = [float(val) for val in system_df[ratio_col] if val != "" and not pd.isna(val)]
-                            if valid_ratios:
-                                ratio_avg = sum(valid_ratios) / len(valid_ratios)
-                                avg_values.append(f"{ratio_avg:.2f}")
-                            else:
-                                avg_values.append("")
+                        valid_values = [float(val) for val in system_df[col] if val != "" and not pd.isna(val)]
+                        if valid_values:
+                            avg = sum(valid_values) / len(valid_values)
+                            avg_values.append(f"{avg:.2f}")
                         else:
-                            # For non-ratio columns, calculate average of original values
-                            valid_values = [float(val) for val in system_df[col] if val != "" and not pd.isna(val)]
-                            if valid_values:
-                                avg = sum(valid_values) / len(valid_values)
-                                avg_values.append(f"{avg:.2f}")
-                            else:
-                                avg_values.append("")
+                            avg_values.append("")
                     else:
                         avg_values.append("")
                 
