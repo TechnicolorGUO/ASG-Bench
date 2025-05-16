@@ -124,8 +124,8 @@ def evaluate_outline_llm(outline_json_path: str, criteria_type: str = "general")
 def evaluate_outline_coverage(
     outline_json_path: str,
     standard_count: int = 10,      # Reference section count for coverage calculation
-    avg_count: int = 30,           # Ideal/expected section count for length penalty
-    min_section_count: int = 5     # Minimum allowed section count
+    min_section_count: int = 5,    # Minimum allowed section count
+    enable_penalty: bool = False    # Whether to enable length penalty
 ) -> float:
     """
     Evaluate outline coverage score Q', including logarithmic length penalty.
@@ -133,8 +133,8 @@ def evaluate_outline_coverage(
     Args:
         outline_json_path (str): Path to the outline JSON file
         standard_count (int, optional): Reference section count for coverage. Defaults to 10.
-        avg_count (int, optional): Ideal section count for length penalty. Defaults to 30.
         min_section_count (int, optional): Minimum allowed section count. Defaults to 5.
+        enable_penalty (bool, optional): Whether to enable length penalty. Defaults to True.
         
     Returns:
         float: Coverage score between 0 and 100
@@ -162,13 +162,16 @@ def evaluate_outline_coverage(
         O = U / M if M > 0 else 0
         F_harmonic = 2 * R * O / (R + O) if (R + O) > 0 else 0
 
-        # Logarithmic penalty term: normalized by avg_count
-        if M < min_section_count:
-            length_penalty = 0
+        if enable_penalty:
+            avg_count = 30  # Ideal/expected section count for length penalty
+            # Logarithmic penalty term: normalized by avg_count
+            if M < min_section_count:
+                length_penalty = 0
+            else:
+                length_penalty = min(1.0, math.log(max(M, 1) + 1) / math.log(avg_count + 1))
+            Q_prime = F_harmonic * length_penalty
         else:
-            length_penalty = min(1.0, math.log(max(M, 1) + 1) / math.log(avg_count + 1))
-
-        Q_prime = F_harmonic * length_penalty
+            Q_prime = F_harmonic
 
         return round(Q_prime * 100, 4)
 
@@ -592,10 +595,10 @@ def evaluate_content_faithfulness(md_path: str) -> dict:
             continue
 
     if total_count > 0:
-        results["Reference_quality"] = round(supported_count / total_count, 4) * 100
+        results["Faithfulness"] = round(supported_count / total_count, 4) * 100
     else:
-        results["Reference_quality"] = 0
-    print("Reference quality score:", results)
+        results["Faithfulness"] = 0
+    print("Faithfulness score:", results)
     return results
 
 def evaluate_content_faithfulness_parallel(md_path: str, max_workers: int = 4) -> dict:
@@ -757,7 +760,7 @@ def evaluate_content(
             results.update(evaluate_content_faithfulness(md_path))
         except Exception as e:
             print("Error in evaluating content faithfulness:", e)
-            results['Citations_density'] = 0
+            results['Faithfulness'] = 0
     else:
         print("Skip evaluate_content_faithfulness.")
 
@@ -1115,6 +1118,87 @@ def evaluate(
     elapsed_time = end_time - start_time
     print(f"Evaluation completed in {elapsed_time:.2f} seconds.")
     return results
+
+def evaluate_pairs(topic_dir: str, system: str, metrics: list[str]) -> dict:
+    """
+    Compare evaluation scores between pdfs and another system for a given topic directory.
+    
+    Args:
+        topic_dir (str): Path to the topic directory
+        system (str): Name of the system to compare with pdfs
+        metrics (list[str]): List of metrics to evaluate, can include 'outline', 'reference', 'content'
+        
+    Returns:
+        dict: Dictionary containing score differences (system - pdfs) for each metric
+    """
+    results = {}
+    
+    # Get pdfs results
+    pdfs_dir = os.path.join(topic_dir, "pdfs")
+    if not os.path.exists(pdfs_dir):
+        print(f"Error: pdfs directory not found at {pdfs_dir}")
+        return results
+    
+    # Get system results
+    system_dir = os.path.join(topic_dir, system)
+    if not os.path.exists(system_dir):
+        print(f"Error: system directory not found at {system_dir}")
+        return results
+    
+    # Find markdown files
+    pdfs_md = [f for f in os.listdir(pdfs_dir) if f.lower().endswith(".md")]
+    system_md = [f for f in os.listdir(system_dir) if f.lower().endswith(".md")]
+    
+    if not pdfs_md:
+        print(f"Error: No markdown file found in pdfs directory")
+        return results
+    if not system_md:
+        print(f"Error: No markdown file found in system directory")
+        return results
+    
+    pdfs_md_path = os.path.join(pdfs_dir, pdfs_md[0])
+    system_md_path = os.path.join(system_dir, system_md[0])
+    
+    # Evaluate each requested metric
+    for metric in metrics:
+        if metric.lower() == "outline":
+            print("\nEvaluating outline...")
+            pdfs_outline = evaluate_outline(pdfs_md_path)
+            system_outline = evaluate_outline(system_md_path)
+            
+            # Calculate differences
+            for key in pdfs_outline:
+                if key in system_outline:
+                    diff = system_outline[key] - pdfs_outline[key]
+                    results[f"Outline_{key}"] = diff
+                    print(f"{key}: {pdfs_outline[key]:+.4f} | {system_outline[key]:+.4f} | {diff:+.4f}")
+        
+        elif metric.lower() == "reference":
+            print("\nEvaluating reference...")
+            pdfs_reference = evaluate_reference(pdfs_md_path)
+            system_reference = evaluate_reference(system_md_path)
+            
+            # Calculate differences
+            for key in pdfs_reference:
+                if key in system_reference:
+                    diff = system_reference[key] - pdfs_reference[key]
+                    results[f"Reference_{key}"] = diff
+                    print(f"{key}: {pdfs_reference[key]:+.4f} | {system_reference[key]:+.4f} | {diff:+.4f}")
+        
+        elif metric.lower() == "content":
+            print("\nEvaluating content...")
+            pdfs_content = evaluate_content(pdfs_md_path)
+            system_content = evaluate_content(system_md_path)
+            
+            # Calculate differences
+            for key in pdfs_content:
+                if key in system_content:
+                    diff = system_content[key] - pdfs_content[key]
+                    results[f"Content_{key}"] = diff
+                    print(f"{key}: {pdfs_content[key]:+.4f} | {system_content[key]:+.4f} | {diff:+.4f}")
+    
+    return results
+
 
 def process_system(
     md_path: str,
@@ -2577,6 +2661,7 @@ if __name__ == "__main__":
     # aggregate_all_categories_average()
     # calculate_all_scores(models=["deepseek-r1"])
     # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "pdfs", "SurveyForge", "SurveyX"], "Qwen2.5-72B-Instruct", num_workers=4)
-    calculate_all_scores()
+    # calculate_all_scores()
+    evaluate_pairs("surveys/cs/Agent-based Modeling and Simulation using Large Language Models", "AutoSurvey", ["Outline"])
 
 
