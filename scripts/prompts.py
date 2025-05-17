@@ -981,3 +981,90 @@ CRITICALNESS_DOMAIN_CRITERIA = {
         'score 5': 'Transformative Statistical Insight and Innovation\nIncisively deconstructs methodological trade-offs (e.g., bias-variance implications of regularization in sparse regression, pitfalls of post-selection inference). Challenges foundational statistical assumptions (e.g., critiques independence in clustered data, re-examines sufficiency principles in era of big data). Future directions are both technically precise and visionary (e.g., "unify causal discovery algorithms with differential privacy constraints" or "design multi-agent hypothesis testing frameworks for federated learning"). Original contributions include formal proofs of unresolved conjectures, novel taxonomy for emerging statistical paradigms (e.g., "interactive inference" frameworks), or meta-analyses exposing replication failures in high-impact domains.'
     }
 }
+
+# -------------- Ranking Evaluation Prompts --------------
+
+OUTLINE_RANKING_PROMPT = """
+You are given a list of outlines for academic surveys about the topic "{topic}". Each outline is identified by an index number.
+
+Here are the outlines:
+{outlines}
+
+Please rank these outlines based on their quality, considering:
+1. Logical organization and hierarchy
+2. Coverage of key aspects of the topic
+3. Clarity and informativeness of section titles
+4. Balance and progression of topics
+5. Overall structural coherence
+
+Return your ranking as a JSON object where:
+- Keys are the index numbers
+- Values are their ranks (1 being the best, higher numbers indicating lower ranks)
+- All ranks must be unique integers from 1 to n (where n is the number of outlines)
+
+Example format:
+{{
+    "1": 2,
+    "2": 1,
+    "3": 3
+}}
+
+Return only the JSON object without any explanation.
+"""
+
+CONTENT_RANKING_PROMPT = """
+You are given a list of academic survey contents about the topic "{topic}". Each content is identified by an index number.
+
+Here are the contents:
+{contents}
+
+Please rank these contents based on their quality, considering:
+1. Coverage and comprehensiveness
+2. Logical structure and flow
+3. Relevance to the topic
+4. Language quality and academic tone
+5. Critical analysis and insights
+6. Overall coherence and readability
+
+Return your ranking as a JSON object where:
+- Keys are the index numbers
+- Values are their ranks (1 being the best, higher numbers indicating lower ranks)
+- All ranks must be unique integers from 1 to n (where n is the number of contents)
+
+Example format:
+{{
+    "1": 2,
+    "2": 1,
+    "3": 3
+}}
+
+Return only the JSON object without any explanation.
+"""
+
+REFERENCE_RANKING_PROMPT = """
+You are given a list of reference sections from academic surveys about the topic "{topic}". Each reference section is identified by an index number.
+
+Here are the reference sections:
+{references}
+
+Please rank these reference sections based on their quality, considering:
+1. Relevance of references to the topic
+2. Coverage of key works in the field
+3. Recency and comprehensiveness
+4. Citation format consistency
+5. Overall quality and appropriateness
+
+Return your ranking as a JSON object where:
+- Keys are the index numbers
+- Values are their ranks (1 being the best, higher numbers indicating lower ranks)
+- All ranks must be unique integers from 1 to n (where n is the number of reference sections)
+
+Example format:
+{{
+    "1": 2,
+    "2": 1,
+    "3": 3
+}}
+
+Return only the JSON object without any explanation.
+"""

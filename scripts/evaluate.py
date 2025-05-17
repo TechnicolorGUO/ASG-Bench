@@ -8,7 +8,7 @@ import threading
 import time
 import dotenv
 import pandas as pd
-from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA, COVERAGE_DOMAIN_CRITERIA, STRUCTURE_DOMAIN_CRITERIA, RELEVANCE_DOMAIN_CRITERIA, LANGUAGE_DOMAIN_CRITERIA, CRITICALNESS_DOMAIN_CRITERIA
+from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA, COVERAGE_DOMAIN_CRITERIA, STRUCTURE_DOMAIN_CRITERIA, RELEVANCE_DOMAIN_CRITERIA, LANGUAGE_DOMAIN_CRITERIA, CRITICALNESS_DOMAIN_CRITERIA, OUTLINE_RANKING_PROMPT, CONTENT_RANKING_PROMPT, REFERENCE_RANKING_PROMPT
 from reference import extract_refs, split_markdown_content_and_refs
 from utils import build_outline_tree_from_levels, count_md_features, count_sentences, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
 import logging
@@ -1275,6 +1275,129 @@ def evaluate_pairs(topic_dir: str, system: str, metrics: list[str]) -> dict:
     
     return results
 
+def evaluate_topic_ranking(topic_dir: str, metrics: list[str]) -> dict:
+    """
+    Evaluate and rank different systems' outputs for a given topic.
+    
+    Args:
+        topic_dir (str): Path to the topic directory
+        metrics (list[str]): List of metrics to evaluate, can include 'outline', 'content', 'reference'
+        
+    Returns:
+        dict: Dictionary containing rankings for each metric
+    """
+    results = {}
+    
+    # Get all systems in the topic directory
+    systems = [d for d in os.listdir(topic_dir) if os.path.isdir(os.path.join(topic_dir, d))]
+    if not systems:
+        print(f"No systems found in {topic_dir}")
+        return results
+    
+    # Create system to index mapping
+    system_to_index = {system: str(i+1) for i, system in enumerate(systems)}
+    index_to_system = {str(i+1): system for i, system in enumerate(systems)}
+    
+    # Extract topic name from path
+    topic = extract_topic_from_path(topic_dir)
+    
+    # Process each metric
+    for metric in metrics:
+        if metric.lower() == "outline":
+            # Collect outlines from each system
+            outlines = {}
+            for system in systems:
+                outline_path = os.path.join(topic_dir, system, "outline.json")
+                if os.path.exists(outline_path):
+                    try:
+                        with open(outline_path, "r", encoding="utf-8") as f:
+                            outline = json.load(f)
+                            outlines[system_to_index[system]] = "\n".join([json.dumps(item, ensure_ascii=False) for item in outline])
+                    except Exception as e:
+                        print(f"Error reading outline for {system}: {e}")
+            
+            if outlines:
+                # Generate prompt and get ranking
+                prompt = OUTLINE_RANKING_PROMPT.format(
+                    topic=topic,
+                    outlines="\n\n".join([f"Index {idx}:\n{outline}" for idx, outline in outlines.items()])
+                )
+                try:
+                    ranking = judge.judge(prompt)
+                    if isinstance(ranking, dict):
+                        # Convert index-based ranking back to system-based ranking
+                        system_ranking = {index_to_system[idx]: rank for idx, rank in ranking.items()}
+                        results["outline_ranking"] = system_ranking
+                except Exception as e:
+                    print(f"Error getting outline ranking: {e}")
+        
+        elif metric.lower() == "content":
+            # Collect content from each system
+            contents = {}
+            for system in systems:
+                md_files = [f for f in os.listdir(os.path.join(topic_dir, system)) if f.lower().endswith(".md")]
+                if md_files:
+                    try:
+                        with open(os.path.join(topic_dir, system, md_files[0]), "r", encoding="utf-8") as f:
+                            content = f.read()
+                            content_str, _ = split_markdown_content_and_refs(content)
+                            contents[system_to_index[system]] = content_str
+                    except Exception as e:
+                        print(f"Error reading content for {system}: {e}")
+            
+            if contents:
+                # Generate prompt and get ranking
+                prompt = CONTENT_RANKING_PROMPT.format(
+                    topic=topic,
+                    contents="\n\n".join([f"Index {idx}:\n{content}" for idx, content in contents.items()])
+                )
+                try:
+                    ranking = judge.judge(prompt)
+                    if isinstance(ranking, dict):
+                        # Convert index-based ranking back to system-based ranking
+                        system_ranking = {index_to_system[idx]: rank for idx, rank in ranking.items()}
+                        results["content_ranking"] = system_ranking
+                except Exception as e:
+                    print(f"Error getting content ranking: {e}")
+        
+        elif metric.lower() == "reference":
+            # Collect references from each system
+            references = {}
+            for system in systems:
+                ref_path = os.path.join(topic_dir, system, "references.json")
+                if os.path.exists(ref_path):
+                    try:
+                        with open(ref_path, "r", encoding="utf-8") as f:
+                            refs = json.load(f)
+                            references[system_to_index[system]] = "\n".join(refs)
+                    except Exception as e:
+                        print(f"Error reading references for {system}: {e}")
+            
+            if references:
+                # Generate prompt and get ranking
+                prompt = REFERENCE_RANKING_PROMPT.format(
+                    topic=topic,
+                    references="\n\n".join([f"Index {idx}:\n{refs}" for idx, refs in references.items()])
+                )
+                try:
+                    ranking = judge.judge(prompt)
+                    if isinstance(ranking, dict):
+                        # Convert index-based ranking back to system-based ranking
+                        system_ranking = {index_to_system[idx]: rank for idx, rank in ranking.items()}
+                        results["reference_ranking"] = system_ranking
+                except Exception as e:
+                    print(f"Error getting reference ranking: {e}")
+    
+    # Save results to topic directory
+    results_path = os.path.join(topic_dir, "ranking_results.json")
+    try:
+        with open(results_path, "w", encoding="utf-8") as f:
+            json.dump(results, f, ensure_ascii=False, indent=4)
+    except Exception as e:
+        print(f"Error saving ranking results: {e}")
+    
+    return results
+
 def process_system(
     md_path: str,
     model: str,
@@ -1813,8 +1936,9 @@ def clear_scores(cat: str, system: str, model: str, target: str = "All") -> None
     """
     # Define metric groups
     metric_groups = {
-        "Outline": ["Outline", "Outline_domain", "Outline_coverage", "Outline_structure", "Outline_no"],
-        "Content": ["Coverage", "Structure", "Relevance", "Language", "Criticalness",
+        "Outline": ["Outline", "Outline_domain", "Outline_coverage", "Outline_structure", "Outline_no", "Outline_density"],
+        "Content": ["Coverage", "Structure", "Relevance", "Language", "Criticalness", "Faithfulness",
+                    "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain", "Criticalness_domain",
                    "Images_density", "Equations_density", "Tables_density", 
                    "Total_density", "Citations_density", "Sentence_no",
                    "Claim_density"],
@@ -1874,6 +1998,61 @@ def clear_scores(cat: str, system: str, model: str, target: str = "All") -> None
                 json.dump(avg_results_data, f, ensure_ascii=False, indent=4)
         except Exception as e:
             print(f"Error processing {avg_results_path}: {e}")
+
+def clear_all_scores(model: str = None, target: str | list[str] = None) -> None:
+    """
+    Clear all scores for all categories, systems, and models with clear_scores function.
+    
+    Args:
+        model (str, optional): Model name to clear scores for. If None, clear for all models.
+        target (str | list[str], optional): Target metric group(s) to clear. Can be:
+            - A single string: "Outline", "Content", "Reference", or "All"
+            - A list of strings: ["Outline", "Content", "Reference"]
+            - None: clear all metrics
+    """
+    base_dir = "surveys"
+    for cat in os.listdir(base_dir):
+        cat_path = os.path.join(base_dir, cat)
+        # Check if it is a directory
+        if os.path.isdir(cat_path):
+            # Get all topics in this category
+            for topic in os.listdir(cat_path):
+                topic_path = os.path.join(cat_path, topic)
+                if os.path.isdir(topic_path):
+                    # Get all systems in this topic
+                    for system in os.listdir(topic_path):
+                        system_path = os.path.join(topic_path, system)
+                        if os.path.isdir(system_path):
+                            # Check if there are any result files
+                            if model is None:
+                                # Clear all result files for this system
+                                results_files = [f for f in os.listdir(system_path) if f.startswith("results_") and f.endswith(".json")]
+                                for results_file in results_files:
+                                    current_model = results_file.replace("results_", "").replace(".json", "")
+                                    try:
+                                        if target is None:
+                                            clear_scores(cat, system, current_model, "All")
+                                        elif isinstance(target, str):
+                                            clear_scores(cat, system, current_model, target)
+                                        else:  # target is a list
+                                            for t in target:
+                                                clear_scores(cat, system, current_model, t)
+                                    except Exception as e:
+                                        print(f"Error clearing scores for {cat}/{topic}/{system}/{current_model}: {e}")
+                            else:
+                                # Clear specific model's result file
+                                results_file = f"results_{model}.json"
+                                if os.path.exists(os.path.join(system_path, results_file)):
+                                    try:
+                                        if target is None:
+                                            clear_scores(cat, system, model, "All")
+                                        elif isinstance(target, str):
+                                            clear_scores(cat, system, model, target)
+                                        else:  # target is a list
+                                            for t in target:
+                                                clear_scores(cat, system, model, t)
+                                    except Exception as e:
+                                        print(f"Error clearing scores for {cat}/{topic}/{system}/{model}: {e}")
 
 def supplement_missing_scores(cat: str = None, model: str = None, system: str = None) -> None:
     """
@@ -2468,7 +2647,7 @@ def calculate_all_scores(
     # Step 7: Reorganize results columns
     print("\nStep 7: Reorganizing results columns...")
     try:
-        reorganize_results_columns()
+        reorganize_results_columns(systems=systems, models=models)
     except Exception as e:
         print(f"Error reorganizing results columns: {e}")
     
@@ -2481,11 +2660,15 @@ def calculate_all_scores(
     
     print("\nComprehensive score calculation completed!")
 
-def reorganize_results_columns() -> None:
+def reorganize_results_columns(systems: list[str] = None, models: list[str] = None) -> None:
     """
     Reorganize the columns in global_average.csv and all_categories_results.csv
     according to specified order and save to new files.
     Replace original values with ratio values for quantitative columns.
+    
+    Args:
+        systems (list[str], optional): List of system names to process. If None, process all systems.
+        models (list[str], optional): List of model names to process. If None, process all models.
     """
     base_dir = "surveys"
     
@@ -2528,41 +2711,48 @@ def reorganize_results_columns() -> None:
         try:
             df = pd.read_csv(global_avg_path)
             
-            # Create new DataFrame with only required columns
-            new_df = pd.DataFrame()
-            for col in global_columns:
-                if col in df.columns:
-                    new_df[col] = df[col]
-                else:
-                    new_df[col] = ""
+            # Filter by systems and models if specified
+            if systems is not None:
+                df = df[df['system'].isin(systems)]
+            if models is not None:
+                df = df[df['model'].isin(models)]
             
-            # Calculate and replace with relative ratios for global average
-            for col in relative_quantitative_columns:
-                if col in new_df.columns:
-                    # Get pdfs values for each model
-                    pdfs_values = {}
-                    for model in new_df['model'].unique():
-                        pdfs_row = new_df[(new_df['system'] == 'pdfs') & (new_df['model'] == model)]
-                        if not pdfs_row.empty:
-                            pdfs_values[model] = pdfs_row[col].iloc[0]
-                    
-                    # Replace values with ratios
-                    new_df[col] = new_df.apply(
-                        lambda row: 1.00 if row['system'] == 'pdfs' 
-                        else round(float(row[col]) / float(pdfs_values[row['model']]), 2) 
-                        if row[col] != "" and pdfs_values.get(row['model']) != "" 
-                        else "", 
-                        axis=1
-                    )
-            
-            # Format numeric columns to 2 decimal places
-            numeric_cols = new_df.select_dtypes(include=['float64', 'int64']).columns
-            new_df[numeric_cols] = new_df[numeric_cols].round(2).applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else "")
-            
-            # Save to new file
-            output_path = os.path.join(base_dir, "global_average_reorganized.csv")
-            new_df.to_csv(output_path, index=False)
-            print(f"Reorganized global averages saved to {output_path}")
+            if not df.empty:
+                # Create new DataFrame with only required columns
+                new_df = pd.DataFrame()
+                for col in global_columns:
+                    if col in df.columns:
+                        new_df[col] = df[col]
+                    else:
+                        new_df[col] = ""
+                
+                # Calculate and replace with relative ratios for global average
+                for col in relative_quantitative_columns:
+                    if col in new_df.columns:
+                        # Get pdfs values for each model
+                        pdfs_values = {}
+                        for model in new_df['model'].unique():
+                            pdfs_row = new_df[(new_df['system'] == 'pdfs') & (new_df['model'] == model)]
+                            if not pdfs_row.empty:
+                                pdfs_values[model] = pdfs_row[col].iloc[0]
+                        
+                        # Replace values with ratios
+                        new_df[col] = new_df.apply(
+                            lambda row: 1.00 if row['system'] == 'pdfs' 
+                            else round(float(row[col]) / float(pdfs_values[row['model']]), 2) 
+                            if row[col] != "" and pdfs_values.get(row['model']) != "" 
+                            else "", 
+                            axis=1
+                        )
+                
+                # Format numeric columns to 2 decimal places
+                numeric_cols = new_df.select_dtypes(include=['float64', 'int64']).columns
+                new_df[numeric_cols] = new_df[numeric_cols].round(2).applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else "")
+                
+                # Save to new file
+                output_path = os.path.join(base_dir, "global_average_reorganized.csv")
+                new_df.to_csv(output_path, index=False)
+                print(f"Reorganized global averages saved to {output_path}")
         except Exception as e:
             print(f"Error processing global_average.csv: {e}")
     
@@ -2572,44 +2762,51 @@ def reorganize_results_columns() -> None:
         try:
             df = pd.read_csv(all_cats_path)
             
-            # Create new DataFrame with only required columns
-            new_df = pd.DataFrame()
-            for col in category_columns:
-                if col in df.columns:
-                    new_df[col] = df[col]
-                else:
-                    new_df[col] = ""
+            # Filter by systems and models if specified
+            if systems is not None:
+                df = df[df['system'].isin(systems)]
+            if models is not None:
+                df = df[df['model'].isin(models)]
             
-            # Calculate and replace with relative ratios for category results
-            for col in relative_quantitative_columns:
-                if col in new_df.columns:
-                    # Get pdfs values for each model and category
-                    pdfs_values = {}
-                    for model in new_df['model'].unique():
-                        for category in new_df['category'].unique():
-                            pdfs_row = new_df[(new_df['system'] == 'pdfs') & 
-                                            (new_df['model'] == model) & 
-                                            (new_df['category'] == category)]
-                            if not pdfs_row.empty:
-                                pdfs_values[(model, category)] = pdfs_row[col].iloc[0]
-                    
-                    # Replace values with ratios
-                    new_df[col] = new_df.apply(
-                        lambda row: 1.00 if row['system'] == 'pdfs'
-                        else round(float(row[col]) / float(pdfs_values.get((row['model'], row['category']), "")), 2)
-                        if row[col] != "" and pdfs_values.get((row['model'], row['category'])) != ""
-                        else "",
-                        axis=1
-                    )
-            
-            # Format numeric columns to 2 decimal places
-            numeric_cols = new_df.select_dtypes(include=['float64', 'int64']).columns
-            new_df[numeric_cols] = new_df[numeric_cols].round(2).applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else "")
-            
-            # Save to new file
-            output_path = os.path.join(base_dir, "all_categories_results_reorganized.csv")
-            new_df.to_csv(output_path, index=False)
-            print(f"Reorganized category results saved to {output_path}")
+            if not df.empty:
+                # Create new DataFrame with only required columns
+                new_df = pd.DataFrame()
+                for col in category_columns:
+                    if col in df.columns:
+                        new_df[col] = df[col]
+                    else:
+                        new_df[col] = ""
+                
+                # Calculate and replace with relative ratios for category results
+                for col in relative_quantitative_columns:
+                    if col in new_df.columns:
+                        # Get pdfs values for each model and category
+                        pdfs_values = {}
+                        for model in new_df['model'].unique():
+                            for category in new_df['category'].unique():
+                                pdfs_row = new_df[(new_df['system'] == 'pdfs') & 
+                                                (new_df['model'] == model) & 
+                                                (new_df['category'] == category)]
+                                if not pdfs_row.empty:
+                                    pdfs_values[(model, category)] = pdfs_row[col].iloc[0]
+                        
+                        # Replace values with ratios
+                        new_df[col] = new_df.apply(
+                            lambda row: 1.00 if row['system'] == 'pdfs'
+                            else round(float(row[col]) / float(pdfs_values.get((row['model'], row['category']), "")), 2)
+                            if row[col] != "" and pdfs_values.get((row['model'], row['category'])) != ""
+                            else "",
+                            axis=1
+                        )
+                
+                # Format numeric columns to 2 decimal places
+                numeric_cols = new_df.select_dtypes(include=['float64', 'int64']).columns
+                new_df[numeric_cols] = new_df[numeric_cols].round(2).applymap(lambda x: f"{x:.2f}" if pd.notnull(x) else "")
+                
+                # Save to new file
+                output_path = os.path.join(base_dir, "all_categories_results_reorganized.csv")
+                new_df.to_csv(output_path, index=False)
+                print(f"Reorganized category results saved to {output_path}")
         except Exception as e:
             print(f"Error processing all_categories_results.csv: {e}")
 
@@ -2677,7 +2874,7 @@ def convert_to_latex() -> None:
                 for col in global_columns[2:]:  # Skip system and model columns
                     val = row[col]
                     if pd.isna(val) or val == "":
-                        values.append("")
+                        values.append("-")  # Replace empty values with dash
                     else:
                         # Skip formatting for non-numeric columns
                         if col in non_numeric_columns:
@@ -2725,7 +2922,7 @@ def convert_to_latex() -> None:
                     for col in category_columns[3:]:  # Skip system, model, and category columns
                         val = row[col]
                         if pd.isna(val) or val == "":
-                            values.append("")
+                            values.append("-")  # Replace empty values with dash
                         else:
                             # Skip formatting for non-numeric columns
                             if col in non_numeric_columns:
@@ -2747,9 +2944,9 @@ def convert_to_latex() -> None:
                             avg = sum(valid_values) / len(valid_values)
                             avg_values.append(f"{avg:.2f}")
                         else:
-                            avg_values.append("")
+                            avg_values.append("-")  # Replace empty values with dash
                     else:
-                        avg_values.append("")
+                        avg_values.append("-")  # Replace empty values with dash
                 
                 # Add the Area-aware ASG-Bench line
                 line = f"& Area-aware ASG-Bench & {' & '.join(avg_values)}\\\\"
@@ -2763,6 +2960,33 @@ def convert_to_latex() -> None:
             
         except Exception as e:
             print(f"Error processing category average: {e}")
+
+def delete_system(systems: list[str]) -> None:
+    """
+    Delete specified system folders under all topics in all categories.
+    
+    Args:
+        systems (list[str]): List of system names to delete
+    """
+    base_dir = "surveys"
+    for cat in os.listdir(base_dir):
+        cat_path = os.path.join(base_dir, cat)
+        # Check if it is a directory
+        if os.path.isdir(cat_path):
+            # Get all topics in this category
+            for topic in os.listdir(cat_path):
+                topic_path = os.path.join(cat_path, topic)
+                if os.path.isdir(topic_path):
+                    # Check each system
+                    for system in systems:
+                        system_path = os.path.join(topic_path, system)
+                        if os.path.exists(system_path):
+                            try:
+                                import shutil
+                                shutil.rmtree(system_path)
+                                print(f"Deleted {cat}/{topic}/{system}")
+                            except Exception as e:
+                                print(f"Error deleting {cat}/{topic}/{system}: {e}")
 
 if __name__ == "__main__":
     # 测试代码
@@ -2787,7 +3011,8 @@ if __name__ == "__main__":
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
     # surveys\cs\3D Gaussian Splatting Techniques\InteractiveSurvey
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/InteractiveSurvey/survey_3D Gaussian Splatting Techniques.md")
-    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "SurveyForge", "SurveyX","vanilla","vanilla_outline", "pdfs"], "gpt-4o-1", num_workers=4)
+    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "SurveyForge", "SurveyX", "pdfs"], "qwen-plus-latest", num_workers=4)
+    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "SurveyForge", "SurveyX", "pdfs"], "qwen-plus-latest", num_workers=4, criteria_type="domain")
     # evaluate("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md")
     # print(evaluate_content_informativeness("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
     # print(evaluate_content_llm_simultaneous("surveys/cs/3D Gaussian Splatting Techniques/AutoSurvey/3D Gaussian Splatting Techniques.md"))
@@ -2797,8 +3022,10 @@ if __name__ == "__main__":
     # aggregate_all_categories_average()
     # calculate_all_scores(models=["deepseek-r1"])
     # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "pdfs", "SurveyForge", "SurveyX"], "Qwen2.5-72B-Instruct", num_workers=4)
-    # calculate_all_scores()
-    evaluate_pairs("surveys/cs/3D Gaussian Splatting Techniques", "AutoSurvey", ["Reference"])
+    calculate_all_scores(models=["qwen-plus-latest"])
+    # evaluate_pairs("surveys/cs/3D Gaussian Splatting Techniques", "AutoSurvey", ["Reference"])
     # print(evaluate_outline_density("surveys/physics/Modeling Thermodynamic Properties of Deep Eutectic Solvents/pdfs/2303.17159.md"))
+    # delete_system(["vanilla", "vanilla_outline"])
+    # evaluate_topic_ranking("surveys/cs/3D Gaussian Splatting Techniques", ["Outline", "Content", "Reference"])
 
 
