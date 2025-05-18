@@ -1068,3 +1068,81 @@ Example format:
 
 Return only the JSON object without any explanation.
 """
+
+# -------------- Comparison Prompts --------------
+
+OUTLINE_COMPARISON_PROMPT = """
+You are given two outlines for academic surveys about the topic "{topic}". Please compare these outlines and determine which one is better.
+
+Outline 1:
+{outline_1}
+
+Outline 2:
+{outline_2}
+
+Please compare these outlines and determine if Outline 1 is better than Outline 2, considering:
+1. Logical organization and hierarchy
+2. Coverage of key aspects of the topic
+3. Clarity and informativeness of section titles
+4. Balance and progression of topics
+5. Overall structural coherence
+
+Return your answer as a JSON object:
+{{
+    "is_better": true/false,  // whether Outline 1 is better than Outline 2
+    "reason": "brief explanation of your decision"
+}}
+
+Return only the JSON object without any explanation.
+"""
+
+CONTENT_COMPARISON_PROMPT = """
+You are given two academic survey contents about the topic "{topic}". Please compare these contents and determine which one is better.
+
+Content 1:
+{content_1}
+
+Content 2:
+{content_2}
+
+Please compare these contents and determine if Content 1 is better than Content 2, considering:
+1. Coverage and comprehensiveness of the topic
+2. Logical structure and flow
+3. Relevance and accuracy of information
+4. Quality of language and readability
+5. Depth of critical analysis
+6. Overall effectiveness as a survey
+
+Return your answer as a JSON object:
+{{
+    "is_better": true/false,  // whether Content 1 is better than Content 2
+    "reason": "brief explanation of your decision"
+}}
+
+Return only the JSON object without any explanation.
+"""
+
+REFERENCE_COMPARISON_PROMPT = """
+You are given two reference sections from academic surveys about the topic "{topic}". Please compare these references and determine which one is better.
+
+References 1:
+{references_1}
+
+References 2:
+{references_2}
+
+Please compare these references and determine if References 1 is better than References 2, considering:
+1. Relevance to the topic
+2. Coverage of key works in the field
+3. Recency and timeliness
+4. Consistency in citation format
+5. Overall quality and comprehensiveness
+
+Return your answer as a JSON object:
+{{
+    "is_better": true/false,  // whether References 1 is better than References 2
+    "reason": "brief explanation of your decision"
+}}
+
+Return only the JSON object without any explanation.
+"""

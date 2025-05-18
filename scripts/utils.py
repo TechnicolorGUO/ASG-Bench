@@ -5,13 +5,34 @@ import re
 import shlex
 import shutil
 import subprocess
+import logging
+from datetime import datetime
 from openai import OpenAI
 
 from dotenv import load_dotenv
 import requests
 
 from prompts import OUTLINE_REFINE_PROMPT
-from reference import split_markdown_content_and_refs
+from reference import extract_refs, split_markdown_content_and_refs, parse_markdown
+import nltk
+from nltk.corpus import stopwords, wordnet
+from nltk.tokenize import word_tokenize
+from collections import Counter
+
+# Download required NLTK data
+# try:
+#     nltk.data.find('tokenizers/punkt')
+# except LookupError:
+#     nltk.download('punkt')
+# try:
+#     nltk.data.find('corpora/stopwords')
+# except LookupError:
+#     nltk.download('stopwords')
+# try:
+#     nltk.data.find('corpora/wordnet')
+# except LookupError:
+#     nltk.download('wordnet')
+
 load_dotenv()
 
 # --------------OpenAI/LLM Related Functions-------------
@@ -45,6 +66,23 @@ def generateResponse(client: OpenAI, prompt: str, max_tokens: int = 4096, temper
     Returns:
         str: Generated response text
     """
+    # Configure logging
+    logging.basicConfig(
+        filename='llm_responses.log',
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s'
+    )
+    
+    # Log request information
+    request_info = {
+        'timestamp': datetime.now().isoformat(),
+        'model': os.environ.get("MODEL"),
+        'max_tokens': max_tokens,
+        'temperature': temperature,
+        'prompt_length': len(prompt)
+    }
+    logging.info(f"Request: {json.dumps(request_info)}")
+    
     chat_response = client.chat.completions.create(
         model=os.environ.get("MODEL"),
         max_tokens=max_tokens,
@@ -53,11 +91,19 @@ def generateResponse(client: OpenAI, prompt: str, max_tokens: int = 4096, temper
         stream=True,
         messages=[{"role": "user", "content": prompt}]
     )
-
     text = ""
     for chunk in chat_response:
         if chunk.choices[0].delta.content:
             text += chunk.choices[0].delta.content
+    
+    # Log response information
+    response_info = {
+        'timestamp': datetime.now().isoformat(),
+        'response_length': len(text),
+        'response_preview': text[:100] + '...' if len(text) > 100 else text
+    }
+    logging.info(f"Response: {json.dumps(response_info)}")
+    
     return text
 
 def get_deduplication_prompt(facts_list: list[str]) -> str:
@@ -122,7 +168,6 @@ def get_extraction_prompt(text: str) -> str:
 
     [Output Format]
     Strict numbered list with consolidated claims maintaining grammatical integrity:
-    1. Use "and/or/including" for merged items
     2. Separate parallel elements with commas
     3. Prohibit abbreviations or contextual references
 
@@ -613,6 +658,261 @@ def fill_single_criterion_prompt(
     }
     return prompt_template.format(**format_args)
 
+def is_valid_word(word: str) -> bool:
+    """
+    Check if a word is a valid English word.
+    
+    Args:
+        word: Word to check
+        
+    Returns:
+        bool: True if word is valid
+    """
+    # Must be at least 3 characters long
+    if len(word) < 3:
+        return False
+        
+    # Must contain at least one vowel
+    if not any(c in 'aeiouy' for c in word.lower()):
+        return False
+        
+    # Must not contain numbers
+    if any(c.isdigit() for c in word):
+        return False
+        
+    # Must not be all uppercase (likely an acronym)
+    if word.isupper() and len(word) > 1:
+        return False
+        
+    # Must be in WordNet or be a common technical term
+    if wordnet.synsets(word) or word in TECHNICAL_TERMS:
+        return True
+        
+    return False
+
+
+# Common technical terms that might not be in WordNet
+TECHNICAL_TERMS = {
+    'gpu', 'cpu', 'api', 'url', 'http', 'https', 'json', 'xml', 'html', 'css',
+    'javascript', 'python', 'java', 'c++', 'c#', 'ruby', 'php', 'sql', 'nosql',
+    'mongodb', 'mysql', 'postgresql', 'redis', 'docker', 'kubernetes', 'aws',
+    'azure', 'gcp', 'cloud', 'serverless', 'microservice', 'api', 'rest',
+    'graphql', 'websocket', 'tcp', 'udp', 'ip', 'dns', 'ssl', 'tls', 'ssh',
+    'ftp', 'smtp', 'pop3', 'imap', 'ldap', 'oauth', 'jwt', 'jwt', 'jwt',
+    'token', 'session', 'cookie', 'cache', 'cdn', 'dns', 'domain', 'subdomain',
+    'endpoint', 'route', 'path', 'query', 'parameter', 'header', 'body',
+    'request', 'response', 'status', 'code', 'error', 'exception', 'stack',
+    'trace', 'log', 'debug', 'info', 'warn', 'error', 'fatal', 'level',
+    'config', 'setting', 'environment', 'variable', 'constant', 'enum',
+    'interface', 'class', 'object', 'method', 'function', 'procedure',
+    'routine', 'module', 'package', 'library', 'framework', 'sdk', 'api',
+    'toolkit', 'plugin', 'extension', 'addon', 'widget', 'component',
+    'element', 'node', 'edge', 'vertex', 'graph', 'tree', 'forest', 'heap',
+    'stack', 'queue', 'list', 'array', 'vector', 'matrix', 'tensor',
+    'scalar', 'vector', 'matrix', 'tensor', 'gradient', 'derivative',
+    'integral', 'sum', 'product', 'quotient', 'remainder', 'modulo',
+    'exponent', 'root', 'logarithm', 'sine', 'cosine', 'tangent',
+    'hyperbolic', 'trigonometric', 'algebraic', 'geometric', 'arithmetic',
+    'statistical', 'probabilistic', 'stochastic', 'deterministic',
+    'algorithmic', 'computational', 'numerical', 'analytical', 'symbolic',
+    'logical', 'boolean', 'binary', 'ternary', 'quaternary', 'quinary',
+    'senary', 'septenary', 'octal', 'decimal', 'hexadecimal', 'octal',
+    'binary', 'decimal', 'hexadecimal', 'octal', 'binary', 'decimal',
+    'hexadecimal', 'octal', 'binary', 'decimal', 'hexadecimal'
+}
+
+def extract_high_frequency_words(category: str, top_n: int = 100) -> None:
+    """
+    Extract high frequency words from outlines and markdown files in a category.
+    
+    Args:
+        category: Category name (e.g., 'econ')
+        top_n: Number of top frequency words to extract
+    """
+    # Initialize stopwords
+    stop_words = set(stopwords.words('english'))
+    # Add custom stopwords
+    custom_stop_words = {
+        'et', 'al', 'e.g', 'i.e', 'fig', 'table', 'section', 'chapter',
+        'figure', 'figures', 'tables', 'sections', 'chapters', 'paper',
+        'study', 'studies', 'research', 'researchers', 'authors', 'author',
+        'review', 'reviews', 'survey', 'surveys', 'analysis', 'analyses',
+        'method', 'methods', 'approach', 'approaches', 'result', 'results',
+        'conclusion', 'conclusions', 'introduction', 'background', 'related',
+        'work', 'works', 'literature', 'discussion', 'discussions', 'summary',
+        'summaries', 'overview', 'overviews', 'example', 'examples', 'case',
+        'cases', 'model', 'models', 'framework', 'frameworks', 'system',
+        'systems', 'algorithm', 'algorithms', 'technique', 'techniques',
+        'methodology', 'methodologies', 'experiment', 'experiments',
+        'evaluation', 'evaluations', 'performance', 'performances',
+        'implementation', 'implementations', 'application', 'applications',
+        'development', 'developments', 'design', 'designs', 'process',
+        'processes', 'analysis', 'analyses', 'evaluation', 'evaluations',
+        'comparison', 'comparisons', 'comparative', 'comparatively',
+        'experimental', 'experimentally', 'theoretical', 'theoretically',
+        'empirical', 'empirically', 'practical', 'practically', 'technical',
+        'technically', 'theoretical', 'theoretically', 'empirical',
+        'empirically', 'practical', 'practically', 'technical', 'technically',
+        'theoretical', 'theoretically', 'empirical', 'empirically',
+        'practical', 'practically', 'technical', 'technically'
+    }
+    stop_words.update(custom_stop_words)
+    
+    # Initialize word counter
+    word_counter = Counter()
+    
+    # Process all topic directories in the category
+    category_dir = os.path.join("surveys", category)
+    if not os.path.exists(category_dir):
+        print(f"Category directory {category_dir} does not exist")
+        return
+        
+    for topic_dir in os.listdir(category_dir):
+        topic_path = os.path.join(category_dir, topic_dir)
+        if not os.path.isdir(topic_path):
+            continue
+            
+        pdfs_dir = os.path.join(topic_path, "pdfs")
+        if not os.path.exists(pdfs_dir):
+            continue
+            
+        # Process outline files
+        outline_path = os.path.join(pdfs_dir, "outline_raw.json")
+        if os.path.exists(outline_path):
+            try:
+                with open(outline_path, 'r', encoding='utf-8') as f:
+                    outline_data = json.load(f)
+                    # Extract text from outline (assuming list of [level, title] pairs)
+                    outline_text = ' '.join([
+                        str(item[1]) if isinstance(item, list) and len(item) > 1 else str(item)
+                        for item in outline_data
+                    ])
+                    # Tokenize and count words
+                    words = word_tokenize(outline_text.lower())
+                    # Filter words
+                    words = [
+                        word for word in words 
+                        if word.isalnum() 
+                        and word not in stop_words 
+                        and is_valid_word(word)
+                    ]
+                    word_counter.update(words)
+            except Exception as e:
+                print(f"Error processing outline {outline_path}: {e}")
+        
+        # Process markdown files
+        for file in os.listdir(pdfs_dir):
+            if file.endswith('.md'):
+                md_path = os.path.join(pdfs_dir, file)
+                try:
+                    with open(md_path, 'r', encoding='utf-8') as f:
+                        md_text = f.read()
+                        # Remove code blocks
+                        md_text = re.sub(r'```.*?```', '', md_text, flags=re.DOTALL)
+                        # Remove inline code
+                        md_text = re.sub(r'`.*?`', '', md_text)
+                        # Remove URLs
+                        md_text = re.sub(r'http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', '', md_text)
+                        # Remove email addresses
+                        md_text = re.sub(r'[\w\.-]+@[\w\.-]+', '', md_text)
+                        # Remove special characters
+                        md_text = re.sub(r'[^\w\s]', ' ', md_text)
+                        # Tokenize and count words
+                        words = word_tokenize(md_text.lower())
+                        # Filter words
+                        words = [
+                            word for word in words 
+                            if word.isalnum() 
+                            and word not in stop_words 
+                            and is_valid_word(word)
+                        ]
+                        word_counter.update(words)
+                except Exception as e:
+                    print(f"Error processing markdown {md_path}: {e}")
+    
+    # Get top N words
+    top_words = word_counter.most_common(top_n)
+    
+    # Save results
+    output_path = os.path.join(category_dir, "high_frequency_words.json")
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump({
+            "words": [{"word": word, "count": count} for word, count in top_words]
+        }, f, indent=2, ensure_ascii=False)
+    
+    print(f"Saved top {len(top_words)} frequent words to {output_path}")
+
+def process_and_evaluate_pdf(pdf_path: str) -> dict:
+    """
+    Process a PDF file and evaluate all metrics (both general and domain-specific).
+    
+    Args:
+        pdf_path (str): Path to the PDF file
+        
+    Returns:
+        dict: Dictionary containing all evaluation results
+    """
+    from evaluate import evaluate
+    
+    # Get directory and filename
+    pdf_dir = os.path.dirname(pdf_path)
+    pdf_name = os.path.basename(pdf_path)
+    pdf_stem = os.path.splitext(pdf_name)[0]
+    
+    # Step 1: Convert PDF to markdown
+    print(f"Converting PDF to markdown: {pdf_path}")
+    if os.path.exists(os.path.join(pdf_dir, pdf_stem + ".md")):
+        md_path = os.path.join(pdf_dir, pdf_stem + ".md")
+    else:
+        md_path, md_content = pdf2md(pdf_path, pdf_dir)
+        if not md_path:
+            print(f"Failed to convert PDF: {pdf_path}")
+        return {}
+    
+    # Step 2: Extract and refine outline
+
+    # Step 3: Extract references using reference.py logic 
+    extract_refs(input_file=md_path, output_folder=os.path.dirname(md_path))
+    # Save sentence-reference mapping
+    
+    # Step 4: Evaluate with general criteria
+    print("Evaluating with general criteria...")
+    general_results = evaluate(
+        md_path=md_path,
+        do_outline=True,
+        do_content=True,
+        do_reference=True,
+        criteria_type="general"
+    )
+    
+    # Step 5: Evaluate with domain-specific criteria
+    print("Evaluating with domain-specific criteria...")
+    domain_results = evaluate(
+        md_path=md_path,
+        do_outline=True,
+        do_content=True,
+        do_reference=True,
+        criteria_type="domain"
+    )
+    
+    # Combine results
+    all_results = {
+        "general": general_results,
+        "domain": domain_results,
+        "metadata": {
+            "pdf_path": pdf_path,
+            "md_path": md_path
+        }
+    }
+    
+    # # Save combined results
+    # results_path = os.path.join(pdf_dir, "all_results.json")
+    # with open(results_path, "w", encoding="utf-8") as f:
+    #     json.dump(all_results, f, ensure_ascii=False, indent=2)
+    
+    # print(f"All results saved to: {results_path}")
+    return all_results
+
 if __name__ == "__main__":
     # # 测试提取大纲
     # md_file_path = "surveys/cs/Optimization Techniques for Transformer Inference/pdfs/2307.07982.md"
@@ -630,4 +930,6 @@ if __name__ == "__main__":
     # print(count_md_features(md_content))
     # refine_outline_if_single_level("surveys\cs\Optimization Techniques for Transformer Inference\pdfs\outline_raw.json", "surveys\cs\Optimization Techniques for Transformer Inference\pdfs\outline.json")
     # batch_pdf2md_in_surveys()
-    count_md_files()
+    # extract_high_frequency_words("econ")
+    process_and_evaluate_pdf("temp/2411.15594v5.pdf")
+    # print(extract_references_from_md("temp/2411.15594v5.md"))

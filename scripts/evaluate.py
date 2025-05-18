@@ -8,11 +8,14 @@ import threading
 import time
 import dotenv
 import pandas as pd
-from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA, COVERAGE_DOMAIN_CRITERIA, STRUCTURE_DOMAIN_CRITERIA, RELEVANCE_DOMAIN_CRITERIA, LANGUAGE_DOMAIN_CRITERIA, CRITICALNESS_DOMAIN_CRITERIA, OUTLINE_RANKING_PROMPT, CONTENT_RANKING_PROMPT, REFERENCE_RANKING_PROMPT
+from prompts import CONTENT_EVALUATION_PROMPT, CONTENT_FAITHFULNESS_PROMPT, OUTLINE_EVALUATION_PROMPT, CRITERIA, OUTLINE_STRUCTURE_PROMPT, REFERENCE_EVALUATION_PROMPT, OUTLINE_COVERAGE_PROMPT, REFERENCE_QUALITY_PROMPT, CONTENT_EVALUATION_SIMULTANEOUS_PROMPT, OUTLINE_DOMAIN_CRITERIA, REFERENCE_DOMAIN_CRITERIA, COVERAGE_DOMAIN_CRITERIA, STRUCTURE_DOMAIN_CRITERIA, RELEVANCE_DOMAIN_CRITERIA, LANGUAGE_DOMAIN_CRITERIA, CRITICALNESS_DOMAIN_CRITERIA, OUTLINE_RANKING_PROMPT, CONTENT_RANKING_PROMPT, REFERENCE_RANKING_PROMPT, OUTLINE_COMPARISON_PROMPT, CONTENT_COMPARISON_PROMPT, REFERENCE_COMPARISON_PROMPT
 from reference import extract_refs, split_markdown_content_and_refs
 from utils import build_outline_tree_from_levels, count_md_features, count_sentences, extract_and_save_outline_from_md, extract_references_from_md, extract_topic_from_path, getClient, generateResponse, pdf2md, refine_outline_if_single_level, robust_json_parse,fill_single_criterion_prompt, read_md
 import logging
 from atomic_facts import extract_and_deduplicate_facts, extract_facts_only
+import csv
+import random
+from tqdm import tqdm
 
 class Judge:
     """
@@ -796,6 +799,12 @@ def evaluate_content(
         "Total_density", "Claim_density", 
     ]
     
+    with open(md_path, "r", encoding="utf-8") as f:
+        content_str = f.read()
+    content, _ = split_markdown_content_and_refs(content_str)
+    content_path = os.path.join(os.path.dirname(md_path), "content.json")
+    with open(content_path, "w", encoding="utf-8") as f:
+        json.dump([content], f, ensure_ascii=False, indent=4)
     # 1. LLM evaluation
     if do_llm:
         try:
@@ -1083,6 +1092,451 @@ def evaluate_reference(
         print("Skip evaluate_reference_number.")
     return results
 
+# ------------- Relative Comparison Functions -------------
+def compare_with_pdfs(topic_dir: str, system: str, metrics: list[str], modelname: str) -> dict:
+    """
+    Compare a system's output with PDFs for a given topic.
+    
+    Args:
+        topic_dir (str): Path to the topic directory
+        system (str): Name of the system to compare with PDFs
+        metrics (list[str]): List of metrics to evaluate, can include 'outline', 'content', 'reference'
+        modelname (str): Name of the evaluation model
+        
+    Returns:
+        dict: Dictionary containing comparison results
+    """
+    results = {}
+    
+    # Get pdfs results
+    pdfs_dir = os.path.join(topic_dir, "pdfs")
+    if not os.path.exists(pdfs_dir):
+        print(f"Error: pdfs directory not found at {pdfs_dir}")
+        return results
+    
+    # Get system results
+    system_dir = os.path.join(topic_dir, system)
+    if not os.path.exists(system_dir):
+        print(f"Error: system directory not found at {system_dir}")
+        return results
+    
+    # Extract topic name from path
+    topic = extract_topic_from_path(topic_dir)
+    
+    # Process each metric
+    for metric in metrics:
+        if metric.lower() == "outline":
+            # Compare outlines
+            pdfs_outline_path = os.path.join(pdfs_dir, "outline.json")
+            system_outline_path = os.path.join(system_dir, "outline.json")
+            
+            if os.path.exists(pdfs_outline_path) and os.path.exists(system_outline_path):
+                try:
+                    with open(pdfs_outline_path, "r", encoding="utf-8") as f:
+                        pdfs_outline = json.load(f)
+                    with open(system_outline_path, "r", encoding="utf-8") as f:
+                        system_outline = json.load(f)
+                    
+                    # Format outlines as strings
+                    pdfs_outline_str = "\n".join([json.dumps(item, ensure_ascii=False) for item in pdfs_outline])
+                    system_outline_str = "\n".join([json.dumps(item, ensure_ascii=False) for item in system_outline])
+                    
+                    # Randomly assign system and PDF to outline_1 and outline_2
+                    import random
+                    is_system_first = random.choice([True, False])
+                    outline_1 = system_outline_str if is_system_first else pdfs_outline_str
+                    outline_2 = pdfs_outline_str if is_system_first else system_outline_str
+                    
+                    # Generate prompt and get comparison
+                    prompt = OUTLINE_COMPARISON_PROMPT.format(
+                        topic=topic,
+                        outline_1=outline_1,
+                        outline_2=outline_2
+                    )
+                    comparison = judge.judge(prompt)
+                    if isinstance(comparison, dict) and "is_better" in comparison:
+                        # If system was outline_1, use the result directly; otherwise, invert it
+                        is_better = comparison["is_better"] if is_system_first else not comparison["is_better"]
+                        results["outline_is_better"] = is_better
+                        results["outline_reason"] = comparison.get("reason", "")
+                except Exception as e:
+                    print(f"Error comparing outlines: {e}")
+        
+        elif metric.lower() == "content":
+            # Compare contents
+            pdfs_md = [f for f in os.listdir(pdfs_dir) if f.lower().endswith(".md")]
+            system_md = [f for f in os.listdir(system_dir) if f.lower().endswith(".md")]
+            
+            if pdfs_md and system_md:
+                try:
+                    with open(os.path.join(pdfs_dir, pdfs_md[0]), "r", encoding="utf-8") as f:
+                        pdfs_content = f.read()
+                    with open(os.path.join(system_dir, system_md[0]), "r", encoding="utf-8") as f:
+                        system_content = f.read()
+                    
+                    # Split content and references
+                    pdfs_content_str, _ = split_markdown_content_and_refs(pdfs_content)
+                    system_content_str, _ = split_markdown_content_and_refs(system_content)
+                    
+                    # Randomly assign system and PDF to content_1 and content_2
+                    is_system_first = random.choice([True, False])
+                    content_1 = system_content_str if is_system_first else pdfs_content_str
+                    content_2 = pdfs_content_str if is_system_first else system_content_str
+                    
+                    # Generate prompt and get comparison
+                    prompt = CONTENT_COMPARISON_PROMPT.format(
+                        topic=topic,
+                        content_1=content_1,
+                        content_2=content_2
+                    )
+                    comparison = judge.judge(prompt)
+                    if isinstance(comparison, dict) and "is_better" in comparison:
+                        # If system was content_1, use the result directly; otherwise, invert it
+                        is_better = comparison["is_better"] if is_system_first else not comparison["is_better"]
+                        results["content_is_better"] = is_better
+                        results["content_reason"] = comparison.get("reason", "")
+                except Exception as e:
+                    print(f"Error comparing contents: {e}")
+        
+        elif metric.lower() == "reference":
+            # Compare references
+            pdfs_ref_path = os.path.join(pdfs_dir, "references.json")
+            system_ref_path = os.path.join(system_dir, "references.json")
+            
+            if os.path.exists(pdfs_ref_path) and os.path.exists(system_ref_path):
+                try:
+                    with open(pdfs_ref_path, "r", encoding="utf-8") as f:
+                        pdfs_refs = json.load(f)
+                    with open(system_ref_path, "r", encoding="utf-8") as f:
+                        system_refs = json.load(f)
+                    
+                    # Format references as strings
+                    pdfs_refs_str = "\n".join(pdfs_refs)
+                    system_refs_str = "\n".join(system_refs)
+                    
+                    # Randomly assign system and PDF to references_1 and references_2
+                    is_system_first = random.choice([True, False])
+                    references_1 = system_refs_str if is_system_first else pdfs_refs_str
+                    references_2 = pdfs_refs_str if is_system_first else system_refs_str
+                    
+                    # Generate prompt and get comparison
+                    prompt = REFERENCE_COMPARISON_PROMPT.format(
+                        topic=topic,
+                        references_1=references_1,
+                        references_2=references_2
+                    )
+                    comparison = judge.judge(prompt)
+                    if isinstance(comparison, dict) and "is_better" in comparison:
+                        # If system was references_1, use the result directly; otherwise, invert it
+                        is_better = comparison["is_better"] if is_system_first else not comparison["is_better"]
+                        results["reference_is_better"] = is_better
+                        results["reference_reason"] = comparison.get("reason", "")
+                except Exception as e:
+                    print(f"Error comparing references: {e}")
+    
+    # Save results to system directory
+    results_path = os.path.join(system_dir, f"compare_{modelname}.json")
+    try:
+        with open(results_path, "w", encoding="utf-8") as f:
+            json.dump(results, f, ensure_ascii=False, indent=4)
+    except Exception as e:
+        print(f"Error saving comparison results: {e}")
+    
+    return results
+
+def aggregate_comparison_results(root_dir: str, systems: list[str], metrics: list[str], modelname: str) -> None:
+    """
+    Aggregate comparison results across all categories and topics.
+    
+    Args:
+        root_dir (str): Root directory containing categories
+        systems (list[str]): List of system names to compare
+        metrics (list[str]): List of metrics to evaluate
+        modelname (str): Name of the evaluation model
+    """
+    from tqdm import tqdm
+    
+    # Initialize results storage
+    category_results = {}  # Results per category
+    global_results = {     # Global results across all categories
+        system: {
+            metric: {"wins": 0, "losses": 0, "total": 0}
+            for metric in metrics
+        }
+        for system in systems
+    }
+    
+    # Get all categories
+    categories = [cat for cat in os.listdir(root_dir) 
+                 if os.path.isdir(os.path.join(root_dir, cat)) and cat != "pdfs"]
+    
+    # Process each category with progress bar
+    for category in tqdm(categories, desc="Processing categories"):
+        category_dir = os.path.join(root_dir, category)
+        
+        # Initialize category results
+        category_results[category] = {
+            system: {
+                metric: {"wins": 0, "losses": 0, "total": 0}
+                for metric in metrics
+            }
+            for system in systems
+        }
+        
+        # Get all topics in this category
+        topics = [topic for topic in os.listdir(category_dir) 
+                 if os.path.isdir(os.path.join(category_dir, topic)) and topic != "pdfs"]
+        
+        # Process each topic in the category with nested progress bar
+        for topic in tqdm(topics, desc=f"Processing {category} topics", leave=False):
+            topic_dir = os.path.join(category_dir, topic)
+            
+            # Process each system
+            for system in systems:
+                system_dir = os.path.join(topic_dir, system)
+                if not os.path.exists(system_dir):
+                    continue
+                
+                # Compare with PDFs
+                compare_path = os.path.join(system_dir, f"compare_{modelname}.json")
+                if not os.path.exists(compare_path):
+                    results = compare_with_pdfs(topic_dir, system, metrics, modelname)
+                else:
+                    with open(compare_path, "r", encoding="utf-8") as f:
+                        if f.read() == "":
+                            results = compare_with_pdfs(topic_dir, system, metrics, modelname)
+                        else:
+                            with open(compare_path, "r", encoding="utf-8") as f2:
+                                results = json.load(f2)
+                
+                # Update category and global results
+                for metric in metrics:
+                    metric_key = f"{metric}_is_better"
+                    if metric_key in results:
+                        is_better = results[metric_key]
+                        
+                        # Update category results
+                        category_results[category][system][metric]["total"] += 1
+                        if is_better:
+                            category_results[category][system][metric]["wins"] += 1
+                        else:
+                            category_results[category][system][metric]["losses"] += 1
+                        
+                        # Update global results
+                        global_results[system][metric]["total"] += 1
+                        if is_better:
+                            global_results[system][metric]["wins"] += 1
+                        else:
+                            global_results[system][metric]["losses"] += 1
+        print(category_results)
+        print(global_results)
+        # Save category results to CSV
+        category_csv_path = os.path.join(category_dir, f"comparison_results_{modelname}.csv")
+        try:
+            with open(category_csv_path, "w", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                # Write header
+                header = ["System", "Metric", "Wins", "Losses", "Total", "Win Rate"]
+                writer.writerow(header)
+                
+                # Write data
+                for system in systems:
+                    for metric in metrics:
+                        stats = category_results[category][system][metric]
+                        if stats["total"] > 0:
+                            win_rate = stats["wins"] / stats["total"]
+                            writer.writerow([
+                                system,
+                                metric,
+                                stats["wins"],
+                                stats["losses"],
+                                stats["total"],
+                                f"{win_rate:.2%}"
+                            ])
+        except Exception as e:
+            print(f"Error saving category results for {category}: {e}")
+    
+    # Save global results to CSV
+    global_csv_path = os.path.join(root_dir, f"global_comparison_results_{modelname}.csv")
+    try:
+        with open(global_csv_path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            # Write header
+            header = ["System", "Metric", "Wins", "Losses", "Total", "Win Rate"]
+            writer.writerow(header)
+            
+            # Write data
+            for system in systems:
+                for metric in metrics:
+                    stats = global_results[system][metric]
+                    if stats["total"] > 0:
+                        win_rate = stats["wins"] / stats["total"]
+                        writer.writerow([
+                            system,
+                            metric,
+                            stats["wins"],
+                            stats["losses"],
+                            stats["total"],
+                            f"{win_rate:.2%}"
+                        ])
+        print(f"\nSaved global results to {global_csv_path}")
+    except Exception as e:
+        print(f"Error saving global results: {e}")
+
+def aggregate_comparison_results_parallel(root_dir: str, systems: list[str], metrics: list[str], modelname: str, num_workers: int = 4) -> None:
+    """
+    Parallel version of aggregate_comparison_results that uses ThreadPoolExecutor.
+    
+    Args:
+        root_dir (str): Root directory containing categories
+        systems (list[str]): List of system names to compare
+        metrics (list[str]): List of metrics to evaluate
+        modelname (str): Name of the evaluation model
+        num_workers (int, optional): Number of worker threads. Defaults to 4.
+    """
+    # Initialize results storage
+    category_results = {}  # Results per category
+    global_results = {     # Global results across all categories
+        system: {
+            metric: {"wins": 0, "losses": 0, "total": 0}
+            for metric in metrics
+        }
+        for system in systems
+    }
+    
+    # Create a lock for thread-safe updates to global results
+    global_lock = threading.Lock()
+    
+    def process_topic(topic_dir: str, system: str) -> dict:
+        """Process a single topic for a system."""
+        results = compare_with_pdfs(topic_dir, system, metrics, modelname)
+        return results
+    
+    def process_category(category: str) -> None:
+        """Process a single category."""
+        category_dir = os.path.join(root_dir, category)
+        if not os.path.isdir(category_dir) or category == "pdfs":
+            return
+        
+        # Initialize category results
+        category_results[category] = {
+            system: {
+                metric: {"wins": 0, "losses": 0, "total": 0}
+                for metric in metrics
+            }
+            for system in systems
+        }
+        
+        # Create tasks for each topic-system combination
+        tasks = []
+        for topic in os.listdir(category_dir):
+            topic_dir = os.path.join(category_dir, topic)
+            if not os.path.isdir(topic_dir) or topic == "pdfs":
+                continue
+            
+            for system in systems:
+                system_dir = os.path.join(topic_dir, system)
+                if os.path.exists(system_dir):
+                    tasks.append((topic_dir, system))
+        
+        # Process tasks in parallel
+        with ThreadPoolExecutor(max_workers=num_workers) as executor:
+            futures = []
+            for topic_dir, system in tasks:
+                futures.append(executor.submit(process_topic, topic_dir, system))
+            
+            # Process results as they complete
+            for (topic_dir, system), future in zip(tasks, futures):
+                try:
+                    results = future.result()
+                    
+                    # Update category and global results
+                    with global_lock:
+                        for metric in metrics:
+                            metric_key = f"{metric}_is_better"
+                            if metric_key in results:
+                                is_better = results[metric_key]
+                                
+                                # Update category results
+                                category_results[category][system][metric]["total"] += 1
+                                if is_better:
+                                    category_results[category][system][metric]["wins"] += 1
+                                else:
+                                    category_results[category][system][metric]["losses"] += 1
+                                
+                                # Update global results
+                                global_results[system][metric]["total"] += 1
+                                if is_better:
+                                    global_results[system][metric]["wins"] += 1
+                                else:
+                                    global_results[system][metric]["losses"] += 1
+                except Exception as e:
+                    print(f"Error processing {topic_dir}/{system}: {e}")
+        
+        # Save category results to CSV
+        category_csv_path = os.path.join(category_dir, f"comparison_results_{modelname}.csv")
+        try:
+            with open(category_csv_path, "w", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                # Write header
+                header = ["System", "Metric", "Wins", "Losses", "Total", "Win Rate"]
+                writer.writerow(header)
+                
+                # Write data
+                for system in systems:
+                    for metric in metrics:
+                        stats = category_results[category][system][metric]
+                        if stats["total"] > 0:
+                            win_rate = stats["wins"] / stats["total"]
+                            writer.writerow([
+                                system,
+                                metric,
+                                stats["wins"],
+                                stats["losses"],
+                                stats["total"],
+                                f"{win_rate:.2%}"
+                            ])
+        except Exception as e:
+            print(f"Error saving category results for {category}: {e}")
+    
+    # Process categories in parallel
+    categories = [cat for cat in os.listdir(root_dir) 
+                 if os.path.isdir(os.path.join(root_dir, cat)) and cat != "pdfs"]
+    
+    with ThreadPoolExecutor(max_workers=num_workers) as executor:
+        futures = [executor.submit(process_category, category) for category in categories]
+        for future in as_completed(futures):
+            try:
+                future.result()
+            except Exception as e:
+                print(f"Error processing category: {e}")
+    
+    # Save global results to CSV
+    global_csv_path = os.path.join(root_dir, f"global_comparison_results_{modelname}.csv")
+    try:
+        with open(global_csv_path, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            # Write header
+            header = ["System", "Metric", "Wins", "Losses", "Total", "Win Rate"]
+            writer.writerow(header)
+            
+            # Write data
+            for system in systems:
+                for metric in metrics:
+                    stats = global_results[system][metric]
+                    if stats["total"] > 0:
+                        win_rate = stats["wins"] / stats["total"]
+                        writer.writerow([
+                            system,
+                            metric,
+                            stats["wins"],
+                            stats["losses"],
+                            stats["total"],
+                            f"{win_rate:.2%}"
+                        ])
+    except Exception as e:
+        print(f"Error saving global results: {e}")
+
 # ------------- Main Evaluation Functions -------------
 
 def evaluate(
@@ -1115,6 +1569,12 @@ def evaluate(
     )
     print("Start evaluating:", md_path)
     print("Using model:", model)
+    with open(md_path, "r", encoding="utf-8") as f:
+        content_str = f.read()
+    content, _ = split_markdown_content_and_refs(content_str)
+    content_path = os.path.join(os.path.dirname(md_path), "content.json")
+    with open(content_path, "w", encoding="utf-8") as f:
+        json.dump([content], f, ensure_ascii=False, indent=4)
 
     # Define required keys for each evaluation section
     if criteria_type == "general":
@@ -1773,6 +2233,7 @@ def calculate_all_cats_average_scores() -> dict:
     
     return all_cats_results
 
+# ------------- Average Score Clearing -------------
 def clear_average_score_by_cat(cat: str) -> None:
     """
     Clear average results for a specific category.
@@ -1845,84 +2306,6 @@ def clear_all_average_scores() -> None:
             print("Removed global average results")
         except Exception as e:
             print(f"Failed to remove {global_results_path}: {e}")
-
-def aggregate_results_to_csv(cat: str) -> None:
-    """
-    Aggregate all results from a category into a CSV file.
-    For specified metrics, if value is 0, fill with average of the same model.
-    The metrics that need to be filled with average if 0 are:
-    - Outline, Outline_coverage, Outline_structure, Outline_no
-    - Reference, Reference_density, Reference_quality, Reference_no
-    - Coverage, Structure, Relevance, Language, Criticalness
-    - Images_density, Equations_density, Tables_density, Total_density
-    - Citations_density, Sentence_no, Claim_density
-    
-    Args:
-        cat (str): Category name (e.g., "cs")
-    """
-    base_dir = os.path.join("surveys", cat)
-    all_results = []
-    
-    metrics_to_fill = [
-        "Outline",  "Outline_coverage", "Outline_structure", "Outline_no", "Outline_density",
-        "Reference", "Reference_density", "Reference_quality", "Reference_no",
-        "Coverage", "Structure", "Relevance", "Language", "Criticalness", "Faithfulness",
-        "Images_density", "Equations_density", "Tables_density", 
-        "Citations_density", "Sentence_no", "Claim_density",
-        "Outline_domain", "Reference_domain",
-        "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain", "Criticalness_domain"
-    ]
-    
-    # Get all topics
-    topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
-    
-    # Collect all results
-    for topic in topics:
-        topic_path = os.path.join(base_dir, topic)
-        systems = [d for d in os.listdir(topic_path) if os.path.isdir(os.path.join(topic_path, d))]
-        
-        for system in systems:
-            sys_path = os.path.join(topic_path, system)
-            # Find all results files
-            results_files = glob.glob(os.path.join(sys_path, "results_*.json"))
-            
-            for results_file in results_files:
-                model = os.path.basename(results_file).replace("results_", "").replace(".json", "")
-                try:
-                    with open(results_file, "r", encoding="utf-8") as f:
-                        results = json.load(f)
-                    
-                    # Add basic info
-                    entry = {
-                        "topic": topic,
-                        "system": system,
-                        "model": model,
-                        "category": cat  # Add category column
-                    }
-                    # Add all metrics
-                    entry.update(results)
-                    all_results.append(entry)
-                except Exception as e:
-                    print(f"Error processing {results_file}: {e}")
-    
-    # Convert to DataFrame
-    df = pd.DataFrame(all_results)
-    
-    # Fill 0 values with system averages for specified metrics
-    for metric in metrics_to_fill:
-        if metric in df.columns:
-            # Calculate system averages for this metric
-            system_avgs = df[df[metric] != 0].groupby('system')[metric].mean()
-            
-            # Fill 0 values with corresponding system average
-            for system, avg in system_avgs.items():
-                mask = (df['system'] == system) & (df[metric] == 0)
-                df.loc[mask, metric] = avg
-    
-    # Save to CSV
-    output_path = os.path.join(base_dir, f"{cat}_results.csv")
-    df.to_csv(output_path, index=False)
-    print(f"Results saved to {output_path}")
 
 def clear_scores(cat: str, system: str, model: str, target: str = "All") -> None:
     """
@@ -2053,6 +2436,113 @@ def clear_all_scores(model: str = None, target: str | list[str] = None) -> None:
                                                 clear_scores(cat, system, model, t)
                                     except Exception as e:
                                         print(f"Error clearing scores for {cat}/{topic}/{system}/{model}: {e}")
+
+def delete_system(systems: list[str]) -> None:
+    """
+    Delete specified system folders under all topics in all categories.
+    
+    Args:
+        systems (list[str]): List of system names to delete
+    """
+    base_dir = "surveys"
+    for cat in os.listdir(base_dir):
+        cat_path = os.path.join(base_dir, cat)
+        # Check if it is a directory
+        if os.path.isdir(cat_path):
+            # Get all topics in this category
+            for topic in os.listdir(cat_path):
+                topic_path = os.path.join(cat_path, topic)
+                if os.path.isdir(topic_path):
+                    # Check each system
+                    for system in systems:
+                        system_path = os.path.join(topic_path, system)
+                        if os.path.exists(system_path):
+                            try:
+                                import shutil
+                                shutil.rmtree(system_path)
+                                print(f"Deleted {cat}/{topic}/{system}")
+                            except Exception as e:
+                                print(f"Error deleting {cat}/{topic}/{system}: {e}")
+
+# ------------- Data Post-processing -------------
+
+def aggregate_results_to_csv(cat: str) -> None:
+    """
+    Aggregate all results from a category into a CSV file.
+    For specified metrics, if value is 0, fill with average of the same model.
+    The metrics that need to be filled with average if 0 are:
+    - Outline, Outline_coverage, Outline_structure, Outline_no
+    - Reference, Reference_density, Reference_quality, Reference_no
+    - Coverage, Structure, Relevance, Language, Criticalness
+    - Images_density, Equations_density, Tables_density, Total_density
+    - Citations_density, Sentence_no, Claim_density
+    
+    Args:
+        cat (str): Category name (e.g., "cs")
+    """
+    base_dir = os.path.join("surveys", cat)
+    all_results = []
+    
+    metrics_to_fill = [
+        "Outline",  "Outline_coverage", "Outline_structure", "Outline_no", "Outline_density",
+        "Reference", "Reference_density", "Reference_quality", "Reference_no",
+        "Coverage", "Structure", "Relevance", "Language", "Criticalness", "Faithfulness",
+        "Images_density", "Equations_density", "Tables_density", 
+        "Citations_density", "Sentence_no", "Claim_density",
+        "Outline_domain", "Reference_domain",
+        "Coverage_domain", "Structure_domain", "Relevance_domain", "Language_domain", "Criticalness_domain"
+    ]
+    
+    # Get all topics
+    topics = [d for d in os.listdir(base_dir) if os.path.isdir(os.path.join(base_dir, d))]
+    
+    # Collect all results
+    for topic in topics:
+        topic_path = os.path.join(base_dir, topic)
+        systems = [d for d in os.listdir(topic_path) if os.path.isdir(os.path.join(topic_path, d))]
+        
+        for system in systems:
+            sys_path = os.path.join(topic_path, system)
+            # Find all results files
+            results_files = glob.glob(os.path.join(sys_path, "results_*.json"))
+            
+            for results_file in results_files:
+                model = os.path.basename(results_file).replace("results_", "").replace(".json", "")
+                try:
+                    with open(results_file, "r", encoding="utf-8") as f:
+                        results = json.load(f)
+                    
+                    # Add basic info
+                    entry = {
+                        "topic": topic,
+                        "system": system,
+                        "model": model,
+                        "category": cat  # Add category column
+                    }
+                    # Add all metrics
+                    entry.update(results)
+                    all_results.append(entry)
+                except Exception as e:
+                    print(f"Error processing {results_file}: {e}")
+    
+    # Convert to DataFrame
+    df = pd.DataFrame(all_results)
+    
+    # Fill 0 values with system averages for specified metrics
+    for metric in metrics_to_fill:
+        if metric in df.columns:
+            # Calculate system averages for this metric
+            system_avgs = df[df[metric] != 0].groupby('system')[metric].mean()
+            
+            # Fill 0 values with corresponding system average
+            for system, avg in system_avgs.items():
+                mask = (df['system'] == system) & (df[metric] == 0)
+                df.loc[mask, metric] = avg
+    
+    # Save to CSV
+    output_path = os.path.join(base_dir, f"{cat}_results.csv")
+    df.to_csv(output_path, index=False)
+    print(f"Results saved to {output_path}")
 
 def supplement_missing_scores(cat: str = None, model: str = None, system: str = None) -> None:
     """
@@ -2961,32 +3451,72 @@ def convert_to_latex() -> None:
         except Exception as e:
             print(f"Error processing category average: {e}")
 
-def delete_system(systems: list[str]) -> None:
-    """
-    Delete specified system folders under all topics in all categories.
+    # Generate new comparison table
+    print("\nGenerating new comparison table...")
+    new_latex_lines = []
     
-    Args:
-        systems (list[str]): List of system names to delete
-    """
-    base_dir = "surveys"
-    for cat in os.listdir(base_dir):
-        cat_path = os.path.join(base_dir, cat)
-        # Check if it is a directory
-        if os.path.isdir(cat_path):
-            # Get all topics in this category
-            for topic in os.listdir(cat_path):
-                topic_path = os.path.join(cat_path, topic)
-                if os.path.isdir(topic_path):
-                    # Check each system
-                    for system in systems:
-                        system_path = os.path.join(topic_path, system)
-                        if os.path.exists(system_path):
-                            try:
-                                import shutil
-                                shutil.rmtree(system_path)
-                                print(f"Deleted {cat}/{topic}/{system}")
-                            except Exception as e:
-                                print(f"Error deleting {cat}/{topic}/{system}: {e}")
+    # Read global average data
+    global_avg_path = os.path.join(base_dir, "global_average_reorganized.csv")
+    if os.path.exists(global_avg_path):
+        global_df = pd.read_csv(global_avg_path)
+        
+        # Read category average data
+        cat_avg_path = os.path.join(base_dir, "all_categories_results_reorganized.csv")
+        if os.path.exists(cat_avg_path):
+            cat_df = pd.read_csv(cat_avg_path)
+            
+            # Process each system
+            for system in global_df['system'].unique():
+                # Get global average row
+                global_row = global_df[global_df['system'] == system].iloc[0]
+                
+                # Calculate domain averages for this system
+                system_cat_df = cat_df[cat_df['system'] == system]
+                domain_avgs = {}
+                for col in ['Outline_domain', 'Coverage_domain', 'Structure_domain', 
+                          'Relevance_domain', 'Language_domain', 'Criticalness_domain', 
+                          'Reference_domain']:
+                    valid_values = [float(val) for val in system_cat_df[col] if val != "" and not pd.isna(val)]
+                    if valid_values:
+                        domain_avgs[col] = sum(valid_values) / len(valid_values)
+                    else:
+                        domain_avgs[col] = 0.0
+                
+                # Format global average row
+                global_values = [
+                    f"{global_row['Outline']:.2f}",
+                    f"{global_row['Coverage']:.2f}",
+                    f"{global_row['Structure']:.2f}",
+                    f"{global_row['Relevance']:.2f}",
+                    f"{global_row['Language']:.2f}",
+                    f"{global_row['Criticalness']:.2f}",
+                    f"{global_row['Reference']:.2f}"
+                ]
+                
+                # Format domain average row
+                cat_values = [
+                    f"{domain_avgs['Outline_domain']:.2f}",
+                    f"{domain_avgs['Coverage_domain']:.2f}",
+                    f"{domain_avgs['Structure_domain']:.2f}",
+                    f"{domain_avgs['Relevance_domain']:.2f}",
+                    f"{domain_avgs['Language_domain']:.2f}",
+                    f"{domain_avgs['Criticalness_domain']:.2f}",
+                    f"{domain_avgs['Reference_domain']:.2f}"
+                ]
+                
+                # Add rows to LaTeX table
+                new_latex_lines.extend([
+                    f"\\textbf{{{system}}} & \\textit{{ASGBench}} & {global_values[0]} & {global_values[1]} & {global_values[2]} & {global_values[3]} & {global_values[4]} & {global_values[5]} & {global_values[6]} \\\\",
+                    f" & \\textit{{AA-ASGBench}} & {cat_values[0]} & {cat_values[1]} & {cat_values[2]} & {cat_values[3]} & {cat_values[4]} & {cat_values[5]} & {cat_values[6]} \\\\",
+                    "\\hline"
+                ])
+    
+    # Save new LaTeX table
+    new_latex_path = os.path.join(base_dir, "comparison_table.tex")
+    with open(new_latex_path, "w", encoding="utf-8") as f:
+        f.write("\n".join(new_latex_lines))
+    
+    print(f"New comparison table saved to {new_latex_path}")
 
 if __name__ == "__main__":
     # 测试代码
@@ -3021,8 +3551,9 @@ if __name__ == "__main__":
     # calculate_category_average_from_csv("cs")
     # aggregate_all_categories_average()
     # calculate_all_scores(models=["deepseek-r1"])
-    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "pdfs", "SurveyForge", "SurveyX"], "Qwen2.5-72B-Instruct", num_workers=4)
-    calculate_all_scores(models=["qwen-plus-latest"])
+    # batch_evaluate_by_system(["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "pdfs", "SurveyForge", "SurveyX"], "qwen-plus-latest", num_workers=4)
+    # calculate_all_scores(models=["qwen-plus-latest"])
+    aggregate_comparison_results(root_dir="surveys", systems=["AutoSurvey", "InteractiveSurvey", "LLMxMapReduce", "SurveyForge", "SurveyX"], metrics=["outline", "content", "reference"], modelname="gpt-4o")
     # evaluate_pairs("surveys/cs/3D Gaussian Splatting Techniques", "AutoSurvey", ["Reference"])
     # print(evaluate_outline_density("surveys/physics/Modeling Thermodynamic Properties of Deep Eutectic Solvents/pdfs/2303.17159.md"))
     # delete_system(["vanilla", "vanilla_outline"])

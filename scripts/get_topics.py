@@ -310,25 +310,27 @@ def get_top_survey_papers_by_citation(
     seen_ids: Optional[Set[str]] = None,
     allow_duplicates: bool = False,
     allow_cross_category: bool = False,
-    max_attempts: int = 10
+    max_attempts: int = 10,
+    max_oversample: int = 20  # Maximum oversample rate to try
 ) -> List[Dict]:
     """
     Get top survey papers by citation count within a time range.
-    If not enough papers are found, extends the time window and tries again.
+    If not enough papers are found, first increases oversample rate, then extends time window.
     
     Args:
         cats: List of arXiv categories to search
         num: Target number of papers to return
-        oversample: Number of papers to fetch initially (num * oversample)
+        oversample: Initial oversample rate
         months_ago_start: Start of time range in months ago
         months_ago_end: End of time range in months ago
         seen_ids: Set of already seen arXiv IDs
         allow_duplicates: Whether to allow papers that exist in seen_ids
         allow_cross_category: Whether to allow papers that exist in other categories
         max_attempts: Maximum number of time window extensions to try
+        max_oversample: Maximum oversample rate to try before extending time window
         
     Returns:
-        List of paper dictionaries with title and arxiv_id
+        List of paper dictionaries with title, arxiv_id, citationCount and category
     """
     if seen_ids is None:
         seen_ids = set()
@@ -340,12 +342,14 @@ def get_top_survey_papers_by_citation(
     all_papers = []  # Store all papers found across time windows
     current_start_date = start_date
     current_end_date = end_date
+    current_oversample = oversample
     attempt = 0
+    last_paper_count = 0
 
     while len(all_papers) < num and attempt < max_attempts:
         # 1. Fetch papers for current time window
         arxiv_papers = get_arxiv_papers_in_time_range(
-            cats, current_start_date, current_end_date, max_results=num*oversample
+            cats, current_start_date, current_end_date, max_results=num*current_oversample
         )
 
         # 2. Get citations in parallel with progress bar
@@ -359,7 +363,8 @@ def get_top_survey_papers_by_citation(
                 future = executor.submit(get_s2_citation, arxiv_id)
                 future_to_paper[future] = {
                     "title": result.title.strip(),
-                    "arxiv_id": arxiv_id
+                    "arxiv_id": arxiv_id,
+                    "category": result.primary_category
                 }
                 time.sleep(0.1)  # Rate limiting
 
@@ -385,20 +390,44 @@ def get_top_survey_papers_by_citation(
                 if not allow_cross_category:
                     seen_ids.add(paper["arxiv_id"])
 
-        # If still not enough papers, extend time window
+        # If still not enough papers
         if len(all_papers) < num:
-            print(f"\nNot enough papers found ({len(all_papers)}/{num}). Extending time window...")
-            # Move the end date to the start date, and extend start date back
-            current_end_date = current_start_date
-            current_start_date = current_start_date - timedelta(days=365)  # Extend by 1 year
-            attempt += 1
+            print(f"\nNot enough papers found ({len(all_papers)}/{num})")
+            
+            # If paper count hasn't increased, try increasing oversample rate first
+            if len(all_papers) == last_paper_count:
+                if current_oversample < max_oversample:
+                    print(f"Increasing oversample rate from {current_oversample} to {current_oversample * 2}")
+                    current_oversample *= 2
+                    continue
+                else:
+                    print("Maximum oversample rate reached, extending time window...")
+                    # Move the end date to the start date, and extend start date back
+                    current_end_date = current_start_date
+                    current_start_date = current_start_date - timedelta(days=365)  # Extend by 1 year
+                    attempt += 1
+                    # Reset oversample rate for the new time window
+                    current_oversample = oversample
+            else:
+                # If we got more papers, try increasing oversample rate
+                if current_oversample < max_oversample:
+                    print(f"Got more papers, increasing oversample rate from {current_oversample} to {current_oversample * 2}")
+                    current_oversample *= 2
+                else:
+                    print("Maximum oversample rate reached, extending time window...")
+                    current_end_date = current_start_date
+                    current_start_date = current_start_date - timedelta(days=365)
+                    attempt += 1
+                    current_oversample = oversample
+            
+            last_paper_count = len(all_papers)
             continue
 
     # Sort all papers by citation count and take top num
     all_papers.sort(key=lambda x: x["citationCount"], reverse=True)
     selected_papers = all_papers[:num]
     
-    return [{"title": p["title"], "arxiv_id": p["arxiv_id"]} for p in selected_papers]
+    return selected_papers  # Return full paper objects with citation count and category
 
 def is_true_survey_or_review(title: str, summary: str) -> bool:
     """
@@ -741,6 +770,7 @@ def main():
     print("Data generation complete. Copied dataset to surveys/ and created system subfolders.")
 
 if __name__ == "__main__":
-    main()
+    # main()
+    get_arxiv_papers_in_time_range(category_map["eess"], datetime(2024, 1, 1), datetime(2025, 12, 31))
 
 #python scripts/get_topics.py --granularity coarse --numofsurvey 10 --systems InteractiveSurvey AutoSurvey SurveyX SurveyForge LLMxMapReduce vanilla
