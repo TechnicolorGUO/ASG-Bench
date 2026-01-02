@@ -1,0 +1,271 @@
+{
+  "outline": [
+    [
+      1,
+      "Physics-Informed Neural Networks for Fluid Mechanics: A Comprehensive Survey"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "Keywords"
+    ],
+    [
+      2,
+      "Introduction"
+    ],
+    [
+      2,
+      "Background"
+    ],
+    [
+      2,
+      "Current State of the Art"
+    ],
+    [
+      2,
+      "Future Directions"
+    ],
+    [
+      2,
+      "Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Physics-Informed Neural Networks for Fluid Mechanics: A Comprehensive Survey",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "**Abstract** Physics-informed neural networks (PINNs) have emerged as a transformative approach in computational fluid mechanics by integrating physical laws directly into the learning process. This survey paper provides a comprehensive overview of the development, current state, and future directions of PINNs in fluid dynamics. By embedding governing equations such as the Navier-Stokes equations into neural network architectures, PINNs offer a data-driven yet physically consistent framework for modeling complex fluid systems. The paper reviews key methodologies, including the use of residual networks, weak forms, and hybrid data-physical training strategies, which have enhanced the accuracy and robustness of fluid simulations. It also highlights challenges such as data scarcity, numerical instability, and the need for efficient training algorithms. Furthermore, the survey discusses recent advances in scalable and parameterized PINN formulations, as well as their applications in turbulence modeling, flow control, and inverse problems. Looking ahead, the paper identifies promising research directions, including the integration of multi-physics constraints, the development of physics-aware neural architectures, and the incorporation of uncertainty quantification. This work serves as a foundational reference for researchers seeking to leverage PINNs in fluid mechanics, emphasizing their potential to bridge the gap between empirical data and physical principles. By synthesizing current insights and outlining future opportunities, this survey contributes to the ongoing evolution of physics-informed machine learning in fluid dynamics.",
+      "stats": {
+        "char_count": 1656,
+        "word_count": 217,
+        "sentence_count": 9,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Keywords",
+      "level": 2,
+      "content": "large language models, multimodal learning, natural language processing, machine learning, artificial intelligence",
+      "stats": {
+        "char_count": 114,
+        "word_count": 12,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Introduction",
+      "level": 2,
+      "content": "The integration of physics-based constraints into deep learning frameworks has emerged as a transformative approach in computational fluid mechanics, giving rise to the field of Physics-informed Neural Networks (PINNs). Unlike traditional data-driven models that rely solely on empirical data, PINNs embed governing physical laws, such as the Navier-Stokes equations, into the training process, enabling the networks to respect the underlying physics of the system. This approach not only enhances the accuracy and generalizability of predictions but also reduces the reliance on large, high-fidelity datasets, which are often expensive or impractical to obtain. Over the past few years, significant advancements have been made in developing PINNs tailored for fluid dynamics, with a focus on improving computational efficiency, scalability, and the ability to handle complex geometries and long-term simulations. Several studies have demonstrated the potential of PINNs to outperform conventional numerical methods in terms of speed and accuracy, particularly in scenarios where traditional solvers face limitations due to computational cost or numerical instability. For instance, a pioneering work introduced a neural network method for fluid simulation that achieved a 10x speedup over Smoothed Particle Hydrodynamics (SPH) and a 300x improvement over Flow3D, highlighting the promise of data-driven approaches in fluid mechanics [3]. At the same time, efforts have been made to address the limitations of standard PINNs, particularly in handling complex geometries and domains. The introduction of finite geometric encoding in Finite-PINN, for example, allows for more accurate representation of solid mechanics problems by explicitly incorporating geometric information into the network architecture [2]. Similarly, GeoMPNN leverages latent graph representations to encode airfoil geometry, improving the performance of aerodynamic modeling tasks [1]. These developments underscore the growing recognition of the importance of geometry-aware designs in PINNs, particularly in applications where the spatial configuration of the domain plays a critical role in the physical behavior. In addition to geometry, the incorporation of structural and dynamic understanding has become a key focus in recent research. Methods like Graph Attention Hamiltonian Neural Networks (GAHN) aim to infer interaction patterns and symmetry properties in Hamiltonian systems, offering a deeper insight into the underlying physics [5]. Such approaches not only enhance the interpretability of the models but also enable the detection of structural abnormalities, which is crucial in applications such as turbulence modeling and flow control. Another important direction is the integration of numerical schemes with deep learning to improve the robustness and efficiency of PINNs. MultiPDENet, for instance, combines PDE-embedded learning with multi-time-stepping strategies, allowing for accurate long-term predictions while maintaining computational efficiency [4]. This hybrid framework demonstrates how PINNs can be adapted to handle complex, time-dependent problems that are traditionally challenging for purely data-driven models. The ongoing evolution of PINNs in fluid mechanics is further supported by the development of specialized libraries and tools, such as jinns, which provide a flexible and scalable platform for implementing and experimenting with physics-informed deep learning models [13]. These resources not only facilitate research but also help bridge the gap between theoretical advancements and practical applications. Despite these promising developments, challenges remain in terms of generalization, training stability, and the ability to handle high-dimensional and multi-physics problems. Ongoing research continues to explore ways to improve the efficiency and scalability of PINNs, as well as to develop more interpretable and robust models. As the field progresses, the integration of physics-based constraints with deep learning is expected to play an increasingly central role in advancing the state of the art in computational fluid dynamics.",
+      "stats": {
+        "char_count": 4161,
+        "word_count": 572,
+        "sentence_count": 21,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Background",
+      "level": 2,
+      "content": "The integration of physics-based principles into neural network architectures has emerged as a powerful paradigm for modeling complex physical systems, particularly in the domain of fluid mechanics. This approach, often referred to as physics-informed neural networks (PINNs), seeks to bridge the gap between data-driven machine learning and the fundamental laws of physics, such as conservation laws, constitutive relations, and partial differential equations (PDEs). By embedding these physical constraints directly into the learning process, PINNs offer enhanced interpretability, improved generalization, and greater robustness compared to purely data-driven models. The growing interest in this area is reflected in a diverse set of studies that explore different aspects of PINN design, training, and application across a wide range of physical systems, including fluid dynamics, battery modeling, and engine health monitoring. One of the key motivations for using PINNs in fluid mechanics is the ability to leverage domain-specific knowledge to guide the learning process. This is particularly important in scenarios where data is scarce or expensive to obtain, as the incorporation of physical laws can significantly reduce the amount of training data required. For instance, the use of SciML foundation models has been shown to improve data efficiency and generalization in fluid field inference, demonstrating the potential of pre-trained models to capture underlying physical patterns and improve performance in real-world applications [11]. Similarly, the hybrid PINN-DeepONet framework introduced in the context of diesel engine health monitoring combines physics-based knowledge with deep learning techniques, enabling more accurate parameter identification and adaptive learning across different operating conditions [6]. These studies highlight the importance of integrating physical constraints into neural network architectures to achieve better predictive accuracy and reliability. Beyond the direct incorporation of physical laws, recent research has also focused on improving the stability and efficiency of PINN-based simulations. For example, the introduction of bypassing terms and secondary conservation laws has been shown to enhance the numerical stability of PINNs when solving complex PDEs, such as those encountered in lithium-ion battery modeling [10]. Additionally, the development of derivative-based frameworks that predict temporal changes rather than state variables has led to more flexible and accurate PDE surrogates, demonstrating the potential for improved temporal resolution and adaptability in dynamic systems [9]. These advancements underscore the importance of tailoring the training objectives and loss functions of neural networks to the specific characteristics of the physical problem at hand. Another notable trend in the field is the exploration of novel neural architectures and training methodologies that enable more effective integration of physical knowledge. For instance, the use of variational autoencoders (VAEs) and neural ordinary differential equations (ODEs) has allowed researchers to discover underlying physical concepts and equations from data, extending the capabilities of machine learning beyond mere pattern recognition [8]. Similarly, the application of reservoir computing techniques has provided new avenues for modeling complex fluid dynamics with reduced computational overhead, particularly in real-time or online scenarios [7]. These approaches illustrate the growing diversity of methods being employed to address the challenges of modeling physical systems with neural networks. Despite these promising developments, several challenges remain in the widespread adoption of PINNs for fluid mechanics. One of the primary concerns is the difficulty of transferring models trained on one physical system to another, especially when the underlying governing equations differ. This has led to increased interest in transfer learning and domain adaptation strategies, which aim to reduce the need for retraining from scratch when applying models to new scenarios [6]. Additionally, the computational cost of training and deploying PINNs can be significant, particularly for high-dimensional or long-time simulations, necessitating further research into efficient training algorithms and model compression techniques. Overall, the field of physics-informed neural networks for fluid mechanics is rapidly evolving, with a growing body of literature that demonstrates both the potential and the challenges of this approach. As researchers continue to refine the integration of physical principles into neural network architectures, the impact of these models on fluid dynamics, engineering, and other scientific domains is expected to grow significantly. The future of this field will likely involve further innovations in model design, training strategies, and application-specific adaptations, all aimed at improving the accuracy, efficiency, and interpretability of neural models in complex physical systems.",
+      "stats": {
+        "char_count": 5083,
+        "word_count": 694,
+        "sentence_count": 24,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Current State of the Art",
+      "level": 2,
+      "content": "Physics-informed neural networks (PINNs) have emerged as a powerful framework for modeling complex fluid dynamics problems by integrating physical laws directly into the learning process. Recent advancements in this field have focused on improving accuracy, efficiency, and robustness, while addressing challenges such as data scarcity, bias, and the need for physically consistent predictions. A key trend is the integration of physical knowledge into neural network architectures, which has been shown to significantly enhance model performance and reliability. For instance, the use of multi-fidelity data in graph-based U-Net models has demonstrated improved prediction accuracy with reduced data requirements, leveraging both low- and high-fidelity simulations to achieve better generalization [15]. This approach contrasts with traditional single-fidelity models that often rely on high-resolution data, which can be computationally expensive and difficult to obtain. Another important development is the refinement of loss functions in PINNs to better capture physical constraints. By incorporating a variance-based term into the loss function, researchers have shown that localized errors can be effectively reduced, leading to more uniform and accurate solutions [12]. This approach not only improves the quality of the solution but also does so with minimal computational overhead, making it a promising direction for practical applications. Similarly, physics-guided graph sampling has been proposed to mitigate spatial bias in graph neural networks (GNNs), particularly in fluid-related problems such as water temperature prediction in river networks [17]. By adjusting the aggregation strategy based on physical properties, these methods ensure that the learned representations are more aligned with the underlying physical principles. Efficiency and parameter scalability have also been central to recent research. The introduction of trainable adaptive activation function structures (TAAFS) has enabled significant improvements in neural network force field performance with only a small increase in parameters [14]. This demonstrates that model accuracy can be enhanced without a substantial increase in computational complexity, which is crucial for real-world applications where resources are limited. Additionally, the use of GNNs has become increasingly prevalent in fluid mechanics, particularly for modeling complex systems with irregular geometries or spatial dependencies. These architectures have shown promise in capturing the underlying physics while maintaining flexibility and scalability. Despite these advances, several challenges remain. One major concern is the robustness of AI models in scientific applications, as neural networks can be vulnerable to small perturbations that lead to significant output deviations [16]. This highlights the need for more reliable and interpretable models, especially in safety-critical or high-stakes environments. Furthermore, while many approaches focus on improving accuracy, there is a growing recognition of the trade-off between robustness and precision, necessitating a balanced design that ensures both performance and reliability. Overall, the current state of the art in physics-informed neural networks for fluid mechanics reflects a strong emphasis on integrating domain knowledge, optimizing model efficiency, and addressing the inherent limitations of purely data-driven approaches. These efforts are paving the way for more accurate, efficient, and trustworthy models that can be applied to a wide range of fluid dynamics problems.",
+      "stats": {
+        "char_count": 3616,
+        "word_count": 492,
+        "sentence_count": 21,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Future Directions",
+      "level": 2,
+      "content": "The integration of physics-based constraints with deep learning has emerged as a powerful paradigm for modeling complex fluid dynamical systems, offering both accuracy and generalizability. As the field of physics-informed neural networks (PINNs) continues to evolve, several key future directions are becoming increasingly apparent. One of the most promising areas lies in the development of more efficient and scalable architectures that can handle high-dimensional and parameterized fluid systems. Recent works, such as the dynamics-embedded conditional generative adversarial network (Dyn-cGAN) [22], have demonstrated the potential of combining generative models with physical laws to capture both temporal dynamics and parameter dependencies. This suggests that future research should focus on enhancing the ability of neural networks to generalize across a wide range of operating conditions, such as varying Reynolds numbers or boundary conditions, while maintaining computational efficiency. Another important direction involves the refinement of attention mechanisms and architectural innovations to better capture long-range dependencies and spatial correlations in fluid flows. The implicit factorized transformer approach (IFactFormer) has shown that factorized attention can significantly improve the accuracy and stability of long-term predictions in turbulent flows [26]. This highlights the potential of attention-based models in fluid mechanics, where capturing large-scale structures and interactions is crucial. Future work could explore hybrid architectures that combine the strengths of transformers with other neural operators, such as deep operator networks (DeepONets) or Fourier neural operators (FNOs), to achieve both efficiency and accuracy in complex flow simulations. In addition, the role of symplectic and energy-preserving neural networks in long-term stability and accuracy is gaining attention. The symplectic neural flow (SympFlow) model [19] has demonstrated the ability to preserve key physical invariants, such as energy and momentum, which is essential for simulating Hamiltonian systems over extended time horizons. This suggests that future research should explore the application of such models to fluid dynamics, particularly in cases where long-term accuracy is critical, such as in climate modeling or turbulent flow prediction. The development of physics-guided neural architectures that inherently respect the conservation laws of fluid mechanics could lead to more robust and reliable simulations. Furthermore, the increasing emphasis on inverse problems and robustness under noisy or sparse data indicates a growing need for hybrid models that integrate both forward and inverse learning. The physics-embedded dual-learning framework for electrical impedance tomography [21] exemplifies how combining convolutional neural networks with physics-informed constraints can improve performance in data-scarce scenarios. This approach can be extended to fluid mechanics, particularly in scenarios where measurements are limited or corrupted, such as in real-world flow monitoring or biomedical applications. Future work should focus on developing more efficient and interpretable methods for solving inverse problems in fluid dynamics, leveraging both data and physical principles. The use of physics-informed neural networks in high-fidelity simulations also raises questions about computational efficiency and scalability. While PINNs have shown promise in solving partial differential equations, their computational cost remains a challenge, especially for high-resolution or multi-physics problems. Recent studies, such as the point-DeepONet [23] and the Gaussian simulator (GausSim) [20], have explored ways to reduce computational overhead while maintaining accuracy. Future research should focus on optimizing training procedures, developing more efficient loss functions, and leveraging parallel and distributed computing to make PINNs viable for large-scale fluid simulations. Moreover, the integration of neural networks with traditional numerical methods, such as finite element or finite volume schemes, presents an exciting opportunity for hybrid modeling approaches. Such methods could combine the strengths of physics-based solvers with the flexibility and adaptability of neural networks, leading to more accurate and efficient simulations. This is particularly relevant in applications like aircraft design optimization [24] or thermal stress prediction in additive manufacturing [25], where both accuracy and computational speed are critical. Finally, the interpretability and explainability of physics-informed neural networks remain important challenges. While these models can achieve high accuracy, understanding how they incorporate physical laws and make predictions is essential for their adoption in critical applications. Recent works, such as the explainable operator approximation framework [18], have made progress in this area by leveraging Green's functions and other mathematical tools. Future research should focus on developing more transparent and interpretable models, enabling users to trust and validate the predictions of PINNs in real-world scenarios. In conclusion, the future of physics-informed neural networks in fluid mechanics is likely to be shaped by advancements in architecture design, attention mechanisms, energy-preserving formulations, inverse problem solving, computational efficiency, and model interpretability. By addressing these challenges, the field can move toward more accurate",
+      "stats": {
+        "char_count": 5586,
+        "word_count": 738,
+        "sentence_count": 30,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Conclusion",
+      "level": 2,
+      "content": "The survey paper on \"Physics-informed Neural Networks for Fluid Mechanics\" provides a comprehensive overview of the integration of physical laws into deep learning frameworks, emphasizing their transformative potential in computational fluid dynamics. The key findings highlight the ability of PINNs to incorporate governing equations, such as the Navier-Stokes equations, directly into the training process, thereby ensuring physical consistency and improving predictive accuracy. The contributions of the paper include a detailed analysis of the current state of the art, which demonstrates significant progress in enhancing the robustness, efficiency, and generalizability of PINNs in modeling complex fluid systems. These advancements have been achieved through innovations in network architectures, loss function formulations, and the incorporation of physical constraints. The current state of the field reflects a maturing approach where PINNs are increasingly being applied to a wide range of fluid mechanics problems, including turbulence modeling, inverse problems, and multi-physics simulations. While early research focused on demonstrating the feasibility of the approach, recent studies have emphasized the need for more scalable and computationally efficient methods, particularly for high-dimensional and parameterized systems. The integration of physical knowledge into neural network designs has proven to be a critical factor in achieving accurate and reliable predictions, even in data-scarce scenarios. Looking ahead, several future research directions and open challenges remain. These include the development of more efficient optimization strategies, the incorporation of uncertainty quantification, and the extension of PINNs to more complex and real-world fluid systems. Additionally, the challenge of balancing model complexity with interpretability and computational cost requires further investigation. The potential for hybrid models that combine PINNs with traditional numerical methods also presents an exciting avenue for exploration. In conclusion, physics-informed neural networks represent a promising and rapidly evolving paradigm in fluid mechanics, offering a powerful alternative to conventional data-driven and purely physics-based approaches. As the field continues to advance, it holds the potential to revolutionize how we model, analyze, and predict fluid behavior, paving the way for more accurate, efficient, and physically consistent computational tools. The integration of deep learning with physical principles not only enhances the predictive capabilities of neural networks but also fosters a deeper understanding of complex fluid systems, making PINNs an essential tool for future research and applications in fluid dynamics.",
+      "stats": {
+        "char_count": 2778,
+        "word_count": 371,
+        "sentence_count": 14,
+        "line_count": 1
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "1. A Geometry-Aware Message Passing Neural Network for Modeling Aerodynamics over Airfoils",
+      "number": null,
+      "title": "a geometry-aware message passing neural network for modeling aerodynamics over airfoils"
+    },
+    {
+      "text": "2. Finite-PINN: A Physics-Informed Neural Network with Finite Geometric Encoding for Solid Mechanics",
+      "number": null,
+      "title": "finite-pinn: a physics-informed neural network with finite geometric encoding for solid mechanics"
+    },
+    {
+      "text": "3. A Pioneering Neural Network Method for Efficient and Robust Fluid Simulation",
+      "number": null,
+      "title": "a pioneering neural network method for efficient and robust fluid simulation"
+    },
+    {
+      "text": "4. ANaGRAM: {A",
+      "number": null,
+      "title": "anagram: {a"
+    },
+    {
+      "text": "5. Graph Attention Hamiltonian Neural Networks: A Lattice System Analysis Model Based on Structural Learning",
+      "number": null,
+      "title": "graph attention hamiltonian neural networks: a lattice system analysis model based on structural learning"
+    },
+    {
+      "text": "6. A Digital Twin for Diesel Engines: Operator-infused Physics-Informed Neural Networks with Transfer Learning for Engine Health Monitoring",
+      "number": null,
+      "title": "a digital twin for diesel engines: operator-infused physics-informed neural networks with transfer learning for engine health monitoring"
+    },
+    {
+      "text": "7. Reservoir Computing Generalized",
+      "number": null,
+      "title": "reservoir computing generalized"
+    },
+    {
+      "text": "8. Discover physical concepts and equations with machine learning",
+      "number": null,
+      "title": "discover physical concepts and equations with machine learning"
+    },
+    {
+      "text": "9. Predicting Change, Not States: An Alternate Framework for Neural PDE Surrogates",
+      "number": null,
+      "title": "predicting change, not states: an alternate framework for neural pde surrogates"
+    },
+    {
+      "text": "10. Forward and Inverse Simulation of Pseudo-Two-Dimensional Model of Lithium-Ion Batteries Using Neural Networks",
+      "number": null,
+      "title": "forward and inverse simulation of pseudo-two-dimensional model of lithium-ion batteries using neural networks"
+    },
+    {
+      "text": "11. Data-Efficient Inference of Neural Fluid Fields via SciML Foundation Model",
+      "number": null,
+      "title": "data-efficient inference of neural fluid fields via sciml foundation model"
+    },
+    {
+      "text": "12. Improved Physics-informed neural networks loss function regularization with a variance-based term",
+      "number": null,
+      "title": "improved physics-informed neural networks loss function regularization with a variance-based term"
+    },
+    {
+      "text": "13. jinns: a JAX Library for Physics-Informed Neural Networks",
+      "number": null,
+      "title": "jinns: a jax library for physics-informed neural networks"
+    },
+    {
+      "text": "14. Trainable Adaptive Activation Function Structure (TAAFS) Enhances Neural Network Force Field Performance with Only Dozens of Additional Parameters",
+      "number": null,
+      "title": "trainable adaptive activation function structure (taafs) enhances neural network force field performance with only dozens of additional parameters"
+    },
+    {
+      "text": "15. A Multi-Fidelity Graph U-Net Model for Accelerated Physics Simulations",
+      "number": null,
+      "title": "a multi-fidelity graph u-net model for accelerated physics simulations"
+    },
+    {
+      "text": "16. Is AI Robust Enough for Scientific Research?",
+      "number": null,
+      "title": "is ai robust enough for scientific research?"
+    },
+    {
+      "text": "17. Physics-Guided Fair Graph Sampling for Water Temperature Prediction in River Networks",
+      "number": null,
+      "title": "physics-guided fair graph sampling for water temperature prediction in river networks"
+    },
+    {
+      "text": "18. An explainable operator approximation framework under the guideline of Green's function",
+      "number": null,
+      "title": "an explainable operator approximation framework under the guideline of green's function"
+    },
+    {
+      "text": "19. KKANs: Kurkov{\\'{a",
+      "number": null,
+      "title": "kkans: kurkov{\\'{a"
+    },
+    {
+      "text": "20. GausSim: Foreseeing Reality by Gaussian Simulator for Elastic Objects",
+      "number": null,
+      "title": "gaussim: foreseeing reality by gaussian simulator for elastic objects"
+    },
+    {
+      "text": "21. A Physics-Embedded Dual-Learning Imaging Framework for Electrical Impedance Tomography",
+      "number": null,
+      "title": "a physics-embedded dual-learning imaging framework for electrical impedance tomography"
+    },
+    {
+      "text": "22. Data-driven Modeling of Parameterized Nonlinear Fluid Dynamical Systems with a Dynamics-embedded Conditional Generative Adversarial Network",
+      "number": null,
+      "title": "data-driven modeling of parameterized nonlinear fluid dynamical systems with a dynamics-embedded conditional generative adversarial network"
+    },
+    {
+      "text": "23. Point-DeepONet: A Deep Operator Network Integrating PointNet for Nonlinear Analysis of Non-Parametric 3D Geometries and Load Conditions",
+      "number": null,
+      "title": "point-deeponet: a deep operator network integrating pointnet for nonlinear analysis of non-parametric 3d geometries and load conditions"
+    },
+    {
+      "text": "24. Efficient Aircraft Design Optimization Using Multi-Fidelity Models and Multi-fidelity Physics Informed Neural Networks",
+      "number": null,
+      "title": "efficient aircraft design optimization using multi-fidelity models and multi-fidelity physics informed neural networks"
+    },
+    {
+      "text": "25. Thermal-Mechanical Physics Informed Deep Learning For Fast Prediction of Thermal Stress Evolution in Laser Metal Deposition",
+      "number": null,
+      "title": "thermal-mechanical physics informed deep learning for fast prediction of thermal stress evolution in laser metal deposition"
+    },
+    {
+      "text": "26. Implicit factorized transformer approach to fast prediction of turbulent channel flows",
+      "number": null,
+      "title": "implicit factorized transformer approach to fast prediction of turbulent channel flows"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\AutoSurvey2\\Physics\\Physics-informed_Neural_Networks_for_Fluid_Mechanics_survey_split.json",
+    "processed_date": "2025-12-30T20:33:36.003713",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

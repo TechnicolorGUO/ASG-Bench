@@ -1,0 +1,224 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Organoids as host models for infection biology – a review of methods."
+    ],
+    [
+      1,
+      "Organoids as Host Models for Infection Biology: A Comprehensive Review of Methods"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Microinjection"
+    ],
+    [
+      3,
+      "4.2 Organoid Fragmentation and Co-culture"
+    ],
+    [
+      3,
+      "4.3 Organoid-Derived Monolayers (ODMs)"
+    ],
+    [
+      3,
+      "4.4 Apical-Out Organoids (Polarity Reversal)"
+    ],
+    [
+      3,
+      "4.5 Air-Liquid Interface (ALI)"
+    ],
+    [
+      3,
+      "4.6 Organ-on-Chip (OoC)"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Viral Infections"
+    ],
+    [
+      3,
+      "5.2 Bacterial Infections"
+    ],
+    [
+      3,
+      "5.3 Parasitic Infections"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "9. References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Organoids as host models for infection biology – a review of methods.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 06:12:12*\n*Progress: [17/25]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Organoids_as_host_models_for_infection_biology_a_review_of_m_20251226_061212.md*\n---"
+    },
+    {
+      "heading": "Organoids as Host Models for Infection Biology: A Comprehensive Review of Methods",
+      "level": 1,
+      "content": "**Abstract**\nInfectious diseases remain a primary challenge to global public health, exacerbated by the emergence of novel pathogens and the rise of antimicrobial resistance. Traditional models, such as immortalized cell lines and animal models, often fail to accurately recapitulate human-specific host-pathogen interactions due to a lack of cellular complexity or species-specific differences. The advent of organoid technology—three-dimensional (3D), self-organizing in vitro tissue models derived from stem cells—has revolutionized infection biology. This review provides a comprehensive analysis of the methods utilized to employ organoids as host models. We examine the evolution of infection protocols, ranging from microinjection of 3D cysts to the development of \"apical-out\" polarity reversal and air-liquid interface (ALI) cultures. We critically evaluate the application of these methods in studying viral (SARS-CoV-2, Zika, Rotavirus), bacterial (*Helicobacter pylori*, *Salmonella*), and parasitic (*Cryptosporidium*, *Toxoplasma*) infections. Finally, we discuss the technological hurdles, including the lack of vascularization and immune components, and outline future directions for complex co-culture systems and organ-on-chip integration.\n\n---"
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The study of infectious diseases has historically relied on two primary pillars: *in vitro* cell culture using immortalized cell lines (e.g., HeLa, Vero cells) and *in vivo* animal models. While these systems have provided foundational knowledge, they possess inherent limitations. Immortalized cell lines often lack the cellular heterogeneity, polarization, and functional maturity of native tissue, while animal models may not support the replication of human-restricted pathogens or may exhibit divergent immune responses [cite: 1, 2].\n\nOrganoids represent a paradigm shift in biomedical research. Defined as 3D structures derived from pluripotent stem cells (PSCs) or adult stem cells (ASCs) that self-organize into organ-specific tissues, organoids recapitulate the histology, genetic signature, and function of their *in vivo* counterparts [cite: 3, 4]. In the context of infection biology, organoids offer a unique platform to study host-pathogen interactions (HPI) in a human-relevant, physiologically active context. They allow for the investigation of tissue tropism, pathogen entry mechanisms, and innate immune responses in primary tissues that were previously inaccessible [cite: 5, 6].\n\nThis review aims to systematically categorize and critically analyze the methodological approaches for using organoids in infection biology. We focus specifically on the engineering solutions developed to overcome the topological challenges of infecting 3D structures and the application of these models across diverse pathogen classes."
+    },
+    {
+      "heading": "2. Key Concepts and Definitions",
+      "level": 2,
+      "content": "To understand the utility of organoids in infection research, several key concepts must be defined:\n\n*   **Organoid:** A 3D construct derived from stem cells (ESCs, iPSCs, or ASCs) that self-organizes to mimic the architecture and function of a specific organ. They contain multiple cell lineages (e.g., enterocytes, goblet cells, Paneth cells in the intestine) [cite: 3].\n*   **Cellular Polarity:** Epithelial tissues are polarized, possessing an **apical** surface (facing the lumen/external environment) and a **basolateral** surface (facing the blood supply/stroma). Most pathogens infect via the apical surface. In standard organoid culture (embedded in extracellular matrix), the apical surface faces the closed internal lumen, making infection difficult [cite: 7, 8].\n*   **Adult Stem Cells (ASCs) vs. Pluripotent Stem Cells (PSCs):** ASC-derived organoids (e.g., intestinal organoids from crypts) typically represent the epithelium only. PSC-derived organoids (e.g., brain or kidney organoids) often contain mesodermal and ectodermal components, offering higher complexity but greater variability [cite: 4, 9].\n*   **Tropism:** The specificity of a pathogen for a particular host tissue or cell type. Organoids are uniquely suited to study tropism due to their cellular heterogeneity [cite: 2]."
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The field of organoid infection biology has evolved rapidly over the last 15 years.\n\n*   **2009:** Hans Clevers’ laboratory established the first long-term culture of murine intestinal organoids from single Lgr5+ stem cells, demonstrating self-organization into crypt-villus structures [cite: 10, 11].\n*   **2011:** Spence et al. generated human intestinal organoids (HIOs) from pluripotent stem cells, introducing a mesenchymal component [cite: 12].\n*   **2012:** The first application of organoids for infection biology was reported by Finkbeiner et al., who successfully modeled **Rotavirus** infection in human intestinal organoids. This study demonstrated that organoids could support the replication of clinical viral isolates that were difficult to culture in traditional cell lines [cite: 12, 13].\n*   **2013:** Lancaster et al. developed human cerebral organoids, paving the way for neurodevelopmental modeling [cite: 11].\n*   **2015-2016:** The **Zika Virus (ZIKV)** outbreak accelerated organoid adoption. Researchers utilized brain organoids to causally link ZIKV infection to microcephaly, a phenotype impossible to model in standard cell lines [cite: 1, 14, 15].\n*   **2018:** Heo et al. achieved a major milestone by culturing **Cryptosporidium parvum** in intestinal and lung organoids, completing the parasite's life cycle *in vitro* for the first time [cite: 16].\n*   **2020-2022:** The **COVID-19** pandemic solidified organoids as essential tools. Lung, intestine, and kidney organoids were used to determine SARS-CoV-2 tropism, screen drugs, and study the \"cytokine storm\" [cite: 17, 18, 19]."
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "A major challenge in organoid infection is accessing the target cell surface. In standard extracellular matrix (ECM) domes (e.g., Matrigel), epithelial organoids orient with the **basolateral surface facing outward** and the **apical surface facing the enclosed lumen**. Since most pathogens (viruses, bacteria, parasites) attack the apical surface, researchers have developed distinct methods to overcome this topological barrier."
+    },
+    {
+      "heading": "4.1 Microinjection",
+      "level": 3,
+      "content": "Microinjection was the earliest method used to introduce pathogens into the organoid lumen.\n*   **Methodology:** Pathogens are injected directly into the central lumen of the organoid using a microcapillary needle under microscopic guidance [cite: 1, 20].\n*   **Advantages:** Maintains the 3D architecture, luminal microenvironment (e.g., hypoxia, concentration of antimicrobial peptides), and cell-cell junctions. It is the most physiologically relevant model for luminal pathogens [cite: 8].\n*   **Limitations:** It is labor-intensive, requires specialized equipment, and has low throughput (a skilled researcher can inject ~100 organoids per hour). There is variability in the volume injected [cite: 8, 20].\n*   **Key Uses:** *Helicobacter pylori* in gastric organoids [cite: 6]; *Clostridioides difficile* toxin studies [cite: 1]."
+    },
+    {
+      "heading": "4.2 Organoid Fragmentation and Co-culture",
+      "level": 3,
+      "content": "To bypass microinjection, organoids can be mechanically or enzymatically disrupted.\n*   **Methodology:** Organoids are sheared to expose the apical surface or dissociated into single cells, mixed with the pathogen, and then re-embedded in ECM to reform. Alternatively, pathogens are added to the media of intact organoids if they target the basolateral surface [cite: 1, 21].\n*   **Advantages:** Simple and scalable.\n*   **Limitations:** Disruption triggers wound-healing responses that may confound infection data. Re-formation takes time, during which the pathogen may be cleared or overgrow [cite: 20]."
+    },
+    {
+      "heading": "4.3 Organoid-Derived Monolayers (ODMs)",
+      "level": 3,
+      "content": "This method converts 3D organoids into 2D formats.\n*   **Methodology:** Organoids are dissociated into single cells and seeded onto Transwell inserts or culture plates coated with ECM. This creates a polarized monolayer with the apical surface facing the supernatant [cite: 2, 21].\n*   **Advantages:** Allows easy apical access for pathogens and therapeutics; compatible with high-throughput screening and transepithelial electrical resistance (TEER) measurements to assess barrier function [cite: 22].\n*   **Limitations:** Loss of 3D architecture, gradients, and complex tissue geometry (e.g., crypt/villus curvature) [cite: 22]."
+    },
+    {
+      "heading": "4.4 Apical-Out Organoids (Polarity Reversal)",
+      "level": 3,
+      "content": "A breakthrough technique involves reversing the polarity of the organoid so the apical surface faces the culture media.\n*   **Methodology:** Organoids are removed from the ECM (Matrigel) and cultured in suspension. In the absence of ECM integrin signaling, the cells spontaneously evert, exposing the apical brush border to the outside [cite: 7, 23].\n*   **Advantages:** Combines the accessibility of monolayers with the 3D complexity of organoids. Enables \"bath infection\" (simply adding pathogen to the media) [cite: 24, 25].\n*   **Key Uses:** *Salmonella* invasion studies (Co et al.) [cite: 23]; Respiratory virus screening (Influenza, SARS-CoV-2) [cite: 24, 26]."
+    },
+    {
+      "heading": "4.5 Air-Liquid Interface (ALI)",
+      "level": 3,
+      "content": "Critical for respiratory models.\n*   **Methodology:** Stem cells or organoid-derived cells are seeded on a porous membrane. The apical medium is removed, exposing cells to air while the basal side is fed. This drives differentiation into ciliated and mucosecretory cells [cite: 27, 28].\n*   **Advantages:** Mimics the lung/nasal environment; essential for airborne pathogens and mucociliary clearance studies [cite: 18]."
+    },
+    {
+      "heading": "4.6 Organ-on-Chip (OoC)",
+      "level": 3,
+      "content": "Integration of organoids with microfluidics.\n*   **Methodology:** Organoid-derived cells are cultured in microfluidic channels that apply shear stress and mechanical strain (mimicking peristalsis or breathing) [cite: 29, 30].\n*   **Advantages:** Introduces physical forces that influence pathogen adherence and host response; allows perfusion of immune cells [cite: 31]."
+    },
+    {
+      "heading": "5.1 Viral Infections",
+      "level": 3,
+      "content": "*   **Zika Virus (ZIKV) and Brain Organoids:**\n    During the 2015 ZIKV epidemic, brain organoids were pivotal. Studies by Qian et al. and others demonstrated that ZIKV preferentially infects neural progenitor cells (NPCs), leading to cell death and reduced organoid size, effectively modeling **microcephaly** *in vitro*. This link could not be established in mice, which are generally resistant to ZIKV [cite: 14, 15, 32].\n*   **SARS-CoV-2 and Multi-Organ Tropism:**\n    Organoids confirmed that SARS-CoV-2 infects not just the lungs (via ALI models showing infection of ciliated cells) but also the intestine, kidney, and liver. Intestinal organoids revealed that enterocytes are a site of active viral replication, explaining gastrointestinal symptoms in COVID-19 patients [cite: 17, 19, 28].\n*   **Rotavirus and Norovirus:**\n    Before organoids, Human Norovirus (HuNoV) could not be cultured in the lab. Ettayebi et al. (2016) and Finkbeiner et al. (2012) used intestinal organoids to successfully culture these pathogens, identifying specific histo-blood group antigens (HBGAs) required for infection [cite: 12, 33]."
+    },
+    {
+      "heading": "5.2 Bacterial Infections",
+      "level": 3,
+      "content": "*   **Helicobacter pylori and Gastric Organoids:**\n    Bartfeld et al. and others utilized gastric organoids to study *H. pylori* pathogenesis. They discovered that the bacterial virulence factor **CagA** interacts with the host receptor **c-Met**, triggering epithelial proliferation and potential carcinogenesis. This interaction relies on the 3D architecture and specific gastric lineages found in organoids [cite: 6, 34, 35].\n*   **Salmonella and Polarity:**\n    Using apical-out organoids, Co et al. demonstrated that *Salmonella* Typhimurium preferentially invades the apical surface, inducing cytoskeletal rearrangements. This model allowed for the visualization of bacterial entry in real-time without the artifacts of microinjection [cite: 8, 23]."
+    },
+    {
+      "heading": "5.3 Parasitic Infections",
+      "level": 3,
+      "content": "*   **Cryptosporidium:**\n    Heo et al. (2018) established a landmark model where *C. parvum* completed its entire life cycle in human intestinal and lung organoids. This was a significant advance over cancer cell lines, which only supported asexual stages, allowing for the study of sexual differentiation and oocyst production [cite: 16].\n*   **Toxoplasma gondii:**\n    Brain organoids have been used to model *T. gondii* infection, showing preferential infection of neurons and glia, cyst formation, and distinct transcriptomic changes (e.g., type I interferon response) that mimic human toxoplasmosis [cite: 36, 37]."
+    },
+    {
+      "heading": "6. Challenges and Open Problems",
+      "level": 2,
+      "content": "Despite their success, organoid models face significant limitations:\n\n1.  **Lack of Immune System:** Most organoids consist solely of epithelial cells. They lack resident immune cells (macrophages, T cells) crucial for mounting a complete response to infection. While co-culture methods are emerging (e.g., adding macrophages to lung organoids), they are not yet standard [cite: 38, 39].\n2.  **Absence of Vasculature:** Organoids rely on diffusion for nutrients, limiting their size and preventing the study of hematogenous dissemination of pathogens. Necrotic cores often form in the center of large organoids [cite: 40, 41].\n3.  **Variability and Standardization:** There is significant batch-to-batch variability in organoid generation, especially with iPSC-derived models. This makes high-throughput screening and reproducibility difficult [cite: 42, 43].\n4.  **Complexity of Infection Protocols:** Techniques like microinjection are technically demanding and difficult to scale for pharmaceutical screening [cite: 20].\n5.  **Incomplete Maturation:** Some organoids (especially fetal-derived or iPSC-derived) resemble fetal tissue rather than adult tissue, which may alter susceptibility to pathogens [cite: 6]."
+    },
+    {
+      "heading": "7. Future Research Directions",
+      "level": 2,
+      "content": "The next generation of organoid models aims to address these complexity gaps:\n\n*   **Co-culture Systems (Assembloids):** Researchers are developing \"assembloids\" by combining epithelial organoids with immune cells, fibroblasts, and neural cells to create a complex tumor/infection microenvironment [cite: 38, 44]. For example, incorporating microglia into brain organoids to study neuroinflammation in viral infections.\n*   **Vascularization:** Strategies include co-culturing with endothelial cells, 3D bioprinting vascular channels, or *in vivo* transplantation into mice to recruit host vessels [cite: 41, 45].\n*   **Organ-on-Chip Integration:** Combining organoids with microfluidics (e.g., Emulate chips) allows for the introduction of flow, shear stress, and circulating immune cells, creating a \"body-on-a-chip\" simulation [cite: 29, 30].\n*   **Standardization and Biobanking:** Efforts are underway to create standardized protocols and large biobanks of patient-derived organoids (PDOs) to capture genetic diversity in host susceptibility [cite: 46, 47].\n*   **High-Throughput Screening:** Adapting apical-out and monolayer formats for robotic handling to screen antiviral and antimicrobial drugs [cite: 24, 48]."
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "Organoids have firmly established themselves as indispensable tools in infection biology, bridging the gap between reductionist cell lines and complex animal models. By recapitulating the cellular heterogeneity, architecture, and physiology of human tissues, they have enabled breakthroughs in understanding pathogens ranging from Zika virus to *Cryptosporidium*.\n\nWhile challenges regarding immune integration, vascularization, and standardization remain, rapid methodological advancements—such as polarity reversal and organ-on-chip technologies—are steadily overcoming these barriers. As these models increase in complexity, they promise to accelerate the discovery of host-directed therapies and personalized treatments for infectious diseases."
+    }
+  ],
+  "references": [
+    "[cite: 1] Bartfeld, S. (2021). Organoids as host models for infection biology – a review of methods. *Experimental & Molecular Medicine*, 53(10), 1471-1482. [cite: 1, 5]",
+    "[cite: 2] Pauzuolis, M., et al. (2024). Organoids in infection research: current state and future perspectives. *Frontiers in Cellular and Infection Microbiology*. [cite: 2]",
+    "[cite: 20] Aguilar, C., et al. (2021). Organoids as host models for infection biology - a review of methods. *Exp Mol Med*. [cite: 20]",
+    "[cite: 5] Bartfeld, S., et al. (2021). Organoids as host models for infection biology. *Exp Mol Med*. [cite: 5]",
+    "[cite: 6] Blutt, S. E., & Estes, M. K. (2022). Organoid Models for Infectious Disease. *Annual Review of Medicine*, 73, 167-182. [cite: 6, 49]",
+    "[cite: 17] Snyder, E. (2020). The Future of Organoids in Infectious Diseases. *Corning Life Sciences*. [cite: 17]",
+    "[cite: 9] Hill, D. R., et al. (2024). Stem cell-derived human intestinal organoids as an infection model. *American Journal of Physiology*. [cite: 9]",
+    "[cite: 10] Sato, T., et al. (2009). Single Lgr5 stem cells build crypt-villus structures in vitro without a mesenchymal niche. *Nature*. [cite: 10]",
+    "[cite: 11] Clevers, H. (2016). Modeling Development and Disease with Organoids. *Cell*. [cite: 11]",
+    "[cite: 3] Wikipedia. (2024). Organoid. [cite: 3]",
+    "[cite: 4] Sino Biological. (2024). History of Organoids. [cite: 4]",
+    "[cite: 7] Co, J. Y., et al. (2021). Controlling the polarity of human gastrointestinal organoids to investigate epithelial biology and infectious diseases. *Nature Protocols*. [cite: 7, 23]",
+    "[cite: 26] StemCell Technologies. (2024). Apical-Out Airway Organoids. [cite: 26]",
+    "[cite: 24] Stroulios, G., et al. (2022). Apical-out airway organoids as a platform for studying viral infections. *Scientific Reports*. [cite: 24]",
+    "[cite: 50] Kramer, P., et al. (2023). Apical-out airway organoids and airway immune co-cultures. *ATS Journals*. [cite: 50]",
+    "[cite: 27] Jackson Laboratory. (2023). Protocol for primary human lung organoid-derived air-liquid interface. [cite: 27]",
+    "[cite: 48] Han, Y., et al. (2022). Organoid models for SARS-CoV-2 infection. *PMC*. [cite: 48]",
+    "[cite: 28] Toptan, T., et al. (2023). Organoid Models of SARS-CoV-2. *MDPI*. [cite: 28]",
+    "[cite: 18] Gamage, A. M., et al. (2022). Infection of human nasal epithelial cells with SARS-CoV-2. *PMC*. [cite: 18]",
+    "[cite: 14] Qian, X., et al. (2017). Modelling Zika virus infection of the developing human brain. *JoVE*. [cite: 14]",
+    "[cite: 38] Bar-Ephraim, Y. E., et al. (2024). Modelling disease with organoid and immune cell co-cultures. *PMC*. [cite: 38]",
+    "[cite: 39] Jovic, D., et al. (2022). Co-culture of murine small intestine epithelial organoids with innate lymphoid cells. *JoVE*. [cite: 39]",
+    "[cite: 8] Wilson, S. S., et al. (2021). Using organoids to study bacterial pathogenesis. *PMC*. [cite: 8]",
+    "[cite: 22] Wang, Y., et al. (2018). Enteroids and intestinal organoids for studying Salmonella infection. *PMC*. [cite: 22]",
+    "[cite: 29] Emulate Bio. (2024). Infectious Disease Application: Organ-on-a-Chip. [cite: 29]",
+    "[cite: 31] Dynamic42. (2024). Exploring infectious diseases with organ-on-chip. [cite: 31]",
+    "[cite: 30] Bein, A., et al. (2018). Microfluidic Organ-on-a-Chip Models of Human Intestine. *PMC*. [cite: 30]",
+    "[cite: 19] Zhang, M., et al. (2021). Human Organoids and Organs-on-Chips for Addressing COVID-19 Challenges. *ResearchGate*. [cite: 19]",
+    "[cite: 36] Seo, H. H., et al. (2020). Modelling Toxoplasma gondii infection in human cerebral organoids. *Emerging Microbes & Infections*. [cite: 36]",
+    "[cite: 37] Lee, J., et al. (2020). Toxoplasma gondii infection in human brain organoids. *PMC*. [cite: 37]",
+    "[cite: 16] Heo, I., et al. (2018). Modelling Cryptosporidium infection in human small intestinal and lung organoids. *Nature Microbiology*. [cite: 16]",
+    "[cite: 42] Blutt, S. E., & Estes, M. K. (2022). Standardization of organoid protocols. *Annual Review of Medicine*. [cite: 42]",
+    "[cite: 43] Kim, J., et al. (2024). Standardization of organoid production and quality evaluation. *PMC*. [cite: 43]",
+    "[cite: 40] Naderi-Meshkin, H., et al. (2023). Vascular organoids: advantages, applications, and challenges. *ResearchGate*. [cite: 40]",
+    "[cite: 44] Zhao, X., et al. (2023). Vascularization and immunization of organoids. *PMC*. [cite: 44]",
+    "[cite: 41] Qkine. (2024). The role of vascularization in organoid advancements. [cite: 41]",
+    "[cite: 5] Bartfeld, S. (2021). Organoids as host models for infection biology. *PubMed*. [cite: 5]",
+    "[cite: 47] Dutta, D., & Clevers, H. (2017). Organoid culture systems to study host–pathogen interactions. *Current Opinion in Immunology*. [cite: 47, 51]",
+    "[cite: 16] Heo, I., et al. (2018). Modelling Cryptosporidium infection. *Nature Microbiology*. [cite: 16]",
+    "[cite: 25] Sigma-Aldrich. (2024). Protocol Guide: Generation of Apical-Out Gastrointestinal Organoids. [cite: 25]",
+    "[cite: 21] Bartfeld, S. (2021). Methods using organoids to study infections. *PMC*. [cite: 21]",
+    "[cite: 34] Tegtmeyer, N., et al. (2017). Helicobacter pylori CagA and c-Met interaction. *Springer*. [cite: 34]",
+    "[cite: 35] Bertaux-Skeirik, N., et al. (2015). CD44 plays a functional role in H. pylori-induced epithelial cell proliferation. *PLoS Pathogens*. [cite: 35]",
+    "[cite: 15] Qian, X., et al. (2016). Brain-Region-Specific Organoids Using Mini-bioreactors for Modeling ZIKV Exposure. *Cell*. [cite: 15]",
+    "[cite: 12] Finkbeiner, S. R., et al. (2012). Stem Cell-Derived Human Intestinal Organoids as an Infection Model for Rotaviruses. *mBio*. [cite: 12, 13]",
+    "[cite: 23] Co, J. Y., et al. (2019). Controlling the polarity of human gastrointestinal organoids. *Nature Protocols*. [cite: 23]"
+  ]
+}

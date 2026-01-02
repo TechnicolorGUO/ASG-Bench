@@ -1,0 +1,341 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Pre-trained Language Models in Biomedical Domain- A Systematic Survey."
+    ],
+    [
+      1,
+      "Pre-trained Language Models in the Biomedical Domain: A Systematic Survey"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Pre-trained Language Models (PLMs) vs. Large Language Models (LLMs)"
+    ],
+    [
+      3,
+      "2.2 Training Strategies"
+    ],
+    [
+      3,
+      "2.3 Evaluation Metrics"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 The BERT Era: Domain Adaptation"
+    ],
+    [
+      3,
+      "3.2 The Vocabulary Hypothesis: PubMedBERT"
+    ],
+    [
+      3,
+      "3.3 Other Notable Encoder Models"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Proprietary Medical LLMs"
+    ],
+    [
+      3,
+      "4.2 Open-Source Medical LLMs (2024–2025)"
+    ],
+    [
+      3,
+      "4.3 Multimodal Foundation Models (LMMs)"
+    ],
+    [
+      3,
+      "4.4 Autonomous Medical Agents"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Clinical Documentation and Summarization"
+    ],
+    [
+      3,
+      "5.2 Information Extraction (NER and RE)"
+    ],
+    [
+      3,
+      "5.3 Clinical Decision Support (CDS)"
+    ],
+    [
+      3,
+      "5.4 Medical Education and Simulation"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Hallucination and Factuality"
+    ],
+    [
+      3,
+      "6.2 Data Privacy and Security"
+    ],
+    [
+      3,
+      "6.3 Domain Shift and Generalization"
+    ],
+    [
+      3,
+      "6.4 Evaluation Gap"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Reliable and Explainable Agents"
+    ],
+    [
+      3,
+      "7.2 Small Language Models (SLMs) for Healthcare"
+    ],
+    [
+      3,
+      "7.3 Multimodal Integration"
+    ],
+    [
+      3,
+      "7.4 Mitigating Hallucination"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Pre-trained Language Models in Biomedical Domain- A Systematic Survey.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 21:58:33*\n*Progress: [35/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Pre-trained_Language_Models_in_Biomedical_Domain-_A_Systemat_20251226_215833.md*\n---"
+    },
+    {
+      "heading": "Pre-trained Language Models in the Biomedical Domain: A Systematic Survey",
+      "level": 1,
+      "content": "**Key Points**\n*   **Evolution of Paradigms:** The field has transitioned from feature-engineering and static embeddings to Pre-trained Language Models (PLMs) like BERT, and recently to Large Language Models (LLMs) and Multimodal models (LMMs).\n*   **Domain-Specific Pre-training:** Evidence suggests that models pre-trained from scratch on biomedical corpora (e.g., PubMedBERT) generally outperform general-domain models adapted via continuous pre-training (e.g., BioBERT) due to domain-specific vocabulary alignment.\n*   **The Rise of Generative AI:** 2023–2025 marked a shift toward generative models (e.g., Med-PaLM 2, OpenBioLLM-70B) which demonstrate expert-level performance on benchmarks like USMLE, though challenges regarding hallucination and reasoning consistency remain.\n*   **Multimodal Integration:** New frontiers involve integrating vision and text (e.g., LLaVA-Med, BioMedGPT) to handle radiology and pathology tasks, moving toward holistic \"medical generalist\" agents.\n*   **Critical Bottlenecks:** Despite performance gains, deployment is hindered by \"hallucinations\" (factuality errors), data privacy concerns, and the lack of rigorous real-world evaluation frameworks beyond static benchmarks.\n\n---"
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "The proliferation of biomedical data, ranging from scientific literature to Electronic Health Records (EHRs), has necessitated advanced Natural Language Processing (NLP) techniques to extract actionable insights. Pre-trained Language Models (PLMs) have emerged as the *de facto* standard for these tasks, evolving from encoder-only architectures like BERT to massive generative decoders and multimodal systems. This systematic survey reviews the development, taxonomy, and application of PLMs in the biomedical domain. We critically analyze the historical progression from BioBERT and ClinicalBERT to state-of-the-art Large Language Models (LLMs) such as Med-PaLM 2 and OpenBioLLM. Furthermore, we examine the shift toward autonomous medical agents and multimodal foundation models. The review identifies significant challenges, particularly regarding model factuality (hallucination), interpretability, and the ethical implications of clinical deployment. We conclude by outlining future research directions, emphasizing the need for robust evaluation metrics that transcend traditional benchmarks to ensure patient safety in real-world settings.\n\n---"
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "Biomedical text mining is a critical discipline at the intersection of bioinformatics, medicine, and computer science. The volume of biomedical literature is expanding exponentially; PubMed alone adds over a million citations annually, and EHRs generate petabytes of unstructured clinical notes [cite: 1, 2]. Traditional NLP methods, relying on rule-based systems or statistical machine learning, struggled to capture the complex semantic dependencies and specialized terminology inherent in biomedical text [cite: 3, 4].\n\nThe advent of the Transformer architecture and the pre-training/fine-tuning paradigm revolutionized this landscape. General-domain models like BERT (Bidirectional Encoder Representations from Transformers) demonstrated that models pre-trained on vast corpora could learn universal language representations. However, the direct application of general-domain PLMs to biomedicine often yields suboptimal results due to a phenomenon known as **distribution shift**—the significant difference in word distribution and semantic structure between general web text (e.g., Wikipedia) and biomedical corpora [cite: 1, 5].\n\nThis survey aims to provide a comprehensive overview of the efforts to bridge this gap. We explore the trajectory from domain-adaptive pre-training (DAPT) to the training of domain-specific LLMs from scratch. Unlike previous surveys that focus solely on specific architectures or tasks, this review integrates recent advancements in multimodal learning and autonomous agents (2024–2025), providing a holistic view of the current ecosystem [cite: 6, 7].\n\n---"
+    },
+    {
+      "heading": "2. Key Concepts and Definitions",
+      "level": 2,
+      "content": "To contextualize the literature, we define the core taxonomies governing biomedical PLMs."
+    },
+    {
+      "heading": "2.1 Pre-trained Language Models (PLMs) vs. Large Language Models (LLMs)",
+      "level": 3,
+      "content": "*   **PLMs (e.g., BERT, RoBERTa):** Typically encoder-based models ranging from 100M to 300M parameters. They utilize a \"pre-train then fine-tune\" paradigm where the model is adapted to specific downstream tasks (e.g., Named Entity Recognition) using labeled data [cite: 2, 8].\n*   **LLMs (e.g., GPT-4, Llama-3):** Generative decoder-based models with billions of parameters. They rely on \"in-context learning\" (prompting) or instruction tuning and are capable of zero-shot or few-shot performance on unseen tasks [cite: 9, 10]."
+    },
+    {
+      "heading": "2.2 Training Strategies",
+      "level": 3,
+      "content": "*   **Continuous Pre-training (DAPT):** Initializing a model with weights from a general-domain model (e.g., BERT-base) and continuing training on biomedical text. This leverages general language knowledge but may suffer from vocabulary mismatch [cite: 5, 11].\n*   **Training From Scratch:** Initializing the model with random weights and training exclusively on biomedical corpora using a domain-specific tokenizer. This approach typically yields better performance for specialized domains [cite: 5, 12].\n*   **Instruction Tuning:** Fine-tuning LLMs on datasets formatted as instruction-response pairs (e.g., \"Diagnose this patient based on the symptoms...\") to align the model with user intent [cite: 9, 10]."
+    },
+    {
+      "heading": "2.3 Evaluation Metrics",
+      "level": 3,
+      "content": "*   **Standard NLP Metrics:** Precision, Recall, F1-score (for entity extraction), and Accuracy (for QA).\n*   **Biomedical Benchmarks:**\n    *   **BLURB:** The Biomedical Language Understanding and Reasoning Benchmark, a comprehensive collection of datasets for NER, Relation Extraction, and QA [cite: 13].\n    *   **MedQA (USMLE):** Questions from the United States Medical Licensing Examination, used to test reasoning capabilities [cite: 14, 15].\n    *   **Med-HALT/MedHallu:** Benchmarks specifically designed to test hallucination and factuality in medical LLMs [cite: 16, 17].\n\n---"
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The history of biomedical PLMs can be categorized into the \"BERT Era\" (2019–2022) and the \"Generative Era\" (2023–Present)."
+    },
+    {
+      "heading": "3.1 The BERT Era: Domain Adaptation",
+      "level": 3,
+      "content": "The release of **BioBERT** (2019/2020) by Lee et al. was a seminal moment. BioBERT initialized weights from the general BERT model and underwent continuous pre-training on PubMed abstracts and PubMed Central (PMC) full-text articles. It achieved state-of-the-art (SOTA) performance on biomedical Named Entity Recognition (NER), Relation Extraction (RE), and Question Answering (QA), significantly outperforming the original BERT [cite: 1, 5, 18].\n\nFollowing BioBERT, **ClinicalBERT** (Huang et al., 2019) addressed the specific nuances of clinical notes (e.g., abbreviations, telegraphic sentence structures) by pre-training on the MIMIC-III dataset. ClinicalBERT demonstrated that models trained on scientific literature (like BioBERT) were insufficient for clinical EHR tasks, such as predicting hospital readmission, due to the distinct linguistic characteristics of clinical notes [cite: 19, 20, 21]."
+    },
+    {
+      "heading": "3.2 The Vocabulary Hypothesis: PubMedBERT",
+      "level": 3,
+      "content": "A critical turning point was the introduction of **PubMedBERT** (Gu et al., 2021). The authors challenged the assumption that starting from a general-domain model was beneficial. They demonstrated that the vocabulary of general BERT (based on Wikipedia) was ill-suited for biomedicine (e.g., splitting common medical terms into nonsensical sub-words). By pre-training from scratch on PubMed data with a custom domain-specific vocabulary, PubMedBERT outperformed BioBERT and ClinicalBERT across the BLURB benchmark, establishing \"training from scratch\" as the superior, albeit more resource-intensive, strategy [cite: 5, 11, 12, 13]."
+    },
+    {
+      "heading": "3.3 Other Notable Encoder Models",
+      "level": 3,
+      "content": "*   **SciBERT:** Trained on a mix of biomedical and computer science papers, offering a broader scientific vocabulary [cite: 12, 22].\n*   **BlueBERT:** Combined PubMed and MIMIC-III data to bridge the gap between biomedical literature and clinical notes [cite: 19, 23].\n\n---"
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "The field has recently shifted toward Generative AI, characterized by massive parameter counts and instruction-following capabilities."
+    },
+    {
+      "heading": "4.1 Proprietary Medical LLMs",
+      "level": 3,
+      "content": "**Med-PaLM** and **Med-PaLM 2** (Google) represented the first models to achieve \"expert\" passing scores on the USMLE (MedQA). Med-PaLM 2 utilized an ensemble of prompting strategies and instruction tuning on medical datasets to achieve accuracy exceeding 85%, surpassing unspecialized models like GPT-3.5 [cite: 14, 24, 25]. Similarly, **GPT-4** has demonstrated strong zero-shot performance on medical reasoning tasks, often outperforming specialized models in reasoning capability, though it lacks public weight availability [cite: 9, 14, 24]."
+    },
+    {
+      "heading": "4.2 Open-Source Medical LLMs (2024–2025)",
+      "level": 3,
+      "content": "To democratize access, the research community has released powerful open-source models:\n*   **OpenBioLLM-70B:** Developed by Saama AI Labs (2024), this model is fine-tuned on the Llama-3 architecture using Direct Preference Optimization (DPO) and a custom medical instruction dataset. It reportedly outperforms GPT-4 and Med-PaLM 2 on several benchmarks despite having fewer parameters than proprietary giants [cite: 26, 27, 28, 29].\n*   **John Snow Labs Medical LLMs:** In late 2024 and early 2025, John Snow Labs released a suite of models (7B to 70B parameters) that claim SOTA performance on medical summarization and QA, emphasizing factuality and reduced hallucination rates compared to GPT-4 [cite: 30, 31, 32].\n*   **BioMistral and MMed-Llama:** These models focus on multilingual medical capabilities and lightweight deployment (7B parameters), making them suitable for resource-constrained environments [cite: 31, 33]."
+    },
+    {
+      "heading": "4.3 Multimodal Foundation Models (LMMs)",
+      "level": 3,
+      "content": "Medicine is inherently multimodal, requiring the synthesis of text, imaging (radiology, pathology), and omics data.\n*   **LLaVA-Med:** Li et al. (2023) introduced LLaVA-Med, a vision-language model trained in less than 15 hours. It utilizes a curriculum learning approach, first aligning biomedical vocabulary with image-caption pairs from PMC, then learning conversational semantics via GPT-4 generated instructions. It enables users to ask open-ended questions about biomedical images [cite: 34, 35, 36].\n*   **BioMedGPT:** An open-source \"generalist\" model designed to handle text, images, and molecular data. It unifies various biomedical tasks (e.g., molecule QA, radiology report generation) under a single sequence-to-sequence framework [cite: 37, 38, 39].\n*   **Llama3-Med:** A recent multimodal adaptation of Llama-3 that integrates visual encoders to achieve SOTA on visual question answering (VQA) benchmarks like VQA-RAD and SLAKE [cite: 40, 41]."
+    },
+    {
+      "heading": "4.4 Autonomous Medical Agents",
+      "level": 3,
+      "content": "The frontier of 2024–2025 is the development of **Agentic AI**.\n*   **Agent Hospital:** A simulation environment where patient, nurse, and doctor agents (powered by LLMs) interact. The \"MedAgent-Zero\" strategy allows doctor agents to evolve and improve their diagnostic accuracy by treating thousands of virtual patients, achieving high accuracy on MedQA without human-labeled data [cite: 15, 42, 43].\n*   **Biomedical Agent Frameworks:** These systems integrate planning, memory, and tool use (e.g., accessing external knowledge bases or calculators) to solve complex, multi-step clinical problems [cite: 7, 44].\n\n---"
+    },
+    {
+      "heading": "5.1 Clinical Documentation and Summarization",
+      "level": 3,
+      "content": "One of the most immediate applications of LLMs is alleviating administrative burden. Studies show that models like GPT-4 and specialized variants are used to draft responses to patient portal messages, summarize complex patient histories, and generate discharge summaries. Real-world deployment at academic medical centers has shown that \"writing for professional communication\" is the most common use case among healthcare professionals [cite: 45, 46]."
+    },
+    {
+      "heading": "5.2 Information Extraction (NER and RE)",
+      "level": 3,
+      "content": "While LLMs excel at generation, traditional PLMs (BioBERT, PubMedBERT) remain highly efficient for extracting structured data (e.g., genes, drugs, diseases) from unstructured text. However, recent work indicates that LLMs can be augmented with Retrieval-Augmented Generation (RAG) to perform few-shot NER, though fine-tuned PLMs often still hold the edge in cost and latency for high-volume extraction tasks [cite: 47, 48, 49]."
+    },
+    {
+      "heading": "5.3 Clinical Decision Support (CDS)",
+      "level": 3,
+      "content": "Models are increasingly evaluated on their ability to act as diagnostic aids.\n*   **Case Study:** In a comparison of GPT-4 against standard clinical decision support systems for drug-drug interaction (DDI) checks, GPT-4 showed lower sensitivity, missing clinically relevant interactions that traditional databases caught. This highlights the danger of relying solely on probabilistic models for safety-critical checks [cite: 50].\n*   **Hospital Readmission:** ClinicalBERT and its successors continue to be refined for predicting 30-day readmission risk by analyzing discharge notes, often outperforming structured-data-only models [cite: 19, 51, 52]."
+    },
+    {
+      "heading": "5.4 Medical Education and Simulation",
+      "level": 3,
+      "content": "The \"Agent Hospital\" simulation demonstrates the potential for LLMs to serve as training grounds for medical students, allowing them to interact with \"virtual patients\" that exhibit realistic disease progression and symptomology [cite: 42, 53].\n\n---"
+    },
+    {
+      "heading": "6. Challenges and Open Problems",
+      "level": 2,
+      "content": "Despite the hype, significant barriers prevent widespread clinical adoption."
+    },
+    {
+      "heading": "6.1 Hallucination and Factuality",
+      "level": 3,
+      "content": "The tendency of LLMs to generate plausible but incorrect information (\"hallucinations\") is the primary safety concern.\n*   **Benchmarks:** New benchmarks like **Med-HALT** and **MedHallu** have been developed to specifically stress-test models with fake questions or complex reasoning tasks. Results show that even SOTA models like GPT-4 struggle with \"hard\" hallucination detection, and general-purpose models often fail to distinguish between real and fabricated medical citations [cite: 16, 17, 54].\n*   **False Confidence:** Models often express high confidence in incorrect diagnoses, which is dangerous in a clinical setting [cite: 17, 55]."
+    },
+    {
+      "heading": "6.2 Data Privacy and Security",
+      "level": 3,
+      "content": "Training models on patient data (EHRs) raises significant privacy issues. While de-identification is standard, LLMs have the capacity to memorize training data, potentially leaking sensitive information. Federated learning and on-premise deployment of open-source models (like Llama-3 derivatives) are being explored as solutions to avoid sending data to external APIs [cite: 6, 56, 57]."
+    },
+    {
+      "heading": "6.3 Domain Shift and Generalization",
+      "level": 3,
+      "content": "While models like PubMedBERT handle literature well, they may struggle with the \"messiness\" of real-world clinical notes (typos, jargon). Furthermore, models trained on data from one hospital system often fail to generalize to another due to differences in reporting standards and demographics [cite: 1, 5, 50]."
+    },
+    {
+      "heading": "6.4 Evaluation Gap",
+      "level": 3,
+      "content": "There is a discord between academic benchmarks (like MedQA) and real-world utility. High performance on multiple-choice questions does not necessarily translate to safe, effective clinical decision-making. Recent studies call for \"Real World Evaluation\" (RWE) frameworks that assess model outputs in actual clinical workflows rather than static datasets [cite: 45, 58].\n\n---"
+    },
+    {
+      "heading": "7.1 Reliable and Explainable Agents",
+      "level": 3,
+      "content": "Future research must move beyond static QA to dynamic agents that can explain their reasoning. Techniques like Chain-of-Thought (CoT) prompting are a start, but rigorous verification mechanisms (e.g., citing specific guidelines or evidence) are required to build trust [cite: 7, 44]."
+    },
+    {
+      "heading": "7.2 Small Language Models (SLMs) for Healthcare",
+      "level": 3,
+      "content": "To address privacy and cost, there is a growing trend toward \"Small Language Models\" (e.g., 7B parameters or fewer) that are highly specialized. Training these models on high-quality, curated medical textbooks and guidelines (rather than noisy web data) could yield models that are both accurate and deployable on local hospital infrastructure [cite: 32, 59]."
+    },
+    {
+      "heading": "7.3 Multimodal Integration",
+      "level": 3,
+      "content": "The integration of \"omics\" data (genomics, proteomics) with text and imaging is the next frontier. Models like BioMedGPT aim to become true \"biomedical generalists,\" capable of bridging the gap between molecular biology and clinical presentation [cite: 37, 39]."
+    },
+    {
+      "heading": "7.4 Mitigating Hallucination",
+      "level": 3,
+      "content": "Research into \"refusal-aware\" models (which know when to say \"I don't know\") and RAG systems that ground every generation in retrieved clinical evidence is critical. Benchmarks like MedHallu will play a vital role in measuring progress in this area [cite: 16, 60].\n\n---"
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "The application of Pre-trained Language Models in the biomedical domain has undergone a rapid transformation. From the vocabulary-aware encoders of PubMedBERT to the multimodal reasoning capabilities of LLaVA-Med and the agentic simulations of Agent Hospital, the field is moving toward systems that can perceive, reason, and act. However, the \"black box\" nature of these models, coupled with the persistent risk of hallucination, necessitates a cautious approach to clinical deployment. Future success lies not just in larger parameters, but in better data curation, rigorous real-world evaluation, and the development of systems that prioritize patient safety and data privacy above all else.\n\n---"
+    }
+  ],
+  "references": [
+    "[cite: 5] **BioBERT vs PubMedBERT Comparison.** (2024). *Medium*. [cite: 5]",
+    "[cite: 19] **Adapting BERT for Biomedical and Clinical NLP.** (2024). *Medium*. [cite: 19]",
+    "[cite: 1] Lee, J., et al. (2020). **BioBERT: a pre-trained biomedical language representation model for biomedical text mining.** *Bioinformatics*. [cite: 1, 18]",
+    "[cite: 3] **Comprehensive Investigation into Applying LLMs in Healthcare.** (2023). *arXiv*. [cite: 3]",
+    "[cite: 22] **Pretrained Language Models for Biomedical Tasks.** (2020). *ResearchGate*. [cite: 22]",
+    "[cite: 9] **Large Language Models in Biomedicine.** (2024). *PMC*. [cite: 9]",
+    "[cite: 26] **OpenBioLLM-70B.** (2024). *Hugging Face*. [cite: 26, 27, 28]",
+    "[cite: 30] **John Snow Labs Achieves State-of-the-Art Medical LLM Accuracy.** (2024). *OpenDataScience*. [cite: 30]",
+    "[cite: 40] **Llama3-Med: Multimodal Medical Model.** (2024). *arXiv*. [cite: 40]",
+    "[cite: 61] **Survey of LLMs in Healthcare.** (2024). *MDPI*. [cite: 61]",
+    "[cite: 62] Wang, B., et al. (2023). **Pre-trained Language Models in Biomedical Domain: A Systematic Survey.** *ACM Computing Surveys*. [cite: 2, 62, 63]",
+    "[cite: 2] **Taxonomy of Biomedical PLMs.** (2023). *ResearchGate*. [cite: 2]",
+    "[cite: 64] **Survey of PLMs in Medical NLP.** (2024). *PubMed*. [cite: 64]",
+    "[cite: 8] **Pre-trained Language Models in Biomedical Domain.** (2021). *arXiv*. [cite: 8]",
+    "[cite: 6] **Challenges of LLMs in Biomedicine.** (2024). *arXiv*. [cite: 6]",
+    "[cite: 44] **Biomedical LLM Agents Survey.** (2024). *MDPI*. [cite: 44]",
+    "[cite: 56] **Ethical Concerns of LLMs in Medicine.** (2024). *PMC*. [cite: 56]",
+    "[cite: 10] **Strategies to Adapt ChatGPT for Biomedicine.** (2024). *Briefings in Bioinformatics*. [cite: 10]",
+    "[cite: 47] **Benchmarking LLMs for BioNLP.** (2023). *arXiv*. [cite: 47]",
+    "[cite: 48] **LLMs in Biomedicine: NER Study.** (2024). *arXiv*. [cite: 48]",
+    "[cite: 49] **Benchmarking LLMs for BioNLP Applications.** (2024). *ResearchGate*. [cite: 49]",
+    "[cite: 4] **Biomedical NER Challenges.** (2023). *PMC*. [cite: 4]",
+    "[cite: 24] **Top 5 Medical AI Models Compared.** (2024). *Dr7.ai*. [cite: 24]",
+    "[cite: 57] **AI in Medicine: Opportunities and Challenges.** (2024). *Medify*. [cite: 57]",
+    "[cite: 50] **Barriers to LLM Implementation in Clinical Practice.** (2024). *MDPI*. [cite: 50]",
+    "[cite: 14] **Capabilities of GPT-4 on Medical Challenge Problems.** (2023). *Microsoft Research*. [cite: 14]",
+    "[cite: 7] **Biomedical LLM Agents Survey.** (2025). *arXiv*. [cite: 7]",
+    "[cite: 54] **Evaluation Metrics for Medical LLMs.** (2025). *PMC*. [cite: 54]",
+    "[cite: 65] **Medical Hallucination Detection.** (2025). *arXiv*. [cite: 65]",
+    "[cite: 45] Unell, A., et al. (2025). **Real-World Usage Patterns of Large Language Models in Healthcare.** *medRxiv*. [cite: 45, 46]",
+    "[cite: 18] **BioBERT Technical Details.** (2020). *Bioinformatics*. [cite: 18]",
+    "[cite: 16] **MedHallu: Benchmark for Hallucination Detection.** (2025). *MedHallu Project*. [cite: 16, 60, 66]",
+    "[cite: 42] **Agent Hospital: Virtual Hospital Simulation.** (2024). *Tsinghua University*. [cite: 42]",
+    "[cite: 15] **Agent Hospital: A Simulacrum of Hospital.** (2024). *arXiv*. [cite: 15, 43]",
+    "[cite: 11] Gu, Y., et al. (2021). **Domain-Specific Language Model Pretraining (PubMedBERT).** *ACM Transactions on Computing for Healthcare*. [cite: 11, 12]",
+    "[cite: 13] **BLURB Benchmark.** (2023). *PMC*. [cite: 13]",
+    "[cite: 20] Huang, K., et al. (2019). **ClinicalBERT: Modeling Clinical Notes.** *arXiv*. [cite: 20, 21, 67]",
+    "[cite: 25] **UltimateMedLLM vs Med-PaLM 2.** (2024). *Stanford CS224n*. [cite: 25]",
+    "[cite: 17] Pal, A., et al. (2023). **Med-HALT: Medical Domain Hallucination Test.** *CoNLL*. [cite: 17, 55, 68]",
+    "[cite: 37] **BiomedGPT: Open Source Multimodal Model.** (2024). *UGA News*. [cite: 37]",
+    "[cite: 34] Li, C., et al. (2023). **LLaVA-Med: Training a Large Language-and-Vision Assistant.** *Microsoft Research*. [cite: 34, 35, 36]",
+    "[cite: 32] **John Snow Labs Medical LLM 2025 Release.** (2025). *John Snow Labs*. [cite: 32]"
+  ]
+}

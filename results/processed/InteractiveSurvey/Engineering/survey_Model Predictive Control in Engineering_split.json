@@ -1,0 +1,841 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of Model Predictive Control in Engineering"
+    ],
+    [
+      1,
+      "1 Abstract"
+    ],
+    [
+      1,
+      "2 Introduction"
+    ],
+    [
+      1,
+      "3 Hybrid Control and Learning Integration"
+    ],
+    [
+      2,
+      "3.1 Algebraic and Theoretical Foundations"
+    ],
+    [
+      3,
+      "3.1.1 Analytical model-free predictive control frameworks"
+    ],
+    [
+      3,
+      "3.1.2 Theoretical integration of nonlinear control with practical validation"
+    ],
+    [
+      2,
+      "3.2 Architectural and Hardware Innovations"
+    ],
+    [
+      3,
+      "3.2.1 Multi-core RISC-V controller design for real-time control"
+    ],
+    [
+      3,
+      "3.2.2 Hardware-in-the-loop evaluation and software mapping strategies"
+    ],
+    [
+      2,
+      "3.3 Algorithmic and Computational Enhancements"
+    ],
+    [
+      3,
+      "3.3.1 Pseudospectral methods for optimal control efficiency"
+    ],
+    [
+      3,
+      "3.3.2 Singular arc suppression in optimal control solutions"
+    ],
+    [
+      2,
+      "3.4 Application-Driven Control Strategies"
+    ],
+    [
+      3,
+      "3.4.1 Prosthetic movement optimization through predictive algorithms"
+    ],
+    [
+      3,
+      "3.4.2 Multi-domain energy system control with MPC and digital twins"
+    ],
+    [
+      2,
+      "3.5 Integration of Learning and Control"
+    ],
+    [
+      3,
+      "3.5.1 GPU-parallelized MPC in reinforcement learning environments"
+    ],
+    [
+      3,
+      "3.5.2 Self-tunable explicit MPC for dynamic systems"
+    ],
+    [
+      2,
+      "3.6 Hybrid and Hierarchical Control Frameworks"
+    ],
+    [
+      3,
+      "3.6.1 Hierarchical model-based planning for musculoskeletal systems"
+    ],
+    [
+      3,
+      "3.6.2 Vision language model integration for real-time vehicle control"
+    ],
+    [
+      1,
+      "4 Advanced MPC Algorithms and Optimization"
+    ],
+    [
+      2,
+      "4.1 Reinforcement Learning and MPC Synergies"
+    ],
+    [
+      3,
+      "4.1.1 Goal-conditioned RL for robust control planning"
+    ],
+    [
+      3,
+      "4.1.2 Policy optimization through scenario-based MPC"
+    ],
+    [
+      2,
+      "4.2 Algorithmic Efficiency and Convergence"
+    ],
+    [
+      3,
+      "4.2.1 Linear convergence in optimization under perturbations"
+    ],
+    [
+      3,
+      "4.2.2 Quadratic programming with O(n³) complexity analysis"
+    ],
+    [
+      2,
+      "4.3 Robust and Risk-Aware Control"
+    ],
+    [
+      3,
+      "4.3.1 Distributionally robust MPC for cascading failure mitigation"
+    ],
+    [
+      3,
+      "4.3.2 Dual-timescale risk adaptation with Gaussian Processes"
+    ],
+    [
+      2,
+      "4.4 Game-Theoretic and Multi-Agent Control"
+    ],
+    [
+      3,
+      "4.4.1 Nonlinear receding-horizon differential games for dynamic path planning"
+    ],
+    [
+      3,
+      "4.4.2 Competitive strategy optimization in electric race scenarios"
+    ],
+    [
+      2,
+      "4.5 Learning-Based Optimization Methods"
+    ],
+    [
+      3,
+      "4.5.1 Deep learning for deviation from gradient descent"
+    ],
+    [
+      3,
+      "4.5.2 Self-supervised PDE-constrained optimization via dual networks"
+    ],
+    [
+      2,
+      "4.6 Adaptive and Online Control"
+    ],
+    [
+      3,
+      "4.6.1 Online Koopman operator-based MPC for dynamic adaptation"
+    ],
+    [
+      3,
+      "4.6.2 Infeasible IPM algorithm for convex QP with exact complexity"
+    ],
+    [
+      1,
+      "5 Data-Driven and Physics-Informed Control Frameworks"
+    ],
+    [
+      2,
+      "5.1 Neural Network Integration in MPC"
+    ],
+    [
+      3,
+      "5.1.1 LSTM-based NMPC for real-time combustion control"
+    ],
+    [
+      3,
+      "5.1.2 RNN prediction models for engine emissions"
+    ],
+    [
+      2,
+      "5.2 Hybrid Modeling and Control"
+    ],
+    [
+      3,
+      "5.2.1 Neural network augmentation of first-principles models"
+    ],
+    [
+      3,
+      "5.2.2 Physics-informed neural control for fluid systems"
+    ],
+    [
+      2,
+      "5.3 Data-Driven System Representation"
+    ],
+    [
+      3,
+      "5.3.1 Sparse neural networks for process system modeling"
+    ],
+    [
+      3,
+      "5.3.2 Feature engineering for building load prediction"
+    ],
+    [
+      2,
+      "5.4 End-to-End Learning with Physical Priors"
+    ],
+    [
+      3,
+      "5.4.1 Neural-symbolic physics-aware simulation for trajectory prediction"
+    ],
+    [
+      3,
+      "5.4.2 Differentiable image-conditioned simulation with physics constraints"
+    ],
+    [
+      2,
+      "5.5 Control with Latent Dynamics"
+    ],
+    [
+      3,
+      "5.5.1 Variational autoencoders for neural manifold control"
+    ],
+    [
+      3,
+      "5.5.2 Latent dynamics modeling with linear approximation"
+    ],
+    [
+      1,
+      "6 Future Directions"
+    ],
+    [
+      1,
+      "7 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of Model Predictive Control in Engineering",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Abstract",
+      "level": 1,
+      "content": "Model predictive control (MPC) has become a cornerstone of modern control engineering, offering a systematic approach to optimize system performance while adhering to constraints. This survey paper provides a comprehensive overview of the evolution and current state of MPC, with a particular focus on its integration with hybrid control and learning frameworks. The paper explores the theoretical foundations, algorithmic advancements, and practical implementations of MPC, highlighting its role in addressing real-world control challenges. A central theme of the survey is the growing synergy between MPC and machine learning, which has enabled the development of more adaptive, efficient, and robust control strategies. Recent research has emphasized the importance of algorithmic efficiency, robustness, and real-time performance in the deployment of MPC in complex engineering systems. The paper also examines the challenges associated with model accuracy, computational complexity, and scalability, providing insights into how these issues are being tackled through emerging research directions. By offering a comprehensive analysis of recent developments, this survey serves as a valuable resource for researchers and practitioners seeking to understand the current state of MPC and its potential for future innovation. The insights presented in this paper are expected to inform the design of more effective and adaptable control systems, ultimately contributing to the advancement of intelligent and autonomous engineering solutions.",
+      "stats": {
+        "char_count": 1542,
+        "word_count": 213,
+        "sentence_count": 8,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2 Introduction",
+      "level": 1,
+      "content": "Model predictive control (MPC) has emerged as a pivotal technique in the field of control engineering, offering a systematic approach to optimize system performance while adhering to constraints [1]. Unlike traditional control strategies that rely on fixed rules or feedback mechanisms, MPC uses a predictive model to anticipate future system behavior and compute optimal control actions over a finite horizon [2]. This capability makes MPC particularly effective in handling complex, dynamic, and nonlinear systems, where the ability to adapt to changing conditions is crucial [3]. Over the past few decades, MPC has found widespread applications in various domains, including robotics, energy systems, autonomous vehicles, and industrial automation [3]. The increasing availability of computational resources and the integration of data-driven techniques have further expanded the scope and effectiveness of MPC, enabling it to address challenges that were previously difficult to manage with conventional control methods [4].\n\nThis survey paper focuses on the evolution and current state of model predictive control (MPC) in engineering, with a particular emphasis on its integration with hybrid control and learning frameworks [1]. The paper explores the theoretical foundations, algorithmic advancements, and practical implementations of MPC, highlighting its role in addressing real-world control challenges [5]. A central theme of the survey is the growing synergy between MPC and machine learning, which has enabled the development of more adaptive, efficient, and robust control strategies [6]. By analyzing recent research contributions, this paper aims to provide a comprehensive overview of the key developments in the field and identify areas where further research is needed [7].\n\nThe paper is structured to first present the theoretical and methodological foundations of MPC, followed by an exploration of its integration with learning-based techniques and hybrid control architectures. The discussion includes an in-depth analysis of recent advancements in algorithmic efficiency, robustness, and real-time implementation, with a focus on applications in dynamic and uncertain environments. The paper also examines the role of hardware innovations, such as multi-core processors and hardware-in-the-loop testing, in enabling the deployment of MPC in real-world systems. Additionally, it addresses the challenges associated with model accuracy, computational complexity, and scalability, providing insights into how these issues are being tackled through emerging research directions. The final section outlines the key contributions of the survey, emphasizing its value in guiding future research and development in the field of model predictive control.\n\nThis survey paper contributes to the advancement of model predictive control by synthesizing a broad range of research findings and identifying key trends and challenges in the field [1]. It provides a structured overview of the theoretical and practical aspects of MPC, with a focus on its integration with learning-based methods and hybrid control strategies [8]. The paper also highlights the importance of algorithmic efficiency, robustness, and real-time performance in the deployment of MPC in complex engineering systems. By offering a comprehensive analysis of recent developments, this survey serves as a valuable resource for researchers and practitioners seeking to understand the current state of MPC and its potential for future innovation. The insights presented in this paper are expected to inform the design of more effective and adaptable control systems, ultimately contributing to the advancement of intelligent and autonomous engineering solutions.",
+      "stats": {
+        "char_count": 3741,
+        "word_count": 528,
+        "sentence_count": 19,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "3.1.1 Analytical model-free predictive control frameworks",
+      "level": 3,
+      "content": "Analytical model-free predictive control frameworks represent a significant shift from traditional model-based approaches by eliminating the need for explicit system dynamics [9]. These frameworks rely on data-driven methods to predict future system behavior and optimize control actions without requiring a detailed mathematical model of the system. This approach is particularly advantageous in complex or uncertain environments where deriving an accurate analytical model is challenging or computationally expensive. By leveraging historical data and machine learning techniques, model-free predictive control can adapt to changing conditions and improve performance over time. The absence of a priori model requirements makes these frameworks highly flexible and applicable across a wide range of systems, from robotics to energy management.\n\nThe core principle of model-free predictive control lies in its ability to learn and predict system responses through empirical data rather than theoretical formulations. This is typically achieved using techniques such as neural networks, kernel methods, or other data-driven models that approximate the system's behavior. These models are trained on input-output data collected from the system, enabling the controller to forecast future states and compute optimal control inputs. The predictive capability is then integrated into an optimization framework that considers constraints and performance objectives. This approach allows for real-time decision-making while maintaining robustness against model inaccuracies and external disturbances. The effectiveness of these frameworks is often validated through simulation and experimental studies, demonstrating their potential in practical applications [4].\n\nDespite their advantages, model-free predictive control frameworks face challenges related to data quality, computational complexity, and generalization. The accuracy of predictions heavily depends on the representativeness and diversity of the training data, which can be a limiting factor in real-world scenarios. Additionally, the computational demands of training and deploying these models can be high, especially for systems with large state spaces or long prediction horizons. To address these issues, ongoing research focuses on improving data efficiency, reducing computational overhead, and enhancing the interpretability of model-free controllers. These efforts aim to make model-free predictive control more scalable, reliable, and applicable to a broader range of control problems [1].",
+      "stats": {
+        "char_count": 2557,
+        "word_count": 339,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.1.2 Theoretical integration of nonlinear control with practical validation",
+      "level": 3,
+      "content": "The theoretical integration of nonlinear control with practical validation represents a critical juncture in modern control system design, where advanced mathematical frameworks are aligned with real-world implementation challenges. Nonlinear control methodologies, such as model predictive control (MPC), provide robust solutions for systems with complex dynamics, constraints, and uncertainties [2]. These approaches rely on accurate system models and optimization techniques to generate control actions that balance performance and stability. However, the transition from theoretical formulations to practical deployment often encounters discrepancies due to model inaccuracies, unmodeled dynamics, and computational limitations. Bridging this gap requires rigorous validation through simulations and real-world experiments, ensuring that the theoretical guarantees of stability and performance hold under practical conditions.\n\nPractical validation of nonlinear control strategies involves systematic testing and refinement to address the limitations of idealized models. This process typically includes the development of high-fidelity simulations that capture the essential nonlinearities and disturbances present in real systems. By iteratively refining control laws based on empirical data, researchers can enhance the robustness and adaptability of control strategies. Furthermore, the integration of data-driven techniques, such as machine learning, allows for the continuous improvement of control policies in response to changing operating conditions. This synergy between theory and practice not only validates the effectiveness of nonlinear control methods but also enables their deployment in complex, dynamic environments where traditional linear control approaches may fall short.\n\nThe challenge of ensuring that theoretical nonlinear control models perform reliably in practice is compounded by the need for real-time computation and adaptability. Control algorithms must be optimized to operate within the constraints of embedded systems, often requiring efficient numerical methods and hardware-specific implementations. Additionally, the presence of unmodeled dynamics, parameter variations, and external disturbances necessitates the development of adaptive and robust control strategies. Through a combination of rigorous theoretical analysis, computational efficiency, and empirical validation, the integration of nonlinear control with practical applications continues to advance the capabilities of modern control systems, enabling their use in a wide range of critical and complex domains.",
+      "stats": {
+        "char_count": 2616,
+        "word_count": 331,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.1 Multi-core RISC-V controller design for real-time control",
+      "level": 3,
+      "content": "The design of multi-core RISC-V controllers for real-time control applications involves the integration of parallel processing capabilities with deterministic execution to meet stringent timing requirements. RISC-V's modular architecture enables the customization of multi-core configurations tailored to specific control tasks, allowing for efficient distribution of computational workloads. This is particularly beneficial in real-time systems where predictable latency and high throughput are critical. The use of vector extensions and custom instruction sets further enhances the performance of control algorithms, enabling them to execute complex computations within tight time constraints. By leveraging the inherent scalability of RISC-V, multi-core controllers can dynamically allocate resources to different control loops, ensuring that high-priority tasks receive the necessary processing power without compromising system stability.\n\nReal-time control systems often require the simultaneous execution of multiple control loops operating at different frequencies, which presents significant challenges in terms of resource allocation and synchronization. The multi-core RISC-V architecture addresses these challenges by enabling independent execution of control tasks on separate cores, reducing inter-core communication overhead and improving overall system responsiveness. This is especially important in applications involving robotics, autonomous vehicles, and industrial automation, where precise timing and coordination between different subsystems are essential. Additionally, the support for hardware-level interrupts and real-time operating system (RTOS) integration ensures that critical control tasks are prioritized, minimizing the risk of missed deadlines and system instability. These features make multi-core RISC-V controllers a compelling choice for real-time applications that demand both performance and reliability.\n\nThe implementation of multi-core RISC-V controllers also benefits from the availability of open-source toolchains and development environments, which facilitate rapid prototyping and deployment. This openness allows researchers and engineers to customize the controller's architecture to match the specific requirements of their applications, such as power efficiency, computational density, and real-time determinism. Furthermore, the integration of advanced memory management techniques, such as hardware-assisted cache coherence and memory protection, ensures that the controller can handle complex control algorithms without compromising performance or security. As a result, multi-core RISC-V controllers represent a powerful and flexible platform for developing next-generation real-time control systems that can adapt to evolving application demands while maintaining high levels of reliability and efficiency.",
+      "stats": {
+        "char_count": 2864,
+        "word_count": 353,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.2 Hardware-in-the-loop evaluation and software mapping strategies",
+      "level": 3,
+      "content": "Hardware-in-the-loop (HIL) evaluation plays a critical role in validating control strategies by integrating physical hardware components with simulated environments. This approach enables the assessment of real-time performance and robustness under realistic conditions, ensuring that control algorithms function as intended when deployed on actual systems. In the context of model predictive control (MPC), HIL testing is particularly valuable for evaluating the impact of time delays, uncertainties, and nonlinear dynamics. By simulating the system's behavior while maintaining real-world hardware elements, HIL provides a bridge between theoretical models and practical implementation, allowing for iterative refinement of control policies before full-scale deployment.\n\nSoftware mapping strategies are essential for optimizing the execution of control algorithms on embedded hardware, especially in resource-constrained environments. Efficient mapping ensures that computational tasks are distributed appropriately across available processing units, minimizing latency and maximizing throughput. For MPC-based systems, which often require high-frequency computations, software mapping must account for the specific characteristics of the target platform, such as memory hierarchy, parallelism, and communication overhead. Techniques like code generation, task scheduling, and hardware-specific optimizations are employed to align the control algorithm's requirements with the underlying architecture, thereby enhancing both performance and reliability.\n\nThe integration of HIL evaluation with effective software mapping strategies is crucial for achieving real-time control in complex systems. This synergy ensures that control algorithms not only perform well in simulation but also maintain their effectiveness when executed on actual hardware. By leveraging HIL testing, developers can identify and mitigate potential bottlenecks early in the design process, while optimized software mapping ensures that the control logic is efficiently implemented. Together, these approaches enable the development of robust, high-performance control systems that can adapt to dynamic and uncertain environments, making them essential components in modern control engineering practices.",
+      "stats": {
+        "char_count": 2279,
+        "word_count": 287,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.1 Pseudospectral methods for optimal control efficiency",
+      "level": 3,
+      "content": "Pseudospectral methods have emerged as a powerful tool for solving optimal control problems, particularly in scenarios where high computational efficiency and accuracy are required. These methods leverage the approximation of state and control variables using a set of basis functions, typically orthogonal polynomials, to transform the continuous-time optimal control problem into a finite-dimensional nonlinear programming problem. This transformation enables the use of well-established numerical optimization techniques, making pseudospectral methods particularly effective for problems with complex dynamics and constraints. The key advantage of these methods lies in their ability to achieve high-order accuracy with relatively few discretization points, thereby reducing the computational burden compared to traditional methods such as direct transcription or shooting methods.\n\nThe efficiency of pseudospectral methods in optimal control is further enhanced by their ability to handle both smooth and nonsmooth optimal control problems, including those with singular arcs and state constraints. By employing collocation at specific nodes, such as Legendre or Chebyshev points, these methods can accurately capture the behavior of the system over the entire time horizon. This property is especially beneficial in applications where the control inputs must be optimized over a long prediction horizon, such as in aerospace or autonomous vehicle control. Additionally, the use of adaptive mesh refinement techniques allows for the dynamic adjustment of the discretization grid, ensuring that regions of high complexity or rapid variation are adequately resolved without unnecessary computational overhead.\n\nDespite their advantages, the application of pseudospectral methods to optimal control problems requires careful consideration of the choice of basis functions, collocation points, and the formulation of the resulting optimization problem. The accuracy and convergence of the solution are highly dependent on these factors, necessitating a thorough understanding of the underlying mathematical principles. Furthermore, the integration of pseudospectral methods with real-time control frameworks presents additional challenges, such as the need for efficient solvers and the management of computational latency. Nonetheless, ongoing research continues to refine these methods, making them increasingly viable for a wide range of optimal control applications.",
+      "stats": {
+        "char_count": 2470,
+        "word_count": 330,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.2 Singular arc suppression in optimal control solutions",
+      "level": 3,
+      "content": "Singular arcs in optimal control solutions represent a critical challenge due to their inherent complexity and the difficulties they introduce in deriving control actions from optimality conditions [10]. These arcs occur when the optimal control inputs over a finite time interval cannot be directly determined using standard Pontryagin's maximum principle, leading to situations where the control law is not uniquely defined. This ambiguity arises because the Hamiltonian, which governs the optimality conditions, becomes independent of the control variable over the arc. As a result, singular arcs require specialized analytical or numerical treatments, often involving higher-order conditions or the use of auxiliary equations to determine the optimal control strategy. The presence of singular arcs can significantly complicate the design of control algorithms, particularly in real-time applications where rapid and reliable decision-making is essential.\n\nThe suppression of singular arcs is a crucial aspect of optimal control theory, especially in applications involving complex dynamical systems with multiple constraints and nonlinear behaviors [10]. Traditional methods for handling singular arcs often rely on perturbation techniques or the introduction of additional cost terms to enforce uniqueness in the control solution. However, these approaches may not always be effective, particularly in high-dimensional systems where the interplay between state variables and control inputs becomes highly nonlinear. Recent advancements in optimal control have focused on developing robust numerical algorithms that can detect and suppress singular arcs through careful tuning of the cost function or by incorporating constraints that guide the control trajectory away from singular regions [10]. These strategies aim to ensure that the resulting control policies are both optimal and computationally tractable.\n\nIn practical applications, the suppression of singular arcs is essential for achieving stable and predictable system behavior, particularly in safety-critical domains such as aerospace, robotics, and process control. The presence of singular arcs can lead to suboptimal or even unstable control actions, which may result in performance degradation or system failure. To address this, researchers have explored hybrid control strategies that combine model predictive control (MPC) with singular arc detection mechanisms, allowing for real-time adjustments to the control policy. These methods often involve the use of adaptive optimization techniques that can dynamically adjust the control inputs based on the system's current state and constraints. By effectively suppressing singular arcs, these approaches enhance the reliability and robustness of optimal control solutions, making them more suitable for real-world implementation.",
+      "stats": {
+        "char_count": 2852,
+        "word_count": 391,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.4.1 Prosthetic movement optimization through predictive algorithms",
+      "level": 3,
+      "content": "Model predictive control (MPC) has emerged as a powerful framework for optimizing prosthetic movement by leveraging predictive algorithms to anticipate future system states and adjust control inputs accordingly [11]. This approach enables prosthetic devices to dynamically respond to user intent and environmental conditions, ensuring more natural and efficient movement. By formulating the control problem as an online optimization task, MPC considers both system constraints and performance objectives over a finite time horizon, leading to improved stability and adaptability [5]. The integration of predictive models allows the system to account for uncertainties and disturbances, making it particularly suitable for real-time applications where precise and timely responses are critical.\n\nThe application of MPC in prosthetics involves the use of sophisticated algorithms that predict the future behavior of the prosthetic limb based on current and past states [11]. These predictions are used to compute optimal control actions that minimize a defined cost function, which may include factors such as energy expenditure, movement smoothness, and user comfort. To address the computational challenges associated with real-time implementation, researchers have developed efficient optimization techniques, including conic convex formulations and simplified control laws. These methods enable the system to maintain high-frequency control while ensuring robustness against model inaccuracies and external perturbations. Additionally, the incorporation of machine learning techniques enhances the adaptability of the control system, allowing it to improve over time through continuous data collection and refinement of predictive models.\n\nRecent advancements in MPC for prosthetic movement optimization have focused on improving the integration of predictive algorithms with real-time control systems [11]. This includes the development of hybrid control strategies that combine model-based predictions with data-driven learning to enhance adaptability and performance. The use of hierarchical MPC frameworks has also shown promise in managing complex, high-dimensional control problems by decomposing the optimization task into more manageable subproblems. These approaches not only improve the responsiveness and accuracy of prosthetic devices but also contribute to a more seamless user experience. As the field continues to evolve, the synergy between predictive algorithms and advanced control strategies is expected to drive further innovations in prosthetic technology, ultimately leading to more intuitive and effective solutions for users.",
+      "stats": {
+        "char_count": 2651,
+        "word_count": 355,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.4.2 Multi-domain energy system control with MPC and digital twins",
+      "level": 3,
+      "content": "Multi-domain energy system control presents significant challenges due to the integration of diverse energy sources, storage systems, and demand-side resources, requiring coordinated and adaptive control strategies. Model Predictive Control (MPC) has emerged as a powerful framework for handling these complexities by optimizing future system behavior based on predictive models [1]. The integration of digital twins enhances this approach by providing high-fidelity virtual representations of physical systems, enabling real-time monitoring, simulation, and control [12]. This synergy allows for more accurate prediction of system states and better handling of uncertainties, such as fluctuating renewable energy generation and variable load demands. By leveraging digital twins, MPC can dynamically adjust control strategies, ensuring optimal performance across multiple energy domains while maintaining system stability and efficiency.\n\nThe application of MPC in multi-domain energy systems involves addressing the inherent nonlinearities and time-varying dynamics of interconnected components. Digital twins play a critical role in capturing these dynamics through detailed modeling and real-time data integration, allowing for more precise and responsive control [12]. This combination enables the development of adaptive control strategies that can handle both short-term fluctuations and long-term planning. Additionally, the use of digital twins facilitates scenario-based optimization, where different operational conditions and constraints can be simulated and evaluated to determine the most effective control actions. This approach not only improves the reliability and robustness of energy systems but also supports the integration of emerging technologies, such as smart grids and distributed energy resources.\n\nRecent advancements in digital twin technology have further enhanced the capabilities of MPC in multi-domain energy systems by enabling high-fidelity simulations and real-time decision-making [13]. These systems can now incorporate machine learning techniques to continuously refine predictive models and improve control performance. The integration of digital twins with MPC also supports the implementation of decentralized control architectures, where multiple subsystems can operate autonomously while maintaining coordination with the overall system. This flexibility is crucial for managing the complexity of modern energy systems, which often involve a mix of conventional and renewable energy sources, storage units, and demand-side management strategies [13]. As a result, the combination of MPC and digital twins offers a promising solution for achieving efficient, resilient, and sustainable energy system control.",
+      "stats": {
+        "char_count": 2751,
+        "word_count": 361,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.5.1 GPU-parallelized MPC in reinforcement learning environments",
+      "level": 3,
+      "content": "GPU-parallelized Model Predictive Control (MPC) in reinforcement learning (RL) environments represents a critical advancement in addressing the computational demands of real-time control systems [14]. Traditional MPC involves solving an optimization problem at each control step, which becomes computationally intensive as the system complexity increases [5]. In RL settings, where the agent must continuously interact with the environment to learn optimal policies, the integration of GPU-parallelized MPC enables the simultaneous evaluation of multiple control strategies [6]. This parallelization significantly reduces the time required for online optimization, allowing for more frequent and accurate control updates. By leveraging the massive parallelism of GPUs, the computational burden of solving multiple MPC instances is distributed efficiently, making it feasible to apply MPC in high-dimensional and dynamic environments [8].\n\nThe integration of GPU-parallelized MPC with RL introduces new opportunities for improving the efficiency and robustness of control policies [8]. In such environments, the MPC framework can be used to generate control commands that are both optimal and safe, while the RL component adapts to changing conditions and learns from experience [15]. This synergy allows for the development of control strategies that balance exploration and exploitation, ensuring that the system remains within safe operational boundaries while optimizing performance. Furthermore, the use of GPUs facilitates the concurrent execution of multiple MPC solvers, which is particularly beneficial in multi-agent or distributed control scenarios where each agent requires independent optimization. This capability enhances the scalability of the overall control system and supports real-time decision-making in complex environments.\n\nDespite its advantages, the implementation of GPU-parallelized MPC in RL environments presents several challenges [8]. The need for efficient memory management and data transfer between the CPU and GPU is critical to maintaining performance. Additionally, the design of the optimization algorithm must be tailored to exploit the parallel architecture of GPUs, which often requires rethinking traditional sequential solvers. The development of specialized software frameworks and libraries that support GPU acceleration is essential for enabling widespread adoption. As research in this area progresses, the focus will likely shift toward optimizing the integration of MPC and RL, ensuring that the resulting control systems are both computationally efficient and capable of handling the complexities of real-world applications [15].",
+      "stats": {
+        "char_count": 2679,
+        "word_count": 362,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.5.2 Self-tunable explicit MPC for dynamic systems",
+      "level": 3,
+      "content": "Self-tunable explicit Model Predictive Control (MPC) for dynamic systems represents an advanced approach that integrates the benefits of explicit MPC with adaptive parameter tuning mechanisms [2]. Unlike traditional explicit MPC, which relies on precomputed control laws for a fixed set of operating conditions, self-tunable explicit MPC dynamically adjusts its control parameters in response to system variations [5]. This adaptability is crucial for handling nonlinear dynamics, time-varying disturbances, and changing operational constraints. The method typically involves embedding a tuning mechanism within the explicit MPC framework, enabling the controller to recalibrate its parameters based on real-time system feedback [16]. This self-tuning capability ensures that the controller remains effective across a broader range of operating conditions without requiring manual intervention or re-derivation of the control law.\n\nThe core of self-tunable explicit MPC lies in its ability to maintain the computational efficiency of explicit MPC while introducing mechanisms for parameter adaptation. This is often achieved through the use of data-driven techniques, such as online learning or gradient-based optimization, to update the tuning parameters. By leveraging historical data and real-time performance metrics, the controller can refine its decision-making process, improving both accuracy and robustness. Additionally, the self-tuning process is typically designed to be computationally lightweight, ensuring that it does not compromise the real-time execution capabilities of explicit MPC. This balance between adaptability and efficiency makes self-tunable explicit MPC particularly suitable for applications where system dynamics are uncertain or evolve over time, such as in autonomous vehicles, robotics, and complex industrial processes.\n\nRecent advancements in self-tunable explicit MPC have focused on enhancing the stability and convergence properties of the tuning algorithms [5]. Techniques such as Lyapunov-based parameter updates and adaptive learning rates have been explored to ensure that the controller remains stable even under significant system variations. Furthermore, the integration of machine learning models, such as neural networks, has enabled more sophisticated tuning strategies that can capture complex system behaviors. These developments have expanded the applicability of self-tunable explicit MPC to a wider range of dynamic systems, including those with high-dimensional state spaces and nonlinear dynamics. As a result, self-tunable explicit MPC is becoming an increasingly attractive solution for real-time control applications where both performance and adaptability are critical [5].",
+      "stats": {
+        "char_count": 2734,
+        "word_count": 364,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.6.1 Hierarchical model-based planning for musculoskeletal systems",
+      "level": 3,
+      "content": "Hierarchical model-based planning for musculoskeletal systems represents a critical advancement in the control of complex, high-dimensional robotic and biological systems [17]. This approach integrates multiple levels of abstraction, where high-level planners generate task-specific goals and low-level controllers execute precise motor commands while respecting physical constraints. By decomposing the control problem into distinct hierarchical layers, such systems can efficiently manage the interplay between global objectives and local actuation dynamics. This structure enables robustness against model inaccuracies and external disturbances, making it particularly suitable for applications involving dynamic environments and real-time adaptation. The hierarchical framework also facilitates the incorporation of prior knowledge and domain-specific constraints, improving both the efficiency and reliability of control strategies.\n\nThe implementation of hierarchical model-based planning often involves a combination of model predictive control (MPC) and task-specific planners. At the upper level, MPC is used to optimize future system states over a finite horizon, considering constraints on joint torques, contact forces, and stability margins [2]. At the lower level, morphology-aware controllers adjust actuation parameters to achieve the desired posture or motion. This dual-layered approach allows for the seamless integration of high-level strategic planning with low-level actuator-level control, ensuring that the system can adapt to changing task requirements and environmental conditions. Additionally, the use of sampling-based methods in the planning phase enhances the ability to explore complex state spaces, improving the likelihood of finding feasible and optimal control trajectories.\n\nDespite its advantages, hierarchical model-based planning for musculoskeletal systems presents several challenges, including computational complexity and the need for accurate dynamic models. The integration of multiple control layers requires careful coordination to ensure real-time performance and stability. Moreover, the high dimensionality of musculoskeletal systems necessitates efficient optimization algorithms that can handle large-scale state spaces without excessive computational overhead. Ongoing research focuses on improving the scalability and adaptability of these frameworks, with an emphasis on reducing the reliance on manual tuning and increasing the autonomy of the planning and control processes. These advancements are essential for enabling the deployment of hierarchical model-based planning in real-world robotic and biomedical applications.",
+      "stats": {
+        "char_count": 2681,
+        "word_count": 338,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.6.2 Vision language model integration for real-time vehicle control",
+      "level": 3,
+      "content": "The integration of Vision Language Models (VLMs) into real-time vehicle control systems represents a significant advancement in autonomous driving and robotics [18]. By leveraging the semantic understanding capabilities of VLMs, control systems can interpret complex environmental inputs, such as traffic signs, pedestrian movements, and road conditions, through natural language descriptions. This enables more informed decision-making and adaptive control strategies. The fusion of visual perception with language-based reasoning allows for richer context-awareness, enhancing the system's ability to handle ambiguous or dynamic scenarios. This integration is particularly beneficial in environments where traditional sensor-based approaches may struggle with interpretive ambiguity or high levels of uncertainty.\n\nIn real-time vehicle control, the challenge lies in efficiently processing and acting upon the information provided by VLMs without introducing latency. The computational demands of VLMs, including high-dimensional feature extraction and natural language processing, must be balanced against the strict timing constraints of control loops. Techniques such as model compression, efficient inference frameworks, and hardware acceleration are essential to ensure that VLMs can operate within the required real-time performance bounds. Furthermore, the integration requires careful design of the control architecture to seamlessly incorporate VLM outputs into the decision-making pipeline, ensuring that the control system remains responsive and reliable under varying operational conditions.\n\nRecent studies have demonstrated the potential of VLMs in enhancing trajectory planning, obstacle avoidance, and scenario understanding in autonomous vehicles. By encoding environmental context into language representations, VLMs can provide high-level directives that guide the control system toward safer and more efficient maneuvers. However, the dynamic nature of real-time control necessitates continuous adaptation and optimization of the VLM integration. Future research should focus on improving the efficiency and robustness of VLM-based control systems, ensuring they can operate reliably in diverse and unpredictable environments while maintaining the necessary real-time performance.",
+      "stats": {
+        "char_count": 2302,
+        "word_count": 293,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.1 Goal-conditioned RL for robust control planning",
+      "level": 3,
+      "content": "Goal-conditioned reinforcement learning (RL) has emerged as a critical approach for enhancing robust control planning in complex and uncertain environments [19]. Unlike traditional RL, which focuses on maximizing cumulative rewards without explicit reference to specific goals, goal-conditioned RL explicitly incorporates goal states into the learning process, enabling agents to adapt their policies to achieve desired outcomes. This paradigm is particularly valuable in control systems where the ability to dynamically adjust to changing objectives or environmental conditions is essential. By conditioning the policy on a goal, the agent can generate more targeted and efficient control actions, which is crucial for applications such as robotic manipulation, autonomous navigation, and adaptive process control. The integration of goal-conditioned RL with model predictive control (MPC) further enhances robustness by combining the predictive capabilities of MPC with the adaptive learning of RL, allowing for more flexible and resilient control strategies [14].\n\nIn the context of robust control planning, goal-conditioned RL addresses the limitations of traditional model-based approaches by enabling the system to learn optimal control policies without relying solely on precise dynamic models [19]. This is especially beneficial in scenarios where model inaccuracies or external disturbances are prevalent. The use of goal-conditioned RL allows for the incorporation of high-level task specifications, such as reaching a specific state or following a desired trajectory, into the control policy. This not only improves the agent's ability to handle uncertainty but also facilitates the design of control strategies that are more interpretable and controllable. Moreover, the ability to learn goal-dependent policies through interaction with the environment enables the system to adapt to new tasks or changing conditions without requiring extensive retraining or manual intervention.\n\nThe synergy between goal-conditioned RL and robust control planning is further enhanced by the use of advanced optimization techniques and uncertainty quantification. By formulating the control problem as a goal-oriented optimization task, the system can account for both model and environmental uncertainties, leading to more reliable and safe decision-making. This approach also allows for the integration of constraint satisfaction mechanisms, ensuring that the generated control actions adhere to operational limits and safety requirements. As a result, goal-conditioned RL provides a powerful framework for developing control systems that are not only effective in achieving desired outcomes but also resilient to disturbances and model inaccuracies, making it a promising direction for future research in robust control planning.",
+      "stats": {
+        "char_count": 2828,
+        "word_count": 389,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.2 Policy optimization through scenario-based MPC",
+      "level": 3,
+      "content": "Scenario-based Model Predictive Control (MPC) offers a structured approach to policy optimization by incorporating multiple possible future scenarios into the control decision-making process [2]. This methodology enables the controller to account for uncertainties in system dynamics, environmental conditions, and external disturbances, thereby enhancing robustness and adaptability. By generating and evaluating a set of representative scenarios, the controller can compute control actions that are not only optimal under nominal conditions but also resilient to deviations. This approach is particularly beneficial in complex systems where modeling errors or unmodeled dynamics are inevitable, as it allows for a more comprehensive exploration of the state space and ensures that the control strategy remains effective across a wide range of operating conditions.\n\nThe integration of scenario-based MPC into policy optimization involves the formulation of a multi-scenario optimization problem, where each scenario represents a potential future state of the system. This formulation typically requires solving a series of constrained optimization problems, each corresponding to a specific scenario, and then aggregating the results to determine the optimal control policy. The computational complexity of this approach can be significant, especially when dealing with a large number of scenarios, but recent advances in optimization algorithms and computational hardware have made it increasingly feasible. Furthermore, the use of scenario reduction techniques can help manage the complexity while maintaining the effectiveness of the control strategy. This makes scenario-based MPC a viable option for real-time applications where both performance and computational efficiency are critical.\n\nIn practice, scenario-based MPC has been successfully applied in various domains, including autonomous systems, robotics, and process control, where the ability to handle uncertainty is essential. By leveraging historical data, simulation models, and real-time measurements, the controller can dynamically adjust its scenario set to reflect the current operating environment. This adaptability not only improves the accuracy of the predictions but also enhances the overall control performance. Moreover, the scenario-based framework provides a natural way to incorporate risk-sensitive objectives and constraints, ensuring that the control policy aligns with the desired safety and performance criteria. As such, scenario-based MPC represents a powerful tool for policy optimization in complex and uncertain environments.",
+      "stats": {
+        "char_count": 2619,
+        "word_count": 351,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.1 Linear convergence in optimization under perturbations",
+      "level": 3,
+      "content": "Linear convergence in optimization under perturbations is a critical aspect of algorithmic stability and performance, particularly in scenarios where the optimization landscape is subject to external or internal disturbances. This section examines the conditions under which optimization algorithms maintain linear convergence rates when faced with perturbations, such as noisy gradients, dynamic constraints, or time-varying objectives. The analysis typically involves characterizing the robustness of the algorithm’s update rule, ensuring that perturbations do not significantly degrade the convergence speed. Key factors include the algorithm’s sensitivity to perturbations, the magnitude and frequency of the disturbances, and the structure of the optimization problem itself. By establishing bounds on the allowable perturbations, one can guarantee that the algorithm converges linearly to a neighborhood of the optimal solution, even in the presence of noise or uncertainty.\n\nThe theoretical foundation for linear convergence under perturbations often relies on the properties of the underlying optimization problem, such as strong convexity, Lipschitz continuity, and smoothness. These properties ensure that the algorithm’s iterates move toward the optimal solution at a predictable rate. When perturbations are introduced, the convergence analysis must account for their impact on the algorithm’s update steps. Techniques such as gradient clipping, adaptive learning rates, and robust optimization frameworks are commonly employed to mitigate the effects of perturbations. Additionally, the interplay between the perturbation structure and the algorithm’s design plays a crucial role in determining the overall convergence behavior. For instance, algorithms that incorporate feedback mechanisms or regularization can better handle perturbations and maintain linear convergence.\n\nRecent advances in this area have focused on developing algorithms that are not only linearly convergent in the absence of perturbations but also maintain this property under a wide range of disturbance scenarios. This includes the development of perturbation-aware variants of classical optimization methods, such as gradient descent and Newton’s method, as well as the integration of machine learning techniques to adaptively adjust the algorithm’s parameters in response to perturbations. These approaches aim to balance the trade-off between convergence speed and robustness, ensuring that the optimization process remains efficient and reliable even in challenging environments. The study of linear convergence under perturbations continues to be an active area of research, with implications for a wide range of applications, from control systems to machine learning and beyond.",
+      "stats": {
+        "char_count": 2772,
+        "word_count": 374,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.2 Quadratic programming with O(n³) complexity analysis",
+      "level": 3,
+      "content": "Quadratic programming (QP) plays a central role in model predictive control (MPC) due to its ability to handle constrained optimization problems efficiently [5]. In the context of online learning and adaptive control, QP formulations are particularly valuable as they allow for real-time decision-making while maintaining computational tractability. The complexity of solving QP problems is typically O(n³), where n represents the number of variables or constraints, making it a critical factor in determining the feasibility of MPC in embedded or real-time applications. This section delves into the theoretical and practical implications of this complexity, emphasizing how it affects the scalability and performance of control algorithms, especially in high-dimensional or dynamic environments.\n\nThe O(n³) complexity of QP arises primarily from the need to solve a system of linear equations during each iteration, often involving matrix factorization or inversion. This computational burden becomes significant as the problem size increases, necessitating the use of tailored solvers and efficient numerical methods. In the context of MPC, where the optimization problem is solved repeatedly at each time step, the computational cost directly impacts the control update rate and overall system responsiveness. Techniques such as active set methods, interior point methods, and first-order approximations are commonly employed to mitigate this complexity, each offering trade-offs between speed, accuracy, and robustness [20]. Understanding these trade-offs is essential for designing control systems that balance performance with computational feasibility.\n\nRecent advancements in QP algorithms have focused on reducing the effective complexity through problem structure exploitation, parallel computing, and algorithmic refinements. For instance, the use of sparse matrix representations and problem-specific preconditioning can significantly lower the actual runtime, even if the theoretical complexity remains O(n³). Additionally, the integration of machine learning techniques to predict or approximate optimal solutions has shown promise in reducing the computational load. These developments are particularly relevant in applications such as autonomous systems and embedded control, where real-time performance is critical. By analyzing the O(n³) complexity of QP, this section provides a foundation for evaluating and improving the efficiency of MPC-based control strategies in complex and dynamic environments [21].",
+      "stats": {
+        "char_count": 2527,
+        "word_count": 341,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.1 Distributionally robust MPC for cascading failure mitigation",
+      "level": 3,
+      "content": "Distributionally robust model predictive control (DRMPC) has emerged as a critical approach for mitigating cascading failures in complex, interconnected systems. Unlike traditional robust MPC, which relies on worst-case scenarios, DRMPC leverages distributional uncertainty sets to account for potential variations in system behavior [22]. This approach ensures that control strategies remain effective under a range of plausible system states, thereby enhancing resilience against cascading failures [22]. By incorporating probabilistic constraints and optimizing over a set of candidate distributions, DRMPC provides a more nuanced and flexible framework for handling uncertainty compared to deterministic or purely stochastic methods. This makes it particularly suitable for applications where the system dynamics are subject to significant variability and where failure propagation must be carefully managed.\n\nThe integration of distributional robustness into MPC involves formulating the control problem as a min-max optimization over a set of probability distributions, rather than a single worst-case scenario. This formulation allows for the inclusion of prior knowledge about the system's uncertainty, such as historical data or expert insights, which can be used to construct more realistic uncertainty sets. Additionally, DRMPC can incorporate risk-sensitive cost functions, enabling the controller to balance between performance and safety in the face of uncertain disturbances. The resulting control policies are not only robust to modeling errors but also adaptive to changing system conditions, which is essential for preventing the propagation of failures in dynamic environments. This approach is particularly beneficial in power systems, transportation networks, and other infrastructure where cascading failures can have severe consequences.\n\nRecent advancements in DRMPC have focused on improving computational efficiency and scalability, making it feasible for real-time implementation in large-scale systems. Techniques such as scenario-based approximations, duality theory, and decomposition methods have been employed to reduce the complexity of the underlying optimization problems. Furthermore, the integration of data-driven methods, such as machine learning and Bayesian inference, has enabled the automatic refinement of uncertainty sets based on real-time data. These developments have broadened the applicability of DRMPC to a wide range of systems, including those with nonlinear dynamics and high-dimensional state spaces. As a result, DRMPC is increasingly being recognized as a powerful tool for ensuring the reliability and stability of complex systems in the presence of uncertainty and potential failure propagation [22].",
+      "stats": {
+        "char_count": 2759,
+        "word_count": 371,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.2 Dual-timescale risk adaptation with Gaussian Processes",
+      "level": 3,
+      "content": "Dual-timescale risk adaptation with Gaussian Processes (GPs) offers a structured approach to address uncertainty in control systems by leveraging the probabilistic nature of GPs for both short-term and long-term risk management. This method operates on two distinct time scales: a fast timescale that handles immediate, local uncertainties through online GP regression, and a slower timescale that adapts the model parameters or hyperparameters to account for evolving system dynamics. By decoupling these temporal aspects, the approach ensures that the controller can respond rapidly to transient disturbances while maintaining a long-term understanding of the system's behavior. The integration of GPs provides not only point estimates of the system state but also uncertainty quantification, which is critical for risk-aware decision-making in dynamic environments.\n\nThe dual-timescale framework enables the system to dynamically adjust its risk tolerance based on the current operational context. On the fast timescale, GPs are used to approximate the residual dynamics between the nominal model and the actual system, allowing for real-time corrections to the control policy. This local adaptation ensures that the system remains stable and performs well under short-term uncertainties. On the slower timescale, the GP hyperparameters are updated using historical data or online learning, which captures long-term changes in the system's behavior. This two-layer adaptation mechanism ensures that the controller remains robust to both transient and persistent uncertainties, enhancing the overall reliability and performance of the control system.\n\nThis approach is particularly effective in applications where the system dynamics are subject to non-stationary or time-varying uncertainties, such as in autonomous robotics, energy systems, and chemical processes. The use of GPs allows for a principled way to balance exploration and exploitation, ensuring that the controller adapts without overfitting to short-term noise. By combining the strengths of GP-based uncertainty estimation with dual-timescale adaptation, the method provides a flexible and scalable solution for risk-aware control in complex, real-world scenarios.",
+      "stats": {
+        "char_count": 2233,
+        "word_count": 308,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.4.1 Nonlinear receding-horizon differential games for dynamic path planning",
+      "level": 3,
+      "content": "Nonlinear receding-horizon differential games (NRHDG) represent a sophisticated extension of model predictive control (MPC) tailored for dynamic path planning in competitive or adversarial environments [23]. Unlike traditional MPC, which focuses on optimizing a single agent's trajectory, NRHDG incorporates game-theoretic principles to account for the strategic interactions between multiple agents. This approach is particularly relevant in scenarios such as autonomous drone racing, where each agent must anticipate and counteract the actions of its opponents. By modeling the system as a differential game, NRHDG enables the formulation of optimal strategies that consider the worst-case behaviors of other agents over a finite prediction horizon, leading to more robust and adaptive control policies.\n\nThe core challenge in NRHDG lies in solving a sequence of finite-horizon optimal control problems that involve coupled dynamics and competing objectives. This requires the development of specialized numerical methods capable of handling the nonlinearities and high-dimensional state spaces inherent in such systems. Recent advancements have focused on integrating learning-based techniques to improve the efficiency and accuracy of these solutions. For instance, the use of data-driven models to approximate the opponent's behavior or to refine the game's payoff functions has shown promise in reducing computational complexity while maintaining performance. Additionally, the incorporation of real-time adaptation mechanisms allows the system to adjust its strategies dynamically in response to changing environmental conditions or unexpected opponent actions.\n\nDespite these advances, several open challenges remain in the application of NRHDG to dynamic path planning. These include ensuring recursive feasibility and stability in the presence of model inaccuracies, managing the computational burden associated with solving complex differential games, and achieving seamless integration with existing control frameworks. Future research directions may involve the development of hybrid approaches that combine NRHDG with reinforcement learning or other adaptive control strategies to enhance robustness and scalability. By addressing these challenges, NRHDG has the potential to significantly advance the capabilities of autonomous systems in complex, multi-agent environments.",
+      "stats": {
+        "char_count": 2388,
+        "word_count": 316,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.4.2 Competitive strategy optimization in electric race scenarios",
+      "level": 3,
+      "content": "Competitive strategy optimization in electric race scenarios involves the development of control frameworks that account for dynamic interactions between multiple autonomous or semi-autonomous vehicles. In such environments, the primary objective is to optimize race strategies, including target lap times, energy consumption, and pit stop decisions, while simultaneously adapting to the actions of competitors [24]. This requires a balance between maximizing performance and ensuring robustness against unpredictable opponent behaviors. Traditional model predictive control (MPC) approaches often focus on single-agent optimization, but in competitive settings, the need for multi-agent coordination and strategic decision-making becomes critical [9]. Recent advances have introduced formulations that incorporate game-theoretic principles, allowing for the prediction of opponent strategies and the generation of adaptive control policies that respond in real-time to changing race conditions.\n\nThe integration of online adaptation mechanisms into competitive strategy optimization has emerged as a key area of research, particularly in scenarios where modeling errors or environmental uncertainties can significantly impact performance. Koopman operator-based MPC has shown promise in this domain, enabling the dynamic adjustment of control policies based on real-time data [1]. This approach allows for the continuous refinement of predictive models, ensuring that the control strategy remains effective even as the race environment evolves. Additionally, the use of Bayesian inference and probabilistic models has enabled the incorporation of uncertainty into the decision-making process, leading to more resilient and adaptive strategies. These methods are particularly valuable in electric race scenarios, where energy efficiency and precise control are paramount, and where the ability to respond to competitor actions can determine the outcome of the race.\n\nA critical challenge in competitive strategy optimization is the trade-off between computational efficiency and the complexity of multi-agent interactions. While advanced optimization techniques such as differential games and receding-horizon strategies offer enhanced adaptability, they often require significant computational resources. Recent studies have focused on reducing this computational burden through the use of simplified models, approximation techniques, and parallel processing. These efforts have enabled the deployment of real-time competitive strategy optimization frameworks that can operate within the constraints of embedded systems. Furthermore, the integration of machine learning techniques has allowed for the development of data-driven strategies that improve over time, adapting to the unique characteristics of each race and competitor. These advancements are paving the way for more sophisticated and effective control systems in electric race scenarios.",
+      "stats": {
+        "char_count": 2950,
+        "word_count": 385,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.5.1 Deep learning for deviation from gradient descent",
+      "level": 3,
+      "content": "Deep learning has emerged as a powerful tool for exploring deviations from traditional gradient descent methods, enabling the design of more efficient and adaptive optimization algorithms. By leveraging the expressive capabilities of neural networks, researchers have developed learned update rules that can outperform classical optimization techniques in specific scenarios [25]. These approaches often involve training neural networks to predict optimal parameter updates based on historical gradient information, allowing for dynamic adaptation to the problem landscape. Such methods can reduce the need for manual hyperparameter tuning and provide more robust convergence properties, especially in non-convex optimization settings. The integration of deep learning into optimization frameworks has opened new avenues for improving the efficiency and scalability of learning algorithms.\n\nOne key aspect of deep learning for deviation from gradient descent is the use of learned deviations that can saturate or normalize gradient updates, ensuring stability and convergence. These techniques often involve training neural networks to model the relationship between gradients and update directions, effectively creating a learned optimizer that can adapt to the specific characteristics of the problem at hand. This approach has shown promise in both supervised and reinforcement learning tasks, where traditional optimizers may struggle with complex or high-dimensional loss surfaces. Moreover, the ability to train these models in a self-supervised manner allows for greater flexibility and reduced dependency on handcrafted optimization strategies, making them particularly appealing for large-scale and real-time applications.\n\nDespite these advancements, challenges remain in ensuring theoretical guarantees for convergence and generalization when using deep learning-based optimization methods. While empirical results have demonstrated improved performance in various domains, the lack of rigorous analysis for many learned optimizers limits their applicability in safety-critical systems. Future work in this area should focus on developing more robust theoretical foundations and exploring hybrid approaches that combine the strengths of traditional optimization techniques with the adaptability of deep learning. This will be crucial for expanding the use of learned optimizers in real-world applications where reliability and interpretability are paramount.",
+      "stats": {
+        "char_count": 2469,
+        "word_count": 327,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.5.2 Self-supervised PDE-constrained optimization via dual networks",
+      "level": 3,
+      "content": "Self-supervised PDE-constrained optimization via dual networks represents a significant advancement in the integration of deep learning with partial differential equation (PDE)-based modeling. This approach leverages a dual-network architecture, where one network acts as a dynamic predictor capturing the system's evolution governed by PDEs, while the other serves as a surrogate controller approximating the optimal control actions [26]. The synergy between these networks is achieved through a self-supervised training framework that employs a primal–dual optimization method. This method enables the system to learn the underlying dynamics and control policies without the need for extensive labeled data, thereby reducing the reliance on manual feature engineering and improving adaptability in complex, high-dimensional settings.\n\nThe dual-network structure is particularly effective in handling the non-convex and high-dimensional optimization problems inherent in PDE-constrained systems [26]. By parameterizing the uncertainties in the system dynamics and control inputs using additional neural networks, the method allows for online adaptation, making it suitable for real-time applications. The use of a single, unified loss function for both offline and online learning ensures consistency and simplifies the training process. This approach not only enhances the robustness of the model but also improves the efficiency of the optimization by avoiding the need for separate training phases. The self-supervised nature of the framework further reduces the dependency on external supervision, making it more scalable and applicable to a wide range of PDE-driven problems.\n\nFurthermore, the proposed method demonstrates strong performance in capturing the complex dynamics of PDEs while maintaining computational tractability. The dynamic predictor network effectively models the spatial and temporal evolution of the system, while the surrogate controller optimizes the control inputs to achieve desired objectives. This dual-network paradigm provides a flexible and interpretable framework for PDE-constrained optimization, enabling the integration of data-driven learning with traditional physics-based models [26]. The results indicate that the method achieves decision quality comparable to state-of-the-art numerical solvers, making it a promising approach for applications in fluid dynamics, materials science, and other domains governed by PDEs.",
+      "stats": {
+        "char_count": 2462,
+        "word_count": 328,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.6.1 Online Koopman operator-based MPC for dynamic adaptation",
+      "level": 3,
+      "content": "Online Koopman operator-based Model Predictive Control (MPC) offers a promising framework for dynamic adaptation by integrating the Koopman operator's ability to linearize nonlinear dynamics with the predictive control strategy of MPC. This approach enables the controller to adapt to system changes in real-time by continuously updating the Koopman model, which captures the underlying system behavior through a linear representation in a higher-dimensional space. Unlike traditional MPC methods that rely on fixed models, this online adaptation mechanism allows the controller to respond to modeling errors and environmental variations, thereby improving robustness and performance [1]. The key advantage lies in the ability to maintain computational efficiency while ensuring accurate state predictions and control actions.\n\nThe integration of the Koopman operator into MPC involves an online learning component that updates the model parameters based on real-time data [1]. This dynamic adaptation is particularly beneficial in scenarios where the system exhibits time-varying or uncertain dynamics, such as in autonomous systems or complex industrial processes. By leveraging the Koopman framework, the controller can efficiently handle nonlinearities and incorporate new data without requiring a complete retraining of the model. The resulting control strategy maintains the structure of standard MPC, where a sequence of control inputs is optimized over a finite horizon, but with the added benefit of a more flexible and adaptive model [5]. This combination ensures that the controller can respond to changing conditions while maintaining stability and constraint satisfaction.\n\nThe proposed online Koopman operator-based MPC method addresses the limitations of static models by enabling real-time model updates, which is crucial for applications requiring high-fidelity dynamic modeling and rapid decision-making [1]. The approach is computationally efficient, as it avoids the need for extensive retraining or recalibration during operation. Furthermore, it provides a systematic way to incorporate new information into the control strategy, enhancing the controller's ability to adapt to unforeseen disturbances. This makes the method well-suited for applications where system dynamics evolve over time, such as in robotics, aerospace, and energy systems. Overall, the integration of online Koopman learning into MPC represents a significant advancement in the field of adaptive control.",
+      "stats": {
+        "char_count": 2498,
+        "word_count": 346,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.6.2 Infeasible IPM algorithm for convex QP with exact complexity",
+      "level": 3,
+      "content": "The infeasible Interior Point Method (IPM) algorithm for convex Quadratic Programming (QP) is a significant advancement in optimization theory, particularly for problems where initial feasibility is not guaranteed [20]. Unlike traditional IPM algorithms that require a strictly feasible starting point, this approach eliminates the need for such a preliminary step, thereby simplifying the initialization process. The algorithm leverages a homogeneous formulation that inherently detects infeasibility, allowing it to handle both feasible and infeasible problems within a unified framework. This property is crucial for real-time applications where the initial guess may not satisfy all constraints, making the algorithm more robust and versatile in practical scenarios.\n\nThe theoretical foundation of the infeasible IPM algorithm is rooted in its ability to achieve exact iteration complexity, which is a key performance metric in optimization [20]. It is proven that the algorithm attains the optimal $O(\\sqrt{n})$ iteration complexity, matching the best-known bounds for feasible IPM algorithms [20]. This exact complexity is not only theoretically significant but also practically advantageous, as it allows for precise estimation of computational effort and resource allocation. The algorithm's design ensures that the complexity is not just an upper bound but an exact measure, which simplifies the analysis and improves the predictability of its performance across different problem instances.\n\nFurthermore, the infeasible IPM algorithm is structured to maintain simplicity in its implementation while ensuring numerical stability. By avoiding the need for an initial feasible point, the algorithm reduces the overhead associated with feasibility restoration steps, which are often computationally expensive. This makes it particularly suitable for large-scale convex QP problems where the dimensionality is high. The algorithm's ability to handle infeasibility without additional complexity also makes it a valuable tool in applications such as economic model predictive control, where the objective function may not always align with the constraints. Overall, the infeasible IPM algorithm represents a significant contribution to the field of convex optimization, offering both theoretical and practical benefits.",
+      "stats": {
+        "char_count": 2322,
+        "word_count": 319,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.1 LSTM-based NMPC for real-time combustion control",
+      "level": 3,
+      "content": "LSTM-based Nonlinear Model Predictive Control (NMPC) has emerged as a promising approach for real-time combustion control, leveraging the ability of Long Short-Term Memory (LSTM) networks to model sequential data and capture temporal dependencies [3]. In the context of combustion systems, where dynamic behavior and transient responses are critical, LSTM models provide accurate predictions of system states, enabling the NMPC to optimize control actions over a finite horizon [3]. This integration allows for the prediction of key combustion parameters such as temperature, pressure, and emissions, which are essential for maintaining stable and efficient operation. The use of LSTM as a prediction model in NMPC is particularly beneficial in handling the nonlinear and time-varying nature of combustion processes, offering a data-driven alternative to traditional first-principles models.\n\nThe implementation of LSTM-based NMPC for real-time combustion control involves the development of a high-fidelity system model that combines experimental data with physical insights. This model is typically trained on historical data from dynamometer tests or real-world engine operations, capturing the complex relationships between control inputs and system outputs. The NMPC framework then uses this model to solve an optimization problem at each time step, considering constraints on actuator limits, system states, and performance objectives. The computational efficiency of the LSTM model is crucial for real-time execution, and recent advancements in hardware acceleration and optimization algorithms have enabled the deployment of such controllers on embedded platforms, ensuring timely decision-making in dynamic environments.\n\nDespite its advantages, the application of LSTM-based NMPC in combustion control presents challenges related to model accuracy, computational complexity, and robustness. The accuracy of the LSTM model is highly dependent on the quality and diversity of the training data, and insufficient data can lead to poor generalization and suboptimal control performance. Additionally, the integration of LSTM into NMPC requires careful tuning of the optimization problem to ensure stability and convergence. Ongoing research focuses on improving the interpretability of LSTM models, enhancing their ability to handle noisy or incomplete data, and developing more efficient training and inference strategies to support real-time control applications.",
+      "stats": {
+        "char_count": 2471,
+        "word_count": 338,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.2 RNN prediction models for engine emissions",
+      "level": 3,
+      "content": "Recurrent Neural Networks (RNNs) have emerged as a powerful tool for modeling sequential data in engine emissions prediction, leveraging their ability to capture temporal dependencies in complex systems [3]. Unlike traditional feedforward networks, RNNs maintain an internal state that allows them to process input sequences in a time-dependent manner, making them particularly suitable for tasks involving time-series data such as engine operation. In the context of engine emissions, RNNs are employed to predict transient behaviors like NOx and soot formation, which are influenced by dynamic operating conditions. By incorporating historical data, RNNs can model the non-linear and time-varying characteristics of combustion processes, offering a data-driven alternative to purely physics-based or empirical models. This capability is especially valuable in scenarios where real-time predictions are required for control applications.\n\nRecent studies have demonstrated the effectiveness of RNN-based models in improving the accuracy of emissions prediction compared to conventional methods. These models are trained on experimental data from dynamometer tests, capturing the relationship between engine inputs—such as fuel injection timing, air-fuel ratio, and engine speed—and the resulting emissions. The integration of RNNs with high-fidelity engine simulations enhances their predictive power, enabling more accurate trajectory predictions and better control strategies. However, challenges remain in ensuring model stability and generalization, particularly when dealing with sparse or noisy data. Techniques such as long short-term memory (LSTM) and gated recurrent units (GRUs) have been explored to mitigate these issues, offering improved memory retention and gradient flow during training.\n\nThe application of RNNs in engine emissions modeling is often combined with model predictive control (MPC) frameworks, where the RNN serves as a prediction model to forecast future emissions and optimize control actions [27]. This approach allows for the incorporation of real-time data and dynamic constraints, leading to more efficient and adaptive control strategies. Despite their advantages, RNNs require careful design and tuning to balance model complexity with computational efficiency. Ongoing research focuses on enhancing the interpretability of these models and integrating them with physics-based constraints to improve reliability and reduce the sim-to-real gap. As a result, RNNs continue to play a critical role in advancing the accuracy and responsiveness of engine emissions prediction.",
+      "stats": {
+        "char_count": 2609,
+        "word_count": 355,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.1 Neural network augmentation of first-principles models",
+      "level": 3,
+      "content": "Neural network augmentation of first-principles models represents a critical advancement in integrating data-driven learning with physics-based modeling. This approach leverages the strengths of both paradigms by embedding physical laws directly into the neural network architecture, ensuring that the model adheres to fundamental principles of mechanics while still benefiting from the flexibility and scalability of deep learning. The integration of a physics-aware neural symbolic layer allows for the preservation of domain knowledge, significantly improving generalization, especially in out-of-distribution scenarios [28]. This hybrid framework not only enhances predictive accuracy but also reduces the sim-to-real gap, making it more suitable for real-world applications where data may be sparse or noisy.\n\nThe implementation of such models often involves the development of high-fidelity simulations that combine neural networks with traditional physics-based engines. For instance, in the context of engine emissions modeling, a multi-layer neural network is trained on experimental dynamometer data to predict emissions, which is then integrated with a high-fidelity engine model to enable closed-loop simulations [16]. This integration allows for the accurate prediction of transient effects, such as smoke spikes, which are often missed by purely data-driven or physics-based models. Additionally, the use of a differentiable neural symbolic layer ensures that the model remains end-to-end trainable, enabling efficient learning and inference even in complex, dynamic environments.\n\nDespite the benefits, challenges such as gradient instability and computational inefficiency remain. Existing differentiable simulators like WARP and BRAX have shown limitations in reliability and speed, prompting the development of custom neural symbolic layers that integrate from-scratch physics engines [28]. These layers not only improve stability but also enhance the interpretability of the model by embedding physical constraints into the learning process. By combining the robustness of first-principles models with the adaptability of neural networks, this approach provides a powerful tool for modeling and control in complex systems, paving the way for more accurate and reliable predictive models.",
+      "stats": {
+        "char_count": 2306,
+        "word_count": 311,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.2 Physics-informed neural control for fluid systems",
+      "level": 3,
+      "content": "Physics-informed neural control for fluid systems integrates deep learning with physical laws to enhance the accuracy and robustness of control strategies in complex fluid dynamics [29]. This approach leverages neural networks to model system behavior while embedding governing equations, such as the Navier-Stokes equations, directly into the learning process. By enforcing physical consistency through these equations, the model ensures that predictions and control actions remain within the bounds of real-world physics, even when trained on limited or noisy data. This integration is particularly valuable in applications where precise trajectory prediction and real-time control are critical, such as in robotics and autonomous systems interacting with fluid environments.\n\nThe architecture of physics-informed neural control typically consists of a data-driven neural network combined with a physics-aware layer that enforces constraints derived from fluid dynamics [29]. This hybrid structure allows the model to benefit from the flexibility of data-driven learning while maintaining the interpretability and reliability of physics-based models. For instance, in the context of trajectory prediction, the neural network may learn from sensor data, while the physics layer ensures that the predicted motion adheres to conservation laws and boundary conditions. This dual approach not only improves prediction accuracy but also reduces the sim-to-real gap, making the system more adaptable to real-world conditions with minimal recalibration.\n\nFurthermore, the application of physics-informed neural control extends to a wide range of fluid systems, including combustion engines, HVAC systems, and carbon capture processes. In these domains, the ability to accurately model transient behaviors and nonlinear dynamics is essential for effective control. By incorporating physical principles into the neural network's training objective, the resulting models can generalize better across different operating conditions and handle uncertainties more effectively. This makes physics-informed neural control a powerful tool for achieving high-performance, reliable, and interpretable control in complex fluid systems.",
+      "stats": {
+        "char_count": 2217,
+        "word_count": 298,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.1 Sparse neural networks for process system modeling",
+      "level": 3,
+      "content": "Sparse neural networks have emerged as a powerful tool for process system modeling due to their ability to balance model complexity with data efficiency. By pruning unnecessary connections, these networks maintain high predictive accuracy while reducing computational overhead, making them particularly suitable for real-time applications. In the context of process systems, where data may be sparse or noisy, sparse architectures enable the model to focus on the most relevant features, thereby enhancing generalization and interpretability. This is especially critical in industrial settings where the integration of physical laws and data-driven insights is essential for robust performance.\n\nThe integration of sparse neural networks with physics-informed principles further strengthens their applicability in process modeling. By embedding domain-specific knowledge—such as conservation laws or differential equations—into the network structure, these models ensure that predictions remain consistent with the underlying physical processes. This hybrid approach not only improves the reliability of the model but also reduces the reliance on large amounts of training data, which is often a limitation in industrial environments. Additionally, the sparse structure allows for more efficient optimization, making it feasible to deploy these models in complex, high-dimensional systems where computational resources are constrained.\n\nSparse neural networks also offer advantages in terms of interpretability and model transparency, which are crucial for decision-making in process control and optimization. By limiting the number of active connections, the model becomes more comprehensible, enabling engineers to identify key variables and relationships that drive system behavior. This is particularly beneficial in applications where model explainability is required for regulatory compliance or operational safety. Overall, the use of sparse neural networks in process system modeling represents a promising direction for achieving accurate, efficient, and interpretable models that bridge the gap between data-driven and physics-based approaches.",
+      "stats": {
+        "char_count": 2154,
+        "word_count": 287,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.2 Feature engineering for building load prediction",
+      "level": 3,
+      "content": "Feature engineering plays a critical role in enhancing the predictive performance of artificial neural networks (ANNs) for building load prediction [30]. By transforming raw input data into more informative features, feature engineering aims to capture the underlying patterns and relationships that are essential for accurate load forecasting. Techniques such as time-series decomposition, statistical feature extraction, and domain-specific transformations are commonly applied to extract relevant temporal and spatial characteristics from historical data. These engineered features can significantly improve the model's ability to generalize and adapt to varying environmental and operational conditions, which is particularly important in building load prediction where external factors like weather, occupancy, and equipment usage exhibit high variability.\n\nIn the context of building load prediction, feature engineering also involves the integration of multi-modal data sources, including sensor readings, weather forecasts, and occupancy schedules. This integration allows for a more comprehensive representation of the building's operational environment, enabling the model to account for both internal and external influences on energy consumption. Additionally, the use of clustering algorithms to group similar load patterns can aid in identifying distinct operational regimes, which can then be used to refine the feature set and improve model interpretability. Such approaches have been shown to enhance the accuracy of load predictions by capturing complex interactions between different variables that may not be evident in raw data.\n\nFurthermore, feature engineering techniques are often tailored to the specific characteristics of the building and its usage patterns. For example, incorporating temporal features such as lagged variables, moving averages, and Fourier coefficients can help the model capture periodic and seasonal variations in load. Similarly, the inclusion of spatial features derived from building geometry and layout can provide additional context for load behavior. These engineered features, when combined with advanced machine learning models, contribute to more robust and reliable load prediction systems, ultimately supporting better energy management and operational efficiency in buildings.",
+      "stats": {
+        "char_count": 2336,
+        "word_count": 312,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.4.1 Neural-symbolic physics-aware simulation for trajectory prediction",
+      "level": 3,
+      "content": "Neural-symbolic physics-aware simulation for trajectory prediction integrates symbolic reasoning with neural network-based learning to enhance the accuracy and robustness of motion prediction. This approach leverages a differentiable physics engine embedded within the neural architecture to enforce physical constraints, ensuring that predicted trajectories adhere to the laws of motion and interaction forces. By incorporating geometrical and physics priors, the model demonstrates superior generalization capabilities, particularly on out-of-distribution terrains where purely data-driven models may fail. The black-box component of the model predicts terrain interaction forces and their spatial distribution, while the symbolic layer uses these inputs to compute the robot’s trajectory, thereby bridging the gap between data and physics-based reasoning [28].\n\nThe integration of physics-aware components into neural architectures addresses critical limitations of traditional data-driven models, such as poor generalization and lack of interpretability. This hybrid approach not only improves prediction accuracy but also enhances the model's ability to handle complex environments with varying terrain properties. The use of a differentiable physics engine allows for end-to-end training, where the model learns both the underlying physical dynamics and the neural representation of the environment. This synergy between symbolic and neural components results in a more reliable and interpretable trajectory prediction system, which is essential for real-world applications such as autonomous navigation and robotics.\n\nFurthermore, the neural-symbolic framework provides a structured way to incorporate domain-specific knowledge into the learning process, reducing the reliance on large-scale training data. This is particularly beneficial in scenarios where data collection is challenging or expensive. By explicitly encoding physical laws and geometric constraints, the model can make more informed predictions even in the presence of sparse or noisy input. The resulting system is not only more accurate but also more robust, capable of adapting to novel environments and conditions. Overall, the neural-symbolic physics-aware simulation represents a significant advancement in trajectory prediction, offering a balanced approach that combines the strengths of data-driven learning with the reliability of physics-based modeling.",
+      "stats": {
+        "char_count": 2438,
+        "word_count": 319,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.4.2 Differentiable image-conditioned simulation with physics constraints",
+      "level": 3,
+      "content": "Differentiable image-conditioned simulation with physics constraints represents a novel approach that integrates visual input with physical laws to enable accurate and efficient trajectory prediction [28]. This method leverages the power of end-to-end differentiable models to generate a large number of simulated trajectories in real-time, making it particularly suitable for robotics applications such as control, learning, and simultaneous localization and mapping. By conditioning the simulation on real-world images, the model can adapt to varying environmental conditions while maintaining the fidelity of physical constraints. This capability allows for the generation of interpretable intermediate outputs, which can be used for self-supervision and model refinement, enhancing the overall robustness of the system.\n\nThe integration of physics constraints into the image-conditioned simulation framework ensures that the generated trajectories adhere to the fundamental laws of motion and energy conservation [28]. This is crucial for applications where physical plausibility is essential, such as autonomous navigation and robotic manipulation. The model's differentiability enables gradient-based optimization, allowing for efficient parameter tuning and control strategy development. By combining image input with physics-based priors, the approach provides a learnable physics engine that can simulate complex interactions between objects and the environment. This dual focus on visual input and physical laws results in a powerful tool for real-time decision-making and adaptive control in dynamic settings.\n\nThe efficiency of the model is further enhanced by its ability to process a large number of trajectories per second, as demonstrated in the proposed architecture. This high throughput is achieved through optimized computational structures and parallel processing capabilities, making the model suitable for deployment in resource-constrained environments. The inclusion of physics constraints ensures that the simulated outcomes remain consistent with real-world dynamics, even when operating under uncertain or incomplete information. This combination of speed, accuracy, and physical consistency makes differentiable image-conditioned simulation with physics constraints a promising direction for future research in embodied intelligence and autonomous systems [28].",
+      "stats": {
+        "char_count": 2390,
+        "word_count": 312,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.5.1 Variational autoencoders for neural manifold control",
+      "level": 3,
+      "content": "Variational autoencoders (VAEs) have emerged as a powerful tool for learning structured latent representations of complex data, enabling control over neural manifolds by capturing the underlying statistical properties of neural activity and external stimuli [31]. In the context of neural manifold control, VAEs provide a means to map high-dimensional neural states and sensory inputs into a lower-dimensional latent space, where dynamic control strategies can be more effectively applied. By leveraging the probabilistic nature of VAEs, the latent space can be interpreted as a distribution over possible neural states, allowing for the incorporation of uncertainty in control tasks. This framework facilitates the identification of latent variables that encode meaningful features of the neural dynamics, enabling the design of controllers that operate directly on these representations.\n\nThe application of VAEs to neural manifold control involves training the encoder to map neural activity and input stimuli into a latent space, while the decoder reconstructs the original data from the latent variables. This process not only extracts compact and informative features but also ensures that the latent space maintains a smooth and continuous structure, which is essential for control. Once the latent representations are obtained, control strategies such as PID or Model Predictive Control (MPC) can be applied to drive the latent states along desired trajectories. This approach allows for precise manipulation of the neural manifold, enabling the system to follow specified reference paths while maintaining stability and adaptability to varying conditions.\n\nComparative studies have shown that VAE-based control strategies offer advantages in terms of computational efficiency and robustness, particularly when dealing with high-dimensional and nonlinear systems. The ability of VAEs to disentangle latent factors of variation provides a more interpretable and controllable representation of the neural manifold, which is crucial for real-world applications. By integrating VAEs with control algorithms, researchers can achieve more effective and reliable control of complex neural systems, paving the way for advanced applications in brain-computer interfaces, robotics, and adaptive control systems.",
+      "stats": {
+        "char_count": 2309,
+        "word_count": 322,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.5.2 Latent dynamics modeling with linear approximation",
+      "level": 3,
+      "content": "Latent dynamics modeling with linear approximation is a critical approach in capturing the essential behavior of complex systems while maintaining computational efficiency. This method assumes that the underlying dynamics of the system can be approximated by a linear model in a reduced latent space, allowing for tractable analysis and control design. By leveraging the structure of the system's latent variables, such models can effectively represent high-dimensional and nonlinear dynamics with a lower computational burden. This linear approximation is particularly useful in scenarios where the system exhibits relatively smooth and predictable behavior, enabling the use of well-established linear control techniques while still accounting for the system's complexity through the latent representation.\n\nThe application of linear approximations to latent dynamics often involves identifying a low-order model that captures the dominant modes of variation in the system's behavior. This is typically achieved through techniques such as principal component analysis (PCA) or dynamic mode decomposition (DMD), which extract the most significant features from the data. These features are then used to construct a linear model that approximates the system's evolution over time. The resulting model can be integrated into control frameworks, such as model predictive control (MPC), to enable real-time decision-making and optimization [2]. The accuracy of the linear approximation depends heavily on the quality of the latent representation and the appropriateness of the linear assumption for the system under consideration.\n\nDespite its advantages, latent dynamics modeling with linear approximation has limitations, particularly when dealing with highly nonlinear or rapidly changing systems. In such cases, the linear assumption may lead to significant errors in prediction and control. To mitigate this, researchers often combine linear approximations with nonlinear components or employ adaptive methods that update the model parameters in real time. These strategies aim to balance the simplicity and efficiency of linear models with the flexibility needed to handle complex system dynamics. Overall, linear approximation remains a valuable tool in the broader landscape of latent dynamics modeling, offering a practical solution for systems where computational constraints and model interpretability are critical factors.",
+      "stats": {
+        "char_count": 2431,
+        "word_count": 337,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6 Future Directions",
+      "level": 1,
+      "content": "Current research on model predictive control (MPC) has made significant strides in integrating hybrid control and learning frameworks, enhancing the adaptability, efficiency, and robustness of control strategies. However, several limitations and gaps remain that hinder the broader adoption and effectiveness of these approaches in real-world applications. One of the primary challenges is the limited generalizability of data-driven models, particularly in scenarios with sparse or noisy data. While machine learning techniques have shown promise in improving prediction accuracy, they often struggle to maintain performance under out-of-distribution conditions, raising concerns about reliability and safety. Additionally, the computational complexity of MPC-based algorithms, especially in high-dimensional and dynamic environments, remains a significant barrier to real-time implementation. The need for efficient optimization algorithms that can handle large-scale problems without compromising performance is a critical area for future research.\n\nTo address these challenges, future research should focus on developing more efficient and scalable optimization techniques that can handle the computational demands of real-time MPC. This includes the exploration of novel numerical methods, such as parallel computing and hardware-specific optimizations, to reduce the time required for online decision-making. Furthermore, the integration of adaptive and self-tuning mechanisms into MPC frameworks can enhance their ability to respond to changing system dynamics and uncertainties. The development of hybrid control strategies that combine model-based and data-driven approaches will also be essential in improving robustness and adaptability. These strategies should leverage the strengths of both paradigms, ensuring that control policies remain effective even in the presence of model inaccuracies and external disturbances.\n\nThe potential impact of these future research directions is substantial. By improving the efficiency and adaptability of MPC, control systems can achieve higher levels of performance and reliability, particularly in complex and uncertain environments. Enhanced computational efficiency will enable the deployment of MPC in resource-constrained settings, expanding its applicability to a wider range of applications, including autonomous systems, industrial automation, and energy management. Moreover, the development of more robust and generalizable models will contribute to the safety and reliability of control systems, reducing the risk of failures and improving overall system stability. Ultimately, these advancements will drive the continued evolution of MPC, making it a more versatile and powerful tool for addressing the challenges of modern engineering systems.",
+      "stats": {
+        "char_count": 2807,
+        "word_count": 368,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "7 Conclusion",
+      "level": 1,
+      "content": "This survey paper provides a comprehensive overview of the evolution and current state of model predictive control (MPC) in engineering, with a focus on its integration with hybrid control and learning frameworks. The analysis highlights the theoretical foundations, algorithmic advancements, and practical implementations of MPC, emphasizing its role in addressing real-world control challenges. A central theme of the survey is the growing synergy between MPC and machine learning, which has enabled the development of more adaptive, efficient, and robust control strategies. The paper also explores the integration of MPC with hybrid control architectures, the use of hardware innovations such as multi-core processors and hardware-in-the-loop testing, and the challenges associated with model accuracy, computational complexity, and scalability. These insights provide a structured understanding of the current state of MPC and identify key areas for future research and development.\n\nThe significance of this survey lies in its ability to synthesize a broad range of research findings, offering a structured overview of the theoretical and practical aspects of MPC. By focusing on its integration with learning-based methods and hybrid control strategies, the paper underscores the importance of algorithmic efficiency, robustness, and real-time performance in the deployment of MPC in complex engineering systems. The insights presented in this paper are expected to inform the design of more effective and adaptable control systems, ultimately contributing to the advancement of intelligent and autonomous engineering solutions. The paper serves as a valuable resource for researchers and practitioners seeking to understand the current state of MPC and its potential for future innovation.\n\nLooking ahead, the integration of MPC with emerging technologies such as artificial intelligence, quantum computing, and edge computing presents new opportunities for advancing control systems. Future research should focus on improving the interpretability and generalizability of MPC frameworks, addressing the limitations of current methods in handling high-dimensional and uncertain environments. Additionally, the development of more efficient optimization algorithms, enhanced hardware support, and better integration with real-time data will be critical in expanding the applicability of MPC. The survey also highlights the need for standardized benchmarks and evaluation frameworks to facilitate the comparison and validation of different MPC approaches. As the field continues to evolve, the insights provided in this paper will serve as a foundation for future research, driving the development of more intelligent, adaptive, and reliable control systems.",
+      "stats": {
+        "char_count": 2763,
+        "word_count": 383,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "[1] Model Predictive Control of Nonlinear Dynamics Using Online Adaptive Koopman Operators",
+      "number": null,
+      "title": "model predictive control of nonlinear dynamics using online adaptive koopman operators"
+    },
+    {
+      "text": "[2] Q-STAC  Q-Guided Stein Variational Model Predictive Actor-Critic",
+      "number": null,
+      "title": "q-stac q-guided stein variational model predictive actor-critic"
+    },
+    {
+      "text": "[3] Introducing a Deep Neural Network-based Model Predictive Control Framework for Rapid Controller Impl",
+      "number": null,
+      "title": "introducing a deep neural network-based model predictive control framework for rapid controller impl"
+    },
+    {
+      "text": "[4] DT-MPC  Synthesizing Derivation-Free Model Predictive Control from Power Converter Netlists via Phys",
+      "number": null,
+      "title": "dt-mpc synthesizing derivation-free model predictive control from power converter netlists via phys"
+    },
+    {
+      "text": "[5] Self-tunable approximated explicit MPC  Heat exchanger implementation and analysis",
+      "number": null,
+      "title": "self-tunable approximated explicit mpc heat exchanger implementation and analysis"
+    },
+    {
+      "text": "[6] Direct transfer of optimized controllers to similar systems using dimensionless MPC",
+      "number": null,
+      "title": "direct transfer of optimized controllers to similar systems using dimensionless mpc"
+    },
+    {
+      "text": "[7] Safe Reinforcement Learning-based Control for Hydrogen Diesel Dual-Fuel Engines",
+      "number": null,
+      "title": "safe reinforcement learning-based control for hydrogen diesel dual-fuel engines"
+    },
+    {
+      "text": "[8] Residual MPC  Blending Reinforcement Learning with GPU-Parallelized Model Predictive Control",
+      "number": null,
+      "title": "residual mpc blending reinforcement learning with gpu-parallelized model predictive control"
+    },
+    {
+      "text": "[9] A Risk-Aware Adaptive Robust MPC with Learned Uncertainty Quantification",
+      "number": null,
+      "title": "a risk-aware adaptive robust mpc with learned uncertainty quantification"
+    },
+    {
+      "text": "[10] Singular Arcs in Optimal Control  Closed-loop Implementations without Workarounds",
+      "number": null,
+      "title": "singular arcs in optimal control closed-loop implementations without workarounds"
+    },
+    {
+      "text": "[11] Optimizing Prosthetic Wrist Movement  A Model Predictive Control Approach",
+      "number": null,
+      "title": "optimizing prosthetic wrist movement a model predictive control approach"
+    },
+    {
+      "text": "[12] Digital Twin of Autonomous Surface Vessels for Safe Maritime Navigation Enabled through Predictive M",
+      "number": null,
+      "title": "digital twin of autonomous surface vessels for safe maritime navigation enabled through predictive m"
+    },
+    {
+      "text": "[13] An efficient co-simulation and control approach to tackle complex multi-domain energetic systems  co",
+      "number": null,
+      "title": "an efficient co-simulation and control approach to tackle complex multi-domain energetic systems co"
+    },
+    {
+      "text": "[14] A view on learning robust goal-conditioned value functions  Interplay between RL and MPC",
+      "number": null,
+      "title": "a view on learning robust goal-conditioned value functions interplay between rl and mpc"
+    },
+    {
+      "text": "[15] Comparative Field Deployment of Reinforcement Learning and Model Predictive Control for Residential",
+      "number": null,
+      "title": "comparative field deployment of reinforcement learning and model predictive control for residential"
+    },
+    {
+      "text": "[16] Modeling and Control of Diesel Engine Emissions using Multi-layer Neural Networks and Economic Model",
+      "number": null,
+      "title": "modeling and control of diesel engine emissions using multi-layer neural networks and economic model"
+    },
+    {
+      "text": "[17] Motion Control of High-Dimensional Musculoskeletal Systems with Hierarchical Model-Based Planning",
+      "number": null,
+      "title": "motion control of high-dimensional musculoskeletal systems with hierarchical model-based planning"
+    },
+    {
+      "text": "[18] VLM-MPC  Vision Language Foundation Model (VLM)-Guided Model Predictive Controller (MPC) for Autonom",
+      "number": null,
+      "title": "vlm-mpc vision language foundation model (vlm)-guided model predictive controller (mpc) for autonom"
+    },
+    {
+      "text": "[19] PC-Gym  Benchmark Environments For Process Control Problems",
+      "number": null,
+      "title": "pc-gym benchmark environments for process control problems"
+    },
+    {
+      "text": "[20] EIQP  Execution-time-certified and Infeasibility-detecting QP Solver",
+      "number": null,
+      "title": "eiqp execution-time-certified and infeasibility-detecting qp solver"
+    },
+    {
+      "text": "[21] Economic Model Predictive Control for Periodic Operation  A Quadratic Programming Approach",
+      "number": null,
+      "title": "economic model predictive control for periodic operation a quadratic programming approach"
+    },
+    {
+      "text": "[22] Data-Driven Distributionally Robust Mitigation of Risk of Cascading Failures",
+      "number": null,
+      "title": "data-driven distributionally robust mitigation of risk of cascading failures"
+    },
+    {
+      "text": "[23] Nonlinear receding-horizon differential game for drone racing along a three-dimensional path",
+      "number": null,
+      "title": "nonlinear receding-horizon differential game for drone racing along a three-dimensional path"
+    },
+    {
+      "text": "[24] Model Predictive Control Strategies for Electric Endurance Race Cars Accounting for Competitors Inte",
+      "number": null,
+      "title": "model predictive control strategies for electric endurance race cars accounting for competitors inte"
+    },
+    {
+      "text": "[25] Learning to optimize with guarantees  a complete characterization of linearly convergent algorithms",
+      "number": null,
+      "title": "learning to optimize with guarantees a complete characterization of linearly convergent algorithms"
+    },
+    {
+      "text": "[26] Learning to Solve Optimization Problems Constrained with Partial Differential Equations",
+      "number": null,
+      "title": "learning to solve optimization problems constrained with partial differential equations"
+    },
+    {
+      "text": "[27] Model Predictive Control of Diesel Engine Emissions Based on Neural Network Modeling",
+      "number": null,
+      "title": "model predictive control of diesel engine emissions based on neural network modeling"
+    },
+    {
+      "text": "[28] FusionForce  End-to-end Differentiable Neural-Symbolic Layer for Trajectory Prediction",
+      "number": null,
+      "title": "fusionforce end-to-end differentiable neural-symbolic layer for trajectory prediction"
+    },
+    {
+      "text": "[29] Physics-Informed Neural Networks for Control of Single-Phase Flow Systems Governed by Partial Differ",
+      "number": null,
+      "title": "physics-informed neural networks for control of single-phase flow systems governed by partial differ"
+    },
+    {
+      "text": "[30] Feature Engineering Approach to Building Load Prediction  A Case Study for Commercial Building Chill",
+      "number": null,
+      "title": "feature engineering approach to building load prediction a case study for commercial building chill"
+    },
+    {
+      "text": "[31] Model Predictive Control on the Neural Manifold",
+      "number": null,
+      "title": "model predictive control on the neural manifold"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\InteractiveSurvey\\Engineering\\survey_Model Predictive Control in Engineering_split.json",
+    "processed_date": "2025-12-30T20:33:40.036204",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

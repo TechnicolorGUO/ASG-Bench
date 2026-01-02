@@ -1,0 +1,641 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Review on model predictive control- an engineering perspective."
+    ],
+    [
+      1,
+      "Review on Model Predictive Control: An Engineering Perspective"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 The Receding Horizon Principle"
+    ],
+    [
+      3,
+      "2.2 The Optimization Problem"
+    ],
+    [
+      3,
+      "2.3 Implicit vs. Explicit Control"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 First Generation: IDCOM and DMC (1970s)"
+    ],
+    [
+      3,
+      "3.2 Second and Third Generations: QDMC and State-Space (1980s-1990s)"
+    ],
+    [
+      3,
+      "3.3 Fourth Generation: Stability and Nonlinearity (2000s-Present)"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Data-Driven and Learning-Based MPC"
+    ],
+    [
+      3,
+      "4.2 Distributed and Hierarchical MPC"
+    ],
+    [
+      3,
+      "4.3 Finite Control Set MPC (FCS-MPC)"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Automotive and Autonomous Driving"
+    ],
+    [
+      3,
+      "5.2 Robotics"
+    ],
+    [
+      3,
+      "5.3 Power Electronics"
+    ],
+    [
+      3,
+      "5.4 Process Industry and Water Systems"
+    ],
+    [
+      3,
+      "5.5 Building Energy Management Systems (BEMS)"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Computational Burden and Embedded Implementation"
+    ],
+    [
+      3,
+      "6.2 Modeling and System Identification"
+    ],
+    [
+      3,
+      "6.3 Dependability and Verification"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Integration of AI and Control (Neuro-MPC)"
+    ],
+    [
+      3,
+      "7.2 Hardware Acceleration and Edge Computing"
+    ],
+    [
+      3,
+      "7.3 Standardization and \"Plug-and-Play\" MPC"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Review on model predictive control- an engineering perspective.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 18:39:06*\n*Progress: [14/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Review_on_model_predictive_control-_an_engineering_perspecti_20251226_183906.md*\n---",
+      "stats": {
+        "char_count": 192,
+        "word_count": 10,
+        "sentence_count": 2,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "Review on Model Predictive Control: An Engineering Perspective",
+      "level": 1,
+      "content": "**Key Points**\n*   **Model Predictive Control (MPC)** has evolved from a niche petrochemical algorithm to a dominant control strategy across automotive, robotics, and power electronics industries due to its unique ability to handle multi-variable constraints explicitly.\n*   **Historical Evolution:** Originating in the 1970s with IDCOM and DMC, MPC has transitioned through four generations, moving from heuristic impulse-response models to state-space formulations, and now to nonlinear and stochastic approaches.\n*   **Current State-of-the-Art:** Recent breakthroughs in 2024-2025 focus on **data-driven MPC**, integrating machine learning (Actor-Critic frameworks) to bridge the gap between reinforcement learning and optimal control, and **distributed optimization** for high-degree-of-freedom systems like legged robots.\n*   **Engineering Challenges:** Despite theoretical maturity, practical implementation faces hurdles regarding computational burden on embedded hardware, the complexity of system identification (modeling), and the need for \"dependable\" software architectures in safety-critical systems.\n*   **Future Outlook:** Research is pivoting toward \"Neuro-MPC\" (combining deep learning with control guarantees), hardware-accelerated solvers (FPGA/GPU), and plug-and-play solutions to democratize advanced control beyond expert circles.\n\n---",
+      "stats": {
+        "char_count": 1357,
+        "word_count": 163,
+        "sentence_count": 6,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "Model Predictive Control (MPC) represents a paradigm shift in control engineering, moving from reactive feedback mechanisms to proactive, optimization-based strategies. Unlike classical Proportional-Integral-Derivative (PID) control, MPC utilizes a mathematical model of the system to predict future behavior and optimizes a sequence of control actions to satisfy performance criteria and operating constraints. This review provides a comprehensive engineering perspective on MPC, tracing its trajectory from industrial process control in the 1970s to modern applications in agile robotics and autonomous vehicles. We critically analyze the transition from linear, unconstrained formulations to contemporary nonlinear, stochastic, and data-driven methods. Special emphasis is placed on the \"engineering\" reality: the implementation challenges on embedded hardware, the trade-offs between model accuracy and computational speed, and the integration of machine learning to address modeling uncertainties. By synthesizing literature from 1976 to 2025, this paper identifies the current state-of-the-art, highlights the persistent gap between theoretical stability and practical robustness, and outlines future research directions necessary to make MPC ubiquitous in cyber-physical systems.\n\n---",
+      "stats": {
+        "char_count": 1291,
+        "word_count": 164,
+        "sentence_count": 7,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The landscape of industrial control systems has long been dominated by the Proportional-Integral-Derivative (PID) controller due to its simplicity and ease of tuning. However, modern engineering systems—ranging from renewable energy grids to quadrupedal robots—exhibit complex dynamics, strong interactions between variables, and strict safety constraints that exceed the capabilities of classical feedback loops [cite: 1, 2]. Model Predictive Control (MPC) has emerged as the premier advanced control methodology capable of addressing these challenges.\n\nMPC is not a specific algorithm but a family of control methods that make use of a process model to predict the future evolution of the system [cite: 1]. By solving a constrained optimization problem at each sampling instant, MPC determines the optimal control inputs that minimize a cost function (typically tracking error and energy expenditure) while strictly adhering to system limitations, such as actuator saturation or safety boundaries [cite: 3, 4].\n\nThe motivation for this review stems from the rapid diversification of MPC applications. While early reviews focused heavily on chemical process control, the \"engineering perspective\" has shifted significantly in the last decade. The availability of powerful embedded processors and efficient numerical solvers has pushed MPC into millisecond and microsecond domains, such as power electronics and automotive powertrain control [cite: 5, 6]. Furthermore, the intersection of control theory and artificial intelligence has given rise to learning-based MPC, a frontier that promises to resolve the longstanding bottleneck of model identification [cite: 7, 8].\n\nThis paper aims to provide a rigorous, systematic review of MPC with a focus on practical engineering implementation. It covers the theoretical foundations, historical milestones, and the latest 2024-2025 advancements in data-driven and distributed MPC. It further scrutinizes the practical barriers to adoption, such as computational latency and hardware constraints, offering a roadmap for future developments in the field.\n\n---",
+      "stats": {
+        "char_count": 2103,
+        "word_count": 295,
+        "sentence_count": 13,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2. Key Concepts and Definitions",
+      "level": 2,
+      "content": "To understand the engineering implications of MPC, one must first define its core components and operational mechanics.",
+      "stats": {
+        "char_count": 119,
+        "word_count": 17,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2.1 The Receding Horizon Principle",
+      "level": 3,
+      "content": "The defining characteristic of MPC is the **receding horizon** strategy. At a current time step \\( t \\), the controller predicts the system's behavior over a finite prediction horizon \\( N_p \\). An optimization problem is solved to find a sequence of control actions over a control horizon \\( N_c \\) (where \\( N_c \\leq N_p \\)) that minimizes a cost function. Crucially, only the first element of this optimal sequence is applied to the plant. At the next time step \\( t+1 \\), the system state is measured or estimated, the horizon shifts forward by one step, and the optimization is repeated [cite: 3, 9]. This iterative process allows the controller to compensate for disturbances and modeling errors effectively.",
+      "stats": {
+        "char_count": 714,
+        "word_count": 120,
+        "sentence_count": 6,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2.2 The Optimization Problem",
+      "level": 3,
+      "content": "The engineering implementation of MPC generally revolves around solving a quadratic programming (QP) or nonlinear programming (NLP) problem of the form:\n\n\\[\n\\min_{u} J = \\sum_{k=0}^{N_p-1} \\| x_{k+1} - x_{ref} \\|_Q^2 + \\| u_k \\|_R^2\n\\]\n\nSubject to:\n*   **System Dynamics:** \\( x_{k+1} = f(x_k, u_k) \\)\n*   **Input Constraints:** \\( u_{min} \\leq u_k \\leq u_{max} \\)\n*   **State Constraints:** \\( x_{min} \\leq x_k \\leq x_{max} \\)\n\nWhere \\( x \\) represents the state vector, \\( u \\) the control input, and \\( Q \\) and \\( R \\) are weighting matrices defining the trade-off between tracking performance and control effort [cite: 1, 10].",
+      "stats": {
+        "char_count": 631,
+        "word_count": 104,
+        "sentence_count": 1,
+        "line_count": 12
+      }
+    },
+    {
+      "heading": "2.3 Implicit vs. Explicit Control",
+      "level": 3,
+      "content": "In standard (implicit) MPC, the optimization is solved online at every time step. This requires significant onboard computational power. In contrast, **Explicit MPC** (or multi-parametric MPC) pre-computes the optimal control laws offline for all possible state combinations, mapping the state space into polyhedral regions. Online execution is reduced to a simple point-location search (lookup table), enabling MPC on low-cost hardware with microsecond sampling times [cite: 11, 12].\n\n---",
+      "stats": {
+        "char_count": 489,
+        "word_count": 68,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The evolution of MPC is a testament to the interplay between industrial necessity and academic rigor.",
+      "stats": {
+        "char_count": 101,
+        "word_count": 16,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.1 First Generation: IDCOM and DMC (1970s)",
+      "level": 3,
+      "content": "MPC originated in the process industry, specifically in oil refineries and power plants where processes were slow enough to allow for online computation.\n*   **IDCOM (Identification and Command):** Presented by Richalet et al. in 1976, this algorithm relied on impulse response models and was one of the first successful applications of predictive heuristic control [cite: 13, 14].\n*   **DMC (Dynamic Matrix Control):** Developed independently by Cutler and Ramaker at Shell Oil in 1979, DMC used step-response models. It became the industrial standard because it could handle multivariable (MIMO) systems intuitively. However, early versions handled constraints in an ad-hoc manner and did not guarantee stability [cite: 13, 15, 16].",
+      "stats": {
+        "char_count": 734,
+        "word_count": 108,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "3.2 Second and Third Generations: QDMC and State-Space (1980s-1990s)",
+      "level": 3,
+      "content": "*   **QDMC (Quadratic DMC):** Engineers at Shell developed QDMC to systematically handle hard constraints using Quadratic Programming (QP). This marked the transition from heuristic control to optimization-based control [cite: 14, 15].\n*   **State-Space Formulation:** By the late 1980s and 1990s, algorithms like **SMOC (Shell Multivariable Optimizing Controller)** adopted state-space models and Kalman filters. This allowed for better handling of unstable plants and integrated disturbance estimation, bridging the gap between industrial practice and modern control theory [cite: 14].",
+      "stats": {
+        "char_count": 587,
+        "word_count": 77,
+        "sentence_count": 4,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "3.3 Fourth Generation: Stability and Nonlinearity (2000s-Present)",
+      "level": 3,
+      "content": "The academic community focused heavily on providing theoretical guarantees. Seminal work by Mayne, Rawlings, and Morari established conditions for **stability** and **recursive feasibility**, often utilizing terminal costs and terminal constraints [cite: 16, 17]. Concurrently, the rise of fast computing enabled **Nonlinear MPC (NMPC)**, where the internal model is no longer restricted to linear dynamics, allowing for the control of highly complex systems like aerospace vehicles and chemical reactors [cite: 12, 18].\n\n---",
+      "stats": {
+        "char_count": 525,
+        "word_count": 72,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "As of 2024-2025, the field has moved beyond basic stabilization toward high-performance, adaptive, and learning-integrated architectures.",
+      "stats": {
+        "char_count": 137,
+        "word_count": 16,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.1 Data-Driven and Learning-Based MPC",
+      "level": 3,
+      "content": "A major bottleneck in engineering MPC is obtaining an accurate physics-based model. Recent trends focus on **Data-Driven MPC**, which bypasses explicit modeling by using input-output data directly (e.g., using Willems' fundamental lemma) or by learning dynamics via neural networks [cite: 19].\n*   **Neural MPC:** Deep Neural Networks (DNNs) are used to approximate complex nonlinear dynamics. However, ensuring stability with \"black-box\" neural models remains a challenge. Recent work in 2025 has focused on providing systems-theoretic guarantees for these learning-based controllers [cite: 8, 19].\n*   **Actor-Critic MPC:** A 2024 breakthrough by Romero et al. introduced \"Actor-Critic MPC,\" bridging Reinforcement Learning (RL) and MPC. In this architecture, a differentiable MPC layer acts as the policy (actor), while a critic network estimates long-term costs. This combines the data efficiency and flexibility of RL with the constraint satisfaction and robustness of MPC [cite: 20, 21, 22].",
+      "stats": {
+        "char_count": 997,
+        "word_count": 141,
+        "sentence_count": 11,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.2 Distributed and Hierarchical MPC",
+      "level": 3,
+      "content": "For large-scale systems (e.g., power grids, swarms of robots), centralized MPC is computationally prohibitive.\n*   **Distributed Optimization:** Recent work by Amatucci et al. (2024) on legged robots demonstrates **Distributed MPC**, where the robot's dynamics are decomposed into parallelizable subsystems. Using Alternating Direction Method of Multipliers (ADMM), these subsystems reach consensus, reducing computational time by up to 75% compared to centralized approaches [cite: 23, 24, 25].\n*   **Hierarchical Control:** In the process industry, hierarchical structures are used where a high-level \"Economic MPC\" optimizes plant-wide profitability and sends setpoints to lower-level tracking MPCs [cite: 26].",
+      "stats": {
+        "char_count": 713,
+        "word_count": 93,
+        "sentence_count": 7,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.3 Finite Control Set MPC (FCS-MPC)",
+      "level": 3,
+      "content": "In power electronics, the inputs are often discrete (switch positions: on/off). **FCS-MPC** exploits this discreteness by evaluating the cost function for all finite switching states and selecting the one that minimizes error. This eliminates the need for a modulator (like PWM) and allows for extremely fast dynamic response, though it requires high sampling frequencies [cite: 27, 28].\n\n---",
+      "stats": {
+        "char_count": 392,
+        "word_count": 58,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5. Applications and Case Studies",
+      "level": 2,
+      "content": "The \"engineering perspective\" is best illustrated through the diverse applications where MPC is currently deployed.",
+      "stats": {
+        "char_count": 115,
+        "word_count": 15,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.1 Automotive and Autonomous Driving",
+      "level": 3,
+      "content": "The automotive sector is a primary driver of modern MPC research.\n*   **Autonomous Driving:** MPC is used for trajectory planning and path tracking, handling vehicle dynamics and obstacle avoidance constraints simultaneously. It is superior to PID for lane-changing maneuvers at high speeds where dynamics are nonlinear [cite: 6, 29, 30].\n*   **EV Energy Management:** In Electric Vehicles (EVs) and Hybrid EVs, MPC manages the power split between motors and batteries to maximize range and battery life. Recent 2024 reviews highlight MPC's role in Vehicle-to-Grid (V2G) systems, optimizing charging schedules based on grid prices and user demand [cite: 31, 32].",
+      "stats": {
+        "char_count": 662,
+        "word_count": 99,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.2 Robotics",
+      "level": 3,
+      "content": "Robotics requires handling fast dynamics and unstable equilibrium points.\n*   **Legged Locomotion:** MPC is standard for quadrupedal robots (e.g., Boston Dynamics' Spot, Unitree). It optimizes ground reaction forces to maintain balance. The 2024 integration of distributed optimization allows these robots to handle more complex configurations, such as adding manipulator arms, without sacrificing real-time performance [cite: 23, 25].\n*   **Agile Drone Flight:** MPC enables quadrotors to perform aggressive maneuvers by predicting aerodynamic effects and respecting thrust limits, outperforming human pilots in time-optimal racing scenarios [cite: 20, 21].",
+      "stats": {
+        "char_count": 658,
+        "word_count": 86,
+        "sentence_count": 7,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.3 Power Electronics",
+      "level": 3,
+      "content": "MPC has revolutionized the control of power converters (inverters, rectifiers).\n*   **Grid Integration:** MPC controls the synchronization of renewable energy sources with the grid, handling fault ride-through and harmonic mitigation better than classical linear controllers [cite: 5, 27].\n*   **Variable Speed Drives:** In motor drives, MPC provides faster torque response and lower switching losses compared to Field Oriented Control (FOC) [cite: 27, 28].",
+      "stats": {
+        "char_count": 457,
+        "word_count": 63,
+        "sentence_count": 3,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.4 Process Industry and Water Systems",
+      "level": 3,
+      "content": "*   **Petrochemical:** This remains the stronghold of MPC. Modern implementations focus on \"Economic MPC,\" which integrates real-time economic optimization (maximizing throughput/profit) directly into the control layer rather than just tracking setpoints [cite: 33, 34].\n*   **Water Networks:** MPC manages open water channels and urban drainage systems, using weather forecasts to pre-emptively lower reservoir levels before storms to prevent flooding [cite: 3].",
+      "stats": {
+        "char_count": 463,
+        "word_count": 61,
+        "sentence_count": 3,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "5.5 Building Energy Management Systems (BEMS)",
+      "level": 3,
+      "content": "MPC in HVAC (Heating, Ventilation, and Air Conditioning) utilizes weather predictions and occupancy schedules to pre-cool or pre-heat buildings. This shifts energy consumption to off-peak hours, significantly reducing costs and carbon footprint compared to rule-based thermostats [cite: 35, 36, 37].\n\n---",
+      "stats": {
+        "char_count": 304,
+        "word_count": 41,
+        "sentence_count": 3,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "6. Challenges and Open Problems",
+      "level": 2,
+      "content": "Despite its success, widespread engineering adoption of MPC faces significant hurdles.",
+      "stats": {
+        "char_count": 86,
+        "word_count": 11,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.1 Computational Burden and Embedded Implementation",
+      "level": 3,
+      "content": "Solving an optimization problem at every time step (e.g., every 50 microseconds for power electronics) requires substantial computing power.\n*   **Hardware Constraints:** Implementing MPC on low-cost, low-power microcontrollers or FPGAs is difficult. Standard solvers require floating-point arithmetic, but embedded hardware often relies on fixed-point arithmetic. This can lead to numerical overflow and instability [cite: 17, 38, 39].\n*   **Solver Efficiency:** There is a constant need for faster, \"embedded-ready\" solvers (like ADMM or Fast Gradient Methods) that have a small code footprint and deterministic execution time [cite: 12, 38].",
+      "stats": {
+        "char_count": 644,
+        "word_count": 88,
+        "sentence_count": 7,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "6.2 Modeling and System Identification",
+      "level": 3,
+      "content": "MPC is only as good as the model it uses.\n*   **Cost of Modeling:** In the process industry, identifying a sufficiently accurate model (System Identification) can take weeks of plant testing, which is expensive and disruptive. \"SysID\" remains the most labor-intensive part of MPC commissioning [cite: 34, 40].\n*   **Model Maintenance:** Models degrade over time due to equipment wear or fouling. Adaptive MPC schemes that update the model online are theoretically available but risky to implement in safety-critical industrial environments [cite: 3, 34].",
+      "stats": {
+        "char_count": 554,
+        "word_count": 83,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "6.3 Dependability and Verification",
+      "level": 3,
+      "content": "For safety-critical applications (aerospace, medical), software must be verifiable. The iterative nature of MPC solvers makes it difficult to guarantee the \"Worst-Case Execution Time\" (WCET). If the solver fails to converge within the sampling interval, the control system may fail. Developing \"dependable\" MPC architectures that can guarantee safe fallback strategies is an open engineering challenge [cite: 17, 41].\n\n---",
+      "stats": {
+        "char_count": 422,
+        "word_count": 59,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "7. Future Research Directions",
+      "level": 2,
+      "content": "The future of MPC lies in reducing the barrier to entry and increasing autonomy.",
+      "stats": {
+        "char_count": 80,
+        "word_count": 14,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.1 Integration of AI and Control (Neuro-MPC)",
+      "level": 3,
+      "content": "The convergence of AI and control theory is accelerating. Future research will focus on **Physics-Informed Machine Learning**, where neural networks learn the residuals (errors) of a physical model rather than the whole dynamic, creating \"Grey-Box\" models that are both accurate and data-efficient [cite: 7, 8]. The \"Actor-Critic MPC\" framework suggests a future where controllers learn complex behaviors via trial-and-error (RL) but execute them with the safety guarantees of MPC [cite: 20, 21].",
+      "stats": {
+        "char_count": 496,
+        "word_count": 72,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.2 Hardware Acceleration and Edge Computing",
+      "level": 3,
+      "content": "To enable MPC on faster systems, research is moving toward custom hardware architectures. This includes **FPGA-based solvers** that parallelize the optimization steps, allowing for MHz-range sampling rates [cite: 12, 39]. Additionally, \"Edge MPC\" architectures are being developed where heavy optimization is offloaded to edge servers (e.g., in 5G-connected factories) while the local controller handles safety [cite: 40].",
+      "stats": {
+        "char_count": 422,
+        "word_count": 57,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.3 Standardization and \"Plug-and-Play\" MPC",
+      "level": 3,
+      "content": "Currently, MPC requires expert tuning (weighting matrices \\( Q \\) and \\( R \\), horizon lengths). Future tools aim to automate this tuning process, making MPC a \"plug-and-play\" technology accessible to engineers who are not control experts. This involves automated system identification and self-tuning algorithms [cite: 33, 34].\n\n---",
+      "stats": {
+        "char_count": 333,
+        "word_count": 49,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "Model Predictive Control has matured from a specialized algorithm for oil refineries into a versatile engineering cornerstone essential for the autonomy of modern systems. Its unique ability to explicitly handle constraints and anticipate future behavior makes it indispensable for the next generation of cyber-physical systems, from self-driving cars to agile robots and smart grids.\n\nHowever, the \"engineering perspective\" reveals that the challenge has shifted from *theory* (proving stability) to *implementation* (computation, modeling, and hardware integration). The current state-of-the-art is addressing these through data-driven modeling, distributed optimization, and hardware-specific solver design. As research continues to bridge the gap between rigorous control theory and flexible machine learning, MPC is poised to become the standard for high-performance control across all engineering domains.\n\n---",
+      "stats": {
+        "char_count": 916,
+        "word_count": 120,
+        "sentence_count": 6,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Adaptive Systems: A Systematic Literature Review",
+      "number": null,
+      "title": "Adaptive Systems: A Systematic Literature Review"
+    },
+    {
+      "text": "Review on Model Predictive Control: An Engineering Perspective",
+      "number": null,
+      "title": "Review on Model Predictive Control: An Engineering Perspective"
+    },
+    {
+      "text": "Review on model predictive control in BEMS",
+      "number": null,
+      "title": "Review on model predictive control in BEMS"
+    },
+    {
+      "text": "State of the art model predictive control methods",
+      "number": null,
+      "title": "State of the art model predictive control methods"
+    },
+    {
+      "text": "Nonlinear Model Predictive Control Conference Objectives",
+      "number": null,
+      "title": "Nonlinear Model Predictive Control Conference Objectives"
+    },
+    {
+      "text": "Accelerating Model Predictive Control for Legged Robots through Distributed Optimization",
+      "number": null,
+      "title": "Accelerating Model Predictive Control for Legged Robots through Distributed Optimization"
+    },
+    {
+      "text": "Actor-Critic Model Predictive Control",
+      "number": null,
+      "title": "Actor-Critic Model Predictive Control"
+    },
+    {
+      "text": "Special Issue on MPC Applications",
+      "number": null,
+      "title": "Special Issue on MPC Applications"
+    },
+    {
+      "text": "Hierarchical Coordinated Control Strategy",
+      "number": null,
+      "title": "Hierarchical Coordinated Control Strategy"
+    },
+    {
+      "text": "Advanced Process Control: A History Overview",
+      "number": null,
+      "title": "Advanced Process Control: A History Overview"
+    },
+    {
+      "text": "Model Predictive Control: History and Development",
+      "number": null,
+      "title": "Model Predictive Control: History and Development"
+    },
+    {
+      "text": "Review of MPC History",
+      "number": null,
+      "title": "Review of MPC History"
+    },
+    {
+      "text": "Interview with Manfred Morari: The Genesis of MPC",
+      "number": null,
+      "title": "Interview with Manfred Morari: The Genesis of MPC"
+    },
+    {
+      "text": "Special Issue on Practical Applications of MPC",
+      "number": null,
+      "title": "Special Issue on Practical Applications of MPC"
+    },
+    {
+      "text": "A tutorial review of machine learning-based model predictive control methods",
+      "number": null,
+      "title": "A tutorial review of machine learning-based model predictive control methods"
+    },
+    {
+      "text": "An Overview of Systems-Theoretic Guarantees in Data-Driven MPC",
+      "number": null,
+      "title": "An Overview of Systems-Theoretic Guarantees in Data-Driven MPC"
+    },
+    {
+      "text": "Comprehensive Review on MPC Applied to Power Electronics",
+      "number": null,
+      "title": "Comprehensive Review on MPC Applied to Power Electronics"
+    },
+    {
+      "text": "Model Predictive Control: A Review of Its Applications in Power Electronics",
+      "number": null,
+      "title": "Model Predictive Control: A Review of Its Applications in Power Electronics"
+    },
+    {
+      "text": "Model Predictive Control for Power Electronics Applications",
+      "number": null,
+      "title": "Model Predictive Control for Power Electronics Applications"
+    },
+    {
+      "text": "Model Predictive Control in Automotive Systems",
+      "number": null,
+      "title": "Model Predictive Control in Automotive Systems"
+    },
+    {
+      "text": "Review of MPC for EV Integration and V2G",
+      "number": null,
+      "title": "Review of MPC for EV Integration and V2G"
+    },
+    {
+      "text": "Review of Production Multi-Motor EVs and MPC Techniques",
+      "number": null,
+      "title": "Review of Production Multi-Motor EVs and MPC Techniques"
+    },
+    {
+      "text": "Review of MPC for Autonomous Ground Vehicles",
+      "number": null,
+      "title": "Review of MPC for Autonomous Ground Vehicles"
+    },
+    {
+      "text": "Toward Dependable Embedded Model Predictive Control",
+      "number": null,
+      "title": "Toward Dependable Embedded Model Predictive Control"
+    },
+    {
+      "text": "Offset-Free Approximate NMPC on Embedded Hardware",
+      "number": null,
+      "title": "Offset-Free Approximate NMPC on Embedded Hardware"
+    },
+    {
+      "text": "Embedded MPC Solvers",
+      "number": null,
+      "title": "Embedded MPC Solvers"
+    },
+    {
+      "text": "FPGA Implementation of MPC",
+      "number": null,
+      "title": "FPGA Implementation of MPC"
+    },
+    {
+      "text": "MPC Industrial Implementation Challenges",
+      "number": null,
+      "title": "MPC Industrial Implementation Challenges"
+    },
+    {
+      "text": "Monitoring and Maintenance of Industrial MPC",
+      "number": null,
+      "title": "Monitoring and Maintenance of Industrial MPC"
+    },
+    {
+      "text": "Practical challenges of MPC for grid-interactive buildings",
+      "number": null,
+      "title": "Practical challenges of MPC for grid-interactive buildings"
+    },
+    {
+      "text": "Practical considerations for implementing MPC",
+      "number": null,
+      "title": "Practical considerations for implementing MPC"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Gemini\\Engineering\\Review_on_model_predictive_control-_an_engineering_perspecti_20251226_183906_split.json",
+    "processed_date": "2025-12-31T00:15:42.937774",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

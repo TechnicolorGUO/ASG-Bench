@@ -1,0 +1,751 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Graph Theory- A Comprehensive Survey about Graph Theory Applications in Computer Science and Social Networks."
+    ],
+    [
+      1,
+      "Graph Theory: A Comprehensive Survey of Applications in Computer Science and Social Networks"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      3,
+      "1.1 Research Motivation"
+    ],
+    [
+      3,
+      "1.2 Objectives"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Fundamental Structures"
+    ],
+    [
+      3,
+      "2.2 Network Metrics and Centrality"
+    ],
+    [
+      3,
+      "2.3 Advanced Graph Types"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 The Foundational Era (1736–1900)"
+    ],
+    [
+      3,
+      "3.2 The Probabilistic Era (1959–1998)"
+    ],
+    [
+      3,
+      "3.3 The Computational and Algorithmic Era (1950s–Present)"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Advanced Pathfinding and Traversal"
+    ],
+    [
+      3,
+      "4.2 Graph Neural Networks (GNNs)"
+    ],
+    [
+      3,
+      "4.3 Community Detection and Clustering"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Case Study: Google Maps and Routing"
+    ],
+    [
+      3,
+      "5.2 Case Study: Facebook and Social Graphs"
+    ],
+    [
+      3,
+      "5.3 Cybersecurity and Attack Graphs"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Scalability and Computation"
+    ],
+    [
+      3,
+      "6.2 Dynamic and Temporal Graphs"
+    ],
+    [
+      3,
+      "6.3 Explainability (XAI)"
+    ],
+    [
+      3,
+      "6.4 Theoretical Open Problems"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Trustworthy and Robust GNNs"
+    ],
+    [
+      3,
+      "7.2 Integration with Large Language Models (LLMs)"
+    ],
+    [
+      3,
+      "7.3 Heterogeneous and Geometric Graph Learning"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Graph Theory- A Comprehensive Survey about Graph Theory Applications in Computer Science and Social Networks.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 22:10:48*\n*Progress: [37/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Graph_Theory-_A_Comprehensive_Survey_about_Graph_Theory_Appl_20251226_221048.md*\n---",
+      "stats": {
+        "char_count": 192,
+        "word_count": 10,
+        "sentence_count": 2,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "Graph Theory: A Comprehensive Survey of Applications in Computer Science and Social Networks",
+      "level": 1,
+      "content": "**Key Points**\n*   **Foundational Importance:** Graph theory provides the mathematical architecture for modeling pairwise relations, serving as the backbone for modern computer science, from compiler design to internet routing.\n*   **Social Network Analysis:** It is the primary tool for analyzing social structures, enabling the identification of influencers (centrality), community detection, and the modeling of information spread (viral phenomena).\n*   **Algorithmic Evolution:** The field has evolved from classical pathfinding (Dijkstra, A*) to advanced machine learning approaches, specifically Graph Neural Networks (GNNs), which handle high-dimensional data in non-Euclidean spaces.\n*   **Real-World Scale:** Modern applications, such as Google Maps and Facebook, utilize advanced graph optimizations (Contraction Hierarchies, Hypergraphs) to manage billions of nodes and edges in real-time.\n*   **Future Frontiers:** Research is pivoting toward \"Trustworthy GNNs\" (explainability and robustness), the integration of Large Language Models (LLMs) with Knowledge Graphs, and the analysis of dynamic, heterogeneous information networks.\n\n---",
+      "stats": {
+        "char_count": 1147,
+        "word_count": 145,
+        "sentence_count": 6,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "Graph theory, a field originating from a recreational mathematical puzzle in the 18th century, has matured into a cornerstone of modern computational science and sociology. This systematic literature review provides a comprehensive survey of graph theory’s theoretical underpinnings and its extensive applications in computer science (CS) and social networks (SN). We examine the historical trajectory from Euler’s Seven Bridges of Königsberg to the emergence of complex network science and Graph Neural Networks (GNNs). The review critically analyzes state-of-the-art methods, including traversal algorithms used in navigation systems and centrality measures used in social influence analysis. Detailed case studies of Google Maps and Facebook illustrate the practical scalability of these theories. Furthermore, we identify significant challenges, such as the computational complexity of massive dynamic graphs and the \"black-box\" nature of deep learning on graphs. The paper concludes by outlining future research directions, emphasizing the convergence of symbolic AI (Knowledge Graphs) with subsymbolic AI (Deep Learning) and the necessity for explainable, trustworthy graph intelligence.",
+      "stats": {
+        "char_count": 1193,
+        "word_count": 161,
+        "sentence_count": 7,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "In an increasingly interconnected world, the ability to model relationships between entities is paramount. Graph theory provides the universal language for these relationships. Whether modeling the physical connections of the internet, the logical flow of computer programs, or the complex web of human interactions, graphs offer a rigorous abstraction that simplifies complexity without losing structural integrity [cite: 1, 2].",
+      "stats": {
+        "char_count": 429,
+        "word_count": 59,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1.1 Research Motivation",
+      "level": 3,
+      "content": "The motivation for this survey stems from the ubiquity of graph-structured data in the era of Big Data. Traditional relational databases and linear data structures are often insufficient for capturing the rich, multidimensional connections inherent in modern datasets [cite: 3]. In computer science, graph theory is no longer just a tool for theoretical optimization but the engine behind search engines, recommendation systems, and cybersecurity defenses [cite: 4, 5]. Simultaneously, the rise of social media has transformed sociology into a computational discipline, where graph metrics quantify influence, community structure, and information propagation [cite: 6, 7].",
+      "stats": {
+        "char_count": 672,
+        "word_count": 94,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1.2 Objectives",
+      "level": 3,
+      "content": "This paper aims to:\n1.  Synthesize the foundational concepts and historical milestones of graph theory.\n2.  Review the current state-of-the-art algorithms, moving from classical methods to deep learning approaches.\n3.  Provide concrete case studies (Google Maps, Facebook) to demonstrate theoretical concepts in practice.\n4.  Identify critical research gaps, particularly regarding scalability, dynamic networks, and explainability.",
+      "stats": {
+        "char_count": 432,
+        "word_count": 55,
+        "sentence_count": 8,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "2. Key Concepts and Definitions",
+      "level": 2,
+      "content": "To understand the applications of graph theory, one must first establish the mathematical lexicon that defines it.",
+      "stats": {
+        "char_count": 114,
+        "word_count": 17,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2.1 Fundamental Structures",
+      "level": 3,
+      "content": "A **graph** $G$ is defined as an ordered pair $G = (V, E)$, where $V$ is a set of vertices (nodes) and $E$ is a set of edges (links) that connect pairs of vertices [cite: 2, 3].\n*   **Directed vs. Undirected:** In an undirected graph, the edge $(u, v)$ is identical to $(v, u)$, representing a symmetric relationship (e.g., a handshake). In a directed graph (digraph), edges have an orientation, representing asymmetric relationships (e.g., a hyperlink from Page A to Page B) [cite: 1, 8].\n*   **Weighted Graphs:** Edges may carry weights representing cost, distance, or strength of relationship. This is crucial for applications like finding the shortest path in a road network [cite: 3, 9].\n*   **Heterogeneous Information Networks (HINs):** Unlike homogeneous graphs where all nodes and edges are of the same type, HINs involve multiple types of objects and relations (e.g., a bibliographic network containing authors, papers, and venues) [cite: 10, 11].",
+      "stats": {
+        "char_count": 957,
+        "word_count": 154,
+        "sentence_count": 13,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "2.2 Network Metrics and Centrality",
+      "level": 3,
+      "content": "In Social Network Analysis (SNA), determining the importance of a node is essential. Centrality measures quantify this importance:\n*   **Degree Centrality:** The number of direct connections a node has. In social networks, this represents immediate popularity [cite: 6, 7].\n*   **Betweenness Centrality:** Measures the frequency with which a node appears on the shortest paths between other nodes. High betweenness indicates a \"bridge\" or \"gatekeeper\" role, critical for controlling information flow [cite: 6, 7].\n*   **Closeness Centrality:** The inverse of the average shortest path distance from a node to all other nodes. It indicates how quickly a node can spread information to the entire network [cite: 6, 7].\n*   **Eigenvector Centrality:** Assigns relative scores to all nodes in the network based on the concept that connections to high-scoring nodes contribute more to the score of the node in question than equal connections to low-scoring nodes (e.g., Google's PageRank) [cite: 6, 12].",
+      "stats": {
+        "char_count": 998,
+        "word_count": 150,
+        "sentence_count": 10,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "2.3 Advanced Graph Types",
+      "level": 3,
+      "content": "*   **Hypergraphs:** A generalization of graphs where an edge (hyperedge) can connect any number of vertices. This is particularly useful in modeling complex social groups where a relationship involves more than two individuals [cite: 13].\n*   **Bipartite Graphs:** Graphs where vertices can be divided into two disjoint sets, with edges only connecting vertices from different sets (e.g., Users and Products in recommendation systems) [cite: 6].",
+      "stats": {
+        "char_count": 446,
+        "word_count": 65,
+        "sentence_count": 5,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The evolution of graph theory can be categorized into three distinct eras: the foundational period, the probabilistic era, and the modern computational era.",
+      "stats": {
+        "char_count": 156,
+        "word_count": 23,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.1 The Foundational Era (1736–1900)",
+      "level": 3,
+      "content": "The birth of graph theory is universally attributed to **Leonhard Euler** and his 1736 solution to the **Seven Bridges of Königsberg** problem. Euler abstracted the physical city into nodes (landmasses) and edges (bridges), proving that a path crossing every bridge exactly once was impossible because more than two nodes had an odd degree [cite: 14, 15, 16]. This was the first instance of \"geometry of position\" (topology), where metric properties like distance were irrelevant compared to connectivity [cite: 17].\nLater, in the mid-19th century, **Gustav Kirchhoff** applied graph theoretic principles to electrical circuits, establishing Kirchhoff’s laws, while **Arthur Cayley** used trees to enumerate chemical isomers, linking graph theory to chemistry [cite: 18, 19].",
+      "stats": {
+        "char_count": 775,
+        "word_count": 113,
+        "sentence_count": 4,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "3.2 The Probabilistic Era (1959–1998)",
+      "level": 3,
+      "content": "In 1959, **Paul Erdős and Alfréd Rényi** introduced the Random Graph Model ($G_{n,p}$), which assumed that edges between nodes occur with a fixed probability. While mathematically elegant, this model failed to capture the clustering and \"hub\" properties of real-world networks [cite: 20, 21].\nThis limitation was addressed in 1998 by **Watts and Strogatz**, who proposed the \"Small-World\" model. They demonstrated that by randomly rewiring a small fraction of edges in a regular lattice, one could create a graph with both high clustering (like a lattice) and short average path lengths (like a random graph), a phenomenon observed in neural networks and social groups [cite: 20, 21].",
+      "stats": {
+        "char_count": 684,
+        "word_count": 106,
+        "sentence_count": 4,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "3.3 The Computational and Algorithmic Era (1950s–Present)",
+      "level": 3,
+      "content": "The mid-20th century saw the development of fundamental algorithms for computer science. **Dijkstra’s Algorithm** (1956/1959) provided a deterministic method for finding shortest paths [cite: 22, 23]. As data complexity grew, the focus shifted to **Graph Neural Networks (GNNs)** in the 21st century, allowing for the application of deep learning to non-Euclidean graph data, revolutionizing fields from drug discovery to social recommendation [cite: 24].",
+      "stats": {
+        "char_count": 455,
+        "word_count": 63,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "Modern graph theory applications rely on a blend of classical combinatorial optimization and emerging machine learning paradigms.",
+      "stats": {
+        "char_count": 129,
+        "word_count": 17,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.1 Advanced Pathfinding and Traversal",
+      "level": 3,
+      "content": "While Dijkstra’s algorithm is foundational, it is insufficient for continental-scale routing due to its computational cost.\n*   **A* Search:** Enhances Dijkstra by using a heuristic function (e.g., Euclidean distance) to guide the search toward the destination, significantly reducing the search space [cite: 25].\n*   **Contraction Hierarchies (CH):** A preprocessing technique used extensively in navigation systems. It prioritizes nodes based on importance (e.g., highways vs. local roads) and creates \"shortcuts,\" allowing queries to ignore vast subgraphs of irrelevant local roads. This reduces query times from seconds to milliseconds [cite: 26, 27].",
+      "stats": {
+        "char_count": 655,
+        "word_count": 90,
+        "sentence_count": 10,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.2 Graph Neural Networks (GNNs)",
+      "level": 3,
+      "content": "GNNs represent the frontier of graph machine learning. Unlike standard neural networks that expect fixed-size inputs (vectors/images), GNNs process graph structures where nodes have varying numbers of neighbors.\n*   **Message Passing:** The core mechanism where nodes aggregate feature information from their neighbors to update their own representation (embedding) [cite: 28, 29].\n*   **GraphSAGE:** An inductive framework that generates embeddings by sampling and aggregating features from a node's local neighborhood. This allows the model to generalize to unseen nodes, a critical feature for dynamic social networks [cite: 24].\n*   **Heterogeneous GNNs (HGNNs):** Designed to handle HINs by employing hierarchical attention mechanisms to weigh the importance of different types of relations (e.g., giving more weight to \"co-author\" links than \"same-venue\" links in a citation network) [cite: 28].",
+      "stats": {
+        "char_count": 901,
+        "word_count": 125,
+        "sentence_count": 8,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "4.3 Community Detection and Clustering",
+      "level": 3,
+      "content": "Identifying substructures within graphs is vital for social network analysis.\n*   **Modularity Optimization:** A standard method for measuring the strength of division of a network into modules (clusters).\n*   **TeraHAC:** A recent (2024) state-of-the-art algorithm for hierarchical agglomerative clustering on trillion-edge graphs, demonstrating the industry's push toward massive scale [cite: 30].",
+      "stats": {
+        "char_count": 399,
+        "word_count": 51,
+        "sentence_count": 3,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5. Applications and Case Studies",
+      "level": 2,
+      "content": "The theoretical constructs of graph theory are operationalized in systems used by billions of people daily.",
+      "stats": {
+        "char_count": 107,
+        "word_count": 16,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.1 Case Study: Google Maps and Routing",
+      "level": 3,
+      "content": "Google Maps exemplifies the application of weighted graphs and advanced pathfinding.\n*   **Graph Representation:** The road network is modeled as a graph where intersections are nodes and road segments are edges. Weights are dynamic, representing travel time rather than just distance, influenced by real-time traffic data [cite: 22, 25].\n*   **Algorithmic Stack:** It utilizes a combination of **A*** for pathfinding and **Contraction Hierarchies** for rapid query execution. Furthermore, **Graph Neural Networks** (specifically DeepMind’s models) are now employed to predict traffic conditions and Estimated Time of Arrival (ETA) by learning the temporal dynamics of the road graph [cite: 24, 25].\n*   **Optimization:** The system solves not just for the shortest path, but for the \"most efficient\" path, considering factors like fuel consumption and user preferences, effectively solving a multi-objective optimization problem on a dynamic graph [cite: 31].",
+      "stats": {
+        "char_count": 960,
+        "word_count": 136,
+        "sentence_count": 6,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "5.2 Case Study: Facebook and Social Graphs",
+      "level": 3,
+      "content": "Facebook’s infrastructure is built upon the \"Social Graph,\" a term popularized to describe the global mapping of people and their connections.\n*   **Structure:** A 2011 study of active Facebook users revealed a nearly fully connected component containing 99.91% of individuals, confirming the \"small-world\" hypothesis with an average path length of just 4.7 hops (degrees of separation) [cite: 32, 33].\n*   **Hypergraphs:** To model complex interactions (e.g., a photo tagged with multiple users, or a group chat), Facebook utilizes hypergraph concepts where a single edge connects multiple vertices, allowing for more efficient querying and recommendation than simple dyadic graphs [cite: 13].\n*   **Friend Recommendation:** Algorithms analyze the \"local clustering coefficient\" and \"common neighbors\" (triadic closure) to suggest friends. If Node A and Node B share multiple mutual friends, the probability of an edge existing between A and B is high [cite: 34, 35].",
+      "stats": {
+        "char_count": 968,
+        "word_count": 142,
+        "sentence_count": 9,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "5.3 Cybersecurity and Attack Graphs",
+      "level": 3,
+      "content": "In cybersecurity, graph theory shifts from construction to defense.\n*   **Attack Graphs:** These are directed graphs where nodes represent system states or vulnerabilities, and edges represent exploits that transition the system from one state to another. They allow security analysts to visualize potential attack paths and identify \"cut sets\"—minimal sets of edges (vulnerabilities) that, if removed (patched), would disconnect the attacker from the target [cite: 36, 37].\n*   **Intrusion Detection:** Graph-based anomaly detection models network traffic as a dynamic graph. Sudden changes in graph topology (e.g., a new node rapidly increasing its out-degree) can signal a DDoS attack or worm propagation [cite: 5, 38].",
+      "stats": {
+        "char_count": 722,
+        "word_count": 104,
+        "sentence_count": 7,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "6. Challenges and Open Problems",
+      "level": 2,
+      "content": "Despite significant progress, the field faces substantial hurdles.",
+      "stats": {
+        "char_count": 66,
+        "word_count": 8,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.1 Scalability and Computation",
+      "level": 3,
+      "content": "Real-world graphs are growing to trillions of edges. Processing such massive structures in real-time is a significant engineering challenge. Traditional algorithms like Dijkstra ($O(V^2)$ or $O(E + V \\log V)$) are too slow for global-scale queries without heavy preprocessing [cite: 26, 30].",
+      "stats": {
+        "char_count": 291,
+        "word_count": 42,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.2 Dynamic and Temporal Graphs",
+      "level": 3,
+      "content": "Most classical graph theory assumes static networks. However, social networks and traffic systems are highly dynamic; edges appear and disappear continuously. Developing algorithms that can update results incrementally without re-computing the entire graph (dynamic graph algorithms) is an active and difficult area of research [cite: 39, 40].",
+      "stats": {
+        "char_count": 343,
+        "word_count": 47,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.3 Explainability (XAI)",
+      "level": 3,
+      "content": "As GNNs become more complex, they suffer from the \"black box\" problem. In sensitive applications like financial fraud detection or medical diagnosis, it is crucial to understand *why* a GNN made a specific prediction. \"GraphXAI\" is an emerging subfield dedicated to making graph learning models interpretable [cite: 41, 42].",
+      "stats": {
+        "char_count": 324,
+        "word_count": 49,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.4 Theoretical Open Problems",
+      "level": 3,
+      "content": "Several mathematical conjectures remain unsolved, such as the **Hadwiger Conjecture** regarding graph coloring and minors, and the **Unit Distance Graph** problem (chromatic number of the plane), which asks for the minimum number of colors needed to color the plane such that no two points at distance 1 have the same color [cite: 19, 43, 44].",
+      "stats": {
+        "char_count": 343,
+        "word_count": 55,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7. Future Research Directions",
+      "level": 2,
+      "content": "The future of graph theory lies in its integration with other AI paradigms and its expansion into new domains.",
+      "stats": {
+        "char_count": 110,
+        "word_count": 19,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.1 Trustworthy and Robust GNNs",
+      "level": 3,
+      "content": "Future research will focus heavily on \"Trustworthy AI.\" This includes making GNNs robust against adversarial attacks (perturbing graph structure to fool the model) and ensuring fairness (preventing bias in social network algorithms). Privacy-preserving graph learning, utilizing techniques like differential privacy, is also critical as social data becomes more regulated [cite: 45, 46].",
+      "stats": {
+        "char_count": 387,
+        "word_count": 52,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.2 Integration with Large Language Models (LLMs)",
+      "level": 3,
+      "content": "A burgeoning trend is the convergence of LLMs and Knowledge Graphs (KGs). While LLMs excel at language generation, they often hallucinate facts. KGs provide structured, factual grounding. \"GraphRAG\" (Retrieval-Augmented Generation) and methods that use LLMs to annotate or reason over graphs are expected to dominate research in 2025 and beyond [cite: 45, 47].",
+      "stats": {
+        "char_count": 360,
+        "word_count": 53,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.3 Heterogeneous and Geometric Graph Learning",
+      "level": 3,
+      "content": "Moving beyond simple graphs, research is deepening into Heterogeneous Information Networks (HINs) to capture richer semantic meanings [cite: 10, 48]. Additionally, Geometric Deep Learning is exploring graphs in non-Euclidean spaces (e.g., hyperbolic embeddings) to better represent hierarchical data structures often found in biology and social networks [cite: 30, 49].",
+      "stats": {
+        "char_count": 369,
+        "word_count": 49,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "Graph theory has transcended its origins as a mathematical curiosity to become the structural substrate of the information age. From the routing algorithms that guide our physical movements to the social algorithms that curate our digital interactions, graphs are omnipresent. The field is currently undergoing a paradigm shift from static, combinatorial analysis to dynamic, data-driven learning via GNNs. As we face the challenges of trillion-edge networks and the demand for explainable AI, the synergy between classical graph theory and modern machine learning will undoubtedly yield the next generation of intelligent systems. The journey from the Seven Bridges of Königsberg to the \"Social Graph\" of billions is a testament to the enduring power of this mathematical abstraction.",
+      "stats": {
+        "char_count": 785,
+        "word_count": 116,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Intro to Graph Theory",
+      "number": null,
+      "title": "Intro to Graph Theory"
+    },
+    {
+      "text": "Graph Theory Basics",
+      "number": null,
+      "title": "Graph Theory Basics"
+    },
+    {
+      "text": "Introduction to Graph Theory",
+      "number": null,
+      "title": "Introduction to Graph Theory"
+    },
+    {
+      "text": "Graph Theory - Social Networks",
+      "number": null,
+      "title": "Graph Theory - Social Networks"
+    },
+    {
+      "text": "Graph Theory Applications in CS and SN",
+      "number": null,
+      "title": "Graph Theory Applications in CS and SN"
+    },
+    {
+      "text": "Graph Theory: A Comprehensive Survey",
+      "number": null,
+      "title": "Graph Theory: A Comprehensive Survey"
+    },
+    {
+      "text": "Social network analysis using graph theory",
+      "number": null,
+      "title": "Social network analysis using graph theory"
+    },
+    {
+      "text": "Graph Theory Survey",
+      "number": null,
+      "title": "Graph Theory Survey"
+    },
+    {
+      "text": "Graph Theory Timeline",
+      "number": null,
+      "title": "Graph Theory Timeline"
+    },
+    {
+      "text": "Timeline of Mathematics",
+      "number": null,
+      "title": "Timeline of Mathematics"
+    },
+    {
+      "text": "Historical development of graph theory",
+      "number": null,
+      "title": "Historical development of graph theory"
+    },
+    {
+      "text": "Graph Theory",
+      "number": null,
+      "title": "Graph Theory"
+    },
+    {
+      "text": "Recent Advances in Dynamic Graph Algorithms",
+      "number": null,
+      "title": "Recent Advances in Dynamic Graph Algorithms"
+    },
+    {
+      "text": "Graph & Geometric ML",
+      "number": null,
+      "title": "Graph & Geometric ML"
+    },
+    {
+      "text": "Graph Theory Open Problems",
+      "number": null,
+      "title": "Graph Theory Open Problems"
+    },
+    {
+      "text": "Open problems in graph theory",
+      "number": null,
+      "title": "Open problems in graph theory"
+    },
+    {
+      "text": "Algorithms that Power Google Maps",
+      "number": null,
+      "title": "Algorithms that Power Google Maps"
+    },
+    {
+      "text": "Google Maps and Graph Theory",
+      "number": null,
+      "title": "Google Maps and Graph Theory"
+    },
+    {
+      "text": "How Google Maps Calculates Routes",
+      "number": null,
+      "title": "How Google Maps Calculates Routes"
+    },
+    {
+      "text": "Shortest Path in Online Network Services",
+      "number": null,
+      "title": "Shortest Path in Online Network Services"
+    },
+    {
+      "text": "Route finding algorithms",
+      "number": null,
+      "title": "Route finding algorithms"
+    },
+    {
+      "text": "Facebook Social Graph Modeling",
+      "number": null,
+      "title": "Facebook Social Graph Modeling"
+    },
+    {
+      "text": "The Anatomy of the Facebook Social Graph",
+      "number": null,
+      "title": "The Anatomy of the Facebook Social Graph"
+    },
+    {
+      "text": "How a Social Network Uses Graph Theory",
+      "number": null,
+      "title": "How a Social Network Uses Graph Theory"
+    },
+    {
+      "text": "Graph Theory in Cybersecurity",
+      "number": null,
+      "title": "Graph Theory in Cybersecurity"
+    },
+    {
+      "text": "Attack Graphs in Cybersecurity",
+      "number": null,
+      "title": "Attack Graphs in Cybersecurity"
+    },
+    {
+      "text": "Graph Theory in Network Security",
+      "number": null,
+      "title": "Graph Theory in Network Security"
+    },
+    {
+      "text": "GraphXAI: Survey",
+      "number": null,
+      "title": "GraphXAI: Survey"
+    },
+    {
+      "text": "Survey on Explainability of GNNs",
+      "number": null,
+      "title": "Survey on Explainability of GNNs"
+    },
+    {
+      "text": "Heterogeneous Information Networks",
+      "number": null,
+      "title": "Heterogeneous Information Networks"
+    },
+    {
+      "text": "Survey of Heterogeneous Information Network Analysis",
+      "number": null,
+      "title": "Survey of Heterogeneous Information Network Analysis"
+    },
+    {
+      "text": "Heterogeneous Information Network Analysis",
+      "number": null,
+      "title": "Heterogeneous Information Network Analysis"
+    },
+    {
+      "text": "HINs: Past, Present, Future",
+      "number": null,
+      "title": "HINs: Past, Present, Future"
+    },
+    {
+      "text": "Trustworthy GNNs and LLMs",
+      "number": null,
+      "title": "Trustworthy GNNs and LLMs"
+    },
+    {
+      "text": "AI Trends: Graph Neural Networks",
+      "number": null,
+      "title": "AI Trends: Graph Neural Networks"
+    },
+    {
+      "text": "New Graph Perspectives",
+      "number": null,
+      "title": "New Graph Perspectives"
+    },
+    {
+      "text": "Facebook Centrality Analysis",
+      "number": null,
+      "title": "Facebook Centrality Analysis"
+    },
+    {
+      "text": "Facebook Hypergraphs",
+      "number": null,
+      "title": "Facebook Hypergraphs"
+    },
+    {
+      "text": "Anatomy of Facebook Graph",
+      "number": null,
+      "title": "Anatomy of Facebook Graph"
+    },
+    {
+      "text": "Origins of Graph Theory",
+      "number": null,
+      "title": "Origins of Graph Theory"
+    },
+    {
+      "text": "Königsberg Bridge Problem",
+      "number": null,
+      "title": "Königsberg Bridge Problem"
+    },
+    {
+      "text": "Seven Bridges of Königsberg",
+      "number": null,
+      "title": "Seven Bridges of Königsberg"
+    },
+    {
+      "text": "Google Maps Algorithms",
+      "number": null,
+      "title": "Google Maps Algorithms"
+    },
+    {
+      "text": "Contraction Hierarchies",
+      "number": null,
+      "title": "Contraction Hierarchies"
+    },
+    {
+      "text": "Watts-Strogatz Model",
+      "number": null,
+      "title": "Watts-Strogatz Model"
+    },
+    {
+      "text": "Random Graphs",
+      "number": null,
+      "title": "Random Graphs"
+    },
+    {
+      "text": "Heterogeneous Graph Neural Networks",
+      "number": null,
+      "title": "Heterogeneous Graph Neural Networks"
+    },
+    {
+      "text": "Top Trends of Graph Machine Learning",
+      "number": null,
+      "title": "Top Trends of Graph Machine Learning"
+    },
+    {
+      "text": "GNN Trends",
+      "number": null,
+      "title": "GNN Trends"
+    },
+    {
+      "text": "Trustworthy Graph Neural Networks",
+      "number": null,
+      "title": "Trustworthy Graph Neural Networks"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Gemini\\Computer Science\\Graph_Theory-_A_Comprehensive_Survey_about_Graph_Theory_Appl_20251226_221048_split.json",
+    "processed_date": "2025-12-30T23:03:06.706588",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

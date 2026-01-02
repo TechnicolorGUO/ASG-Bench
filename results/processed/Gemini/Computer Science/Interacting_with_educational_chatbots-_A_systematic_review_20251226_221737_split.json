@@ -1,0 +1,615 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Interacting with educational chatbots- A systematic review"
+    ],
+    [
+      1,
+      "Interacting with Educational Chatbots: A Systematic Literature Review"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      3,
+      "1.1 Research Motivation"
+    ],
+    [
+      3,
+      "1.2 Objectives"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Defining the Educational Chatbot"
+    ],
+    [
+      3,
+      "2.2 Technical Classification"
+    ],
+    [
+      3,
+      "2.3 Pedagogical Roles"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 The Era of Pattern Matching (1966–2000s)"
+    ],
+    [
+      3,
+      "3.2 The Intelligent Tutoring System (ITS) Era (2000s–2015)"
+    ],
+    [
+      3,
+      "3.3 The Generative AI Era (2016–Present)"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Retrieval Augmented Generation (RAG)"
+    ],
+    [
+      3,
+      "4.2 Scaffolding and Socratic Methods"
+    ],
+    [
+      3,
+      "4.3 Interaction Design and Multimodality"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Case Study: Jill Watson (Georgia Tech)"
+    ],
+    [
+      3,
+      "5.2 Case Study: Khanmigo (Khan Academy)"
+    ],
+    [
+      3,
+      "5.3 Case Study: Duolingo Max"
+    ],
+    [
+      3,
+      "5.4 Domain-Specific Applications"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Accuracy and Hallucination"
+    ],
+    [
+      3,
+      "6.2 Academic Integrity and Over-reliance"
+    ],
+    [
+      3,
+      "6.3 Ethics, Bias, and Privacy"
+    ],
+    [
+      3,
+      "6.4 Lack of Emotional Intelligence"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Multimodal and Affective Computing"
+    ],
+    [
+      3,
+      "7.2 Longitudinal and Ecological Studies"
+    ],
+    [
+      3,
+      "7.3 Teacher-AI Collaboration"
+    ],
+    [
+      3,
+      "7.4 Standardization of Evaluation Metrics"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Interacting with educational chatbots- A systematic review",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 22:17:37*\n*Progress: [38/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Interacting_with_educational_chatbots-_A_systematic_review_20251226_221737.md*\n---",
+      "stats": {
+        "char_count": 190,
+        "word_count": 10,
+        "sentence_count": 2,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "Interacting with Educational Chatbots: A Systematic Literature Review",
+      "level": 1,
+      "content": "**Key Points**\n*   **Evolution:** Educational chatbots have evolved from simple rule-based systems (e.g., ELIZA) to sophisticated Large Language Models (LLMs) capable of Socratic tutoring and complex scaffolding.\n*   **Pedagogical Roles:** Chatbots primarily function as teaching agents, peer agents, teachable agents, or motivational agents, with \"teaching presence\" being a critical metric for success.\n*   **Key Case Studies:** \"Jill Watson\" (Georgia Tech) demonstrates high efficacy in administrative and Q&A support using Retrieval Augmented Generation (RAG), while \"Khanmigo\" (Khan Academy) exemplifies the application of Socratic methods to foster critical thinking rather than providing direct answers.\n*   **Challenges:** Major hurdles include \"hallucinations\" (factual errors), data privacy concerns, lack of emotional intelligence, and the risk of fostering academic dishonesty.\n*   **Future Directions:** Research is moving toward multimodal interactions (voice/video), affective computing (emotion recognition), and longitudinal studies on learning retention.\n\n---",
+      "stats": {
+        "char_count": 1077,
+        "word_count": 135,
+        "sentence_count": 8,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "The integration of conversational agents, or chatbots, into educational settings has witnessed a paradigm shift following the advent of generative artificial intelligence. This systematic literature review examines the landscape of educational chatbots, tracing their trajectory from early pattern-matching systems to state-of-the-art Large Language Models (LLMs). By synthesizing data from over 100 sources, this paper categorizes chatbots based on their pedagogical roles—teaching, peer, teachable, and motivational agents—and analyzes their efficacy in diverse learning environments. Special attention is given to interaction styles, scaffolding techniques, and the implementation of Socratic methods in platforms like Khanmigo and Duolingo Max. While the literature indicates significant potential for scalability and personalized support, critical challenges regarding accuracy, ethics, and the depth of cognitive engagement remain. This review identifies gaps in longitudinal empirical evidence and proposes a research agenda focused on multimodal interaction and ethical governance.",
+      "stats": {
+        "char_count": 1089,
+        "word_count": 138,
+        "sentence_count": 6,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1.1 Research Motivation",
+      "level": 3,
+      "content": "The scalability of personalized education has long been a \"grand challenge\" in educational technology. While the benefits of one-on-one tutoring are well-documented (often referred to as Bloom's 2 Sigma Problem), providing human tutors for every student is economically unfeasible [cite: 1, 2]. Chatbots—software applications designed to simulate human conversation—have emerged as a potential solution to this scalability crisis. The release of advanced LLMs, such as GPT-4, has accelerated interest in this field, transforming chatbots from rigid, menu-based tools into dynamic conversational partners capable of complex dialogue [cite: 3, 4].",
+      "stats": {
+        "char_count": 645,
+        "word_count": 89,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1.2 Objectives",
+      "level": 3,
+      "content": "This paper aims to provide a comprehensive systematic review of the literature concerning interactions with educational chatbots. The specific objectives are:\n1.  To define and classify the pedagogical roles and technical architectures of educational chatbots.\n2.  To trace the historical evolution from rule-based systems to generative AI.\n3.  To critically evaluate state-of-the-art methods, specifically focusing on scaffolding and Socratic interaction.\n4.  To analyze key case studies (Jill Watson, Khanmigo, Duolingo) for empirical evidence of efficacy.\n5.  To identify current challenges and outline future research directions.",
+      "stats": {
+        "char_count": 633,
+        "word_count": 85,
+        "sentence_count": 11,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "2.1 Defining the Educational Chatbot",
+      "level": 3,
+      "content": "An educational chatbot is defined as a computer program designed to interact with learners through natural language (text or voice) to achieve specific pedagogical goals [cite: 1, 5]. Unlike general-purpose assistants (e.g., Siri), educational chatbots are specifically engineered to facilitate learning processes, provide feedback, or support administrative educational tasks [cite: 6, 7].",
+      "stats": {
+        "char_count": 390,
+        "word_count": 52,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2.2 Technical Classification",
+      "level": 3,
+      "content": "The literature categorizes chatbots into two primary technical architectures:\n*   **Rule-Based (Pattern Matching):** These systems rely on predefined templates and decision trees (e.g., AIML). They function well for frequently asked questions but fail when users deviate from the script [cite: 8, 9].\n*   **AI-Based (Generative):** Utilizing Machine Learning (ML) and Natural Language Processing (NLP), these bots generate responses dynamically. Modern iterations use Transformer architectures (e.g., GPT) to understand context and intent [cite: 4, 8].",
+      "stats": {
+        "char_count": 552,
+        "word_count": 74,
+        "sentence_count": 8,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "2.3 Pedagogical Roles",
+      "level": 3,
+      "content": "A critical contribution of recent systematic reviews [cite: 10, 11, 12] is the classification of chatbots by their educational function:\n*   **Teaching Agents:** The most common role, where the bot acts as a tutor delivering content, quizzing students, and providing direct feedback [cite: 10, 13].\n*   **Peer Agents:** The bot simulates a fellow student to facilitate collaborative learning or reduce anxiety, often used in language learning contexts [cite: 10, 12].\n*   **Teachable Agents:** Based on the \"learning-by-teaching\" paradigm, these bots allow students to teach the agent. The agent's performance improves as the student explains concepts, reinforcing the student's own understanding [cite: 12, 14, 15].\n*   **Motivational Agents:** Designed to support self-regulation, time management, and emotional well-being rather than delivering curriculum content [cite: 16].",
+      "stats": {
+        "char_count": 878,
+        "word_count": 123,
+        "sentence_count": 5,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The evolution of educational chatbots can be segmented into three distinct eras:",
+      "stats": {
+        "char_count": 80,
+        "word_count": 12,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.1 The Era of Pattern Matching (1966–2000s)",
+      "level": 3,
+      "content": "The history begins with **ELIZA** (1966), created by Joseph Weizenbaum. ELIZA simulated a Rogerian psychotherapist using simple pattern matching and substitution. While not strictly educational, it demonstrated the potential for human-computer dialogue [cite: 17, 18, 19]. This was followed by **PARRY** (1972) and **A.L.I.C.E.** (1995), which utilized Artificial Intelligence Markup Language (AIML) but lacked deep semantic understanding [cite: 17, 19].",
+      "stats": {
+        "char_count": 454,
+        "word_count": 60,
+        "sentence_count": 9,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.2 The Intelligent Tutoring System (ITS) Era (2000s–2015)",
+      "level": 3,
+      "content": "**AutoTutor**, developed at the University of Memphis, represented a significant leap. Unlike simple chatbots, AutoTutor utilized Latent Semantic Analysis (LSA) to engage students in natural language dialogue, identifying gaps in understanding and employing pedagogical strategies to guide learning in subjects like physics and computer literacy [cite: 20, 21, 22].",
+      "stats": {
+        "char_count": 365,
+        "word_count": 49,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.3 The Generative AI Era (2016–Present)",
+      "level": 3,
+      "content": "The modern era began with the deployment of **Jill Watson** at Georgia Tech in 2016, built originally on IBM Watson. Jill was the first AI teaching assistant to operate in a real classroom without students realizing it was non-human [cite: 23, 24]. The release of OpenAI's GPT-3 and GPT-4 (2020–2023) marked the current phase, enabling \"zero-shot\" interactions where chatbots can handle open-domain questions with high fluency, leading to tools like **Khanmigo** and **Duolingo Max** [cite: 2, 25, 26].",
+      "stats": {
+        "char_count": 502,
+        "word_count": 78,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.1 Retrieval Augmented Generation (RAG)",
+      "level": 3,
+      "content": "To address the issue of \"hallucinations\" (fabricating facts) common in LLMs, state-of-the-art educational bots employ RAG. This technique restricts the AI to a specific \"walled garden\" of trusted content (e.g., textbooks, syllabi). The system retrieves relevant information from this trusted database and uses the LLM only to formulate the response. This is the core architecture of the modern **Jill Watson**, ensuring high accuracy (approx. 97%) and reducing harmful outputs [cite: 23, 27, 28].",
+      "stats": {
+        "char_count": 496,
+        "word_count": 73,
+        "sentence_count": 7,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.2 Scaffolding and Socratic Methods",
+      "level": 3,
+      "content": "Advanced chatbots are now designed to avoid giving direct answers. Instead, they use **scaffolding**—breaking complex tasks into manageable steps—and **Socratic questioning**.\n*   **Instructional Scaffolding:** Research indicates that chatbots providing conceptual scaffolding (enhancing understanding) and reflective guidance are more effective for skill development than those providing direct answers [cite: 29, 30].\n*   **Socratic Dialogue:** Tools like Khanmigo are explicitly prompted to ask leading questions (\"What do you think the first step is?\") rather than solving the problem, fostering critical thinking [cite: 2, 31].",
+      "stats": {
+        "char_count": 632,
+        "word_count": 82,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.3 Interaction Design and Multimodality",
+      "level": 3,
+      "content": "Current research emphasizes the importance of interaction design.\n*   **Persona and Social Presence:** Chatbots with distinct personas (e.g., Duolingo's \"Lily\") enhance user engagement and \"social presence,\" a key component of the Community of Inquiry (CoI) framework [cite: 32, 33].\n*   **Multimodality:** Newer systems are moving beyond text to include voice and visual avatars. For example, Duolingo Max uses \"visemes\" (visual phonemes) to lip-sync avatars dynamically, creating a more immersive language learning environment [cite: 32, 34].",
+      "stats": {
+        "char_count": 544,
+        "word_count": 75,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.1 Case Study: Jill Watson (Georgia Tech)",
+      "level": 3,
+      "content": "**Context:** A virtual teaching assistant (TA) for large online Master's courses (OMSCS).\n**Function:** Jill answers logistical and content-related questions in discussion forums (e.g., Piazza, EdStem).\n**Outcome:** The latest version, powered by ChatGPT and RAG, outperforms OpenAI's native assistant in accuracy and safety. Studies show Jill enhances \"Teaching Presence\" (design and facilitation) and correlates with improved student grades (more A's, fewer C's) [cite: 23, 35, 36]. It successfully offloads routine queries, allowing human TAs to focus on complex mentoring [cite: 33].",
+      "stats": {
+        "char_count": 587,
+        "word_count": 80,
+        "sentence_count": 7,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.2 Case Study: Khanmigo (Khan Academy)",
+      "level": 3,
+      "content": "**Context:** An AI-powered tutor integrated into Khan Academy, powered by GPT-4.\n**Function:** It acts as a Socratic tutor for students and a lesson-planning assistant for teachers. It is designed to identify errors in math (a weakness of standard LLMs) and guide students through writing processes without writing the essay for them [cite: 2, 37].\n**Outcome:** Evaluations highlight its ability to personalize learning and provide immediate feedback. However, it requires a \"walled garden\" approach to ensure safety and relevance. It distinguishes itself from ChatGPT by *refusing* to do the work for the student [cite: 31, 38].",
+      "stats": {
+        "char_count": 629,
+        "word_count": 95,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.3 Case Study: Duolingo Max",
+      "level": 3,
+      "content": "**Context:** A language learning platform utilizing GPT-4.\n**Function:** Features include \"Roleplay\" (simulating real-world conversations like ordering coffee) and \"Explain My Answer\" (providing context-aware grammatical feedback) [cite: 25, 39].\n**Outcome:** The use of distinct characters with memory and specific personalities (e.g., the sarcastic Lily) increases user retention and reduces the anxiety often associated with speaking a new language with a human [cite: 32, 40].",
+      "stats": {
+        "char_count": 480,
+        "word_count": 63,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.4 Domain-Specific Applications",
+      "level": 3,
+      "content": "*   **Language Learning (EFL):** Chatbots are extensively used for practicing conversation in English as a Foreign Language (EFL), providing a low-stakes environment that reduces \"foreign language anxiety\" [cite: 14, 41, 42].\n*   **Nursing and Healthcare:** Chatbots are used to simulate patient interactions, allowing nursing students to practice diagnosis and communication skills in safe, virtual scenarios [cite: 43, 44].",
+      "stats": {
+        "char_count": 425,
+        "word_count": 58,
+        "sentence_count": 2,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "6.1 Accuracy and Hallucination",
+      "level": 3,
+      "content": "Despite improvements, LLMs can still generate plausible but incorrect information. While RAG mitigates this, it does not eliminate it. In math specifically, LLMs often struggle with calculation accuracy, requiring specialized integrations (e.g., Wolfram) or specific prompting strategies [cite: 2, 28, 45].",
+      "stats": {
+        "char_count": 306,
+        "word_count": 41,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.2 Academic Integrity and Over-reliance",
+      "level": 3,
+      "content": "A significant concern is that students may use chatbots to bypass learning processes (e.g., plagiarism). There is a tension between using a bot as a \"scaffold\" versus a \"crutch.\" If students rely entirely on the bot for answers, critical thinking and problem-solving skills may atrophy [cite: 9, 44, 46].",
+      "stats": {
+        "char_count": 304,
+        "word_count": 49,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.3 Ethics, Bias, and Privacy",
+      "level": 3,
+      "content": "Chatbots trained on internet data may reflect societal biases. Furthermore, the collection of student data raises privacy concerns. Ensuring \"ethical governance\" and protecting student data (PII) is a major barrier to widespread institutional adoption [cite: 44, 46, 47].",
+      "stats": {
+        "char_count": 271,
+        "word_count": 38,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.4 Lack of Emotional Intelligence",
+      "level": 3,
+      "content": "While some bots simulate empathy, they lack genuine emotional understanding. They may fail to detect frustration or confusion in a student's tone, which a human teacher would instantly recognize. This limits their effectiveness in sensitive or highly frustrated contexts [cite: 44, 48].",
+      "stats": {
+        "char_count": 286,
+        "word_count": 42,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.1 Multimodal and Affective Computing",
+      "level": 3,
+      "content": "Future chatbots must move beyond text. Research should focus on **multimodal interactions** (voice, gesture, expression) and **affective computing**—systems that can recognize and respond to a student's emotional state (e.g., detecting boredom or frustration via webcam or typing cadence) [cite: 48, 49].",
+      "stats": {
+        "char_count": 304,
+        "word_count": 41,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.2 Longitudinal and Ecological Studies",
+      "level": 3,
+      "content": "Most current studies are short-term or experimental. There is a critical need for **longitudinal studies** to assess the long-term impact of chatbot interaction on learning retention, student motivation, and social skills over entire semesters or years [cite: 48, 50, 51].",
+      "stats": {
+        "char_count": 272,
+        "word_count": 40,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.3 Teacher-AI Collaboration",
+      "level": 3,
+      "content": "Future research should explore the \"Human-in-the-Loop\" model, focusing on how chatbots can augment rather than replace teachers. This includes developing dashboards that summarize chatbot-student interactions for teachers to intervene when necessary [cite: 2, 33].",
+      "stats": {
+        "char_count": 264,
+        "word_count": 34,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.4 Standardization of Evaluation Metrics",
+      "level": 3,
+      "content": "The field lacks standardized metrics. Future work should establish consistent frameworks for evaluating chatbot efficacy, combining quantitative metrics (accuracy, response time) with qualitative measures (user engagement, perceived teaching presence, CoI scores) [cite: 47, 52, 53].",
+      "stats": {
+        "char_count": 283,
+        "word_count": 35,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "The landscape of educational chatbots has transformed from simple pattern-matching novelties to powerful pedagogical agents capable of enhancing teaching presence and personalizing learning at scale. The integration of Generative AI has enabled sophisticated roles, from Socratic tutors like Khanmigo to administrative assistants like Jill Watson. However, the field stands at a crossroads. To realize the full potential of this technology, researchers and developers must address the \"hallucination\" problem, ensure robust data privacy, and design interactions that foster deep cognitive engagement rather than passive consumption. The future of educational chatbots lies not in replacing human educators, but in creating a symbiotic ecosystem where AI handles the routine and scalable aspects of instruction, freeing human teachers to focus on mentorship, emotional support, and complex pedagogical guidance.",
+      "stats": {
+        "char_count": 910,
+        "word_count": 124,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Unleashing the Potential of Chatbots in Education: A State-Of-The-Art Analysis",
+      "number": null,
+      "title": "Unleashing the Potential of Chatbots in Education: A State-Of-The-Art Analysis"
+    },
+    {
+      "text": "Are We There Yet? - A Systematic Literature Review on Chatbots in Education",
+      "number": null,
+      "title": "Are We There Yet? - A Systematic Literature Review on Chatbots in Education"
+    },
+    {
+      "text": "A Literature Survey of Recent Advances in Chatbots",
+      "number": null,
+      "title": "A Literature Survey of Recent Advances in Chatbots"
+    },
+    {
+      "text": "GPT-4 Technical Report",
+      "number": null,
+      "title": "GPT-4 Technical Report"
+    },
+    {
+      "text": "Interacting with educational chatbots: A systematic review",
+      "number": null,
+      "title": "Interacting with educational chatbots: A systematic review"
+    },
+    {
+      "text": "Role of AI Chatbots in Education: Systematic Literature Review",
+      "number": null,
+      "title": "Role of AI Chatbots in Education: Systematic Literature Review"
+    },
+    {
+      "text": "ELIZA—a computer program for the study of natural language communication between man and machine",
+      "number": null,
+      "title": "ELIZA—a computer program for the study of natural language communication between man and machine"
+    },
+    {
+      "text": "AutoTutor: An intelligent tutoring system with mixed-initiative dialogue",
+      "number": null,
+      "title": "AutoTutor: An intelligent tutoring system with mixed-initiative dialogue"
+    },
+    {
+      "text": "Jill Watson: A Virtual Teaching Assistant for Online Education",
+      "number": null,
+      "title": "Jill Watson: A Virtual Teaching Assistant for Online Education"
+    },
+    {
+      "text": "Khanmigo: The AI Guide",
+      "number": null,
+      "title": "Khanmigo: The AI Guide"
+    },
+    {
+      "text": "Introducing Duolingo Max",
+      "number": null,
+      "title": "Introducing Duolingo Max"
+    },
+    {
+      "text": "Jill Watson: Empowering Learners and Teachers with Virtual Teaching Assistant",
+      "number": null,
+      "title": "Jill Watson: Empowering Learners and Teachers with Virtual Teaching Assistant"
+    },
+    {
+      "text": "Critical inquiry in a text-based environment: Computer conferencing in higher education",
+      "number": null,
+      "title": "Critical inquiry in a text-based environment: Computer conferencing in higher education"
+    },
+    {
+      "text": "Education in the Era of Generative Artificial Intelligence (AI): Understanding the Potential Benefits of ChatGPT in Promoting Teaching and Learning",
+      "number": null,
+      "title": "Education in the Era of Generative Artificial Intelligence (AI): Understanding the Potential Benefits of ChatGPT in Promoting Teaching and Learning"
+    },
+    {
+      "text": "Future directions for chatbot research: an interdisciplinary research agenda",
+      "number": null,
+      "title": "Future directions for chatbot research: an interdisciplinary research agenda"
+    },
+    {
+      "text": "Chatbots applications in education: A systematic review",
+      "number": null,
+      "title": "Chatbots applications in education: A systematic review"
+    },
+    {
+      "text": "A review of opportunities and challenges of chatbots in education",
+      "number": null,
+      "title": "A review of opportunities and challenges of chatbots in education"
+    },
+    {
+      "text": "Chatbots in EFL: A systematic review",
+      "number": null,
+      "title": "Chatbots in EFL: A systematic review"
+    },
+    {
+      "text": "ChatGPT for good? On opportunities and challenges of large language models for education",
+      "number": null,
+      "title": "ChatGPT for good? On opportunities and challenges of large language models for education"
+    },
+    {
+      "text": "Estimating the cognitive value of YouTube's educational videos: A learning analytics approach",
+      "number": null,
+      "title": "Estimating the cognitive value of YouTube's educational videos: A learning analytics approach"
+    },
+    {
+      "text": "Bots as language learning partners",
+      "number": null,
+      "title": "Bots as language learning partners"
+    },
+    {
+      "text": "Chatbots for learning: A review of educational chatbots for the Facebook Messenger",
+      "number": null,
+      "title": "Chatbots for learning: A review of educational chatbots for the Facebook Messenger"
+    },
+    {
+      "text": "Chatbots for language learning: Are they really useful? A systematic review of chatbot-supported language learning.",
+      "number": null,
+      "title": "Chatbots for language learning: Are they really useful? A systematic review of chatbot-supported language learning."
+    },
+    {
+      "text": "Rediscovering the use of chatbots in education: A systematic literature review",
+      "number": null,
+      "title": "Rediscovering the use of chatbots in education: A systematic literature review"
+    },
+    {
+      "text": "The Role of Chatbots in Formal Education",
+      "number": null,
+      "title": "The Role of Chatbots in Formal Education"
+    },
+    {
+      "text": "Teachers’ perceptions of chatbots in education",
+      "number": null,
+      "title": "Teachers’ perceptions of chatbots in education"
+    },
+    {
+      "text": "The Impact of Chatbot Technology on Enhancing Historical Learning",
+      "number": null,
+      "title": "The Impact of Chatbot Technology on Enhancing Historical Learning"
+    },
+    {
+      "text": "Student Interaction with an LLM-Based Educational Chatbot",
+      "number": null,
+      "title": "Student Interaction with an LLM-Based Educational Chatbot"
+    },
+    {
+      "text": "Scaffolding Learning Scenarios with a Socratic Chatbot",
+      "number": null,
+      "title": "Scaffolding Learning Scenarios with a Socratic Chatbot"
+    },
+    {
+      "text": "Scaffolding strategies in educational chatbots",
+      "number": null,
+      "title": "Scaffolding strategies in educational chatbots"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Gemini\\Computer Science\\Interacting_with_educational_chatbots-_A_systematic_review_20251226_221737_split.json",
+    "processed_date": "2025-12-30T23:07:10.322288",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

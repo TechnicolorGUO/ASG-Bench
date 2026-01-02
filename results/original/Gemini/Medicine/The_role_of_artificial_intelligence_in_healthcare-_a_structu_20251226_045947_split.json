@@ -1,0 +1,361 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: The role of artificial intelligence in healthcare- a structured literature review."
+    ],
+    [
+      1,
+      "The Role of Artificial Intelligence in Healthcare: A Structured Literature Review"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Artificial Intelligence (AI)"
+    ],
+    [
+      3,
+      "2.2 Machine Learning (ML)"
+    ],
+    [
+      3,
+      "2.3 Deep Learning (DL) and Neural Networks"
+    ],
+    [
+      3,
+      "2.4 Generative AI and Large Language Models (LLMs)"
+    ],
+    [
+      3,
+      "2.5 Federated Learning (FL)"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 The Early Era (1950s–1970s)"
+    ],
+    [
+      3,
+      "3.2 The Growth of Data and Robotics (1980s–2000s)"
+    ],
+    [
+      3,
+      "3.3 The Deep Learning Boom (2010s)"
+    ],
+    [
+      3,
+      "3.4 The Generative and Foundation Model Era (2022–Present)"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Transformer Architectures and LLMs"
+    ],
+    [
+      3,
+      "4.2 AlphaFold 3 and Biomolecular Prediction"
+    ],
+    [
+      3,
+      "4.3 Multimodal AI"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Diagnostic Imaging and Radiology"
+    ],
+    [
+      3,
+      "5.2 Drug Discovery and Personalized Medicine"
+    ],
+    [
+      3,
+      "5.3 Clinical Decision Support and Administration"
+    ],
+    [
+      3,
+      "5.4 Case Study: The Failure of IBM Watson Health"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Data Privacy and Security"
+    ],
+    [
+      3,
+      "6.2 The \"Black Box\" and Explainability (XAI)"
+    ],
+    [
+      3,
+      "6.3 Bias and Health Equity"
+    ],
+    [
+      3,
+      "6.4 Regulatory and Liability Issues"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Federated Learning (FL)"
+    ],
+    [
+      3,
+      "7.2 Explainable AI (XAI)"
+    ],
+    [
+      3,
+      "7.3 Agentic AI"
+    ],
+    [
+      3,
+      "7.4 Human-AI Collaboration"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: The role of artificial intelligence in healthcare- a structured literature review.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 04:59:47*\n*Progress: [9/25]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/The_role_of_artificial_intelligence_in_healthcare-_a_structu_20251226_045947.md*\n---"
+    },
+    {
+      "heading": "The Role of Artificial Intelligence in Healthcare: A Structured Literature Review",
+      "level": 1,
+      "content": "**Key Points**\n*   **Transformative Potential:** AI has evolved from theoretical concepts in the 1950s to practical, life-saving applications in 2024, particularly in diagnostics, drug discovery, and personalized medicine.\n*   **Technological Shift:** The field is currently shifting from predictive/discriminative AI (machine learning for classification) to generative AI (Large Language Models and protein folding models like AlphaFold 3).\n*   **Critical Challenges:** Despite technical success, clinical adoption is hindered by the \"black box\" problem (lack of explainability), data privacy concerns, algorithmic bias, and integration difficulties, as exemplified by the failure of IBM Watson Health.\n*   **Future Trajectory:** Research is moving toward Federated Learning to solve privacy issues, Agentic AI for autonomous clinical assistance, and multimodal models that integrate genomics, imaging, and electronic health records.\n\n---"
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "**Background:** The integration of Artificial Intelligence (AI) into healthcare represents one of the most significant paradigm shifts in modern medicine. From early expert systems to contemporary Large Language Models (LLMs) and deep learning algorithms, AI promises to revolutionize patient care, administrative efficiency, and pharmaceutical development.\n**Objectives:** This systematic literature review aims to provide a comprehensive analysis of the role of AI in healthcare, tracing its historical evolution, defining key concepts, evaluating state-of-the-art methods, and critically assessing applications, challenges, and future directions.\n**Methods:** A structured review of literature published up to 2025 was conducted, focusing on peer-reviewed journals, technical reports, and case studies. The review synthesizes findings on machine learning, deep learning, generative AI, and robotic surgery.\n**Results:** The literature reveals that AI has achieved expert-level performance in specific diagnostic tasks, particularly in radiology and pathology. The 2024 release of AlphaFold 3 marks a watershed moment for drug discovery. However, systemic failures, such as the discontinuation of IBM Watson Health, highlight the gap between technical capability and clinical utility.\n**Conclusion:** While AI offers unprecedented opportunities for precision medicine and operational efficiency, its successful implementation requires robust governance frameworks, solutions to the \"black box\" interpretability problem, and rigorous validation of clinical outcomes.\n\n---"
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The healthcare sector is currently undergoing a digital transformation driven by the exponential growth of health data and advancements in computational power. Artificial Intelligence (AI), once a futuristic concept, has become a central pillar of medical innovation. The motivation for integrating AI into healthcare stems from the urgent need to address the \"iron triangle\" of healthcare: improving access, reducing costs, and enhancing quality [cite: 1, 2]. With the volume of medical data—ranging from genomic sequences to electronic health records (EHRs)—exceeding the processing capacity of human clinicians, AI offers the necessary tools to synthesize vast datasets into actionable clinical insights [cite: 3, 4].\n\nThe objective of this paper is to provide a rigorous, systematic review of the AI landscape in healthcare. Unlike previous reviews that may focus solely on technical metrics or specific medical specialties, this paper adopts a holistic view. It examines the trajectory from early rule-based systems to the generative AI revolution of 2023-2024, analyzes high-profile successes and failures, and identifies the ethical and technical barriers preventing widespread adoption."
+    },
+    {
+      "heading": "2. Key Concepts and Definitions",
+      "level": 2,
+      "content": "To understand the literature, it is essential to define the taxonomy of AI technologies used in healthcare."
+    },
+    {
+      "heading": "2.1 Artificial Intelligence (AI)",
+      "level": 3,
+      "content": "AI refers to the simulation of human intelligence processes by computer systems. In healthcare, this is generally categorized into \"Narrow AI\" (ANI), which excels at specific tasks (e.g., detecting tumors in X-rays), and the theoretical \"General AI\" (AGI), which would possess human-like cognitive flexibility [cite: 3, 5]."
+    },
+    {
+      "heading": "2.2 Machine Learning (ML)",
+      "level": 3,
+      "content": "ML is a subset of AI where algorithms learn patterns from data without being explicitly programmed for every rule.\n*   **Supervised Learning:** The algorithm learns from labeled training data (e.g., images labeled \"cancer\" vs. \"benign\") to predict outcomes for unforeseen data [cite: 5, 6].\n*   **Unsupervised Learning:** The algorithm identifies hidden patterns in unlabeled data, often used for patient clustering or identifying novel disease subtypes [cite: 6, 7]."
+    },
+    {
+      "heading": "2.3 Deep Learning (DL) and Neural Networks",
+      "level": 3,
+      "content": "Deep Learning utilizes Artificial Neural Networks (ANNs) with many layers (hence \"deep\") to model complex patterns. DL is the engine behind most modern medical imaging breakthroughs.\n*   **Convolutional Neural Networks (CNNs):** The standard for processing visual data like MRI and CT scans [cite: 8, 9].\n*   **Recurrent Neural Networks (RNNs):** Used for sequential data, such as time-series patient vitals or DNA sequences [cite: 8]."
+    },
+    {
+      "heading": "2.4 Generative AI and Large Language Models (LLMs)",
+      "level": 3,
+      "content": "Emerging prominently in the 2020s, Generative AI creates new content rather than just analyzing existing data. LLMs, such as GPT-4 and Med-PaLM 2, are trained on vast corpora of text to understand and generate human-like language. In healthcare, they are used for summarizing patient notes, answering medical queries, and generating synthetic data [cite: 10, 11, 12]."
+    },
+    {
+      "heading": "2.5 Federated Learning (FL)",
+      "level": 3,
+      "content": "FL is a decentralized training technique where an algorithm is trained across multiple decentralized edge devices or servers holding local data samples, without exchanging them. This is critical for healthcare privacy, allowing institutions to collaborate on AI models without sharing sensitive patient data [cite: 13, 14, 15]."
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The evolution of AI in healthcare can be segmented into distinct eras, characterized by the prevailing technology and computational capabilities."
+    },
+    {
+      "heading": "3.1 The Early Era (1950s–1970s)",
+      "level": 3,
+      "content": "The conceptual origins trace back to the 1950s, but practical application began in the 1960s and 70s.\n*   **1970s:** The development of **MYCIN** at Stanford University was a seminal moment. MYCIN was an expert system designed to diagnose bacterial infections and recommend antibiotics. Although it performed well in research, it was never fully operationalized due to the lack of digital infrastructure (EHRs) and slow processing speeds [cite: 3, 16].\n*   **SUMEX-AIM (1973):** Established to facilitate networking among AI researchers in medicine, signaling the start of collaborative AI [cite: 16]."
+    },
+    {
+      "heading": "3.2 The Growth of Data and Robotics (1980s–2000s)",
+      "level": 3,
+      "content": "*   **1980s-90s:** The focus shifted to data digitization and the introduction of expert systems for decision support.\n*   **2000:** The FDA approval of the **da Vinci Surgical System** marked the beginning of robotic-assisted surgery. While not fully autonomous AI, it laid the groundwork for AI-driven precision in the operating room [cite: 17, 18, 19]."
+    },
+    {
+      "heading": "3.3 The Deep Learning Boom (2010s)",
+      "level": 3,
+      "content": "The 2010s saw the resurgence of AI due to the availability of \"Big Data\" and GPU computing.\n*   **2011:** IBM Watson won *Jeopardy!*, leading to the launch of IBM Watson Health. This era was defined by the promise that AI would \"cure cancer\" by ingesting medical literature [cite: 20, 21].\n*   **2017-2018:** The FDA began approving AI-powered diagnostic devices, particularly in radiology (e.g., for detecting diabetic retinopathy and stroke) [cite: 22, 23]."
+    },
+    {
+      "heading": "3.4 The Generative and Foundation Model Era (2022–Present)",
+      "level": 3,
+      "content": "*   **2022-2023:** The release of ChatGPT and subsequent medical-specific models (Med-PaLM) shifted focus to natural language understanding and generation [cite: 10, 11].\n*   **2024:** A major milestone was reached with **AlphaFold 3**, developed by Google DeepMind. Unlike its predecessors, AlphaFold 3 can predict the structures of proteins, DNA, RNA, and ligands, and how they interact, fundamentally altering drug discovery [cite: 24, 25, 26]."
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "As of 2024-2025, the field is dominated by foundation models and multimodal learning."
+    },
+    {
+      "heading": "4.1 Transformer Architectures and LLMs",
+      "level": 3,
+      "content": "Transformers, which utilize \"attention mechanisms\" to weigh the importance of different input data parts, are the state-of-the-art for processing unstructured medical text.\n*   **Performance Benchmarks:** In 2023-2024, comparisons between generalist models (like GPT-4) and specialist models (like Med-PaLM 2) showed that generalist models with advanced prompting strategies (e.g., \"Medprompt\") could outperform specialist models on medical licensing exams (USMLE). GPT-4 achieved approximately 90% accuracy on USMLE-style questions, surpassing the passing threshold significantly [cite: 12, 27, 28].\n*   **Med-PaLM 2:** This model was the first to reach \"expert\" level performance on the MedQA dataset, scoring 86.5%, demonstrating that LLMs can reason through complex clinical scenarios [cite: 29, 30]."
+    },
+    {
+      "heading": "4.2 AlphaFold 3 and Biomolecular Prediction",
+      "level": 3,
+      "content": "Released in May 2024, AlphaFold 3 utilizes a diffusion-based architecture. It has achieved a 50% improvement in prediction accuracy for protein-molecule interactions compared to traditional methods. This capability allows for the modeling of complex molecular systems, including protein-ligand and antibody-antigen interactions, which is critical for modern drug design [cite: 25, 26, 31]."
+    },
+    {
+      "heading": "4.3 Multimodal AI",
+      "level": 3,
+      "content": "Current research emphasizes models that can process text, images, and genomic data simultaneously. For example, **MedGemma** and **MedImageInsight** are designed to analyze medical images while generating textual reports, bridging the gap between radiology and administration [cite: 29, 32]."
+    },
+    {
+      "heading": "5.1 Diagnostic Imaging and Radiology",
+      "level": 3,
+      "content": "Radiology is the most mature application of AI in healthcare. Deep learning algorithms are used for:\n*   **Cancer Detection:** AI tools for mammography have demonstrated a 94.5% accuracy rate, reducing false positives by 88% [cite: 33].\n*   **Stroke Detection:** Solutions like those from Aidoc have been shown to reduce door-to-puncture time for stroke patients by 38 minutes, significantly improving outcomes [cite: 23].\n*   **Pathology:** AI assists in counting cells and identifying cancerous tissue in biopsy slides with precision that matches or exceeds human pathologists [cite: 34, 35]."
+    },
+    {
+      "heading": "5.2 Drug Discovery and Personalized Medicine",
+      "level": 3,
+      "content": "*   **AlphaFold Impact:** AlphaFold 3 is revolutionizing the \"structure-based drug design\" process. By predicting how drugs bind to proteins, it accelerates the identification of viable drug candidates, potentially cutting discovery timelines by half [cite: 24, 36, 37].\n*   **Pharmacogenomics:** AI analyzes genetic markers to predict individual drug responses. Reports indicate AI-driven pharmacogenomic analysis can reduce prescription-related complications by 26% [cite: 36, 38]."
+    },
+    {
+      "heading": "5.3 Clinical Decision Support and Administration",
+      "level": 3,
+      "content": "*   **Ambient Documentation:** Tools like DAX Copilot listen to patient-physician conversations and automatically generate clinical notes, reducing administrative burden and physician burnout [cite: 32].\n*   **Sepsis and Mortality Prediction:** Algorithms integrated into EHRs monitor patient vitals in real-time to predict deterioration hours before it becomes clinically apparent [cite: 39]."
+    },
+    {
+      "heading": "5.4 Case Study: The Failure of IBM Watson Health",
+      "level": 3,
+      "content": "A critical analysis of AI in healthcare must address the failure of IBM Watson Health. Launched with the goal of revolutionizing oncology, the division was sold off in 2022.\n*   **Reasons for Failure:**\n    1.  **Data Quality:** Watson was trained on hypothetical \"synthetic\" cases from a single institution (Memorial Sloan Kettering) rather than diverse real-world patient data, leading to recommendations that were biased or unsafe for general populations [cite: 20, 40, 41].\n    2.  **Unstructured Data:** The system struggled to parse messy, unstructured clinical notes and abbreviations found in real-world EHRs [cite: 42].\n    3.  **Overpromising:** Marketing hype outpaced technical capability, leading to a loss of trust among clinicians when the system failed to deliver \"super-human\" diagnostics [cite: 43, 44].\n*   **Lesson:** Success requires integration with real-world workflows and transparent validation, not just raw processing power."
+    },
+    {
+      "heading": "6.1 Data Privacy and Security",
+      "level": 3,
+      "content": "The training of robust AI models requires vast amounts of data, raising concerns about patient consent and data ownership. Centralizing data creates targets for cyberattacks. The \"de-identification\" of genomic data is particularly challenging, as genetic markers are inherently identifiable [cite: 45, 46, 47]."
+    },
+    {
+      "heading": "6.2 The \"Black Box\" and Explainability (XAI)",
+      "level": 3,
+      "content": "Deep learning models are often opaque; they provide a prediction without an explanation. In healthcare, \"trust\" is clinical currency. If a model predicts a high risk of sepsis, a clinician needs to know *why* (e.g., rising lactate levels) to intervene. The lack of explainability remains a primary barrier to regulatory approval and clinical trust [cite: 48, 49, 50]."
+    },
+    {
+      "heading": "6.3 Bias and Health Equity",
+      "level": 3,
+      "content": "AI models trained on data from specific demographics (e.g., white, male, urban populations) perform poorly on underrepresented groups. Studies have shown AI systems underdiagnosing diseases in Black patients or misdiagnosing female patients due to training data imbalances [cite: 45, 46]."
+    },
+    {
+      "heading": "6.4 Regulatory and Liability Issues",
+      "level": 3,
+      "content": "Determining liability when an AI makes an error is legally complex. Is the fault with the developer, the hospital, or the supervising physician? Regulatory bodies like the FDA are currently establishing frameworks (e.g., \"Software as a Medical Device\"), but the rapid pace of GenAI evolution outstrips regulation [cite: 36, 51]."
+    },
+    {
+      "heading": "7.1 Federated Learning (FL)",
+      "level": 3,
+      "content": "To address privacy silos, future research is heavily focused on FL. By training models locally at hospitals and only sharing model updates (weights) rather than raw data, FL promises to unlock global datasets without compromising privacy. 2024 reviews indicate FL is moving from proof-of-concept to real-world trials in radiology and internal medicine [cite: 13, 14, 52]."
+    },
+    {
+      "heading": "7.2 Explainable AI (XAI)",
+      "level": 3,
+      "content": "Developing \"glass box\" models that are interpretable by design is a priority. Techniques like SHAP (SHapley Additive exPlanations) are being integrated to provide clinicians with visual heatmaps or decision trees explaining AI outputs [cite: 48, 53]."
+    },
+    {
+      "heading": "7.3 Agentic AI",
+      "level": 3,
+      "content": "Moving beyond passive chatbots, the next generation of \"Agentic AI\" will be capable of taking actions—such as scheduling appointments, ordering lab tests, or navigating insurance claims—autonomously, acting as a comprehensive medical concierge [cite: 54, 55]."
+    },
+    {
+      "heading": "7.4 Human-AI Collaboration",
+      "level": 3,
+      "content": "Research is shifting from \"AI replacing doctors\" to \"AI augmenting doctors.\" Benchmarks in 2024 suggest that AI-physician collaboration yields higher diagnostic accuracy (near 100%) than either AI or physicians working alone [cite: 35, 56]."
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "The role of Artificial Intelligence in healthcare has transitioned from experimental curiosity to a fundamental driver of medical progress. The milestones of the last decade—from deep learning in radiology to AlphaFold’s mastery of biology—demonstrate AI's capacity to enhance diagnostic precision and accelerate therapeutic discovery. However, the journey is fraught with challenges. The cautionary tale of IBM Watson serves as a reminder that technology cannot simply be dropped into complex clinical environments; it must be validated, explainable, and equitable.\n\nAs we look toward 2030, the integration of Federated Learning for privacy, the refinement of Large Language Models for clinical reasoning, and the development of multimodal systems will likely define the next era. The ultimate success of AI in healthcare will not be measured by algorithmic accuracy alone, but by its ability to improve patient outcomes, reduce systemic costs, and equitably serve diverse global populations.\n\n---"
+    }
+  ],
+  "references": [
+    "[cite: 1] Itradiant. (n.d.). The Rise of AI-Powered Healthcare.",
+    "[cite: 16] Keragon. (2024). History of AI in Healthcare.",
+    "[cite: 33] Inferscience. (2025). 10 Milestones in the History of AI in Healthcare.",
+    "[cite: 22] Cedars-Sinai. (2023). AI Ascendance in Medicine.",
+    "[cite: 3] Xsolis. (n.d.). The Evolution of AI in Healthcare.",
+    "[cite: 36] Rocket Doctor. (n.d.). How AI is Enhancing Personalized Medicine.",
+    "[cite: 34] Medium. (2024). AI for Healthcare: Transforming Diagnosis, Drug Discovery.",
+    "[cite: 57] Intuz. (2025). Generative AI in Precision Medicine.",
+    "[cite: 38] PMC. (2024). AI in Pharmaceutical Industry.",
+    "[cite: 45] PMC. (2025). Ethical Concerns of AI in Healthcare.",
+    "[cite: 46] Stack AI. (2025). What are the Ethical Concerns of AI in Healthcare.",
+    "[cite: 58] PMC. (2022). Ethical Challenges in AI.",
+    "[cite: 47] HITRUST. (2023). The Ethics of AI in Healthcare.",
+    "[cite: 51] Kosin Med J. (2024). Ethical Challenges in Medical AI.",
+    "[cite: 10] MDPI. (2024). Generative AI in Healthcare.",
+    "[cite: 54] Blue Prism. (2025). The Future of AI in Healthcare.",
+    "[cite: 11] PMC. (2023). Generative AI and LLMs in Healthcare.",
+    "[cite: 55] YouTube. (2025). LLMs in Healthcare: Future Directions.",
+    "[cite: 32] BrandVM. (2024). AI Innovations Transforming Healthcare 2024.",
+    "[cite: 59] Boston Institute of Analytics. (2024). Top 10 AI Innovations.",
+    "[cite: 35] Future Healthcare Today. (2024). How AI is Impacting Healthcare.",
+    "[cite: 23] Aidoc. (2024). AI in Healthcare 2024 Milestones.",
+    "[cite: 2] Elsevier. (2023). Systematic Literature Review: AI in Healthcare.",
+    "[cite: 53] MDPI. (2023). AI in Healthcare Management: Systematic Review.",
+    "[cite: 4] Technology in Society. (2024). Factors Influencing AI Adoption.",
+    "[cite: 5] LITFL. (2024). Glossary of AI Definitions.",
+    "[cite: 8] Coursera. (2025). Machine Learning in Healthcare.",
+    "[cite: 6] TechTarget. (2025). Defining Common AI Terms.",
+    "[cite: 9] Aidoc. (2025). Deep Learning in Healthcare.",
+    "[cite: 17] General Surgery News. (2021). History of Robotic-Assisted Surgery.",
+    "[cite: 18] PMC. (2020). Da Vinci Surgical System History.",
+    "[cite: 13] Cell Reports Medicine. (2024). Federated Learning in Healthcare Systematic Review.",
+    "[cite: 39] Semantic Scholar. (2022). Federated Learning for Healthcare.",
+    "[cite: 14] MDPI. (2024). Federated Learning in Healthcare: Systematic Review.",
+    "[cite: 24] Atomic Academia. (2024). AlphaFold: Redefining Medicine.",
+    "[cite: 37] Medium. (2025). AI Revolutionizing Drug Discovery with AlphaFold 3.",
+    "[cite: 48] MedRxiv. (2024). Explainable AI in Healthcare Systematic Review.",
+    "[cite: 49] IEEE. (2023). Review on Explainable AI for Healthcare.",
+    "[cite: 20] IRJIET. (2025). IBM Watson Health Failure Analysis.",
+    "[cite: 40] ResearchGate. (2025). The Rise and Fall of IBM Watson.",
+    "[cite: 21] Healthcare Digital. (2023). IBM Watson: What Went Wrong?",
+    "[cite: 43] INSEAD. (2023). Challenges in Commercial Deployment: IBM Watson.",
+    "[cite: 44] Henrico Dolfing. (2025). The $4 Billion AI Failure of IBM Watson.",
+    "[cite: 31] EurekAlert. (2025). AlphaFold 3 Capabilities.",
+    "[cite: 25] Time. (2024). Google DeepMind AlphaFold 3.",
+    "[cite: 26] Google Blog. (2024). Introducing AlphaFold 3.",
+    "[cite: 12] arXiv. (2023). Med-PaLM 2 vs GPT-4 USMLE Performance.",
+    "[cite: 29] Dr7.ai. (2024). Top 5 Medical AI Models Compared.",
+    "[cite: 28] Synthedia. (2023). GPT-4 Beats Med-PaLM 2."
+  ]
+}

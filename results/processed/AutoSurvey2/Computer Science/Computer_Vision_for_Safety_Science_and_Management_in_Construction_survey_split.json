@@ -1,0 +1,226 @@
+{
+  "outline": [
+    [
+      1,
+      "Computer Vision for Safety Science and Management in Construction: A Comprehensive Survey"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "Keywords"
+    ],
+    [
+      2,
+      "Introduction"
+    ],
+    [
+      2,
+      "Background"
+    ],
+    [
+      2,
+      "Current State of the Art"
+    ],
+    [
+      2,
+      "Future Directions"
+    ],
+    [
+      2,
+      "Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Computer Vision for Safety Science and Management in Construction: A Comprehensive Survey",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "**Abstract** The integration of computer vision into safety science and management within the construction industry has gained significant traction, offering transformative potential through real-time monitoring, automated risk assessment, and enhanced decision-making. This survey paper provides a comprehensive overview of the current state of computer vision applications in construction safety, examining the evolution of methodologies, key challenges, and emerging trends. The paper begins with an introduction that outlines the limitations of traditional safety practices and highlights the advantages of vision-based systems. It then reviews the background of computer vision in safety science, emphasizing the growing reliance on visual data for effective safety management. The current state of the art is discussed, focusing on the application of deep learning and machine learning techniques for tasks such as object detection, activity recognition, and hazard identification. The paper also addresses the challenges associated with real-time processing, data quality, and system robustness. Looking ahead, the future directions of the field are explored, including the integration of safety guarantees, context-aware systems, and hybrid models that balance accuracy with efficiency. This survey contributes to the ongoing discourse by synthesizing existing research, identifying gaps, and suggesting areas for further investigation. By highlighting the scope and impact of computer vision in construction safety, this paper aims to guide future research and support the development of intelligent, reliable, and scalable safety solutions in the construction industry.",
+      "stats": {
+        "char_count": 1679,
+        "word_count": 226,
+        "sentence_count": 9,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Keywords",
+      "level": 2,
+      "content": "large language models, multimodal learning, natural language processing, machine learning, artificial intelligence",
+      "stats": {
+        "char_count": 114,
+        "word_count": 12,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Introduction",
+      "level": 2,
+      "content": "The integration of computer vision into safety science and management within the construction industry has emerged as a transformative force, driven by the increasing availability of high-resolution imagery, video data, and advanced computational techniques. Traditional safety practices in construction have often relied on manual inspections, which are time-consuming, labor-intensive, and prone to human error. In contrast, computer vision offers the potential for real-time monitoring, automated defect detection, and predictive risk assessment, thereby enhancing both the efficiency and effectiveness of safety management. Recent advancements in deep learning, particularly in image and video analysis, have enabled the development of robust systems capable of identifying hazards, assessing structural integrity, and supporting decision-making in dynamic construction environments. These developments are reflected in a growing body of research that explores the application of computer vision to a wide range of safety-related tasks, from detecting pavement defects to monitoring incidents in urban settings. The use of multi-modal data, including RGB-D information, video sequences, and textual descriptions, further expands the capabilities of these systems, allowing for more comprehensive and context-aware analyses. Several studies have demonstrated the effectiveness of deep learning models in tasks such as semantic segmentation, object detection, and visual question answering, with applications ranging from flood damage assessment to automated optical inspection in industrial settings. Notably, the emphasis on scalability, cost-effectiveness, and real-world applicability has led to the creation of benchmark datasets and open-source frameworks that facilitate further research and development in this field. While these advancements have significantly improved the accuracy and reliability of computer vision systems, challenges remain, including the need for high-quality annotated data, the complexity of model architectures, and the generalizability of solutions across diverse environments. As the construction industry continues to evolve, the role of computer vision in safety science and management is expected to grow, offering new opportunities for innovation and improvement in the way safety is monitored, managed, and ensured. The ongoing exploration of efficient, adaptable, and interpretable models will be critical in addressing these challenges and realizing the full potential of computer vision in construction safety.",
+      "stats": {
+        "char_count": 2556,
+        "word_count": 339,
+        "sentence_count": 11,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Background",
+      "level": 2,
+      "content": "Computer vision has emerged as a transformative force in various domains, including safety science and management in construction. The integration of computer vision techniques into construction safety practices has been driven by the need for real-time monitoring, risk assessment, and automated decision-making. As the construction industry becomes increasingly complex, the reliance on visual data for safety management has grown, necessitating the development of robust and efficient vision-based systems. Over the past few years, significant progress has been made in addressing the unique challenges associated with applying computer vision to safety-critical environments. One of the central challenges is the scarcity of labeled data, which has led to the exploration of self-supervised learning approaches that can extract meaningful features without extensive manual annotation [1]. This has proven particularly useful in scenarios where collecting and labeling data is costly or impractical, such as in large-scale infrastructure monitoring. Additionally, the use of synthetic data has gained traction as a viable alternative to overcome data limitations, particularly in applications like driver monitoring and safety certification, where real-world data may be limited or ethically constrained [2]. These data-centric strategies have enabled the development of models that generalize well across different environments and conditions. At the same time, there has been a growing emphasis on designing lightweight and efficient models that can operate in real-time and on mobile platforms, which is essential for on-site safety monitoring and inspection tasks [3]. Architectural innovations such as the integration of transformers, feature pyramid networks, and asymmetric twin networks have further enhanced model performance while maintaining computational efficiency. These advancements have been applied to a wide range of safety-related tasks, including damage assessment, crack detection, and hazard identification, demonstrating the versatility of computer vision in construction safety. Moreover, the ability to adapt models across different domains—such as from remote sensing to in-cabin monitoring—has been a key focus, ensuring that vision systems can operate effectively under varying conditions and sensor modalities. Despite these advances, challenges remain, particularly in ensuring the reliability and robustness of vision systems in dynamic and unpredictable construction environments. The application of neural barrier functions and error simulation techniques has been explored to enhance the safety and reliability of vision-based systems in stochastic settings [4]. Overall, the evolution of computer vision in safety science and management in construction reflects a growing synergy between algorithmic innovation, data strategy, and domain-specific requirements, paving the way for more intelligent and autonomous safety solutions.",
+      "stats": {
+        "char_count": 2967,
+        "word_count": 401,
+        "sentence_count": 15,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Current State of the Art",
+      "level": 2,
+      "content": "The current state of the art in computer vision for safety science and management in construction is marked by rapid advancements driven by data-driven methodologies, real-time processing capabilities, and the integration of hybrid models that balance performance with efficiency. Recent research has demonstrated that deep learning and machine learning techniques are increasingly being applied to address safety-critical challenges in construction environments, ranging from real-time monitoring and hazard detection to automated inspection and risk assessment. These developments are not only enhancing the accuracy and reliability of safety systems but also enabling more efficient and scalable solutions for large-scale infrastructure projects. One of the most prominent trends in this field is the emphasis on high-quality, annotated datasets as the foundation for training and evaluating computer vision models. This is evident in the success of challenges such as the Data Science for Pavements Challenge [11], which highlighted the importance of data cleaning, labeling, and augmentation in achieving high model performance. Similarly, medical imaging applications like AI-MIA [10] have demonstrated the value of large, well-structured datasets in enabling accurate diagnosis and severity analysis. In the context of construction safety, the availability of such datasets is crucial for training models that can detect structural defects, monitor worker behavior, and identify potential hazards in real time. Another key development is the increasing focus on real-time processing and computational efficiency. This is particularly important in safety-critical applications where delays can lead to serious consequences. Research such as the learning-based traversability analysis [7] has shown that lightweight models, such as those based on support vector machines (SVM) with hybrid geometric and appearance features, can achieve high accuracy while running efficiently on standard hardware. This approach contrasts with more complex models that require specialized hardware or significant computational resources, making it more accessible for deployment in resource-constrained environments. Hybrid models that combine classical and emerging computational paradigms are also gaining traction. For instance, the use of quantum neural networks (QNNs) [8] has shown promise in improving prediction accuracy with reduced training data, which could be particularly beneficial in scenarios where data collection is challenging or expensive. Similarly, the integration of multi-task learning in computer vision systems, as seen in surround-view camera applications for automated driving [12], has demonstrated the potential for more robust and versatile perception systems that can handle multiple tasks simultaneously. The application of computer vision in construction safety is also being shaped by the need for automation and continuous monitoring. Techniques such as automated visual inspection of infrastructure components, as seen in the analysis of silicon detectors in the CMS experiment [5], highlight the potential for computer vision to reduce human error and improve the consistency of inspections. In construction sites, similar approaches can be used to monitor equipment, track worker movements, and detect unsafe conditions, thereby contributing to a safer working environment. Moreover, the field is witnessing a growing interest in domain generalization and model robustness. Papers such as CAISAR [6] and the work on sparse mixture-of-experts models [9] have explored ways to make computer vision models more adaptable to different environments and data distributions. This is especially relevant in construction, where conditions can vary significantly across sites, and models must be able to perform reliably under diverse and unpredictable circumstances. Despite these advancements, several challenges remain. The reliance on high-quality annotated data continues to be a bottleneck, particularly in niche applications where labeled datasets are scarce. Additionally, the trade-off between model complexity and computational efficiency remains a critical consideration, especially for real-time applications. Furthermore, ensuring the interpretability and transparency of AI-driven safety systems is essential for gaining trust and acceptance among stakeholders in the construction industry. In conclusion, the current state of computer vision for safety science and management in construction reflects a dynamic and rapidly evolving field. While significant progress has been made in leveraging deep learning, hybrid models, and real-time processing to enhance safety and efficiency, there remains a need for continued innovation in data curation, model generalization, and practical deployment. As the construction industry increasingly adopts AI-driven solutions, the integration of computer vision into safety management systems will play a pivotal role in shaping the future of construction practices.",
+      "stats": {
+        "char_count": 5036,
+        "word_count": 688,
+        "sentence_count": 27,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Future Directions",
+      "level": 2,
+      "content": "The future of computer vision in safety science and management within the construction industry is poised to evolve through a convergence of advanced machine learning techniques, robust safety frameworks, and context-aware system designs. As the field progresses, several key directions emerge that will shape the development and deployment of vision-based systems in safety-critical construction environments. One of the most pressing areas of research is the integration of safety guarantees into vision-based decision-making processes. Recent studies have demonstrated the potential of combining reinforcement learning with barrier functions and sum-of-squares programming to ensure safety in control systems [14]. Such approaches could be extended to construction site monitoring, where real-time vision systems must make decisions that directly impact human safety and equipment integrity. Future work should focus on adapting these methods to the dynamic and often unstructured environments of construction sites, where uncertainty is a constant challenge. Another critical area of development involves the handling of runtime uncertainty in data-driven models, which is essential for reliable safety monitoring. Architectural patterns that incorporate uncertainty estimation and context-aware adaptation have shown promise in safety-critical perception tasks [16]. These strategies can be applied to computer vision systems that monitor worker behavior, detect hazardous conditions, or assess structural integrity. By embedding uncertainty-aware mechanisms, such systems can provide more trustworthy outputs, reducing the risk of false positives or negatives that could lead to unsafe decisions. Future research should explore how these architectural patterns can be scaled and adapted to the unique challenges of construction environments, including varying lighting conditions, occlusions, and dynamic scenes. The vulnerability of deep learning models, particularly Vision Transformers, to backdoor attacks highlights the need for robust and interpretable vision systems [16]. In safety-critical applications, model transparency and resilience to adversarial manipulation are paramount. Future directions should include the development of secure vision systems that are resistant to such attacks, as well as the integration of interpretability tools that allow operators to understand and trust the decisions made by these systems. This is especially important in construction, where the consequences of model failure can be severe. Furthermore, the fusion of traditional modeling techniques with data-driven approaches offers a promising path toward more reliable and interpretable vision systems. Techniques such as physics-informed neural networks and surrogate modeling with SVD-enabled training have demonstrated effectiveness in capturing complex behaviors under uncertainty [13]. These methods can be adapted to construction safety applications, such as predicting structural failures or monitoring environmental conditions. By combining domain knowledge with machine learning, future systems can achieve higher accuracy and reliability, ensuring that vision-based safety solutions are both effective and trustworthy. Context-aware adaptation, a recurring theme in the literature, suggests that future vision systems should not only perceive their environment but also dynamically adjust their behavior based on the specific risks and conditions they encounter. This could involve real-time reconfiguration of perception modules, adaptive alarm thresholds, or context-sensitive decision-making frameworks. Such capabilities would enable vision systems to operate more effectively in the unpredictable and evolving conditions of construction sites. In addition, the integration of prior knowledge into vision systems, such as through Gaussian processes or physics-informed models, can enhance their ability to generalize and make reliable predictions in data-scarce scenarios [17]. This is particularly relevant for safety applications where data collection may be limited or expensive. Future work should explore how such knowledge-based approaches can be seamlessly integrated with deep learning, improving the robustness and adaptability of vision systems in construction safety contexts. Finally, the increasing use of autonomous systems in construction, such as UAVs and robotic platforms, presents new opportunities and challenges for computer vision. These systems must not only perceive their environment but also make safe and reliable decisions in real-time. Research into trajectory-guided control prediction, safe output feedback motion planning, and embodied vision navigation offers valuable insights that can be applied to construction automation [15]. Future developments should focus on ensuring that these autonomous systems are equipped with vision systems that are both capable and safe, capable of operating in complex and unstructured environments without compromising human safety. In summary, the future of computer vision in construction safety science and management will be defined by the integration of safety guarantees, uncertainty handling, robustness, interpretability, and context-aware adaptation. By drawing on advances in AI safety, control theory, and domain-specific modeling, researchers can develop vision systems that are not only powerful but also reliable and trustworthy in the demanding environments of construction sites.",
+      "stats": {
+        "char_count": 5482,
+        "word_count": 730,
+        "sentence_count": 31,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Conclusion",
+      "level": 2,
+      "content": "The integration of computer vision into safety science and management within the construction industry has demonstrated significant potential to enhance safety, efficiency, and decision-making processes. This survey paper has explored the evolution, current state, and future prospects of computer vision applications in construction safety, highlighting its transformative role in addressing longstanding challenges associated with manual inspection and reactive safety measures. Key findings indicate that deep learning and machine learning techniques have enabled real-time monitoring, hazard detection, and risk assessment, significantly improving the accuracy and responsiveness of safety management systems. The paper has also underscored the importance of hybrid models that balance computational efficiency with performance, as well as the growing emphasis on context-aware and adaptive vision systems. The current state of the field reflects a rapid maturation of computer vision technologies, with a strong focus on data-driven methodologies, real-time processing, and the integration of multimodal data sources. While significant progress has been made, challenges such as model generalizability, robustness in dynamic and unstructured environments, and the integration of safety guarantees remain critical areas of concern. Furthermore, the deployment of these systems in real-world construction sites requires careful consideration of ethical, legal, and operational constraints. Looking ahead, future research should prioritize the development of more resilient and interpretable models, the incorporation of safety guarantees into vision-based systems, and the creation of standardized benchmarks and evaluation frameworks. Additionally, the fusion of computer vision with other emerging technologies, such as the Internet of Things (IoT) and edge computing, presents promising avenues for enhancing the scalability and effectiveness of safety management solutions. Open challenges include addressing data scarcity, improving model interpretability, and ensuring seamless integration with existing safety protocols and workflows. In conclusion, computer vision is poised to play a central role in the future of construction safety, offering innovative solutions that can mitigate risks, improve compliance, and foster safer working environments. Continued interdisciplinary collaboration, investment in research, and a focus on practical deployment will be essential in realizing the full potential of this technology. As the construction industry continues to evolve, the integration of intelligent vision systems will be a key driver in shaping a safer and more efficient future.",
+      "stats": {
+        "char_count": 2696,
+        "word_count": 357,
+        "sentence_count": 13,
+        "line_count": 1
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "1. Self-supervised Learning for Building Damage Assessment from Large-Scale xBD Satellite Imagery Benchmark Datasets",
+      "number": null,
+      "title": "self-supervised learning for building damage assessment from large-scale xbd satellite imagery benchmark datasets"
+    },
+    {
+      "text": "2. Hands-Up: Leveraging Synthetic Data for Hands-On-Wheel Detection",
+      "number": null,
+      "title": "hands-up: leveraging synthetic data for hands-on-wheel detection"
+    },
+    {
+      "text": "3. YOLOv5s-GTB: light-weighted and improved YOLOv5s for bridge crack detection",
+      "number": null,
+      "title": "yolov5s-gtb: light-weighted and improved yolov5s for bridge crack detection"
+    },
+    {
+      "text": "4. Three-dimensional microstructure generation using generative adversarial neural networks in the context of continuum micromechanics",
+      "number": null,
+      "title": "three-dimensional microstructure generation using generative adversarial neural networks in the context of continuum micromechanics"
+    },
+    {
+      "text": "5. Automated visual inspection of silicon detectors in CMS experiment",
+      "number": null,
+      "title": "automated visual inspection of silicon detectors in cms experiment"
+    },
+    {
+      "text": "6. {CAISAR:",
+      "number": null,
+      "title": "{caisar"
+    },
+    {
+      "text": "7. Pushing the Limits of Learning-Based Traversability Analysis for Autonomous Driving on {CPU",
+      "number": null,
+      "title": "pushing the limits of learning-based traversability analysis for autonomous driving on {cpu"
+    },
+    {
+      "text": "8. Predict better with less training data using a QNN",
+      "number": null,
+      "title": "predict better with less training data using a qnn"
+    },
+    {
+      "text": "9. Sparse Mixture-of-Experts are Domain Generalizable Learners",
+      "number": null,
+      "title": "sparse mixture-of-experts are domain generalizable learners"
+    },
+    {
+      "text": "10. Optimization for Infrastructure Cyber-Physical Systems",
+      "number": null,
+      "title": "optimization for infrastructure cyber-physical systems"
+    },
+    {
+      "text": "11. The 1st Data Science for Pavements Challenge",
+      "number": null,
+      "title": "the 1st data science for pavements challenge"
+    },
+    {
+      "text": "12. Surround-View Cameras based Holistic Visual Perception for Automated Driving",
+      "number": null,
+      "title": "surround-view cameras based holistic visual perception for automated driving"
+    },
+    {
+      "text": "13. Consistent attack: Universal adversarial perturbation on embodied vision navigation",
+      "number": null,
+      "title": "consistent attack: universal adversarial perturbation on embodied vision navigation"
+    },
+    {
+      "text": "14. Barrier Certified Safety Learning Control: When Sum-of-Square Programming Meets Reinforcement Learning",
+      "number": null,
+      "title": "barrier certified safety learning control: when sum-of-square programming meets reinforcement learning"
+    },
+    {
+      "text": "15. Trajectory-guided Control Prediction for End-to-end Autonomous Driving: {A",
+      "number": null,
+      "title": "trajectory-guided control prediction for end-to-end autonomous driving: {a"
+    },
+    {
+      "text": "16. Backdoor Attacks on Vision Transformers",
+      "number": null,
+      "title": "backdoor attacks on vision transformers"
+    },
+    {
+      "text": "17. On Integrating Prior Knowledge into Gaussian Processes for Prognostic Health Monitoring",
+      "number": null,
+      "title": "on integrating prior knowledge into gaussian processes for prognostic health monitoring"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\AutoSurvey2\\Computer Science\\Computer_Vision_for_Safety_Science_and_Management_in_Construction_survey_split.json",
+    "processed_date": "2025-12-30T20:33:34.961996",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Brightening up Biology- Advances in Luciferase Systems for in Vivo Imaging."
+    ],
+    [
+      1,
+      "Brightening up Biology: A Systematic Review of Advances in Luciferase Systems for In Vivo Imaging"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 The Luciferase-Luciferin Reaction"
+    ],
+    [
+      3,
+      "2.2 Bioluminescence Resonance Energy Transfer (BRET)"
+    ],
+    [
+      3,
+      "2.3 Optical Windows"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Engineered Luciferase-Luciferin Pairs"
+    ],
+    [
+      3,
+      "4.2 BRET-Based Systems: NanoLuc and Antares"
+    ],
+    [
+      3,
+      "4.3 NIR-II Bioluminescence Imaging"
+    ],
+    [
+      3,
+      "4.4 Deep Learning in Bioluminescence Tomography (BLT)"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Neuroscience: BL-OG and BLUsH"
+    ],
+    [
+      3,
+      "5.2 Oncology and Metastasis Tracking"
+    ],
+    [
+      3,
+      "5.3 Infectious Diseases"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "9. References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Brightening up Biology- Advances in Luciferase Systems for in Vivo Imaging.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 07:25:40*\n*Progress: [25/25]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Brightening_up_Biology-_Advances_in_Luciferase_Systems_for_i_20251226_072540.md*\n---"
+    },
+    {
+      "heading": "Brightening up Biology: A Systematic Review of Advances in Luciferase Systems for In Vivo Imaging",
+      "level": 1,
+      "content": "**Key Points**\n*   **Evolution of Bioluminescence:** The field has transitioned from native Firefly Luciferase (FLuc) systems to highly engineered enzyme-substrate pairs (e.g., AkaLuc/AkaLumine, NanoLuc) designed to overcome tissue attenuation and improve sensitivity.\n*   **Deep Tissue Breakthroughs:** Recent innovations in 2024 and 2025, such as the synthetic luciferin **AkaSuke** and the **BLUsH** (Bioluminescence Using Hemodynamics) technique, have revolutionized the ability to image deep brain structures and metastases, bridging the gap between optical imaging and MRI.\n*   **Computational Advances:** The integration of deep learning, specifically Self-supervised Hybrid Neural Networks (SHyNN), is solving the ill-posed inverse problem of Bioluminescence Tomography (BLT), enabling accurate 3D reconstruction of light sources.\n*   **Multimodal and Functional Applications:** Beyond simple tracking, systems like **Bioluminescent Optogenetics (BL-OG)** allow for the non-invasive control of neuronal activity, while BRET-based sensors (e.g., Antares) allow for the monitoring of specific cellular events with high signal-to-noise ratios.\n\n---"
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "Bioluminescence imaging (BLI) has established itself as a cornerstone of preclinical biomedical research, offering a non-invasive, highly sensitive modality for longitudinal monitoring of biological processes in living subjects. Unlike fluorescence imaging, which requires external excitation light and often suffers from high background autofluorescence, BLI relies on the enzymatic oxidation of a substrate (luciferin) by a luciferase enzyme to generate photons [cite: 1, 2]. This \"glow-in-the-dark\" mechanism provides an exceptional signal-to-background ratio, making it indispensable for tracking tumor burden, infectious disease progression, and gene expression patterns [cite: 3, 4].\n\nHowever, the application of traditional BLI has historically been constrained by the optical properties of biological tissue. Hemoglobin, melanin, and water absorb visible light, while lipids and cellular structures scatter it, severely attenuating photons emitted from deep tissues [cite: 1, 5]. Consequently, the \"holy grail\" of BLI research has been to shift emission spectra into the near-infrared (NIR) window (650–900 nm) and the second near-infrared (NIR-II) window (1000–1700 nm), where tissue transparency is maximized [cite: 6, 7].\n\nThis review provides a comprehensive analysis of the recent \"brightening\" of biology through advanced luciferase systems. We examine the transition from native enzymes to engineered powerhouses like AkaLuc and NanoLuc, explore the 2024-2025 breakthroughs in synthetic substrates like AkaSuke, and discuss the integration of deep learning in tomographic reconstruction. Furthermore, we highlight novel functional applications such as Bioluminescent Optogenetics (BL-OG) and MRI-linked bioluminescence (BLUsH), which are redefining the boundaries of in vivo optical imaging."
+    },
+    {
+      "heading": "2.1 The Luciferase-Luciferin Reaction",
+      "level": 3,
+      "content": "Bioluminescence is a chemiluminescent reaction occurring within a living organism. The core components are the **luciferase** (enzyme) and the **luciferin** (small molecule substrate).\n*   **ATP-Dependent Systems:** The most common system, derived from the North American firefly (*Photinus pyralis*), requires ATP, Magnesium ($Mg^{2+}$), and Oxygen ($O_2$) to oxidize D-luciferin, producing oxyluciferin and light ($\\lambda_{max} \\approx 560$ nm) [cite: 8, 9]. This ATP dependence allows FLuc to serve as a sensor for metabolic activity but can limit signal in necrotic (low ATP) tumor cores [cite: 10].\n*   **ATP-Independent Systems:** Luciferases from marine organisms, such as *Renilla reniformis* (RLuc) and *Oplophorus gracilirostris* (NanoLuc), utilize coelenterazine or its analogs (e.g., furimazine). These reactions require only oxygen and the substrate, making them distinct from metabolic state reporters [cite: 10, 11]."
+    },
+    {
+      "heading": "2.2 Bioluminescence Resonance Energy Transfer (BRET)",
+      "level": 3,
+      "content": "BRET is a biophysical phenomenon where a bioluminescent donor transfers energy non-radiatively to a proximal fluorescent acceptor molecule [cite: 12, 13]. This mechanism is exploited to red-shift emission spectra. By tethering a blue-emitting luciferase (like NanoLuc) to a red or orange fluorescent protein, researchers can generate light that penetrates tissue more effectively than the native enzyme's emission [cite: 14, 15]."
+    },
+    {
+      "heading": "2.3 Optical Windows",
+      "level": 3,
+      "content": "*   **Visible Spectrum (400–650 nm):** Subject to high absorption by hemoglobin and scattering.\n*   **NIR-I (650–900 nm):** The \"therapeutic window\" where hemoglobin absorption drops, allowing deeper imaging [cite: 1].\n*   **NIR-II (1000–1700 nm):** Characterized by minimal scattering and autofluorescence, offering the highest spatial resolution for deep-tissue imaging [cite: 6, 7]."
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The scientific journey of luciferase systems began with the identification of the reaction components by Raphaël Dubois in the late 19th century, who coined the terms \"luciferine\" and \"luciferase\" [cite: 9, 16]. A major milestone occurred in 1985 with the cloning of the firefly luciferase (FLuc) gene, which democratized the use of bioluminescence as a genetic reporter [cite: 9].\n\n**Table 1: Key Milestones in Luciferase System Development**\n\n| Era | Milestone | Impact |\n| :--- | :--- | :--- |\n| **1887** | Dubois identifies Luciferin/Luciferase | Established biochemical basis of bioluminescence [cite: 16]. |\n| **1985** | Cloning of *Photinus pyralis* Luciferase | Enabled genetic encoding of light production [cite: 9]. |\n| **1990s** | *Renilla* Luciferase (RLuc) adoption | Introduced ATP-independent, blue-light systems [cite: 2]. |\n| **2012** | Development of **NanoLuc** | Engineered from *Oplophorus*; 150x brighter than FLuc, highly stable [cite: 8, 11]. |\n| **2018** | **AkaLuc / AkaLumine** System | Directed evolution created a pair matching NIR emission with high catalytic efficiency [cite: 17, 18]. |\n| **2024** | **BLUsH** & **AkaSuke** | MRI-detectable bioluminescence and ultra-bright synthetic NIR substrates [cite: 19, 20]. |"
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "The current landscape of in vivo imaging is defined by the pursuit of red-shifted emission, higher quantum yields, and improved substrate biodistribution."
+    },
+    {
+      "heading": "4.1 Engineered Luciferase-Luciferin Pairs",
+      "level": 3,
+      "content": "To overcome the poor tissue penetration of yellow-green light ($\\sim$560 nm) produced by native FLuc, researchers have engineered enzyme-substrate pairs that emit in the NIR.\n\n*   **AkaLuc and AkaLumine (TokeOni):**\n    Developed through the directed evolution of FLuc, **AkaLuc** is optimized to catalyze **AkaLumine-HCl** (marketed as TokeOni). This pair produces emission centered around 677 nm (NIR-I). Crucially, AkaLumine possesses superior blood-brain barrier (BBB) permeability compared to D-luciferin. Studies have shown AkaLuc/AkaLumine to be 100- to 1000-fold brighter in vivo than the FLuc/D-luciferin system, enabling the detection of single cells in the lungs and deep brain structures [cite: 5, 17, 21, 22].\n\n*   **AkaSuke (2025 Breakthrough):**\n    In early 2025, Saito-Moriya et al. introduced **AkaSuke**, a synthetic firefly luciferin analog with a thiazole ring introduced into the AkaLumine scaffold. AkaSuke generates intense NIR bioluminescence ($\\lambda_{max} = 680$ nm). When paired with a newly identified Japanese firefly luciferase variant, **DkumLuc1**, it achieves detection sensitivities comparable to or exceeding the AkaLumine/AkaLuc system. Notably, AkaSuke demonstrated a 7.7-fold higher signal from lung metastases compared to D-luciferin and allows for sensitive visualization of ectopic hematogenesis [cite: 19, 23].\n\n*   **CouLuc and Multiplexing:**\n    The **CouLuc** system (Coumarin-based luciferins) represents a shift toward orthogonal pairs for multiplexed imaging. CouLuc-1 and its evolved enzyme **Pecan** emit red light and are chemically distinct from D-luciferin. This orthogonality allows researchers to image two distinct biological events simultaneously in the same animal by sequentially injecting different substrates (e.g., D-luciferin followed by CouLuc-1) without cross-reactivity [cite: 24, 25, 26, 27].\n\n*   **Infraluciferin (iLH2):**\n    Another approach involves **infraluciferin (iLH2)**, a substrate that can produce emissions ranging from visible green to NIR depending on the specific luciferase mutant used. This single-substrate, multi-color capability simplifies dual-parameter imaging, allowing for the spectral unmixing of different cell populations [cite: 28, 29, 30]."
+    },
+    {
+      "heading": "4.2 BRET-Based Systems: NanoLuc and Antares",
+      "level": 3,
+      "content": "While FLuc variants dominate deep-tissue imaging due to red emission, **NanoLuc** (NLuc) offers superior intrinsic brightness and ATP independence. NLuc is a 19 kDa enzyme engineered from the deep-sea shrimp *Oplophorus gracilirostris*, utilizing the substrate **furimazine**. It is approximately 150-fold brighter than FLuc but emits blue light ($\\sim$460 nm), which is heavily attenuated in tissue [cite: 10, 11].\n\nTo harness NLuc's brightness for in vivo imaging, it is often incorporated into BRET systems:\n*   **Antares:** This construct fuses NLuc with two copies of **CyOFP1**, a cyan-excitable orange fluorescent protein. The BRET efficiency is high, effectively converting NLuc's blue energy into orange-red emission ($\\sim$584 nm). Antares has demonstrated significantly higher signal-to-background ratios in deep tissues compared to FLuc, primarily because the substrate furimazine has lower background autoluminescence than D-luciferin [cite: 14, 15]."
+    },
+    {
+      "heading": "4.3 NIR-II Bioluminescence Imaging",
+      "level": 3,
+      "content": "Imaging in the NIR-II window (1000–1700 nm) significantly reduces photon scattering. Recent developments utilize BRET between luciferases and NIR-II emitting nanoparticles, such as **Ag2S quantum dots** (QDs). These systems allow for high-resolution imaging of vasculature and stem cells with micron-level spatial resolution, surpassing traditional NIR-I BLI [cite: 6, 7, 31]."
+    },
+    {
+      "heading": "4.4 Deep Learning in Bioluminescence Tomography (BLT)",
+      "level": 3,
+      "content": "Bioluminescence Tomography (BLT) aims to reconstruct the 3D distribution of light sources from 2D surface measurements. This is an \"ill-posed\" inverse problem, meaning multiple internal source configurations could theoretically produce the same surface image.\n\n*   **SHyNN (Self-supervised Hybrid Neural Network):** Introduced in late 2024, SHyNN integrates conventional model-based reconstruction (diffusion approximation) with machine learning. Unlike purely data-driven models that require massive training datasets, SHyNN uses a self-supervised approach to adapt to specific in vivo scenarios, significantly improving tumor localization and volume estimation under high-noise conditions [cite: 32, 33].\n*   **1DCNN:** Other approaches utilize one-dimensional convolutional neural networks to map surface photon flux density directly to internal source distribution, bypassing iterative inverse solvers [cite: 34]."
+    },
+    {
+      "heading": "5.1 Neuroscience: BL-OG and BLUsH",
+      "level": 3,
+      "content": "The application of luciferase systems in neuroscience has expanded from observation to control and novel detection modalities.\n\n*   **Bioluminescent Optogenetics (BL-OG):**\n    BL-OG utilizes **luminopsins** (LMOs), fusion proteins of a luciferase and a light-sensitive opsin (e.g., Channelrhodopsin). When the luciferin is administered, the luciferase emits light that activates the opsin, modulating neuronal activity. This allows for \"chemogenetic\" control using optogenetic mechanisms without implanted fiber optics. Recent 2024 studies have demonstrated non-invasive, dose-dependent activation of brain circuits using BL-OG, offering a safer alternative to deep brain stimulation [cite: 35, 36, 37, 38].\n\n*   **BLUsH (Bioluminescence Using Hemodynamics):**\n    A groundbreaking 2024 study by Ohlendorf et al. (MIT) introduced **BLUsH**. This technique solves the optical depth limit by converting the optical signal into a hemodynamic one detectable by **MRI**. Vascular cells are engineered to express a photoactivated adenylate cyclase (bPAC). When proximal bioluminescent cells emit light, bPAC triggers vasodilation. This local blood flow change is detected via T2*-weighted MRI, allowing for whole-brain, deep-tissue localization of bioluminescent sources with MRI resolution [cite: 20, 39, 40, 41]."
+    },
+    {
+      "heading": "5.2 Oncology and Metastasis Tracking",
+      "level": 3,
+      "content": "The enhanced sensitivity of systems like AkaLuc/AkaLumine and AkaSuke has redefined cancer research.\n*   **Case Study:** In glioma models, AkaLuc allowed for the detection of as few as 5,000 cells in the brain, tracking tumor expansion from very early stages where FLuc signals were undetectable [cite: 17, 18].\n*   **Metastasis:** The AkaSuke substrate has shown particular efficacy in visualizing lung metastases and ectopic hematogenesis, providing 7-8 times higher sensitivity than D-luciferin, which is critical for evaluating early-stage metastatic spread and therapeutic response [cite: 19]."
+    },
+    {
+      "heading": "5.3 Infectious Diseases",
+      "level": 3,
+      "content": "During the COVID-19 pandemic, BLI proved vital. The **AkaLuc** system was successfully accommodated into the SARS-CoV-2 genome. Because AkaLumine penetrates tissues effectively, researchers could visualize viral replication in the lungs of live mice with high sensitivity, facilitating the rapid testing of antiviral therapeutics [cite: 22]."
+    },
+    {
+      "heading": "6. Challenges and Open Problems",
+      "level": 2,
+      "content": "Despite these advances, significant hurdles remain:\n\n1.  **The Inverse Problem in BLT:** While deep learning (e.g., SHyNN) has improved 3D reconstruction, BLT remains computationally expensive and sensitive to noise. Accurate reconstruction requires precise anatomical priors (CT/MRI), complicating the workflow [cite: 32, 42].\n2.  **Substrate Delivery and Cost:** Synthetic substrates like AkaLumine and furimazine are significantly more expensive than D-luciferin. Furthermore, while AkaLumine crosses the BBB well, other substrates (like coelenterazine) have poor solubility and biodistribution, limiting their use in the brain [cite: 5, 22].\n3.  **ATP Dependence vs. Independence:** FLuc's ATP dependence is a double-edged sword; it indicates cell viability but can lead to false negatives in hypoxic/necrotic tumor regions. Conversely, NanoLuc (ATP-independent) may remain active in metabolically compromised cells, potentially overestimating viable cell counts in therapeutic studies [cite: 10, 43].\n4.  **Spectral Overlap:** In multiplexed imaging, separating signals from multiple luciferases (e.g., green FLuc vs. red FLuc) requires spectral unmixing algorithms that can be prone to artifacts if the emission peaks are not sufficiently distinct [cite: 28, 29]."
+    },
+    {
+      "heading": "7. Future Research Directions",
+      "level": 2,
+      "content": "*   **Orthogonal \"Color\" Palettes:** The development of more distinct luciferase-luciferin pairs (like the CouLuc series) will enable routine \"hyperspectral\" bioluminescence, allowing the simultaneous tracking of tumor cells, immune cells (e.g., CAR-T), and therapeutic agents in a single animal [cite: 25, 26].\n*   **Integration with MRI (BLUsH 2.0):** The BLUsH technique opens a new frontier. Future work will likely focus on improving the kinetics of the hemodynamic response and expanding the toolbox to other photo-responsive vascular effectors to increase temporal resolution [cite: 20, 41].\n*   **Clinical Translation of NIR-II:** While currently limited to preclinical models due to the toxicity of some QDs, developing biocompatible, biodegradable NIR-II bioluminescent probes could pave the way for intraoperative imaging in humans [cite: 7, 44].\n*   **Standardization of AI in Imaging:** As AI models like SHyNN mature, creating standardized, open-source datasets for training BLT algorithms will be crucial for widespread adoption [cite: 32]."
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "The field of luciferase systems for in vivo imaging is undergoing a renaissance. We have moved far beyond the dim, surface-limited signals of early firefly luciferase applications. The advent of **AkaLuc/AkaSuke** has conquered the depth barrier in small animals, while **BLUsH** has ingeniously bridged the gap to MRI, offering unlimited depth penetration. Simultaneously, **BL-OG** has transformed luciferase from a passive reporter into an active control mechanism for neural circuits.\n\nThese advances, coupled with the power of deep learning for 3D reconstruction, are \"brightening up biology\" in the truest sense. They allow researchers to visualize and quantify the intricate dance of cellular processes—metastasis, infection, and neural signaling—within the intact, living organism with unprecedented clarity and precision. As these technologies mature and converge, they promise to accelerate the pace of discovery in oncology, neuroscience, and drug development."
+    }
+  ],
+  "references": [
+    "[cite: 35] Neuroscience News. (2024). Noninvasive Light Activation Method Could Revolutionize Brain Treatment. *Neuroscience News*. [cite: 35]",
+    "[cite: 36] University of Rochester Medical Center. (2024). Rochester researchers have refined the noninvasive method of bioluminescent optogenetics to activate parts of the brain. *ScienceDaily*. [cite: 36]",
+    "[cite: 37] Shipley, F. B., et al. (2024). Feasibility of a novel combined opto- and chemogenetic tool, BioLuminescent-OptoGenetics (BL-OG), for the ChP in vivo. *PMC*. [cite: 37]",
+    "[cite: 45] Gomez-Ramirez, M., et al. (2024). Strength of Activation and Temporal Dynamics of BioLuminescent-Optogenetics. *bioRxiv*. [cite: 45]",
+    "[cite: 32] Deng, B., et al. (2024). Self-supervised hybrid neural network (SHyNN) for bioluminescence tomography. *Biomedical Optics Express*. [cite: 32, 33]",
+    "[cite: 34] Zhang, Y., et al. (2021). Deep-learning optical reconstruction method based on one-dimensional convolutional neural networks. *PMC*. [cite: 34]",
+    "[cite: 39] Analytical Science. (2024). Illuminating Deep Brain Structures: MIT engineers devise innovative method to detect bioluminescent signals. [cite: 39]",
+    "[cite: 1] Tung, C. H., et al. (2021). Advances in Luciferase Systems for in Vivo Imaging. *ACS Chemical Biology*. [cite: 1, 5]",
+    "[cite: 2] Iwano, S., et al. (2020). Recent Advances in Bioluminescence Systems for In Vivo Imaging. *International Journal of Molecular Sciences*. [cite: 2]",
+    "[cite: 5] Prescher, J. A., et al. (2021). Brightening up Biology: Advances in Luciferase Systems for in Vivo Imaging. *ACS Chemical Biology*. [cite: 5, 46]",
+    "[cite: 6] Huang, P., et al. (2020). NIR-II fluorescence/dual bioluminescence multiplexed imaging. *ResearchGate*. [cite: 6]",
+    "[cite: 7] Li, C., et al. (2021). Recent Progress in Near-Infrared II Fluorescence Imaging. *Frontiers in Chemistry*. [cite: 7]",
+    "[cite: 24] Bagchi, D. (2021). A new class of bioluminescent substrate-enzyme pair for deep tissue multi-colour imaging. *RSC Blogs*. [cite: 24]",
+    "[cite: 21] Tocris Bioscience. (n.d.). TokeOni: Deep Tissue Bioluminescent Imaging. [cite: 21]",
+    "[cite: 19] Saito-Moriya, R., et al. (2025). A bright synthetic near-infrared luciferin, AkaSuke, enhances the capabilities of deep-tissue bioluminescence imaging. *bioRxiv*. [cite: 19, 23]",
+    "[cite: 25] Love, A. C., et al. (2023). Coumarin Luciferins and Mutant Luciferases for Robust Multi-Component Bioluminescence Imaging. *JACS*. [cite: 25, 26]",
+    "[cite: 27] Prescher, J. A., et al. (2021). Photon output of CouLuc-1-NMe2 with an engineered luciferase. *ResearchGate*. [cite: 27]",
+    "[cite: 19] Saito-Moriya, R., et al. (2025). Characterization of AkaSuke in living cells. *bioRxiv*. [cite: 19]",
+    "[cite: 42] CBO Algorithm. (2024). Consensus-based optimization for bioluminescence tomography. *arXiv*. [cite: 42]",
+    "[cite: 20] Ohlendorf, R., et al. (2024). Imaging bioluminescence by detecting localized haemodynamic contrast from photosensitized vasculature. *Nature Biomedical Engineering*. [cite: 20]",
+    "[cite: 40] Lab Manager. (2024). Engineers Use MRI to Detect Light Deep in the Brain. [cite: 40]",
+    "[cite: 38] Brown University. (n.d.). BioLuminescent OptoGenetics (BL-OG). [cite: 38]",
+    "[cite: 32] Deng, B. (2024). Self-supervised Hybrid Neural Network (SHyNN). *Optica*. [cite: 32]",
+    "[cite: 23] Saito-Moriya, R., et al. (2025). AkaSuke synthetic firefly luciferin. *bioRxiv*. [cite: 23]",
+    "[cite: 20] Ohlendorf, R. (2024). BLUsH: Bioluminescence Imaging Using Hemodynamics. *PubMed*. [cite: 20]",
+    "[cite: 41] Ohlendorf, R., et al. (2024). Abstract: Bioluminescent probes detected with MRI. *PubMed*. [cite: 41]",
+    "[cite: 22] Iwano, S., et al. (2024). AkaLuc/AkaLumine for SARS-CoV-2 imaging. *PMC*. [cite: 22]",
+    "[cite: 17] Kuchimaru, T., et al. (2020). Akaluc bioluminescence offers superior sensitivity to track in vivo glioma expansion. *PMC*. [cite: 17, 18]",
+    "[cite: 10] BenchChem. (2025). A Head-to-Head Battle: NanoLuc vs Firefly. [cite: 10]",
+    "[cite: 11] Promega. (n.d.). NanoLuc Luciferase Technology. [cite: 11]",
+    "[cite: 8] England, C. G., et al. (2016). NanoLuc: A Small Luciferase is Brightening Up the Field of Bioluminescence. *PMC*. [cite: 8]",
+    "[cite: 28] Jathoul, A. P., et al. (2019). Near-infrared dual bioluminescence imaging using infraluciferin. *eLife*. [cite: 28, 29]",
+    "[cite: 30] Stowe, C. L., et al. (2022). Infraluciferin (iLH2) for dual color imaging. *Frontiers in Bioengineering and Biotechnology*. [cite: 30]",
+    "[cite: 3] InnoSer. (2024). The Application of Bioluminescence Imaging in Preclinical Oncology Research. [cite: 3]",
+    "[cite: 4] Alsawaftah, N., et al. (2021). Bioluminescence Imaging Applications in Cancer: A Comprehensive Review. *IEEE Reviews in Biomedical Engineering*. [cite: 4]",
+    "[cite: 14] Chu, J., et al. (2016). A bright cyan-excitable orange fluorescent protein facilitates dual-emission microscopy and enhances bioluminescence imaging in vivo. *Nature Biotechnology*. [cite: 14]",
+    "[cite: 15] Berglund, K., et al. (2021). Antares BRET system mechanism. *PMC*. [cite: 15]",
+    "[cite: 12] Xu, Y., et al. (1999). A bioluminescence resonance energy transfer (BRET) system. *PNAS*. [cite: 12]",
+    "[cite: 13] Berthold Technologies. (n.d.). BRET Principle. [cite: 13]",
+    "[cite: 16] GoldBio. (n.d.). The History of Luciferin and Luciferase Discovery. [cite: 16]",
+    "[cite: 9] The Scientist. (2024). Luciferase: A Powerful Bioluminescent Research Tool. [cite: 9]",
+    "[cite: 47] iBiology. (2015). Hastings on the evolution of bioluminescence. [cite: 47]"
+  ]
+}

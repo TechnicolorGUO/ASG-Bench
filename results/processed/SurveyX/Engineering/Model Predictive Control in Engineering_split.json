@@ -1,0 +1,538 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of Advanced Process Control and Model Predictive Control Applications in Engineering"
+    ],
+    [
+      1,
+      "Abstract"
+    ],
+    [
+      1,
+      "1 Introduction"
+    ],
+    [
+      1,
+      "1.1 Significance of APC and MPC in Industrial Automation"
+    ],
+    [
+      1,
+      "1.2 Objectives and Scope of the Survey"
+    ],
+    [
+      1,
+      "1.3 Key Contributions"
+    ],
+    [
+      1,
+      "1.4 Structure of the Survey"
+    ],
+    [
+      1,
+      "2 Background and Core Concepts"
+    ],
+    [
+      1,
+      "2.1 Theoretical Underpinnings of APC and MPC"
+    ],
+    [
+      1,
+      "2.2 Historical Development and Evolution"
+    ],
+    [
+      1,
+      "2.3 Core Principles of Predictive Modeling"
+    ],
+    [
+      1,
+      "2.4 Real-Time Optimization and Feedback Mechanisms"
+    ],
+    [
+      1,
+      "2.5 APC vs. Traditional Control Methods"
+    ],
+    [
+      1,
+      "3 Applications of MPC in Engineering Systems"
+    ],
+    [
+      1,
+      "3.1 Industrial Case Studies: Wastewater Treatment and Surge Tank Control"
+    ],
+    [
+      1,
+      "3.2 Advanced Manufacturing and Superconducting Qubit Fabrication"
+    ],
+    [
+      1,
+      "3.3 Real-Time Control and Fault Detection in Industrial Processes"
+    ],
+    [
+      1,
+      "4 Predictive Modeling and Optimization Techniques"
+    ],
+    [
+      1,
+      "4.1 Data-Driven vs. Model-Based Approaches"
+    ],
+    [
+      1,
+      "4.4 Machine Learning Integration and Advanced Techniques"
+    ],
+    [
+      1,
+      "5 Challenges and Future Directions"
+    ],
+    [
+      1,
+      "5.1 Computational and Model Limitations"
+    ],
+    [
+      1,
+      "5.2 Data and Robustness Challenges"
+    ],
+    [
+      1,
+      "5.3 Future Research Directions"
+    ],
+    [
+      1,
+      "6 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ],
+    [
+      1,
+      "Disclaimer:"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of Advanced Process Control and Model Predictive Control Applications in Engineering",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 1,
+      "content": "This survey paper comprehensively examines the state-of-the-art in Advanced Process Control (APC) and Model Predictive Control (MPC), highlighting their transformative role in industrial automation through predictive modeling, real-time optimization, and adaptive feedback mechanisms. We systematically analyze theoretical foundations, including hybrid modeling approaches that integrate physicsbased and data-driven techniques, and evaluate their applications across diverse sectors such as chemical processing, cryogenic systems, and biopharmaceutical manufacturing. Key contributions include the synthesis of dynamic controller selection frameworks, operator-integrated predictive models, and open-source MPC implementations. The survey identifies persistent challenges in computational scalability, data robustness, and real-time implementation, while proposing future research directions in edge computing, adaptive sampling, and interdisciplinary collaboration. By bridging theoretical advancements with practical implementations, this work provides a critical resource for researchers and practitioners aiming to advance the frontiers of industrial process control.",
+      "stats": {
+        "char_count": 1172,
+        "word_count": 133,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Introduction",
+      "level": 1,
+      "content": "The evolution of industrial automation has been significantly influenced by the advent of Advanced Process Control (APC) and Model Predictive Control (MPC). These control methodologies have transformed traditional approaches by introducing sophisticated predictive modeling techniques, real-time optimization strategies, and adaptive feedback mechanisms. The importance of APC and MPC is underscored by their widespread adoption across various industries, including pharmaceuticals, chemicals, and energy, where they have been pivotal in enhancing operational efficiency and stabilizing complex systems. As industries strive for greater efficiency and reliability, understanding the principles and applications of APC and MPC becomes increasingly crucial. This review aims to synthesize current knowledge, highlight emerging trends, and identify future research directions in the realm of APC and MPC, thereby providing a comprehensive overview of their significance in industrial automation.",
+      "stats": {
+        "char_count": 992,
+        "word_count": 128,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1.1 Significance of APC and MPC in Industrial Automation",
+      "level": 1,
+      "content": "Advanced Process Control (APC) and Model Predictive Control (MPC) have revolutionized industrial automation by addressing the inefficiencies of traditional control methods through predictive modeling, real-time optimization, and adaptive feedback mechanisms [1]. Their adoption spans diverse sectors, from pharmaceuticals to energy-intensive processes, driven by their ability to enhance operational efficiency and stabilize complex systems. For instance, Economic Model Predictive Control (EMPC) has demonstrated significant cost reductions in smart manufacturing by dynamically optimizing control variables while adhering to process constraints [2]. Similarly, MPC has proven critical in cryogenic process control, managing high heat load dynamics to ensure operational stability [3].\n\n[Image]\nFigure 1: chapter structure\n\nThe integration of data-driven machine learning with physics-based models has further expanded the capabilities of APC and MPC, enabling adaptive control strategies with improved accuracy [4]. However, the efficacy of these methods depends on data quality and quantity, with challenges in acquisition and preprocessing posing significant barriers [5]. The incorporation of operator expertise into predictive models has also been shown to enhance human-machine collaboration, bridging the gap between theoretical frameworks and practical implementation [6]. Recent advancements include mechanistic modeling for lipid nanoparticle (LNP) formation, which addresses manufacturing inefficiencies in nucleic acid therapeutics [7], and open-source MPC frameworks that promote transparency in industrial research [8].\n\nDespite these advancements, challenges persist in computational scalability, model robustness, and adaptive sampling for spatiotemporal processes [9]. The alignment of statistical modeling with decision-making processes underscores the need for uncertainty quantification to improve operational efficiency [10]. In monoclonal antibody production, MPC optimizes switching operations to reduce downtime in batch processes [11], while sensitivity-based performance assessment aids in selecting between EMPC and tracking MPC under noise [12]. Cyber-physical systems (CPSs) further highlight the challenges in real-time APC implementation, emphasizing the need for robust software methodologies [13]. Future directions include hybrid modeling, edge computing, and interdisciplinary collaboration to overcome these limitations and advance industrial automation.\n\nThe significance of APC and MPC in contemporary industrial automation cannot be overstated. As industries become increasingly complex and data-driven, the need for robust control strategies that can adapt to changing conditions and optimize performance becomes paramount. The ongoing evolution of these methodologies promises to enhance not only operational efficiency but also the overall sustainability of industrial processes. By addressing the existing challenges and leveraging emerging technologies, APC and MPC are poised to play a pivotal role in shaping the future landscape of industrial automation.",
+      "stats": {
+        "char_count": 3102,
+        "word_count": 395,
+        "sentence_count": 17,
+        "line_count": 10
+      }
+    },
+    {
+      "heading": "1.2 Objectives and Scope of the Survey",
+      "level": 1,
+      "content": "This survey delineates the goals and boundaries of research on Advanced Process Control (APC) and Model Predictive Control (MPC), with a focus on their theoretical foundations, industrial applications, and emerging trends. The primary objective is to synthesize advancements in APC and MPC, emphasizing their role in enhancing industrial automation, process efficiency, and real-time optimization across diverse engineering systems. The scope encompasses both historical developments and contemporary innovations, including the integration of machine learning (ML) with traditional control frameworks [4].\n\nThe survey systematically examines the transition from conventional control methods to data-driven and hybrid approaches, addressing key challenges such as computational scalability, model robustness, and uncertainty quantification. It highlights sector-specific implementations, including cryogenic process control [3], smart manufacturing [2], and pharmaceutical production [11]. Special attention is given to the interplay between operator expertise and predictive modeling, as well as the practical barriers posed by data quality and preprocessing [5].\n\nThe literature covered spans mechanistic modeling for bioprocesses [7], open-source MPC frameworks [8], and adaptive sampling techniques for spatiotemporal systems [9]. Future directions, such as edge computing and interdisciplinary collaboration, are explored to identify unresolved challenges and opportunities for innovation in APC and MPC research.\n\nBy outlining the objectives and scope of this survey, a clear framework is established for understanding the advancements and applications of APC and MPC. This comprehensive approach ensures that both theoretical insights and practical implementations are thoroughly examined, providing valuable perspectives for future research in the field. The insights garnered from this survey aim to inform ongoing developments and foster collaboration among researchers and practitioners in industrial automation.",
+      "stats": {
+        "char_count": 2022,
+        "word_count": 261,
+        "sentence_count": 11,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "1.3 Key Contributions",
+      "level": 1,
+      "content": "This survey presents several novel insights and contributions to the field of Advanced Process Control (APC) and Model Predictive Control (MPC). First, it synthesizes recent advancements in dynamic controller selection, exemplified by the Industrial Automation Cloud Platform (IACP), which leverages real-time performance metrics to optimize controller choices among competing vendors [1]. The survey also highlights the integration of operator expertise into predictive modeling through contextual mixture of experts (cMoE) frameworks, bridging the gap between human intuition and data-driven control strategies [6].\n\nA critical contribution lies in the analysis of hybrid modeling approaches, particularly the fusion of deep neural networks with physics-based models to enhance nonlinear dynamics representation without predefined basis functions [14]. The survey further examines mechanistic modeling innovations, such as those applied to lipid nanoparticle (LNP) formation, which improve manufacturing efficiency in biopharmaceutical processes [7]. Open-source MPC frameworks are evaluated for their role in democratizing advanced control research, offering nonlinear control and moving horizon estimation capabilities [8].\n\nPractical contributions include optimization strategies for industrial batch processes, such as switching operations in monoclonal antibody production, where ReLU-based approaches demonstrate superior cost and efficiency outcomes [11]. The survey also identifies unresolved challenges, including computational scalability and adaptive sampling, while proposing future directions such as edge computing and interdisciplinary collaboration to advance APC and MPC applications.\n\nThe contributions outlined in this survey not only advance theoretical understanding but also provide practical insights that can be directly applied in industrial settings. By addressing both current challenges and future opportunities, the survey serves as a valuable resource for researchers and practitioners aiming to leverage APC and MPC for improved industrial automation outcomes.",
+      "stats": {
+        "char_count": 2093,
+        "word_count": 268,
+        "sentence_count": 10,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "1.4 Structure of the Survey",
+      "level": 1,
+      "content": "This survey is systematically organized into six sections to provide a comprehensive exploration of Advanced Process Control (APC) and Model Predictive Control (MPC). Section 1 introduces the significance of APC and MPC in industrial automation, outlining the survey’s objectives, key contributions, and structure. Section 2 delves into the theoretical underpinnings and historical development of APC and MPC, covering core principles such as predictive modeling, real-time optimization, and feedback mechanisms, while contrasting APC with traditional control methods.\n\nSection 3 examines practical applications of MPC across engineering systems, including industrial case studies in wastewater treatment and surge tank control, advanced manufacturing processes, and real-time fault detection. Section 4 provides a comprehensive analysis of predictive modeling and optimization techniques, focusing on the comparison between data-driven and model-based approaches. It delves into system identification methods and highlights the integration of machine learning to enhance control strategies. The discussion includes innovative concepts such as simulation-assisted machine learning, which leverages approximate simulations to create effective kernels for kernelized methods like support vector machines, particularly in scenarios where limited system details are available. Additionally, the section addresses the development of the open-source ModelPredictiveControl.jl toolkit, which simplifies the design of advanced model predictive controllers and enhances the transparency and reproducibility of control strategies. Finally, it explores the Contextual Mixture of Experts (cMoE) model, which incorporates process knowledge to improve predictive accuracy and interpretability in various industrial applications [6, 15, 8].\n\nSection 5 addresses current challenges, such as computational limitations, data robustness, and adaptive sampling, while proposing future research directions like hybrid models and edge computing. The survey concludes in Section 6 by synthesizing key findings related to the competitive landscape of advanced process control (APC) and model predictive control (MPC) as facilitated by industrial automation cloud platforms. It highlights critical open questions for future innovation, particularly in areas such as data acquisition and preparation, the integration of process knowledge into predictive modeling, and the application of machine learning techniques to enhance control strategies and process analytics. These insights aim to guide ongoing developments in improving human-machine synergy and optimizing performance in industrial processes [5, 1, 6, 4]. This structure ensures a coherent narrative, bridging theoretical foundations, practical implementations, and emerging trends in the field.The following sections are organized as shown in Figure 1.",
+      "stats": {
+        "char_count": 2888,
+        "word_count": 375,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "2.1 Theoretical Underpinnings of APC and MPC",
+      "level": 1,
+      "content": "Advanced Process Control (APC) and Model Predictive Control (MPC) are grounded in dynamic system modeling, optimization theory, and control frameworks that balance predictive accuracy with computational feasibility. These methodologies employ mathematical models, categorized into physics-based, data-driven, and hybrid approaches. Physics-based models, such as those in mechanistic modeling of lipid nanoparticle formation, utilize first-principles for biopharmaceutical manufacturing enhancements [7]. Data-driven techniques, like the Jacobian Regularized Feedforward Neural Network (JRFNN), incorporate the Frobenius norm of the Jacobian in their loss functions to enhance nonlinear system predictive stability [16]. This duality in modeling underscores ongoing efforts to integrate the strengths of both paradigms.\n\nKey advancements include integrating mechanistic models with data-driven techniques for adaptive control strategies in complex processes. Multilevel convolutional autoencoder networks predict spatiotemporal dynamics using historical data, reducing computational demands [17]. The PASST algorithm optimizes monitoring strategies for fluid processes by bridging environmental models with empirical data through adaptive sampling [9]. Real-time simulations of elastoplastic deformations, combining proper orthogonal decomposition with long short-term memory networks, illustrate the effective modeling of complex material behaviors [18]. These advancements enhance predictive capabilities and improve control system responsiveness in dynamic environments.\n\nState estimation and uncertainty quantification are crucial for robust APC implementations, ensuring adaptability to varying conditions and model inaccuracies. Nonparametric Monte Carlo techniques quantify bias and variance in predictive outputs, allowing rigorous assessments of model reliability [19]. State estimation methods are categorized by computational efficiency and accuracy, balancing nonlinearity handling and dimensionality reduction [20]. Economic Model Predictive Control (EMPC) optimizes monoclonal antibody production operations, minimizing product loss while adhering to constraints [11]. Deep reinforcement learning benchmarks, such as those simulating industrial manufacturing, demonstrate the scalability of data-driven control [21]. These theoretical advancements address model fidelity and computational efficiency, establishing adaptive, robust control strategies in complex systems.",
+      "stats": {
+        "char_count": 2482,
+        "word_count": 292,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "2.2 Historical Development and Evolution",
+      "level": 1,
+      "content": "The evolution of Advanced Process Control (APC) and Model Predictive Control (MPC) marks a shift from heuristic-based methods to data-driven and optimization-centric approaches, propelled by computational advancements and theoretical developments. Early applications of Economic Model Predictive Control (EMPC) in processes like alkylation and wastewater treatment showcased MPC’s potential to optimize economic objectives within operational constraints [2]. This transition from traditional Proportional-Integral-Derivative (PID) controllers to dynamic optimization strategies capable of handling multivariable systems with complex constraints highlights the sophistication of control methodologies and the importance of economic considerations in process control.\n\nThe evolution of APC and MPC has been intertwined with nonlinear dynamics representation advancements, notably through Koopman operator theory. Finite-dimensional approximations of the Koopman operator enable nonlinear system behavior prediction using linear techniques, addressing stability and accuracy challenges [22]. The integration of machine learning into chemical processes, such as polyolefin manufacturing, underscores the role of data-driven techniques in overcoming firstprinciples model limitations [4]. Advances in state estimation methodologies have become crucial for handling nonlinear stochastic systems [20]. These developments enrich the theoretical landscape of predictive control.\n\nRecent advancements emphasize mechanistic modeling integration with adaptive sampling techniques, notably through the PASST algorithm. This approach optimizes spatiotemporal fluid processes by using predictive models, like Knowledge-based Neural Ordinary Differential Equations, for autonomous vehicle-guided fluid data sampling [9, 6]. Open-source MPC frameworks democratize access to advanced control algorithms, fostering industrial research innovation. Future trajectories focus on hybrid modeling paradigms and edge computing to address computational scalability and real-time decision-making challenges. The historical trajectory of APC and MPC underscores their transformative impact on industrial automation, reflecting a continuous evolution from empirical implementations to contemporary data-driven, theoretically grounded approaches.",
+      "stats": {
+        "char_count": 2316,
+        "word_count": 273,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "2.3 Core Principles of Predictive Modeling",
+      "level": 1,
+      "content": "Predictive modeling in Advanced Process Control (APC) and Model Predictive Control (MPC) is governed by principles ensuring accurate forecasting, robust control, and efficient optimization. Central to these principles is the distinction between continuous-time and discrete-time modeling approaches, each with varying predictive capabilities under sparse data conditions [23]. Continuoustime models offer superior interpretability for physical systems, while discrete-time formulations excel in computational tractability for real-time implementations. The choice between these approaches significantly influences predictive model design and performance.\n\nAn advancement in predictive modeling is the Jacobian Regularized Feedforward Neural Network (JRFNN), which addresses long-term stability in nonlinear systems by incorporating the Frobenius norm of the Jacobian in its loss function [16]. This ensures stable and accurate forecasts over extended horizons, particularly effective for high-dimensional state spaces. Multitask learning frameworks enhance predictive modeling by leveraging shared features across related tasks, improving model generalization and efficiency. For instance, real-time simulation of elastoplastic deformations employs proper orthogonal decomposition and long short-term memory networks to predict multiple state variables simultaneously, enhancing computational efficiency and accuracy [18].\n\nPrediction horizons and control strategies are intrinsically linked, with longer horizons necessitating robust error mitigation techniques. Adaptive sampling methods, like those in spatiotemporal process monitoring, dynamically adjust data collection to optimize model performance under evolving conditions. The integration of APC and MPC principles with optimization algorithms enables predictive models to forecast system behavior and determine optimal control actions. This integration bridges prediction and decision-making, facilitating improved performance in applications such as designing model predictive controllers using open-source tools like ModelPredictiveControl.jl, which offers modular features for nonlinear control and moving horizon estimation. Sensitivitybased performance assessments inform choices between economic and tracking MPC strategies, especially in noisy environments. Adaptive sampling algorithms like PASST optimize monitoring of spatiotemporal fluid processes, ensuring efficient data collection and enhanced model accuracy [12, 9, 8].",
+      "stats": {
+        "char_count": 2494,
+        "word_count": 299,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "2.4 Real-Time Optimization and Feedback Mechanisms",
+      "level": 1,
+      "content": "Real-time optimization and feedback mechanisms are vital for Advanced Process Control (APC) and Model Predictive Control (MPC), enabling dynamic adjustments to process variables while maintaining constraints. The integration of active learning with Gaussian processes (ALGP-U) reduces predictive uncertainty through strategic sample selection, enhancing model accuracy in realtime applications [24]. This adaptability allows control systems to respond effectively to changing conditions and uncertainties. The AI-Based Classification System, using electrical signal analysis, classifies flow patterns without visual data, demonstrating the efficacy of data-driven feedback in industrial monitoring [25].\n\nThe Real-Time Vector Fitting (RTVF) algorithm approximates dynamics through rational transfer function matrices, ensuring robust performance in dynamic environments [26]. This allows for accurate modeling of system dynamics, enhancing control strategy effectiveness. For spatiotemporal chaotic systems, the Conjugate Tubular Neighborhoods method linearizes dynamics near unstable periodic orbits, enabling precise control despite complexity [27]. Nonparametric Monte Carlo techniques enhance feedback reliability by quantifying bias and variance in model outputs, providing uncertainty bounds for decision-making [19].\n\nIndustrial applications benefit from frameworks like CPS-RT-APC, which integrates shared data, timers, and network communication for synchronized real-time control across distributed systems [13]. The SMPL benchmark facilitates reinforcement learning comparisons in simulated manufacturing environments [21]. Unsupervised fault detection methods, such as SensorSCAN, employ selfsupervised learning for anomaly diagnosis without labeled data, reducing downtime in automated processes [28]. These methodologies enhance control system robustness and efficiency across industrial contexts.\n\nEmerging trends highlight edge computing integration with feedback loops in distributed control systems, reducing latency and enhancing real-time performance. This approach leverages industrial automation cloud platforms, facilitating competition among APC vendors and ensuring optimal controller selection [1, 25, 13]. Challenges persist in balancing computational efficiency with model fidelity, especially for high-dimensional or nonlinear processes. Future directions include adaptive sampling refinements and hybrid architectures combining physics-based models with data-driven techniques to optimize real-time performance across diverse applications.",
+      "stats": {
+        "char_count": 2568,
+        "word_count": 304,
+        "sentence_count": 16,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "2.5 APC vs. Traditional Control Methods",
+      "level": 1,
+      "content": "Advanced Process Control (APC) and traditional methods differ fundamentally in design philosophies, computational frameworks, and operational efficacy. Traditional methods, like ProportionalIntegral-Derivative (PID) controllers, rely on heuristic tuning and static feedback loops, often struggling with multivariable interactions, nonlinear dynamics, and constraint handling. APC utilizes predictive modeling, real-time optimization, and adaptive feedback to address these limitations, offering superior performance in complex systems [1].\n\nAPC integrates multiple control objectives, such as economic optimization and constraint satisfaction, within a unified framework. Economic Model Predictive Control (EMPC) optimizes switching operations in monoclonal antibody production, minimizing downtime and product loss within constraints, unlike traditional PID controllers [11]. However, solving integer nonlinear programs (INLPs) at each sampling time remains a barrier for APC, particularly in high-speed applications where traditional methods excel due to low computational overhead.\n\nTraditional methods often overlook spatiotemporal dynamics and system nonlinearities, relying on simplified ordinary differential equation (ODE) models. APC frameworks, integrating population balance equations with reaction kinetics, provide nuanced process representations compared to conventional ODE approaches [29]. Open-source APC tools, like ModelPredictiveControl.jl, democratize access to advanced strategies, reducing dependency on proprietary software [8].\n\nAPC feedback mechanisms are more robust due to adaptive sampling and uncertainty quantification. The Real-Time Vector Fitting (RTVF) algorithm handles initial conditions and multiple inputs in dynamic systems, surpassing traditional frequency-domain methods assuming static operating points [26]. Self-supervised learning techniques, such as SensorSCAN, enhance fault detection with minimal labeled data, unlike traditional methods requiring extensive manual calibration [28].\n\nTrade-offs between APC and traditional methods are evident in computational scalability, implementation complexity, and real-time performance. Industrial automation cloud platforms and data analytics optimize processes [5, 1, 11]. While APC excels in accuracy and adaptability, its reliance on high-fidelity models and optimization algorithms introduces latency and resource demands. Future advancements in edge computing and hybrid modeling aim to bridge these gaps, solidifying APC’s dominance in industrial automation while preserving traditional methods’ simplicity and reliability for specific use cases.\n\nIn recent years, the application of Model Predictive Control (MPC) has gained significant attention across various engineering systems due to its effectiveness in managing complex processes. This review paper examines the diverse implementations of MPC, focusing on its hierarchical categorization within different industrial contexts. As illustrated in Figure ??, the figure delineates the primary domains of MPC applications, including industrial case studies, advanced manufacturing, and real-time control. Furthermore, it provides detailed insights into specific applications such as wastewater treatment, surge tank control, cryogenic manufacturing, superconducting qubit fabrication, fault detection techniques, and the CPS-RT-APC framework. This comprehensive overview not only underscores the versatility of MPC but also emphasizes its critical role in enhancing operational efficiency across various sectors.\n\nFigure 2: This figure illustrates the hierarchical categorization of Model Predictive Control (MPC) applications across various engineering systems. It highlights the primary domains of industrial case studies, advanced manufacturing, and real-time control, further detailing specific applications such as wastewater treatment, surge tank control, cryogenic manufacturing, superconducting qubit fabrication, fault detection techniques, and the CPS-RT-APC framework.",
+      "stats": {
+        "char_count": 4027,
+        "word_count": 489,
+        "sentence_count": 25,
+        "line_count": 13
+      }
+    },
+    {
+      "heading": "3.1 Industrial Case Studies: Wastewater Treatment and Surge Tank Control",
+      "level": 1,
+      "content": "Model Predictive Control (MPC) has proven highly effective in industrial settings, particularly in wastewater treatment and surge tank control, where dynamic optimization and constraint management are paramount. As illustrated in Figure 3, which depicts the application and advancements of MPC in these processes, the figure outlines major challenges and future directions for this technology. In wastewater treatment, MPC surpasses traditional methods by dynamically adjusting variables to meet effluent quality standards while reducing costs. Simulations demonstrate MPC’s superior performance in managing nonlinear dynamics and multivariable interactions [2]. AI-based classification systems further enhance MPC, achieving over $8 5 \\%$ accuracy in flow pattern identification, thus improving aeration and sedimentation control [25]. This adaptability enhances treatment efficiency and regulatory compliance, promoting sustainable wastewater management.\n\nIn surge tank control, MPC excels by managing fluid dynamics to prevent overflow or underflow, optimizing inflow and outflow rates for stability under varying conditions [1]. MPC’s versatility is also evident in continuously stirred tank reactor (CSTR) systems, where it effectively handles linear and nonlinear dynamics [8]. Comparisons with Proportional-Integral-Derivative (PID) controllers highlight MPC’s superior adaptability in complex processes, as shown by reinforcement learning benchmarks in simulated manufacturing environments [21]. These examples underscore MPC’s role in enhancing fluid management’s reliability and efficiency in industrial contexts.\n\nChallenges include the need for high-fidelity models and significant computational resources for real-time performance. Effective data acquisition and preparation are crucial, requiring sophisticated pre-processing to develop reliable predictive models [5, 15]. Future research aims to improve MPC scalability and robustness through hybrid modeling and edge computing, bridging theoretical advancements with practical implementations.\n\n[Image]\nFigure 3: This figure illustrates the application and advancements of Model Predictive Control (MPC) in industrial settings, focusing on wastewater treatment and surge tank control processes, and outlines major challenges and future directions.",
+      "stats": {
+        "char_count": 2313,
+        "word_count": 292,
+        "sentence_count": 14,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "3.2 Advanced Manufacturing and Superconducting Qubit Fabrication",
+      "level": 1,
+      "content": "Model Predictive Control (MPC) is pivotal in advanced manufacturing and superconducting qubit fabrication, meeting the precision and dynamic demands of these processes. In cryogenic manufacturing, the Dynamic Heat Load Observer (DHLO) method exemplifies MPC’s integration with real-time thermal management, stabilizing high heat loads in the SPIRAL2 superconducting LINAC [3]. This approach mitigates thermal fluctuations, crucial for maintaining superconducting performance in quantum computing.\n\nSuperconducting qubit fabrication requires nanometer-scale precision, where MPC optimizes etching parameters in real-time to minimize defects and enhance qubit yield [30]. MPC’s multivariable constraint handling ensures consistent feature dimensions, vital for quantum computing performance. Real-time feedback integration enhances qubit fabrication reliability, allowing continuous monitoring and adjustment.\n\nComparative analyses show MPC’s superiority over traditional methods by integrating real-time sensor feedback with predictive optimization, enhancing economic performance and reducing computational complexity in smart manufacturing and fluid monitoring [12, 9, 8, 2]. Future directions include machine learning for defect prediction and hybrid models combining physics-based simulations with empirical data, highlighting MPC’s potential to revolutionize precision manufacturing and quantum device fabrication.",
+      "stats": {
+        "char_count": 1418,
+        "word_count": 169,
+        "sentence_count": 8,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3 Real-Time Control and Fault Detection in Industrial Processes",
+      "level": 1,
+      "content": "Model Predictive Control (MPC) is crucial for real-time control and fault detection in diverse industrial processes, enhancing operational reliability and efficiency. Techniques like SensorSCAN exemplify MPC’s adaptability in fault detection, utilizing unlabeled data to identify anomalies accurately [28]. This reduces the need for extensive labeled datasets, a major advantage in industrial contexts where data annotation is costly. Advanced machine learning techniques enhance fault detection and system resilience, ensuring continuous operation amid disturbances.\n\nThe CPS-RT-APC framework demonstrates MPC’s synergy with real-time control, achieving precise timing and performance through shared data structures and network communication [13]. This framework synchronizes sensor inputs and actuator outputs across nodes, ensuring consistent performance in dynamic environments. MPC’s robustness in fault detection is evident in handling nonlinear dynamics and multivariable interactions, essential for maintaining integrity and minimizing downtime in complex operations.\n\nEmerging trends emphasize integrating MPC with edge computing to reduce latency and enhance control loop efficiency, leveraging real-time data processing for faster decision-making in automation systems, especially in advanced process control and the Industrial Internet of Things (IIoT) [1, 25, 8, 2]. Challenges include scaling solutions for high-dimensional systems and ensuring robustness under varying conditions. Future research focuses on hybrid models combining physics-based simulations with data-driven techniques, enhancing MPC’s predictive accuracy and responsiveness, underscoring its pivotal role in modern industrial automation.",
+      "stats": {
+        "char_count": 1720,
+        "word_count": 215,
+        "sentence_count": 10,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4 Predictive Modeling and Optimization Techniques",
+      "level": 1,
+      "content": "Table 1: This table provides a comprehensive overview of various methodologies employed in predictive modeling and optimization techniques. It categorizes these methods into four distinct areas: Data-Driven vs. Model-Based Approaches, System Identification and State Estimation, Optimization Algorithms and Real-Time Implementation, and Machine Learning Integration and Advanced Techniques. Each category details specific features and the corresponding methods, highlighting the diverse strategies and tools utilized in enhancing Advanced Process Control (APC) and Model Predictive Control (MPC) frameworks.\n\n<html><body><table><tr><td>Category</td><td>Feature</td><td>Method</td></tr><tr><td>Data-Driven vs.Model-Based Approaches</td><td>Physics and Model-Based Hybrid Integration Multi-Task and Simulation</td><td>WHIDEM[29], MLNPF[7] SDPA[12], CPS-RT-APC[13] MTL-LSTM[18]</td></tr><tr><td>System Identification and State Estimation</td><td>Iterative Learning and Refinement Data Quality and Integrity Dynamic System Performance</td><td>ALGP-U[24] DQIM[5] RTVF[26]</td></tr><tr><td>Optimization Algorithms and Real-Time Implementation</td><td>Dynic Real-Tieotralion</td><td>IACI[1J,EMPC[1]</td></tr><tr><td>Machine Learning Integration and Advanced Techniques</td><td>Expert Knowledge Integration Dnynamive Lem Anapproaches Stability and Regularization</td><td>cMoE[6], NSM[32] PK[22,SimKem[15] JRFNN[16], ML-CAN[17]</td></tr></table></body></html>\n\nA profound understanding of predictive modeling and optimization is fundamental to enhancing Advanced Process Control (APC) and Model Predictive Control (MPC). Table 5 offers a comprehensive comparison of methodologies in predictive modeling and optimization, essential for enhancing the efficacy of APC and MPC systems. Additionally, Table 1 presents a detailed classification of methodologies in predictive modeling and optimization, essential for advancing APC and MPC systems. This section offers a comparative analysis of data-driven and model-based strategies, highlighting their respective strengths and weaknesses, and their significance in developing robust predictive frameworks with practical applications in various industrial settings.",
+      "stats": {
+        "char_count": 2200,
+        "word_count": 224,
+        "sentence_count": 9,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1 Data-Driven vs. Model-Based Approaches",
+      "level": 1,
+      "content": "The comparative analysis of data-driven versus model-based approaches in APC and MPC elucidates their respective attributes and limitations. Model-based methodologies, such as the Weakly Hyperbolic Integro-Differential Equation Model (WHIDEM), leverage first-principles physics to offer robust extrapolations beyond observed data and capture complex dynamics like fermentation processes [29]. Multi-scale mechanistic modeling further optimizes processes like lipid nanoparticle formation, showcasing the efficacy of physics-based approaches in intricate industrial scenarios [7]. However, these methods face scalability challenges and susceptibility to misspecification in nonlinear systems.\n\nConversely, data-driven techniques capitalize on empirical observations via statistical learning, exemplified by the Jacobian Regularized Feedforward Neural Network (JRFNN), which integrates Jacobian regularization for heightened predictive stability [16]. Multi-task learning networks enhance prediction by sharing features across tasks, achieving high fidelity in simulating elastoplastic deformations [18]. While discrete-time models can surpass continuous-time models in predictive accuracy, they demand extensive training data and struggle with generalization beyond observed data [23].\n\nHybrid methods bridge model-based and data-driven paradigms, incorporating physics knowledge with data adaptations, such as the Real-Time Vector Fitting (RTVF) for power system identification [26] and the CPS-RT-APC framework [13]. Sensitivity-based dynamic performance assessment (SDPA) further aids in choosing between EMPC and tracking MPC variants [12]. Application requirements dictate preferences: Model-based methods are ideal for interpretive safety-critical applications, whereas data-driven techniques excel where high-dimensional data is prevalent.\n\nFuture research trends advance adaptive model structures responsive to data variation and system complexity, illustrated by Contextual Mixture of Experts (cMoE) integrating contextual insights and computational frameworks like SimKern enhancing prediction accuracy [15] through simulationassisted techniques. Tools like PASST underscore real-time predictive decision-making, utilizing predictive models for optimizing data collection [9]. Open-source platforms such as ModelPredictiveControl.jl bolster transparency and reproducibility in research, spurring innovations and interdisciplinary collaboration [15, 8].\n\n4.2 System Identification and State Estimation\n\n<html><body><table><tr><td>Method Name</td><td>Modeling Techniques</td><td>Data Quality</td><td>Computational Efficiency</td></tr><tr><td>ALGP-U[24]</td><td>Gaussian Processes</td><td>Sample Quality</td><td>Computational Cost</td></tr><tr><td>DQIM[5]</td><td>Complex Modeling Techniques</td><td>Data Quality</td><td>Computational Efficiency</td></tr><tr><td>RTVF[26]</td><td>Predictive Modeling Algorithm</td><td>Noisy Measurements Affect</td><td>Refine Model Parameters</td></tr></table></body></html>\n\nTable 2: Comparison of methods for system identification and state estimation, highlighting modeling techniques, data quality considerations, and computational efficiency. The table includes ALGPU, DQIM, and RTVF methodologies, each addressing different aspects of predictive modeling and data integrity in advanced process control (APC) and model predictive control (MPC) systems.\n\nSystem identification and state estimation are quintessential techniques in APC and MPC, facilitating accurate predictive modeling through parameterization and real-time state reconstruction. Table 2 provides a comprehensive comparison of various methodologies employed in system identification and state estimation, emphasizing their modeling techniques, data quality management, and computational efficiency. Active learning with Gaussian processes (ALGP-U) represents robust system identification, refining models via log-likelihood maximization in sparse data realms [24]. The integrity of data is crucial, as underscored by the Data Quality Improvement Methodology (DQIM), emphasizing source evaluation, anomaly mitigation, and feature validation [5], particularly pertinent in industrial contexts where data variability poses significant challenges.\n\nIn nonlinear, high-dimensional systems, state estimation faces dimensionality and efficiency challenges. The Fokker-Planck equation, though rigorous, falters in real-time applications due to dimensional constraints [20]. Particle filters surpass others in nonlinear settings, though at high computational costs, whereas Kalman filters prioritize efficiency with linear assumptions. Balancing these trade-offs remains a pivotal challenge.\n\nHybrid approaches integrating physics constraints with data adaptations illustrate future trajectories in system identification and state estimation. Algorithms like RTVF optimize power system performance [26]. Adaptive sampling and edge computing enhance real-time estimation, bridging scalability gaps in APC and MPC processes. These advancements solidify the role of system identification and state estimation in aligning theoretical models with operational realities.\n\n4.3 Optimization Algorithms and Real-Time Implementation\n\n<html><body><table><tr><td>Method Name</td><td>Optimization Techniques</td><td>Real-Time Challenges</td><td>Application Domains</td></tr><tr><td>SO-EBM[31]</td><td>Energy-based Modeling</td><td>Computational Latency</td><td>Power Scheduling</td></tr><tr><td>ML-CAN[17]</td><td>Dilated Convolutions</td><td>Computational Efficiency</td><td>Complex Flow Dynamics</td></tr><tr><td>EMPC[11]</td><td>Reinforcement Learning</td><td>Computational Complexity</td><td>Biopharmaceutical Production</td></tr><tr><td>IACP[1]</td><td>Selector Evaluates Performance</td><td>Real-time Data Sharing</td><td>Industrial Process Control</td></tr></table></body></html>\n\nTable 3: Overview of optimization methods employed in Model Predictive Control (MPC) highlighting their respective optimization techniques, real-time challenges, and application domains. The table delineates the specific methodologies such as energy-based modeling, dilated convolutions, and reinforcement learning, illustrating their roles in addressing computational latency, efficiency, and complexity across various industrial sectors.\n\nOptimization algorithms in MPC orchestrate dynamic programming in real-time process control, marrying solution accuracy with computational efficacy. The Stochastic Optimization Energy-Based Model (SO-EBM) exemplifies advancements, parameterizing optimization through energy-based models and improving efficiency via stochastic gradient descent [31]. Efficiently managing optimization’s complexities is vital for successful MPC strategy enactment.\n\nMoreover, multilevel convolutional autoencoder networks counter real-time optimization impediments by distilling high-dimensional inputs into latent components, thus aiding swift convergence in predictive applications [17]. The performance-latency trade-off in real-time MPC necessitates novel algorithm exploration for seamless execution.\n\nAdvanced algorithms like switching optimization in monoclonal antibody production optimize capturing times and columns, minimizing downtime under regulatory scrutiny [11]. ReLU-based methods bolster computational tractability over mixed-integer techniques. These strategies underscore optimization’s significances in enhancing biopharmaceutical productivity.\n\nImplementation challenges, such as synchronizing control systems via CPS-RT-APC, stimulate research in edge computing and hybrid architectures merging stochastic optimization with physicsbased constraints [1]. Incorporating innovations like energy-based models and automation platforms aims for theoretical optimality within industrial MPC applications. Simulation-assisted ML methods paired with economic MPC strategies improve biopharmaceutical operational adaptability [15, 31, 11]. Table 3 presents a comprehensive summary of prominent optimization methods used in Model Predictive Control (MPC), detailing their optimization techniques, challenges encountered in real-time applications, and the specific domains where they are applied.",
+      "stats": {
+        "char_count": 8206,
+        "word_count": 862,
+        "sentence_count": 44,
+        "line_count": 33
+      }
+    },
+    {
+      "heading": "4.4 Machine Learning Integration and Advanced Techniques",
+      "level": 1,
+      "content": "<html><body><table><tr><td>Method Name</td><td>Integration Approach</td><td>Predictive Modeling</td><td>System Dynamics</td></tr><tr><td>cMoE[6]</td><td>Data-driven Model</td><td>Contextual Mixture Experts</td><td></td></tr><tr><td>KF[22]</td><td>SupervisedLearning Framework</td><td>Koopmanizing Flows</td><td>Koopmanizing Flows</td></tr><tr><td>JRFNN[16]</td><td>Jacobian Regularization</td><td>Jacobian Regularization Technique</td><td>Nonlinear Dynamical Systems</td></tr><tr><td>ML-CAN[17]</td><td>Dilated Convolutions</td><td>Convolutional Autoencoders</td><td>Multilevel Convolutional Autoencoder</td></tr><tr><td>NSM[32]</td><td>Convolutional Autoencoders</td><td>Convolutional Autoencoders</td><td>Non-intrusive Surrogate</td></tr><tr><td>PASST[9]</td><td>Reinforcement Learning</td><td>Knowledge-based Neural</td><td>Spatiotemporal Fluid Processes</td></tr><tr><td>SimKern[15]</td><td>Kernelized ML</td><td>Simkern Method</td><td>Similarity Kernel</td></tr></table></body></html>\n\nTable 4: This table presents a comparative overview of various machine learning methods and their integration approaches in predictive modeling and system dynamics. Each method is characterized by its unique strategy for enhancing predictive accuracy and system stability, highlighting the diverse applications of machine learning in Model Predictive Control (MPC). The table encapsulates the core techniques and frameworks that define the current advancements in machine learning-driven MPC solutions.\n\nMachine learning’s integration in MPC metamorphoses predictive modeling, enabling adaptive controls blending data-driven insights and traditional frameworks. The Contextual Mixture of Experts (cMoE) model amalgamates operator expertise with ML models, nurturing predictive precision and interpretability [6]. This fusion addresses the trust deficit in automated systems, aligning machine accuracy with human insighta fundamental adoption factor.\n\nKoopman operator theory revolutionizes nonlinear dynamics portrayal, as Koopmanizing Flows form stable linear predictors using supervised learning, facilitating long-term forecasting for intricate systems [22]. The JRFNN boosts nonlinear system stability by incorporating Jacobian norms, mitigating error propagation [16].\n\nMultilevel convolutional autoencoder networks tackle spatiotemporal dynamics via hierarchical latent variable encoding that preserves essential features while boosting computational efficacy [17]. Non-intrusive surrogate methods utilizing CAEs and NNs advance predictive efficiency without altering underlying models [32].\n\nReinforcement learning enhances adaptive control, illustrated by PASST’s predictive modeling and path optimization synergy [9]. Simulation-assisted ML tools, like SimKern, refine kernelized ML algorithms by simulation-derived measures, bridging theoretical and empirical realms [15].\n\nState estimation methodologies evolve with ML integration, especially in computational efficiency contexts for large-scale systems. Trends advocate hybrid architectures merging estimation frameworks with data adaptations for enhanced accuracy [20]. Future pursuits entail modular ML-MPC designs, edge computing deployments, and interdisciplinary cooperation to refine automation’s predictive prowess. Collectively, ML integration embodies a transformative MPC potential, presenting solutions to longstanding control and optimization challenges. Table 4 provides a comprehensive comparison of machine learning methods and their integration approaches, illustrating their roles in predictive modeling and system dynamics within Model Predictive Control (MPC) frameworks.\n\n<html><body><table><tr><td>Feature</td><td></td><td></td><td>Data-DrivenvModelBasedApproahsSystedentiftioandtateEstiationOptizationAgoritsandRealTImpetatio</td></tr><tr><td>Application Domain Method Strength Implementation Challenge</td><td>Apc And Mpc Robust Extrapolations</td><td>Apc And Mpc Real-time Reconstruction</td><td>Mpc Solution Accuracy</td></tr><tr><td>Table 5: This table provides a comparative analysis of various methodologies in predictive modeling and optimization, focusing on their application domains,method strengths,and implementation identification and state estimation techniques,and optimization algorithms in real-time setings. The</td><td>Scalability Challenges</td><td>Dimensionality Challenges</td><td>Performance-latency Trade-off</td></tr><tr><td colspan=\"2\"></td><td colspan=\"2\">challenges.It highlights the distinctions between data-driven and model-based approaches,system</td></tr></table></body></html>",
+      "stats": {
+        "char_count": 4585,
+        "word_count": 412,
+        "sentence_count": 20,
+        "line_count": 15
+      }
+    },
+    {
+      "heading": "5 Challenges and Future Directions",
+      "level": 1,
+      "content": "The multifaceted challenges of Advanced Process Control (APC) and Model Predictive Control (MPC) systems significantly impact their theoretical development and practical industrial applications. A thorough examination of computational and model limitations reveals their influence on APC and MPC deployment in real-world processes, emphasizing the need for innovative solutions to overcome these obstacles.",
+      "stats": {
+        "char_count": 406,
+        "word_count": 52,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.1 Computational and Model Limitations",
+      "level": 1,
+      "content": "APC and MPC systems face substantial computational and modeling barriers limiting industrial implementation. A core challenge is the computational intensity of real-time optimization, particularly in high-dimensional nonlinear systems. Current methods often lack generality, focusing on convex optimization objectives, with scalability issues due to repeated optimization needs [31]. Economic Model Predictive Control (EMPC) exemplifies these limitations, as approximating complex nonlinear dynamics often exceeds available computational resources, hampering time-critical applications [2]. This burden is evident in industrial batch processes like monoclonal antibody production, where dynamic switching operations add complexity [11].\n\nModel fidelity suffers due to inherent system complexities and computational constraints. Traditional numerical methods, such as finite element analysis, are impractical for real-time applications due to high computational costs [18]. The Weakly Hyperbolic Integro-Differential Equation Model (WHIDEM), while theoretically robust for yeast cell dynamics, requires substantial computational resources, posing implementation challenges without extensive empirical validation [29]. Real-Time Vector Fitting (RTVF) is sensitive to input-output data quality, with measurement noise potentially degrading accuracy despite robustness to moderate disturbances [26]. Predictive models like PASST show diminishing accuracy over extended horizons, affecting performance in rapidly changing environments [9].\n\nHigh-dimensional state spaces pose additional challenges, especially in spatiotemporal chaotic systems where identifying unstable periodic orbits is difficult [27]. State estimation methods, including Ensemble Kalman Filters (EnKF) and Particle Filters (PF), are computationally inefficient for largescale systems, limiting real-time applicability [20]. The Jacobian Regularized Feedforward Neural Network (JRFNN) performs well with low-dimensional attractors but struggles in high-dimensional or sparse-data regimes [16].\n\nManufacturing scalability further constrains implementation, particularly in specialized domains like superconducting qubit fabrication, where traditional techniques are incompatible with modern CMOS processes [30]. Mechanistic modeling approaches for lipid nanoparticle (LNP) formation highlight scalability and efficiency limitations, affecting encapsulation and product quality [7]. Cyber-physical systems (CPS) face compounded challenges due to the multidisciplinary nature of CPS-RT-APC, complicating the application of existing software tools and principles [13].\n\nAddressing these challenges requires hybrid modeling paradigms that balance computational efficiency with model accuracy. This includes adaptive sampling techniques and edge computing to enhance real-time performance. The simulation-based kernel (SimKern) method uses approximate simulations to improve kernelized machine learning, while the Contextual Mixture of Experts (cMoE) model incorporates process knowledge for refined predictions and improved interpretability. Advances in decision-focused learning (DFL), such as the SO-EBM, illustrate strategies for optimizing stochastic problems, emphasizing the integration of diverse modeling approaches to address complex system behaviors effectively [15, 31, 6]. Future research must tackle these limitations through interdisciplinary collaboration and innovative algorithmic developments to expand APC and MPC systems’ operational capabilities.",
+      "stats": {
+        "char_count": 3527,
+        "word_count": 417,
+        "sentence_count": 21,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "5.2 Data and Robustness Challenges",
+      "level": 1,
+      "content": "Data quality and robustness are persistent challenges in APC and MPC applications, significantly affecting model reliability and operational performance. A critical issue is the undervaluation of data preparation, where inadequate preprocessing and validation compromise AI-driven industrial applications [5]. This results in biased training datasets, sensor noise amplification, and feature misalignment, particularly in high-dimensional processes with prevalent data heterogeneity. Addressing these issues is crucial to prevent distorted model training and unreliable predictions, undermining control strategies in dynamic environments.\n\nPredictive model robustness is further challenged by nonlinear dynamics and spatiotemporal variability. Nonintrusive surrogate modeling techniques, effective for parametrized systems, show diminishing reliability in highly nonlinear scenarios without large training datasets [32]. Simulationassisted machine learning methods struggle to capture biological variability and uncertainty, leading to suboptimal predictions in bioprocess applications dominated by intrinsic stochasticity [15]. These limitations are exacerbated in real-time implementations, where computational constraints restrict comprehensive uncertainty quantification techniques, necessitating robust methodologies to handle industrial processes’ inherent unpredictability.\n\nScalability challenges arise when transitioning from laboratory-scale models to industrial deployments. Data-driven approaches often struggle to generalize across varying operational scales due to significant changes in process dynamics and sensor configurations, leading to predictive performance inconsistencies and hindering machine learning applications in industrial settings [25, 1, 6, 10, 5]. Hybrid modeling paradigms combining physics-based constraints with adaptive data-driven components offer a promising direction to mitigate these challenges, though implementation requires careful calibration of model fidelity and computational overhead. Future research must prioritize robust data acquisition frameworks and adaptive learning mechanisms to enhance APC and MPC systems’ reliability in dynamic industrial environments.",
+      "stats": {
+        "char_count": 2215,
+        "word_count": 257,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3 Future Research Directions",
+      "level": 1,
+      "content": "Future research in APC and MPC must address critical gaps across multiple domains to advance industrial automation and process optimization. In quantum computing, optimizing surface treatments and exploring novel qubit designs are essential for enhancing superconducting qubit lifetimes and performance [30]. For spatiotemporal chaotic systems, extending clustering methods to higherdimensional spaces and incorporating dynamic features into model architectures will improve robustness and prediction accuracy [27]. These research areas promise to enhance theoretical understanding and translate findings into practical applications, significantly improving efficiency and effectiveness in real-world scenarios.\n\nEnhancing computational efficiency remains a priority, especially for Monte Carlo-based uncertainty quantification methods. Refining these techniques and integrating them with data-driven optimization frameworks will expand their industrial applicability [19]. Manufacturing process simulation environments require expansion to include realistic noise profiles and process variability, enabling robust algorithm development and cross-process generalization [21]. Sensitivity-based performance assessment methods should be extended to handle colored noise and diverse disturbance profiles, providing comprehensive evaluation metrics for controller selection [12]. Addressing these computational challenges will pave the way for more reliable and efficient control systems.\n\nMachine learning integration offers multiple advancement avenues. Self-supervised and semisupervised learning techniques will enhance fault detection capabilities while reducing labeled dataset dependency [28]. Simulation-assisted approaches should explore multi-kernel integration and refined simulation techniques to bridge theoretical models and empirical observations [15]. Software frameworks for cyber-physical systems need expansion to diverse industrial contexts, with exploration of emerging technologies to improve scalability and performance [13]. Innovation in these areas will be vital for developing robust, adaptable, and scalable control systems for modern industrial applications.\n\nReal-time simulation capabilities must evolve to handle increasingly complex scenarios. For elastoplastic deformation modeling, incorporating additional state variables and refining prediction accuracy under extreme conditions are critical [18]. Hybrid modeling paradigms should combine these advancements with physics-based constraints to create adaptive, computationally efficient frameworks for industrial implementation. Interdisciplinary collaboration is essential to address these multifaceted challenges, fostering innovation across control theory, materials science, and computational engineering domains. Leveraging diverse expertise and approaches will shape the future of APC and MPC to meet evolving industry demands.",
+      "stats": {
+        "char_count": 2914,
+        "word_count": 343,
+        "sentence_count": 19,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "6 Conclusion",
+      "level": 1,
+      "content": "This survey has comprehensively explored the foundational theories, practical applications, and emerging trends of Advanced Process Control (APC) and Model Predictive Control (MPC), highlighting their transformative role in modern engineering systems. The fusion of machine learning with traditional control frameworks marks a significant advancement, enhancing predictive accuracy and optimization capabilities. Such integration necessitates careful attention to data quality and model selection, offering robust mathematical underpinnings for adapting to complex, nonlinear system challenges. These developments signify a paradigm shift towards more adaptive and intelligent control system designs.\n\nAcross various industrial sectors, the implementation of MPC has been pivotal, with applications ranging from cryogenic process control to quantum device fabrication. Techniques like adaptive sampling have shown substantial improvements in monitoring efficiency and predictive accuracy, while open-source frameworks have democratized access to advanced control strategies, outperforming proprietary solutions in computational efficiency and flexibility. This democratization promotes wider adoption of sophisticated control methodologies, enabling diverse organizations to leverage cutting-edge technologies. Additionally, dynamic performance assessment methods provide valuable insights for optimizing controller design under uncertainty, underscoring the ongoing refinement of MPC applications in real-world contexts.\n\nDespite these advancements, challenges remain in terms of computational scalability, model robustness, and real-time implementation, especially in high-dimensional chaotic systems. There is a pressing need to align predictive modeling with operational decision-making, balancing theoretical rigor with practical cost-effectiveness. Addressing these challenges requires collaborative efforts to develop methodologies that integrate advanced algorithms seamlessly into existing industrial processes. Future research should focus on hybrid modeling paradigms, edge computing, and interdisciplinary collaboration to overcome current limitations. Key areas for future exploration include refining adaptive sampling techniques, incorporating quantum computing principles into control frameworks, and establishing universal benchmarks for industrial MPC applications. These directions are poised to further enhance the role of APC and MPC in advancing next-generation engineering systems.",
+      "stats": {
+        "char_count": 2504,
+        "word_count": 296,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Competing advanced process control via an industrial automation cloud platform",
+      "number": null,
+      "title": "Competing advanced process control via an industrial automation cloud platform"
+    },
+    {
+      "text": "A comparative study of model approximation methods applied to economic mpc",
+      "number": null,
+      "title": "A comparative study of model approximation methods applied to economic mpc"
+    },
+    {
+      "text": "Advanced cryogenic process control and monitoring for the spiral2 superconducting linac",
+      "number": null,
+      "title": "Advanced cryogenic process control and monitoring for the spiral2 superconducting linac"
+    },
+    {
+      "text": "Applications of machine learning to optimizing polyolefin manufacturing",
+      "number": null,
+      "title": "Applications of machine learning to optimizing polyolefin manufacturing"
+    },
+    {
+      "text": "Data quality over quantity: Pitfalls and guidelines for process analytics",
+      "number": null,
+      "title": "Data quality over quantity: Pitfalls and guidelines for process analytics"
+    },
+    {
+      "text": "Contextual mixture of experts: Integrating knowledge into predictive modeling",
+      "number": null,
+      "title": "Contextual mixture of experts: Integrating knowledge into predictive modeling"
+    },
+    {
+      "text": "Mechanistic modeling of lipid nanoparticle formation for the delivery of nucleic acid therapeutics",
+      "number": null,
+      "title": "Mechanistic modeling of lipid nanoparticle formation for the delivery of nucleic acid therapeutics"
+    },
+    {
+      "text": "Model predictive control.jl: advanced process control made easy in julia",
+      "number": null,
+      "title": "Model predictive control.jl: advanced process control made easy in julia"
+    },
+    {
+      "text": "Leveraging predictive models for adaptive sampling of spatiotemporal fluid processes",
+      "number": null,
+      "title": "Leveraging predictive models for adaptive sampling of spatiotemporal fluid processes"
+    },
+    {
+      "text": "Machine learning with operational costs",
+      "number": null,
+      "title": "Machine learning with operational costs"
+    },
+    {
+      "text": "Optimizing the switching operation in monoclonal antibody production: Economic mpc and reinforcement learning",
+      "number": null,
+      "title": "Optimizing the switching operation in monoclonal antibody production: Economic mpc and reinforcement learning"
+    },
+    {
+      "text": "Sensitivity-based dynamic performance assessment for model predictive control with gaussian noise",
+      "number": null,
+      "title": "Sensitivity-based dynamic performance assessment for model predictive control with gaussian noise"
+    },
+    {
+      "text": "Software principles and concepts applied in the implementation of cyber-physical systems for real-time advanced process control",
+      "number": null,
+      "title": "Software principles and concepts applied in the implementation of cyber-physical systems for real-time advanced process control"
+    },
+    {
+      "text": "Deep hidden physics models: Deep learning of nonlinear partial differential equations",
+      "number": null,
+      "title": "Deep hidden physics models: Deep learning of nonlinear partial differential equations"
+    },
+    {
+      "text": "Simulation assisted machine learning",
+      "number": null,
+      "title": "Simulation assisted machine learning"
+    },
+    {
+      "text": "Long-time predictive modeling of nonlinear dynamical systems using neural networks",
+      "number": null,
+      "title": "Long-time predictive modeling of nonlinear dynamical systems using neural networks"
+    },
+    {
+      "text": "Multi-level convolutional autoencoder networks for parametric prediction of spatio-temporal dynamics",
+      "number": null,
+      "title": "Multi-level convolutional autoencoder networks for parametric prediction of spatio-temporal dynamics"
+    },
+    {
+      "text": "Towards a real-time simulation of elastoplastic deformation using multi-task neural networks",
+      "number": null,
+      "title": "Towards a real-time simulation of elastoplastic deformation using multi-task neural networks"
+    },
+    {
+      "text": "Robust output analysis with monte-carlo methodology",
+      "number": null,
+      "title": "Robust output analysis with monte-carlo methodology"
+    },
+    {
+      "text": "State estimation for continuous-discrete-time nonlinear stochastic systems",
+      "number": null,
+      "title": "State estimation for continuous-discrete-time nonlinear stochastic systems"
+    },
+    {
+      "text": "Smpl: Simulated industrial manufacturing and process control learning environments",
+      "number": null,
+      "title": "Smpl: Simulated industrial manufacturing and process control learning environments"
+    },
+    {
+      "text": "Diffeomorphically learning stable koopman operators",
+      "number": null,
+      "title": "Diffeomorphically learning stable koopman operators"
+    },
+    {
+      "text": "Comparison of continuous and discrete-time data-based modeling for hypoelliptic systems",
+      "number": null,
+      "title": "Comparison of continuous and discrete-time data-based modeling for hypoelliptic systems"
+    },
+    {
+      "text": "Active learning for gaussian process considering uncertainties with application to shape control of composite fuselage",
+      "number": null,
+      "title": "Active learning for gaussian process considering uncertainties with application to shape control of composite fuselage"
+    },
+    {
+      "text": "Automated flow pattern classification in multi-phase systems using ai and capacitance sensing techniques",
+      "number": null,
+      "title": "Automated flow pattern classification in multi-phase systems using ai and capacitance sensing techniques"
+    },
+    {
+      "text": "Handling initial conditions in vector fitting for real time modeling of power system dynamics",
+      "number": null,
+      "title": "Handling initial conditions in vector fitting for real time modeling of power system dynamics"
+    },
+    {
+      "text": "Prediction and control of spatiotemporal chaos by learning conjugate tubular neighborhoods",
+      "number": null,
+      "title": "Prediction and control of spatiotemporal chaos by learning conjugate tubular neighborhoods"
+    },
+    {
+      "text": "Sensorscan: Selfsupervised learning and deep clustering for fault diagnosis in chemical processes",
+      "number": null,
+      "title": "Sensorscan: Selfsupervised learning and deep clustering for fault diagnosis in chemical processes"
+    },
+    {
+      "text": "Existence, uniqueness and numerical modeling of wine fermentation based on integro-differential equations",
+      "number": null,
+      "title": "Existence, uniqueness and numerical modeling of wine fermentation based on integro-differential equations"
+    },
+    {
+      "text": "Path toward manufacturable superconducting qubits with relaxation times exceeding 0.1 ms",
+      "number": null,
+      "title": "Path toward manufacturable superconducting qubits with relaxation times exceeding 0.1 ms"
+    },
+    {
+      "text": "End-to-end stochastic optimization with energy-based model",
+      "number": null,
+      "title": "End-to-end stochastic optimization with energy-based model"
+    },
+    {
+      "text": "Non-intrusive surrogate modeling for parametrized time-dependent pdes using convolutional autoencoders",
+      "number": null,
+      "title": "Non-intrusive surrogate modeling for parametrized time-dependent pdes using convolutional autoencoders"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\SurveyX\\Engineering\\Model Predictive Control in Engineering_split.json",
+    "processed_date": "2025-12-31T13:47:16.498007",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

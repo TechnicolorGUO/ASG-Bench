@@ -1,0 +1,211 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: A survey of community detection methods in multilayer networks."
+    ],
+    [
+      2,
+      "Introduction and Background"
+    ],
+    [
+      2,
+      "Key Concepts and Foundational Frameworks"
+    ],
+    [
+      2,
+      "Historical Development and Milestones"
+    ],
+    [
+      2,
+      "Current State-of-the-Art Methodologies"
+    ],
+    [
+      2,
+      "Applications and Case Studies"
+    ],
+    [
+      2,
+      "Challenges, Limitations, and Open Problems"
+    ],
+    [
+      2,
+      "Future Research Directions"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: A survey of community detection methods in multilayer networks.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-25 15:46:13*\n*Topic Index: 3/10*\n\n---\n\nThis research aims to survey and analyze community detection methods in multilayer networks, covering their theoretical foundations, historical development, state-of-the-art techniques, applications, challenges, and future directions. The review will synthesize existing knowledge from peer-reviewed and credible sources, organized thematically to support scholarly understanding and identify gaps for further research, without limiting to specific network types or application domains unless implied by the literature.# A Comprehensive Survey of Community Detection Methods in Multilayer Networks",
+      "stats": {
+        "char_count": 659,
+        "word_count": 81,
+        "sentence_count": 3,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "Introduction and Background",
+      "level": 2,
+      "content": "The study of complex systems has long relied on network science to model and analyze the intricate web of interactions that define them. Traditionally, these systems have been represented as single-layer graphs, where nodes represent entities and edges represent a single type of relationship between them. However, this simplification often fails to capture the rich, multi-relational, and dynamic nature of real-world phenomena. From social interactions spanning multiple platforms to biological systems with diverse molecular interactions, and from transportation grids with various modes of transport to financial markets with different types of transactions, systems are inherently multilayered. This recognition has catalyzed a paradigm shift in network science, moving beyond the confines of single-layer graph analysis towards the more comprehensive and realistic framework of multilayer networks (MLNs). The motivation for this survey is to provide a systematic literature review of the methods developed for community detection within this increasingly prominent domain. By synthesizing existing research, identifying key methodological approaches, and analyzing the current state of the field, this paper aims to offer a rigorous and insightful overview for researchers and practitioners seeking to understand and apply these advanced techniques.\n\nA community in a network is broadly defined as a subgraph characterized by dense internal connections compared to its external connections [[1]]. Detecting these communities is a cornerstone of network analysis, providing critical insights into the functional organization, resilience, and dynamics of the system being studied. In the context of single-layer networks, a wealth of well-established methods exists, including modularity optimization, spectral clustering, label propagation, and frequent pattern mining [[3]]. These methods, however, are predicated on the assumption of a uniform interaction space, an assumption that crumbles when faced with the heterogeneity of multilayer structures. The fundamental challenge lies in developing algorithms that can integrate information across layers, each potentially representing a distinct type of relationship, a different time snapshot, or a unique operational mode. For instance, a person's influence may not be evident from their email correspondence alone but becomes apparent when their social media interactions are considered simultaneously. Similarly, a protein's function cannot be fully understood by examining its physical binding partners in isolation; its regulatory relationships and metabolic interactions must also be taken into account. Community detection in MLNs is therefore essential for uncovering latent group structures that would otherwise remain invisible in any single projection of the data.\n\nThis survey covers all forms of multilayer networks, which generalize single-layer graphs by allowing vertices and edges to vary across different layers [[3]]. These networks encompass a variety of structures, including multiplex networks, where all layers share the same set of nodes but have different edge sets; multislice networks, which can represent temporal evolution; multi-relational networks; k-partite networks; and heterogeneous networks, where both node and edge types can differ across layers [[1,11]]. The primary objective of this review is to systematically catalog and analyze the landscape of community detection algorithms designed for these complex structures. We will explore the historical development of the field, tracing the transition from single-layer models to sophisticated multilayer frameworks. We will delve into the core concepts, definitions, and formalisms that underpin modern research. Furthermore, we will dissect the current state-of-the-art methods, classifying them into major categories such as optimization-based, probabilistic, deep learning, and motif-aware approaches. Finally, we will examine the diverse applications of these methods across domains like social, biological, and transportation sciences, critically assess the prevailing challenges and open problems, and chart potential future research directions. Through this comprehensive examination, this paper seeks to illuminate the profound impact of multilayer network analysis and provide a roadmap for future innovation in the quest to understand complex systems in all their interconnected glory.",
+      "stats": {
+        "char_count": 4441,
+        "word_count": 606,
+        "sentence_count": 23,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "Key Concepts and Foundational Frameworks",
+      "level": 2,
+      "content": "The effective application of community detection methods hinges on a clear understanding of the underlying network structures and the formalisms used to describe them. A multilayer network (MLN) generalizes the concept of a single-layer graph by incorporating multiple channels of connectivity [[2]]. While some definitions propose a quadruplet (node set, link set, layer set, interlayer connection set) [[1]], a simpler and widely adopted definition views an MLN as a couple comprising a family of graphs (the layers) and a set of crossed layers that represent interconnections between nodes of different layers [[2]]. This mathematical formulation allows for the representation of a vast array of complex systems where entities participate in multiple, distinct relational contexts simultaneously. A particularly important subclass is the multiplex network, which is characterized by having the same set of nodes across all layers, with interlayer connections only existing between counterpart nodes in different layers [[2,3]]. This structure is ideal for modeling systems like individuals interacting through different communication media (e.g., email, phone, social media) or proteins engaged in multiple types of biochemical reactions [[8]].\n\nThe formal representation of these networks is crucial for algorithm design. For multiplex networks, the supra-adjacency matrix is a powerful tool, combining the adjacency matrices of each individual layer into a large block matrix [[2]]. This structure elegantly encodes both intra-layer connections (within the diagonal blocks) and inter-layer connections (between the off-diagonal blocks), enabling the use of linear algebraic techniques originally developed for single-layer networks. This formalism was instrumental in seminal works that laid the foundation for the field [[2,13]]. Another critical concept is that of community structure itself. In multilayer contexts, a community can be conceptualized in several ways. A common definition is a cohesive grouping of nodes that persists across one or more layers, forming a \"pillar\" community [[15]]. More flexible definitions allow for overlapping communities, where a node can belong to multiple groups, a phenomenon observed frequently in social and biological systems [[1]]. The emergence of local and similarity-based community concepts further expands the analytical toolkit, though these areas remain less explored compared to global partitioning methods [[1]].\n\nTo evaluate the performance of community detection algorithms, standardized benchmarks are indispensable. The development of synthetic random graph models that generate networks with ground-truth community structure is a significant area of research. One such model is mABCD, introduced by Krainski et al., which extends the ABCD benchmark to the multilayer setting [[4]]. It offers tunable inter-layer dependencies for node degrees, community partitions, and edges, and is significantly faster than previous frameworks, making it suitable for large-scale experiments [[4]]. Another notable model is multilayerGM, which serves as a basis for comparison [[4]]. The validation of these algorithms is typically performed on a suite of real-world datasets. Examples cited in the literature include gene co-expression networks across developmental stages [[8]], scientific collaboration networks like the American Physical Society (APS) dataset [[10]], social networks such as Scholat [[11]], and transportation networks like air and maritime traffic [[2]]. The evaluation metrics themselves reflect the complexity of the task. For networks with known ground-truth partitions, Normalized Mutual Information (NMI) and F1-score are standard measures of overlap between the detected and true communities [[5,10]]. When ground-truth is unavailable, performance is assessed via predictive tasks, such as link prediction accuracy measured by the Area Under the ROC Curve (AUC) or attribute prediction accuracy [[5]]. The table below summarizes key synthetic models and real-world datasets mentioned in the provided context.\n\n| Model/DataSet | Description | Source(s) |\n| :--- | :--- | :--- |\n| **mABCD** | A fast synthetic random graph generator for multilayer networks with tunable inter-layer dependencies and power-law degree distributions. | `[[4]]` |\n| **multilayerGM** | A generative framework for mesoscale structures in multilayer networks, used as a basis for comparison. | `[[4,7]]` |\n| **ABCD** | A foundational random graph model extended by mABCD to the multilayer case. | `[[4]]` |\n| **arxiv** | A multilayer network dataset with 13 layers and 14,065 actors. | `[[4]]` |\n| **aps** | A two-layer scientist-research topic network based on APS journal data (1893–2010). | `[[4,10]]` |\n| **scholat** | A real-world dataset used to validate a motif-aware community detection method. | `[[11]]` |\n| **imdb, dblp, accident** | Datasets used to test a network decoupling strategy for community detection. | `[[15]]` |\n\nThese foundational concepts, formalisms, and evaluation tools collectively form the bedrock upon which the field of multilayer community detection is built. They enable researchers to move from abstract ideas to concrete implementations and rigorous empirical validation, driving the continuous advancement of our ability to analyze complex systems.",
+      "stats": {
+        "char_count": 5337,
+        "word_count": 762,
+        "sentence_count": 38,
+        "line_count": 17
+      }
+    },
+    {
+      "heading": "Historical Development and Milestones",
+      "level": 2,
+      "content": "The history of community detection in multilayer networks is a story of paradigmatic shifts, moving from a myopic focus on single-layer abstractions to a holistic embrace of structural complexity. For decades, network science was dominated by the analysis of single-layer graphs (SLGs), where a single type of edge connected a fixed set of nodes [[3]]. This approach proved incredibly successful in many domains but was fundamentally limited in its ability to represent systems with multiple, interacting relational dimensions. The attention of the research community remained almost exclusively on SLGs until a period of rapid innovation began roughly a decade ago [[2]]. This renaissance was catalyzed by a series of landmark papers published between 2010 and 2015 that established the theoretical and methodological foundations for what would become a new frontier in network science.\n\nOne of the earliest and most influential contributions came from Buldyrev et al. in 2010, whose work on catastrophic cascading failures in interdependent networks highlighted the vulnerability of coupled systems and underscored the necessity of moving beyond single-layer analyses [[2]]. This was followed swiftly by a groundbreaking paper from Mucha, Richardson, Macon, Porter, and Onnela in 2010, published in *Science*, which introduced a principled framework for detecting community structure in time-dependent, multiscale, and multiplex networks [[2,3,9,13]]. This work was revolutionary because it proposed extending the popular modularity maximization technique—a staple of SLG analysis—to the multilayer context. Crucially, it did so by introducing inter-layer links that connect copies of the same node across different layers, thereby explicitly modeling the continuity of nodes over time or across relations [[3]]. This seminal paper effectively launched the modern era of multilayer community detection.\n\nBuilding on this foundation, De Domenico, Solé-Ribalta, Omodei, Gómez, and Arenas provided a complete mathematical formulation for multilayer networks in 2013, offering a unified language and notation that could accommodate a wide range of network types, including those with arbitrary inter-layer connections [[2,13]]. Their work on identifying modular flows revealed the presence of overlapping organizational structures, a key insight that challenged the traditional view of non-overlapping communities. Around the same time, Valles-Català, Battiston, Nicosia, Latora, and Porter were exploring growing multiplex networks, while Berlingerio, Coscia, and others were developing practical methods for finding and characterizing communities in multidimensional networks [[6]]. These concurrent efforts solidified the theoretical underpinnings and demonstrated the practical utility of the emerging field. Fortunato's comprehensive review on community detection in graphs, published in 2010, served as a crucial reference point, clearly delineating the limitations of single-layer methods and pointing toward the need for more generalized approaches [[13]].\n\nThe subsequent years saw an explosion of activity building directly upon these early milestones. Researchers began to develop more sophisticated extensions of modularity, such as the multi-layer degree-corrected stochastic block model (MLDCSBM) [[8]] and Hm-modularity [[9]]. Probabilistic models became increasingly central, with the introduction of multilayer stochastic block models (MLSBM) and the development of inference algorithms based on tensor factorization [[7,13]]. A pivotal moment was the realization that aggregating multilayer information into a single projected layer could lead to a loss of critical structural information, prompting a search for alternative strategies [[11]]. This led to the development of methods that either worked directly on the multilayer structure, such as tensor decomposition methods like CANDECOMP/PARAFAC (CP) [[2]], or employed clever aggregation schemes that preserved higher-order information, such as the motif-aware methods discussed later [[10,11]]. The cumulative effect of these developments has been to establish multilayer network analysis as a vibrant and independent subfield of network science, with its own dedicated conferences, journals, and research community.",
+      "stats": {
+        "char_count": 4288,
+        "word_count": 586,
+        "sentence_count": 22,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "Current State-of-the-Art Methodologies",
+      "level": 2,
+      "content": "The current landscape of community detection in multilayer networks is remarkably diverse, reflecting the multifaceted nature of the problem itself. Methodologies have evolved far beyond simple extensions of single-layer algorithms, giving rise to several distinct classes of techniques. These can be broadly categorized into optimization-based, probabilistic, deep learning, and motif-aware approaches, each with its own strengths, weaknesses, and areas of applicability. Understanding this taxonomy is crucial for selecting the appropriate tool for a given research question and for appreciating the ongoing innovation in the field.\n\nOptimization-based methods are perhaps the most direct extension of classical community detection. Inspired by the success of modularity maximization in single-layer networks, researchers have developed numerous multilayer variants. Mucha et al. first proposed extending modularity to multiplex networks using inter-layer linkages, creating a foundation for this approach [[3]]. Subsequent work has sought to refine this idea, leading to concepts like Hm-modularity, which incorporates higher-order connections [[9]], and other specialized formulations like QM_GN and QM_louvain [[10]]. These methods typically involve defining an objective function that quantifies the quality of a given partition and then employing heuristic or exact optimization algorithms to find the partition that maximizes this score. A related approach involves leveraging tensor representations of multilayer networks, where community detection is framed as a tensor decomposition problem, such as CANDECOMP/PARAFAC (CP) [[2]]. These methods are intuitive and often perform well on networks with clear community structure, but they can struggle with issues like resolution limits and computational scalability on very large networks.\n\nProbabilistic methods represent a more principled and statistically-grounded alternative. Instead of optimizing an ad-hoc objective function, these methods posit a generative model for the network, where nodes are assigned to latent community memberships, and the probability of an edge is determined by these memberships. The goal is then to infer the most likely community assignments given the observed network structure. Prominent examples include Stochastic Block Models (SBMs) and their multilayer extensions, such as the Multi-Layer Degree-Corrected Stochastic Block Model (MLDCSBM) [[8]] and the Multilayer Stochastic Block Models (MLSBM) [[13]]. A powerful variant is MTCOV, a generative model that integrates node attributes (covariates) with the network structure using a Poisson tensor factorization framework [[5]]. This approach is particularly valuable because it allows for the simultaneous inference of community structure and the correlation between communities and node attributes directly from the data, enhancing interpretability and predictive power [[5,12]]. Bayesian Nonparametric models, such as those based on the Hierarchical Dirichlet Process, offer another avenue for automatically determining the number of communities without requiring it as a predefined parameter [[13]].\n\nDeep learning and machine learning approaches are rapidly gaining traction due to their ability to learn complex patterns from high-dimensional data. An emerging trend is the integration of deep learning with traditional local expansion strategies. For example, the Layered Information Expansion Detection Algorithm (LIEDA) uses local structural characteristics to select seed nodes and then employs a deep learning-enhanced strategy to expand these seeds into communities [[14]]. Other methods leverage Orthogonal Nonnegative Matrix Tri-factorization (ONMTF) for community detection [[9]]. Embedding-based approaches, which learn low-dimensional vector representations of nodes, are also central to this category. These can be divided into joint representation learning, where embeddings are learned independently for each layer and then fused (e.g., via averaging or concatenation), and coordinate representation learning, which learns a simultaneous cross-layer embedding [[1]]. These embeddings can then be fed into standard clustering algorithms like k-means to identify communities. While these methods show great promise, especially for handling large-scale and heterogeneous data, they often require large amounts of training data and can suffer from a lack of interpretability compared to their probabilistic counterparts.\n\nFinally, a more recent and highly promising direction is the development of motif-aware methods. These algorithms recognize that community structure is not just about pairwise connections but also about higher-order connectivity patterns. Motifs—small, connected subgraphs that occur in networks at frequencies significantly higher than in random graphs—are strong indicators of functional modules [[11]]. Methods like CDMMHN and CDMA explicitly incorporate motifs into the community detection process [[10,11]]. CDMMHN optimizes a modularity function that includes weights for intralayer closed triangles and interlayer open triangles, effectively capturing the tendency of nodes to form tightly-knit, repeating triadic structures across layers [[10]]. Similarly, CDMA constructs a mixed-order network that combines both binary interactions and motif-based higher-order connections before applying a clustering algorithm [[11]]. Experiments have shown that these methods consistently outperform baseline approaches that ignore higher-order structure, demonstrating that motif-awareness leads to more accurate and robust community detection [[10,11]]. This focus on higher-order structure marks a significant evolution in the field, moving from analyzing dyadic relationships to understanding the complex, polyadic interactions that truly define community.",
+      "stats": {
+        "char_count": 5842,
+        "word_count": 772,
+        "sentence_count": 37,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "Applications and Case Studies",
+      "level": 2,
+      "content": "The theoretical advancements in community detection for multilayer networks have unlocked a wide range of practical applications across diverse scientific and technological domains. By providing a lens to see beyond simple pairwise interactions, these methods reveal hidden organizational principles in complex systems, leading to novel insights and actionable intelligence. The case studies detailed in the provided literature illustrate the power of this approach in social, biological, and infrastructure networks.\n\nIn the realm of social network analysis, multilayer community detection provides a richer understanding of human interaction and influence. Traditional single-layer analysis might miss the full picture of an individual's role in a community. For instance, a person might be a peripheral member of a professional network but a central influencer in a social media network. By integrating data from multiple platforms, such as email, messaging, and social media, researchers can construct a more complete profile of an individual's social fabric [[8]]. A specific application by Oro et al. focused on detecting influential users in multilayer social media environments [[1]]. This is crucial for marketing and public health campaigns, as targeting these influencers can maximize the spread of information. The availability of real-world multiplex network datasets, such as Pardus (with 6 layers), Facebook (5 layers), and Flickr (9 relation types), has been instrumental in validating these methods [[2]]. These networks allow researchers to study the interplay between different types of social ties and how they shape community formation and information diffusion.\n\nBiological systems, with their inherent complexity and multiple levels of interaction, are another fertile ground for applying multilayer network analysis. The integration of heterogeneous data sources is particularly impactful here. Chen et al. developed the MLPCD algorithm, which successfully combined gene expression data and protein-protein interaction (PPI) data to detect communities in biological networks [[1]]. This approach leverages the complementary information from different data modalities to produce more biologically meaningful functional modules than either dataset could provide alone. Comito et al. applied a multimodal approach to the diagnosis of Alzheimer’s disease, using multilayer networks to integrate different types of neuroimaging and clinical data [[1]]. In a similar vein, Pournoor et al. developed a transcriptome-to-interactome multilayer framework to analyze colon adenocarcinoma, highlighting how different layers of biological interaction contribute to disease pathology [[7]]. A compelling case study involved constructing a two-layer network to model scientific collaboration, connecting scientists to the research topics they have published on using data from the American Physical Society (APS) journals (1893–2010) [[10]]. By treating scientists and PACS codes as nodes in two separate layers, the authors identified four major collaborative research groups, revealing the thematic structure of the entire discipline over more than a century.\n\nTransportation and infrastructure networks benefit immensely from a multilayer perspective, as these systems are naturally composed of multiple interacting components. For example, a city's mobility patterns cannot be fully understood by looking at its road network in isolation. A more comprehensive model would include layers for railways, bus routes, bike-sharing systems, and even pedestrian walkways. A study by Du et al. used particle swarm optimization in a two-layer traffic model to optimize flow, while Yildirimoglu and Kim identified geographically connected communities in a three-layer urban network representing different transportation modes [[1]]. In air transport, layers can represent different airline carriers, with some being major hubs and others being low-cost operators, revealing distinct community structures within the broader aviation ecosystem [[2]]. Financial systems also exhibit multilayer characteristics, with different layers representing different types of transactions or ownership relations. Gao et al. analyzed China's banking data from 2021 using community detection methods to understand systemic risk, while Fernandes et al. studied consumer centrality and co-marketing opportunities by analyzing customer purchase histories across different product categories [[1]]. These applications demonstrate that community detection in multilayer networks is not merely an academic exercise but a powerful tool for managing, optimizing, and understanding the behavior of critical real-world infrastructures.",
+      "stats": {
+        "char_count": 4712,
+        "word_count": 643,
+        "sentence_count": 34,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "Challenges, Limitations, and Open Problems",
+      "level": 2,
+      "content": "Despite significant progress, the field of community detection in multilayer networks faces a host of persistent challenges and open problems that continue to drive research forward. These issues span computational, statistical, and conceptual domains, and addressing them is crucial for the continued maturation and widespread adoption of these methods. The most prominent challenges include scalability, interpretability, validation, and the lack of universally accepted methodologies.\n\nScalability remains a paramount concern, particularly as the size and dimensionality of available datasets grow exponentially. Many state-of-the-art algorithms, especially those based on tensor decompositions or spectral methods, have high computational complexity, making them intractable for massive networks [[2,8]]. This has led to a push for developing scalable approximations and acceleration techniques, such as subsampling-based spectral methods [[8]] and efficient generators like mABCD, which is up to 310 times faster than previous frameworks [[4]]. Interpretability is another major hurdle. The results produced by many complex algorithms, particularly deep learning and certain optimization-based methods, can be difficult to interpret, leaving analysts unsure of why a particular community structure was identified [[2]]. This is compounded by the difficulty of validating results against ground truth, as few real-world multilayer networks possess a universally accepted, unambiguous community structure. This lack of ground truth makes it challenging to objectively compare the performance of different algorithms and to trust their outputs [[2]].\n\nConceptually, the field grapples with several unresolved issues. One of the most significant is the lack of a unified definition for community structure in multilayer networks. Different algorithms often implicitly assume different definitions—for example, as a cohesive group that persists across layers versus a group that emerges from the synergy of multiple layers [[11]]. This ambiguity can lead to conflicting results and hinders the development of a coherent theoretical framework. Another limitation is the scarcity of multilayer-specific embedding methods that can effectively capture the nuanced interplay between layers [[1]]. Furthermore, while static multilayer networks are becoming better understood, there is a relative scarcity of research focused on dynamic multilayer networks, where both the topology and the node sets can change over time [[1,2]]. Amelio et al. have noted the importance of evolutionary clustering in this context [[1]].\n\nSeveral specific technical challenges also persist. Aggregating multilayer information into a single projection is a common strategy but is known to lose critical structural information, a problem that motivates the development of more sophisticated flattening and assembly techniques [[1,11]]. There is also a recognized need for methods that can automatically estimate the number of communities, as many current algorithms require this value as an input parameter [[1]]. The detection of overlapping, local, and similarity-based communities remains less developed compared to the dominant global partitioning approaches [[1]]. Finally, the fragility of interdependent networks under random failures and cascading effects is a significant concern, especially in technological and infrastructure systems, and requires deeper investigation [[2]]. The table below summarizes some of the key challenges and corresponding research efforts aimed at addressing them.\n\n| Challenge | Description | Proposed Solutions / Research Directions | Source(s) |\n| :--- | :--- | :--- | :--- |\n| **Scalability** | High computational cost and memory requirements for large networks. | Accelerated spectral methods, subsampling, efficient generators (mABCD), deep learning enhancements (LIEDA). | `[[2,4,8,14]]` |\n| **Interpretability** | Difficulty in understanding and trusting the results of complex algorithms. | Development of probabilistic models (MTCOV) that explain data correlations. | `[[2,5,12]]` |\n| **Ground-Truth Validation** | Lack of universally accepted, unambiguous community labels in real-world networks. | Use of synthetic benchmarks (mABCD), link/attribute prediction as proxy tasks, custom indices (R_Inter). | `[[2,4,5,10]]` |\n| **Lack of Unified Definition** | Ambiguity in the definition of a \"community\" across layers. | Development of methods that can handle different definitions (e.g., pillar vs. emergent communities). | `[[11]]` |\n| **Dynamic Networks** | Insufficient focus on networks where topology and node sets evolve over time. | Application of evolutionary clustering techniques. | `[[1]]` |\n| **Automatic Parameter Estimation** | Need for algorithms that can automatically determine parameters like the number of communities. | Development of Bayesian Nonparametric models, methods using average modularity. | `[[1,8,13]]` |\n\nAddressing these challenges will be central to the next wave of innovation in the field, pushing the boundaries of what can be achieved in understanding the complex, interconnected world around us.",
+      "stats": {
+        "char_count": 5156,
+        "word_count": 712,
+        "sentence_count": 40,
+        "line_count": 18
+      }
+    },
+    {
+      "heading": "Future Research Directions",
+      "level": 2,
+      "content": "The field of community detection in multilayer networks, while already rich with established methods and successful applications, is poised for continued growth and innovation. The future trajectory of research appears to be moving towards greater integration, specialization, and sophistication in response to the increasing complexity of data and the demand for more interpretable and robust insights. Several key future directions stand out as particularly promising, aiming to address the current limitations and unlock new capabilities in network analysis.\n\nOne of the most significant future directions is the deeper integration of node attributes and features into the community detection process. While current methods like MTCOV are beginning to bridge this gap [[5]], there is immense potential to go further. Future research could focus on developing end-to-end frameworks where community structure, node attributes, and edge features are inferred jointly within a single, unified probabilistic model. This would allow communities to be defined not just by their connectivity patterns but also by the shared characteristics of their members, leading to more semantically meaningful and actionable groupings. The ability to predict missing attributes or links based on the inferred community structure would also provide a powerful tool for data imputation and knowledge discovery in sparse networks [[12]].\n\nAnother critical area for future exploration is the development of more advanced methods for dynamic and evolving multilayer networks. The current body of research is largely focused on static snapshots, but many real-world systems are continuously changing. Future work should aim to create algorithms that can perform \"evolutionary clustering,\" tracking the birth, merging, splitting, and death of communities over time [[1]]. This would require moving beyond simple aggregation of time-slices and developing models that can capture temporal dependencies and phase transitions in community structure. Such methods would be invaluable for applications in finance (tracking market segments), epidemiology (monitoring disease outbreaks), and social media analysis (understanding the lifecycle of online communities).\n\nThe third major thrust of future research lies in moving beyond pairwise interactions to fully embrace higher-order structure. The success of motif-aware methods like CDMMHN and CDMA is a clear indicator of this trend [[10,11]]. The logical next step is to move from counting small motifs to learning more complex, high-order connectivity patterns directly from the data. This could involve using techniques from algebraic topology, such as persistent homology, to identify loops and voids in the network that correspond to functional modules. Alternatively, deep learning architectures could be designed to learn hierarchical representations of network structure, starting from edges and building up to motifs, then super-motifs, and finally to entire communities. This would represent a fundamental shift from analyzing networks to discovering the complex polyadic rules that govern their formation.\n\nFinally, the development of more automated and adaptive methods represents a long-term goal for the field. This includes not only algorithms that can automatically tune their own hyperparameters but also those that can adapt to the specific characteristics of the network they are analyzing. For instance, a future algorithm might be able to detect whether a network contains overlapping or non-overlapping communities, or whether a layer aggregation strategy would be beneficial, based on an initial analysis of the data. This level of automation would make community detection more accessible to non-experts and reduce the reliance on trial-and-error parameter tuning. To summarize, the future of community detection in multilayer networks is likely to be characterized by a synthesis of probabilistic modeling, dynamic analysis, higher-order structure exploitation, and intelligent automation, ultimately providing a much deeper and more nuanced understanding of complex systems.\n\n---",
+      "stats": {
+        "char_count": 4126,
+        "word_count": 584,
+        "sentence_count": 25,
+        "line_count": 11
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "1. Community Detection in Multilayer Networks: Challenges, ...",
+      "number": null,
+      "title": "community detection in multilayer networks: challenges"
+    },
+    {
+      "text": "2. The structure and dynamics of multilayer networks - PMC",
+      "number": null,
+      "title": "the structure and dynamics of multilayer networks - pmc"
+    },
+    {
+      "text": "3. Community Detection On Multi-layer Graph using Intra ...",
+      "number": null,
+      "title": "community detection on multi-layer graph using intra"
+    },
+    {
+      "text": "4. Multilayer Artificial Benchmark for Community Detection ...",
+      "number": null,
+      "title": "multilayer artificial benchmark for community detection"
+    },
+    {
+      "text": "5. Community detection with node attributes in multilayer ...",
+      "number": null,
+      "title": "community detection with node attributes in multilayer"
+    },
+    {
+      "text": "6. Null Model and Community Structure in Multiplex Networks",
+      "number": null,
+      "title": "null model and community structure in multiplex networks"
+    },
+    {
+      "text": "7. A local perspective on community structure in multilayer ...",
+      "number": null,
+      "title": "a local perspective on community structure in multilayer"
+    },
+    {
+      "text": "8. Community detection by spectral methods in multi-layer ...",
+      "number": null,
+      "title": "community detection by spectral methods in multi-layer"
+    },
+    {
+      "text": "9. (PDF) Motif-based community detection in heterogeneous ...",
+      "number": null,
+      "title": "(pdf) motif-based community detection in heterogeneous"
+    },
+    {
+      "text": "10. Motif-based community detection in heterogeneous ...",
+      "number": null,
+      "title": "motif-based community detection in heterogeneous"
+    },
+    {
+      "text": "11. Multiplex network community detection algorithm based on ...",
+      "number": null,
+      "title": "multiplex network community detection algorithm based on"
+    },
+    {
+      "text": "13. (PDF) Community detection with node attributes in ...",
+      "number": null,
+      "title": "(pdf) community detection with node attributes in"
+    },
+    {
+      "text": "14. Research on a Multilayer Network Community Detection ...",
+      "number": null,
+      "title": "research on a multilayer network community detection"
+    },
+    {
+      "text": "15. Efficient community detection in multilayer networks using ...",
+      "number": null,
+      "title": "efficient community detection in multilayer networks using"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Qwen\\Sociology\\03_A_survey_of_community_detection_methods_in_multilayer_networ_20251225_154613_split.json",
+    "processed_date": "2025-12-30T20:33:45.906482",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

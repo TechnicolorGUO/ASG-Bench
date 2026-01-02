@@ -1,0 +1,335 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: A Review on Design of Upper Limb Exoskeleton."
+    ],
+    [
+      1,
+      "A Comprehensive Review on the Design of Upper Limb Exoskeletons: Mechanics, Control, and Applications"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Classification of Robotic Rehabilitation Devices"
+    ],
+    [
+      3,
+      "2.2 Anatomical Considerations"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 Early Concepts (1890–1950)"
+    ],
+    [
+      3,
+      "3.2 The Industrial Age and \"Hardiman\" (1960s)"
+    ],
+    [
+      3,
+      "3.3 The Digital and Rehabilitation Era (1990s–2000s)"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Mechanical Design Architectures"
+    ],
+    [
+      4,
+      "4.1.1 Rigid Exoskeletons"
+    ],
+    [
+      4,
+      "4.1.2 Soft Exoskeletons (Exosuits)"
+    ],
+    [
+      3,
+      "4.2 Actuation Technologies"
+    ],
+    [
+      3,
+      "4.3 Control Strategies"
+    ],
+    [
+      4,
+      "4.3.1 Interaction Control"
+    ],
+    [
+      4,
+      "4.3.2 Intention Detection and Synergy-Based Control"
+    ],
+    [
+      4,
+      "4.3.3 Artificial Intelligence and Reinforcement Learning"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Medical Rehabilitation"
+    ],
+    [
+      3,
+      "5.2 Industrial Ergonomics"
+    ],
+    [
+      3,
+      "5.3 Military and Human Augmentation"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Kinematic Compatibility"
+    ],
+    [
+      3,
+      "6.2 Power and Energy Density"
+    ],
+    [
+      3,
+      "6.3 Human-Robot Interaction (pHRI)"
+    ],
+    [
+      3,
+      "6.4 Cost and Accessibility"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Soft Robotics and Hybrid Materials"
+    ],
+    [
+      3,
+      "7.2 AI-Driven Personalization"
+    ],
+    [
+      3,
+      "7.3 Hybrid FES-Exoskeleton Systems"
+    ],
+    [
+      3,
+      "7.4 Brain-Machine Interfaces (BMI)"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: A Review on Design of Upper Limb Exoskeleton.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 18:30:22*\n*Progress: [13/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/A_Review_on_Design_of_Upper_Limb_Exoskeleton_20251226_183022.md*\n---"
+    },
+    {
+      "heading": "A Comprehensive Review on the Design of Upper Limb Exoskeletons: Mechanics, Control, and Applications",
+      "level": 1,
+      "content": "**Key Points**\n*   **Evolution:** Upper limb exoskeletons have evolved from the heavy, hydraulic \"Hardiman\" of the 1960s to modern lightweight, soft-robotic, and AI-driven systems.\n*   **Design Diversity:** Designs are categorized into rigid (linkage-based) and soft (textile/pneumatic) structures, with actuation ranging from fully active (motors) to passive (springs/dampers) for industrial support.\n*   **Control Strategies:** State-of-the-art control has shifted from simple PID loops to complex admittance/impedance models, synergy-based intention detection, and Deep Reinforcement Learning (e.g., Twin Delayed DDPG).\n*   **Applications:** The field is dominated by three sectors: medical rehabilitation (stroke recovery), industrial ergonomics (overhead work support), and military augmentation (load carrying).\n*   **Critical Challenges:** Major hurdles remain in kinematic compatibility (aligning robot axes with the complex human shoulder), power-to-weight ratios, and intuitive human-robot interaction.\n\n---"
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "Upper limb exoskeletons represent a rapidly advancing field in biorobotics, merging mechanical engineering, neurophysiology, and control theory to augment, assist, or rehabilitate human motor function. This systematic literature review provides a comprehensive analysis of the design, control, and application of upper limb exoskeletons. We trace the historical trajectory from early 19th-century patents to contemporary soft robotics. The review critically examines mechanical architectures, contrasting rigid anthropomorphic designs with end-effector systems and emerging soft pneumatic actuators. We analyze state-of-the-art control strategies, including electromyography (EMG)-based intention detection, synergy-based control, and reinforcement learning algorithms. Furthermore, we evaluate the efficacy of these devices in clinical rehabilitation for stroke patients, industrial injury prevention, and military load augmentation. The paper concludes by identifying persistent challenges regarding kinematic compatibility and human-robot interaction (pHRI), proposing future research directions in hybrid actuation and embodied artificial intelligence."
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The human upper limb is a marvel of biological engineering, capable of complex manipulation, high-precision tasks, and significant force generation. However, this complexity makes the limb vulnerable to neurological injuries, such as stroke, and musculoskeletal disorders (MSDs) resulting from repetitive industrial labor. According to the World Health Organization, stroke remains a leading cause of long-term disability, often leaving survivors with hemiparesis that severely impacts activities of daily living (ADL) [cite: 1]. Simultaneously, in the industrial sector, work-related MSDs account for a significant portion of lost workdays, particularly due to overhead tasks that strain the shoulder complex [cite: 2, 3].\n\nUpper limb exoskeletons have emerged as a technological solution to these disparate problems. Defined as wearable electromechanical devices that align with the user's joints, these systems work in parallel with the human body to provide torque assistance, guidance, or load redistribution [cite: 4, 5]. Unlike prosthetics, which replace a missing limb, exoskeletons augment or restore the function of an existing one.\n\nThe motivation for this review stems from the rapid diversification of exoskeleton technology in the last decade. While early systems were predominantly rigid, stationary, and designed for research, the current landscape includes portable passive vests for factory workers, soft robotic gloves for home rehabilitation, and AI-driven active suits. This paper aims to synthesize these developments, offering a rigorous analysis of the mechanical designs and control methodologies that define the current state-of-the-art."
+    },
+    {
+      "heading": "2.1 Classification of Robotic Rehabilitation Devices",
+      "level": 3,
+      "content": "In the domain of upper limb rehabilitation, robotic devices are generally classified into three categories:\n1.  **Exoskeletons:** Wearable devices where the robot's axes of rotation are aligned with the human joints. They provide direct control over individual joint torques and are capable of isolating specific muscle groups [cite: 4].\n2.  **End-Effectors:** Robots that attach only to the distal part of the limb (e.g., the hand). The robot moves the hand in space, and the proximal joints (elbow, shoulder) follow based on the limb's inverse kinematics. While simpler to design, they offer less control over joint-specific posture [cite: 4].\n3.  **Orthoses:** Traditionally passive devices used for stabilization. However, the line between \"active orthoses\" and \"exoskeletons\" has blurred, with the terms often used interchangeably in literature regarding powered assistive devices [cite: 6]."
+    },
+    {
+      "heading": "2.2 Anatomical Considerations",
+      "level": 3,
+      "content": "Designing an upper limb exoskeleton is uniquely challenging due to the complexity of the shoulder girdle. The human shoulder is not a simple ball-and-socket joint; it involves the articulation of the humerus, scapula, and clavicle. The center of rotation (CoR) of the glenohumeral joint shifts during movement [cite: 7, 8]. A rigid exoskeleton with a fixed CoR can generate misalignment forces, causing discomfort or injury to the user. This phenomenon, known as **kinematic incompatibility**, is a central design constraint [cite: 9]."
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The lineage of exoskeleton technology spans over a century, evolving from purely mechanical concepts to cyber-physical systems."
+    },
+    {
+      "heading": "3.1 Early Concepts (1890–1950)",
+      "level": 3,
+      "content": "The earliest recorded exoskeleton concept is attributed to **Nicholas Yagn**, a Russian engineer who, in 1890, patented an \"apparatus for facilitating walking, running, and jumping\" [cite: 10, 11, 12]. Yagn’s device was passive, utilizing stored energy in compressed gas bags and springs to aid movement. Although primarily focused on the lower limbs, it established the fundamental concept of parallel mechanical augmentation. In the 1910s, Leslie C. Kelley patented the \"Pedomotor,\" further exploring artificial ligaments and power generation [cite: 10, 12]."
+    },
+    {
+      "heading": "3.2 The Industrial Age and \"Hardiman\" (1960s)",
+      "level": 3,
+      "content": "The modern era of active exoskeletons began in the 1960s with the **Hardiman** project, a collaboration between General Electric and the U.S. military. Hardiman was a massive, hydraulic full-body exoskeleton designed to amplify human strength by a factor of 25, allowing a user to lift 1,500 pounds [cite: 6, 11, 13]. However, the system weighed nearly 1,500 pounds itself and suffered from severe stability and control latency issues. It was never practical for deployment but demonstrated the potential (and limitations) of master-slave hydraulic amplification [cite: 11]."
+    },
+    {
+      "heading": "3.3 The Digital and Rehabilitation Era (1990s–2000s)",
+      "level": 3,
+      "content": "Advancements in microprocessors and sensors in the 1990s allowed for more sophisticated control. The **HAL (Hybrid Assistive Limb)**, developed by Cyberdyne in Japan (starting prototypes in the 90s, commercialized later), marked a paradigm shift by using bio-electric signals (EMG) to control the robot, effectively creating a \"voluntary control\" loop [cite: 13, 14]. Simultaneously, the **Lokomat** (2001) revolutionized lower limb rehab, paving the way for upper limb equivalents like the **ARMin** and **CADEN-7** in the mid-2000s, which focused on neurorehabilitation rather than super-strength [cite: 15]."
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "Contemporary upper limb exoskeletons are characterized by a divergence in design philosophies: rigid vs. soft, and active vs. passive."
+    },
+    {
+      "heading": "4.1.1 Rigid Exoskeletons",
+      "level": 4,
+      "content": "Rigid exoskeletons utilize hard links (metal or carbon fiber) and joints (bearings/motors) to transmit force.\n*   **Serial Manipulators:** Most common designs (e.g., CADEN-7, NEUROExos) mimic the human arm's serial chain. They offer high precision and high force output [cite: 15, 16].\n*   **Shoulder Mechanisms:** To address the shifting shoulder CoR, advanced designs employ redundant degrees of freedom (DoF) or passive slip interfaces. For example, the **SAMA** exoskeleton and others utilize parallelogram mechanisms or spherical parallel mechanisms (SPM) to align the robot's rotation with the human's instantaneous center of rotation [cite: 7, 17].\n*   **Gravity Compensation:** Many rigid systems incorporate passive gravity compensation (using springs or counterweights) to make the device \"weightless\" to the user, reducing the motor torque required for active assistance [cite: 7]."
+    },
+    {
+      "heading": "4.1.2 Soft Exoskeletons (Exosuits)",
+      "level": 4,
+      "content": "To overcome the bulk and kinematic restrictions of rigid systems, soft robotics has emerged as a dominant trend. These devices use compliant materials (textiles, elastomers) to transmit force.\n*   **Pneumatic Actuators:** Recent innovations include the **LISPER** (Lobster-Inspired Silicone Pneumatic Robot) and **SCASPER** (Scallop-Shaped Pneumatic Robot) [cite: 18, 19]. LISPER utilizes a C-shape constraint to create bending motion for the elbow, while SCASPER uses inflatable airbags for high-torque shoulder assistance. These actuators are lightweight, inherently safe due to compliance, and cheaper to manufacture.\n*   **Cable-Driven Systems:** These systems use Bowden cables to transmit force from a remote motor pack to soft anchors on the limb. This reduces the distal mass on the arm, improving metabolic efficiency [cite: 20]."
+    },
+    {
+      "heading": "4.2 Actuation Technologies",
+      "level": 3,
+      "content": "*   **Electric Motors:** The standard for precision. Often paired with harmonic drives for high torque density. However, they are stiff and require complex control to appear \"compliant\" [cite: 21].\n*   **Series Elastic Actuators (SEA):** An electric motor connected to the load via a spring. SEAs provide accurate force control, shock tolerance, and energy storage, making them ideal for safe human-robot interaction [cite: 7, 16].\n*   **Pneumatic Artificial Muscles (PAMs):** McKibben muscles and soft silicone actuators offer high power-to-weight ratios and natural compliance but suffer from non-linear dynamics and require bulky air compressors [cite: 15, 20].\n*   **Passive Actuation:** Gas springs and elastic elements are used in industrial exoskeletons (e.g., Ekso EVO) to store energy during arm lowering and release it during lifting, requiring no batteries [cite: 22, 23]."
+    },
+    {
+      "heading": "4.3 Control Strategies",
+      "level": 3,
+      "content": "The control system is the \"brain\" of the exoskeleton, determining how and when assistance is applied."
+    },
+    {
+      "heading": "4.3.1 Interaction Control",
+      "level": 4,
+      "content": "*   **Impedance/Admittance Control:** Instead of forcing the limb through a trajectory (position control), these controllers regulate the relationship between force and position. This allows the robot to yield to the user's voluntary movement, essential for \"Assist-as-Needed\" (AAN) rehabilitation [cite: 21]."
+    },
+    {
+      "heading": "4.3.2 Intention Detection and Synergy-Based Control",
+      "level": 4,
+      "content": "Advanced systems attempt to predict user intent before movement occurs.\n*   **EMG-Based Control:** Surface electromyography (sEMG) measures muscle activation. The **HAL** exoskeleton is famous for using these signals to drive motors proportionally to the user's effort [cite: 13, 24].\n*   **Synergy-Based Control (Syn-ID):** Recent research utilizes the concept of \"muscle synergies\"—the hypothesis that the nervous system activates groups of muscles rather than individual ones. Algorithms like **Syn-ID** detect EMG onset and use Gaussian Mixture Models to infer movement direction (e.g., reaching) in real-time, reducing the dimensionality of the control problem [cite: 25]."
+    },
+    {
+      "heading": "4.3.3 Artificial Intelligence and Reinforcement Learning",
+      "level": 4,
+      "content": "Machine learning is increasingly used to handle the non-linear complexities of human-robot systems.\n*   **Reinforcement Learning (RL):** Algorithms like **Twin Delayed Deep Deterministic Policy Gradient (TD3)** are being applied to optimize assistance levels in real-time. In experiments, TD3 agents learn to adjust actuator gains to minimize user EMG activity during reaching tasks, effectively \"learning\" the user's needs without a pre-defined model [cite: 26, 27, 28, 29].\n*   **Offline RL:** Recent studies (2025) have explored offline RL (e.g., Mixed Q-Functionals) to tune parameters like biceps/triceps thresholds on devices like the MyoPro 2, reducing the need for manual calibration by clinicians [cite: 30]."
+    },
+    {
+      "heading": "5.1 Medical Rehabilitation",
+      "level": 3,
+      "content": "The primary application of active upper limb exoskeletons is neurorehabilitation for stroke and spinal cord injury.\n*   **TIGER (Tenodesis-Induced-Grip Exoskeleton Robot):** A specialized device connecting wrist and finger motion. Clinical trials (2021-2024) demonstrated that TIGER training significantly improved Fugl-Meyer Assessment (FMA) scores in chronic stroke patients by utilizing the tenodesis effect (wrist extension causing finger flexion) [cite: 24, 31, 32].\n*   **HEXO-UR30A:** A shoulder-elbow exoskeleton providing continuous passive motion. Randomized controlled trials showed significant improvements in shoulder ROM and spasticity reduction compared to conventional therapy [cite: 24, 33, 34].\n*   **Portable Systems:** There is a shift towards portable devices like the **MyoPro** and **CLEVERarm**, allowing rehabilitation to move from clinics to homes [cite: 1, 30]."
+    },
+    {
+      "heading": "5.2 Industrial Ergonomics",
+      "level": 3,
+      "content": "Passive exoskeletons have found widespread adoption in manufacturing to prevent injuries.\n*   **Overhead Work Support:** Devices like the **Ekso EVO** (Ekso Bionics), **Paexo Shoulder** (Ottobock), and **Skelex 360** are designed for workers performing overhead assembly (e.g., automotive underbody work). They use passive springs to support the weight of the arms, reducing shoulder muscle activity by up to 50% [cite: 2, 3, 22, 35].\n*   **Case Study - Ekso EVO:** This vest features a \"stacked-link\" structure that decouples left and right shoulder support, allowing torso twist and cooling airflow. It is purely passive, providing 5-15 lbs of lift assistance per arm [cite: 23, 36]."
+    },
+    {
+      "heading": "5.3 Military and Human Augmentation",
+      "level": 3,
+      "content": "While less publicized than medical or industrial versions due to classification, military exoskeletons focus on endurance.\n*   **Load Carriage:** Systems like the **HULC** (Human Universal Load Carrier) and **ONYX** (Lockheed Martin) are designed to transfer backpack loads through the exoskeleton to the ground, bypassing the soldier's spine. While ONYX is lower-limb focused, it is often integrated with upper-body modules for handling heavy logistics (e.g., loading shells) [cite: 37, 38].\n*   **Current State:** The \"Iron Man\" suit remains fiction due to power constraints. Current military focus has shifted towards \"logistics\" exoskeletons (like the **Guardian XO**) for base operations rather than frontline combat suits [cite: 37, 39]."
+    },
+    {
+      "heading": "6. Challenges and Open Problems",
+      "level": 2,
+      "content": "Despite significant progress, several barriers prevent ubiquitous adoption."
+    },
+    {
+      "heading": "6.1 Kinematic Compatibility",
+      "level": 3,
+      "content": "The mismatch between the robot's joints and the human's biological axes remains a critical issue. The human shoulder complex has a floating center of rotation. If the exoskeleton forces a fixed rotation, it creates shear forces on the skin and joints, leading to discomfort and potential injury. While mechanisms like the SPM [cite: 7] address this, they add weight and complexity."
+    },
+    {
+      "heading": "6.2 Power and Energy Density",
+      "level": 3,
+      "content": "For active, portable exoskeletons, battery life is the limiting factor. High-torque motors require significant power. Current battery technology limits operation times to a few hours, which is insufficient for full-day industrial or military use without tethering. This has driven the market toward passive devices in industry [cite: 11, 40]."
+    },
+    {
+      "heading": "6.3 Human-Robot Interaction (pHRI)",
+      "level": 3,
+      "content": "Detecting user intent with zero latency is unsolved. EMG signals are noisy and vary with sweat/fatigue. There is a delay between the user's neural command and the robot's mechanical response. If the robot lags, it feels like a heavy burden; if it leads too aggressively, it feels unsafe. Achieving \"transparency\" (where the user feels no resistance) is difficult with high-ratio gearboxes [cite: 9, 21]."
+    },
+    {
+      "heading": "6.4 Cost and Accessibility",
+      "level": 3,
+      "content": "Medical exoskeletons are prohibitively expensive for individual ownership, restricting them to clinics. Industrial units are more affordable but still represent a significant capital investment for widespread deployment [cite: 41]."
+    },
+    {
+      "heading": "7.1 Soft Robotics and Hybrid Materials",
+      "level": 3,
+      "content": "The future lies in **soft exosuits**. Research into textile-based pneumatic actuators (like SCASPER) promises devices that are lighter, safer, and more comfortable. Future work will likely focus on improving the force output of soft actuators, which currently lag behind rigid motors [cite: 18, 19]."
+    },
+    {
+      "heading": "7.2 AI-Driven Personalization",
+      "level": 3,
+      "content": "Control systems will move from generalized models to highly personalized, adaptive agents. **Reinforcement Learning** frameworks that continuously update based on the user's specific biomechanics and recovery progress will become standard. This includes \"human-in-the-loop\" optimization where the control parameters evolve in real-time [cite: 26, 42]."
+    },
+    {
+      "heading": "7.3 Hybrid FES-Exoskeleton Systems",
+      "level": 3,
+      "content": "Combining robotic support with **Functional Electrical Stimulation (FES)** offers a dual benefit: the robot supports the load, while FES activates the user's muscles to prevent atrophy and promote neuroplasticity. Cooperative control strategies that allocate effort between the motor and the muscle are a promising frontier [cite: 17, 43]."
+    },
+    {
+      "heading": "7.4 Brain-Machine Interfaces (BMI)",
+      "level": 3,
+      "content": "While currently invasive or requiring cumbersome caps, non-invasive EEG-based control is the ultimate goal for patients with complete paralysis, bypassing the spinal cord to drive the exoskeleton directly from cortical activity [cite: 20]."
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "The design of upper limb exoskeletons has matured from the cumbersome hydraulic prototypes of the 1960s to sophisticated, multi-modal systems capable of delicate rehabilitation and robust industrial support. The field is currently witnessing a bifurcation: industrial applications are favoring passive, reliable, and lightweight mechanical solutions (e.g., Ekso EVO), while medical research is pushing the boundaries of active control, soft robotics, and artificial intelligence (e.g., TIGER, Syn-ID).\n\nWhile mechanical challenges regarding shoulder kinematics and power density persist, the integration of deep learning and soft materials offers a pathway to more transparent, comfortable, and effective devices. As these technologies converge, upper limb exoskeletons are poised to transition from specialized clinical tools to ubiquitous assistive devices, fundamentally altering how humans interact with their environment, recover from injury, and perform labor."
+    }
+  ],
+  "references": [
+    "[cite: 24] [cite: 24, 31] Systematic review on portable exoskeletons (2025) & TIGER exoskeleton study.",
+    "[cite: 44] [cite: 4] Review of portable rehabilitation robots and classifications.",
+    "[cite: 4] [cite: 5] Review on design of upper limb exoskeletons (2020).",
+    "[cite: 5] [cite: 10, 11] History of exoskeletons and Nicholas Yagn.",
+    "[cite: 10] [cite: 6, 13] Historical timeline: Hardiman to modern era.",
+    "[cite: 6] [cite: 7] Upper limb anatomy and design challenges.",
+    "[cite: 45] [cite: 1] CLEVERarm and challenges in rehab exoskeleton design.",
+    "[cite: 46] [cite: 41] Soft pneumatic exoskeletons for children.",
+    "[cite: 13] [cite: 16] NEUROExos and ergonomic design.",
+    "[cite: 7] [cite: 9] Kinematic compatibility and pHRI.",
+    "[cite: 1] [cite: 15] State-of-the-art active upper-limb exoskeletons (2014).",
+    "[cite: 41] [cite: 8] Design difficulties and requirements for active exoskeletons.",
+    "[cite: 16] [cite: 17] SAMA exoskeleton and cooperative control.",
+    "[cite: 9] [cite: 21] Variable impedance actuation in pHRI.",
+    "[cite: 15] [cite: 42] AI and PID control for upper limb exoskeletons.",
+    "[cite: 47] [cite: 25] Synergy-based intention decoding (Syn-ID).",
+    "[cite: 8] [cite: 43] Synergy-based cooperative control (FES + Exo).",
+    "[cite: 48] [cite: 20] Hierarchical control systems and cable-driven designs.",
+    "[cite: 49] [cite: 26, 27] Deep Reinforcement Learning (TD3) for exoskeleton control.",
+    "[cite: 17] [cite: 30] Offline RL for MyoPro 2 parameter tuning.",
+    "[cite: 21] [cite: 2, 3] Industrial exoskeletons (Ekso EVO, Skelex).",
+    "[cite: 42] [cite: 18, 19] Soft actuators: LISPER and SCASPER.",
+    "[cite: 50] [cite: 37, 51] Military exoskeleton applications and history.",
+    "[cite: 52] [cite: 38] Military exoskeleton market and ONYX.",
+    "[cite: 53] [cite: 14] History of HAL and commercialization.",
+    "[cite: 25] [cite: 22, 23] Ekso EVO technical specifications.",
+    "[cite: 43] [cite: 28, 29] Twin Delayed DDPG algorithm details.",
+    "[cite: 20] [cite: 33, 34] HEXO-UR30A clinical trials."
+  ]
+}

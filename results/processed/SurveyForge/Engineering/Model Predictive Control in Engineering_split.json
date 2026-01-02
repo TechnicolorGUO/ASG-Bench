@@ -1,0 +1,875 @@
+{
+  "outline": [
+    [
+      1,
+      "A Comprehensive Survey on Model Predictive Control in Engineering"
+    ],
+    [
+      2,
+      "1 Introduction"
+    ],
+    [
+      2,
+      "2 Theoretical Foundations and Algorithmic Frameworks"
+    ],
+    [
+      3,
+      "2.1 Mathematical Formulation of Model Predictive Control Problems"
+    ],
+    [
+      3,
+      "2.2 Optimization Techniques in Model Predictive Control"
+    ],
+    [
+      3,
+      "2.3 Stability and Feasibility Analysis in Model Predictive Control"
+    ],
+    [
+      3,
+      "2.4 Types of Model Predictive Control Frameworks"
+    ],
+    [
+      2,
+      "3 Advanced Model Predictive Control Techniques"
+    ],
+    [
+      3,
+      "3.1 Robust Model Predictive Control under Uncertainty"
+    ],
+    [
+      3,
+      "3.2 Stochastic Model Predictive Control with Probabilistic Constraints"
+    ],
+    [
+      3,
+      "3.3 Adaptive Model Predictive Control for Dynamic Systems"
+    ],
+    [
+      3,
+      "3.4 Nonlinear and Data-Driven Model Predictive Control"
+    ],
+    [
+      3,
+      "3.5 Computational Efficiency and Real-Time Implementation"
+    ],
+    [
+      2,
+      "4 Data-Driven and Learning-Based Model Predictive Control"
+    ],
+    [
+      3,
+      "4.1 Data-Driven Model Predictive Control Frameworks"
+    ],
+    [
+      3,
+      "4.2 Learning-Based Model Predictive Control Approaches"
+    ],
+    [
+      3,
+      "4.3 Hybrid Control Strategies Combining MPC with Learning"
+    ],
+    [
+      3,
+      "4.4 Applications of Data-Driven and Learning-Based MPC in Engineering"
+    ],
+    [
+      3,
+      "4.5 Challenges and Future Directions in Data-Driven and Learning-Based MPC"
+    ],
+    [
+      2,
+      "5 Applications of Model Predictive Control in Engineering Domains"
+    ],
+    [
+      3,
+      "5.1 Applications in Process Control and Industrial Systems"
+    ],
+    [
+      3,
+      "5.2 Autonomous Systems and Robotics"
+    ],
+    [
+      3,
+      "5.3 Energy Systems and Smart Buildings"
+    ],
+    [
+      3,
+      "5.4 Aerospace and Mechanical Systems"
+    ],
+    [
+      3,
+      "5.5 Emerging and Cross-Domain Applications"
+    ],
+    [
+      2,
+      "6 Computational Challenges and Implementation Considerations"
+    ],
+    [
+      3,
+      "6.1 Computational Complexity and Real-Time Constraints"
+    ],
+    [
+      3,
+      "6.2 Optimization Strategies for Computational Efficiency"
+    ],
+    [
+      3,
+      "6.3 Implementation in Embedded and Distributed Systems"
+    ],
+    [
+      3,
+      "6.4 Trade-offs in MPC Design and Performance"
+    ],
+    [
+      2,
+      "7 Robustness, Safety, and Constraint Handling"
+    ],
+    [
+      3,
+      "7.1 Robust Model Predictive Control Frameworks"
+    ],
+    [
+      3,
+      "7.2 Safety-Critical Applications of Model Predictive Control"
+    ],
+    [
+      3,
+      "7.3 Constraint Handling and Feasibility Analysis"
+    ],
+    [
+      3,
+      "7.4 Stochastic and Data-Driven Constraint Handling"
+    ],
+    [
+      3,
+      "7.5 Computational and Implementation Challenges"
+    ],
+    [
+      2,
+      "8 Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Comprehensive Survey on Model Predictive Control in Engineering",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Introduction",
+      "level": 2,
+      "content": "Model Predictive Control (MPC) has emerged as a powerful and versatile control strategy that has significantly transformed the landscape of modern engineering systems. Unlike traditional control methodologies, which often rely on fixed control laws or heuristic tuning, MPC is fundamentally based on the principles of predictive modeling and dynamic optimization. At its core, MPC employs a mathematical model of the system to predict future behavior over a finite horizon and then solves an optimization problem at each time step to determine the optimal control actions that minimize a cost function while satisfying constraints [1]. This optimization-based approach allows MPC to handle complex, nonlinear, and constrained systems, making it particularly effective in applications where safety, performance, and adaptability are critical [2].\n\nThe evolution of MPC can be traced back to the 1970s with early works on predictive control in process industries, such as the Dynamic Matrix Control (DMC) proposed by Richalet et al. [3]. Over the decades, MPC has undergone significant advancements, from the development of linear MPC (LMPC) to the emergence of nonlinear MPC (NMPC) and the integration of robustness, adaptability, and learning-based techniques. This progression has been driven by the need to address the increasing complexity of modern engineering systems, which often operate under uncertainty, have stringent constraint requirements, and require real-time adaptability [4]. The ability of MPC to systematically incorporate system constraints, handle multi-variable interactions, and optimize performance over a prediction horizon has made it a preferred choice in a wide range of applications, including autonomous systems, energy management, and process control [5].\n\nOne of the key strengths of MPC is its flexibility in adapting to different system dynamics and control objectives. It can be formulated as a linear, nonlinear, or hybrid optimization problem, depending on the system under consideration [5]. Furthermore, the integration of data-driven and learning-based methods has opened new frontiers in MPC, enabling the development of adaptive and robust controllers that can learn from system data and improve performance over time [6]. This convergence of traditional control theory with modern machine learning techniques has been a focal point of recent research, with significant progress in areas such as data-driven MPC, robust MPC, and distributed MPC [7].\n\nDespite its many advantages, MPC also presents several challenges, particularly in terms of computational complexity and real-time implementation. The need for solving an optimization problem at each control step can be computationally intensive, especially for large-scale and nonlinear systems. However, recent advances in optimization algorithms, such as first-order methods, parallel computing, and explicit MPC formulations, have significantly improved the efficiency of MPC implementations [8]. Additionally, the integration of robustness and safety guarantees, such as terminal constraints and constraint tightening, ensures that MPC systems remain feasible and stable even in the presence of uncertainties and disturbances [9].\n\nIn summary, the evolution of MPC reflects its growing importance in modern engineering systems. As the demand for more sophisticated control strategies continues to increase, MPC is poised to play an even greater role in shaping the future of automation, robotics, and intelligent systems. The following sections of this survey will explore the theoretical foundations, algorithmic frameworks, and advanced techniques that underpin MPC, as well as its diverse applications and future research directions.",
+      "stats": {
+        "char_count": 3734,
+        "word_count": 530,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2.1 Mathematical Formulation of Model Predictive Control Problems",
+      "level": 3,
+      "content": "Model predictive control (MPC) is a powerful control methodology that relies on the solution of an optimization problem at each time step to determine the optimal control action. The mathematical formulation of MPC problems involves three core components: the cost function, the prediction model, and the constraint set. These elements collectively define the structure of the control problem and guide the design of the controller. The cost function quantifies the control objectives, such as tracking a reference trajectory, minimizing energy consumption, or ensuring stability. It typically consists of a stage cost that penalizes deviations from desired behavior over the prediction horizon and a terminal cost that ensures long-term stability [1]. The prediction model, often represented as a state-space or input-output model, forecasts the system's future behavior based on the current state and the proposed control inputs. This model is critical for capturing the dynamics of the system and ensuring that the controller makes informed decisions [10]. The constraint set includes bounds on the system's inputs, states, and outputs, ensuring that the controller operates within safe and feasible limits. These constraints are essential for maintaining system safety and compliance with operational requirements [11].\n\nThe choice of prediction horizon, which determines how far into the future the controller looks, is a crucial design parameter that balances control performance with computational complexity. A longer horizon generally improves control performance by considering more future states, but it also increases the computational burden [12]. The cost function's structure, including the trade-off between stage and terminal costs, plays a vital role in ensuring recursive feasibility and stability [13]. Moreover, the integration of data-driven methods, such as Gaussian processes and neural networks, has enabled more accurate and adaptive prediction models, enhancing the robustness of MPC in uncertain environments [14]. Emerging trends in MPC formulation include the use of hybrid models for systems with both continuous and discrete dynamics and the incorporation of stochastic and robust optimization techniques to handle uncertainties [9; 15]. These advancements highlight the evolving nature of MPC and its increasing relevance in complex, dynamic systems. As the field continues to develop, the mathematical foundations of MPC will remain central to its theoretical and practical advancements.",
+      "stats": {
+        "char_count": 2521,
+        "word_count": 361,
+        "sentence_count": 16,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "2.2 Optimization Techniques in Model Predictive Control",
+      "level": 3,
+      "content": "Optimization techniques form the backbone of model predictive control (MPC), enabling the efficient and effective solution of complex control problems. At the heart of MPC is the need to solve a constrained optimization problem at each sampling time, where the objective is to minimize a cost function subject to system dynamics and constraints. This subsection provides an in-depth analysis of the optimization algorithms and techniques used in MPC, emphasizing both traditional and advanced methods.\n\nFor linear systems, quadratic programming (QP) is the primary optimization method, owing to its computational efficiency and well-established theoretical foundations [16]. QP solves convex optimization problems by minimizing a quadratic cost function subject to linear constraints, making it well-suited for linear MPC (LMPC) [16]. The simplicity of QP allows for real-time implementation, although its applicability is limited to systems with linear dynamics and convex constraints. To handle nonlinear systems, sequential quadratic programming (SQP) is often employed. SQP iteratively approximates the nonlinear problem with a sequence of QP subproblems, enabling the solution of nonlinear MPC (NMPC) [16]. While SQP is powerful, it can suffer from high computational complexity, particularly for large-scale problems, and may require careful initialization to ensure convergence [16].\n\nBeyond traditional methods, convex and non-convex optimization strategies are increasingly being explored to address the challenges of large-scale and complex MPC problems. Convex relaxation techniques, such as those based on semidefinite programming (SDP), are used to approximate non-convex problems into convex ones, facilitating more efficient solution procedures [17]. On the other hand, non-convex optimization approaches, including first-order methods and proximal algorithms, are gaining traction for their ability to handle large-scale problems with high-dimensional state spaces [16]. These methods often leverage parallel computing and distributed architectures to improve computational performance, which is critical for real-time applications [16].\n\nRecent advances in optimization techniques for MPC include the development of first-order methods, such as the alternating direction method of multipliers (ADMM), which offer faster convergence and lower computational overhead [18]. Additionally, parallelized solvers, such as HPIPM, have been designed to accelerate the solution of QP problems, enabling real-time MPC in resource-constrained environments [17]. These advancements are particularly significant in applications where rapid decision-making is essential, such as autonomous systems and real-time process control.\n\nThe choice of optimization method in MPC is often dictated by the problem's characteristics, including the system's dynamics, the nature of constraints, and the required computational speed. While traditional methods remain robust and widely used, the emergence of advanced optimization techniques underscores the importance of tailoring the solution approach to the specific requirements of the control problem. Future research is likely to focus on further improving the efficiency and scalability of optimization algorithms, integrating machine learning for adaptive optimization, and developing hybrid methods that combine the strengths of different approaches to achieve optimal performance in complex, dynamic environments [16].",
+      "stats": {
+        "char_count": 3466,
+        "word_count": 463,
+        "sentence_count": 19,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2.3 Stability and Feasibility Analysis in Model Predictive Control",
+      "level": 3,
+      "content": "Model predictive control (MPC) relies on a robust theoretical foundation to ensure both stability and feasibility of the closed-loop system. These properties are crucial for practical implementations, especially in safety-critical applications where suboptimal or infeasible control actions can lead to system failure. Ensuring stability and feasibility in MPC typically involves the design of terminal constraints, the use of Lyapunov-based methods, and the incorporation of robustness guarantees against uncertainties and disturbances. This subsection explores these aspects in depth, highlighting both classical and emerging approaches.\n\nA fundamental concept in ensuring stability and recursive feasibility is the use of terminal constraints and terminal cost functions. Terminal constraints restrict the state of the system at the end of the prediction horizon to a subset of the state space where stability can be guaranteed. This approach, often referred to as terminal constraint-based MPC, ensures that the closed-loop system remains within a region of attraction while maintaining feasibility across successive control cycles [19]. However, the choice of the terminal set and the associated cost function significantly impacts the controller's performance and the size of the feasible region. Recent work has proposed adaptive methods to dynamically adjust the terminal constraints based on the system's operating conditions, thereby improving both feasibility and performance [20].\n\nLyapunov-based methods provide a powerful framework for analyzing the stability of MPC controllers. By constructing a Lyapunov function that decreases along the closed-loop trajectories, one can formally guarantee asymptotic stability of the controlled system. Control Lyapunov functions (CLFs) have been widely used in the design of MPC strategies, particularly for nonlinear systems, where traditional quadratic Lyapunov functions may not be applicable [21]. However, the design of such functions can be non-trivial, especially for high-dimensional or highly nonlinear systems. Recent advances have explored the integration of data-driven methods to learn Lyapunov functions from system trajectories, offering a promising direction for improving stability guarantees in complex systems [22].\n\nRobustness is another critical aspect of feasibility analysis in MPC, especially when dealing with model uncertainties and disturbances. Techniques such as tube-based MPC and robust optimization have been developed to ensure that the system remains within safe operational bounds despite these uncertainties [23]. These approaches typically involve the use of robust invariant sets and constraint tightening to account for the worst-case behavior of the system. While such methods improve robustness, they often come at the cost of increased computational complexity and reduced performance. Recent studies have sought to balance these trade-offs by proposing adaptive robust MPC strategies that adjust the level of conservatism based on the system's current state and the available computational resources [24].\n\nIn conclusion, the stability and feasibility analysis in MPC is a vibrant and evolving research area. The interplay between terminal constraints, Lyapunov-based approaches, and robustness guarantees continues to shape the design of modern MPC algorithms. Future research directions are likely to focus on the integration of learning-based methods, the development of more efficient optimization techniques, and the extension of these theoretical foundations to increasingly complex and uncertain environments.",
+      "stats": {
+        "char_count": 3612,
+        "word_count": 495,
+        "sentence_count": 22,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2.4 Types of Model Predictive Control Frameworks",
+      "level": 3,
+      "content": "Model predictive control (MPC) encompasses a diverse set of frameworks, each tailored to specific system dynamics, constraints, and control objectives. These frameworks can be broadly categorized into linear, nonlinear, and hybrid MPC, each with distinct characteristics, advantages, and challenges. Understanding these distinctions is essential for selecting the appropriate MPC formulation and designing effective control strategies for real-world engineering systems.\n\nLinear MPC (LMPC) is the most widely studied and implemented form of MPC, particularly for systems with linear dynamics and convex constraints. LMPC typically involves solving a quadratic programming (QP) problem at each time step, making it computationally efficient and suitable for real-time applications. The framework assumes that the system model is linear and that the constraints can be expressed as linear inequalities. LMPC ensures recursive feasibility and stability through terminal constraints and costs, which are often derived using Lyapunov-based methods [16; 16]. However, LMPC is limited in its ability to handle nonlinearities and non-convex constraints, which are common in many complex systems. This limitation motivates the development of more advanced formulations, such as nonlinear MPC.\n\nNonlinear MPC (NMPC) extends the capabilities of LMPC to handle systems with nonlinear dynamics and potentially non-convex constraints. NMPC involves solving a nonlinear optimization problem at each control step, often using sequential quadratic programming (SQP) or other advanced optimization techniques. This approach allows for greater flexibility in modeling complex systems, such as those found in chemical processes, robotics, and aerospace applications. However, the computational burden of NMPC is significantly higher than that of LMPC, and ensuring stability and recursive feasibility can be more challenging. Recent advances in optimization algorithms and computational hardware have made NMPC more viable for real-time applications, but further research is needed to address issues such as convergence guarantees and robustness under model uncertainties [16; 16].\n\nHybrid MPC is designed for systems that exhibit both continuous and discrete dynamics, such as those with switching modes, logical constraints, or mixed-integer variables. This framework combines elements of both linear and nonlinear MPC, often involving mixed-integer optimization to handle the discrete components of the system. Hybrid MPC is particularly useful in applications such as autonomous vehicles, process control, and robotics, where the system may transition between different operating modes. The complexity of hybrid MPC arises from the need to manage both continuous and discrete decision variables, which can lead to increased computational requirements and the need for specialized solvers. Despite these challenges, hybrid MPC offers a powerful tool for addressing complex control problems with mixed dynamics [16; 18].\n\nBeyond these core categories, specialized variants of MPC have emerged to address specific application needs. These include economic MPC, which focuses on optimizing economic performance rather than setpoint tracking; robust MPC, which ensures feasibility and stability under model uncertainties; and distributed MPC, which enables decentralized control in large-scale systems. These frameworks highlight the adaptability of MPC and its potential to address a wide range of control challenges. As the field continues to evolve, further research is needed to improve the scalability, robustness, and computational efficiency of MPC frameworks, particularly in the context of data-driven and learning-based approaches [17; 16].",
+      "stats": {
+        "char_count": 3729,
+        "word_count": 512,
+        "sentence_count": 23,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "3.1 Robust Model Predictive Control under Uncertainty",
+      "level": 3,
+      "content": "Robust model predictive control (RMPC) is a critical extension of traditional model predictive control (MPC) that addresses the inherent challenges of system uncertainties, including bounded and unbounded disturbances, parametric variations, and modeling errors. Unlike standard MPC, which assumes perfect knowledge of the system dynamics and disturbances, RMPC explicitly accounts for uncertainty by incorporating robustness guarantees into the control design. This subsection explores the core methodologies and recent advances in RMPC, emphasizing constraint tightening, terminal sets, and tube-based approaches to ensure feasibility and stability in uncertain environments.\n\nOne of the primary challenges in RMPC is ensuring recursive feasibility and constraint satisfaction under uncertain conditions. To address this, constraint tightening strategies have been widely adopted. These methods modify the original constraints by incorporating a safety margin, which accounts for the worst-case effect of disturbances or parameter variations [1]. By tightening the constraints, RMPC guarantees that the actual system trajectory remains within the feasible region despite uncertainty. However, this approach often introduces conservatism, as the tightened constraints may limit the controller's performance. Recent studies [25] have proposed data-driven methods to adaptively adjust constraint tightening based on the system's operating conditions, thereby reducing conservatism while maintaining robustness.\n\nAnother fundamental technique in RMPC is the use of terminal sets and terminal cost functions. Terminal sets, such as invariant sets, ensure that the closed-loop system remains within a bounded region, even in the presence of disturbances. A well-designed terminal cost function further enhances stability by providing a Lyapunov-like guarantee. These terminal ingredients are essential for ensuring long-term feasibility and convergence, particularly in nonlinear systems [26]. However, the construction of these sets and costs often requires extensive offline computation, which can be computationally expensive for large-scale or high-dimensional systems.\n\nTube-based MPC is another prominent approach that has gained significant attention in RMPC. This method maintains a nominal trajectory, which is computed using a nominal model, and generates a tube around this trajectory to account for the uncertainty. The tube ensures that the actual system trajectory remains within a bounded region, even when the system is subject to disturbances. Tube-based MPC provides a balance between conservatism and computational efficiency, as it allows for the use of standard MPC solvers while incorporating robustness guarantees [4]. Recent advances have extended tube-based approaches to nonlinear systems, enabling their application in complex, real-world scenarios [27].\n\nDespite these advancements, several challenges remain in the design and implementation of RMPC. These include the trade-off between robustness and computational complexity, the need for efficient constraint tightening strategies, and the integration of data-driven methods to improve adaptability. Future research directions may focus on hybrid approaches that combine tube-based methods with data-driven learning, as well as the development of more efficient solvers for large-scale and nonlinear RMPC problems. By addressing these challenges, RMPC can further enhance its applicability in safety-critical and uncertain environments.",
+      "stats": {
+        "char_count": 3513,
+        "word_count": 466,
+        "sentence_count": 23,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "3.2 Stochastic Model Predictive Control with Probabilistic Constraints",
+      "level": 3,
+      "content": "Stochastic Model Predictive Control (SMPC) extends traditional Model Predictive Control (MPC) by incorporating probabilistic constraints to handle random disturbances and uncertainties. Unlike deterministic MPC, which assumes perfect knowledge of system dynamics and disturbances, SMPC allows for a certain probability of constraint violation, providing a more flexible and practical approach for real-world systems subject to uncertainty. At the core of SMPC is the concept of chance constraints, which impose probabilistic bounds on the satisfaction of system constraints. These constraints are typically expressed as $\\mathbb{P}\\{g(x_k, u_k) \\leq 0\\} \\geq 1 - \\epsilon$, where $\\epsilon$ represents the maximum acceptable violation probability. This formulation enables SMPC to balance feasibility and performance under uncertainty, making it particularly suitable for applications such as autonomous systems, energy networks, and process control, where disturbances are inherent and unpredictable [28].\n\nThe effectiveness of SMPC hinges on the choice of distributional assumptions for the uncertainties. Common approaches include the use of Gaussian distributions, which enable analytical computation of probabilistic constraints using techniques such as Chebyshev’s inequality or the central limit theorem. However, these assumptions may not always hold in practice, necessitating more general methods such as Monte Carlo sampling or polynomial chaos expansions to propagate uncertainties through the system dynamics [29]. The use of probabilistic reachable sets offers a promising alternative, where the evolution of the system's state distribution is approximated to ensure constraint satisfaction with a desired probability [28].\n\nEnsuring closed-loop feasibility and performance in SMPC involves careful design of the control policy and terminal conditions. Techniques such as constraint tightening and the use of probabilistic invariant sets are employed to guarantee recursive feasibility, even in the presence of unbounded disturbances. For instance, the approach presented in [1] introduces a unifying framework that balances the feasible region against guaranteed bounds on performance and convergence time. Additionally, the integration of data-driven methods, such as those in [30], enhances the adaptability of SMPC to complex and uncertain environments by leveraging historical data for better predictive accuracy.\n\nDespite significant progress, SMPC faces challenges in computational complexity, especially for large-scale systems with high-dimensional uncertainty spaces. Recent work has focused on developing efficient algorithms, such as those in [25], which reduce the online computational burden while maintaining robustness. Future research directions include the development of more scalable methods, the integration of learning-based techniques for adaptive uncertainty modeling, and the exploration of hybrid frameworks that combine SMPC with other control paradigms. These advancements will further expand the applicability of SMPC in safety-critical and high-dimensional systems.",
+      "stats": {
+        "char_count": 3109,
+        "word_count": 410,
+        "sentence_count": 17,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "3.3 Adaptive Model Predictive Control for Dynamic Systems",
+      "level": 3,
+      "content": "Adaptive Model Predictive Control (AMPC) represents a critical advancement in the field of Model Predictive Control (MPC), addressing the limitations of traditional MPC in dynamic and uncertain environments. Unlike conventional MPC, which relies on fixed models and static optimization formulations, AMPC dynamically adjusts its prediction models, control policies, and constraints based on real-time data and system behavior. This adaptability is particularly crucial in systems with time-varying dynamics, unmodeled disturbances, or evolving operating conditions, making AMPC a compelling approach for complex engineering applications [16].\n\nAt the core of AMPC is the integration of online learning and parameter adaptation techniques, which allow the controller to continuously refine its understanding of the system. Recursive least squares (RLS) and Kalman filtering are commonly used for online system identification, enabling the estimation of time-varying parameters and state variables [16]. These techniques provide the basis for updating the prediction model, ensuring that the controller remains accurate even as the system evolves. Additionally, AMPC often employs adaptive control strategies that adjust the prediction horizon, terminal costs, and constraint sets in real-time, enhancing both robustness and performance [16].\n\nA key advantage of AMPC is its ability to handle uncertain and nonlinear systems by leveraging data-driven models. Methods such as Gaussian processes and neural networks are increasingly being integrated into AMPC frameworks to improve prediction accuracy and reduce reliance on precise mathematical models [16]. This data-driven approach is especially valuable in scenarios where the system dynamics are complex or not fully understood, as it allows the controller to learn from past experiences and adapt accordingly.\n\nHowever, the integration of learning mechanisms into MPC introduces new challenges, particularly in ensuring stability and recursive feasibility. While traditional MPC relies on terminal constraints and Lyapunov-based analysis to guarantee convergence, AMPC must account for the variability introduced by online learning. Recent research has addressed this by incorporating adaptive Lyapunov functions and robust constraint tightening techniques, ensuring that the closed-loop system remains stable despite model inaccuracies [16].\n\nThe development of AMPC also highlights the importance of computational efficiency. As the controller continuously updates its models and control policies, the associated computational load can become significant. Techniques such as warm-starting, model reduction, and parallel computing are being explored to maintain real-time performance while preserving control quality [18].\n\nLooking ahead, the future of AMPC lies in the seamless integration of advanced learning algorithms, such as reinforcement learning and deep learning, with traditional MPC frameworks. This synergy has the potential to further enhance the adaptability and performance of AMPC, making it even more effective in handling complex, uncertain, and dynamic systems. As the field continues to evolve, the balance between model accuracy, computational efficiency, and robustness will remain a central focus for researchers and practitioners alike.",
+      "stats": {
+        "char_count": 3314,
+        "word_count": 449,
+        "sentence_count": 19,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "3.4 Nonlinear and Data-Driven Model Predictive Control",
+      "level": 3,
+      "content": "Nonlinear model predictive control (NMPC) and data-driven approaches represent a significant advancement in the realm of advanced model predictive control techniques, addressing the limitations of traditional linear MPC in systems with complex, time-varying dynamics. NMPC extends the classical MPC framework by incorporating nonlinear system models, allowing for more accurate representation of real-world processes that exhibit nonlinear behaviors. This approach is particularly effective in applications where the system dynamics cannot be adequately described by linear models, such as in chemical processes, robotics, and aerospace systems [31]. However, the computational complexity of NMPC remains a challenge, as it requires solving a non-convex optimization problem at each time step. To mitigate this, recent research has focused on the development of efficient solvers and approximation techniques, such as the use of sequential quadratic programming (SQP) and tailored numerical methods [32].\n\nData-driven model predictive control (DD-MPC) has emerged as a complementary approach that leverages measured input-output data to construct prediction models without relying on explicit system equations. This is particularly advantageous in scenarios where the system model is either unknown or too complex to derive analytically. DD-MPC frameworks often employ techniques such as the Willems' fundamental lemma, which enables the construction of prediction models from trajectory data [33]. These approaches have demonstrated promising results in ensuring constraint satisfaction and stability, even in the presence of noise and model inaccuracies. The integration of machine learning techniques into MPC has further enhanced the adaptability of these controllers, allowing them to learn from experience and improve performance over time. For instance, neural networks have been used to approximate complex system dynamics and to construct terminal cost functions that guarantee stability [34].\n\nThe combination of NMPC and data-driven techniques has led to the development of hybrid frameworks that merge the strengths of model-based and data-driven approaches. These frameworks leverage the accuracy of physics-based models while benefiting from the flexibility and adaptability of data-driven methods. Such approaches are particularly effective in systems with changing operating conditions or uncertain dynamics, as they can dynamically adjust the control policy based on real-time data [35]. Moreover, the use of learning-based terminal ingredients, such as control Lyapunov functions (CLFs) and control barrier functions (CBFs), has enabled the design of NMPC schemes with formal guarantees on stability and safety [36].\n\nDespite these advances, several challenges remain. The computational demands of NMPC and data-driven approaches, particularly in real-time applications, require further optimization. Additionally, the integration of machine learning into MPC must be carefully managed to ensure robustness and reliability in safety-critical systems. Future research should focus on developing more efficient optimization algorithms, improving the scalability of data-driven methods, and enhancing the theoretical foundations of learning-based MPC. By addressing these challenges, NMPC and data-driven approaches will continue to play a pivotal role in advancing the capabilities of model predictive control in complex and dynamic environments.",
+      "stats": {
+        "char_count": 3462,
+        "word_count": 468,
+        "sentence_count": 20,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "3.5 Computational Efficiency and Real-Time Implementation",
+      "level": 3,
+      "content": "Computational efficiency and real-time implementation are critical challenges in advanced model predictive control (MPC) systems, especially when applied to complex, high-dimensional, and safety-critical applications. As MPC evolves from theoretical frameworks to practical deployment, the need for efficient algorithms, parallelized computations, and hardware-aware implementations becomes increasingly important. This subsection examines the current state of research on computational efficiency in MPC, highlighting key strategies such as explicit MPC, model reduction, parallelization, and hardware acceleration, while emphasizing the trade-offs between computational complexity, control accuracy, and real-time performance.\n\nA major direction in improving computational efficiency is the development of explicit MPC, where the control law is precomputed offline and represented as a piecewise-affine or piecewise-linear function [16]. This approach drastically reduces the online computational burden, making it suitable for embedded and resource-constrained systems. However, explicit MPC suffers from the \"curse of dimensionality,\" where the number of regions in the partitioned state space grows exponentially with the state dimension [16]. Alternative approaches, such as approximate explicit MPC [16], attempt to mitigate this issue by using learning-based or sampling-based techniques to construct compact and computationally efficient control laws.\n\nParallelization and distributed MPC are also gaining traction as strategies to handle large-scale and high-dimensional systems [16]. Techniques like dual decomposition and alternating direction method of multipliers (ADMM) allow for the decomposition of the global optimization problem into smaller subproblems that can be solved in parallel [16]. This not only reduces computation time but also enables scalability to networked and multi-agent systems. However, the effectiveness of these methods depends on the structure of the system and the communication infrastructure, which introduces additional complexity in real-world implementations.\n\nHardware considerations play a pivotal role in the real-time implementation of MPC. Specialized solvers such as HPIPM [18] and MATMPC [17] are designed to exploit the sparsity and structure of the underlying optimization problems, achieving high performance on both CPU and GPU platforms. Additionally, the use of embedded solvers, such as TinyMPC [16], demonstrates the feasibility of deploying MPC on microcontrollers with limited computational resources. These hardware-aware approaches are essential for applications such as autonomous vehicles, robotics, and industrial control systems, where real-time performance is paramount.\n\nIn summary, the advancement of computational efficiency in MPC is a multidisciplinary endeavor, involving algorithmic innovation, hardware optimization, and system-level design. While significant progress has been made, the interplay between computational efficiency, constraint satisfaction, and control accuracy remains a key area of ongoing research. Future directions may include the integration of machine learning for adaptive optimization, the use of quantum computing for large-scale problems, and the development of more scalable and robust real-time MPC frameworks.",
+      "stats": {
+        "char_count": 3318,
+        "word_count": 429,
+        "sentence_count": 18,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "4.1 Data-Driven Model Predictive Control Frameworks",
+      "level": 3,
+      "content": "Data-driven model predictive control (DD-MPC) has emerged as a powerful paradigm that shifts the paradigm of traditional model predictive control (MPC) from explicit system modeling to leveraging measured input-output data for control law derivation. This approach is particularly appealing in scenarios where accurate system models are difficult or costly to obtain, or when the system dynamics are highly complex and nonlinear. By directly utilizing data, DD-MPC frameworks aim to enhance adaptability, reduce modeling effort, and improve control performance in uncertain and dynamic environments [16]. The core idea is to construct prediction models, constraint sets, and stability guarantees directly from data, bypassing the need for explicit mathematical descriptions of the system.\n\nOne of the foundational techniques in DD-MPC is Willems' fundamental lemma, which provides a data-based characterization of the system's behavior by leveraging input-output trajectories. This lemma allows the construction of a subspace that spans the system's reachable states, enabling prediction without relying on an explicit model [16]. Building on this, data-driven prediction models can be constructed using kernel methods, Gaussian processes, or subspace identification techniques. These methods offer flexibility in capturing complex dynamics while maintaining computational tractability [16]. However, the quality and quantity of data significantly influence the accuracy and reliability of these models, making data collection and preprocessing critical steps in the DD-MPC design.\n\nConstraint handling remains a central challenge in DD-MPC. Unlike traditional MPC, where constraints are explicitly defined based on the system model, data-driven approaches must infer or approximate constraints from the data. Techniques such as constraint tightening, probabilistic bounds, and data-driven robust optimization have been proposed to ensure feasibility and safety. For instance, constraint tightening methods adjust the nominal constraints based on the variability observed in the data, while probabilistic approaches use statistical models to enforce chance constraints that balance performance and safety [16]. These strategies help mitigate the risks associated with data scarcity and noise, which are common in real-world applications.\n\nStability guarantees in DD-MPC are also a critical aspect. While traditional MPC relies on Lyapunov-based analysis, data-driven frameworks must derive stability conditions from the data itself. Recent work has explored the use of terminal sets and terminal cost functions derived from data to ensure recursive feasibility and asymptotic stability. For example, some approaches construct terminal sets using data-based reachability analysis, while others employ learning-based terminal costs that adapt to the system's behavior over time [16]. These methods aim to bridge the gap between data-driven prediction and control performance, ensuring that the closed-loop system remains stable under varying operating conditions.\n\nDespite the promise of DD-MPC, several challenges remain. The reliance on data introduces issues such as data quality, generalization, and computational complexity. Moreover, ensuring robustness and safety in the presence of model uncertainties and disturbances requires careful design and validation. Future research directions include the development of more efficient data-driven modeling techniques, the integration of learning-based approaches for adaptive constraint handling, and the exploration of hybrid frameworks that combine data-driven and model-based methods. As the field continues to evolve, DD-MPC is poised to play a central role in advancing the capabilities of predictive control in complex and uncertain environments.",
+      "stats": {
+        "char_count": 3801,
+        "word_count": 514,
+        "sentence_count": 24,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "4.2 Learning-Based Model Predictive Control Approaches",
+      "level": 3,
+      "content": "Learning-based model predictive control (MPC) represents a transformative approach that integrates machine learning (ML) techniques into traditional MPC frameworks to enhance adaptability, performance, and robustness in uncertain environments. Unlike conventional MPC, which relies on explicit system models, learning-based approaches leverage data to derive predictive models, optimize control policies, and adapt to changing conditions in real time. This subsection explores the theoretical foundations, practical implementations, and emerging trends in learning-based MPC, emphasizing its potential to address complex control challenges in nonlinear, dynamic, and data-rich systems.\n\nReinforcement learning (RL) has emerged as a powerful tool for learning optimal control policies in MPC frameworks. By formulating the control problem as a sequential decision-making task, RL enables the controller to learn from interactions with the environment, adapting its policy to maximize long-term performance. In this context, Q-learning and policy gradient methods are widely used to optimize control strategies, while deep reinforcement learning (DRL) extends these capabilities by incorporating neural networks to approximate value functions and policies [37]. The integration of RL into MPC allows for online policy optimization, enabling the controller to dynamically adjust its behavior based on real-time data [6].\n\nNeural networks, particularly deep learning architectures, have also been extensively applied in learning-based MPC to improve prediction accuracy and control performance. These networks can be trained to approximate complex nonlinear dynamics, enabling the use of data-driven prediction models in place of traditional physics-based models. For instance, neural network-based MPC (NN-MPC) has been used to predict system behavior and optimize control inputs, achieving superior performance in systems with unknown or highly nonlinear dynamics [38]. Furthermore, the use of recurrent neural networks (RNNs) and long short-term memory (LSTM) networks allows for the modeling of temporal dependencies, which is crucial for handling time-varying and sequential control tasks.\n\nAdaptive MPC approaches, which combine model predictive control with online learning algorithms, have also gained traction in recent years. These methods update control policies in real time based on incoming data, improving performance in dynamic and nonlinear systems. For example, adaptive MPC using online learning algorithms has been shown to effectively handle parametric uncertainties and time-varying operating conditions, ensuring robust constraint satisfaction and stability [39]. The integration of learning mechanisms into MPC not only enhances adaptability but also enables the controller to continuously improve its performance over time.\n\nDespite these advancements, learning-based MPC faces several challenges, including the need for large amounts of data, the risk of overfitting, and the difficulty of ensuring formal guarantees on stability and feasibility. Addressing these challenges requires further research into efficient learning algorithms, robustness analysis, and the development of hybrid control strategies that combine the strengths of model-based and data-driven approaches. As the field continues to evolve, learning-based MPC is poised to play a central role in the next generation of control systems, enabling more intelligent, adaptive, and resilient control solutions for complex engineering applications.",
+      "stats": {
+        "char_count": 3534,
+        "word_count": 472,
+        "sentence_count": 18,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "4.3 Hybrid Control Strategies Combining MPC with Learning",
+      "level": 3,
+      "content": "Hybrid control strategies that integrate model predictive control (MPC) with learning-based methods represent a promising direction for enhancing the adaptability, robustness, and computational efficiency of control systems in complex and uncertain environments. These approaches leverage the strengths of traditional MPC, which provides rigorous constraint satisfaction and stability guarantees, while incorporating learning techniques that adapt to system dynamics and improve performance over time. By combining these paradigms, hybrid controllers aim to address the limitations of purely model-based or purely data-driven methods, offering a balanced solution that is both flexible and reliable.\n\nOne prominent approach involves the use of learning to approximate or enhance the prediction models within MPC frameworks. Data-driven methods such as Gaussian processes, neural networks, and kernel methods are employed to construct predictive models that can generalize from historical data, reducing reliance on explicit system equations [16; 17]. For instance, the integration of neural networks with MPC allows for the online adaptation of prediction models, which can significantly improve performance in systems with time-varying or nonlinear dynamics [16]. This hybrid strategy not only enhances the accuracy of predictions but also enables the controller to respond more effectively to changes in the operating environment.\n\nAnother key aspect of hybrid control is the integration of learning-based optimization techniques to improve the efficiency of MPC computations. For example, reinforcement learning (RL) has been successfully combined with MPC to optimize control policies in real-time, allowing the system to adapt to changing conditions and maximize long-term performance [17; 17]. By using RL to learn optimal control policies, hybrid controllers can reduce the computational burden associated with online optimization, making MPC more feasible for real-time applications. Furthermore, the use of proximal algorithms and first-order optimization methods has been shown to accelerate the solution of MPC problems, particularly in large-scale and high-dimensional systems [16; 40].\n\nIn addition to enhancing prediction and optimization, hybrid control strategies also leverage learning to improve the robustness of MPC. Techniques such as robust MPC with online learning can dynamically adjust the controller's constraints and terminal conditions based on real-time data, ensuring that the system remains stable and feasible even in the presence of disturbances and uncertainties [41; 16]. This approach combines the worst-case guarantees of traditional robust MPC with the adaptability of learning-based methods, resulting in a more resilient control framework.\n\nDespite the advantages of hybrid control strategies, several challenges remain, including the need for formal guarantees on stability and constraint satisfaction, as well as the computational complexity associated with integrating learning algorithms into MPC. Future research directions may focus on developing more efficient learning algorithms, improving the interpretability of hybrid controllers, and exploring the integration of physics-informed machine learning to enhance model accuracy and generalization. Overall, the fusion of MPC with learning-based methods opens new avenues for addressing complex control problems in a wide range of engineering applications.",
+      "stats": {
+        "char_count": 3453,
+        "word_count": 468,
+        "sentence_count": 17,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "4.4 Applications of Data-Driven and Learning-Based MPC in Engineering",
+      "level": 3,
+      "content": "Data-driven and learning-based model predictive control (MPC) has emerged as a transformative approach in engineering, enabling robust and adaptive control in complex, uncertain environments. Unlike traditional model-based MPC, which relies on explicit system models, data-driven and learning-based MPC leverages historical data and machine learning techniques to infer control policies, prediction models, and constraint handling strategies. This shift has significantly broadened the applicability of MPC across diverse engineering domains, including autonomous systems, energy systems, and industrial process control. The integration of data-driven methods has enabled real-time adaptation, improved performance, and reduced reliance on accurate dynamical models, making it a cornerstone of modern control engineering.\n\nIn the domain of autonomous vehicles and robotics, data-driven MPC has demonstrated remarkable effectiveness in trajectory optimization, obstacle avoidance, and adaptive control under uncertain conditions [16]. For instance, learning-based MPC frameworks employ neural networks to predict system dynamics and optimize control policies in real time, enabling autonomous systems to navigate complex environments [16]. In such applications, the use of reinforcement learning to refine control policies has led to improved performance in tasks such as lane-keeping, path tracking, and adaptive cruise control [16]. The ability to learn from experience while ensuring constraint satisfaction has made these approaches particularly attractive for safety-critical systems.\n\nIn the energy sector, data-driven MPC has been applied to power systems and building energy management, where the integration of renewable energy sources and dynamic demand patterns pose significant challenges [16]. Learning-based prediction models, such as those derived from Gaussian processes and neural networks, have been used to enhance the accuracy of load forecasting and optimize energy distribution [16]. These methods enable more efficient use of resources, reduce operational costs, and improve the resilience of energy systems against uncertainties and disturbances.\n\nIn industrial process control, data-driven MPC has been widely adopted for real-time adaptation to changing conditions in chemical plants, manufacturing lines, and automation systems [18]. By utilizing historical data to construct predictive models, these approaches have enabled more accurate control of nonlinear and time-varying systems. Additionally, hybrid control strategies that combine model-based MPC with data-driven learning have been employed to balance computational efficiency with adaptability [17]. The integration of machine learning into MPC frameworks has also allowed for the development of more robust and scalable control solutions, particularly in the presence of model inaccuracies and unmodeled dynamics [16].\n\nThe application of data-driven and learning-based MPC continues to evolve, with ongoing research focusing on improving computational efficiency, enhancing robustness, and expanding the scope of applicable systems. Emerging trends include the use of physics-informed neural networks, edge computing for decentralized control, and the integration of digital twins for real-time decision-making. While significant progress has been made, challenges remain in ensuring safety, reliability, and interpretability in learning-based MPC, particularly in high-stakes applications. Addressing these challenges will be critical for the continued advancement and widespread adoption of data-driven and learning-based MPC in engineering.",
+      "stats": {
+        "char_count": 3631,
+        "word_count": 474,
+        "sentence_count": 19,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "4.5 Challenges and Future Directions in Data-Driven and Learning-Based MPC",
+      "level": 3,
+      "content": "The integration of data-driven and learning-based approaches into model predictive control (MPC) has opened new frontiers in control theory, enabling adaptive and high-performance solutions for complex systems. However, this evolution also introduces significant challenges, particularly in computational complexity, generalization, and robustness under uncertainty. Addressing these challenges is critical for advancing the practical applicability and theoretical foundations of data-driven and learning-based MPC.\n\nOne of the primary challenges in data-driven MPC is computational complexity, especially when dealing with high-dimensional state spaces and large datasets. Online optimization in data-driven MPC often requires solving complex nonlinear programs, which can be computationally prohibitive in real-time applications [16; 16]. Recent approaches have attempted to reduce this burden by leveraging efficient solvers, such as those based on first-order methods or parallel computing, but these solutions often come with trade-offs in accuracy and constraint satisfaction. Moreover, the reliance on data for prediction and control policy learning can lead to overfitting or poor generalization, particularly when the training data does not fully capture the system's dynamics or operating conditions [42; 16].\n\nGeneralization remains another key challenge, especially in systems with time-varying or partially unknown dynamics. While learning-based MPC can adapt to new scenarios through online updates, the performance of such controllers is highly dependent on the quality and diversity of the training data. Some works have explored domain adaptation and meta-learning techniques to improve generalization across different systems, but these methods are still in their infancy and require further theoretical and empirical validation [42; 16]. Additionally, the use of black-box models such as neural networks in MPC introduces difficulties in interpreting and guaranteeing the safety of control decisions, raising concerns about reliability in safety-critical applications.\n\nRobustness under uncertainty is another pressing issue. Data-driven MPC is inherently susceptible to model inaccuracies, noise, and distribution shifts, which can lead to constraint violations or suboptimal performance. Recent studies have attempted to address these issues through robust optimization, probabilistic constraints, and learning-based uncertainty quantification. For example, methods based on tube-MPC and homothetic tubes have been proposed to ensure robust constraint satisfaction, while others have used Bayesian approaches to quantify uncertainty in learned models [16; 17; 17]. However, these techniques often increase computational complexity and may not be scalable to large-scale systems.\n\nLooking ahead, future research should focus on developing more efficient and scalable algorithms that balance computational demands with performance and safety. The integration of physics-informed learning, hybrid model- and data-driven approaches, and edge computing for decentralized MPC are promising directions. Furthermore, the development of formal guarantees for learning-based MPC, particularly in terms of stability and robustness, will be essential for broader adoption in safety-critical applications. As the field continues to evolve, interdisciplinary collaboration between control theory, machine learning, and optimization will be key to overcoming these challenges and realizing the full potential of data-driven and learning-based MPC.",
+      "stats": {
+        "char_count": 3553,
+        "word_count": 465,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "5.1 Applications in Process Control and Industrial Systems",
+      "level": 3,
+      "content": "Model Predictive Control (MPC) has emerged as a powerful control strategy in process control and industrial systems, enabling the optimization of complex chemical, manufacturing, and power systems through effective constraint handling, real-time optimization, and efficient resource utilization. Unlike traditional control methods, MPC explicitly accounts for system dynamics, constraints, and objectives, making it particularly suitable for industrial environments where operational efficiency, safety, and compliance are critical. This subsection explores the applications of MPC in process control and industrial systems, emphasizing its role in enhancing performance and reliability through advanced control strategies.\n\nIn chemical engineering, MPC has been widely applied for the control of reaction systems, distillation columns, and batch processes. The ability of MPC to handle multivariable systems with nonlinear dynamics and hard constraints makes it an ideal choice for optimizing processes such as temperature and pressure regulation in chemical reactors [16]. By incorporating dynamic models of the system and solving an optimization problem at each sampling time, MPC ensures that the process remains within safe operating limits while maximizing throughput and minimizing energy consumption. This is especially beneficial in complex chemical plants where the interplay between multiple variables and constraints requires a sophisticated control strategy.\n\nIn manufacturing systems, MPC is used for scheduling, resource allocation, and quality control, ensuring adherence to operational constraints and improving overall efficiency. For example, MPC has been applied to semiconductor manufacturing to manage the scheduling of wafer fabrication, where the control of temperature, pressure, and chemical concentrations is critical to maintaining product quality [16]. The integration of MPC with advanced process models allows for real-time adjustments to production schedules, reducing downtime and improving yield. Additionally, the use of MPC in supply chain management enables more accurate demand forecasting and inventory control, further optimizing resource utilization.\n\nIn power systems, MPC plays a crucial role in load balancing, grid stability, and energy distribution, particularly in smart grids and hybrid energy systems. The integration of renewable energy sources into the grid introduces variability and uncertainty, which MPC addresses through predictive control strategies that ensure stable and efficient power distribution [16]. By leveraging real-time data and predictive models, MPC can dynamically adjust the operation of power generation and distribution systems, minimizing energy waste and ensuring reliable supply. The application of MPC in microgrid control further highlights its potential in managing decentralized energy systems, where the coordination of multiple energy sources and loads is essential for optimal performance.\n\nRecent advancements in data-driven and learning-based MPC have further expanded its applicability in industrial systems. Techniques such as Gaussian processes and neural networks enable the development of adaptive MPC controllers that can learn from historical data and improve their performance over time [16]. These approaches are particularly valuable in industrial settings where system dynamics may change due to aging equipment, environmental factors, or operational variations.\n\nDespite its advantages, the implementation of MPC in industrial systems presents challenges, including computational complexity, model accuracy, and real-time constraints. Ongoing research focuses on improving the efficiency of MPC algorithms, reducing computational burden, and enhancing robustness in the face of uncertainties. Future directions include the integration of MPC with emerging technologies such as edge computing, digital twins, and artificial intelligence, which hold the potential to further enhance the performance and adaptability of industrial control systems.",
+      "stats": {
+        "char_count": 4043,
+        "word_count": 538,
+        "sentence_count": 21,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "5.2 Autonomous Systems and Robotics",
+      "level": 3,
+      "content": "Autonomous systems and robotics represent a critical domain where model predictive control (MPC) has demonstrated significant impact, particularly in trajectory planning, obstacle avoidance, and real-time decision-making in dynamic environments. The inherent complexity of these systems, characterized by nonlinear dynamics, time-varying constraints, and uncertain operating conditions, makes MPC an attractive control strategy due to its ability to explicitly account for constraints and optimize future system behavior [31]. In autonomous vehicles, for example, MPC enables precise trajectory tracking while ensuring safety by incorporating constraints on vehicle dynamics and environmental boundaries [43].\n\nMPC's application in robotics is particularly notable in multi-robot coordination, where decentralized control strategies are essential. The use of distributed MPC (DMPC) allows for scalable control architectures, where each robot or subsystem operates with local knowledge while maintaining global coordination. This approach is supported by the design of local controllers that respect the system's loosely coupled structure, enabling efficient and robust control [44]. Such architectures are especially effective in scenarios involving dynamic environments, where real-time adaptation and re-planning are required.\n\nIn the context of unmanned aerial vehicles (UAVs), MPC has been employed for navigation, formation flying, and mission execution under varying environmental conditions [45]. The integration of MPC with sensor fusion and perception systems enhances situational awareness and control performance, allowing UAVs to make informed decisions in real time. Furthermore, the use of data-driven approaches in MPC, such as Koopman-based models, enables the control of complex nonlinear systems with reduced computational complexity [38].\n\nThe ability of MPC to handle time-varying and nonlinear dynamics is further enhanced by the use of control barrier functions (CBFs), which ensure safety and stability in the presence of constraints [36]. This combination is particularly useful in applications such as autonomous racing, where the vehicle must navigate through dynamic obstacles while maintaining high performance [46].\n\nDespite its advantages, the application of MPC in autonomous systems faces several challenges, including computational complexity, robustness under uncertainty, and the need for accurate models. Recent advancements in robust MPC and adaptive MPC aim to address these challenges by incorporating uncertainty bounds and online parameter adaptation [39]. These developments are crucial for ensuring the reliability and safety of autonomous systems in real-world applications.\n\nLooking ahead, the integration of MPC with machine learning and data-driven methods presents promising opportunities for improving the adaptability and performance of autonomous systems [30]. As these systems become increasingly complex, the development of efficient and scalable MPC algorithms will remain a key research direction.",
+      "stats": {
+        "char_count": 3052,
+        "word_count": 406,
+        "sentence_count": 17,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "5.3 Energy Systems and Smart Buildings",
+      "level": 3,
+      "content": "Model Predictive Control (MPC) has emerged as a powerful tool in the domain of energy systems and smart buildings, enabling advanced control strategies that enhance energy efficiency, manage demand response, and promote sustainability. By leveraging predictive models and optimization techniques, MPC offers a systematic approach to managing complex, dynamic interactions between energy consumption, environmental conditions, and operational constraints. This subsection explores the application of MPC in key areas such as HVAC control, renewable energy integration, and building energy management, highlighting its impact on system performance, adaptability, and economic viability.\n\nIn the context of building energy management, MPC is widely used to optimize the operation of heating, ventilation, and air conditioning (HVAC) systems. Traditional control strategies often operate based on fixed schedules or simple feedback mechanisms, which may not account for dynamic changes in occupancy, weather, or energy prices. By contrast, MPC-based HVAC control uses predictive models to forecast future loads and adjust control actions in real time. For instance, the use of data-driven MPC frameworks [16] allows for adaptive control strategies that learn from historical data, improving the accuracy of predictions and reducing energy consumption. Furthermore, the integration of probabilistic constraints [16] enables robust handling of uncertainties, ensuring that system performance remains within desired bounds even under variable operating conditions.\n\nRenewable energy integration presents another critical application area for MPC. As buildings increasingly rely on distributed energy resources such as solar panels and wind turbines, the intermittent nature of these sources necessitates advanced control strategies to ensure grid stability and efficient energy use. MPC can optimize the dispatch of renewable energy, manage energy storage systems, and coordinate with the grid to balance supply and demand. For example, in microgrid control, MPC can dynamically adjust power flows and prioritize energy from renewable sources, reducing reliance on fossil fuels [16]. The use of distributed MPC [16] further enhances scalability, enabling real-time coordination among multiple energy sources and loads.\n\nSmart building systems benefit from MPC’s ability to manage complex, multi-objective optimization problems. By integrating diverse subsystems—such as lighting, heating, and plug loads—MPC can optimize overall energy use while maintaining occupant comfort. The application of learning-based MPC [16] further enhances adaptability, allowing the controller to improve its performance over time by leveraging data from previous operations. This is particularly valuable in buildings with variable occupancy patterns, where traditional control methods may struggle to maintain efficiency.\n\nDespite its advantages, the deployment of MPC in energy systems and smart buildings faces several challenges, including computational complexity, model accuracy, and the need for real-time implementation. Recent advances in optimization algorithms [47] and parallel computing [16] have addressed some of these issues, making MPC more viable for large-scale applications. Looking ahead, the integration of MPC with emerging technologies such as edge computing and digital twins is expected to further enhance its capabilities, enabling more intelligent, resilient, and sustainable building systems.",
+      "stats": {
+        "char_count": 3495,
+        "word_count": 472,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "5.4 Aerospace and Mechanical Systems",
+      "level": 3,
+      "content": "Model predictive control (MPC) has become a pivotal tool in the design and operation of aerospace and mechanical systems, where stability, trajectory control, and performance optimization are critical. In aerospace applications, such as flight control of aircraft and spacecraft, MPC enables precise handling of complex dynamics, input and state constraints, and real-time adjustments to environmental disturbances. For instance, in aircraft control, MPC is employed for attitude regulation, trajectory optimization, and fuel-efficient maneuvering, often incorporating nonlinear dynamics and time-varying constraints [16]. Similarly, in spacecraft applications, MPC facilitates orbital maneuvers, propulsion control, and attitude stabilization, where the system's nonlinear and uncertain behavior necessitates adaptive and robust control strategies [16]. The use of MPC in these domains is further enhanced by its ability to integrate predictive models, such as those derived from first principles or data-driven methods, ensuring that control actions are both optimal and feasible [16].\n\nIn mechanical systems, such as industrial machinery and robotics, MPC is employed to achieve high-precision control, vibration suppression, and fault detection. For example, in industrial automation, MPC is used to optimize energy consumption while maintaining product quality, particularly in processes with multiple interacting variables and constraints [16]. In robotic systems, MPC plays a crucial role in motion planning and control, enabling dynamic obstacle avoidance, trajectory tracking, and coordination in multi-robot systems [16]. The integration of MPC with advanced control techniques, such as control barrier functions (CBFs) and Lyapunov-based stability guarantees, further enhances the safety and reliability of these systems [18].\n\nA notable challenge in applying MPC to aerospace and mechanical systems is the computational complexity associated with solving online optimization problems, particularly for nonlinear and high-dimensional systems. Recent advances in optimization algorithms, such as first-order methods and parallelized solvers, have improved the feasibility of real-time MPC implementation [17]. Additionally, the use of data-driven and learning-based MPC approaches has shown promise in reducing reliance on explicit system models and improving adaptability to uncertain environments [16].\n\nLooking ahead, the future of MPC in aerospace and mechanical systems will likely involve further integration with machine learning and artificial intelligence, enabling more intelligent and autonomous control strategies. Moreover, the development of computationally efficient and robust MPC frameworks will be essential for addressing the increasing complexity and dynamic nature of these systems. As research continues to advance, the role of MPC in ensuring safety, stability, and performance in aerospace and mechanical systems will only grow in importance.",
+      "stats": {
+        "char_count": 2976,
+        "word_count": 396,
+        "sentence_count": 15,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "5.5 Emerging and Cross-Domain Applications",
+      "level": 3,
+      "content": "Emerging and cross-domain applications of Model Predictive Control (MPC) are expanding rapidly, driven by the increasing complexity of modern engineering systems and the need for adaptive, constraint-aware control strategies. These applications span a diverse range of fields, including transportation, medical devices, and cyber-physical systems, showcasing the versatility and robustness of MPC in addressing multidisciplinary challenges. In the context of autonomous transportation, MPC has been increasingly adopted for trajectory planning and obstacle avoidance in autonomous vehicles and drones [48]. For instance, NMPC formulations have been designed to handle dynamic obstacles by incorporating probabilistic obstacle trajectory predictions and constraint tightening strategies, enabling real-time decision-making and path planning [49]. These approaches demonstrate the effectiveness of MPC in managing complex, time-varying environments with nonlinear dynamics and safety constraints.\n\nIn the medical domain, MPC is finding applications in the control of prosthetics, drug delivery systems, and wearable health monitoring devices [50]. For example, NMPC has been applied to optimize the control of prosthetic limbs by considering both actuator limitations and patient-specific dynamics, leading to improved performance and energy efficiency [26]. Additionally, MPC is being used in adaptive drug delivery systems, where it helps in maintaining optimal drug concentrations in the bloodstream while respecting safety constraints [51]. These applications highlight the potential of MPC in personalized and real-time medical control systems.\n\nCyber-physical systems (CPS) represent another emerging domain where MPC is being leveraged to ensure secure and reliable control of interconnected networks and infrastructure [52]. For example, in smart grid applications, MPC is used to optimize energy distribution, manage renewable energy integration, and maintain grid stability [53]. The ability of MPC to handle constraints, optimize performance, and incorporate real-time data makes it particularly suitable for CPS applications where safety and reliability are paramount.\n\nMoreover, the integration of MPC with machine learning and data-driven methods is opening new frontiers in adaptive and intelligent control [6]. Techniques such as learning-based MPC and data-driven MPC are being used to enhance adaptability and robustness in systems with uncertain or changing dynamics [51; 6]. These methods leverage historical data and online learning to improve control performance while maintaining constraint satisfaction, demonstrating the potential of MPC in dynamic and data-rich environments.\n\nIn conclusion, the emerging applications of MPC across multiple domains illustrate its adaptability and potential in addressing complex, multidisciplinary challenges. As research continues to advance, the integration of MPC with emerging technologies such as machine learning and distributed computing is expected to further expand its applicability and effectiveness in real-world systems.",
+      "stats": {
+        "char_count": 3091,
+        "word_count": 410,
+        "sentence_count": 17,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "6.1 Computational Complexity and Real-Time Constraints",
+      "level": 3,
+      "content": "The computational complexity of model predictive control (MPC) represents a fundamental challenge in its real-time implementation, especially in resource-constrained environments. At its core, MPC relies on solving an optimization problem at each sampling time, which typically involves a prediction horizon, dynamic system models, and constraint sets. The length of the prediction horizon and the complexity of the optimization problem directly influence the computational burden, making it a critical factor in determining the feasibility of online MPC. For example, in linear MPC, the computational complexity scales with the square of the prediction horizon, while for nonlinear MPC (NMPC), the complexity can grow exponentially, especially when dealing with non-convex constraints and large-scale systems [16; 16]. This makes the design of efficient solvers and algorithms a key research direction in the field.\n\nOne of the primary challenges in real-time MPC is the trade-off between control performance and computational speed. As the prediction horizon increases, the number of decision variables and constraints also grows, leading to higher computational demands. This can result in delays that prevent the controller from meeting real-time requirements, particularly in safety-critical applications. For instance, in autonomous systems, such as self-driving vehicles or robotics, timely control decisions are essential to avoid collisions and ensure system stability. Techniques such as explicit MPC, which pre-computes control laws offline, can mitigate some of these challenges by reducing online computation time, but they often come at the cost of reduced adaptability to changing conditions [16]. Similarly, the use of first-order optimization methods, such as proximal algorithms and ADMM, has gained popularity due to their efficiency in solving large-scale problems, but their convergence properties and robustness under uncertainty remain areas of ongoing research [16].\n\nAnother significant factor in computational complexity is the choice of control framework and the underlying system dynamics. Linear MPC (LMPC) is generally computationally more efficient than NMPC, but it is limited in its ability to handle nonlinearities and complex constraint structures. NMPC, while more powerful, requires advanced optimization techniques, such as sequential quadratic programming (SQP) or interior-point methods (IPMs), which can be computationally intensive. Recent advances in hardware acceleration, such as GPU-based solvers and cloud computing, have helped reduce the computational burden, but these solutions may not be viable in embedded systems with limited processing power [16; 18]. Moreover, the integration of machine learning models into MPC frameworks introduces additional computational overhead, as these models often require significant training and inference time [17].\n\nTo address these challenges, researchers have proposed various strategies, including constraint tightening, model reduction, and warm-starting techniques. Constraint tightening, for example, can reduce the number of constraints in the optimization problem, thereby improving computational efficiency while still maintaining feasibility and stability [16]. Similarly, the use of data-driven models, such as Gaussian processes or neural networks, can provide approximate predictions that reduce the need for high-fidelity simulations, but they must be carefully validated to ensure reliability in safety-critical applications [17]. Ultimately, the future of real-time MPC will likely depend on the development of more efficient solvers, the integration of hardware-specific optimizations, and the careful balance between computational complexity and control performance.",
+      "stats": {
+        "char_count": 3771,
+        "word_count": 511,
+        "sentence_count": 20,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "6.2 Optimization Strategies for Computational Efficiency",
+      "level": 3,
+      "content": "Optimization strategies for computational efficiency are central to the practical implementation of model predictive control (MPC), especially in real-time and resource-constrained applications. The inherent complexity of MPC, driven by the need to solve constrained optimization problems at each sampling interval, necessitates the development of tailored computational techniques to reduce the online burden while maintaining performance and feasibility guarantees. This subsection explores various algorithmic and hardware-enabled strategies that have emerged to address these challenges, highlighting their effectiveness and trade-offs.\n\nOne of the primary approaches to reducing computational load is the use of first-order optimization methods and convex relaxation techniques, which are well-suited for large-scale and embedded systems. These methods, such as proximal gradient and alternating direction methods, offer faster convergence compared to second-order solvers like interior-point methods [54]. Additionally, the integration of warm-starting strategies—where previous solutions are used as initial guesses for subsequent iterations—can significantly accelerate convergence in time-varying scenarios [20]. This is particularly beneficial in iterative MPC frameworks, where the solution structure remains relatively stable across consecutive time steps [6].\n\nAnother critical strategy is model reduction and approximation, which aims to simplify the control problem without compromising essential system dynamics. Techniques such as proper orthogonal decomposition (POD) and balanced truncation have been employed to reduce the dimensionality of large-scale systems, making online optimization more tractable [55]. Similarly, the use of explicit MPC, where the control law is precomputed as a piecewise affine function over the feasible region, eliminates the need for online optimization, thereby enabling real-time execution [56]. However, the offline computation required for explicit MPC can be computationally intensive and may not be feasible for systems with high-dimensional state spaces.\n\nParallelization and hardware acceleration represent another avenue for improving computational efficiency. The adoption of GPU-based solvers and distributed computing frameworks has enabled the handling of large-scale and complex MPC problems in real-time [54]. For instance, the use of multi-threading and parallelized linear algebra operations can significantly reduce the computational time of quadratic programming (QP) solvers, which are commonly used in linear MPC. Furthermore, the integration of specialized hardware, such as FPGAs and ASICs, offers the potential for customized, low-latency MPC implementations, particularly in safety-critical applications [57].\n\nFinally, the development of efficient constraint tightening and terminal set construction techniques plays a vital role in reducing online computational complexity. By leveraging robust control invariant sets and tube-based MPC, the need for complex online constraint handling is minimized, thereby improving the tractability of the optimization problem [58]. These strategies, combined with advances in solver algorithms and hardware, are paving the way for the widespread deployment of MPC in real-time and embedded control systems. Future research is likely to focus on the integration of machine learning techniques to further enhance computational efficiency while maintaining robustness and performance.",
+      "stats": {
+        "char_count": 3495,
+        "word_count": 454,
+        "sentence_count": 19,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "6.3 Implementation in Embedded and Distributed Systems",
+      "level": 3,
+      "content": "The implementation of Model Predictive Control (MPC) in embedded and distributed systems presents significant computational and practical challenges due to hardware limitations, communication constraints, and the need for real-time performance. Embedded systems, such as microcontrollers and low-power devices, typically have constrained processing capabilities and limited memory, which necessitate the design of lightweight and efficient MPC solvers. In contrast, distributed systems involve multiple agents or subsystems that must coordinate their actions while maintaining computational efficiency and communication efficiency [16].\n\nOne key approach to addressing these challenges is the development of efficient optimization algorithms tailored for embedded and distributed settings. For example, the use of first-order methods, such as proximal gradient algorithms, has been shown to reduce computational burden and improve convergence in real-time applications [16]. Additionally, techniques like warm-starting and suboptimal solution strategies can significantly reduce computation time by leveraging prior knowledge or approximations [16]. Furthermore, the integration of convex relaxation techniques allows for the simplification of complex optimization problems, making them more tractable for embedded implementations [16].\n\nIn distributed MPC, communication efficiency is a critical concern. The paper [16] presents a distributed algorithm that minimizes communication overhead by allowing each node to focus on only the relevant components of the global optimization problem. This approach leverages the concept of intersecting local domains, where each node only needs partial information about the global solution. Similarly, the use of Alternating Direction Method of Multipliers (ADMM) has been widely adopted in distributed MPC to enable decentralized computation while ensuring convergence [18]. ADMM-based methods are particularly attractive due to their scalability and ability to handle large-scale systems with complex constraints [17].\n\nThe integration of MPC in distributed systems also involves addressing the trade-offs between decentralization and performance. While fully decentralized approaches reduce communication overhead, they may lead to suboptimal control decisions due to the lack of global coordination. To mitigate this, hybrid schemes that combine centralized and decentralized optimization have been proposed, allowing for a balance between computational efficiency and control accuracy [16]. Furthermore, the use of robust and adaptive strategies ensures that the system remains stable and feasible under uncertain or time-varying conditions [17].\n\nIn conclusion, the implementation of MPC in embedded and distributed systems requires a holistic approach that considers algorithmic efficiency, communication protocols, and hardware constraints. Emerging trends, such as the use of GPU acceleration and machine learning-based approximations, offer promising solutions to enhance performance while maintaining real-time feasibility. Future research should focus on developing more scalable and resilient MPC frameworks that can adapt to dynamic environments and resource-constrained settings.",
+      "stats": {
+        "char_count": 3235,
+        "word_count": 419,
+        "sentence_count": 19,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "6.4 Trade-offs in MPC Design and Performance",
+      "level": 3,
+      "content": "The design of Model Predictive Control (MPC) systems inherently involves balancing multiple conflicting objectives, including computational efficiency, control accuracy, and constraint satisfaction. These trade-offs are critical in determining the performance and practicality of MPC in real-world applications. At the core of this challenge lies the tension between the length of the prediction horizon, the complexity of the optimization problem, and the need to maintain recursive feasibility and stability. For instance, longer prediction horizons generally improve control accuracy by enabling more informed decisions but increase computational complexity, making real-time implementation challenging [16]. Conversely, shorter horizons reduce computational load but may lead to suboptimal control actions, potentially compromising system performance.\n\nA key area of trade-off is the use of terminal constraints and costs, which are often employed to ensure recursive feasibility and stability. While terminal constraints can significantly enhance the theoretical guarantees of MPC, they also impose additional computational burdens and may limit the feasible region of operation [16]. In contrast, methods that dispense with explicit terminal constraints, such as those based on monotonically increasing stage costs [16], can reduce computational overhead but require careful tuning to ensure stability. The choice of terminal conditions must therefore be tailored to the specific application, balancing the need for rigorous guarantees with the constraints of real-time implementation.\n\nAnother critical trade-off involves the handling of uncertainties and constraints. Robust MPC strategies that incorporate constraint tightening and tube-based methods ensure safety and feasibility under model inaccuracies but often result in conservative control actions and increased computational demands [16]. On the other hand, stochastic MPC frameworks that use probabilistic constraints offer less conservative solutions but require accurate knowledge of disturbance distributions, which may not always be available [16]. In complex systems with nonlinear dynamics, the use of data-driven or learning-based approaches can improve adaptability but introduces additional challenges in ensuring stability and constraint satisfaction [18].\n\nComputational efficiency is also a major concern, especially in embedded and distributed control systems. Techniques such as explicit MPC and model reduction can significantly reduce online computation, but they often come at the cost of reduced flexibility and adaptability [17]. Parallelization and GPU acceleration offer promising avenues for improving performance, but they require careful algorithm design to avoid introducing new sources of complexity [16]. Moreover, the integration of learning-based components into MPC frameworks, while potentially enhancing performance, can complicate the verification of safety and stability properties [17].\n\nIn practice, these trade-offs are further influenced by the specific characteristics of the application. For example, in autonomous systems, where safety and real-time performance are paramount, the design of MPC often emphasizes constraint satisfaction and robustness over computational efficiency. In contrast, in systems with high computational resources, such as cloud-based control, the focus may shift toward achieving higher control accuracy and adaptability. As the field of MPC continues to evolve, the development of hybrid control strategies that dynamically balance these trade-offs will be essential for expanding the applicability of MPC to increasingly complex and uncertain environments.",
+      "stats": {
+        "char_count": 3694,
+        "word_count": 490,
+        "sentence_count": 21,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "7.1 Robust Model Predictive Control Frameworks",
+      "level": 3,
+      "content": "Robust Model Predictive Control (RMPC) has emerged as a critical paradigm for ensuring system stability, feasibility, and performance in the presence of model uncertainties and external disturbances. Unlike traditional MPC, which assumes perfect knowledge of the system dynamics, RMPC incorporates worst-case scenarios and uncertainty descriptions into the control design, ensuring that the closed-loop system remains stable and feasible even under adversarial conditions. This subsection provides an in-depth analysis of the key methodologies and frameworks used in RMPC, emphasizing their theoretical foundations, practical implementations, and current research trends.\n\nOne of the most prominent approaches in RMPC is the **tube-based MPC framework**, which guarantees robustness by maintaining a robust invariant set around the nominal trajectory. This method constructs a \"tube\" of possible system trajectories that accounts for bounded disturbances, and the control law is designed to keep the system within this tube [25]. By tightening the constraints based on the tube's width, RMPC ensures that the system remains within safe operational bounds, even in the face of disturbances. This approach has been widely applied in industrial systems where uncertainty is a critical concern, and recent advances have focused on reducing conservatism while maintaining feasibility [1].\n\nAnother important class of RMPC methods relies on **robust optimization**, where the controller explicitly accounts for uncertainty in the system model by incorporating worst-case scenarios into the optimization problem. This approach often uses **stochastic programming** or **robust convex programming** to ensure that the control actions remain feasible under all possible realizations of the uncertainty. These techniques have been particularly effective in applications involving parametric uncertainties, where the system's parameters are not precisely known [1; 59]. However, the computational complexity of robust optimization can be high, especially in large-scale systems, which has led to the development of **approximate robust MPC** techniques that balance performance and computational efficiency.\n\nIn addition to these classical approaches, **data-driven RMPC** has gained significant attention in recent years. By leveraging historical data to estimate the system's behavior and uncertainty bounds, data-driven methods provide a more flexible and adaptive approach to robust control. Techniques such as **Gaussian processes** and **kernel methods** are used to learn the system dynamics and construct robust prediction models, which are then incorporated into the MPC framework [14; 60]. These methods are particularly promising in applications where the system model is not available or is too complex to derive analytically.\n\nDespite the progress in RMPC, several challenges remain. One major issue is the trade-off between robustness and performance—increasing the level of robustness often leads to conservative control actions that may degrade system performance. Another challenge is the computational burden associated with robust optimization and constraint tightening, especially in high-dimensional and nonlinear systems. Future research directions include the development of **adaptive RMPC** strategies that adjust the level of robustness in real-time based on system conditions, as well as the integration of **machine learning** and **data-driven techniques** to improve the accuracy and efficiency of uncertainty modeling [25; 59]. As RMPC continues to evolve, its integration with emerging technologies such as **edge computing** and **AI-driven control** holds great potential for enhancing the robustness and adaptability of complex systems.",
+      "stats": {
+        "char_count": 3760,
+        "word_count": 514,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "7.2 Safety-Critical Applications of Model Predictive Control",
+      "level": 3,
+      "content": "Model predictive control (MPC) has emerged as a critical tool in safety-critical applications, where the enforcement of constraints and the guarantee of system stability are of paramount importance. In domains such as autonomous systems, power grids, and medical devices, the ability of MPC to handle complex constraints, anticipate future system behavior, and optimize control actions in real-time has made it an attractive choice. The inherent structure of MPC, which incorporates predictive models and optimization, enables it to systematically address safety-critical requirements by ensuring that control actions do not violate operational limits, even under uncertainty [16]. This subsection explores the application of MPC in safety-critical systems, highlighting methodologies that guarantee feasibility, stability, and robustness in high-stakes environments.\n\nIn safety-critical applications, constraint satisfaction is a primary concern, and various techniques have been developed to enforce it. One prominent approach is the use of control barrier functions (CBFs), which encode safety constraints as conditions on the system's input space. By integrating CBFs into the MPC framework, controllers can ensure that the system remains within safe operating regions while still optimizing performance [61]. For example, the work in [61] demonstrates the use of discrete-time CBFs in a model predictive control setting to ensure safety while tracking complex reference trajectories. Another strategy involves terminal constraints and terminal costs, which are essential for guaranteeing recursive feasibility and asymptotic stability in the presence of disturbances [16]. These constraints, often derived from Lyapunov-based methods, provide a robust foundation for ensuring that the system remains within safe bounds over time.\n\nIn addition to constraint satisfaction, ensuring system stability is another key aspect of safety-critical MPC. Robust MPC frameworks, such as tube-based MPC, have been widely applied to handle model uncertainties and external disturbances [16]. By maintaining a robust invariant set around the nominal trajectory, these methods ensure that the actual system remains within a bounded region, even under adversarial conditions [16]. Similarly, stochastic MPC has been employed to handle probabilistic constraints, where the goal is to minimize the probability of constraint violation rather than enforcing strict deterministic bounds [17]. This approach is particularly valuable in environments with uncertain disturbances, such as autonomous vehicles or power systems, where safety must be maintained despite unpredictable variations [17].\n\nDespite the progress in safety-critical MPC, several challenges remain. These include the computational complexity of online optimization, the trade-off between conservatism and performance, and the need for efficient algorithms that can handle large-scale systems. Future research directions include the integration of learning-based methods to improve adaptability, the development of distributed MPC schemes for networked systems, and the incorporation of formal verification techniques to provide rigorous guarantees. As MPC continues to evolve, its role in safety-critical applications will only grow, driven by the need for reliable, adaptive, and constraint-aware control strategies in increasingly complex engineering systems.",
+      "stats": {
+        "char_count": 3411,
+        "word_count": 461,
+        "sentence_count": 19,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "7.3 Constraint Handling and Feasibility Analysis",
+      "level": 3,
+      "content": "Constraint handling and feasibility analysis are critical components of model predictive control (MPC), ensuring that control actions remain within physically or operationally permissible bounds while maintaining system stability and performance. This subsection examines the theoretical and practical methods used to enforce constraint satisfaction in MPC, with a focus on both hard and soft constraints, and highlights recent advancements and challenges in this area.\n\nHard constraints, such as bounds on inputs, states, and outputs, are essential for maintaining safety and operational limits in control systems. A common approach to enforcing these constraints is through terminal constraints and terminal cost functions, which ensure recursive feasibility and asymptotic stability of the closed-loop system [62]. These constraints are typically derived from invariant sets or Lyapunov-based analyses, ensuring that the system remains within a feasible region over time. However, the choice of terminal constraints can significantly impact the conservatism of the control policy and the size of the feasible region. For example, constraint-adaptive MPC (ca-MPC) dynamically removes constraints at each sampling step to reduce computational complexity while guaranteeing identical closed-loop behavior to the original MPC law [11]. This approach provides a promising avenue for improving computational efficiency without compromising feasibility.\n\nIn contrast, soft constraints allow for occasional constraint violations, often through the use of penalty functions in the cost function. This approach is particularly useful in scenarios where strict constraint satisfaction is not always feasible due to disturbances or model inaccuracies. Chance constraints, which ensure that constraints are satisfied with a certain probability, are a popular method for handling stochastic uncertainties in MPC [23]. These constraints are typically formulated using probabilistic bounds or Monte Carlo sampling, providing a balance between safety and performance. Recent work has also explored learning-based constraint tightening methods, where constraints are adapted based on historical data or system behavior to reduce conservatism while maintaining safety [22].\n\nFeasibility analysis in MPC involves ensuring that the optimization problem at each sampling step has a solution, which is essential for the practical implementation of MPC. Techniques such as constraint tightening, tube-based MPC, and robust invariant sets are widely used to guarantee feasibility under model uncertainties and disturbances [63]. The use of terminal sets in robust MPC ensures that the system remains within a feasible region even in the presence of unmodeled dynamics or disturbances [64]. However, the design of these sets often involves a trade-off between feasibility, stability, and performance.\n\nIn summary, constraint handling and feasibility analysis in MPC are complex tasks that require careful design and implementation. While traditional approaches such as terminal constraints and constraint tightening provide strong theoretical guarantees, emerging methods like ca-MPC and learning-based constraint tightening offer promising alternatives for improving computational efficiency and adaptability. Future research in this area should focus on developing more efficient algorithms for handling nonlinear and time-varying constraints while maintaining robustness and computational tractability.",
+      "stats": {
+        "char_count": 3482,
+        "word_count": 469,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "7.4 Stochastic and Data-Driven Constraint Handling",
+      "level": 3,
+      "content": "Stochastic and data-driven constraint handling in Model Predictive Control (MPC) represents a critical advancement in addressing uncertainties and complex constraints in dynamic systems. Traditional MPC frameworks often rely on deterministic models and hard constraints, which may be insufficient in real-world scenarios where disturbances, model inaccuracies, and operational variability are prevalent. To address these challenges, stochastic and data-driven approaches have been developed to enhance the robustness and adaptability of MPC by incorporating probabilistic models and machine learning techniques. These methods allow for more flexible constraint handling, enabling systems to operate within probabilistic bounds while maintaining safety and feasibility [1].\n\nStochastic Model Predictive Control (SMPC) is a prominent framework that incorporates probabilistic constraints, often formulated as chance constraints, to ensure that system constraints are satisfied with a specified probability. Unlike deterministic MPC, SMPC accounts for random disturbances and uncertainties by using statistical models to estimate the likelihood of constraint violations. This approach allows for a more efficient use of control resources, as it avoids overly conservative constraint tightening, which can lead to suboptimal performance. The use of Monte Carlo sampling, polynomial chaos expansions, and probabilistic reachable sets are common techniques in SMPC to propagate uncertainty and ensure recursive feasibility under stochastic disturbances [29]. Furthermore, recent advances in SMPC have focused on integrating data-driven uncertainty models, such as Gaussian processes and neural networks, to improve the accuracy of probabilistic predictions and reduce reliance on exact knowledge of disturbance distributions [30].\n\nData-driven constraint handling, on the other hand, leverages historical system data to learn constraint bounds and uncertainty models without explicit system models. This approach is particularly useful in scenarios where the system dynamics are unknown or difficult to model. Techniques such as the Willems' fundamental lemma enable the derivation of predictive models directly from input-output data, allowing for constraint satisfaction without prior knowledge of the system's internal states [65]. Additionally, learning-based constraint tightening methods adapt to system behavior over time, reducing conservatism while maintaining safety. These methods often use reinforcement learning or online optimization to refine constraint bounds in real-time [66].\n\nDespite their advantages, stochastic and data-driven constraint handling techniques face challenges in terms of computational complexity and theoretical guarantees. For instance, the inclusion of probabilistic constraints can lead to non-convex optimization problems, which may be computationally intensive to solve. Moreover, the accuracy of data-driven models heavily depends on the quality and quantity of the available data. To address these issues, recent research has focused on developing efficient optimization algorithms, such as first-order methods and parallelized solvers, to improve the computational performance of stochastic and data-driven MPC. Additionally, formal guarantees on stability, feasibility, and constraint satisfaction are crucial for safety-critical applications, requiring further theoretical advancements [32; 67].\n\nIn conclusion, the integration of stochastic and data-driven approaches into MPC provides a powerful framework for handling uncertainties and complex constraints in dynamic systems. These methods enable more flexible and robust control strategies, with potential applications in autonomous systems, energy management, and industrial processes. Future research should focus on improving the scalability, computational efficiency, and theoretical guarantees of these approaches to ensure their widespread applicability in real-world scenarios.",
+      "stats": {
+        "char_count": 3979,
+        "word_count": 512,
+        "sentence_count": 22,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "7.5 Computational and Implementation Challenges",
+      "level": 3,
+      "content": "The implementation of robust and safe model predictive control (MPC) in real-world systems presents a host of computational and practical challenges that must be carefully addressed. These challenges are primarily driven by the need to balance computational efficiency, control accuracy, and system constraints, especially in the presence of uncertainties, nonlinear dynamics, and real-time execution requirements. As MPC frameworks evolve to handle increasingly complex and dynamic environments, the computational burden associated with solving optimization problems online becomes a critical bottleneck [25]. For instance, the online solution of quadratic or nonlinear programs, which is central to MPC, often requires significant computational resources, making it difficult to deploy in resource-constrained or high-speed applications [49].\n\nOne of the most pressing challenges is the trade-off between computational complexity and control performance. While longer prediction horizons and more detailed models can improve control accuracy, they also increase the problem size, leading to longer solution times and higher computational demands [68]. This is particularly critical in real-time applications where control decisions must be made within strict time limits, such as in autonomous vehicles or industrial process control. To address this, several approaches have been proposed, including explicit MPC, model reduction, and the use of warm-starting techniques [69]. These methods aim to reduce the online computational load while maintaining acceptable levels of performance and constraint satisfaction.\n\nAnother significant challenge is the integration of robustness and safety into the MPC framework. Robust MPC techniques, such as tube-based approaches and constraint tightening, are essential for ensuring feasibility and stability under model uncertainties and disturbances [70]. However, these methods often come with increased computational complexity, as they require additional constraints and more sophisticated optimization strategies. For example, the use of robust control invariant sets and terminal constraints can significantly enhance the reliability of MPC but at the expense of higher online computation times [45].\n\nFurthermore, the implementation of MPC in distributed and embedded systems introduces additional challenges related to communication overhead, coordination, and computational resource allocation [71]. These issues are exacerbated in large-scale systems where the control problem must be decomposed and solved in parallel. Techniques such as decentralized MPC, distributed optimization, and the use of specialized solvers like HPIPM [72] have been proposed to address these challenges, but they require careful design to ensure scalability and maintain system-wide stability.\n\nIn summary, the computational and implementation challenges of robust and safe MPC highlight the need for innovative optimization algorithms, efficient solvers, and advanced control strategies that can balance performance, robustness, and computational efficiency. Future research should focus on developing more scalable and adaptive MPC frameworks that can effectively handle the complexities of modern engineering systems.",
+      "stats": {
+        "char_count": 3250,
+        "word_count": 434,
+        "sentence_count": 18,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "8 Conclusion",
+      "level": 2,
+      "content": "The subsection \"8.1 Conclusion\" serves as a synthesis of the comprehensive survey on Model Predictive Control (MPC) in engineering, providing a critical overview of the current state of research, highlighting key contributions, and identifying areas for future investigation. MPC has evolved from a theoretical framework into a powerful and flexible control methodology, with applications spanning a wide range of engineering domains, including process control, autonomous systems, energy management, and robotics. The survey has explored the theoretical foundations, advanced techniques, computational challenges, and practical implementations of MPC, emphasizing its unique ability to handle constraints, optimize performance, and adapt to dynamic environments [16; 16; 16].\n\nA key contribution of this survey is the systematic analysis of different MPC formulations, such as linear, nonlinear, and hybrid MPC, and their corresponding optimization techniques, including quadratic programming, sequential quadratic programming, and robust and stochastic approaches. Theoretical stability and feasibility guarantees, such as terminal constraints, Lyapunov-based analysis, and robust invariant sets, have been reviewed, highlighting their critical role in ensuring reliable and safe operation [16; 16]. Furthermore, the integration of data-driven and learning-based approaches has emerged as a promising direction, enabling adaptive and intelligent control strategies that can improve performance in uncertain environments [18; 17].\n\nDespite the significant progress in MPC research, several challenges remain. Computational complexity, particularly for nonlinear and large-scale systems, continues to pose a major hurdle for real-time implementation [16]. The balance between computational efficiency and control performance remains a key research focus, with emerging trends such as explicit MPC, parallelization, and hardware acceleration offering potential solutions [17; 61]. Moreover, the integration of model predictive control with machine learning, while promising, requires further investigation into stability guarantees, generalization, and robustness under uncertainty [47].\n\nFuture research directions in MPC are likely to focus on enhancing adaptability, scalability, and safety in complex and dynamic systems. Advances in data-driven predictive models, such as Gaussian processes and neural networks, are expected to play a significant role in improving the accuracy and efficiency of MPC [17; 42]. Additionally, the development of robust and computationally efficient algorithms for stochastic and distributed MPC will be essential for expanding the applicability of MPC in real-world engineering systems [73; 41]. Ultimately, the continued evolution of MPC will depend on interdisciplinary collaboration, integrating insights from control theory, optimization, machine learning, and system identification to address the ever-increasing complexity of modern engineering challenges.",
+      "stats": {
+        "char_count": 2997,
+        "word_count": 389,
+        "sentence_count": 15,
+        "line_count": 7
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "[1] Constraint-Tightening and Stability in Stochastic Model Predictive  Control",
+      "number": null,
+      "title": "constraint-tightening and stability in stochastic model predictive control"
+    },
+    {
+      "text": "[2] Optimization Algorithms as Robust Feedback Controllers",
+      "number": null,
+      "title": "optimization algorithms as robust feedback controllers"
+    },
+    {
+      "text": "[3] Reproducible Subjective Evaluation",
+      "number": null,
+      "title": "reproducible subjective evaluation"
+    },
+    {
+      "text": "[4] A System Level Approach to Tube-based Model Predictive Control",
+      "number": null,
+      "title": "a system level approach to tube-based model predictive control"
+    },
+    {
+      "text": "[5] Analysis and design of model predictive control frameworks for dynamic  operation -- An overview",
+      "number": null,
+      "title": "analysis and design of model predictive control frameworks for dynamic operation -- an overview"
+    },
+    {
+      "text": "[6] Learning Model Predictive Control for Iterative Tasks  A Computationally  Efficient Approach for Linear System",
+      "number": null,
+      "title": "learning model predictive control for iterative tasks a computationally efficient approach for linear system"
+    },
+    {
+      "text": "[7] Synthesis of model predictive control based on data-driven learning",
+      "number": null,
+      "title": "synthesis of model predictive control based on data-driven learning"
+    },
+    {
+      "text": "[8] Robust Real-time Computing with Chemical Reaction Networks",
+      "number": null,
+      "title": "robust real-time computing with chemical reaction networks"
+    },
+    {
+      "text": "[9] Adaptive Robust Model Predictive Control via Uncertainty Cancellation",
+      "number": null,
+      "title": "adaptive robust model predictive control via uncertainty cancellation"
+    },
+    {
+      "text": "[10] Learning Model Predictive Control for iterative tasks. A Data-Driven  Control Framework",
+      "number": null,
+      "title": "learning model predictive control for iterative tasks"
+    },
+    {
+      "text": "[11] Constraint-Adaptive MPC for linear systems  A system-theoretic framework  for speeding up MPC through online constraint removal",
+      "number": null,
+      "title": "constraint-adaptive mpc for linear systems a system-theoretic framework for speeding up mpc through online constraint removal"
+    },
+    {
+      "text": "[12] Infinite-Horizon Differentiable Model Predictive Control",
+      "number": null,
+      "title": "infinite-horizon differentiable model predictive control"
+    },
+    {
+      "text": "[13] Optimal control analysis and Practical NMPC applied to refrigeration  systems",
+      "number": null,
+      "title": "optimal control analysis and practical nmpc applied to refrigeration systems"
+    },
+    {
+      "text": "[14] Online learning-based Model Predictive Control with Gaussian Process  Models and Stability Guarantees",
+      "number": null,
+      "title": "online learning-based model predictive control with gaussian process models and stability guarantees"
+    },
+    {
+      "text": "[15] Stochastic Model Predictive Control using Initial State Optimization",
+      "number": null,
+      "title": "stochastic model predictive control using initial state optimization"
+    },
+    {
+      "text": "[16] Computer Science",
+      "number": null,
+      "title": "computer science"
+    },
+    {
+      "text": "[17] Paperswithtopic  Topic Identification from Paper Title Only",
+      "number": null,
+      "title": "paperswithtopic topic identification from paper title only"
+    },
+    {
+      "text": "[18] A Speculative Study on 6G",
+      "number": null,
+      "title": "a speculative study on 6g"
+    },
+    {
+      "text": "[19] A Convex Feasibility Approach to Anytime Model Predictive Control",
+      "number": null,
+      "title": "a convex feasibility approach to anytime model predictive control"
+    },
+    {
+      "text": "[20] Adaptive model predictive control for constrained, linear time varying  systems",
+      "number": null,
+      "title": "adaptive model predictive control for constrained, linear time varying systems"
+    },
+    {
+      "text": "[21] Nonlinear Model Predictive Control for Quadrupedal Locomotion Using  Second-Order Sensitivity Analysis",
+      "number": null,
+      "title": "nonlinear model predictive control for quadrupedal locomotion using second-order sensitivity analysis"
+    },
+    {
+      "text": "[22] Learning Convex Optimization Control Policies",
+      "number": null,
+      "title": "learning convex optimization control policies"
+    },
+    {
+      "text": "[23] A scenario approach for non-convex control design",
+      "number": null,
+      "title": "a scenario approach for non-convex control design"
+    },
+    {
+      "text": "[24] Computationally Efficient Robust Model Predictive Control for Uncertain  System Using Causal State-Feedback Parameterization",
+      "number": null,
+      "title": "computationally efficient robust model predictive control for uncertain system using causal state-feedback parameterization"
+    },
+    {
+      "text": "[25] A computationally efficient robust model predictive control framework  for uncertain nonlinear systems -- extended version",
+      "number": null,
+      "title": "a computationally efficient robust model predictive control framework for uncertain nonlinear systems -- extended version"
+    },
+    {
+      "text": "[26] Nonlinear Model Predictive Control of Robotic Systems with Control  Lyapunov Functions",
+      "number": null,
+      "title": "nonlinear model predictive control of robotic systems with control lyapunov functions"
+    },
+    {
+      "text": "[27] A novel constraint tightening approach for robust data-driven predictive  control",
+      "number": null,
+      "title": "a novel constraint tightening approach for robust data-driven predictive control"
+    },
+    {
+      "text": "[28] Stochastic Model Predictive Control for Linear Systems using  Probabilistic Reachable Sets",
+      "number": null,
+      "title": "stochastic model predictive control for linear systems using probabilistic reachable sets"
+    },
+    {
+      "text": "[29] Stochastic Model Predictive Control with Discounted Probabilistic  Constraints",
+      "number": null,
+      "title": "stochastic model predictive control with discounted probabilistic constraints"
+    },
+    {
+      "text": "[30] Data-driven MPC with stability guarantees using extended dynamic mode  decomposition",
+      "number": null,
+      "title": "data-driven mpc with stability guarantees using extended dynamic mode decomposition"
+    },
+    {
+      "text": "[31] Nonlinear Model Predictive Control for Constrained Output Path Following",
+      "number": null,
+      "title": "nonlinear model predictive control for constrained output path following"
+    },
+    {
+      "text": "[32] Stability and performance of stochastic predictive control",
+      "number": null,
+      "title": "stability and performance of stochastic predictive control"
+    },
+    {
+      "text": "[33] Stability in data-driven MPC  an inherent robustness perspective",
+      "number": null,
+      "title": "stability in data-driven mpc an inherent robustness perspective"
+    },
+    {
+      "text": "[34] Learning an Approximate Model Predictive Controller with Guarantees",
+      "number": null,
+      "title": "learning an approximate model predictive controller with guarantees"
+    },
+    {
+      "text": "[35] Robust adaptive MPC using control contraction metrics",
+      "number": null,
+      "title": "robust adaptive mpc using control contraction metrics"
+    },
+    {
+      "text": "[36] Safety-Critical Model Predictive Control with Discrete-Time Control  Barrier Function",
+      "number": null,
+      "title": "safety-critical model predictive control with discrete-time control barrier function"
+    },
+    {
+      "text": "[37] Reinforcement Learning of the Prediction Horizon in Model Predictive  Control",
+      "number": null,
+      "title": "reinforcement learning of the prediction horizon in model predictive control"
+    },
+    {
+      "text": "[38] Model Predictive Control of a Vehicle using Koopman Operator",
+      "number": null,
+      "title": "model predictive control of a vehicle using koopman operator"
+    },
+    {
+      "text": "[39] A robust adaptive model predictive control framework for nonlinear  uncertain systems",
+      "number": null,
+      "title": "a robust adaptive model predictive control framework for nonlinear uncertain systems"
+    },
+    {
+      "text": "[40] 360Zhinao Technical Report",
+      "number": null,
+      "title": "360zhinao technical report"
+    },
+    {
+      "text": "[41] Proceedings 15th Interaction and Concurrency Experience",
+      "number": null,
+      "title": "proceedings 15th interaction and concurrency experience"
+    },
+    {
+      "text": "[42] 6th International Symposium on Attention in Cognitive Systems 2013",
+      "number": null,
+      "title": "6th international symposium on attention in cognitive systems"
+    },
+    {
+      "text": "[43] Practical Learning of Predictive State Representations",
+      "number": null,
+      "title": "practical learning of predictive state representations"
+    },
+    {
+      "text": "[44] Distributed Model Predictive Control for Linear Systems with Adaptive  Terminal Sets",
+      "number": null,
+      "title": "distributed model predictive control for linear systems with adaptive terminal sets"
+    },
+    {
+      "text": "[45] Plug-and-Play Model Predictive Control based on robust control invariant  sets",
+      "number": null,
+      "title": "plug-and-play model predictive control based on robust control invariant sets"
+    },
+    {
+      "text": "[46] Safety of Dynamical Systems with Multiple Non-Convex Unsafe Sets Using  Control Barrier Functions",
+      "number": null,
+      "title": "safety of dynamical systems with multiple non-convex unsafe sets using control barrier functions"
+    },
+    {
+      "text": "[47] Proceedings of the Eleventh International Workshop on Developments in  Computational Models",
+      "number": null,
+      "title": "proceedings of the eleventh international workshop on developments in computational models"
+    },
+    {
+      "text": "[48] Nonlinear MPC for Collision Avoidance and Controlof UAVs With Dynamic  Obstacles",
+      "number": null,
+      "title": "nonlinear mpc for collision avoidance and controlof uavs with dynamic obstacles"
+    },
+    {
+      "text": "[49] NMPC trajectory planner for urban autonomous driving",
+      "number": null,
+      "title": "nmpc trajectory planner for urban autonomous driving"
+    },
+    {
+      "text": "[50] Switched-Actuator Systems with Setup Times  Efficient Modeling, MPC, and  Application to Hyperthermia Therapy",
+      "number": null,
+      "title": "switched-actuator systems with setup times efficient modeling, mpc"
+    },
+    {
+      "text": "[51] Data-driven Economic NMPC using Reinforcement Learning",
+      "number": null,
+      "title": "data-driven economic nmpc using reinforcement learning"
+    },
+    {
+      "text": "[52] An Efficient Resilient MPC Scheme via Constraint Tightening against  Cyberattacks  Application to Vehicle Cruise Control",
+      "number": null,
+      "title": "an efficient resilient mpc scheme via constraint tightening against cyberattacks application to vehicle cruise control"
+    },
+    {
+      "text": "[53] Improving the Load Flexibility of Stratified Electric Water Heaters   Design and Experimental Validation of MPC Strategies",
+      "number": null,
+      "title": "improving the load flexibility of stratified electric water heaters design and experimental validation of mpc strategies"
+    },
+    {
+      "text": "[54] Introducing the quadratically-constrained quadratic programming  framework in HPIPM",
+      "number": null,
+      "title": "introducing the quadratically-constrained quadratic programming framework in hpipm"
+    },
+    {
+      "text": "[55] Nonlinear Data-Enabled Prediction and Control",
+      "number": null,
+      "title": "nonlinear data-enabled prediction and control"
+    },
+    {
+      "text": "[56] Explicit model predictive control accuracy analysis",
+      "number": null,
+      "title": "explicit model predictive control accuracy analysis"
+    },
+    {
+      "text": "[57] Control Capacity",
+      "number": null,
+      "title": "control capacity"
+    },
+    {
+      "text": "[58] Self-Tuning Tube-based Model Predictive Control",
+      "number": null,
+      "title": "self-tuning tube-based model predictive control"
+    },
+    {
+      "text": "[59] A Data-Driven Automatic Tuning Method for MPC under Uncertainty using  Constrained Bayesian Optimization",
+      "number": null,
+      "title": "a data-driven automatic tuning method for mpc under uncertainty using constrained bayesian optimization"
+    },
+    {
+      "text": "[60] An overview of systems-theoretic guarantees in data-driven model predictive control",
+      "number": null,
+      "title": "an overview of systems-theoretic guarantees in data-driven model predictive control"
+    },
+    {
+      "text": "[61] The 10 Research Topics in the Internet of Things",
+      "number": null,
+      "title": "the 10 research topics in the internet of things"
+    },
+    {
+      "text": "[62] Stable MPC with maximal terminal sets and quadratic terminal costs",
+      "number": null,
+      "title": "stable mpc with maximal terminal sets and quadratic terminal costs"
+    },
+    {
+      "text": "[63] Computationally efficient robust MPC using optimized constraint  tightening",
+      "number": null,
+      "title": "computationally efficient robust mpc using optimized constraint tightening"
+    },
+    {
+      "text": "[64] A Family of Iterative Gauss-Newton Shooting Methods for Nonlinear  Optimal Control",
+      "number": null,
+      "title": "a family of iterative gauss-newton shooting methods for nonlinear optimal control"
+    },
+    {
+      "text": "[65] On the design of terminal ingredients for data-driven MPC",
+      "number": null,
+      "title": "on the design of terminal ingredients for data-driven mpc"
+    },
+    {
+      "text": "[66] Learning Control Lyapunov Functions from Counterexamples and  Demonstrations",
+      "number": null,
+      "title": "learning control lyapunov functions from counterexamples and demonstrations"
+    },
+    {
+      "text": "[67] Robust Learning-based Predictive Control for Discrete-time Nonlinear  Systems with Unknown Dynamics and State Constraints",
+      "number": null,
+      "title": "robust learning-based predictive control for discrete-time nonlinear systems with unknown dynamics and state constraints"
+    },
+    {
+      "text": "[68] Stability proof for nonlinear MPC design using monotonically increasing  weighting profiles without terminal constraints",
+      "number": null,
+      "title": "stability proof for nonlinear mpc design using monotonically increasing weighting profiles without terminal constraints"
+    },
+    {
+      "text": "[69] Warm Start of Mixed-Integer Programs for Model Predictive Control of  Hybrid Systems",
+      "number": null,
+      "title": "warm start of mixed-integer programs for model predictive control of hybrid systems"
+    },
+    {
+      "text": "[70] Robust Model Predictive Control with Polytopic Model Uncertainty through  System Level Synthesis",
+      "number": null,
+      "title": "robust model predictive control with polytopic model uncertainty through system level synthesis"
+    },
+    {
+      "text": "[71] Distributed MPC Via Dual Decomposition and Alternating Direction Method  of Multipliers",
+      "number": null,
+      "title": "distributed mpc via dual decomposition and alternating direction method of multipliers"
+    },
+    {
+      "text": "[72] HPIPM  a high-performance quadratic programming framework for model  predictive control",
+      "number": null,
+      "title": "hpipm a high-performance quadratic programming framework for model predictive control"
+    },
+    {
+      "text": "[73] Proceedings of Symposium on Data Mining Applications 2014",
+      "number": null,
+      "title": "proceedings of symposium on data mining applications"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\SurveyForge\\Engineering\\Model Predictive Control in Engineering_split.json",
+    "processed_date": "2025-12-30T20:33:48.782303",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

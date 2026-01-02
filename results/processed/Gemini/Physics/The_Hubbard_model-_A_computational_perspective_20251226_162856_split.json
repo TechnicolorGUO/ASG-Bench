@@ -1,0 +1,635 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: The Hubbard model- A computational perspective."
+    ],
+    [
+      1,
+      "The Hubbard Model: A Computational Perspective"
+    ],
+    [
+      2,
+      "A Systematic Literature Review"
+    ],
+    [
+      3,
+      "1. Introduction"
+    ],
+    [
+      3,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      4,
+      "2.1 The Hamiltonian"
+    ],
+    [
+      4,
+      "2.2 Fundamental Parameters and Regimes"
+    ],
+    [
+      3,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      4,
+      "3.1 The Early Years (1963–1980s)"
+    ],
+    [
+      4,
+      "3.2 The Numerical Revolution (1980s–2000s)"
+    ],
+    [
+      4,
+      "3.3 The Era of Precision and Consensus (2010s–Present)"
+    ],
+    [
+      3,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      4,
+      "4.1 Quantum Monte Carlo (QMC)"
+    ],
+    [
+      4,
+      "4.2 Tensor Network States"
+    ],
+    [
+      4,
+      "4.3 Quantum Embedding Theories"
+    ],
+    [
+      4,
+      "4.4 Neural Quantum States (NQS)"
+    ],
+    [
+      3,
+      "5. Applications and Case Studies"
+    ],
+    [
+      4,
+      "5.1 The Ground State of the 2D Hubbard Model"
+    ],
+    [
+      4,
+      "5.2 Ultracold Atoms in Optical Lattices"
+    ],
+    [
+      4,
+      "5.3 Twisted Bilayer Graphene and Moiré Materials"
+    ],
+    [
+      3,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      4,
+      "6.1 The Fermionic Sign Problem"
+    ],
+    [
+      4,
+      "6.2 Scaling to the Thermodynamic Limit in 2D"
+    ],
+    [
+      4,
+      "6.3 Optimization Landscapes in NQS"
+    ],
+    [
+      4,
+      "6.4 Digital Quantum Simulation Constraints"
+    ],
+    [
+      3,
+      "7. Future Research Directions"
+    ],
+    [
+      4,
+      "7.1 Multi-Method \"Hybrid\" Approaches"
+    ],
+    [
+      4,
+      "7.2 Advancing Neural Quantum States"
+    ],
+    [
+      4,
+      "7.3 Fault-Tolerant Quantum Computing"
+    ],
+    [
+      4,
+      "7.4 Extension to Multi-Orbital and Non-Equilibrium Systems"
+    ],
+    [
+      3,
+      "8. Conclusion"
+    ],
+    [
+      3,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: The Hubbard model- A computational perspective.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 16:28:56*\n*Progress: [20/21]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/The_Hubbard_model-_A_computational_perspective_20251226_162856.md*\n---",
+      "stats": {
+        "char_count": 178,
+        "word_count": 10,
+        "sentence_count": 2,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "A Systematic Literature Review",
+      "level": 2,
+      "content": "**Abstract**\nThe Hubbard model, often described as the \"fruit fly\" of condensed matter physics, serves as the paradigmatic framework for understanding strongly correlated electron systems. Despite its deceptive simplicity—comprising only a kinetic hopping term and an on-site interaction term—the model captures the essential physics of phenomena ranging from the Mott metal-insulator transition to high-temperature superconductivity and quantum magnetism. This systematic literature review provides a comprehensive analysis of the computational landscape surrounding the Hubbard model. We trace the historical evolution from early perturbative approximations to modern, numerically exact techniques. We critically evaluate state-of-the-art methods, including Quantum Monte Carlo (QMC), Density Matrix Renormalization Group (DMRG), Dynamical Mean-Field Theory (DMFT), and the emerging frontier of Neural Quantum States (NQS) and quantum simulation. Special attention is given to recent benchmark initiatives, such as the Simons Collaboration on the Many-Electron Problem, which have established consensus on the ground-state properties of the two-dimensional model. We conclude by identifying persistent challenges, particularly the fermionic sign problem and the scaling of entanglement entropy, and outline future research directions in the era of hybrid classical-quantum computing.\n\n---",
+      "stats": {
+        "char_count": 1390,
+        "word_count": 178,
+        "sentence_count": 8,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 3,
+      "content": "The study of interacting fermions on a lattice remains one of the central challenges in modern quantum many-body physics. At the heart of this endeavor lies the Hubbard model, a Hamiltonian that models the competition between the kinetic energy of electrons (favoring delocalization) and their Coulomb repulsion (favoring localization). Since its independent proposal in 1963 by John Hubbard, Martin Gutzwiller, and Junjiro Kanamori [cite: 1, 2, 3], the model has transcended its original purpose of describing transition metal ferromagnetism to become the fundamental testing ground for theories of strong correlation.\n\nThe motivation for solving the Hubbard model is twofold. First, it is believed to contain the minimal ingredients necessary to describe the physics of cuprate high-temperature superconductors, specifically the interplay between antiferromagnetism and $d$-wave superconductivity upon doping [cite: 4, 5]. Second, it serves as a rigorous benchmark for computational methods; because the model is analytically intractable in dimensions greater than one, it drives the development of numerical algorithms that are subsequently applied to more complex materials science problems [cite: 6, 7].\n\nThis review aims to synthesize the vast literature on the computational treatment of the Hubbard model. Unlike previous reviews that may focus on a single method, this paper adopts a \"multi-messenger\" perspective, analyzing how complementary techniques—ranging from tensor networks to machine learning—have been combined to resolve longstanding controversies regarding the model's phase diagram [cite: 7].",
+      "stats": {
+        "char_count": 1615,
+        "word_count": 226,
+        "sentence_count": 8,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "2.1 The Hamiltonian",
+      "level": 4,
+      "content": "The single-band Hubbard Hamiltonian is defined on a lattice $\\Lambda$ as:\n\\[\nH = -t \\sum_{\\langle i,j \\rangle, \\sigma} (c^\\dagger_{i\\sigma} c_{j\\sigma} + \\text{h.c.}) + U \\sum_{i} n_{i\\uparrow} n_{i\\downarrow} - \\mu \\sum_{i} (n_{i\\uparrow} + n_{i\\downarrow})\n\\]\nwhere $c^\\dagger_{i\\sigma}$ creates an electron at site $i$ with spin $\\sigma$, $n_{i\\sigma}$ is the number operator, $t$ is the hopping amplitude between nearest neighbors $\\langle i,j \\rangle$, $U$ is the on-site Coulomb repulsion, and $\\mu$ is the chemical potential controlling the electron density [cite: 2, 4].",
+      "stats": {
+        "char_count": 578,
+        "word_count": 81,
+        "sentence_count": 3,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "2.2 Fundamental Parameters and Regimes",
+      "level": 4,
+      "content": "*   **Interaction Strength ($U/t$):** The ratio $U/t$ determines the correlation regime. Weak coupling ($U \\ll t$) is often accessible via perturbation theory, while strong coupling ($U \\gg t$) leads to Mott insulating behavior and can be mapped onto the $t-J$ model or the Heisenberg model at half-filling [cite: 2, 8].\n*   **Doping ($\\delta$):** The model exhibits distinct physics at half-filling (one electron per site, $n=1$) compared to the doped regimes. Hole doping is critical for studying high-$T_c$ superconductivity scenarios [cite: 5].\n*   **The Sign Problem:** A fundamental barrier in Quantum Monte Carlo simulations of fermionic systems, where the weights in the sampling procedure become negative or complex, causing the signal-to-noise ratio to decay exponentially with system size and inverse temperature [cite: 4, 9].",
+      "stats": {
+        "char_count": 837,
+        "word_count": 123,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "3.1 The Early Years (1963–1980s)",
+      "level": 4,
+      "content": "The model was introduced in 1963 to address electron correlations in narrow energy bands [cite: 2, 3]. Early analytical work relied on mean-field approximations (Hartree-Fock) and the Gutzwiller approximation. A significant milestone was the exact solution of the one-dimensional (1D) Hubbard model by Lieb and Wu in 1968 using the Bethe Ansatz, which revealed a Mott insulator ground state for any $U > 0$ at half-filling [cite: 1, 8].",
+      "stats": {
+        "char_count": 436,
+        "word_count": 69,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.2 The Numerical Revolution (1980s–2000s)",
+      "level": 4,
+      "content": "The discovery of high-temperature superconductivity in 1986 catalyzed intense computational research. This era saw the rise of Quantum Monte Carlo (QMC) methods, specifically Determinantal QMC (DQMC), which provided the first unbiased results for finite temperatures [cite: 9, 10]. Simultaneously, the failure of standard renormalization group techniques in 2D led to the development of the Density Matrix Renormalization Group (DMRG) by Steven White in 1992, revolutionizing the study of 1D and quasi-1D (ladder) systems [cite: 4, 5].",
+      "stats": {
+        "char_count": 535,
+        "word_count": 76,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.3 The Era of Precision and Consensus (2010s–Present)",
+      "level": 4,
+      "content": "The last decade has been characterized by the refinement of \"embedding\" methods like Dynamical Mean-Field Theory (DMFT) and its cluster extensions (DCA, CDMFT) [cite: 11, 12]. Most notably, the \"Simons Collaboration on the Many-Electron Problem\" launched a large-scale benchmark initiative, bringing together competing numerical methods to resolve the ground state of the 2D Hubbard model, marking a shift from individual algorithmic development to collaborative verification [cite: 7, 13].",
+      "stats": {
+        "char_count": 490,
+        "word_count": 68,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 3,
+      "content": "The computational landscape is currently dominated by four major families of algorithms, each with distinct strengths and limitations.",
+      "stats": {
+        "char_count": 134,
+        "word_count": 18,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.1 Quantum Monte Carlo (QMC)",
+      "level": 4,
+      "content": "QMC methods are among the most powerful tools for unbiased simulations.\n*   **Auxiliary-Field QMC (AFQMC):** This method decouples the interaction term using a Hubbard-Stratonovich transformation. Recent advances in constrained-path approximations have allowed AFQMC to access larger system sizes and lower temperatures by mitigating the sign problem [cite: 14, 15].\n*   **Diagrammatic Monte Carlo (DiagMC):** Instead of sampling configuration space, DiagMC samples the Feynman diagrammatic series directly. Recent work has demonstrated its ability to sum diagrams to high orders, offering controlled results in the thermodynamic limit, particularly for the Fermi liquid regime and phase transitions [cite: 12, 16, 17].\n*   **Limitations:** The fermionic sign problem remains the primary bottleneck for doped systems away from half-filling [cite: 9].",
+      "stats": {
+        "char_count": 850,
+        "word_count": 116,
+        "sentence_count": 6,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "4.2 Tensor Network States",
+      "level": 4,
+      "content": "Tensor networks avoid the sign problem entirely by representing the wavefunction as a contraction of tensors.\n*   **Density Matrix Renormalization Group (DMRG):** While originally for 1D, modern DMRG is the gold standard for cylinders (quasi-2D strips). It provides highly accurate ground state energies but scales exponentially with the cylinder width [cite: 5, 18].\n*   **Projected Entangled Pair States (PEPS):** A true 2D generalization of DMRG. PEPS captures the area law of entanglement entropy natural to 2D systems. Recent infinite-PEPS (iPEPS) calculations have been crucial in identifying the competition between stripe order and superconductivity [cite: 18].",
+      "stats": {
+        "char_count": 669,
+        "word_count": 95,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.3 Quantum Embedding Theories",
+      "level": 4,
+      "content": "These methods map the lattice problem onto a solvable impurity problem.\n*   **Dynamical Mean-Field Theory (DMFT):** Exact in infinite dimensions, DMFT captures local temporal correlations.\n*   **Cluster Extensions (DCA/CDMFT):** By embedding a finite cluster into a self-consistent bath, these methods capture short-range spatial correlations. They are essential for studying the pseudogap and the transition from Fermi liquid to Mott insulator [cite: 11, 12].",
+      "stats": {
+        "char_count": 460,
+        "word_count": 63,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.4 Neural Quantum States (NQS)",
+      "level": 4,
+      "content": "The application of machine learning to quantum many-body physics represents the newest frontier.\n*   **Architecture:** NQS uses artificial neural networks (e.g., Restricted Boltzmann Machines, Convolutional Neural Networks, and Transformers) to parameterize the many-body wavefunction $\\Psi(\\mathbf{n})$.\n*   **Recent Breakthroughs:** In 2024-2025, transformer-based architectures utilizing \"attention heads\" demonstrated the ability to capture long-range correlations and nodal structures in the doped Hubbard model, achieving state-of-the-art variational energies comparable to or exceeding DMRG on wide lattices [cite: 19, 20, 21].\n*   **Advantages:** NQS can theoretically compress the exponentially large Hilbert space more efficiently than tensor networks for volume-law entangled states [cite: 22].",
+      "stats": {
+        "char_count": 805,
+        "word_count": 98,
+        "sentence_count": 6,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "5.1 The Ground State of the 2D Hubbard Model",
+      "level": 4,
+      "content": "One of the most significant achievements in the field was the multi-method benchmark orchestrated by the Simons Collaboration.\n*   **The Controversy:** For decades, it was debated whether the ground state of the doped 2D Hubbard model (specifically at 1/8 doping) was a uniform $d$-wave superconductor or a charge-ordered state.\n*   **The Consensus:** By combining AFQMC, DMRG, iPEPS, and DMET, researchers established that the ground state in the strong-coupling regime is likely a **stripe phase** (intertwined spin and charge order) rather than a pure superconductor. Superconductivity appears to be fragile and competes closely with stripe order [cite: 7, 13, 18].",
+      "stats": {
+        "char_count": 668,
+        "word_count": 99,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.2 Ultracold Atoms in Optical Lattices",
+      "level": 4,
+      "content": "The Hubbard model is no longer just a theoretical construct; it is realized experimentally in optical lattices.\n*   **Quantum Simulation:** Ultracold fermionic atoms (e.g., $^{6}\\text{Li}$ or $^{40}\\text{K}$) trapped in interference patterns of laser light mimic electrons in a crystal. These \"analog\" quantum simulators allow for the precise tuning of $U/t$ and lattice geometry [cite: 23, 24].\n*   **Key Results:** Experiments have successfully observed the Mott insulator shell structure, antiferromagnetic correlations, and the onset of the pseudogap, providing a direct experimental check against numerical theories [cite: 25, 26, 27].",
+      "stats": {
+        "char_count": 640,
+        "word_count": 88,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.3 Twisted Bilayer Graphene and Moiré Materials",
+      "level": 4,
+      "content": "The discovery of superconductivity in magic-angle twisted bilayer graphene has revitalized interest in extended Hubbard models.\n*   **Modeling:** The low-energy physics of these systems is often described by Hubbard models on triangular or honeycomb moiré superlattices.\n*   **Computational Approach:** Researchers use maximally localized Wannier orbitals to construct effective Hubbard Hamiltonians from *ab initio* data, subsequently solving them using Hartree-Fock or exact diagonalization to predict phase diagrams containing correlated insulators and superconductors [cite: 28, 29, 30, 31].",
+      "stats": {
+        "char_count": 595,
+        "word_count": 76,
+        "sentence_count": 3,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "6.1 The Fermionic Sign Problem",
+      "level": 4,
+      "content": "Despite decades of progress, the sign problem in QMC remains \"NP-hard\" in the general case. While constrained-path methods (CP-AFQMC) mitigate this, they introduce systematic biases that are difficult to quantify without exact benchmarks [cite: 9, 15].",
+      "stats": {
+        "char_count": 252,
+        "word_count": 36,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.2 Scaling to the Thermodynamic Limit in 2D",
+      "level": 4,
+      "content": "Tensor networks (DMRG/PEPS) are limited by bond dimension, which governs the amount of entanglement they can represent. Scaling these methods to infinite 2D systems with high accuracy remains computationally prohibitive, often requiring extrapolation techniques that introduce uncertainty [cite: 18].",
+      "stats": {
+        "char_count": 300,
+        "word_count": 39,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.3 Optimization Landscapes in NQS",
+      "level": 4,
+      "content": "While Neural Quantum States offer high expressivity, optimizing the network parameters (Variational Monte Carlo) is non-trivial. The optimization landscape can be rugged, leading to local minima (barren plateaus), and enforcing fermionic antisymmetry (nodal structures) within neural architectures is mathematically challenging [cite: 19, 32].",
+      "stats": {
+        "char_count": 343,
+        "word_count": 43,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.4 Digital Quantum Simulation Constraints",
+      "level": 4,
+      "content": "Algorithms for gate-based quantum computers, such as the Variational Quantum Eigensolver (VQE), currently suffer from noise (NISQ era limitations) and the depth of Trotterized evolution steps required to simulate the Hubbard Hamiltonian accurately. Classical benchmarks often still outperform quantum hardware for system sizes relevant to physics [cite: 33, 34, 35].",
+      "stats": {
+        "char_count": 366,
+        "word_count": 50,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.1 Multi-Method \"Hybrid\" Approaches",
+      "level": 4,
+      "content": "The future lies in the integration of complementary methods. For example, using DMRG or NQS trial wavefunctions to guide the constraints in AFQMC, or using QMC data to train neural networks. This \"multi-messenger\" approach reduces the bias inherent in any single method [cite: 7].",
+      "stats": {
+        "char_count": 280,
+        "word_count": 44,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.2 Advancing Neural Quantum States",
+      "level": 4,
+      "content": "Developing better architectures for NQS, particularly Transformer-based models that naturally handle long-range dependencies and symmetries (translation, rotation, particle conservation), is a rapidly expanding field. Improving the \"sign structure\" learning in NQS is critical for fermionic systems [cite: 20, 21, 36].",
+      "stats": {
+        "char_count": 318,
+        "word_count": 40,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.3 Fault-Tolerant Quantum Computing",
+      "level": 4,
+      "content": "As quantum hardware matures, the focus will shift from variational heuristics (VQE) to robust algorithms like Quantum Phase Estimation (QPE). The Hubbard model is a primary target for demonstrating \"quantum advantage\" once error correction becomes feasible [cite: 33, 37].",
+      "stats": {
+        "char_count": 272,
+        "word_count": 39,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.4 Extension to Multi-Orbital and Non-Equilibrium Systems",
+      "level": 4,
+      "content": "Moving beyond the single-band model to multi-orbital Hubbard models is essential for describing realistic materials like iron-based superconductors and ruthenates. Additionally, simulating non-equilibrium dynamics (quenches, photo-doping) is a frontier where methods like time-dependent DMRG and NQS show promise [cite: 11, 22].",
+      "stats": {
+        "char_count": 328,
+        "word_count": 41,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 3,
+      "content": "The Hubbard model remains the \"standard model\" of correlated electron physics. Over the past six decades, it has evolved from a qualitative phenomenological framework into a precision laboratory for computational physics. The field has transitioned from an era of competing, often contradictory, approximate solutions to a collaborative era of quantitative consensus, exemplified by the resolution of the stripe phase in the 2D limit.\n\nWhile analytical solutions in high dimensions remain elusive, the arsenal of computational tools—ranging from the stochastic rigor of QMC to the entanglement-based logic of tensor networks and the expressive power of machine learning—has provided deep insights into the model's rich phase diagram. As we enter the era of quantum simulation and artificial intelligence, the computational perspective on the Hubbard model continues to expand, promising not only to solve this specific Hamiltonian but to unlock the general principles of quantum matter.\n\n---",
+      "stats": {
+        "char_count": 991,
+        "word_count": 144,
+        "sentence_count": 6,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Hubbard model",
+      "number": null,
+      "title": "Hubbard model"
+    },
+    {
+      "text": "The Hubbard Model",
+      "number": null,
+      "title": "The Hubbard Model"
+    },
+    {
+      "text": "Introduction to the Hubbard Model",
+      "number": null,
+      "title": "Introduction to the Hubbard Model"
+    },
+    {
+      "text": "The Hubbard Model: A Computational Perspective",
+      "number": null,
+      "title": "The Hubbard Model: A Computational Perspective"
+    },
+    {
+      "text": "Numerical Methods for Quantum Monte Carlo Simulations of the Hubbard Model",
+      "number": null,
+      "title": "Numerical Methods for Quantum Monte Carlo Simulations of the Hubbard Model"
+    },
+    {
+      "text": "Numerical Studies of the 2D Hubbard Model",
+      "number": null,
+      "title": "Numerical Studies of the 2D Hubbard Model"
+    },
+    {
+      "text": "Quantum Showdown: Competing Methods of Solving Quantum Systems Put to the Test",
+      "number": null,
+      "title": "Quantum Showdown: Competing Methods of Solving Quantum Systems Put to the Test"
+    },
+    {
+      "text": "Simons Collaboration on the Many Electron Problem",
+      "number": null,
+      "title": "Simons Collaboration on the Many Electron Problem"
+    },
+    {
+      "text": "Simons Collaboration on the Many Electron Problem Annual Meeting",
+      "number": null,
+      "title": "Simons Collaboration on the Many Electron Problem Annual Meeting"
+    },
+    {
+      "text": "Simons Collaboration Benchmark",
+      "number": null,
+      "title": "Simons Collaboration Benchmark"
+    },
+    {
+      "text": "A computationally efficient workflow for obtaining the low-energy symmetric tight-binding Hamiltonians for twisted multilayer systems",
+      "number": null,
+      "title": "A computationally efficient workflow for obtaining the low-energy symmetric tight-binding Hamiltonians for twisted multilayer systems"
+    },
+    {
+      "text": "Maximally Localized Wannier Orbitals and the Extended Hubbard Model for Twisted Bilayer Graphene",
+      "number": null,
+      "title": "Maximally Localized Wannier Orbitals and the Extended Hubbard Model for Twisted Bilayer Graphene"
+    },
+    {
+      "text": "Twisted Bilayer Graphene Hubbard Model Simulation Methods",
+      "number": null,
+      "title": "Twisted Bilayer Graphene Hubbard Model Simulation Methods"
+    },
+    {
+      "text": "Maximally-localized Wannier orbitals and the extended Hubbard model for the twisted bilayer graphene",
+      "number": null,
+      "title": "Maximally-localized Wannier orbitals and the extended Hubbard model for the twisted bilayer graphene"
+    },
+    {
+      "text": "Diagrammatic Monte Carlo Hubbard model recent progress",
+      "number": null,
+      "title": "Diagrammatic Monte Carlo Hubbard model recent progress"
+    },
+    {
+      "text": "Evaluating Second-Order Phase Transitions with Diagrammatic Monte Carlo",
+      "number": null,
+      "title": "Evaluating Second-Order Phase Transitions with Diagrammatic Monte Carlo"
+    },
+    {
+      "text": "Diagrammatic Monte Carlo for Correlated Fermions",
+      "number": null,
+      "title": "Diagrammatic Monte Carlo for Correlated Fermions"
+    },
+    {
+      "text": "Diagrammatic Monte Carlo for the Hubbard Model",
+      "number": null,
+      "title": "Diagrammatic Monte Carlo for the Hubbard Model"
+    },
+    {
+      "text": "Enhanced Diagrammatic Monte-Carlo Approaches for the Anisotropic Triangular Hubbard Model",
+      "number": null,
+      "title": "Enhanced Diagrammatic Monte-Carlo Approaches for the Anisotropic Triangular Hubbard Model"
+    },
+    {
+      "text": "Solving the Hubbard model with Neural Quantum States",
+      "number": null,
+      "title": "Solving the Hubbard model with Neural Quantum States"
+    },
+    {
+      "text": "Specialising neural network quantum states for the Bose Hubbard model",
+      "number": null,
+      "title": "Specialising neural network quantum states for the Bose Hubbard model"
+    },
+    {
+      "text": "Quantum simulation of the Hubbard model with ultracold fermions in optical lattices",
+      "number": null,
+      "title": "Quantum simulation of the Hubbard model with ultracold fermions in optical lattices"
+    },
+    {
+      "text": "Optical Lattices and the Hubbard Model",
+      "number": null,
+      "title": "Optical Lattices and the Hubbard Model"
+    },
+    {
+      "text": "Cold atoms optical lattices Hubbard model quantum simulation",
+      "number": null,
+      "title": "Cold atoms optical lattices Hubbard model quantum simulation"
+    },
+    {
+      "text": "Quantum computing algorithms for Hubbard model VQE Trotterization",
+      "number": null,
+      "title": "Quantum computing algorithms for Hubbard model VQE Trotterization"
+    },
+    {
+      "text": "Quantum Simulation of 1D 2D Lattice-based Fermi Hubbard Model using Variational Quantum Algorithms",
+      "number": null,
+      "title": "Quantum Simulation of 1D 2D Lattice-based Fermi Hubbard Model using Variational Quantum Algorithms"
+    },
+    {
+      "text": "VQE Tutorials: Hubbard Circuit",
+      "number": null,
+      "title": "VQE Tutorials: Hubbard Circuit"
+    },
+    {
+      "text": "Classical Benchmarks for Variational Quantum Eigensolver Simulations of the Hubbard Model",
+      "number": null,
+      "title": "Classical Benchmarks for Variational Quantum Eigensolver Simulations of the Hubbard Model"
+    },
+    {
+      "text": "Benchmark study of the two-dimensional Hubbard model with auxiliary-field quantum Monte Carlo method",
+      "number": null,
+      "title": "Benchmark study of the two-dimensional Hubbard model with auxiliary-field quantum Monte Carlo method"
+    },
+    {
+      "text": "Solutions of the Two Dimensional Hubbard Model: Benchmarks and Results from a Wide Range of Numerical Algorithms",
+      "number": null,
+      "title": "Solutions of the Two Dimensional Hubbard Model: Benchmarks and Results from a Wide Range of Numerical Algorithms"
+    },
+    {
+      "text": "Quantum Showdown",
+      "number": null,
+      "title": "Quantum Showdown"
+    },
+    {
+      "text": "Hubbard model History",
+      "number": null,
+      "title": "Hubbard model History"
+    },
+    {
+      "text": "Gutzwiller wave function: Historical note",
+      "number": null,
+      "title": "Gutzwiller wave function: Historical note"
+    },
+    {
+      "text": "History of the Hubbard model",
+      "number": null,
+      "title": "History of the Hubbard model"
+    },
+    {
+      "text": "Ferromagnetism in Hubbard Models: Low Density Route",
+      "number": null,
+      "title": "Ferromagnetism in Hubbard Models: Low Density Route"
+    },
+    {
+      "text": "Neural quantum states",
+      "number": null,
+      "title": "Neural quantum states"
+    },
+    {
+      "text": "Neural Quantum States Hubbard model literature review",
+      "number": null,
+      "title": "Neural Quantum States Hubbard model literature review"
+    },
+    {
+      "text": "Autoregressive neural quantum states of Fermi Hubbard models",
+      "number": null,
+      "title": "Autoregressive neural quantum states of Fermi Hubbard models"
+    },
+    {
+      "text": "google scholar, \"mingpu qin,\" [cite: 57]",
+      "number": null,
+      "title": "google scholar, \"mingpu qin,\" [cite: 57]"
+    },
+    {
+      "text": "Annual Meeting 2022",
+      "number": null,
+      "title": "Annual Meeting 2022"
+    },
+    {
+      "text": "About Many Electron Problem",
+      "number": null,
+      "title": "About Many Electron Problem"
+    },
+    {
+      "text": "Solutions of the Two-Dimensional Hubbard Model",
+      "number": null,
+      "title": "Solutions of the Two-Dimensional Hubbard Model"
+    },
+    {
+      "text": "Solutions of the Two Dimensional Hubbard Model",
+      "number": null,
+      "title": "Solutions of the Two Dimensional Hubbard Model"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Gemini\\Physics\\The_Hubbard_model-_A_computational_perspective_20251226_162856_split.json",
+    "processed_date": "2025-12-31T02:04:52.580185",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

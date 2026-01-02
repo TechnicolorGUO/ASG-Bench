@@ -1,0 +1,512 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Non-Hermitian Topological Phenomena- A Review."
+    ],
+    [
+      1,
+      "Non-Hermitian Topological Phenomena: A Review"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Exceptional Points (EPs)"
+    ],
+    [
+      3,
+      "2.2 Complex Energy Gaps: Point vs. Line Gaps"
+    ],
+    [
+      3,
+      "2.3 The Non-Hermitian Skin Effect (NHSE)"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 The Hatano-Nelson Model (1996)"
+    ],
+    [
+      3,
+      "3.2 $\\mathcal{PT}$ Symmetry (1998)"
+    ],
+    [
+      3,
+      "3.3 Topological Photonics and Lasers (2018)"
+    ],
+    [
+      3,
+      "3.4 Symmetry Classification and Unification (2018-2019)"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Non-Bloch Band Theory"
+    ],
+    [
+      3,
+      "4.2 Topological Invariants in Non-Hermitian Systems"
+    ],
+    [
+      3,
+      "4.3 Experimental Platforms"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Topological Insulator Lasers"
+    ],
+    [
+      3,
+      "5.2 Exceptional Point Sensors"
+    ],
+    [
+      3,
+      "5.3 Topolectrical Circuit Simulations"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 The Sensitivity-Noise Debate"
+    ],
+    [
+      3,
+      "6.2 Instability in Active Systems"
+    ],
+    [
+      3,
+      "6.3 Intrinsic vs. Extrinsic Topology"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Non-Abelian Non-Hermitian Topology"
+    ],
+    [
+      3,
+      "7.2 Many-Body Non-Hermitian Physics"
+    ],
+    [
+      3,
+      "7.3 Generalized Non-Hermitian Skin Effects"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Non-Hermitian Topological Phenomena- A Review.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 16:36:44*\n*Progress: [21/21]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Non-Hermitian_Topological_Phenomena-_A_Review_20251226_163644.md*\n---",
+      "stats": {
+        "char_count": 177,
+        "word_count": 10,
+        "sentence_count": 2,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "Non-Hermitian Topological Phenomena: A Review",
+      "level": 1,
+      "content": "**Abstract**\nThe synthesis of non-Hermitian physics and topological phases of matter has emerged as a frontier in condensed matter physics, photonics, and acoustics. Unlike conventional Hermitian systems, where energy conservation and orthogonal eigenstates are paramount, non-Hermitian systems—characterized by gain, loss, and non-reciprocity—exhibit unique spectral singularities and topological invariants. This review provides a comprehensive analysis of non-Hermitian topological phenomena. We examine foundational concepts such as Exceptional Points (EPs), the Non-Hermitian Skin Effect (NHSE), and the distinction between point and line gaps. We trace the historical development from Parity-Time ($\\mathcal{PT}$) symmetry to the 38-fold symmetry classification of non-Hermitian topological phases. Furthermore, we critically evaluate state-of-the-art experimental platforms, including topological lasers and topolectrical circuits, and address the ongoing debate regarding the fundamental signal-to-noise ratio limits of EP-based sensors. Finally, we identify key challenges and outline future research directions, particularly in non-Abelian braiding and interacting non-Hermitian systems.\n\n---",
+      "stats": {
+        "char_count": 1202,
+        "word_count": 144,
+        "sentence_count": 8,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "For much of the 20th century, quantum mechanics and solid-state physics were built upon the axiom of Hermiticity. The Hamiltonian operator $\\hat{H}$, representing the total energy of a closed system, was required to be Hermitian ($\\hat{H} = \\hat{H}^\\dagger$) to guarantee real eigenvalues and unitary time evolution [cite: 1, 2]. However, this framework is an idealization; realistic systems are inevitably coupled to their environments, exchanging energy and particles. Such open systems are effectively described by non-Hermitian Hamiltonians, where eigenvalues become complex, representing decay (loss) or amplification (gain) [cite: 2, 3].\n\nIn parallel, the discovery of the Quantum Hall Effect and Topological Insulators (TIs) revolutionized our understanding of phases of matter, classifying materials not by symmetry breaking but by global topological invariants (e.g., Chern numbers) [cite: 4, 5]. The intersection of these two fields—**Non-Hermitian Topological Physics**—has revealed that non-Hermiticity is not merely a perturbation that destroys topological order, but a fundamental modifier that enriches it [cite: 6, 7].\n\nThe motivation for this field is twofold. Theoretically, non-Hermitian systems defy the conventional bulk-boundary correspondence (BBC), leading to novel phenomena like the Non-Hermitian Skin Effect (NHSE), where bulk eigenstates localize macroscopically at boundaries [cite: 8, 9]. Experimentally, the ability to engineer gain and loss in classical wave systems (photonics, acoustics, electric circuits) has enabled the realization of devices with unprecedented functionalities, such as topological insulator lasers that combine robustness with high slope efficiency [cite: 10, 11].\n\nThis paper reviews the current state of non-Hermitian topological phenomena. We begin by defining key concepts, followed by a historical overview. We then discuss theoretical methods, experimental applications, and the critical challenges facing the field.\n\n---",
+      "stats": {
+        "char_count": 1982,
+        "word_count": 268,
+        "sentence_count": 15,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2. Key Concepts and Definitions",
+      "level": 2,
+      "content": "Non-Hermitian topology introduces mathematical structures absent in Hermitian counterparts. The complex nature of the spectrum requires a redefinition of energy gaps and topological invariants.",
+      "stats": {
+        "char_count": 193,
+        "word_count": 24,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2.1 Exceptional Points (EPs)",
+      "level": 3,
+      "content": "In Hermitian systems, degeneracies (Diabolic Points) occur when eigenvalues cross, but eigenvectors remain orthogonal. In non-Hermitian systems, eigenvalues and eigenvectors can coalesce simultaneously at spectral singularities known as Exceptional Points (EPs) [cite: 1, 2].\n*   **Topology:** EPs are branch points on the complex energy Riemann surface. Encircling an EP of order $n$ results in the permutation of eigenstates and a geometric phase accumulation, often exhibiting a $\\epsilon^{1/n}$ spectral response to perturbations $\\epsilon$ [cite: 1, 2].\n*   **Significance:** This enhanced sensitivity is the basis for proposed EP sensors, although the implications for signal-to-noise ratio (SNR) remain debated [cite: 12, 13].",
+      "stats": {
+        "char_count": 733,
+        "word_count": 99,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "2.2 Complex Energy Gaps: Point vs. Line Gaps",
+      "level": 3,
+      "content": "A defining feature of non-Hermitian topology is the classification of band gaps. Since eigenvalues $E$ lie in the complex plane $\\mathbb{C}$, the definition of a \"gap\" bifurcates [cite: 14, 15, 16]:\n1.  **Line Gap:** The spectrum does not cross a reference line in the complex plane. Systems with line gaps can often be adiabatically deformed to Hermitian or anti-Hermitian limits, inheriting conventional topological classifications (extrinsic topology) [cite: 14, 17].\n2.  **Point Gap:** The spectrum does not cross a specific reference point $E_{ref}$ (usually $E=0$). This allows for a non-trivial winding number of the complex spectrum around $E_{ref}$, a phenomenon with no Hermitian analog (intrinsic topology) [cite: 14, 16]. Point gap topology is intimately linked to the NHSE [cite: 18].",
+      "stats": {
+        "char_count": 797,
+        "word_count": 119,
+        "sentence_count": 8,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "2.3 The Non-Hermitian Skin Effect (NHSE)",
+      "level": 3,
+      "content": "The NHSE describes the extreme sensitivity of the spectrum to boundary conditions. In systems exhibiting NHSE:\n*   **Periodic Boundary Conditions (PBC):** The spectrum forms loops in the complex plane with non-zero winding numbers.\n*   **Open Boundary Conditions (OBC):** The spectrum collapses into lines or arcs within the PBC loops, and an extensive number of bulk eigenstates ($O(L)$) become exponentially localized at the boundaries [cite: 3, 8, 9].\nThis breakdown of Bloch's theorem necessitates the **Generalized Brillouin Zone (GBZ)** formalism for accurate topological characterization [cite: 19, 20].\n\n---",
+      "stats": {
+        "char_count": 615,
+        "word_count": 87,
+        "sentence_count": 5,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The field has evolved through several distinct phases, moving from mathematical curiosity to experimental realization.",
+      "stats": {
+        "char_count": 118,
+        "word_count": 15,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.1 The Hatano-Nelson Model (1996)",
+      "level": 3,
+      "content": "Hatano and Nelson introduced a lattice model with asymmetric hopping to describe the pinning of magnetic flux lines in superconductors. They observed that under OBC, eigenvalues became real, while under PBC, they were complex. This was an early precursor to the NHSE and point-gap topology [cite: 5, 16].",
+      "stats": {
+        "char_count": 304,
+        "word_count": 48,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.2 $\\mathcal{PT}$ Symmetry (1998)",
+      "level": 3,
+      "content": "Bender and Boettcher demonstrated that non-Hermitian Hamiltonians respecting Parity-Time ($\\mathcal{PT}$) symmetry could possess entirely real spectra [cite: 2, 21]. This triggered a wave of research into \"balanced gain and loss\" systems, particularly in optics, where $\\mathcal{PT}$ symmetry breaking leads to spontaneous symmetry breaking transitions at EPs [cite: 1, 22].",
+      "stats": {
+        "char_count": 374,
+        "word_count": 49,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.3 Topological Photonics and Lasers (2018)",
+      "level": 3,
+      "content": "A major milestone was the theoretical proposal and subsequent experimental realization of the **Topological Insulator Laser** by Harari, Bandres, Segev, and Christodoulides [cite: 11, 23, 24]. They demonstrated that topological edge states could support single-mode lasing with high efficiency, robust against disorder, bridging the gap between topological physics and active device engineering.",
+      "stats": {
+        "char_count": 395,
+        "word_count": 52,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.4 Symmetry Classification and Unification (2018-2019)",
+      "level": 3,
+      "content": "While the Altland-Zirnbauer (AZ) classification governs Hermitian topological phases (10 classes), non-Hermiticity complicates this picture. In 2018-2019, seminal works by Kawabata et al. and Gong et al. established a complete classification of non-Hermitian topological phases [cite: 25, 26]. By accounting for sublattice symmetry, pseudo-Hermiticity, and the distinction between transposition and complex conjugation, they identified **38 symmetry classes** for non-Hermitian systems [cite: 26, 27, 28].\n\n---",
+      "stats": {
+        "char_count": 510,
+        "word_count": 65,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.1 Non-Bloch Band Theory",
+      "level": 3,
+      "content": "Standard Bloch band theory fails for non-Hermitian systems under OBC due to the NHSE. The state-of-the-art method is **Non-Bloch Band Theory**, which replaces the real Bloch wavevector $k$ with a complex one, $k \\to k + i\\kappa(k)$. The locus of allowed complex wavevectors forms the Generalized Brillouin Zone (GBZ) [cite: 19, 29].\n*   **Technique:** The GBZ is determined by the condition that the characteristic equation $\\det[H(\\beta) - E] = 0$ (where $\\beta = e^{ik}$) has roots satisfying $|\\beta_M| = |\\beta_{M+1}|$ for a specific ordering of roots. This restores the bulk-boundary correspondence (BBC) [cite: 20, 30].",
+      "stats": {
+        "char_count": 625,
+        "word_count": 95,
+        "sentence_count": 5,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "4.2 Topological Invariants in Non-Hermitian Systems",
+      "level": 3,
+      "content": "*   **Spectral Winding Number:** For point-gapped systems in 1D, the winding of the complex energy spectrum serves as a topological invariant predicting the NHSE [cite: 14, 16].\n*   **Biorthogonal Polarization:** To account for non-orthogonal eigenstates, topological invariants like the Berry phase are generalized using the biorthogonal basis (left and right eigenvectors) [cite: 6, 31].",
+      "stats": {
+        "char_count": 389,
+        "word_count": 54,
+        "sentence_count": 2,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "4.3 Experimental Platforms",
+      "level": 3,
+      "content": "*   **Topolectrical Circuits:** These are among the most versatile platforms. By using operational amplifiers and capacitors, researchers can engineer arbitrary non-reciprocal hoppings (violating Newton's third law) to realize NHSE, 4D topology, and non-Abelian braiding [cite: 32, 33, 34, 35].\n*   **Photonics:** Coupled waveguides and ring resonators with controlled gain (pumping) and loss (absorption/radiation) allow for the observation of EPs and topological lasing [cite: 1, 36].\n*   **Acoustics:** Active acoustic metamaterials use microphones and speakers with feedback loops to simulate non-Hermitian Hamiltonians [cite: 37].\n\n---",
+      "stats": {
+        "char_count": 640,
+        "word_count": 84,
+        "sentence_count": 5,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1 Topological Insulator Lasers",
+      "level": 3,
+      "content": "Conventional semiconductor lasers suffer from multimode instability and sensitivity to defects. Topological insulator lasers utilize the robustness of topological edge modes to enforce single-mode operation.\n*   **Case Study:** Bandres et al. (Science, 2018) utilized a 2D array of coupled ring resonators acting as a photonic topological insulator. By pumping the perimeter, they achieved single-mode lasing with a slope efficiency significantly higher than trivial counterparts [cite: 24, 38]. Recent advances include electrically pumped variants and vertical-cavity surface-emitting laser (VCSEL) arrays [cite: 22, 39].",
+      "stats": {
+        "char_count": 622,
+        "word_count": 82,
+        "sentence_count": 6,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "5.2 Exceptional Point Sensors",
+      "level": 3,
+      "content": "The spectral splitting $\\Delta \\omega$ near a generic degeneracy scales linearly with perturbation $\\epsilon$. Near an EP of order $n$, it scales as $\\epsilon^{1/n}$ (e.g., $\\sqrt{\\epsilon}$ for $n=2$). This \"infinite\" susceptibility at $\\epsilon \\to 0$ suggests ultra-high sensitivity.\n*   **Implementations:** Microtoroid cavities, nanoparticle detection, and gyroscopes have demonstrated EP-enhanced frequency splitting [cite: 40, 41, 42].\n*   **Critical Analysis:** While sensitivity (signal shift) is enhanced, recent studies indicate that eigenbasis collapse at the EP amplifies noise, potentially negating the Signal-to-Noise Ratio (SNR) benefit (see Section 6) [cite: 12, 43].",
+      "stats": {
+        "char_count": 684,
+        "word_count": 88,
+        "sentence_count": 7,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.3 Topolectrical Circuit Simulations",
+      "level": 3,
+      "content": "Circuits have realized the **Non-Hermitian Haldane Model** and **Higher-Order Skin Effects**.\n*   **Case Study:** A 2023 study demonstrated \"skin interface states\" in circuits, where domain walls between regions of different winding numbers localized voltage modes, confirming theoretical predictions of non-Hermitian domain wall physics [cite: 33, 44]. Another recent breakthrough involved the realization of non-Abelian permutations of eigenstates by encircling exceptional arcs in a 3-state system [cite: 45].\n\n---",
+      "stats": {
+        "char_count": 517,
+        "word_count": 68,
+        "sentence_count": 4,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "6.1 The Sensitivity-Noise Debate",
+      "level": 3,
+      "content": "A major controversy in the field is whether EP sensors offer a fundamental advantage.\n*   **The Problem:** While the signal scales as $\\sqrt{\\epsilon}$, the non-orthogonality of eigenstates at the EP (measured by the Petermann factor) leads to an amplification of quantum and thermal noise [cite: 12, 46].\n*   **Current Consensus:** Theoretical and experimental works by Lau, Clerk, and others suggest that for fundamental noise sources (quantum shot noise), the SNR is *not* enhanced compared to diabolic points [cite: 12, 47]. However, EP sensors may still offer advantages in regimes dominated by technical noise or readout limitations [cite: 46, 48].",
+      "stats": {
+        "char_count": 654,
+        "word_count": 99,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "6.2 Instability in Active Systems",
+      "level": 3,
+      "content": "In systems with gain (e.g., lasers, active circuits), the NHSE can lead to an accumulation of energy at boundaries, potentially triggering instabilities or nonlinear saturation effects that deviate from linear topological predictions [cite: 49, 50]. Understanding the interplay between non-Hermitian topology and nonlinearity is a critical open problem [cite: 50].",
+      "stats": {
+        "char_count": 364,
+        "word_count": 50,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.3 Intrinsic vs. Extrinsic Topology",
+      "level": 3,
+      "content": "Distinguishing \"intrinsic\" non-Hermitian phases (those with no Hermitian analog, protected by point gaps) from \"extrinsic\" phases (deformable to Hermitian systems) remains subtle, especially in high-dimensional symmetry classes. Recent work has attempted to formalize this via homomorphisms from line-gap to point-gap classifications [cite: 14].\n\n---",
+      "stats": {
+        "char_count": 350,
+        "word_count": 44,
+        "sentence_count": 3,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "7.1 Non-Abelian Non-Hermitian Topology",
+      "level": 3,
+      "content": "Unlike Hermitian systems, where band gaps are simple voids, non-Hermitian bands can braid around each other in complex ways.\n*   **Direction:** Research is moving toward manipulating multiple EPs and \"Exceptional Lines\" to realize non-Abelian braiding operations. This could lead to new forms of topological information processing where the state of the system depends on the non-commutative order of control parameter variations [cite: 37, 45, 51].",
+      "stats": {
+        "char_count": 449,
+        "word_count": 65,
+        "sentence_count": 3,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "7.2 Many-Body Non-Hermitian Physics",
+      "level": 3,
+      "content": "Most current work focuses on single-particle or mean-field descriptions. Extending non-Hermitian topology to interacting many-body quantum systems (e.g., via the non-Hermitian Hubbard model) is a frontier. This includes studying the fate of the NHSE in the presence of interactions and the emergence of non-Hermitian topological order in highly entangled states [cite: 29, 52].",
+      "stats": {
+        "char_count": 377,
+        "word_count": 53,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.3 Generalized Non-Hermitian Skin Effects",
+      "level": 3,
+      "content": "Recent theoretical proposals suggest \"relative skin effects\" and skin effects that defy the current GBZ framework, driven by real-space non-Hermitian terms or critical behaviors. Exploring these generalized localization phenomena will refine the non-Bloch band theory [cite: 53].\n\n---",
+      "stats": {
+        "char_count": 284,
+        "word_count": 38,
+        "sentence_count": 3,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "Non-Hermitian topological phenomena represent a paradigm shift in our understanding of open quantum and classical wave systems. By embracing non-Hermiticity, researchers have uncovered a rich landscape of physics defined by exceptional points, complex energy windings, and the macroscopic localization of bulk states (NHSE). The field has rapidly matured from abstract mathematical classifications to concrete applications in robust lasing and versatile circuit simulations.\n\nHowever, significant hurdles remain. The practical utility of EP sensors hinges on resolving the SNR debate, and the extension of these concepts to the quantum many-body regime is in its infancy. As the community addresses these challenges, the interplay between topology, symmetry, and dissipation promises to yield next-generation technologies and deeper insights into the nature of open systems.\n\n---",
+      "stats": {
+        "char_count": 879,
+        "word_count": 121,
+        "sentence_count": 7,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Exceptional points in optics and photonics",
+      "number": null,
+      "title": "Exceptional points in optics and photonics"
+    },
+    {
+      "text": "Review of exceptional point-based sensors",
+      "number": null,
+      "title": "Review of exceptional point-based sensors"
+    },
+    {
+      "text": "Recent Advances of Exceptional Points (EP)-Based Sensing Applications: A Review",
+      "number": null,
+      "title": "Recent Advances of Exceptional Points (EP)-Based Sensing Applications: A Review"
+    },
+    {
+      "text": "Realization of a non-Hermitian Haldane model in circuits",
+      "number": null,
+      "title": "Realization of a non-Hermitian Haldane model in circuits"
+    },
+    {
+      "text": "Exceptional topology of non-Hermitian systems",
+      "number": null,
+      "title": "Exceptional topology of non-Hermitian systems"
+    },
+    {
+      "text": "Experimental realization of non-Abelian permutations in a three-state non-Hermitian system",
+      "number": null,
+      "title": "Experimental realization of non-Abelian permutations in a three-state non-Hermitian system"
+    },
+    {
+      "text": "Non-Hermitian Topological Phases: Principles and Prospects",
+      "number": null,
+      "title": "Non-Hermitian Topological Phases: Principles and Prospects"
+    },
+    {
+      "text": "A review on non-Hermitian skin effect",
+      "number": null,
+      "title": "A review on non-Hermitian skin effect"
+    },
+    {
+      "text": "Hermitian Bulk – Non-Hermitian Boundary Correspondence",
+      "number": null,
+      "title": "Hermitian Bulk – Non-Hermitian Boundary Correspondence"
+    },
+    {
+      "text": "Non-Hermitian Topological Phenomena: A Review",
+      "number": null,
+      "title": "Non-Hermitian Topological Phenomena: A Review"
+    },
+    {
+      "text": "Symmetry and Topology in Non-Hermitian Physics",
+      "number": null,
+      "title": "Symmetry and Topology in Non-Hermitian Physics"
+    },
+    {
+      "text": "Experimental observation of non-Hermitian higher-order skin interface states in topological electric circuits",
+      "number": null,
+      "title": "Experimental observation of non-Hermitian higher-order skin interface states in topological electric circuits"
+    },
+    {
+      "text": "Exceptional-Point Sensors Offer No Fundamental Signal-to-Noise Ratio Enhancement",
+      "number": null,
+      "title": "Exceptional-Point Sensors Offer No Fundamental Signal-to-Noise Ratio Enhancement"
+    },
+    {
+      "text": "Topological insulator laser: Theory",
+      "number": null,
+      "title": "Topological insulator laser: Theory"
+    },
+    {
+      "text": "Topological insulator laser: Experiments",
+      "number": null,
+      "title": "Topological insulator laser: Experiments"
+    },
+    {
+      "text": "Non-Bloch Band Theory of Non-Hermitian Systems",
+      "number": null,
+      "title": "Non-Bloch Band Theory of Non-Hermitian Systems"
+    },
+    {
+      "text": "Exceptional Non-Abelian Topology in Multiband Non-Hermitian Systems",
+      "number": null,
+      "title": "Exceptional Non-Abelian Topology in Multiband Non-Hermitian Systems"
+    },
+    {
+      "text": "Observation of impurity-induced scale-free localization in a disordered non-Hermitian electrical circuit",
+      "number": null,
+      "title": "Observation of impurity-induced scale-free localization in a disordered non-Hermitian electrical circuit"
+    },
+    {
+      "text": "Intrinsic and extrinsic non-Hermitian topological phases",
+      "number": null,
+      "title": "Intrinsic and extrinsic non-Hermitian topological phases"
+    },
+    {
+      "text": "Topolectrical circuits: Recent experimental progress",
+      "number": null,
+      "title": "Topolectrical circuits: Recent experimental progress"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Gemini\\Physics\\Non-Hermitian_Topological_Phenomena-_A_Review_20251226_163644_split.json",
+    "processed_date": "2025-12-31T01:49:41.730425",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

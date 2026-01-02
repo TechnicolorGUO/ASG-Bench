@@ -1,0 +1,271 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Practical and Ethical Challenges of Large Language Models in Education- A Systematic Scoping Review."
+    ],
+    [
+      2,
+      "Introduction and Background"
+    ],
+    [
+      2,
+      "Historical Development and Key Technological Milestones"
+    ],
+    [
+      2,
+      "Current State-of-the-Art Applications and Empirical Evidence"
+    ],
+    [
+      2,
+      "The Pervasive Challenge of Technical Hallucinations and Bias"
+    ],
+    [
+      2,
+      "Pedagogical Impacts and Societal Equity Concerns"
+    ],
+    [
+      2,
+      "Institutional Barriers and Future Directions for Responsible Integration"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Practical and Ethical Challenges of Large Language Models in Education- A Systematic Scoping Review.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-25 04:30:39*\n*Topic Index: 1/10*\n\n---\n\nThis research aims to systematically map the landscape of large language models (LLMs) in educational contexts, focusing on both practical implementation issues and ethical concerns. It will explore key concepts, historical developments, current applications, and open challenges across diverse educational settings. The review is designed to be comprehensive and balanced between technical and socio-ethical dimensions, serving as a foundation for future research and responsible deployment in education.# A Systematic Scoping Review of Practical and Ethical Challenges in the Application of Large Language Models in Education",
+      "stats": {
+        "char_count": 689,
+        "word_count": 93,
+        "sentence_count": 4,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "Introduction and Background",
+      "level": 2,
+      "content": "The advent of Large Language Models (LLMs) has precipitated a paradigm shift across numerous sectors, with education being one of the most profoundly impacted. Since the public release of OpenAI's ChatGPT in November 2022, these powerful AI systems have rapidly permeated educational ecosystems, catalyzing widespread discussion, experimentation, and concern [[5,23]]. LLMs are advanced AI systems that leverage deep neural networks, primarily based on the transformer architecture, to process and generate human-like text from vast datasets [[7,12]]. Their capacity for natural language understanding and generation offers transformative potential for teaching and learning, promising personalized instruction, automated administrative tasks, and unprecedented access to information. However, this rapid integration has also exposed a complex landscape of practical and ethical challenges that educators, researchers, and policymakers are only beginning to navigate. The need for a comprehensive review of these issues is critical to inform responsible and effective implementation.\n\nThis systematic scoping review synthesizes current research to provide a detailed analysis of the practical and ethical dimensions of LLMs in education. Its primary objective is to move beyond simplistic narratives of either unmitigated benefit or imminent dystopia by critically examining the empirical evidence surrounding their application. The review addresses key questions: What are the demonstrated capabilities and limitations of LLMs in various educational contexts? What are the most significant practical barriers to their deployment, and how can they be overcome? How do we address the profound ethical risks related to bias, privacy, academic integrity, and equity? By systematically mapping the existing literature, this paper aims to identify prevailing trends, highlight critical knowledge gaps, and chart a course for future research and policy development. The scope of this review encompasses peer-reviewed studies published between 2017 and 2025, covering applications across K–12, higher education, and lifelong learning. It focuses on both proprietary models like GPT-4 and open-source alternatives such as Llama and Mistral, analyzing their deployment modes in intelligent tutoring, assessment, content generation, and pedagogical support. This comprehensive approach provides a foundational resource for stakeholders seeking to harness the power of LLMs while mitigating their inherent risks.",
+      "stats": {
+        "char_count": 2501,
+        "word_count": 340,
+        "sentence_count": 15,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "Historical Development and Key Technological Milestones",
+      "level": 2,
+      "content": "The integration of artificial intelligence into education is not a recent phenomenon but rather the culmination of decades of technological evolution. The historical trajectory reveals a steady progression from early, rule-based systems to today's sophisticated, generative models, each step expanding the possibilities for technology-mediated learning. The origins of AI in education can be traced back to the 1960s with pioneering Intelligent Tutoring Systems (ITS). For example, PLATO (Programmed Logic for Automatic Teaching Operations), developed at the University of Illinois at Urbana-Champaign, and the \"Automatic Grader\" system for programming classes were early attempts to create computerized educational tools [[3]]. These systems were heavily influenced by behavioral learning theories, such as B.F. Skinner's programmed instruction movement and Benjamin Bloom's mastery learning, which posited that students learn best when presented with material in small, sequential steps and given immediate feedback [[3]]. In the 1970s, multimedia-based ITSs like TICCIT (Time-shared, Interactive Computer-Controlled Instructional Television) further expanded the scope of interactive learning [[3]].\n\nThe true revolution began with the confluence of three key factors in the 21st century: hardware improvements, big data mining, and advancements in deep learning models [[3]]. The World Wide Web in the 1990s shifted educational services online, enabling data-driven personalization through learning analytics, while Web 2.0 technologies facilitated the creation of rich user-generated content and social learning platforms [[3]]. The theoretical foundation for modern LLMs was laid in 2017 with the introduction of the Transformer architecture by Vaswani et al. [[1,3]]. This model introduced a self-attention mechanism that allowed it to process relationships between all tokens in an input sequence in parallel, overcoming the limitations of previous recurrent neural network architectures and enabling the training of much larger and more powerful models [[1,2]]. This architectural breakthrough was the catalyst for the emergence of Generative Pre-trained Transformers (GPT), first released by OpenAI in 2018 [[3,5]].\n\nSince then, the field has experienced exponential growth. The release of GPT-3 in June 2020, with its 175 billion parameters trained on massive datasets, marked a significant scaling milestone [[2,24,29]]. This was followed by a rapid succession of increasingly capable models, including InstructGPT in 2022, which used Reinforcement Learning from Human Feedback (RLHF) to improve safety and alignment with human values, and GPT-4 in 2023, which demonstrated broader capabilities and larger context windows [[5,29]]. The public release of ChatGPT in late 2022 served as a watershed moment, bringing these powerful tools to the hands of millions of users within months and sparking intense debate across the educational community [[3,15,23]]. Concurrently, the rise of multimodal models like GPT-4o (May 2024) indicates a move towards integrating text with other modalities like vision and audio, opening new frontiers for interactive and inclusive educational applications [[14,22]]. This history demonstrates a clear trajectory from simple, task-specific programs to general-purpose, context-aware AI tutors, setting the stage for the complex challenges and opportunities examined in this review.",
+      "stats": {
+        "char_count": 3424,
+        "word_count": 473,
+        "sentence_count": 21,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "Current State-of-the-Art Applications and Empirical Evidence",
+      "level": 2,
+      "content": "The integration of Large Language Models into education has spurred a wide array of applications, transforming traditional roles of teachers, students, and administrators. Empirical studies from 2022 onwards reveal a dynamic ecosystem of use cases spanning content creation, assessment, personalized support, and pedagogical innovation. One of the most prominent applications is in the generation of educational resources. Teachers are using LLMs to create lesson plans, slide decks, quizzes, and formative assessments [[9,23]]. Platforms like Khan Academy have developed AI tutors such as 'Khanmigo' that use LLMs to provide personalized, Socratic-style guidance [[5,23,29]]. Fine-tuned models like Google's LearnLM and EduBERT are being specifically designed for educational contexts to improve performance on domain-specific tasks [[11,12]]. Beyond static content, LLMs are also used to adapt materials for different reading levels or cultural contexts, enhancing accessibility for diverse learners [[16,20]].\n\nAutomated assessment represents another major area of application, offering the potential for scalable and timely feedback. Studies show that LLMs can perform grading tasks with accuracy comparable to human experts, particularly for short-answer questions and reading comprehension [[8,16]]. For instance, GPT-3.5 matched student performance on an undergraduate neuroscience exam, though its work could often be detected by experienced graders [[16]]. Fine-tuning approaches have yielded near-human accuracy in scoring math problems [[16]]. However, the reliability of LLM grading remains a subject of debate, with concerns about fairness and transparency in automated assessment systems [[13]]. In writing and language education, LLMs are applied to grammatical error detection and correction (GEC), providing vocabulary feedback and helping students structure coherent arguments [[11]]. They also serve as conversational partners for practice in languages like English as a Foreign Language (EFL) [[22]]. Furthermore, LLMs are being deployed to support learners with disabilities, providing real-time translation, simplified text, and empathetic interactions [[20,21]].\n\nEmpirical evidence suggests these applications yield mixed but often positive results. Meta-analyses indicate that LLMs can have a positive impact on academic performance, cognitive development, motivation, and engagement [[4,23]]. Some reports claim that students using AI tools have outperformed peers in traditional settings by 64%, and that LLMs can increase student retention by 32% [[21]]. A study on emotional well-being found that AI conversational systems improved well-being by 40% [[21]]. However, the quality of this evidence varies significantly. A systematic review noted that while many studies report high F1 scores for classification tasks, performance drops substantially for more complex tasks like essay scoring, where quadratic weighted kappa scores range from 0.80 to 0.94—indicating strong agreement but not perfect alignment with human raters [[8]]. Another study evaluating LLMs in classifying student responses in applied linguistics found that even the best-performing model achieved only moderate agreement (κ = 0.68) with expert human coders, underscoring the necessity of human oversight [[25]]. The table below summarizes some key applications and findings from the literature.\n\n| Application Area | Specific Use Case | Key Findings & Performance Metrics | Representative LLMs/Models | Source(s) |\n| :--- | :--- | :--- | :--- | :--- |\n| **Content Generation** | Lesson Planning & Resource Creation | Used for planning (63.8%), differentiation (36.9%), and assessment design (47.2%). | Claude 3.5 Haiku | `[[9]]` |\n| | Educational Material Adaptation | Revised math content to improve readability metrics; generated culturally relevant activities. | GPT-4 | `[[9,16]]` |\n| **Automated Assessment** | Short Answer Grading | Achieved F1 scores of 0.61–0.82; QWK of 0.80–0.94 for essay scoring. | GPT-3.5, GPT-4 | `[[8,16]]` |\n| | Reading Comprehension | Accuracy comparable to human experts. | GPT-3.5 | `[[16]]` |\n| | Math Word Problems | Generated 75% sensible problems; fine-tuning on K12 math datasets improved performance. | T5, GPT-J | `[[15,16]]` |\n| **Personalized Support** | Intelligent Tutoring | Khanmigo uses GPT-4 for Socratic dialogue; HumSum for lecture summarization. | GPT-4, ChatGPT | `[[5,13,29]]` |\n| | Accessibility & Inclusion | Real-time translation, simplified text generation, assistive tech for disabled students. | General LLMs | `[[20]]` |\n| **Writing & Language** | Grammar & Error Correction | Few-shot prompting outperforms zero-shot; struggles with minimal edits. | LearnLM, T5 | `[[11]]` |\n| | Writing Feedback | OpineBot for class feedback; inconsistent reliability noted. | GPT-4 | `[[13,16]]` |\n\nWhile the potential is evident, the literature consistently highlights a gap between technical capability and pedagogical effectiveness, emphasizing that successful integration requires careful design, robust evaluation, and continuous human involvement.",
+      "stats": {
+        "char_count": 5102,
+        "word_count": 719,
+        "sentence_count": 47,
+        "line_count": 19
+      }
+    },
+    {
+      "heading": "The Pervasive Challenge of Technical Hallucinations and Bias",
+      "level": 2,
+      "content": "Despite their impressive capabilities, Large Language Models are fundamentally flawed systems whose outputs can be unreliable, biased, and unpredictable. Two of the most pervasive technical challenges are hallucinations and the amplification of societal biases embedded in their training data. Hallucinations refer to the generation of plausible but factually incorrect or nonsensical information [[10,19]]. This is a critical issue in educational contexts where accuracy is paramount. Research shows that LLMs can produce fabricated answers without context, as seen with Google's Bard [[23]], and that monetized versions like ChatGPT-Plus can significantly outperform free versions on complex tasks, suggesting paid features may mask underlying unreliability [[24]]. Even advanced models are not immune; a meta-analysis found ChatGPT-3.5's accuracy was only 56%, and another study showed it scored poorly on answer comprehensiveness for medical queries [[24]]. This unreliability necessitates robust verification practices by both educators and students, yet studies show that vague prompts often lead to less effective and inaccurate outputs from educators themselves [[9]].\n\nBias is another deeply entrenched problem. LLMs learn patterns from vast corpora of internet text, code, and other sources, which inevitably contain the full spectrum of human biases related to gender, race, religion, and culture [[2,3]]. When these models are applied to education, they risk perpetuating and amplifying these inequities. For example, studies have documented gender bias in resume screening and racial/gender disparities in grading performed by ChatGPT-3.5 [[2,10]]. More alarmingly, models can perpetuate harmful stereotypes, such as race-based assumptions about medical conditions like pain tolerance or kidney function, a critical failure in any professional training environment [[24]]. This \"stochastic parrot\" nature, where models mimic patterns without genuine understanding, means they can fluently reproduce prejudice [[3,15]]. The problem is exacerbated by the dominance of English-language models and a lack of diversity in training data, which marginalizes non-WEIRD (Western, educated, industrialized, rich, democratic) contexts [[8]].\n\nFurthermore, LLMs exhibit a limited capacity for contextual understanding and common sense reasoning, making them prone to errors in complex or nuanced situations [[20]]. They struggle with rare or out-of-vocabulary words and can generate toxic or offensive content if not properly constrained [[19]]. In multimodal applications, the accuracy of image generation can be poor; for instance, DALL-E plugins struggled with medical image accuracy, correctly illustrating only 20% of skin conditions [[24]]. To mitigate these issues, researchers are exploring several strategies. Prompt engineering, such as Chain-of-Thought (CoT) prompting, can encourage models to provide more logical and verifiable outputs [[3,16]]. Fine-tuning on domain-specific data can improve performance on specialized tasks like mathematical problem generation or annotating student dialogue acts [[16]]. Preference learning and dual contrastive learning are being used to refine model behavior [[11]]. However, these techniques often come with trade-offs. Fine-tuning is expensive and time-consuming, while RLHF can sometimes introduce sycophancy bias, where the model learns to agree with the user regardless of factual accuracy [[7]]. Ultimately, the persistent challenges of hallucination and bias underscore a fundamental limitation: LLMs are powerful pattern-matching engines, not reliable arbiters of truth or fairness. Their deployment in education must be accompanied by rigorous validation, explainable AI (xAI) methods to understand their decision-making processes, and explicit human-in-the-loop oversight to ensure accountability and trust [[5,12]].",
+      "stats": {
+        "char_count": 3879,
+        "word_count": 522,
+        "sentence_count": 27,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "Pedagogical Impacts and Societal Equity Concerns",
+      "level": 2,
+      "content": "Beyond their technical flaws, the integration of LLMs into education carries profound pedagogical and societal implications, raising critical questions about student learning, teacher roles, and equitable access. A central pedagogical concern is the risk of cognitive offloading, where reliance on AI tools erodes students' own cognitive skills. Research suggests that using LLMs can reduce neural activity in brain regions associated with executive function and lead to memory erosion, as students become less likely to recall information they know an AI can generate [[10]]. This can foster \"metacognitive laziness,\" undermining the development of essential skills like critical thinking, problem-solving, and self-regulation [[10]]. There is also a risk of diminished metacognition, as students may rely on AI-generated answers without reflecting on their own thought processes [[10]]. While some propose that assigning tasks where AI use is encouraged can prepare students for an AI-integrated world, critics argue this approach fails to address the deeper issue of compromised academic integrity and authentic learning [[10,17]].\n\nThese pedagogical risks are compounded by significant equity and access challenges, which threaten to exacerbate existing societal divides. The \"AI divide\" is a multifaceted problem encompassing economic, geographic, and skill-based inequalities [[10]]. Access to powerful, state-of-the-art LLMs is often tied to commercial APIs or subscription fees, creating a barrier for low-resource schools and individuals in economically disadvantaged regions [[5,8]]. The stark performance difference between ChatGPT-Plus and the free version exemplifies this pay-to-win dynamic, where financial resources directly translate into superior AI assistance [[24]]. This creates a new form of educational inequality where affluent students gain an advantage through better AI tools. The challenge is particularly acute in Global South countries, where contributions to AI development (e.g., Kenyan content moderators for OpenAI) are exploited under a framework of \"data colonialism,\" while local populations are left with limited access and agency over the resulting technologies [[10]].\n\nEven within a single country, access is not guaranteed. Unequal distribution of devices and reliable internet connectivity can prevent students from benefiting from AI-powered educational tools, widening the digital divide [[21]]. Furthermore, the dominance of English-language models and training data means that curricula and educational materials are often misaligned with the needs of non-English speaking contexts. Studies have shown that US-centric models like ChatGPT do not align well with curricula from Ireland, South Korea, or Maharashtra, highlighting a significant cultural bias [[10]]. This linguistic and cultural myopia limits the global applicability of LLMs and can disadvantage students who do not speak the language in which the models are primarily trained. Addressing these equity concerns requires a concerted effort to develop and promote open-source, on-device LLMs that operate offline and require fewer computational resources [[20,21]]. Such models can empower local communities, improve data privacy, and support education in low-infrastructure environments, as demonstrated by research showing lightweight models like TinyLlama can run efficiently on mobile devices [[26]]. Ultimately, ensuring equitable and just outcomes from LLM integration demands a deliberate focus on affordability, accessibility, and cultural responsiveness, moving beyond a one-size-fits-all approach to technology deployment.",
+      "stats": {
+        "char_count": 3641,
+        "word_count": 496,
+        "sentence_count": 22,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "Institutional Barriers and Future Directions for Responsible Integration",
+      "level": 2,
+      "content": "The successful and responsible integration of LLMs into education hinges not only on technological solutions but also on navigating significant institutional, pedagogical, and policy-related barriers. A primary obstacle is the lack of preparedness among educators and institutions. Many teachers lack the necessary AI literacy and pedagogical frameworks to effectively integrate these tools into their practice [[5,6]]. This is compounded by a dearth of comprehensive institutional policies. A survey of 116 U.S. research universities found that while many endorsed GenAI use, few provided detailed classroom integration guidelines, especially for STEM subjects [[17]]. Similarly, a review of 142 academic institutions revealed that only one had established AI usage policies, indicating a systemic gap in governance [[29]]. Without clear guidelines on academic integrity, data privacy, and acceptable use, educators and students are left to navigate a confusing and often contradictory landscape, leading to inconsistent practices and heightened risk [[17]].\n\nInfrastructure and cost represent another formidable barrier. Deploying and maintaining large-scale LLMs requires high-performance GPUs/TPUs and reliable, high-speed internet, which are costly and not universally available [[5]]. The computational demands are immense; for example, training a single model like GPT-3 consumed approximately 1287 MWh of electricity and resulted in over 550 tons of CO2 emissions, raising serious environmental sustainability concerns [[10,20]]. These costs can be prohibitive for public schools and universities with limited budgets, further entrenching the digital divide [[5]]. The reliance on proprietary, API-based models also creates vendor lock-in and raises ongoing operational costs, making sustainable deployment difficult for many institutions [[5,18]].\n\nLooking forward, addressing these challenges requires a multi-pronged strategy focused on human-centered design, robust policy, and continued research. First and foremost, a human-in-the-loop approach is essential. This involves designing hybrid systems that combine the strengths of AI with human oversight, expertise, and ethical judgment [[5,15]]. Teachers must transition from being dispensers of information to orchestrators, facilitators, and mentors who guide students in the critical use of AI tools [[23]]. This necessitates significant investment in teacher training programs that build AI literacy and pedagogical skills [[5,6]]. Second, the development of clear, comprehensive, and flexible institutional policies is crucial. Frameworks like the green/amber/red classification used at the University of Leeds or the neutral/permissive/prohibitive tiers at Utrecht University offer structured approaches to managing AI use that can be adapted to specific courses and disciplines [[17]].\n\nFuture research must focus on several key areas. There is a critical need for longitudinal studies to understand the long-term impacts of LLMs on student learning and development [[22,23]]. Researchers should continue to develop and validate standardized benchmarks for LLM performance in educational tasks, such as MathEval [[14]]. There is also a pressing need to move beyond dominant models like ChatGPT and explore the potential of diverse open-source models [[22]]. Finally, the development of multimodal models like GPT-4o points to a future where LLMs will interact with visual and auditory data, requiring new research into their application in arts, sciences, and vocational training [[14,22]]. In conclusion, the path forward requires a balanced approach that embraces the transformative potential of LLMs while proactively addressing their profound challenges through thoughtful policy, robust teacher preparation, and a steadfast commitment to equity and ethical principles.\n\n---",
+      "stats": {
+        "char_count": 3848,
+        "word_count": 523,
+        "sentence_count": 28,
+        "line_count": 9
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "1. What Are Large Language Models (LLMs)?",
+      "number": null,
+      "title": "what are large language models (llms)?"
+    },
+    {
+      "text": "2. History, Development, and Principles of Large Language ...",
+      "number": null,
+      "title": "history, development"
+    },
+    {
+      "text": "3. History of Using AI in Education",
+      "number": null,
+      "title": "history of using ai in education"
+    },
+    {
+      "text": "4. Large language models in education: a systematic review ...",
+      "number": null,
+      "title": "large language models in education: a systematic review"
+    },
+    {
+      "text": "5. A comprehensive review of large language models: issues ...",
+      "number": null,
+      "title": "a comprehensive review of large language models: issues"
+    },
+    {
+      "text": "6. AI Literacy in K-12 and Higher Education in the Wake of ...",
+      "number": null,
+      "title": "ai literacy in k-12 and higher education in the wake of"
+    },
+    {
+      "text": "7. Primer on large language models: an educational overview ...",
+      "number": null,
+      "title": "primer on large language models: an educational overview"
+    },
+    {
+      "text": "8. Practical and ethical challenges of large language models in ...",
+      "number": null,
+      "title": "practical and ethical challenges of large language models in"
+    },
+    {
+      "text": "9. How K-12 Educators Use AI: LLM-Assisted Qualitative ...",
+      "number": null,
+      "title": "how k-12 educators use ai: llm-assisted qualitative"
+    },
+    {
+      "text": "10. Risks of Large Language Models in Education",
+      "number": null,
+      "title": "risks of large language models in education"
+    },
+    {
+      "text": "11. Opportunities and Challenges of LLMs in Education",
+      "number": null,
+      "title": "opportunities and challenges of llms in education"
+    },
+    {
+      "text": "12. An Introduction to Large Language Models in Education",
+      "number": null,
+      "title": "an introduction to large language models in education"
+    },
+    {
+      "text": "13. Pedagogical Alignment of Large Language Models (LLM) ...",
+      "number": null,
+      "title": "pedagogical alignment of large language models (llm)"
+    },
+    {
+      "text": "14. Current Trends and Future Prospects of Large-Scale ...",
+      "number": null,
+      "title": "current trends and future prospects of large-scale"
+    },
+    {
+      "text": "15. The promise and challenges of generative AI in education",
+      "number": null,
+      "title": "the promise and challenges of generative ai in education"
+    },
+    {
+      "text": "16. The Use of Large Language Models in Education - Springer Link",
+      "number": null,
+      "title": "the use of large language models in education - springer link"
+    },
+    {
+      "text": "17. Large Language Models in Computer Science Classrooms",
+      "number": null,
+      "title": "large language models in computer science classrooms"
+    },
+    {
+      "text": "18. Large language models and GenAI in education:...",
+      "number": null,
+      "title": "large language models and genai in education"
+    },
+    {
+      "text": "19. Challenges and Limitations of LLMs",
+      "number": null,
+      "title": "challenges and limitations of llms"
+    },
+    {
+      "text": "20. Integrating Large Language Models into Accessible and ...",
+      "number": null,
+      "title": "integrating large language models into accessible and"
+    },
+    {
+      "text": "21. The role of large language models in personalized learning",
+      "number": null,
+      "title": "the role of large language models in personalized learning"
+    },
+    {
+      "text": "22. Full article: Generative AI (GenAI) in the language classroom",
+      "number": null,
+      "title": "full article: generative ai (genai) in the language classroom"
+    },
+    {
+      "text": "23. What the Current State of Large Language Models in ...",
+      "number": null,
+      "title": "what the current state of large language models in"
+    },
+    {
+      "text": "24. Assessing the Current Limitations of Large Language ...",
+      "number": null,
+      "title": "assessing the current limitations of large language"
+    },
+    {
+      "text": "25. Large language models fall short in classifying learners' ...",
+      "number": null,
+      "title": "large language models fall short in classifying learners'"
+    },
+    {
+      "text": "26. Near Feasibility, Distant Practicality: Empirical Analysis of ...",
+      "number": null,
+      "title": "near feasibility, distant practicality: empirical analysis of"
+    },
+    {
+      "text": "27. The impact of large language models on higher education",
+      "number": null,
+      "title": "the impact of large language models on higher education"
+    },
+    {
+      "text": "28. (PDF) Large Language Models in Higher Education",
+      "number": null,
+      "title": "(pdf) large language models in higher education"
+    },
+    {
+      "text": "29. A systematic literature review to implement large language ...",
+      "number": null,
+      "title": "a systematic literature review to implement large language"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Qwen\\education\\01_Practical_and_Ethical_Challenges_of_Large_Language_Models_in_20251225_043039_split.json",
+    "processed_date": "2025-12-30T20:33:44.294738",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

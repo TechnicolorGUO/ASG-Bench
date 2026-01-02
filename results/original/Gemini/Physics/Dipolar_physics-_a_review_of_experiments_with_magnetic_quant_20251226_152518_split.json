@@ -1,0 +1,294 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Dipolar physics- a review of experiments with magnetic quantum gases."
+    ],
+    [
+      1,
+      "Dipolar Physics: A Review of Experiments with Magnetic Quantum Gases"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 The Dipole-Dipole Interaction (DDI)"
+    ],
+    [
+      3,
+      "2.2 The Dipolar Length and Interaction Parameter"
+    ],
+    [
+      3,
+      "2.3 Beyond-Mean-Field Effects (LHY Correction)"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 The Chromium Era (2005–2010)"
+    ],
+    [
+      3,
+      "3.2 The Lanthanide Revolution (2011–Present)"
+    ],
+    [
+      3,
+      "3.3 Expansion of the Species"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Cooling and Trapping of Lanthanides"
+    ],
+    [
+      3,
+      "4.2 Feshbach Resonance Control"
+    ],
+    [
+      3,
+      "4.3 Vortex Generation Techniques"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Fermi Surface Deformation (FSD)"
+    ],
+    [
+      3,
+      "5.2 Extended Bose-Hubbard Models (eBHM)"
+    ],
+    [
+      3,
+      "5.3 Quantum Droplets"
+    ],
+    [
+      3,
+      "5.4 Dipolar Supersolids"
+    ],
+    [
+      3,
+      "5.5 Observation of Vortices in Supersolids (2024)"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Three-Body Recombination"
+    ],
+    [
+      3,
+      "6.2 Temperature and Entropy"
+    ],
+    [
+      3,
+      "6.3 Complexity of the Spectrum"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Dipolar Quantum Gas Mixtures"
+    ],
+    [
+      3,
+      "7.2 Quantum Gas Microscopes for Magnetic Atoms"
+    ],
+    [
+      3,
+      "7.3 Simulation of Astrophysical Phenomena"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Dipolar physics- a review of experiments with magnetic quantum gases.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 15:25:18*\n*Progress: [13/21]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Dipolar_physics-_a_review_of_experiments_with_magnetic_quant_20251226_152518.md*\n---"
+    },
+    {
+      "heading": "Dipolar Physics: A Review of Experiments with Magnetic Quantum Gases",
+      "level": 1,
+      "content": "**Abstract**\nThe realization of quantum degeneracy in gases of highly magnetic atoms has opened a new frontier in many-body quantum physics, characterized by the long-range and anisotropic nature of the dipole-dipole interaction (DDI). This review provides a comprehensive systematic analysis of experimental progress in magnetic quantum gases, tracing the evolution from the first Bose-Einstein condensates (BECs) of chromium to the recent proliferation of lanthanide experiments (dysprosium, erbium, thulium, and europium). We examine the fundamental properties of dipolar gases, including the competition between contact and dipolar interactions, and the stabilization of dense phases via quantum fluctuations. Key milestones are critically analyzed, including the observation of Fermi surface deformation, the realization of extended Bose-Hubbard models, and the discovery of quantum droplets and supersolid states. Special attention is given to the very recent observation of quantized vortices in dipolar supersolids (2024), which provides hydrodynamic evidence of superfluidity in a modulated phase. We conclude by identifying current challenges and outlining future research directions in dipolar mixtures and quantum simulation."
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The experimental realization of Bose-Einstein condensation (BEC) in dilute atomic gases in 1995 revolutionized atomic physics, providing a pristine platform for studying macroscopic quantum phenomena. For the first decade, these experiments were dominated by alkali atoms, where the interatomic interaction is isotropic and short-range, effectively described by a contact potential characterized by the s-wave scattering length $a_s$. However, the desire to simulate more complex condensed matter systems and explore exotic quantum phases necessitated the introduction of long-range, anisotropic interactions [cite: 1, 2].\n\nMagnetic quantum gases—comprising atoms with large permanent magnetic dipole moments in their electronic ground state—have emerged as the leading platform for exploring such physics. Unlike alkali atoms, which typically have magnetic moments of $\\approx 1 \\mu_B$ (Bohr magneton), highly magnetic species such as chromium ($6 \\mu_B$), erbium ($7 \\mu_B$), and dysprosium ($10 \\mu_B$) exhibit significant dipole-dipole interactions (DDI) [cite: 2, 3]. The DDI is fundamentally different from the contact interaction: it is long-range (decaying as $1/r^3$) and anisotropic (depending on the orientation of the dipoles relative to the interatomic separation vector).\n\nThis review aims to synthesize the rapid experimental developments in this field. We are motivated by the recent explosion of results, including the stabilization of quantum droplets by beyond-mean-field effects and the long-sought observation of supersolidity—a paradoxical state of matter possessing both crystalline order and superfluid flow [cite: 4, 5]. We further address the expansion of the \"dipolar periodic table\" to include thulium and europium, and the application of these systems to simulate phenomena ranging from extended Hubbard models to neutron star glitches [cite: 6, 7, 8]."
+    },
+    {
+      "heading": "2.1 The Dipole-Dipole Interaction (DDI)",
+      "level": 3,
+      "content": "The interaction potential between two magnetic dipoles aligned by an external field along the $z$-axis is given by:\n\\[\nV_{dd}(\\mathbf{r}) = \\frac{\\mu_0 \\mu^2}{4\\pi} \\frac{1-3\\cos^2\\theta}{r^3}\n\\]\nwhere $\\mu_0$ is the vacuum permeability, $\\mu$ is the magnetic moment, $r$ is the interparticle distance, and $\\theta$ is the angle between the vector $\\mathbf{r}$ and the polarization direction $z$ [cite: 2, 9]. This interaction is repulsive for particles side-by-side ($\\theta = \\pi/2$) and attractive for particles in a head-to-tail configuration ($\\theta = 0$)."
+    },
+    {
+      "heading": "2.2 The Dipolar Length and Interaction Parameter",
+      "level": 3,
+      "content": "The strength of the dipolar interaction relative to the contact interaction is often quantified by the dimensionless parameter $\\epsilon_{dd}$:\n\\[\n\\epsilon_{dd} = \\frac{a_{dd}}{a_s} \\quad \\text{with} \\quad a_{dd} = \\frac{\\mu_0 \\mu^2 m}{12\\pi \\hbar^2}\n\\]\nwhere $a_{dd}$ is the dipolar length and $m$ is the atomic mass. When $\\epsilon_{dd} > 1$, the dipolar interaction dominates, leading to phenomena such as d-wave collapse in BECs [cite: 2, 10]. For highly magnetic atoms like $^{164}$Dy, $a_{dd}$ is approximately $130\\,a_0$ (Bohr radii), whereas for alkali atoms it is negligible ($< 1\\,a_0$) [cite: 2]."
+    },
+    {
+      "heading": "2.3 Beyond-Mean-Field Effects (LHY Correction)",
+      "level": 3,
+      "content": "In standard dilute gases, the Gross-Pitaevskii equation (GPE) adequately describes the system. However, in strongly dipolar gases, the competition between the mean-field attraction (from DDI) and repulsion (from contact interaction) can lead to a regime where quantum fluctuations become significant. These fluctuations provide a repulsive energy correction, known as the Lee-Huang-Yang (LHY) correction, which scales as density $n^{3/2}$ (or higher orders in dipolar systems). This correction prevents the collapse of the gas, stabilizing high-density \"quantum droplets\" [cite: 3, 9]."
+    },
+    {
+      "heading": "3.1 The Chromium Era (2005–2010)",
+      "level": 3,
+      "content": "The field of magnetic quantum gases began with the condensation of $^{52}$Cr by the Pfau group in Stuttgart (2005) [cite: 1, 2]. Chromium, with $\\mu = 6 \\mu_B$, was the first species where DDI effects were observable, although $\\epsilon_{dd}$ was initially small ($\\approx 0.16$). By using Feshbach resonances to tune the scattering length $a_s$ to zero, researchers achieved a purely dipolar regime, observing the anisotropic d-wave collapse of the condensate, a hallmark of the DDI's symmetry [cite: 10]."
+    },
+    {
+      "heading": "3.2 The Lanthanide Revolution (2011–Present)",
+      "level": 3,
+      "content": "The field accelerated with the introduction of lanthanides, specifically dysprosium (Dy) and erbium (Er), which possess larger magnetic moments and larger masses.\n*   **Dysprosium:** Condensation was achieved by the Lev group (Stanford) in 2011. Dy ($10 \\mu_B$) exhibits strong dipolar physics even without Feshbach tuning [cite: 1, 2].\n*   **Erbium:** The Ferlaino group (Innsbruck) achieved Er ($7 \\mu_B$) condensation in 2012. This opened avenues for studying complex scattering resonances and dipolar Fermi gases [cite: 1, 11]."
+    },
+    {
+      "heading": "3.3 Expansion of the Species",
+      "level": 3,
+      "content": "Recent years have seen the successful cooling of other magnetic species:\n*   **Thulium (Tm):** In 2020, the Akimov group utilized machine learning optimization to achieve BEC of Tm ($4 \\mu_B$) in an optical dipole trap [cite: 8]. Tm offers a simpler electronic structure than Dy/Er while retaining significant magnetic character.\n*   **Europium (Eu):** In 2022, Miyazawa et al. reported the BEC of $^{151}$Eu ($7 \\mu_B$). Eu is unique among magnetic lanthanides for having a highly symmetric S-state ground state (zero orbital angular momentum), minimizing anisotropic collisional losses and potentially simplifying spinor physics [cite: 7, 12]."
+    },
+    {
+      "heading": "4.1 Cooling and Trapping of Lanthanides",
+      "level": 3,
+      "content": "Cooling lanthanides presents unique challenges due to their complex electronic structure. The standard technique involves a magneto-optical trap (MOT) operating on a broad transition for capture, followed by a narrow-line MOT (intercombination line) to reach microkelvin temperatures [cite: 2, 13].\n*   **Machine Learning Optimization:** The complexity of evaporative cooling sequences, particularly for new species like Thulium, has necessitated the use of machine learning (Gaussian processes/Bayesian optimization). Davletov et al. (2020) demonstrated that ML could optimize evaporation ramps in optical dipole traps where human intuition failed due to unknown loss channels [cite: 8, 14, 15]."
+    },
+    {
+      "heading": "4.2 Feshbach Resonance Control",
+      "level": 3,
+      "content": "Magnetic lanthanides possess an extremely high density of Feshbach resonances due to the anisotropy of the interaction potential coupling many partial waves. This \"Feshbach chaos\" allows for precise tuning of the scattering length $a_s$, enabling the variation of $\\epsilon_{dd}$ across the entire phase diagram [cite: 2, 11]."
+    },
+    {
+      "heading": "4.3 Vortex Generation Techniques",
+      "level": 3,
+      "content": "To probe superfluidity in dipolar supersolids, advanced stirring methods are required.\n*   **Magnetostirring:** As demonstrated in the 2024 observation of vortices, a rotating magnetic field is used to deform the trap or the magnetic orientation, imparting angular momentum to the cloud. This technique requires extreme precision to spin up the supersolid without melting its fragile crystalline structure [cite: 4, 16, 17]."
+    },
+    {
+      "heading": "5.1 Fermi Surface Deformation (FSD)",
+      "level": 3,
+      "content": "In a non-interacting Fermi gas, the Fermi surface is spherical. In 2014, Aikawa et al. experimentally observed the deformation of the Fermi surface in a degenerate gas of fermionic erbium. The strong, anisotropic DDI stretches the momentum distribution along the direction of the dipoles (an ellipsoid). This was a direct observation of a many-body effect driven by long-range interactions in a Fermi gas, confirming theoretical predictions that the DDI competes with the Pauli exclusion principle to reshape the system's ground state [cite: 18, 19, 20]."
+    },
+    {
+      "heading": "5.2 Extended Bose-Hubbard Models (eBHM)",
+      "level": 3,
+      "content": "Optical lattices allow the simulation of solid-state physics. Baier et al. (2016) realized the extended Bose-Hubbard model using erbium atoms in a 3D optical lattice. Unlike standard Hubbard models with only on-site interactions, the long-range DDI introduced nearest-neighbor (NN) interactions. The experiment demonstrated that the superfluid-to-Mott-insulator transition depends on the orientation of the dipoles relative to the lattice, confirming the anisotropic nature of the hopping and interaction terms [cite: 11, 21, 22, 23]."
+    },
+    {
+      "heading": "5.3 Quantum Droplets",
+      "level": 3,
+      "content": "Around 2016, experiments in Dy and Er revealed that when the mean-field interaction is tuned to be slightly attractive ($\\epsilon_{dd} > 1$), the gas does not collapse but forms stable, self-bound droplets. These droplets are stabilized by the repulsive LHY quantum fluctuations. This marked the discovery of a new state of matter: a dilute liquid that is self-bound in free space, distinct from the van der Waals liquids (like water) which are 8 orders of magnitude denser [cite: 2, 3, 9]."
+    },
+    {
+      "heading": "5.4 Dipolar Supersolids",
+      "level": 3,
+      "content": "The most prominent recent application is the realization of supersolidity.\n*   **1D Supersolids (2019):** Three groups (Pisa, Stuttgart, Innsbruck) concurrently observed transient supersolid properties in dipolar gases, where the gas spontaneously breaks translational symmetry (forming droplets) while maintaining global phase coherence (superfluidity) [cite: 6, 24, 25].\n*   **2D Supersolids (2021):** The Innsbruck group extended this to two dimensions, creating a long-lived supersolid state in erbium. This 2D geometry is crucial for studying vorticity and isotropic superfluid flow [cite: 5, 26, 27]."
+    },
+    {
+      "heading": "5.5 Observation of Vortices in Supersolids (2024)",
+      "level": 3,
+      "content": "A critical milestone was reached in 2024 by Casotti et al. (Innsbruck), who reported the observation of quantized vortices in a dipolar supersolid. While phase coherence had been established, vortices are the \"hydrodynamic fingerprint\" of superfluidity. The experiment involved rotating a 2D supersolid of dysprosium/erbium. The results showed a fundamental difference in vortex dynamics between unmodulated superfluids and supersolids; in the supersolid, vortices are pinned within the density minima (between droplets), confirming the coexistence of solid order and superfluid flow [cite: 4, 17, 28]. This result connects cold atom physics to the hydrodynamics of neutron stars, where \"glitches\" are believed to arise from vortex unpinning in the crustal supersolid [cite: 6, 29]."
+    },
+    {
+      "heading": "6.1 Three-Body Recombination",
+      "level": 3,
+      "content": "A persistent challenge in dipolar physics, particularly in the droplet and supersolid regimes, is three-body recombination. The high densities required to stabilize these phases lead to rapid atom loss. While LHY stabilization works, the lifetime of these states is often limited to hundreds of milliseconds. Understanding and mitigating these losses, perhaps via Pauli blocking in fermionic mixtures or specific optical shielding, remains an open problem [cite: 2, 14, 30]."
+    },
+    {
+      "heading": "6.2 Temperature and Entropy",
+      "level": 3,
+      "content": "Achieving the extremely low entropies required for certain magnetic ordering phases in optical lattices (e.g., quantum magnetism models) is difficult. Dipolar relaxation heating can be significant. The recent work on finite-temperature phase diagrams of supersolids suggests that thermal fluctuations also play a complex role in the melting and formation of these states, which is not yet fully understood [cite: 31]."
+    },
+    {
+      "heading": "6.3 Complexity of the Spectrum",
+      "level": 3,
+      "content": "The dense Feshbach spectrum of lanthanides, while offering tunability, complicates the isolation of specific interaction regimes. The \"chaotic\" nature of these resonances makes theoretical prediction of scattering lengths difficult without extensive experimental mapping [cite: 32]."
+    },
+    {
+      "heading": "7.1 Dipolar Quantum Gas Mixtures",
+      "level": 3,
+      "content": "The realization of Er-Dy mixtures [cite: 33] opens the door to heteronuclear dipolar physics. Future research will likely focus on:\n*   **Sympathetic Cooling:** Using one species to cool another to lower temperatures.\n*   **Miscibility/Immiscibility:** Studying how DDI affects the phase separation of two superfluids.\n*   **Dipolar Molecules:** While this review focuses on magnetic atoms, the interface with ultracold polar molecules (e.g., NaK) is growing. Molecules offer even stronger electric dipole moments, potentially allowing for crystallization at higher temperatures [cite: 34, 35]."
+    },
+    {
+      "heading": "7.2 Quantum Gas Microscopes for Magnetic Atoms",
+      "level": 3,
+      "content": "While standard for alkali atoms, single-site imaging (quantum gas microscopy) for magnetic lanthanides is an emerging frontier. This would allow for the direct observation of spin correlations in extended Hubbard models and the microscopic structure of supersolids [cite: 14]."
+    },
+    {
+      "heading": "7.3 Simulation of Astrophysical Phenomena",
+      "level": 3,
+      "content": "The observation of vortices in supersolids strengthens the link between cold atoms and neutron star physics. Future experiments aim to simulate \"glitches\"—sudden spin-ups of neutron stars—by studying the dynamics of vortex lattices in rotating supersolids under controlled acceleration [cite: 6, 29]."
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "The field of dipolar physics with magnetic quantum gases has matured from the initial demonstration of weak dipolar effects in chromium to a rich domain of many-body physics dominated by strong, long-range interactions in lanthanides. The transition from studying simple BEC collapse to engineering extended Hubbard models, quantum droplets, and 2D supersolids highlights the versatility of this platform.\n\nThe very recent observation of quantized vortices in 2024 marks a crowning achievement, providing unambiguous proof of the superfluid nature of the supersolid phase. As the \"dipolar periodic table\" expands to include Thulium and Europium, and as control techniques refine, magnetic quantum gases are poised to unravel further mysteries of quantum matter, from the microscopic origins of magnetism to the macroscopic dynamics of astrophysical objects."
+    }
+  ],
+  "references": [
+    "[cite: 1] Chomaz, L., et al. (2023). \"Dipolar physics: a review of experiments with magnetic quantum gases.\" *Reports on Progress in Physics*, 86(2), 026401. [cite: 1, 36]",
+    "[cite: 3] Chomaz, L., et al. (2022). \"Dipolar physics: a review of experiments with magnetic quantum gases.\" *arXiv preprint arXiv:2201.02672*. [cite: 2, 3]",
+    "[cite: 34] Veljić, V. (2019). \"Ground state and dynamics of dipolar quantum gases.\" PhD Thesis. [cite: 34]",
+    "[cite: 4] Casotti, E., et al. (2024). \"Observation of vortices in a dipolar supersolid.\" *Nature*, 635, 327–331. [cite: 4, 17]",
+    "[cite: 17] University of Innsbruck. (2024). \"Quantum vortices confirm superfluidity in supersolid.\" *Newsroom*. [cite: 17]",
+    "[cite: 28] Casotti, E., et al. (2024). \"Observation of vortices in a dipolar supersolid.\" *arXiv preprint arXiv:2403.18510*. [cite: 28]",
+    "[cite: 16] Choucair, C. (2024). \"Chasing Impossible Vortices: Supersolid Discovery and the Future of Quantum Technology.\" *The Quantum Insider*. [cite: 16]",
+    "[cite: 6] Poli, E. (2024). \"Vortices in dipolar supersolids.\" *YouTube Seminar*. [cite: 6]",
+    "[cite: 36] Chomaz, L., et al. (2022). *Reports on Progress in Physics*. [cite: 36]",
+    "[cite: 2] Chomaz, L., et al. (2022). \"Dipolar physics: A review of experiments with magnetic quantum gases.\" *ResearchGate*. [cite: 2]",
+    "[cite: 9] Chomaz, L., et al. (2022). *PubMed*. [cite: 9]",
+    "[cite: 5] Bonazza, S. (2021). \"Our 2D Supersolid now in Nature!\" *Erbium.at*. [cite: 5]",
+    "[cite: 29] Lab Horizons. (2024). \"New evidence confirms supersolids' dual nature in quantum physics breakthrough.\" [cite: 29]",
+    "[cite: 26] MacDonald, F. (2021). \"2D 'Supersolid' That Flows Without Friction Has Been Made For The First Time.\" *ScienceAlert*. [cite: 26]",
+    "[cite: 27] Langen, T. (2022). \"Dipolar supersolids: Solid and superfluid at the same time.\" *Physics Today*. [cite: 27]",
+    "[cite: 18] Aikawa, K., et al. (2014). \"Observation of Fermi surface deformation in a dipolar quantum gas.\" *arXiv preprint arXiv:1405.2154*. [cite: 18, 20]",
+    "[cite: 19] Aikawa, K., et al. (2014). *ResearchGate*. [cite: 19]",
+    "[cite: 35] Bigagli, et al. (2025). \"Exploring dipolar many body effects in a degenerate molecular Fermi gas.\" *DAMOP*. [cite: 35]",
+    "[cite: 7] Miyazawa, Y., et al. (2022). \"Bose-Einstein Condensation of Europium.\" *Physical Review Letters*, 129, 223401. [cite: 7]",
+    "[cite: 10] Griesmaier, A., et al. (2006). \"Bose-Einstein Condensation of Chromium.\" *ResearchGate*. [cite: 10]",
+    "[cite: 8] Davletov, E. T., et al. (2020). \"Machine learning for achieving Bose-Einstein condensation of thulium atoms.\" *Physical Review A*, 102, 011302. [cite: 8]",
+    "[cite: 14] Kumpilov, D., et al. (2023). \"Learning from machine learning: optimization of the Bose-Einstein condensate of the thulium atom at a 1064 trap.\" *arXiv preprint arXiv:2311.06795*. [cite: 14, 37]",
+    "[cite: 13] Davletov, E. T., et al. (2020). *arXiv preprint arXiv:2003.00346*. [cite: 13]",
+    "[cite: 11] Baier, S. (2018). \"Ultracold Dipolar Erbium Atoms: From Scattering Phenomena to Quantum Simulations.\" PhD Thesis. [cite: 11]",
+    "[cite: 21] Baier, S., et al. (2016). \"Extended Bose-Hubbard models with ultracold magnetic atoms.\" *Science*, 352, 201-205. [cite: 21, 22]",
+    "[cite: 22] Baier, S., et al. (2016). *Semantic Scholar*. [cite: 22]",
+    "[cite: 23] Baier, S., et al. (2016). *ResearchGate*. [cite: 23]",
+    "[cite: 20] Aikawa, K., et al. (2014). *Science*. [cite: 20]",
+    "[cite: 18] Aikawa, K., et al. (2014). *arXiv*. [cite: 18]",
+    "[cite: 7] Miyazawa, Y., et al. (2022). *PubMed*. [cite: 7]",
+    "[cite: 12] Miyazawa, Y., et al. (2022). *arXiv*. [cite: 12]",
+    "[cite: 10] Miyazawa, Y., et al. (2022). *ResearchGate*. [cite: 10]",
+    "[cite: 17] University of Innsbruck. (2024). *Newsroom*. [cite: 17]",
+    "[cite: 8] Davletov, E. T., et al. (2020). *ResearchGate*. [cite: 8]",
+    "[cite: 15] Vendeiro, Z., et al. (2022). \"Machine-learning-accelerated Bose-Einstein condensation.\" *Semantic Scholar*. [cite: 15]",
+    "[cite: 32] Davletov, E. T., et al. (2019). \"Random to Chaotic Statistic Transformation in Low-Field Fano-Feshbach Resonances.\" *SciSpace*. [cite: 32]",
+    "[cite: 33] Durastante, G. (2020). \"Dipolar quantum gas mixture experiment combining erbium and dysprosium atoms.\" PhD Thesis. [cite: 33]",
+    "[cite: 24] Weiss, et al. (2019). \"The low-energy Goldstone mode in a trapped dipolar supersolid.\" *Nature*. [cite: 24]",
+    "[cite: 25] Tanzi, L., et al. (2019). \"Supersolid symmetry breaking from compressional oscillations in a dipolar quantum gas.\" *Nature*. [cite: 25]",
+    "[cite: 31] Recati, A., et al. (2025). \"Finite-temperature phase behavior of a harmonically trapped dipolar BEC.\" *arXiv*. [cite: 31]",
+    "[cite: 38] Baier, S., et al. (2016). *ICTP*. [cite: 38]",
+    "[cite: 39] Pollet, L., et al. (2010). \"Study of the extended Bose Hubbard model.\" *PMC*. [cite: 39]"
+  ]
+}

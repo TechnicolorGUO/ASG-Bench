@@ -1,0 +1,1438 @@
+{
+  "outline": [
+    [
+      1,
+      "A Review on Key Design and Operational Parameters to Optimize and Develop Hydrothermal Liquefaction of Biomass for Biorefinery Applications"
+    ],
+    [
+      1,
+      "ABSTRACT:"
+    ],
+    [
+      1,
+      "1 Introduction"
+    ],
+    [
+      1,
+      "2 Hydrothermal liquefaction"
+    ],
+    [
+      1,
+      "2.1 Hydrothermal liquefaction to date"
+    ],
+    [
+      1,
+      "2.2 Reaction pathways in HTL"
+    ],
+    [
+      1,
+      "2.2.1 Depolymerization"
+    ],
+    [
+      1,
+      "2.2.2 Decomposition"
+    ],
+    [
+      1,
+      "2.2.3 Recombination"
+    ],
+    [
+      1,
+      "3 HTL products"
+    ],
+    [
+      1,
+      "3.1 Bio-crude"
+    ],
+    [
+      1,
+      "3.2 Hydrochar"
+    ],
+    [
+      1,
+      "3.3 HTL aqueous"
+    ],
+    [
+      1,
+      "3.4 Gases"
+    ],
+    [
+      1,
+      "4 Effect of process parameters on bio-crude yield and quality"
+    ],
+    [
+      1,
+      "4.1 Type of biomass"
+    ],
+    [
+      1,
+      "4.2 Reaction temperature, retention time, and pressure"
+    ],
+    [
+      1,
+      "4.3 Ramping time"
+    ],
+    [
+      1,
+      "4.4 Solid content"
+    ],
+    [
+      1,
+      "4.5 Type of solvent"
+    ],
+    [
+      1,
+      "4.6 Headspace purging"
+    ],
+    [
+      1,
+      "4.7 Catalysts used in HTL"
+    ],
+    [
+      1,
+      "4.7.1 Alkaline catalysts"
+    ],
+    [
+      1,
+      "4.7.2 Acid catalysts"
+    ],
+    [
+      1,
+      "4.7.3 Metal-based catalysts"
+    ],
+    [
+      1,
+      "4.7.4 Mineral catalysts"
+    ],
+    [
+      1,
+      "4.7.5 Other additives and mixed catalysts"
+    ],
+    [
+      1,
+      "4.7.6 Substrate-specific overall catalyst performance"
+    ],
+    [
+      1,
+      "5 HTL systems"
+    ],
+    [
+      1,
+      "5.1 Batch HTL systems"
+    ],
+    [
+      1,
+      "5.2 Continuous-flow HTL systems"
+    ],
+    [
+      1,
+      "6 Techno-economical analysis of the HTL process"
+    ],
+    [
+      1,
+      "7 Conclusion and recommendations for future research"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Review on Key Design and Operational Parameters to Optimize and Develop Hydrothermal Liquefaction of Biomass for Biorefinery Applications",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "ABSTRACT:",
+      "level": 1,
+      "content": "An increase in environmental awareness has resulted in a significant shift in research towards more renewable and sustainable energy sources and better waste valorization technologies. Within this vast field, biomass conversion technologies and biofuels have attracted much attention due to their adaptability potential to pre-existing infrastructure. Hydrothermal liquefaction is one of the most efficient biomass processing methods and has become a promising technology for future applications. Although many studies have been performed on this process, there is still much to discover about the technology; notably, there are critical gaps in substrate-specific reaction optimization, reactor design, and the effect of catalysts. In order to facilitate future studies reporting on these research gaps, this review summarizes the science and engineering applications of hydrothermal liquefaction of biomass. The effects of reaction temperature, retention time, biomass solid content, biomass type, solvent, and catalyst type on bio-crude yield and quality are discussed. In addition, reaction pathways, reactor types, and process economy are reviewed. In particular, due to their value for future full-scale applications, the emphasis is given to continuousflow reactor systems. The secondary goal of this review is to serve as a reference point for the new researchers in the field.",
+      "stats": {
+        "char_count": 1385,
+        "word_count": 196,
+        "sentence_count": 9,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Introduction",
+      "level": 1,
+      "content": "Advancements in technology, human population growth, and economic developments have resulted in an increase in our energy demand1. Due to this increase, renewable energy studies and efficient valorization of energy sources have become prominent research topics within the sustainable development sphere. Over the last decades, biomass has been the focus of renewable fuel generation technologies. The current biomass to biofuel conversion processes, as we know it today, can be categorized into three main groups as direct combustion, thermochemical, and biochemical processes. Notably, one of the thermochemical conversion methods, hydrothermal liquefaction (HTL), has received much attention from researchers and the industry due to its significantly high potential for biofuel production and waste valorization.\n\nHydrothermal liquefaction is a biomass processing method performed in an aqueous environment, typically at a temperature between $2 0 0 { - } 3 7 4 ^ { \\circ } \\mathrm { C }$ and pressure between 15-220 bars. The most significant advantage of the HTL process is that without the application of a drying process, it can utilize biomass sources with high moisture content such as algae, municipal sludge, lignocellulose, or organic fraction of municipal solid waste. Due to its broad range of substrate processing ability, HTL systems can be used for direct fuel production as well as waste valorization applications. In addition, lower reaction temperatures compared to the other thermochemical conversion methods and suitability for the utilization of alkaline catalysts decrease the risk of corrosion in HTL reactors.\n\nWithin a range of 1 to 60 minutes, the HTL process can convert biomass into bio-crude, which is a petroleum-like liquid that can be upgraded and used in petroleum refineries. Being highly polar, water can stay in liquid state up to a temperature of $3 7 3 . 9 4 ^ { \\circ } \\mathrm { C }$ and pressure of 220 bar2, and can act as a potent solvent due to its lowered dielectric constant at high temperatures. Being able to change the process temperature allows for the manipulation of the dielectric constant of water; thus, the severity of the hydrolysis process can be controlled3. Water’s dielectric constant is 80.1 at $2 0 \\mathrm { { ^ \\circ C } }$ and decreases below 20 at $3 0 0 ^ { \\circ } \\mathrm { C } ^ { 4 }$ , making it a better solvent than commonly used solvents such as acetone, methanol, or ethanol. The HTL process mimics the natural occurrence of petroleum from biomass, which usually occurs over millions of years. However, simulating this natural process in such a short period results in a lower quality fuel (bio-crude) with $8 \\mathrm { - } 2 0 \\%$ $\\mathrm { O } _ { 2 }$ compared to petro-crude. This defect can be overcome with the application of fuel upgrading processes to bio-crude, such as hydrodeoxygenation. Along with biocrude, hydrochar, HTL aqueous, and gas phases are also being produced as coproducts in the HTL process.\n\nIncreasing interest in the HTL process has led to valuable literature published in this area. This review article aims to contribute to the existing literature to accelerate the development of this promising technology beyond research-based applications. Particular attention was given to the optimization of the HTL process conditions (reaction temperature, retention time, biomass solid content, type of biomass, and type of solvent) required to maximize bio-crude yield. Furthermore, the effects of catalysts, as another crucial parameter in the HTL process, are summarized under alkaline, acid, metal-based, and mineral catalyst sections.",
+      "stats": {
+        "char_count": 3639,
+        "word_count": 581,
+        "sentence_count": 23,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "2.1 Hydrothermal liquefaction to date",
+      "level": 1,
+      "content": "The first hydrothermal liquefaction research was performed by Professor Ernst Berl in Darmstadt, Germany. His results in the 1920s indicated that bio-crude production from biomass in hot water with alkali catalyst was possible5. In 1933, he continued his HTL research at Carnegie Institute of Technology in Pittsburgh, Pennsylvania. In the 1940s, his research attracted significant attention due to his publications and magazine articles6–10. However, no significant progress was achieved until the petroleum fuel shortage in the late $1 9 6 0 \\mathrm { s } ^ { 1 1 }$ when the Arab oil embargo in the mid- $1 9 7 0 \\mathrm { s } ^ { 1 2 }$ revealed the necessity of developing a sustainable fuel production process. In the 1970s and 1980s, the most important studies were performed by Pittsburgh Energy Research Center (PERC)13, Lawrence Berkeley Laboratory (LBL)14, Rust International Corporation11 in the USA, and Shell Research Institute in the Netherlands. Pacific Northwest National Laboratory (PNNL) in Washington, USA, has been the pioneering research institute in the HTL field since 1990.\n\nAlthough the early studies focused on liquefaction of wood, other types of substrates have also been considered in the investigation of HTL over time. While HTL of lignocellulosic biomass is still actively being studied, scientists mostly focus on waste plant material and energy crops instead of wood biomass. Since 2009, due to the algal biofuel technologies' increasing popularity, numerous HTL studies were performed to investigate algal bio-crude production on various microalgae, macroalgae, and cyanobacteria species. The number of HTL studies conducted between 2001-2019 is presented in Figure 1. While various HTL investigations continue at full speed, in recent years, municipal sludge HTL applications have increased due to the recent promising continuous-flow reactor designs with high heat recovery rates up to $8 0 \\% ^ { 1 }$ 5. Today, pilotscale continuous-flow HTL systems around the world, foremost PNNL16, Aarhus University17, Aalborg University18, Genifuel19, New Mexico State University20, and The University of Sydney21, are carrying the process one step closer to full-scale application. The increasing number of HTL studies in the literature indicates that, especially in the wastewater treatment field, HTL process will continue to be a popular research field in the next decade. Furthermore, we may even witness the HTL process replacing anaerobic sludge digestion at wastewater treatment plants in the future.\n\n[Image]\nFigure 1. Research trend of HTL and types of substrates used in studies",
+      "stats": {
+        "char_count": 2617,
+        "word_count": 401,
+        "sentence_count": 17,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "2.2 Reaction pathways in HTL",
+      "level": 1,
+      "content": "Reaction pathways in HTL can be separated into three main groups: depolymerization (hydrolysis), decomposition, and recombination (repolymerization). Although many of the exact HTL reactions remain unclear due to the large number of organic compound types, studies in the literature were able to reveal some of the major pathways. Potential reaction pathways of HTL are summarized in Figure 2. The selectivity of these reactions can vary depending on pH, severity of HTL process (temperature, pressure, ramping and retention time), type and concentration of solvent, and type and concentration of catalyst.\n\n[Image]\nFigure 2. Potential hydrothermal liquefaction reactions and pathways22–41\n\nIn the HTL process, the Maillard reaction is one of the important recombination pathways for the production of bio-crude42. In Maillard reaction, carbonyl groups of reducing sugars react with the free amino groups of amino acids and form nitrogenous polymers and melanoidins43,44, which contribute to bio-crude generation. This contribution was investigated by Qiu et al.45 by using different ratios of leucine and glucose as HTL substrate. According to their findings, at $3 0 0 ^ { \\circ } \\mathrm { C }$ and $4 . 2 \\%$ solids concentration for 40 minutes, leucine and glucose resulted in $1 4 \\%$ and $7 \\%$ bio-crude yield, respectively. However, their mixture at 2:5 weight ratio (leucine: glucose) achieved up to $3 4 \\%$ bio-crude yield under the same HTL conditions. Fan et al.46 studied the effect of Maillard reactions on bio-crude yield at reaction temperatures of 250, 300, and $3 5 0 ^ { \\circ } \\mathrm { C }$ . At $3 5 0 \\mathrm { { } ^ { \\circ } C }$ , for lactose, maltose, lysine, lactose $^ +$ lycin and maltose $^ +$ lycin substrates, they measured $1 5 . 2 \\%$ , $1 3 \\%$ , $1 9 . 7 \\%$ , $5 8 \\%$ and $5 9 . 9 \\%$ bio-crude yields, respectively. Tang et al.47 also reported that at $2 8 0 ^ { \\circ } \\mathrm { C }$ and 60 minutes retention time, the highest bio-crude yield was observed with a protein to glucose mixture ratio of 3:1 (wt. $\\%$ ). According to the findings in these studies, when carbohydrates or proteins alone are used as the substrate, they result in lower than $1 0 \\%$ and $2 0 \\%$ bio-crude yield, respectively. This highlights the importance of taking advantage of Maillard reactions to achieve higher bio-crude yields. Therefore, to reach an optimum bio-crude yield, the biomass needs to be balanced in terms of protein and carbohydrate content, or it can be co-liquefied with another balancing substrate.\n\nIn order to investigate the effect of HTL on model compounds, Lu et al.48 studied HTL of soybean oil, soy protein, cellulose, xylose and lignin’s binary, ternary, quaternary and quinary mixtures to reveal the effect of substrate composition on HTL products at $3 5 0 ^ { \\circ } \\mathrm { C }$ for 30 minutes. For individual model compounds, they reported bio-crude yields of $8 2 \\ \\mathrm { w t \\% }$ for lipids, $2 1 . 1 ~ \\mathrm { w t \\% }$ for proteins, $4 . 6 ~ \\mathrm { w t \\% }$ for cellulose, $6 . 6 ~ \\mathrm { w t \\% }$ for xylose, and $1 . 4 ~ \\mathrm { w t \\% }$ for lignin. For the binary mixtures, they reported yield increases for protein-carbohydrate and protein-lignin mixtures; and cellulose-xylose mixture was found to be ineffective for bio-crude production. A mixture of lipid and lignin showed an antagonistic interaction. The highest energy recovery was observed for the quinary mixture, underlining the importance of a balanced substrate in the HTL process to benefit from synergistic effects. Biller and Ross49 used representative model compounds in HTL processes, such as albumin, asparagine, glutamine, soya protein for proteins, glucose and starch for carbohydrates, and sunflower for lipids. Similar to the other studies in the literature, they reported bio-crude yields of $8 6 \\%$ for lipids, $2 3 \\%$ for proteins, and $1 0 \\%$ for carbohydrates.\n\nAccording to the average biochemical compositions presented in Figure 3, microalgae and municipal sludge are the most suitable substrate types for taking advantage of Maillard reactions. Microalgae composition can vary depending on the species. Therefore, some species might not be suitable for the HTL process. On the other hand, municipal sludge has fewer varying characteristics, and its composition can be slightly adjusted by changing the primary and secondary sludge blending ratio. There are two main composition differences between the two sludge types. The first is the high protein content of secondary sludge that can be used for balancing the substrate composition to take advantage of Maillard reactions. The second is the high lipid content of primary sludge50,51, which can be directly converted into bio-crude in the HTL process.\n\n[Image]\nFigure 3. Biochemical composition distributions of microalgae49,52–56, macroalgae30,57, cyanobacteria49,52,53,58,59, lignocellulosic60,61, municipal sludge62–64, primary and secondary municipal sludge62,64\n\nFigure 3 also shows that macroalgae and lignocellulosic biomasses are carbohydrate-rich due to their cellulose and hemicellulose contents. This causes them to have a lower bio-crude yield compared to the other types of biomasses. Excessive organic acids form during the process and decrease the $\\mathrm { p H }$ as a result of the HTL pathway of carbohydrates. Acidic conditions cause HTL reactions to favor hydrochar production rather than bio-crude. Therefore, to balance the $\\mathrm { p H }$ , an alkaline catalyst needs to be used in HTL of macroalgae and lignocellulosic biomasses. Like microalgae, cyanobacteria biochemical composition also differs depending on the species. On\n\naverage, cyanobacteria have high protein content and less lipid content compared to microalgae.\nThis causes bio-crude production from cyanobacteria to mostly rely on Maillard reactions.\n\nIn summary, from the results of HTL studies on model compounds, lipids can be converted into bio-crude in high yields. Carbohydrates and proteins, on the other hand, need to be in a specific ratio to benefit from Maillard reactions. There are varying results in the HTL literature for the optimum ratio for carbohydrates and proteins. Therefore, revealing the optimum ratio is required to fill that gap in the literature either by using model compounds or co-liquefaction of substrates.",
+      "stats": {
+        "char_count": 6350,
+        "word_count": 1031,
+        "sentence_count": 56,
+        "line_count": 20
+      }
+    },
+    {
+      "heading": "2.2.1 Depolymerization",
+      "level": 1,
+      "content": "Depolymerization (hydrolysis) reaction is the first step in the HTL process. In these reactions, lipids are broken down into fatty acids and glycerol, proteins are broken down into amino acids, and carbohydrates are broken down into monosaccharides65. No significant bio-crude forming occurs at this stage. If the severity of the HTL process is adjusted only for the depolymerization step, effluent can be used in fermentation processes to produce biofuels (i.e., methane, hydrogen, and ethanol). Depending on the substrate’s characteristics, the level of HTL temperature required for depolymerization varies between $1 5 0 { - } 2 5 0 ^ { \\circ } \\mathrm { C }$ .\n\nHydrothermal depolymerization is a widely investigated technology under the name of hydrothermal pretreatment. The technology is mostly used to increase the biodegradability of municipal sludge or enhance the hydrolysis of lignocellulosic biomass66–68. Most of the candidate substrates, such as woody and herbaceous plants, microalgae, macroalgae, cyanobacteria, and manure, contain lignocellulose in different ratios. Depolymerization of lignocellulosic biomass results in various pentoses and hexoses along with monolignols32, as presented in Figure 4. Hydrolysis of lignocellulosic biomass. All the monosaccharides obtained from the hydrothermal depolymerization of lignocellulosic biomass are valuable platform chemicals69 that have great potential in developing sustainable chemical and biofuel industries. In the HTL, these monosaccharides can contribute to bio-crude formation by reacting with amino acids. Lignin depolymerization products, monolignols, on the other hand, remain in the aqueous phase mostly in phenol and catechol forms70. Monolignols were found the contribute to bio-crude in HTL if a water – phenol mixture aqueous phase is used71,72.\n\n[Image]\nFigure 4. Hydrolysis of lignocellulosic biomass",
+      "stats": {
+        "char_count": 1883,
+        "word_count": 268,
+        "sentence_count": 18,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "2.2.2 Decomposition",
+      "level": 1,
+      "content": "Hydrolyzed smaller molecules go through several thermal decomposition reactions such as dehydration, decarboxylation, decarbonylation, deamination, dehydrogenation, and some bond cleavages due to high temperatures. The decomposition of different compound groups in HTL occurs at $1 8 0 { - } 3 4 0 ^ { \\circ } \\mathrm { C }$ range73. In the HTL process, carbohydrates are the first group to start decomposing at $1 8 0 \\mathrm { { } ^ { \\circ } C }$ . Over $2 0 0 ^ { \\circ } \\mathrm { C }$ , proteins and lipids begin to decompose. For the total decomposition of proteins and lipids, $3 0 0 ^ { \\circ } \\mathrm { C }$ and $6 4 0 ^ { \\circ } \\mathrm { C }$ temperatures are required, respectively74. Since some lipids, such as long-chain fatty acids, are directly included in bio-crude, total decomposition of lipids is not required in the HTL process. Obtaining the highest efficiency in the HTL process is directly related to the balance of decomposition reactions. The intensity of HTL operating conditions should be high enough to allow organic compounds to decompose into biocrude forming compounds, but at the same time, it should not be too severe to decompose biocrude into gases. For wastewater treatment applications, decomposition reactions in the HTL process allow for treating most pharmaceuticals75 and converting microplastics into bio-crude76.\n\nThe first degrading group, carbohydrates, have several decomposition pathways ending with short-chain (volatile) fatty acids, basic alcohols, ketones, furan compounds, furanic acids, and furanic alcohols. Except for large furanic molecules, decomposition of carbohydrates does not contribute to bio-crude formation significantly. However, products of carbohydrate decomposition can form larger molecules in recombination reactions. Important carbohydrate decomposition pathways are summarized in Figure 5. Hydrothermal decomposition of carbohydrates Due to the formation of furanic compounds in the HTL, carbohydrate-rich substrates, such as lignocellulose and macroalgae, can form bio-crude and aqueous phase with higher oxygen percentages than the other substrates.\n\n[Image]\nFigure 5. Hydrothermal decomposition of carbohydrates77–79\n\nThe second decomposing group in HTL is proteins. Protein decomposition pathways mostly consist of deamination and decarboxylation reactions of amino acids. Depending on the type of amino acid, decomposition temperature, reaction pathways, and products differ80. Amino acid deamination reaction is the primary source of ammonia in the HTL aqueous. Therefore, HTL aqueous phase of protein-rich substrates can have up to $1 6 ~ \\mathrm { g / L }$ ammonia, causing pH levels over $8 ^ { 8 1 }$ . Protein decomposition end products are mostly simple amines, amides, aldehydes, short-chain fatty acids, and N-heterocyclic compounds. Like O-heterocyclic compounds (furan derivatives) in carbohydrate decomposition, large N-heterocyclic molecules are the only significant direct biocrude contribution of protein decomposition. Decomposition reaction examples of some amino acids (indicated in red) are presented in Figure 6. Hydrothermal decomposition pathways of amino acids.\n\n[Image]\nFigure 6. Hydrothermal decomposition pathways of amino acids82–102\n\nIn terms of $\\mathrm { p H }$ , substrate’s carbohydrate and protein amount should be in a specific ratio in the HTL so that decomposition products, carboxylic acids and ammonia, would balance each other. If the substrate is protein-rich, alkaline conditions can occur in the HTL, which is reported to be beneficial for bio-crude production103. On the other hand, in HTL of carbohydrate-rich substrates, such as lignocellulosic biomass, acidic conditions can promote the formation of hydrochar and lower the bio-crude yield104.\n\nThe last decomposing group in HTL process is lipids. Lipids have the highest contribution to bio-crude production among biomass fractions due to their larger molecule sizes. This contribution occurs by the decomposition products of long chain fatty acids, alkanes, and alkenes. Due to the formation of phosphoric acid and long chain fatty acids, lipid decomposition can cause a pH drop. The majority of sterols also decompose thermally105 into various smaller molecules, such as ketones and aldehydes, that can later go into recombination reactions. Lipid decomposition pathways are presented in Figure 7.\n\n[Image]\nFigure 7. Lipid decomposition reactions27,106–110",
+      "stats": {
+        "char_count": 4437,
+        "word_count": 660,
+        "sentence_count": 36,
+        "line_count": 18
+      }
+    },
+    {
+      "heading": "2.2.3 Recombination",
+      "level": 1,
+      "content": "Various reactive fragments formed by the decomposition reactions start to recombine (repolymerize) above $3 0 0 ^ { \\circ } \\mathrm { C }$ into bio-crude compounds35. Large molecules formed in these reactions contribute to bio-crude formation. Basic molecules, on the other hand, stay in the aqueous phase. Most of the organic molecule groups in bio-crude, such as aromatics, ketones, amides, amines, and esters, form in the recombination reactions of long-chain fatty acids. Also, complex\n\nalcohol molecules of bio-crude come from the hydration and cyclization reactions of alkenes.\nExamples of recombination pathways and products are given in Figure 8.\n\n[Image]\nFigure 8. Recombination reaction examples in HTL111–117\n\nOne of the most important recombination reactions is the Maillard reaction taking place between reducing sugars and amino acids. In these reactions, reducing sugar’s aldehyde group reacts with amino groups via the formation of Schiff’s base and Amadori rearrangement118. Although it is referred to as one reaction, the Maillard reaction is actually a combination of reactions with complex pathways119. Although Maillard products, O and $_ \\mathrm { N }$ heterocyclic compounds, decrease the quality of bio-crude due to the oxygen and nitrogen in their structures, the reaction is essential in terms of achieving higher carbon recovery in the bio-crude phase. The impurity caused by the Maillard reaction products can be treated in refineries prior to the distillation process. Studies performed on model compounds revealed that if Maillard reaction is not occurring in an HTL process, bio-crude yields obtained from carbohydrates and proteins were in the $7 . 1 8 \\%$ range, while bio-crude yields up to $4 0 \\%$ were reported when carbohydrates and proteins are used together in the HTL process45,46. Maillard reaction pathways are summarized in Figure 9.\n\n[Image]\nFigure 9. Maillard reaction pathway and products120–123\n\nRecombining fragments also include some of the bio-crude compounds which form coke and contribute to hydrochar124. Coke formation can be minimized with the application of high pressurized $\\mathrm { H } _ { 2 }$ during the recombination step125. At this point, severe HTL conditions can start secondary cracking of bio-crude and decrease the process efficiency.",
+      "stats": {
+        "char_count": 2305,
+        "word_count": 351,
+        "sentence_count": 19,
+        "line_count": 14
+      }
+    },
+    {
+      "heading": "3.1 Bio-crude",
+      "level": 1,
+      "content": "Bio-crude is a dark brown, free-flowing126, hydrocarbon-rich liquid obtained in the HTL process as the primary fuel product. When produced from renewable or waste biomass sources, it is accepted as a suitable and sustainable energy source replacement for fossil fuels127. Bio-crude contains saturated fatty acids, alkanes, alkenes, aromatic hydrocarbons, N and O heterocyclic compounds, ketones, alcohols, esters, amines, and amides. Concentrations of these organic compound groups in the bio-crude are highly dependent on carbohydrate, protein, and lipid composition of the HTL substrate, HTL process conditions, and bio-crude separation method. Examples for the compound groups that form bio-crude are presented in Figure 10.\n\nBio-crude is a renewable fuel that can be upgraded and used as a replacement for crude oil. It can be distilled into gasoline, jet fuel, diesel, naphtha128, fuel oil, and a heavy fraction that can be used in engine lubricant production129. Contrary to fossil fuels, bio-crude based fuels lower the greenhouse gas emissions130 owing to the carbon fixation occurring during the growth of biomass.\n\nTherefore, it can be said that fuels obtained from bio-crude are environmentally friendly, whereas they are also renewable and sustainable due to their source, biomass.\n\n[Image]\nFigure 10. Organic compound groups that form bio-crude and example compounds31,131–141\n\nBio-crude is physically quite similar to crude oil; however, chemically it has some impurities which decrease its fuel quality, such as O-heterocyclic and N-heterocyclic compounds. In the HTL process, to achieve the best fuel quality possible, carbon and hydrogen are aimed to be maximized, whereas oxygen and nitrogen are to be minimized. The typical elemental composition for biocrude is $6 0 { - } 7 8 \\%$ carbon, $6 \\mathrm { - } 1 2 \\%$ hydrogen, $2 { \\cdot } 6 \\%$ nitrogen, $0 { - } 2 \\%$ sulfur and $8 { - } 2 0 \\%$ oxygen. The elemental distribution of bio-crudes derived from different substrates is presented in Figure 11 (a-e). One of the most important parameters for measuring bio-crude quality is the higher heating value (HHV), which can either be measured with a bomb calorimeter or calculated by the Dulong equation (Equation 1). In Equation $1 , \\mathrm { C } , \\mathrm { H }$ , and O represent carbon, hydrogen, and oxygen content of bio-crude in percentage unit, respectively.\n\n$$\n\\mathrm { H H V } \\left( \\frac { \\mathrm { M J } } { \\mathrm { k g } } \\right) = 0 . 3 3 8 ~ \\mathrm { C } + 1 . 4 2 8 ~ ( \\mathrm { H } - \\frac { 0 } { 8 } )\n$$\n\n[Image]\n\nThe efficiency of HTL process can be calculated by the amount of bio-crude obtained at the end of the process by Equation 2. Although biomass to bio-crude conversion percentage is mostly used as an efficiency measurement in the literature, in some cases, this parameter can be misleading. Bio-crude yield may decrease as a result of recombination reactions above $3 0 0 ^ { \\circ } \\mathrm { C }$ ; however, reactions can lower the oxygen percentage of bio-crude and increase its HHV. On the other hand, energy recovery (ER) parameter, which can be calculated using Equation 3, represents both quality and quantity of bio-crude, which makes it more representative for the process efficiency measurement. ER should be used as the response of the process, especially for HTL modeling studies. HHV distribution of bio-crudes reported in the literature is given in Figure 11(f).\n\nEnergy recovery $( ^ { 0 } / \\mathrm { 0 } ) = \\frac { \\mathrm { D r y ~ m a s s ~ o f ~ b i o - c r u d e ~ \\times ~ H H V ~ o f ~ d r y ~ b i o - c r u d e } } { \\mathrm { D r y ~ m a s s ~ o f ~ s u b s t r a t e ~ \\times ~ H H V ~ o f ~ d r y ~ s u b s t r a t e } } \\times 1 0 0 $\n\nThere are five major substrate groups that were extensively studied as an HTL substrate in the literature: microalgae, macroalgae, cyanobacteria, lignocellulosic biomass, and municipal sludge. When the elemental composition of bio-crudes produced from these groups is evaluated in terms of carbon and hydrogen, it can be seen that they all have similar characteristics, which makes them valuable fuels with high HHV. According to nitrogen content, cyanobacteria bio-crudes visibly have a higher N profile, and lignocellulosic bio-crudes have a lower N profile. For oxygen, on the other hand, lignocellulosic bio-crudes have significantly high levels compared to other biocrudes. Those nitrogen and oxygen content variations are directly related to the biochemical and elemental compositions of substrates. Most of the impurities in bio-crude caused by $_ \\mathrm { N }$ and O are due to the heteroatoms being formed during HTL227. Although sulfur contents were found to be low for all bio-crudes, municipal sludge bio-crudes were found to have higher levels and large standard deviation due to the varying characteristics of substrates in the studies. This sulfur content may cause catalyst fouling in downstream processes, such as hydrodeoxygenation bio-crude upgrading228.\n\nThe average HHV values indicate that microalgae is the most suitable HTL substrate in terms of bio-crude quality (Figure 11(f)). In contrast, lignocellulosic bio-crudes were found to have a vast diversity of HHV and, on average, the lowest fuel quality. Macroalgae, cyanobacteria, and municipal sludge bio-crudes were reported to have similar HHV. However, difficulties in growing and harvesting of microalgae and cyanobacteria229 along with macroalgae being a food source make municipal sludge the best substrate for HTL. This is the main driver for the HTL conversion of municipal sludge to bio-crude in recent years.\n\nIn the literature, pyrolysis oil is also mentioned as bio-crude in some studies. Pyrolysis oil is another thermochemically produced renewable fuel that can replace fossil fuels230. However, compared with HTL bio-crude, pyrolysis oil has a higher water content $1 5 - 3 0 \\%$ ), higher oxygen percentage, and ignition complications231. Typical properties of pyrolysis oil and HTL bio-crude are given in Table 1.\n\nTable 1. Fuel quality comparison of HTL bio-crude and pyrolysis oil\n\n<html><body><table><tr><td rowspan=\"2\">Parameters</td><td>Hydrothermal</td><td>Pyrolysis Oi1232,233</td></tr><tr><td>Liquefaction Bio-crude</td><td></td></tr><tr><td>Drying</td><td>Not required</td><td>Required</td></tr><tr><td>C%</td><td>46.1-84.2</td><td>32-49</td></tr><tr><td>H%</td><td>2.7-14.2</td><td>6.9-8.6</td></tr><tr><td>0%</td><td>1.7-40.2</td><td>44-60</td></tr><tr><td>N%</td><td>0-10.5</td><td>0-0.2</td></tr><tr><td>S%</td><td>0-5.1</td><td>0-0.05</td></tr><tr><td>HHV (MJ/kg)</td><td>16.5-42.5</td><td>16-19</td></tr></table></body></html>\n\nAfter the HTL process, bio-crude can be separated either by physical methods or solvents. The most utilized method in the literature (mostly in batch-fed HTL studies) is to dissolve biocrude in dichloromethane (DCM), separate it by centrifugation, and then evaporate the solvent for reuse. Bio-crude that is dissolved and separated from the liquid fraction and hydrochar are called light oil and heavy oil, respectively. Valdez et al.234 investigated the solubility of bio-crude by different polar and non-polar solvents. They reported that the highest fraction of bio-crude dissolved was $3 9 \\%$ by hexane or decane solvents, whereas it was only $3 0 \\%$ for DCM. However, DCM solved bio-crude was found to have the highest carbon and hydrogen among seven solvents. Overall, decane was found as the best solvent to separate bio-crude. A similar study was done by Yan et al.219 to investigate the efficiency of ten different solvents on bio-crude extraction. According to their findings, isopropanol was slightly more successful than DCM in extraction. Xu et al.216 studied the effect of centrifugation and solvent extraction order on bio-crude recovery. They found that $4 3 . 7 \\%$ bio-crude can be extracted if DCM is directly added to HTL effluent. However, a higher yield of $4 4 . 2 \\%$ was reached by centrifuging the effluent first and then using solvent on both liquid and solid fractions separately. Mujahid et al.191 also reported that the centrifugation-first approach increased the bio-crude extraction yield from $4 7 \\%$ to $6 4 \\%$ .",
+      "stats": {
+        "char_count": 8215,
+        "word_count": 1311,
+        "sentence_count": 75,
+        "line_count": 32
+      }
+    },
+    {
+      "heading": "3.2 Hydrochar",
+      "level": 1,
+      "content": "Hydrochar is the solid co-product in HTL, and it is the main product of hydrothermal carbonization (HTC) process, which typically utilizes lower temperatures $1 5 0 { - } 2 8 0 ^ { \\circ } \\mathrm { C }$ ). Hydrochar in HTL process, also called solid residue, is formed by the recombination reactions of compounds in the aqueous phase and bio-crude. Along with recombination products, hydrochar also contains insoluble inorganics. Similar to bio-crude, hydrochar characteristics vary depending on the substrate and HTL conditions, and can consist of up to $8 0 \\%$ inorganics33. Since bio-crude and hydrochar are formed from the same carbon sources, their yields are inversely proportional. According to the studies in the literature, hydrochar can be directly combusted for energy production, applied to soil for amendment and carbon sequestration, or activated for adsorption purposes235. Hydrochar also contains a decent amount of trace elements and phosphorus, which can be extracted for commercial use236. The valorization and/or safe disposal of hydrochar is one of the requirements to facilitate the sustainable development of HTL.",
+      "stats": {
+        "char_count": 1138,
+        "word_count": 176,
+        "sentence_count": 8,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.3 HTL aqueous",
+      "level": 1,
+      "content": "HTL aqueous stream contains both organic and inorganic residue compounds. Major organic compound groups in aqueous phase are carboxylic acids, alcohols, ketones, glycerol, aldehydes, phenolics, esters, ethers, amides, pyrazines, pyridines, and N&O-heterocyclic compounds140,237,238. Percentages of organic compound groups in HTL aqueous phases obtained from different types of substrates are presented in Figure 12.\n\n[Image]\nFigure 12. Distribution of organic compounds in HTL aqueous phase of microalgae239, macroalgae145, cyanobacteria240, municipal sludge241, and lignocellulosic biomass242\n\nAccording to Figure 12, the most abundant organic compound group in the HTL aqueous phase is carboxylic acids, except for HTL aqueous of cyanobacteria. The amount of carboxylic acids in HTL aqueous is directly proportional with carbohydrate percentage of the biomass type due to HTL reaction pathways presented in Figure 2. Therefore, lignocellulosic biomass HTL aqueous was found to have the highest carboxylic acids due to its carbohydrate-rich cellulose and hemicellulose structure. For the same reason, HTL aqueous of macroalgae and some microalgae species also have high amounts of carboxylic acids. Cyanobacteria-based HTL aqueous, on the other hand, was found to be rich in amides as a result of the HTL reactions of lipids and proteins in its structure. HTL aqueous of municipal sludge has the most balanced distribution with carboxylic acids, ketones, amines, and amides as major compound groups. Substrates with high protein content cause an abundance of amides in the aqueous phase. A high amide amount in the aqueous phase indicates that the substrate can be co-liquefied with a carbohydrate-rich substrate to promote the Maillard reactions. Likewise, a substrate with a high carboxylic acid concentration in the aqueous phase can be co-liquefied with a protein-rich substrate to obtain a higher bio-crude yield.\n\nDue to deamination reactions of proteins, ammonia concentration is also high in the aqueous phase. Similar to hydrochar, HTL aqueous is also a suitable medium for nutrient recovery. Ovsyannikova et al.243 reported that the authors reached $9 9 \\%$ P, $7 9 . 4 \\%$ $\\mathrm { N H } _ { 4 ^ { - } } \\mathrm { N }$ , and $6 6 . 5 \\%$ P, $1 9 . 4 \\%$ $\\mathrm { N H } _ { 4 }$ -N recovery by precipitation from HTL aqueous of municipal sludge and Spirulina, respectively. On the other hand, Garcia Alba et al.239 investigated Desmodesmus sp. growth in HTL aqueous phase and reported growth reduction in HTL aqueous. Chen et al.244 also found that even in 100 times diluted HTL aqueous, Chlorella vulgaris growth was reduced by $4 7 \\%$ due to toxicity. In the study by Das et al.245, they found that it is possible to grow Tetraselmis sp. in HTL aqueous if it is diluted enough to provide $5 0 \\%$ of nutrients.\n\nAnaerobic digestion is another valorization method for the HTL aqueous stream. However, according to the study by Zhou et al.246, HTL aqueous ( $1 0 4 \\mathrm { g }$ chemical oxygen demand $\\mathrm { ( C O D ) / L ) }$ ) inhibits the batch anaerobic digestion process in mesophilic conditions $( 3 7 ^ { \\circ } \\mathrm { C } )$ when its volume exceeds $1 3 . 3 \\%$ of the reactor liquid volume. Chen et al.247 reported that in up-flow anaerobic sludge blanket systems that were being fed with HTL aqueous $2 . 5 \\ \\mathrm { g } \\ \\mathrm { C O D / L } \\ \\mathrm { d }$ ), $6 1 . 6 \\%$ and $4 5 \\%$ of the COD caused by HTL aqueous $\\mathrm { ~ ( 1 0 ~ g ~ C O D / L ) }$ were digested under mesophilic and thermophilic conditions, respectively. They also emphasized that it was not possible to digest phenolic compounds, furans, and pyrazines in up-flow anaerobic sludge blanket system. On the other hand, it is known that digesting low concentrations of those compounds in batch anaerobic reactors is possible248,249. Elliott et al.164,165,185 suggested catalytic hydrothermal gasification (CHG) treatment for converting organic compounds in HTL aqueous into combustible gasses. Xu et al.250 also followed the same approach and found that some N-containing compounds are difficult to be gasified. According to the study by Cherad et al.251, it is possible to produce sufficient $\\mathrm { H } _ { 2 }$ gas from CHG of HTL aqueous for hydrodeoxygenation fuel upgrading of bio-crude. Recycling HTL aqueous back to HTL process or headworks of a wastewater treatment plant is another option. Ramos-Tercero et al.201, Biller et al.157, and Shah et al.205 found that recycling aqueous phase up to six times in HTL increases energy recovery of the process. However, Shah et al.205 also stated that the nitrogen content of bio-crude was increased by $5 5 \\%$ after the sixth recycle.\n\nTreatment of HTL aqueous with a microbial fuel cell is another topic of research interest. The valorization alternatives of aqueous phase were reviewed in detail by Watson et al.81.\n\nIn terms of widely available and sustainable feedstock and bio-crude yield, one of the best options for the HTL process is to use municipal sludge as substrate by coupling the HTL plant with a wastewater treatment plant. In this configuration, HTL aqueous can be treated by returning it to the headworks of wastewater treatment plant. However, the exact effects of inhibitory aromatic compounds and high concentration of ammonia in the HTL aqueous on wastewater treatment processes are still unclear. Although carboxylic acid concentration can be tolerated due to the dilution with incoming wastewater, high nitrogen concentration of HTL aqueous can affect the biological treatment processes applied in the mainstream by bringing an extra load to the nutrient removal process. If the nutrient removal capacity of the biological treatment process is not sufficient for treating that extra load, nitrogen accumulation may occur in the plant. Zhuang et al.252 reported that in the HTL aqueous of municipal sludge, organic nitrogen is converted into ammonium $\\mathrm { ( N H } _ { 4 } { } ^ { + } )$ by increasing the temperature, whereas no significant change was observed on nitrite $\\left( \\mathrm { N O } _ { 2 } \\right)$ and nitrate $\\left( \\mathrm { N O } _ { 3 } \\right)$ concentrations. In their study, the ammonium concentration in the aqueous phase was found to be $2 5 0 0 ~ \\mathrm { { m g / L } }$ at $3 0 0 ^ { \\circ } \\mathrm { C }$ and 30 minutes HTL condition. Xu et al.139 also reported a $2 2 1 0 ~ \\mathrm { { m g / L } }$ ammonia concentration in HTL aqueous phase of municipal sludge processed at $3 4 0 ^ { \\circ } \\mathrm { C }$ . Ammonia is mostly formed in the deamination reactions of amino acids. Therefore, compared to the HTL aqueous of primary sludge, secondary (biological) sludge HTL aqueous has a higher ammonia concentration due to its higher protein content. In a continuousflow HTL system working at $3 5 0 \\mathrm { { } ^ { \\circ } C }$ , Maddi et al.241 found $3 6 8 0 ~ \\mathrm { { m g / L } }$ and $5 7 0 0 ~ \\mathrm { m g / L }$ ammonia concentrations in HTL aqueous of primary sludge and secondary sludge, respectively.\n\nBesides the aerobic or anaerobic treatability of HTL aqueous, its possible effects on settling and UV disinfection units when it is returned to headworks of wastewater treatment plant should also be considered. In the literature, there are no studies investigating the effect of blending HTL aqueous to wastewater on settling and UV disinfection processes. As mentioned above, HTL aqueous contains a wide variety of organic molecules. Many of the organic compounds in HTL aqueous was reported to be inhibitors for anaerobic consortium246, microalgae155,253, or even mammal cells254. These inhibitors might also change the microbiological structure of wastewater and cause a decrease in settling efficiency. Furthermore, an increase in the concentration of some compounds, which has a high adsorption capacity at $2 5 4 ~ \\mathrm { n m }$ , such as phenol255 or melanoidins, can lower the UV disinfection process yield.",
+      "stats": {
+        "char_count": 7971,
+        "word_count": 1369,
+        "sentence_count": 74,
+        "line_count": 16
+      }
+    },
+    {
+      "heading": "3.4 Gases",
+      "level": 1,
+      "content": "Gases in the HTL process are mainly produced in decarboxylation, decarbonylation, and deamination reactions. At reaction temperatures over $3 5 0 ^ { \\circ } \\mathrm { C }$ and $3 4 0 ^ { \\circ } \\mathrm { C }$ , respectively, water-gas shift256,257 and methane forming reactions73,258 also occur and produce $\\mathrm { H } _ { 2 }$ and $\\mathrm { C H } _ { 4 }$ . The gaseous phase contains mainly $\\mathrm { C O } _ { 2 }$ , which is around $8 0 - 9 5 \\% ^ { 2 0 0 , 2 0 4 }$ . Typical HTL gas composition is given in Figure 13. The $\\mathrm { C O } _ { 2 }$ content of the gaseous phase can be as high as $9 7 \\%$ . Zhang et al.259 suggested that HTL gaseous phase can be used in algae growth due to the high $\\mathrm { C O } _ { 2 }$ content.\n\n[Image]\nFigure 13. Typical composition of HTL gaseous phase at $3 5 0 ^ { \\circ } \\mathrm { C } ^ { 1 3 4 , 1 7 9 , 2 5 1 }$\n\nHTL gaseous phase can also include small quantities of light hydrocarbons, such as ethane, ethylene, propene58, isobutane, n-butane, 1-butane, isopentane, and 1-pentene187. Although these gases are generally in low concentrations, Wagner et al.58 reported that in HTL of a polyhydroxy butyrate (PHB) producing cyanobacteria, Synechocystis cf. salina, it is possible to generate propylene gas with a $2 . 6 \\%$ yield along with bio-crude.",
+      "stats": {
+        "char_count": 1311,
+        "word_count": 267,
+        "sentence_count": 13,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "4 Effect of process parameters on bio-crude yield and quality",
+      "level": 1,
+      "content": "Product yield and quality vary in HTL processes, mainly depending on the reaction temperature, retention time, heating rate, type of biomass, solid content, type of solvent, catalyst type, and catalyst concentration. This product variation is caused by the effect of reaction contents and conditions on the complex kinetics of HTL reactions presented in Section 2.2. In order to evaluate the parameter effect on HTL, studies in the literature using different reaction temperatures, retention times, substrate types, and solid contents are summarized in Table 2.\n\nTable 2. Batch HTL studies performed with water as solvent and without catalyst\n\n<html><body><table><tr><td colspan=\"2\">HTL contents</td><td colspan=\"2\"> HTL conditions</td><td rowspan=\"2\">The highest bio-crude yield (% wt)</td><td rowspan=\"2\">Refere</td></tr><tr><td> Substrate</td><td></td><td>eRetore</td><td>Retention</td></tr><tr><td>L. digitata L syperborea</td><td>(w:w) 8:30</td><td>350℃</td><td>15 min</td><td>17.6% 1%</td><td>151</td></tr><tr><td> A. esculenta</td><td></td><td></td><td></td><td>17.8%</td><td></td></tr><tr><td>Dried sewage sludge Food waste</td><td>1:2 3:20</td><td>250-400℃ 240-295℃</td><td>60 min 0-30 min</td><td>52% at 350℃ 27.5% at 240C,30 min</td><td>133 260</td></tr><tr><td>C. vulgaris</td><td></td><td></td><td></td><td>46.6% at300℃</td><td></td></tr><tr><td>Ss.imorphous C. fritschii</td><td>1:10</td><td>300,350℃</td><td>60 min</td><td>35.8% at30C 38.6% at 300℃</td><td>155</td></tr><tr><td>Nannochloropsis sp. Eight types of green</td><td>1:20 1:10</td><td>200-500℃ 300℃</td><td>60 min 30 min</td><td>43% at 350℃ Leaves: 41% for D.racemosum</td><td>134 261</td></tr><tr><td> landscaping waste</td><td></td><td>340℃</td><td>30 min</td><td>Branches: 51% for C.camphora 35.4%</td><td>159</td></tr><tr><td>Microweipa sludeated Mixed-culture algal</td><td>3:20</td><td>260-320℃</td><td></td><td>49.9% at 300C, 60 min</td><td>33</td></tr><tr><td>biomass G. N.splinaria</td><td>1:4</td><td>310-350℃</td><td>0-90 min 5-60 min</td><td>51%a3</td><td>55</td></tr><tr><td>G sulphuraria587. G.</td><td>1:20-1:10</td><td>310-350℃</td><td></td><td>182%a330C</td><td>262</td></tr><tr><td>Arthrospira platensis</td><td>1:20-1:10 3:10</td><td>270-330℃</td><td>5-60 min 0 min</td><td>45.7% at 330℃</td><td>263</td></tr><tr><td>rsemsu 1/02-P Mixed culture of C. sorokiniana, C.</td><td></td><td>350℃</td><td>60 min</td><td>26.7%</td><td>160</td></tr><tr><td>minutissima, S. bijuga Tetraselmis sp.</td><td>7:32 3:17</td><td>325,350℃</td><td></td><td>51.2% at 350℃,30 min</td><td>245</td></tr><tr><td></td><td>1:5</td><td>240,320℃</td><td>30-60 min 30 min</td><td> 25% for walnut shell</td><td>161</td></tr><tr><td>Sspirulin sp.</td><td>4:25</td><td>300-350°℃</td><td></td><td>42% at350C</td><td>163</td></tr><tr><td>Desmodesmus sp.</td><td></td><td></td><td>5 min</td><td>40%</td><td>239</td></tr><tr><td>Desmodesmus sp.</td><td>3:40 2:25</td><td>300℃ 175-450C</td><td>5 min 5-60 min</td><td>49.4%at 375℃,5 min</td><td>167</td></tr><tr><td>Mixture of C. sorokiniana DBWC2 Chlorella sp. DBWC7</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>K. pneumoniae ORWB1 A. calcoaceticus ORWB3</td><td>3:20</td><td>310℃</td><td>55 min</td><td>15%</td><td>264</td></tr><tr><td>Chlorella sp. FC2</td><td>1:10</td><td>350℃</td><td>60 min</td><td>14.72%</td><td>265</td></tr><tr><td> Arthrospira platensis</td><td>3:10</td><td>270C</td><td>80min</td><td>34.6%</td><td>169</td></tr><tr><td>Cyanophyta</td><td>1:20-3:10</td><td>320-370°℃C</td><td>10-70 min</td><td>39.54% at 370C, 50 min, 1:10 ratio</td><td>170</td></tr><tr><td>Oil Mill Wastewater</td><td>3:25</td><td>240-300℃</td><td>15-45 min</td><td>58% at 280℃,30 min</td><td>137</td></tr><tr><td>Nanmochorpsp</td><td>3:20</td><td>260-340℃</td><td>30 min</td><td>54.11% at320C</td><td>30</td></tr></table></body></html>\n\n<html><body><table><tr><td>Rawmmptyfrut buch Palm kernel shell</td><td>1:10</td><td>330-390°℃</td><td>30-240 min</td><td>38.242% at390℃C,.20min 38.53% at 390C,60 min</td><td>266</td></tr><tr><td> Nannochloropsis sp.</td><td>3:20</td><td>100-400℃</td><td>0.16-60</td><td>Model prediction:</td><td>267</td></tr><tr><td> Chlamydomonas</td><td>7:50</td><td>220-310°℃</td><td>60 min</td><td>58.7% at 310℃</td><td>175</td></tr><tr><td>Cyanobatera p.</td><td>1:10</td><td>250-350°℃C</td><td>15-90 min</td><td>21.10% at325℃C.45mnm</td><td>176</td></tr><tr><td>Spirulina platensis</td><td>1:5</td><td>350℃</td><td>60 min</td><td>40.7%</td><td>178</td></tr><tr><td>Animal by-products</td><td>1:1-1:5</td><td>150-290℃</td><td>5-15 min</td><td>74% at 250℃</td><td>268</td></tr><tr><td>Nnnochorpsp.</td><td>3:20-1:4</td><td>220-300℃</td><td>30-90 min</td><td>829%2.m</td><td>184</td></tr><tr><td>Manure from six different animal species</td><td>1:5</td><td>310-340°℃</td><td>30 min</td><td>30.85% at 340C for swine manure</td><td>269</td></tr><tr><td> SNagmdiansis</td><td>1:10</td><td>350℃</td><td>15 min</td><td>57.%</td><td>138</td></tr><tr><td></td><td>1:20-1:4</td><td>250-350℃</td><td>5-31 min</td><td>Model predictions:</td><td>270</td></tr><tr><td>Xylan Soy protein Sunflower oil Starch Lignin Food waste Garden waste</td><td>1:1</td><td>260-300℃</td><td>20 min</td><td>97% at 300℃ 22% at 300℃ 95% at 260℃ 3% at 300℃ 34% at 300℃ 79% at 280℃</td><td>271</td></tr><tr><td>Paper waste</td><td></td><td>Direct HTL: 220-300℃ Sequential</td><td></td><td>33% at 300℃ 74% at 280℃ 30% at 240℃C,20 min,1:9 ratio</td><td></td></tr><tr><td></td><td></td><td>HTL: 220-320℃</td><td></td><td>22% at 350C,30 min</td><td></td></tr><tr><td>Domestic ssge sludge Monoraphidlum p.</td><td>1:10</td><td>275-350℃</td><td>15-60 min</td><td>33% at 325C,30 min</td><td>190</td></tr><tr><td>Mixture of KMC4 to DSS</td><td></td><td></td><td></td><td>39.6% at 325C,45 min</td><td></td></tr><tr><td>Dewatered sewage sludge</td><td>13:100</td><td>300-400°℃</td><td>30-120</td><td>64% at 325C,30 min</td><td>191</td></tr><tr><td>Four species of marine frend wer meciea gfe</td><td>1:15</td><td>330-341℃C</td><td>5min</td><td>Freshwater species:</td><td>194</td></tr><tr><td>Lipid Crbilhydate Protein</td><td>3:10</td><td>250-350℃</td><td>0-60 min</td><td>100% at 250C.0 min 42.27% at350C.omin 4.4% at 250℃,0 min</td><td>272</td></tr><tr><td>Mixture of lipid, carbohydrate,lignin, and</td><td>3:10</td><td>250-350℃</td><td>5-60 min</td><td>~30% at 350C,30 min</td><td>141</td></tr><tr><td>protein Gracilaria gracilis</td><td>1:10</td><td>350°℃</td><td>15 min</td><td>15.7%</td><td>196</td></tr></table></body></html>\n\n<html><body><table><tr><td>Cladophora glomerata</td><td colspan=\"4\">16.9%</td><td colspan=\"2\"></td></tr><tr><td> Chlorella vulgaris</td><td>11:100</td><td>220-265℃</td><td>30 min</td><td>42.2% at 240°C for the sixth time recycling of HTL aqueous</td><td></td><td>201 54</td></tr><tr><td>Nannochoropsgdtana</td><td>1:10</td><td>180-330℃</td><td>30 min</td><td></td><td>47.5% at30C</td><td>273</td></tr><tr><td>1:1 Water hyacinh-Para</td><td>1:6</td><td>260-300℃</td><td>15 min</td><td></td><td>13.34% at 280℃</td><td></td></tr><tr><td>Lipide Dactionresidue of</td><td>4:25</td><td>350℃</td><td>60 min</td><td></td><td>11.81%</td><td>274 275</td></tr><tr><td>Rice straw Spirulina Chlorella</td><td>1:6</td><td>280-320℃</td><td>15 min</td><td></td><td>17% at 280℃ 32.5% at 350℃ 37.5% at 350℃</td><td></td></tr><tr><td>Enteromorpha prolifera Nannochloropsis sp. Dunaliella salina Euglena Cyanophyta</td><td>1:4</td><td>280-350℃</td><td>30 min</td><td></td><td>27% at 280℃ 37% at 280℃ 17% at 350℃ 29% at 350℃ 30.5% at 280℃</td><td>52</td></tr><tr><td> Nanmpchoropsis</td><td>1:10</td><td>220-300℃</td><td></td><td>60 min</td><td>341%at280℃C</td><td>208</td></tr><tr><td>Mixed algae Corn straw</td><td>1:10-1:5</td><td>260-340℃</td><td>30-90 min</td><td></td><td>8.4% at 300C, 60 min,1:5 ratio 7.9%</td><td>209</td></tr><tr><td>SPybet staw Rice straw</td><td>3:8</td><td>320℃</td><td>60 min</td><td></td><td>14.6% 15.1%</td><td>276</td></tr><tr><td>Nannochlorps sdina</td><td>1:3</td><td>220-375℃</td><td></td><td>10-30 min</td><td>46% at310℃C.30min</td><td>53</td></tr><tr><td>Nannochloropsis sp. Spirulina</td><td>1:20-7:20</td><td>250-400℃</td><td>10-90 min</td><td></td><td>50% at 300℃,10-20 min 32.6%</td><td>277</td></tr><tr><td>Swine manure Digested anaerobic sludge</td><td>1:5</td><td>300℃</td><td>30 min</td><td></td><td>30.2% 9.4%</td><td>59</td></tr><tr><td>Raw Scenedesmus, Defatted Scenedesmus Spirulina</td><td>1:5</td><td>300°℃</td><td>30 min</td><td></td><td>45.4% 36.5% 31.2%</td><td>211</td></tr><tr><td>Arthrospira platensis Amphora sp.</td><td>3:10</td><td>270-300℃</td><td>80min</td><td></td><td>32.6% at 330℃ 55%</td><td>212</td></tr><tr><td>Spirulina sp. Tetraselmis sp. Spirulina,</td><td>4:25</td><td>350℃</td><td>5 min</td><td></td><td>50% 66% 36.9% at 340℃</td><td>213</td></tr><tr><td>Synechococcus/Anabaena Synechocystis Soybean Rapeseed oil Cornflour</td><td>4:25</td><td>300-360℃</td><td>0 min</td><td></td><td>31.2% at 340℃ 16.6% at 340℃ 28% at 360℃ 100% at 320-360℃</td><td>58</td></tr><tr><td>Polyhydroxy butyrate Secondary sewage sludge</td><td>1:10</td><td>260-350℃</td><td></td><td></td><td>3% at 340℃ 8% at 300℃ 22.9% at 340℃</td><td>139</td></tr><tr><td>Nannochloropsis sp. Chlorella</td><td>7:50</td><td>350℃</td><td>10 min 20 min</td><td></td><td>43.9%</td><td>216</td></tr><tr><td> Sewage sludge</td><td>1:10</td><td>340℃</td><td>30 min</td><td></td><td>22% 24%</td><td>217</td></tr><tr><td>Mixture (1:3,1:1,3:1)</td><td></td><td></td><td></td><td></td><td>26.8% for 1:1 mixing ratio</td><td></td></tr><tr><td>Duckwindr</td><td>1:3</td><td>350℃</td><td>30 min</td><td></td><td>2426%</td><td>219</td></tr><tr><td> Animal carcass</td><td>1:20-1:5</td><td>230-350℃</td><td>10-80 min</td><td></td><td>55.6% at 320oC, 60 min, 1:10 ratio</td><td>221</td></tr><tr><td>Spend coffee grounds</td><td>1:20-1:5</td><td>200-300℃</td><td>5-30 min</td><td></td><td>35.29% at 275℃,10 min,1:5 ratio</td><td>222</td></tr><tr><td>Chlorella pyrenoidosa</td><td>1:5</td><td>100-300℃</td><td>0-120 min</td><td></td><td>39.5% at 280°℃,120 min</td><td>278</td></tr><tr><td>Spirulina platensis</td><td>1:10</td><td>280-350℃</td><td>10-60 min</td><td></td><td>19.74% at 315C, 35 min</td><td>143</td></tr></table></body></html>\n\n<html><body><table><tr><td colspan=\"4\">Lemon peel</td><td colspan=\"2\">7.24% at 315℃, 35 min</td></tr><tr><td>Mixture (0-4:0-4)</td><td></td><td></td><td></td><td>26% at 336C,35 min, 4:1 blending</td><td></td></tr><tr><td>Enteromorphaprolifera</td><td>3:17</td><td>300℃C</td><td>30 min</td><td>17.8% 33%</td><td>279</td></tr><tr><td>Swine manure Sewage sludge</td><td>1:5</td><td>280℃</td><td>30 min</td><td>32%</td><td>259</td></tr><tr><td>11 algae species</td><td></td><td></td><td>10-90 min</td><td> 35% for Chlamydomonas</td><td></td></tr><tr><td>Dunaliella tertiolecta</td><td>1:40-7:40</td><td>300-380℃</td><td></td><td>36.9% at 360C, 30 min, 1:10 ratio</td><td>148</td></tr><tr><td>Sargassum tenerrimum</td><td>1:6</td><td>260-300℃</td><td>15 min</td><td>16.33% at 280℃</td><td>280</td></tr><tr><td>Macroalgal mix</td><td>1:5</td><td>305-350℃</td><td>0 min</td><td>16% at 345-350℃</td><td>281</td></tr><tr><td> Sargassum tenerrimum</td><td>1:6</td><td>260-300℃</td><td>15 min</td><td>16.33% at 280℃</td><td>282</td></tr><tr><td>Ulva prolifera</td><td>1:6</td><td>200-310℃</td><td>10-30 min 10-50 min</td><td>12% at 290℃,10 min</td><td>283</td></tr><tr><td>Human feces</td><td>1:20-1:4</td><td>260-340℃</td><td>0-60 min</td><td>34.44% at 340C, 10 min, 1:4 ratio</td><td>284</td></tr><tr><td>Corn stover</td><td>1:6</td><td>250-375℃</td><td></td><td>42.61% at 300℃,0 min</td><td>285</td></tr></table></body></html>\n\nAccording to the result summary of HTL studies performed without catalyst in Table 2, in varying HTL conditions, the average bio-crude yields for microalgae, macroalgae, cyanobacteria, lignocellulosic and municipal sludge were $3 5 . 3 \\%$ , $1 7 . 5 \\%$ , $2 8 . 7 \\%$ , $2 6 . 9 \\%$ , and $3 9 . 4 \\%$ , respectively. The two lowest average bio-crude yields, which belong to lignocellulosic and macroalgae substrates, indicate that due to the HTL pathways of carbohydrate-rich biomasses, the application of an alkaline catalyst is crucial to reach higher bio-crude yields. In HTL of carbohydrate-rich biomasses, volatile fatty acids can accumulate and decrease $\\mathrm { p H }$ . As indicated by Elliot et al.286, acidic conditions in HTL favors hydrochar generation instead of bio-crude.\n\nDue to different reactor types, ramping times and substrates used in these studies, it is not possible to determine an optimum HTL condition for maximum biocrude yield. For the determination of optimum conditions, substrate-specific studies with a wide-range experimental design are required. In Table 2, it can be clearly seen that the optimum HTL conditions and biocrude yield results are highly dependent on the substrate type. Among the most investigated five substrate types, municipal sludge studies reported the highest bio-crude yields. This trend is consistent with biochemical compositions and HTL reaction pathways, as discussed in Section 2.2.",
+      "stats": {
+        "char_count": 13143,
+        "word_count": 881,
+        "sentence_count": 125,
+        "line_count": 15
+      }
+    },
+    {
+      "heading": "4.1 Type of biomass",
+      "level": 1,
+      "content": "As one of the most significant advantages of the HTL process, there is no limitations or pretreatment requirement for the types of substrate that are processed. Regardless of the moisture content and structure of organic substrate, it is possible to produce bio-crude with diverse quality and quantity. In the literature, microalgae, macroalgae, cyanobacteria, lignocellulosic biomass, and municipal sludge are the most studied HTL substrates. There are also studies that investigated the\n\nHTL of manure, food waste, slaughterhouse waste, and organic fraction of municipal solid waste59,195,221,225,242,260,268,269,287.\n\nTo compare the bio-crude quality obtained from the five most promising HTL substrates, a van Krevelen diagram was created from the reported bio-crude data and presented in Figure 14. According to the diagram, macroalgae have the closest bio-crude quality to crude oil, assessed by hydrogen to carbon $\\mathrm { ( H / C ) }$ and oxygen to carbon (O/C) atomic ratios. However, as shown in Figure 16, macroalgae substrates also have the lowest bio-crude yield. When both bio-crude quality and quantity are evaluated, it can be seen that municipal sludge and microalgae are the most promising substrates. Figure 14 also reveals that, regardless of the substrate type, application of a bio-crude upgrading process can be necessary to lower the oxygen percentage of bio-crude and reach the fuel quality of crude oil.\n\n[Image]\nFigure 14. van Krevelen diagram of bio-crudes produced from different substrates in the literature15,17,20,21,31,33,45,48,49,52,53,56,59,63,132,134–140,142–226\n\nIn the literature, comparative studies on HTL of cyanobacteria, lignocellulosic biomass, and municipal sludge were performed to determine the effect of substrate type on bio-crude yield. For HTL at $3 5 0 \\mathrm { { } ^ { \\circ } C }$ and $2 0 ~ \\mathrm { { m i n } }$ conditions, Huang et al.63 found $3 9 . 4 6 \\%$ , $3 4 . 5 1 \\%$ , and $2 1 . 1 4 \\%$ biocrude yields for municipal sludge, Spirulina, and rice straw, respectively. In a similar study, Anastasakis et al.15 reported yields of $3 2 . 9 \\%$ for Spirulina, $2 6 . 2 \\%$ for Miscanthus, and $2 4 . 5 \\%$ for municipal sludge in a continuous-flow HTL system. Furthermore, by using the same substrates, Madsen et al.270 found $4 0 \\%$ , $4 6 . 9 \\%$ , and $4 2 . 3 \\%$ bio-crude yields for Spirulina, Miscanthus, and municipal sludge, respectively, by optimized process conditions using a statistical method.",
+      "stats": {
+        "char_count": 2473,
+        "word_count": 403,
+        "sentence_count": 25,
+        "line_count": 10
+      }
+    },
+    {
+      "heading": "4.2 Reaction temperature, retention time, and pressure",
+      "level": 1,
+      "content": "Undoubtedly, reaction temperature and retention time have the most significant effect on HTL products. In the HTL process, high temperatures cause water to be a potent solvent by decreasing its dielectric constant. Improved solvent properties allow water to hydrolyze organic matter and allow further HTL reactions to take place. Also, water acts as a catalyst during HTL due to its dissociation into $\\mathrm { H } ^ { + }$ and $\\mathrm { O H } ^ { - }$ ions190. After hydrolysis, increasing temperatures cause decomposition and, in severe conditions, repolymerization reactions. To reach the highest biocrude yield, reaction temperature should be optimized to minimize the repolymerization reactions. The typical temperature range for HTL is $2 0 0 { - } 3 7 4 ^ { \\circ } \\mathrm { C }$ . The optimum HTL temperature and the endproduct distribution is biomass composition specific. The required temperature for the optimum bio-crude production can also be decreased by utilizing the correct catalyst type and amount.\n\nSince the reaction temperature is the most effective parameter in the HTL process, many studies investigated its effect on the end products. Garcia Alba et al.167 investigated the effect of HTL temperature on energy recovery for Desmodesmus sp. and reported energy recovery of $6 0 \\%$ , $6 7 \\%$ , and $7 5 \\%$ for 325, 350, and $3 7 5 \\mathrm { { } ^ { \\circ } C }$ , respectively. For HTL of mixed algal culture, Chen et al. 33 studied reaction temperatures between $2 6 0 { - } 3 2 0 ^ { \\circ } \\mathrm { C }$ . They found that although the best bio-crude quality can be obtained at $3 2 0 \\mathrm { { } ^ { \\circ } C }$ , the highest energy recovery of $5 2 \\%$ can be reached at $3 0 0 ^ { \\circ } \\mathrm { C }$ due to higher bio-crude yield. Madsen et al.270 built a response surface model for Spirulina platensis, Miscanthus, and primary sewage sludge substrates at HTL temperatures of $2 5 0 – 3 5 0 ^ { \\circ } \\mathrm { C }$ . They reported that according to their model, the highest bio-crude yields were at 300, 330, and $3 2 0 \\mathrm { { } ^ { \\circ } C }$ for Spirulina platensis, Miscanthus, and primary sewage sludge, respectively.\n\nMost studies agree that the optimum HTL reaction temperature is under the water’s critical point (i.e., ${ \\leq } 3 7 4 ^ { \\circ } \\mathrm { C }$ ). Over the water's critical temperature, bio-crude yield decreases due to syngas forming reactions288 and secondary cracking of bio-crude. Lowering bio-crude yields were reported at temperatures over water’s critical temperature133,134,148,167,170,191,277. As an exception, increasing bio-crude yields were reported at supercritical conditions $( 3 9 0 ^ { \\circ } \\mathrm { C } )$ for oil palm biomass266,289 due to the substrate's high lipid content.\n\nThe reaction temperature is also the parameter that controls another important HTL parameter, the reaction pressure. Pressure in HTL is autogenous, varying between 15.51 and 222.4 bars for temperatures of 200 and $3 7 4 ^ { \\circ } \\mathrm { C }$ , respectively. High pressure in the HTL process allows for the existence of liquid water until the critical point. Therefore, the large energy loss due to phase change is avoided290. Since high pressure comes with high temperatures in the HTL process, it would not be economical to increase the pressure further for better process efficiency. Qian et al.291 revealed the effect of pressure change between 200-400 bar in their study and stated that once the critical pressure (221 bar) is reached, the pressure has no significant effect on bio-crude yield. Sangon et al.292, on the other hand, investigated coal liquefaction in toluene-tetralin and found that increasing pressure from 75 to 120 bar resulted in $3 0 \\%$ higher bio-crude yield. Another important consideration for pressure is the feeding pump costs and effluent pressure regulators in continuousflow systems. Application of the correct catalyst can decrease the required temperature and pressure, and lower the feed pumping costs significantly.\n\nRetention time (reaction, holding, or residence time) is the second most crucial HTL process parameter. Yu et al.278 studied retention times of 0 to 120 minutes and found that increasing retention time affects bio-crude yield positively for all reaction temperatures between $1 0 0 { - } 3 0 0 ^ { \\circ } \\mathrm { C }$ . Both temperature and retention time parameters directly contribute to the HTL process severity. Changing the retention time allows for fine adjustment in process severity. HTL severity can be calculated by Equation $4 ^ { 2 9 3 , 2 9 4 }$ where n is the number of treatment stages; ti is retention time (minutes); $\\mathrm { T _ { i } }$ is reaction temperature $( ^ { \\circ } \\mathrm { C } )$ ; $\\mathrm { T _ { b } }$ is the base temperature $( 1 0 0 ^ { \\circ } \\mathrm { C } )$ , and $\\mathfrak { O }$ is the fitted parameter which is assigned the value of 14.75. Variation of HTL severity by temperature and retention time is presented in Figure 15.\n\n$$\n{ \\mathrm { S e v e r i t y } } = \\log \\left[ \\sum _ { \\mathrm { i } = 1 } ^ { \\mathrm { n } } { \\mathrm { t } } _ { \\mathrm { i } } \\times \\mathrm { e } ^ { \\left( { \\frac { \\mathrm { T } _ { \\mathrm { i } } - \\mathrm { T } _ { \\mathrm { b } } } { \\omega } } \\right) } \\right]\n$$\n\n[Image]\nFigure 15. Effect of temperature and retention time on HTL severity\n\nThe effect of severity can be seen in the study of Guo et al.170. They reported a $3 8 . 4 6 \\%$ biocrude yield at $3 5 0 ^ { \\circ } \\mathrm { C }$ and 60 minutes (severity: 9.14) and $3 9 . 5 4 \\%$ bio-crude yield at $3 7 0 \\mathrm { { } ^ { \\circ } C }$ and 50 minutes (severity: 9.6). Some of the literature findings indicate that the effect of temperature rise can also be achieved by increasing retention time. However, longer retention times in the HTL process can cause bio-crude to repolymerize into hydrochar and coke. Therefore, although the severity is an important parameter for hydrothermal processes, it can be said that it is not directly related to the biocrude yield due to the HTL process's complexity.\n\nBio-crude yields observed at different HTL temperatures and retention times for different substrates in the literature are presented in Figure 16. According to the results reported for HTL of microalgae given in Figure 16(a), bio-crude yield was low for temperatures under $2 7 5 \\mathrm { { } ^ { \\circ } C }$ and 0-50 min retention time. High yields were obtained at $2 0 0 { - } 3 0 0 ^ { \\circ } \\mathrm { C }$ and $5 5 { \\mathrm { - } } 9 0 ~ \\mathrm { m i n }$ or $3 0 0 { - } 3 5 0 ^ { \\circ } \\mathrm { C }$ and 0- 40 min HTL conditions. The highest bio-crude yield of $7 1 . 4 \\%$ from microalgae was obtained at $2 3 0 \\mathrm { { } ^ { \\circ } C }$ , $6 0 ~ \\mathrm { { m i n } }$ . Bio-crude yields of macroalgae, given in Figure 16(b), were lower compared to the other substrates. The highest yields reported for macroalgae were reached at $2 5 0 { - } 2 7 5 ^ { \\circ } \\mathrm { C }$ and $4 0 { \\cdot } 6 0 \\ \\mathrm { m i n }$ conditions. For cyanobacteria substrate, on the other hand, the highest yields were at $3 2 5 { - } 3 7 5 ^ { \\circ } \\mathrm { C }$ and $0 { - } 5 ~ \\mathrm { \\ m i n }$ . There were also some high bio-crude yield results for lipid-rich cyanobacteria liquified at $2 2 0 ^ { \\circ } \\mathrm { C }$ reaction temperature. Similar to macroalgae, lignocellulosic biomass bio-crude yields were also low except for one point. The highest yield of $5 1 \\%$ was obtained at $3 0 0 ^ { \\circ } \\mathrm { C }$ and $4 5 ~ \\mathrm { { m i n } }$ . The most evident HTL condition to bio-crude yield pattern was found for municipal sludge due to less variation in substrate characteristics among studies. The highest bio-crude yields from municipal sludge were reported to be obtained at $3 2 5 { - } 3 6 0 ^ { \\circ } \\mathrm { C }$ and 70- 85 min conditions.\n\n[Image]\n\n[Image]\nFigure 16. Bio-crude yields reported in different HTL conditions for (a) microalgae30,33,52– 55,134,138,143,148,155,160,163,167,175,176,184,188,190,194,201,211,213,217,245,277,295,296, (b) macroalgae52,151,152,259,280– 283,297, (c) cyanobacteria52,53,59,143,155,163,170,176,209,211–213,253,263,296, (d) lignocellulosic biomass143,222,261,266,273,276,285, and (e) municipal sludge133,139,159,190,191,259,284",
+      "stats": {
+        "char_count": 8314,
+        "word_count": 1551,
+        "sentence_count": 72,
+        "line_count": 25
+      }
+    },
+    {
+      "heading": "4.3 Ramping time",
+      "level": 1,
+      "content": "In HTL processes, long reaction times, including the ramping time, increase char and coke formation by promoting the repolymerization reactions of bio-crude forming compounds. Therefore, higher heating rates (allowing for shorter reaction time) are beneficial in terms of biocrude yield. Getting inspiration from the fast pyrolysis process, a study on a fast HTL process was performed by Faeth et al.166 on Nannochloropsis. They performed their experiments in a preheated sandbath to $3 0 0 { - } 6 0 0 ^ { \\circ } \\mathrm { C }$ by allowing 1-5 minutes of ramping time for fast HTL and $2 5 0 – 4 0 0 ^ { \\circ } \\mathrm { C }$ reaction temperature and 10-60 minutes retention time for conventional HTL. According to their findings, the HTL reactor temperature reached around $2 7 5 \\mathrm { { } ^ { \\circ } C }$ for 1 min ramping time in $6 0 0 ^ { \\circ } \\mathrm { C }$ preheated environment, and it resulted in the highest bio-crude yield of $6 6 \\%$ reported for Nannochloropsis sp. They also calculated $9 1 \\%$ energy recovery for fast HTL conditions. In another study, Faeth et al.298 also reported an increased bio-crude yield for Botryococcus in fast HTL and found that the fast HTL process is more effective at low solid loadings $( 0 . 1 0 ~ \\mathrm { w t \\% }$ total solids). The effect of fast HTL process on chitin was studied by Gollakota and Savage168. For 1 minute ramping time, they reported that the maximum bio-crude yield was observed at the HTL condition with the highest heating rate $3 5 0 ^ { \\circ } \\mathrm { C / m i n } ,$ ). They also found that fast HTL bio-crude contains aldehydes and a double amount of nitrogenous compounds compared with the conventional HTL bio-crude. The effectiveness of fast HTL was also evaluated with kinetic modeling by Hietala et al.267. Their model predicted a $4 6 \\%$ bio-crude yield at $4 0 0 ^ { \\circ } \\mathrm { C }$ and 1-minute ramping time (reaching $2 3 0 ^ { \\circ } \\mathrm { C } $ ) conditions.\n\nShort ramping times are applicable for continuous-flow HTL reactors299. However, stronger heating systems and requirements for reactor material due to higher temperatures can increase capital costs drastically. On the other hand, higher energy recovery and shorter reaction times can be beneficial in the long run. In continuous-flow systems, decreasing coke and char formation by fast HTL can also lower the risk of clogging the plug-flow reactors300. This type of continuousflow fast HTL reactor is suitable for coupling with a wastewater treatment plant, where the substrate supply is sustainable.\n\nThe behavior of municipal sludge under fast HTL conditions was investigated by Xu et al.139. They reported that the maximum bio-crude yield of $2 2 . 9 \\%$ was observed at $3 4 0 ^ { \\circ } \\mathrm { C }$ and 2-3 minutes ramping time under fast HTL conditions. Qian et al.291 also reported that it is possible to reach ${ \\sim } 2 5 \\%$ bio-crude yield in $5 0 0 \\mathrm { { } ^ { \\circ } C }$ preheated sandbath with 1-minute ramping time HTL conditions. According to their results, the highest bio-crude yield from isothermal HTL $( 4 0 0 ^ { \\circ } \\mathrm { C } - 6 0 $ minutes retention time) was $2 6 . 8 \\%$ , whereas it was $2 7 . 5 \\%$ from the fast HTL process.",
+      "stats": {
+        "char_count": 3247,
+        "word_count": 600,
+        "sentence_count": 30,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.4 Solid content",
+      "level": 1,
+      "content": "Water in HTL processes behaves like a solvent at high temperatures and hydrolyzes biomass. Therefore, the solid content can also be defined as a solute-to-solvent ratio by mass. Since hydrolysis is the first step of the HTL process, and the other processes only occur with hydrolyzed compounds, solid content affects all subsequent reaction kinetics. The solid content at which the highest bio-crude results in HTL process can vary depending on the type of substrate, type of solvent and process severity. For this reason, the determination of optimum solid content needs to be performed specific to substrate and solvent.\n\nIn the literature, most of the studies used a fixed 1:10 substrate to solvent ratio. There are also many studies that investigated the effect of different ratios. Arun et al.131 investigated the effect of substrate to solvent ratio of 1:40-4:40 on bio-crude yield for the macroalgae Sargassum tenerrimum. They revealed that, for their substrate, at $3 0 0 ^ { \\circ } \\mathrm { C }$ and 60 minutes conditions, the maximum bio-crude yield can be produced at 3:40 substrate to solvent ratio. For another macroalga\n\nLaminaria saccharina, Anastasakis et al.152 examined the bio-crude yield for 1:20-5:20 substrate to solvent ratios and reported that the highest bio-crude was produced at 1:10 ratio. Jazrawi et al.177 studied ratios between 1:100-1:10 on microalgae Chlorella and found the most efficient ratio as 1:10.\n\nFor the economy of the process, in other words, in order to maximize net energy generation per $\\mathrm { k g }$ of substrate, the highest solid content possible should be used without lowering the biocrude production efficiency. Therefore, dewatering of substrate can be considered prior to HTL process. For substrates like municipal sludge, anionic or cationic polymers can be used in order to lower the zeta potential to reach higher dewatering. There are continuous-flow HTL systems that can utilize biomass with up to $2 0 \\%$ solids301. In terms of pumping, current commercial vendors offer pumps for HTL systems that can pump up to $4 0 \\%$ solid containing organic materials302.",
+      "stats": {
+        "char_count": 2127,
+        "word_count": 340,
+        "sentence_count": 19,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "4.5 Type of solvent",
+      "level": 1,
+      "content": "The HTL process is suitable for using different solvents instead of water. By using alcohol or acetone as solvent, it is possible to reach supercritical conditions at lower temperatures. The most common solvents used in HTL process ethanol, methanol, isopropanol, and acetone have critical points of $2 4 1 ^ { \\circ } \\mathrm { C }$ , $2 4 0 ^ { \\circ } \\mathrm { C }$ , $2 3 5 . 6 ^ { \\circ } \\mathrm { C }$ , and $2 3 5 ^ { \\circ } \\mathrm { C }$ , respectively. Although better hydrolysis conditions can be reached with the utilization of different solvents, taking advantage of the catalytic effect of the $\\mathrm { H } ^ { + }$ and OH- water ions at high temperatures is not possible. Therefore, in some studies, decreasing bio-crude yields were reported. Using solvents along with water, as cosolvent to take advantage of both, is also a good strategy for increasing bio-crude yield303. In addition, the use of solvents avoids repolymerization reactions and increases bio-crude stability during the process304. Results from the studies that used different solvent than water in the HTL process are presented in Table 3.\n\nTable 3. Summary of HTL studies using different solvent than water\n\n<html><body><table><tr><td rowspan=\"2\">Substrate</td><td rowspan=\"2\">HTL process conditions and remtprature, substration slvent mass ratio, reactor type)</td><td rowspan=\"2\">Byo-crude water (%)</td><td rowspan=\"2\">Biccrudeyie water as solvent</td><td rowspan=\"2\">Reference</td></tr><tr><td></td></tr><tr><td>Black pine wood and Kkukmixte cil (2:1)</td><td>300°℃, 30 min, 1:15</td><td>10.24%</td><td>Methanol: 31.86% (+211%)</td><td>149</td></tr><tr><td>Eremurus</td><td>310℃, 75 min, 2:15</td><td>N/A</td><td>Methnol1:4.36% Acetone: 64.3%</td><td>132</td></tr><tr><td>str Daturm L.</td><td>325°℃, 75 min, 2:15</td><td>N/A</td><td>Isopropanol:42.5%</td><td>153</td></tr><tr><td>Nannochloropsis oceanica</td><td>240°C,30 min, 6:25 Batch</td><td>36%</td><td>50% Ethanol: 58% (+61%) 50% Methanol: 48% (+33%)</td><td>158</td></tr><tr><td>Rice straw</td><td>280℃,15 min, 1:6</td><td>23%</td><td>Menol:1:5% +8.796) 10% Ethanol: 30.7% (-1%)</td><td>136</td></tr><tr><td> Tetraselmis sp.</td><td>350C,30 min, 1:10</td><td>31%</td><td>1 10% Glycerol: 39% (+25.8%)</td><td>172</td></tr><tr><td></td><td>350C,3 min,.1:20</td><td>24%</td><td>10</td><td>21</td></tr><tr><td>Rice straw Spirulina</td><td> 350C,20 min, 2:25</td><td>N/A</td><td>Ethanol: 21.14% Ethanol: 34.51%</td><td>63</td></tr><tr><td>Sewage sludge Cryptococcus</td><td>240°℃,30 min, 1:10</td><td></td><td>Ethanol: 39.46%</td><td>180</td></tr><tr><td>curvatus</td><td>Batch 243C, 60 min, 1:15</td><td>N/A</td><td>50% Isopropanol: 56.38%</td><td></td></tr><tr><td>Birchwood</td><td>Batch</td><td>N/A</td><td>Ethanol: 19%</td><td>305</td></tr><tr><td rowspan=\"2\">Concentrated acid hydrolysis lignin</td><td>300°℃,0 min 1:20</td><td>24.8</td><td>:1-145)</td><td rowspan=\"2\">182</td></tr><tr><td>350C,28 mn,13</td><td>51%</td><td>propol::2% +.17.64%)</td></tr><tr><td></td><td>300°℃,60 mn, 1:2</td><td>N/A</td><td></td><td>306</td></tr></table></body></html>\n\n<html><body><table><tr><td colspan=\"2\">Wheat straw</td><td colspan=\"3\">Tetralin: 72.1%</td></tr><tr><td>Waste activated Ruberwood sawdust</td><td>310C,100min, 3:25</td><td>N/A</td><td>30% Ethanol: 31.9%</td><td>192</td></tr><tr><td>Wheat straw</td><td>300°℃,120 min, 1:60 Semi-continuous flow</td><td>27%</td><td>Ethanol: 43% (+59.26%)</td><td>307</td></tr><tr><td>Pinewood sawdust</td><td>300℃, 30 min, 1:10 Batch</td><td>11.35%</td><td>50% Ethanol: 47.63% (+319%)</td><td>198</td></tr><tr><td>White pine sawdust</td><td>300℃, 15 min, 1:10 Batch</td><td>40%</td><td>50% Ethanol: 66% (+65%) 100% Ethanol: 71% (+77.5%) 50% Methanol: 33% (-17.5%) 100% Methanol: 24% (-40%)</td><td>308</td></tr><tr><td>α-Cellulose</td><td>350℃, 350 mn 1:30</td><td>N/A</td><td></td><td>309</td></tr><tr><td></td><td>300°℃,30 min 1.8</td><td>14%</td><td>Tetralin: 19% (+35.71%)</td><td>310</td></tr><tr><td>Eucalyptus</td><td>260℃,30 min, 1:10</td><td>30%</td><td>Ethanol: 27% (-10%)</td><td>311</td></tr><tr><td>Pinus banksiana</td><td>260℃, 60 min, 1:13 Batch</td><td>N/A</td><td>Ethanol: 35%</td><td>215</td></tr><tr><td>Dunaliella salina</td><td>200°℃C, 0 min 19</td><td>N/A</td><td>Ethanol: 34.8%</td><td>220</td></tr><tr><td>Dewatered secondary sludge</td><td>340℃, 40 min, 3:40 Batch</td><td>N/A</td><td>75% Methanol: 23.7</td><td>223</td></tr><tr><td> Macroalgae</td><td>300℃, 45 min, 1:10 Batch</td><td>14%</td><td>75% Ethanol: 45% (+221%)</td><td>142</td></tr><tr><td>Chlorella pyrenoidosa</td><td>280℃,120 min, 3:10 Batch</td><td>46%</td><td>50% Ethanol: 57% (+23.91)</td><td>312</td></tr><tr><td>Corn straw</td><td>300°℃,15mn, 1:4</td><td>28%</td><td>15% Methanol: 32% (+14.28%) 1000:1%(-5057) 100% Isopropanol: 11% (-60.71%)</td><td>303</td></tr></table></body></html>\n\nWhen the HTL results of different solvents are evaluated, it can be seen that the positive effect of solvents decreases when the HTL conditions become more severe. In terms of bio-crude yield, from the most to least effective, solvents can be sorted as acetone, isopropanol, ethanol, and methanol. Overall, organic solvents were found to be more effective when used as co-solvents.\n\nUsing pure solvents either caused a decrease or an insignificant increase in bio-crude yield. On the other hand, no noteworthy change for the HHV of bio-crude was reported for varying solvents. Like the other HTL parameters, the effect of solvent also varies depending on the substrate structure.\n\nThe most significant increases were reported for lignocellulosic substrates, including macroalgae. This increase was caused by the reaction of organic solvents with the decomposition products. For lignocellulosic substrates and macroalgae, carboxylic acids are the major decomposition products in HTL. These carboxylic acids are known to react with alcohols in hydrothermal conditions and form esters313. The esterification reaction is given in Figure 17. Esterification reaction of carboxylic acids and alcohols. As a result of this reaction, molecules that would normally stay in the aqueous phase can form longer chain hydrocarbons and contribute to bio-crude formation. The esterification reaction yield can be significantly increased with catalysts, such as sulphuric acid and ZSM-5 (zeolite socony mobil catalyst)314.\n\n[Image]\nFigure 17. Esterification reaction of carboxylic acids and alcohols\n\nThe highest bio-crude yield increase, $2 2 1 \\%$ , was achieved by using $5 0 \\%$ (v/vsolvent) ethanol as solvent142. In this study, macroalgae was used as the substrate, which is known to produce high amounts of organic acids in the HTL process. The use of ethanol as solvent caused formation of esters with organic acids. With $2 5 . 9 5 \\%$ , esters were reported as the most abundant group in the bio-crude in this study. By applying the ZSM-5 catalyst, esterification reactions were promoted, and the bio-crude’s ester content was increased to $4 3 . 5 \\%$ . Along with lignocellulosic biomass and macroalgae, organic solvents were also found beneficial at $2 4 0 ^ { \\circ } \\mathrm { C }$ on microalgae158 and yeast180 substrates.",
+      "stats": {
+        "char_count": 7189,
+        "word_count": 779,
+        "sentence_count": 65,
+        "line_count": 18
+      }
+    },
+    {
+      "heading": "4.6 Headspace purging",
+      "level": 1,
+      "content": "Headspace purging is another HTL process variable applicable only for batch systems. It is performed before closing the reactor to avoid liquid loss278,279 and to get rid of the oxygen188,272,315, which can reduce the bio-crude quality in the HTL process. The most common purging method is to use inert gases like nitrogen or a noble gas56,70,199. To determine the effect of purging with different gases on bio-crude yields, Yin et al. 225 used air, CO, $\\mathrm { H } _ { 2 }$ , and ${ \\Nu } _ { 2 }$ . They reported that the effect of purging was the most apparent at $3 1 0 \\mathrm { { } ^ { \\circ } C }$ . According to their results, purging with CO, $\\mathrm { H } _ { 2 }$ , ${ \\bf N } _ { 2 }$ , and air resulted in $4 8 . 7 6 \\%$ , $4 4 . 7 2 \\%$ , $3 8 . 4 9 \\%$ , and $2 7 . 9 7 \\%$ bio-crude yields, respectively, and revealed the necessity of purging in batch systems.\n\nAnother important hypothesis tested related to purging is, “can a partial hydrotreating effect be achieved by purging the reactor with $\\mathrm { H } _ { 2 }$ ?” Jogi et al.305 reported bio-crude yields of $1 3 \\%$ for Ar purged, and $1 9 \\%$ for $\\mathrm { H } _ { 2 }$ purged HTL experiments. They also reported that $\\mathrm { H } _ { 2 }$ purging caused a significant increase of phenolics in the aqueous phase. Xu and Etcheverry215 studied the effect of 20, 50, and 100 bar initial $\\mathrm { H } _ { 2 }$ pressurizing of the HTL system at 220 and $3 0 0 ^ { \\circ } \\mathrm { C }$ . They reported only minor bio-crude yield increases proportional to $\\mathrm { H } _ { 2 }$ pressure for both temperatures. Malins et al.186 also carried out a detailed study to reveal the effect of $\\mathrm { H } _ { 2 }$ purging at $3 0 0 ^ { \\circ } \\mathrm { C }$ and 40 minutes reaction conditions with the addition of $5 \\%$ $\\mathrm { F e S O _ { 4 } }$ . For 20 to 110 bar initial $\\mathrm { H } _ { 2 }$ pressure, they found no significant change in terms of calorific value and yield of bio-crude. According to the results of these studies and safety concerns, it can be said that $\\mathrm { H } _ { 2 }$ purging is not advantageous in the HTL process.",
+      "stats": {
+        "char_count": 2132,
+        "word_count": 449,
+        "sentence_count": 21,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.7 Catalysts used in HTL",
+      "level": 1,
+      "content": "HTL is a suitable process for the application of various catalyst types. Utilization of correct type and concentration of catalyst has the potential to decrease required HTL temperature and pressure while increasing bio-crude yield. Furthermore, the use of milder process conditions can lower energy and capital costs significantly. However, since catalysts work by altering the reaction kinetics, their effects are substrate-specific. This effect can be seen in the study of Shakta et al.56, where they studied catalytic effect of $\\mathrm { N a } _ { 2 } \\mathrm { C O } _ { 3 }$ on three different microalgae at $3 5 0 \\mathrm { { } ^ { \\circ } C }$ , and reported bio-crude yield decreased for Nannochloropsis $s p$ , increased for Pavlova sp. and not affected for Isochrysis sp. On the other hand, the effect of different catalyst types was revealed in the study of Nazari et al.193. They used seven different catalysts, including alkaline, alkali salt, mineral, and metal-based types, and reported varying bio-crude yield and quality for every catalyst.",
+      "stats": {
+        "char_count": 1059,
+        "word_count": 178,
+        "sentence_count": 10,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.7.1 Alkaline catalysts",
+      "level": 1,
+      "content": "Alkaline catalysts are well-known and widely used in HTL processes due to their char formation inhibiting behavior258 by avoiding repolymerization of bio-crude forming compounds.\n\nTherefore, depending on the substrate, alkaline catalysts can significantly increase bio-crude and decrease hydrochar yields. Strong alkaline solutions can promote lignin decomposition and increase bio-crude yield26,316, especially in HTL of lignin-rich biomass. Alkaline catalysts are mostly effective on high-carbohydrate containing biomass types, such as lignocellulose. In HTL process, carbohydrate-rich substrates tend to produce organic acids due to the pathways presented in Section 2.2. In the presence of an alkali catalyst, the pH changes can be neutralized during the HTL process; thus, the process favors bio-crude formation instead of repolymerization reactions. Also, keeping the pH at alkaline conditions avoids corrosion risk in the reactors. The varying effect of alkaline catalysts linked to the substrate type is presented in the literature summary in Table 4.\n\nTable 4. Summary of HTL studies using alkaline catalyst\n\n<html><body><table><tr><td colspan=\"3\">HTL contents</td><td rowspan=\"2\">HTL conditions and 三 type)</td><td rowspan=\"2\"></td><td rowspan=\"2\"></td><td rowspan=\"2\">Reference</td></tr><tr><td> Substrate</td><td>Solvent</td><td>volume)</td></tr><tr><td>L. Saccharina</td><td>Water</td><td>5% KOH</td><td>350℃,15 min, 1:10 Batch</td><td>19.30%</td><td>10% (-48%)</td><td>152</td></tr><tr><td>S. obliques</td><td>Water</td><td>2.5% NaOH</td><td>300℃, 60 min, 3:40 Batch</td><td>27%</td><td>27% (-9%)</td><td>131</td></tr><tr><td>Eremurus</td><td>Ethanol</td><td>10% NaOH</td><td>310℃,75 mn, 2:15</td><td>7.80%</td><td>9.5% (+22%)</td><td>132</td></tr><tr><td>Datura stramonium</td><td>Acetone</td><td>10% Ca(OH)2</td><td> 325°C,75 min, 2:15</td><td>42%</td><td>46% (+9.5%)</td><td>153</td></tr><tr><td> Laminaria</td><td>Water</td><td>0.5% KOH</td><td>350℃,15 mn 1:10</td><td>65%</td><td>67% (+3%)</td><td>154</td></tr><tr><td>Corn straw Nine different</td><td>Water</td><td>4% NaOH</td><td>230°℃, 60 min, 1:10</td><td>N/A</td><td>17.02%</td><td>317</td></tr><tr><td>lignocellulosic biomass</td><td>Water</td><td>20% KOH</td><td>302℃,30 min, 1:15 Batch</td><td>31.20%</td><td>63.7% (+104%)</td><td>318</td></tr><tr><td>Black cumin seed</td><td>Water</td><td>10% Ca(OH)2</td><td>350℃, 0 min, 1:12 Batch</td><td>36.24%</td><td>28.85% (-20%)</td><td>319</td></tr><tr><td>Beech wood</td><td>Water</td><td>0.9% NaOH</td><td>300℃, 60 min, 3:20 Batch</td><td>14%</td><td>28% (+100%)</td><td>171</td></tr><tr><td>Korean native kenaf</td><td>Water</td><td>1% NaOH</td><td>350℃,30 min, 1:8 Batch</td><td>17.09%</td><td>23.74% (+39%)</td><td>181</td></tr><tr><td>Wste actiated</td><td>Water</td><td>0.5% KOH</td><td>310°C,10 min, 1:10</td><td>N/A</td><td>23.10%</td><td>192</td></tr></table></body></html>\n\n<html><body><table><tr><td>Wste actiyated</td><td>1o1</td><td>0.13% KOH</td><td>310°C,100min, 1:10</td><td>N/A</td><td>29.99%</td><td>192</td></tr><tr><td>slWage,bircth wed sawdust</td><td>Water</td><td>0.35% KOH</td><td>320℃,20 min, 7:100 Batch</td><td>N/A</td><td>33.60%</td><td>320</td></tr><tr><td>Miscanthus giganteus</td><td>Water</td><td>1.4% KOH</td><td>350℃,5.6 min, 3:20 Continuous-flow</td><td>N/A</td><td>26.20%</td><td>15</td></tr><tr><td>Pinewood sawdust</td><td>Water</td><td>0.5% NaOH</td><td>300°℃,30 min, 1:10</td><td>11.35%</td><td>26.73% (+135%)</td><td>198</td></tr><tr><td>Chlorella vulgaris Spirulina</td><td>Water</td><td>5.6% KOH</td><td>350℃, 60 min, 1:10 Batch</td><td>N/A</td><td>22.4% 15.2%</td><td>202</td></tr><tr><td>Blackcurrent pomace</td><td>Water</td><td>0.45% NaOH</td><td>300℃, 60 min, 1:20 Batch</td><td>26.50%</td><td>32% (+20%)</td><td>203</td></tr><tr><td>Scenedesmus</td><td>Water</td><td>NaOH</td><td>300℃, 6 mn 1:20</td><td>N/A</td><td>35.50%</td><td>207</td></tr><tr><td>Eucalyptus</td><td>Water</td><td>0.5% KOH</td><td>260°C,30 mn, 1:10</td><td>31.50%</td><td>50% (+86)</td><td>315</td></tr><tr><td>Spirulina platensis</td><td>Water</td><td>0.056% KOH</td><td>300℃,35 min, 1:10 Batch</td><td>29.70%</td><td>30.1% (-1.35%)</td><td>240</td></tr><tr><td>Tomato plant waste</td><td>ao1</td><td>0.5% KOH</td><td>250℃.,30 min, 1:20</td><td>30%</td><td>45% (+50%)</td><td>321</td></tr><tr><td>Swine carcass</td><td>Water</td><td>0.04% NaOH</td><td>250°C,6 min, 1:20</td><td>58%</td><td>62% (+6.9%)</td><td>144</td></tr><tr><td> Water hyacinth</td><td>Water</td><td>5.6% KOH</td><td>280℃,15 min, 1:6 Batch</td><td>16%</td><td>23% (+43.75%)</td><td>322</td></tr><tr><td>Cattle manure</td><td>Water</td><td>2% NaOH</td><td>310°℃,15 min, 1:4</td><td>N/A</td><td>48.76%</td><td>225</td></tr><tr><td>Birchwood</td><td>Water</td><td>0.5% KOH</td><td>300℃,30 min, 1:10 Batch</td><td>18.90%</td><td>39.5% (+109%)</td><td>193</td></tr></table></body></html>\n\nIn HTL of lignocellulosic substrate studies171,193,198,315,318,321, an increase in bio-crude yield by $5 0 \\mathrm { - } 1 3 5 \\%$ was observed by the addition of an alkaline catalyst. For other types of substrates, on the other hand, this effect was minor or even negative. Anastasakis et al.152 reported that the negative effect of alkaline catalysts is caused by the increased solubility of organics, including biocrude, in the aqueous phase.\n\nAlkali salts can also be classified as alkaline catalysts due to their chemical behavior. The most used alkali salts, $\\mathrm { N a } _ { 2 } \\mathrm { C O } _ { 3 }$ and $\\mathrm { K } _ { 2 } \\mathrm { C O } _ { 3 }$ , form a strong base and carbonic acid with a $\\mathrm { p K } _ { \\mathrm { b } }$ of $3 . 7 5 ^ { 3 2 3 }$ when they are dissolved. Carbonic acid further decomposes into water and $\\mathrm { C O } _ { 2 }$ gas. Chemical equations occurring are given in Reactions 1, 2, and 3.\n\n$$\n\\mathrm { N a } _ { 2 } \\mathrm { C O } _ { 3 } + 2 \\mathrm { H } _ { 2 } \\mathrm { O }  \\mathrm { H } _ { 2 } \\mathrm { C O } _ { 3 } \\mathrm { ( a q ) } + 2 \\mathrm { N a O H } \\mathrm { ( }\n$$\n\n$$\n\\begin{array} { r l } & { \\mathrm { K } _ { 2 } \\mathrm { C O } _ { 3 } + 2 \\mathrm { H } _ { 2 } \\mathrm { O } \\to \\mathrm { H } _ { 2 } \\mathrm { C O } _ { 3 ( \\mathrm { a q } ) } + 2 \\mathrm { K O H } _ { ( \\mathrm { a q } ) } } \\\\ & { \\mathrm { H } _ { 2 } \\mathrm { C O } _ { 3 ( \\mathrm { a q } ) } \\to \\mathrm { H } _ { 2 } \\mathrm { O } _ { ( \\mathrm { a q } ) } + \\mathrm { C O } _ { 2 ( \\mathrm { g } ) } } \\end{array}\n$$\n\nDue to the reactions that alkali salts and alkaline catalysts undergo, it is not possible to recover and reuse them. However, if considered for full-scale HTL applications, they are not expensive and are easy to obtain. When the summary of alkali salt catalyst studies in Table 5 evaluated, it can be seen that the effect of alkali salts on bio-crude yield shows a similar pattern to alkaline catalysts. According to the studies, by the addition of alkali salt catalysts, bio-crude yield can be significantly increased for cellulose258 and lignocellulosic biomass147,193,198, whereas it shows fluctuating results for other types of biomass156,291,324.\n\nTable 5. Summary of HTL studies using alkali salts as catalyst\n\n<html><body><table><tr><td colspan=\"3\">HTL contents</td><td rowspan=\"2\">HTL conditions and sustrate to slyen type)</td><td rowspan=\"2\">Bio-crude catalyst</td><td rowspan=\"2\">catalyst to vield</td><td rowspan=\"2\">Reference</td></tr><tr><td> Substrate</td><td>Solvent</td><td>Catalyst type and amount volume)</td></tr><tr><td>C. vulgaris Spirulina N.occulta</td><td>Water</td><td>10.5% NazCO3</td><td>350℃, 60 min, 1:10 Batch</td><td>42% 26.6% 20% 32%</td><td>31.6% (-25%) 18.3% (-31%) 15.8% (-21%) 13.3% (-58%)</td><td rowspan=\"3\">49</td></tr><tr><td>P.cruentum Sewage sludge Miscanthus Switchgrass</td><td>Water</td><td>2% K2CO3</td><td>340℃,20 min, 1:5- 1:3</td><td>35.4% 21.2% 26.5%</td><td>30.7% (-13%) 24.1% (+13.6%) 22.1% (+3.5%)</td></tr><tr><td>willow Pine flakes gDrie islarsles</td><td>Water</td><td>2% KzCO3</td><td>Batch 340°℃, 20 min, 3:4</td><td>25.1% 28.6% 34%</td><td>26% (-25%) 23.6% (-17.5%) 40% (+17.6%)</td></tr><tr><td>Herb pasture Bog myrtle</td><td></td><td></td><td></td><td>26.6% 21.6% 22.2%</td><td>24.1% (-9.4%) 23.1% (+6.9%) 26.3% (+18.5%)</td><td>157</td></tr><tr><td>Molinia pasture Sedge pasture Rush pasture Heather Bracken Timgrhy/wclover Lucerne Reed canary Triticale Oats Rye Beet Maize</td><td>Water</td><td>K2CO3</td><td>340C,20 min,-</td><td>26% 26.1% 25.1%</td><td>22.8% 22.8% 25.6% 20.8% 23.3% 28.9%</td><td>19.4% (-14.9%) 23.8% (+4.4%) 30.4% (+18.8%) 24.2% (+16.3%) 23.7%(+1796) 30.1% (+4.2%) 24% (-7.7%)</td><td>242</td></tr></table></body></html>\n\n<html><body><table><tr><td>Botryococus</td><td>Water</td><td>0.3% NazCO3</td><td>300°℃, 60min, 3:50</td><td>56%</td><td>63% (+12.5%)</td><td>325</td></tr><tr><td>Botryococcus</td><td>Water</td><td>5% Na2CO3</td><td>300C.</td><td>54%</td><td>75% (+38.9%)</td><td>326</td></tr><tr><td>Cryptococcus</td><td>Water</td><td>5% NazCO3</td><td>300°℃,0mn 1:.10</td><td>49.11%</td><td>52.61% (+7.1%)</td><td>180</td></tr><tr><td>Sarcasm pdtens</td><td>Water</td><td>5% NazCO3</td><td> 340°C,15min, 1:10</td><td>32%</td><td>28% (-12.5%)</td><td>183</td></tr><tr><td>Anglerfish waste</td><td>Water</td><td>10%</td><td>250C. 60 min 3:20</td><td>68.25%</td><td>49.53% (-27.4%)</td><td>324</td></tr><tr><td>Grape pomace</td><td>Water</td><td>1% NazCO3</td><td>350C.,30 mn.3:20</td><td>N/A</td><td>39-40%</td><td>185</td></tr><tr><td>Sewage sludge</td><td>Water</td><td>1% Na2CO3</td><td>300°℃,40 mn, 1:5</td><td>40%</td><td>39% (-2.5%)</td><td>186</td></tr><tr><td>demalella</td><td>Water</td><td>1% NazCO3</td><td>300°℃C, 0 mn 1:5</td><td>34.3%</td><td>42% (+22.5%)</td><td>189</td></tr><tr><td>Cellulose</td><td>Water</td><td>0.8% NazCO3</td><td>300℃,0mn, 1:6</td><td>20%</td><td>44% (+120%)</td><td>258</td></tr><tr><td>Mixture of aspen</td><td>Water</td><td>4.2% K2CO3</td><td>400°℃, 43 mn.2.3</td><td>N/A</td><td>20-31%</td><td>197</td></tr><tr><td>Glucose xylose lignin</td><td rowspan=\"2\">Water</td><td rowspan=\"2\">2% KCO3</td><td rowspan=\"2\">400°℃,15 min, 1:5 Batch</td><td rowspan=\"2\">N/A</td><td rowspan=\"2\">30% 28% 14% 42% 26%</td><td rowspan=\"2\">327</td></tr><tr><td>Aspen wood sorbitol</td></tr><tr><td>xylitol glycerol ethylene glycol</td><td></td><td></td><td></td><td></td><td>23% 18% 14%</td><td></td></tr><tr><td>Pinewood sawdust</td><td>Water</td><td>0.5% NazCO3</td><td>300℃C,30 mn 1:10</td><td>11.35%</td><td>29.89% (+154%)</td><td>198</td></tr><tr><td> Sewage sludge</td><td>Water</td><td>1.5% NzCO3</td><td>300℃, 60 min 3:20</td><td>26.8%</td><td>20.% (-124%)</td><td>291</td></tr><tr><td>Chlorela ulgaris</td><td>Water</td><td>100%</td><td>300°℃,60 min, 1.10</td><td>N/A</td><td>6%</td><td>202</td></tr><tr><td>Douglas fir wood</td><td>Water</td><td>0.1% NazCO3</td><td>335℃, 100 min, 1:10 Continuous</td><td>N/A</td><td>56.8%</td><td>11</td></tr><tr><td> Sewage sludge</td><td>Water</td><td>2.5% K2CO3</td><td>350℃,15 min, 7:25</td><td>25%</td><td>28% (+12%)</td><td>205</td></tr><tr><td>Nanmochlorpsp. Isochrysis sp.</td><td>Water</td><td>0.7% NazCO3</td><td>300°℃, 60 min, 16</td><td></td><td></td><td>56</td></tr><tr><td>Dundlella</td><td>Water</td><td>5% NazCO3</td><td>360C,50 mn, 1:10</td><td>21%</td><td>25% (+19%)</td><td>206</td></tr></table></body></html>\n\n<html><body><table><tr><td>Water hyacinth</td><td>Water</td><td>13.8%KC03</td><td>280°C,15 min, 1:6</td><td>16%</td><td>22%(+12.596)</td><td>322</td></tr><tr><td>Litsea cubeba seed</td><td>Water</td><td>10% NazCO3</td><td>290°℃, 60 min, 1:10 Batch</td><td>56.9%</td><td>49.6% (-12.8%)</td><td>214</td></tr><tr><td>Microcystis viridis</td><td>Water</td><td>5% NazCO3</td><td>300℃,30 min, 1:20</td><td>22%</td><td>26% (+18.2%)</td><td>224</td></tr><tr><td>Raw sewage sludge</td><td>Water</td><td>5% Na2CO3</td><td>300°C, 0 min, 1:4</td><td>20%</td><td>48% (+140%)</td><td>226</td></tr><tr><td>Corn straw</td><td>Water</td><td>2.5% NCO3</td><td>300℃C,15mn.1:4</td><td>32%</td><td>35（+12.5%)</td><td>303</td></tr><tr><td>Enteromorpha prolifera</td><td>Water</td><td> 5% NazCO3</td><td>300℃,30 min, 2:15 Batch</td><td>21%</td><td>22.5% (+7.1%)</td><td>145</td></tr><tr><td>Barley straw</td><td>Water</td><td>1.5% KCO3</td><td>300℃,15 min,3:20 Batch</td><td>N/A</td><td>35%</td><td>146</td></tr><tr><td> Barley straw</td><td>Water</td><td>1.5% K2CO3</td><td>300°℃, 15 min 3:20</td><td>17.88%</td><td>34.85% (+94.9%)</td><td>147</td></tr><tr><td>Spirulina platensis</td><td>Water</td><td>1% NazCO3</td><td>300°C, 0 min, 1:5</td><td>39.9%</td><td>51.6% (+29.3%)</td><td>179</td></tr><tr><td>Birch wood</td><td>Water</td><td>0.5% KCO3</td><td>300℃,30 min, 1:10 Batch</td><td>18.90%</td><td>38.5% (+104%)</td><td>193</td></tr><tr><td> Ter platens.</td><td>Water</td><td>5% NazCO3</td><td> 350°C,30 min, 1:5</td><td>N/A</td><td>35%</td><td>127</td></tr></table></body></html>",
+      "stats": {
+        "char_count": 12927,
+        "word_count": 1117,
+        "sentence_count": 184,
+        "line_count": 31
+      }
+    },
+    {
+      "heading": "4.7.2 Acid catalysts",
+      "level": 1,
+      "content": "Acidic conditions in the HTL process were reported to favor repolymerization12 and condensation185 reactions and decrease bio-crude yields. However, adding organic acids, which are also produced by HTL, can change reaction kinetics and increase bio-crude yield. Also, small chain organic acids can decompose into hydrogen and carbon monoxide, and hydrogen can act as a proton donor, increasing bio-crude yield. There are only a few studies regarding beneficial use of acid catalysts in the literature. Lou et al.324 and Shah et al.205 reported that by the addition of acetic acid, a minor bio-crude increase was observed from seafood waste and sewage sludge, respectively. The summary of acid catalyst studies is presented in Table 6.\n\nTable 6. Summary of HTL studies using acid catalyst\n\n<html><body><table><tr><td colspan=\"3\">HTL contents</td><td rowspan=\"2\">HTL conditions and remtprture, substeation tilvent</td><td rowspan=\"2\">Bio-crude yield w/o catalyst</td><td rowspan=\"2\">Bio-crude yield with catalyst (f) catalyst o yield</td><td rowspan=\"2\">Reference</td></tr><tr><td>Substrate</td><td>Solvent</td><td>Catalmountpe</td></tr></table></body></html>\n\n<html><body><table><tr><td colspan=\"2\"></td><td>reactor volume)</td><td>mass ratio,reactor type)</td><td></td><td></td><td></td></tr><tr><td rowspan=\"3\">Chlorella vulgaris Spiruina P. cruentum</td><td rowspan=\"3\">Water</td><td rowspan=\"3\">4.6% HCOOH</td><td rowspan=\"3\">350°℃C,60 mn 1:10</td><td>42%</td><td>25.6% (-39%)</td><td rowspan=\"3\">49</td></tr><tr><td>26.6%</td><td>15.3% (-2196)</td></tr><tr><td>32%</td><td>13.3% (-58%)</td></tr><tr><td rowspan=\"3\">Concentrated acid hydrolysis lignin</td><td rowspan=\"3\">50% Ethanol</td><td>5% HCOOH</td><td>300℃, 60 min, 1:20 Batch</td><td>40.9%</td><td>61.9% (+51%)</td><td rowspan=\"3\">182</td></tr><tr><td>3% HCOOH</td><td>350℃,28 min, 1:33</td><td>51.47%</td><td>59.22% (+15%)</td></tr><tr><td>CHCOOH</td><td>Continuous 250℃, 60 mn, 3:20</td><td>68.25%</td><td></td></tr><tr><td>Anglerfish waste</td><td>Water</td><td></td><td></td><td></td><td>76.4% (+12%)</td><td>324</td></tr><tr><td></td><td rowspan=\"2\">Water</td><td rowspan=\"2\">4.cHCO0H</td><td></td><td></td><td></td><td rowspan=\"2\">202</td></tr><tr><td> Sewage sludge</td><td></td><td></td><td></td></tr><tr><td>Enteromorpha</td><td>Water Water</td><td>CHCOOH</td><td>350°℃, 15 min, 7:25</td><td>24%</td><td>26% (+8.3%)</td><td>205</td></tr><tr><td>Spirulina platensis</td><td>Water</td><td>CHCOOH</td><td>290℃, 20 min, 1:3</td><td>18%</td><td>12.5 (-2%)</td><td>140 240</td></tr><tr><td>Tomato plant waste</td><td>1ano1</td><td>0.5% HSO4</td><td>300°℃C,35 mn, 1:10</td><td>29.7%</td><td>28% (-5.7%)</td><td>321</td></tr><tr><td></td><td></td><td>10% HCO0H</td><td>250°℃, 30 min, 1:20</td><td>N/A</td><td>44.95%</td><td></td></tr><tr><td>Sewage sludge</td><td>Water</td><td>CH3COOH</td><td>400°℃, 60 min, 3:20 Batch</td><td>26.8%</td><td>20.7% (-296)</td><td>291</td></tr></table></body></html>",
+      "stats": {
+        "char_count": 2960,
+        "word_count": 219,
+        "sentence_count": 31,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "4.7.3 Metal-based catalysts",
+      "level": 1,
+      "content": "Metal oxides, metal salts, pure metals, and other metal-based catalysts can also be used in the HTL process. Due to their charges, they adsorb organic reactant molecules; then, they release the molecule after the reaction is completed328. Adsorbed molecules by metal-based catalysts require less activation energy for HTL reactions. Therefore, high bio-crude yields in lower process temperatures can be achieved. Unlike acidic and alkaline ones, metal-based catalysts are heterogeneous. This gives important advantages to metal-based catalysts in terms of handling, separation, recovery, and regeneration329. Metal-based catalysts are also widely used for activating $\\mathrm { H } _ { 2 }$ molecules330 in bio-crude upgrading processes, such as hydrodeoxygenation331. HTL studies investigating metal-based catalysts, which are presented in Table 7, reported mostly increased biocrude yield regardless of substrate type.\n\nTable 7. Summary of HTL studies using metal-based catalyst\n\n<html><body><table><tr><td colspan=\"3\"> HTL contents</td><td rowspan=\"2\">HTL conditions 三 type)</td><td rowspan=\"2\"></td><td rowspan=\"2\"></td><td rowspan=\"2\">Reference</td></tr><tr><td> Substrate</td><td>Solvent</td><td></td></tr><tr><td>Eremurus spectabilis</td><td>Ethanol</td><td>10% FeCl3</td><td>310℃,75 min, Batch</td><td>53.8%</td><td>64.5 (+19.9%)</td><td>132</td></tr><tr><td>Datura stramonium L</td><td>Acetone</td><td>10% ZnO</td><td>325°℃,75 min, Batch 230℃, 60 min,</td><td>42%</td><td>56% (+33.3%)</td><td>153</td></tr><tr><td>Corn straw</td><td>Water</td><td>2% CuO</td><td>1:10 Batch</td><td>N/A</td><td>11.77%</td><td>317</td></tr><tr><td>Oak wood</td><td>Water</td><td></td><td>330℃,10 mn,1.5</td><td>32.88%</td><td>35.03% (+140)</td><td>161</td></tr><tr><td>Oak wood</td><td>Water</td><td>20 A1/18A-15</td><td>320℃,15 min, 1:5</td><td>26%</td><td>36% (+56.5%</td><td>162</td></tr><tr><td>Rice straw</td><td>Water</td><td>Ni18-15 10% Ni-Al/SBA-15</td><td>280℃, 15 min, 1:6</td><td>23%</td><td>33% (+43.5%) 44% (+91.3%) 57% (+62.9%)</td><td>136</td></tr><tr><td>Nannochloropsis sp.</td><td>Water</td><td>3% Pd/C 3% Pt/C Al2O3 3% CoMo/γ-</td><td>350℃, 60 mn, Batch</td><td>35%</td><td>48% (+37.1%) 50 （+4396) 53% (+51%)</td><td>332</td></tr><tr><td>Black cumin seed</td><td>Water</td><td>Al2O3 10% A 5HO</td><td>300C,0 min, 1:12 Batch</td><td>20.34%</td><td>39.% +27.6%)</td><td>319</td></tr><tr><td>Sugarcane bagasse</td><td>Water</td><td>1.38% 1:1 Fe/Co</td><td>250°℃, 120 min, Batch</td><td>35%</td><td>57.6% (+64.6%)</td><td>333</td></tr><tr><td>Red grape seeds</td><td>Water</td><td>0.74% MgCI2,</td><td>300,.30</td><td>39%</td><td>48% (+23%)</td><td>173</td></tr><tr><td></td><td>Water</td><td>5% Ni(NO3)2</td><td>300°℃,0 min 1.30</td><td>N/A</td><td>25%</td><td>334</td></tr><tr><td>Spirulina platensis</td><td>Water</td><td>1%%NO02</td><td>300°℃,0 mn, 1:5</td><td>39.9%</td><td>30.2% (-23%9)</td><td>179</td></tr><tr><td>Birch wood</td><td>Ethanol</td><td>Fe-bets zeolite</td><td>243*G,0mm</td><td>19%</td><td>15% (+1.5%)</td><td>305</td></tr></table></body></html>\n\n<html><body><table><tr><td rowspan=\"2\">Spirulina platensis</td><td rowspan=\"2\">Water</td><td rowspan=\"2\">0.4% CeO2</td><td rowspan=\"2\">250℃,30 min, 1:10 Batch 320C,37 min,</td><td rowspan=\"2\">16%</td><td rowspan=\"2\">26% (+62.5%)</td><td rowspan=\"2\">31</td></tr><tr><td></td></tr><tr><td>Spirulina platensis</td><td>Water</td><td>1.5% Fe3O4 1.5% Zr/Al2O3 1.5% Ti/Al2O3</td><td>1:10 Batch</td><td>N/A</td><td>32.33% 28.3% (+2.5%) 31.6% (+14.5%)</td><td>335</td></tr><tr><td>Chlorella</td><td>Water</td><td>1.5% Sn/Al2O3 1.5% Zr/Al2O3.SO4 1.5% Ti/Al2O3.SO4 1.5% Sn/Al2O3.SO4 1% SnO</td><td>300℃, 60 min, 3:10 Batch</td><td>27.6%</td><td>31.2% (+13%) 32.7% (+18.5%) 31.7% (+14.9%) 32.1% (+16.3%) 37%</td><td>336</td></tr><tr><td>Anabaena variabilis</td><td>Water</td><td>1% TiO.AlO3 1% ZrO.Al2O3 1% SnO.Al2O3 1% T10-kaolin 1% SnO- halloysite 1% TiO-clay 1% ZrO- nanotubes</td><td>300℃.30 mn, Batch</td><td>N/A</td><td>36% 34% 26% 16% 26% 21% 30%</td><td>337</td></tr><tr><td> Sewage sludge</td><td>Water</td><td>5% Raney 5miFesI 5% MoS2</td><td>300°℃.40 min, 1:5</td><td>40%</td><td>40% (+0%) 46% (+15%) 42% (+5%)</td><td>186</td></tr><tr><td>Cellulose</td><td>Water Water</td><td>6.6% Ni catalyst 0.5%</td><td>300℃, 0 min, 1:6 Batch 300℃,30 min,</td><td>20%</td><td>0% (-100%) 32% (+69.3%)</td><td>258</td></tr><tr><td>Birch wood</td><td></td><td>FeSO4.7HO 0.5% MgO</td><td>1:10 Batch</td><td>18.9%</td><td>30.3% (+60.3%)</td><td>193</td></tr><tr><td>Wheat straw</td><td>o1</td><td>1.66% Ra/H-</td><td></td><td>26%</td><td>24% (-7.7%)</td><td>307</td></tr><tr><td>Chlorella vulgaris</td><td>Water</td><td></td><td>3259,.3mi</td><td>32%</td><td>29% (949</td><td>199</td></tr><tr><td>Sewage sludge</td><td>Water</td><td>13.8% K2C03 1.5% MoO3-</td><td>280℃,15 min, 1:6 400℃, 60 min,</td><td>27%</td><td>21% (118) 21.7% (-19%)</td><td></td></tr><tr><td> Sewage sludge</td><td>Water</td><td>CoO/γ-Al2O3 1.5% Ru/C 5% CaO</td><td>3:20 Batch</td><td>26.8%</td><td>18.9% (-29.5%) 49.73% (+16.7%)</td><td>291</td></tr><tr><td>Nannocloropsis gaditana</td><td>Water</td><td>5% C 5% MnO2 5% Al2O3</td><td>320°℃.10 mn, Batch</td><td>42.6%</td><td>4.66% +0.16) 44.11% (+3.5%) 44.22% (+3.8%)</td><td>204</td></tr></table></body></html>\n\n\\*HZSM-5: acid-activated zeolite socony mobil catalyst\n\n<html><body><table><tr><td colspan=\"5\">5% Ni(NO3)2.6H0</td><td colspan=\"2\">22.14%</td></tr><tr><td>Pine wood</td><td>Water</td><td>5%</td><td>250℃,10i</td><td>N/A</td><td>15.9% 16.1%</td><td>338</td></tr><tr><td></td><td>Water</td><td>Ca(NO3)2.4HO Fes</td><td>300℃,30 min, 1:8</td><td>14%</td><td>1</td><td>310</td></tr><tr><td>Pinus banksiana</td><td>Ethanol</td><td>0.38% FeSO4.7HO 0.38% FeS</td><td>300℃,40 min, 1:13 Batch</td><td>44%</td><td>53% (+20.5%) 43% (-2.3%)</td><td>215</td></tr><tr><td>Dunaliella salina</td><td>Ethanol</td><td>22EHY</td><td>200℃, 0 min, 1:9</td><td>34.8%</td><td>51.6% +48.3%)</td><td>220</td></tr><tr><td> Malasian sil galn</td><td>Water</td><td>1% CaO 1% Mg0 1% MnO 10 1% CeO2 1% AlO3</td><td>390~,.g</td><td>11.85%</td><td>14.5% (+22.4%) 10.5% (-11.4%) 16.4% (+38.4%) 1 16.6% (+40%) 13% (+9.7%)</td><td>289</td></tr><tr><td>Chlorella</td><td>Water</td><td>1% La2O3 Ce/HZsM-5*</td><td>300,10</td><td>33.3%</td><td>16.2% (+36.7%) 49.87% (+49.76%)</td><td>339</td></tr></table></body></html>",
+      "stats": {
+        "char_count": 6370,
+        "word_count": 431,
+        "sentence_count": 122,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "4.7.4 Mineral catalysts",
+      "level": 1,
+      "content": "Mineral catalysts are another heterogeneous catalyst group that has a broad application in many fields. Mainly acid-activated zeolite socony mobil catalyst (HZSM-5) was investigated for the HTL process due to its selective cracking, alkylation, isomerization, and aromatization properties142,340. Zhang et al.303 observed an $1 8 . 8 \\%$ bio-crude yield increase by the addition of $2 . 5 \\%$ HZSM-5, whereas the catalyst had a negative effect on bio-crude yields from microalgae218 and macroalgae142. Also, some promising results for hydrotalcite and colemanite catalysts were reported in the literature193,341 with a significant bio-crude yield increase in the HTL of lignocellulosic biomass. The studies that utilized mineral catalysts in the literature are summarized in Table 8.\n\nTable 8. Summary of HTL studies using mineral catalyst\n\n<html><body><table><tr><td>HTL contents</td><td>HTL conditips and</td><td>Bio-crwude</td><td>in crtalyied)</td><td>Reference</td></tr><tr><td></td><td>47</td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></table></body></html>\n\n<html><body><table><tr><td rowspan=\"2\"> Substrate</td><td rowspan=\"2\">Solvent</td><td rowspan=\"2\"></td><td rowspan=\"2\"></td><td rowspan=\"2\">catalyst</td><td rowspan=\"2\"></td><td rowspan=\"2\"></td></tr><tr><td></td></tr><tr><td>Namochloropss</td><td>Water</td><td>3% Zeolite 0.5%</td><td>350℃C,60 mn 3:50</td><td>35%</td><td>45% (+28.6)</td><td>332</td></tr><tr><td>Birch wood</td><td>Water</td><td>Hydrotaleie Colemanite</td><td>300℃, 30 min, 1:10</td><td>18.9%</td><td>34.4% (+82%) 36.3% (+92%)</td><td>193</td></tr><tr><td>Beech wood</td><td>Water</td><td>1% Colemanite</td><td>300C,0 min, 1:10 Batch</td><td>21%</td><td>41% (+95.2%)</td><td>341</td></tr><tr><td>tLai nites wc waste mixture</td><td>Water</td><td>Tourmaline</td><td>300℃,30 mn, 1:8</td><td>14%</td><td>12.5% (-10.7%)</td><td>310</td></tr><tr><td>Chlorella pyrenoidosa</td><td>Water</td><td>HZSM-5*</td><td>300℃,20 min,1:10 Batch</td><td>33.3%</td><td>34.02% (+2.2%)</td><td>339</td></tr><tr><td>Microalgae</td><td>Water</td><td>H2SM-5*</td><td>300°℃C,20 mn, :10</td><td>15.8%</td><td>12.5% (-20.9%)</td><td>218</td></tr><tr><td>Macroalgae</td><td>o1</td><td>HZSM-5*</td><td>300°℃,45 min, 1:10</td><td>45%</td><td>44.5% (-1.1%)</td><td>142</td></tr><tr><td>Corn straw</td><td>Water</td><td>H2SM-5*</td><td>300℃, 15 min, 1:4</td><td>32%</td><td>38% (+18.8%)</td><td>303</td></tr><tr><td>Rice straw</td><td>Water</td><td>SBA-15**</td><td>280°℃,15 min, 1:6</td><td>23%</td><td>24.5 (+6.5%)</td><td>136</td></tr></table></body></html>\n\n\\*HZSM-5: Acid zeolite socony mobil catalyst, \\*\\*SBA-15: Mesoporous silica",
+      "stats": {
+        "char_count": 2790,
+        "word_count": 191,
+        "sentence_count": 29,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "4.7.5 Other additives and mixed catalysts",
+      "level": 1,
+      "content": "Along with typical catalyst applications, there are also studies in the literature that investigated the effect of other additives or the synergistic effect of two catalysts on the HTL process. Chen et al. 317 studied the effect of NaOH, $\\mathrm { C u O }$ , and their mixture as catalysts on corn straw. According to their results, $\\mathrm { C u O } + \\mathrm { N a O H }$ catalyst resulted in the highest bio-crude yield of $2 6 . 6 \\%$ , whereas the yield was $1 1 . 7 7 \\%$ for $\\mathrm { C u O }$ and $1 7 . 0 2 \\%$ for NaOH. This result indicates that catalyst studies should be performed at different $\\mathrm { p H }$ values to identify the ideal pH conditions. Other studies reported that the $\\mathrm { p H }$ is effective on catalysts product selectivity342. The mixture of Fe with $\\mathrm { P d } / \\mathrm { A l } _ { 2 } \\mathrm { O } _ { 3 }$ , ${ \\mathrm { R u } } / { \\mathrm { A l } _ { 2 } } { \\mathrm { O } } _ { 3 }$ , $\\mathrm { P t } / \\mathrm { A l } _ { 2 } \\mathrm { O } _ { 3 }$ , $\\mathrm { C u } / \\mathrm { S i O } _ { 2 }$ , and Ni/kieselguhr as HTL catalysts were investigated on cellulose by Hirano et al.343. They reported that the combination of metal catalysts enhanced decomposition reactions and converted all bio-crude into smaller molecules in the aqueous phase. Zhang et al.303 used a fixed-bed cracking catalyzer produced by Nankai University (NKC-11) and reported an increase of $2 5 \\%$ in bio-crude yield.\n\nAlhassan and Kumar287 researched the effect of chloromethylene (ChCl) based deep eutectic solvents (DES) addition to HTL of food waste. They reported that $4 \\%$ DES loading as catalyst was the most effective process. In a similar study conducted on Jatropha curcas, Alhassan et al.150 tested different DES by mixing ChCl with KOH, p-toluenesulfonic acid, glycerol, or $\\mathrm { F e C l } _ { 3 }$ . According to their findings, all DES additions increased bio-crude yield. The highest yield increase of $8 9 \\%$ was observed in the presence of ChCl-KOH.",
+      "stats": {
+        "char_count": 2010,
+        "word_count": 404,
+        "sentence_count": 20,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.7.6 Substrate-specific overall catalyst performance",
+      "level": 1,
+      "content": "The effect of catalyst varies in the HTL process, depending on the type of catalyst and substrate. Catalytic effect is achieved by altering the complex HTL reaction pathways or kinetics. However, due to the complexity of the process, catalytic effect can also be negative in terms of bio-crude yield. Therefore, catalyst type and concentration, which are specific for the substrate type, need to be selected carefully to enhance bio-crude yield and quality. To determine the substrate-specific catalyst performances, the overall effects of catalysts used by the studies summarized in Tables Table 4-Table 8 were calculated and presented in Figure 18.\n\n[Image]\nFigure 18. The overall catalyst performance on different HTL substrates\n\nAccording to the results presented in Figure 18, it can be seen that lignocellulosic biomass is the most suitable biomass type for a catalytic HTL process. A high bio-crude yield enhancement for lignocellulosic biomass is reported for all five catalyst types, especially for alkaline and mineral catalysts. Due to the carbohydrate-rich structure of lignocellulosic biomass, the majority of the HTL reactions that can be catalyzed are based on carbohydrates. In uncatalyzed HTL of lignocellulosic biomass, carbohydrates are converted into organic acids. The accumulation of organic acids causes HTL reactions to favor hydrochar formation due to low pH. However, when the process is catalyzed, this pH change is avoided either by neutralizing pH or enhance degradation of organic acids. Although low pH during the HTL process is not favored, adding an acid catalyst in low concentrations initially can enhance the hydrolysis step and increase bio-crude yield for lignocellulosic biomass.\n\nFor the substrates that are balanced in terms of carbohydrate and protein, catalysts are less effective compared to lignocellulosic biomass. Except for metal-based catalysts, mostly negative results were reported for microalgae, macroalgae, cyanobacteria, and municipal sludge. Particularly acid catalysts caused a significant loss in bio-crude yield for these substrates. Some promising results were reported for HTL of microalgae and cyanobacteria with a metal-based catalyst. The development of a reusable heterogeneous metal-based HTL catalyst can positively affect the process's energy balance by decreasing the required reaction temperature while increasing the bio-crude yield. Therefore, it can be said that catalyst development will be an important step in the transition to full-scale applications.",
+      "stats": {
+        "char_count": 2528,
+        "word_count": 369,
+        "sentence_count": 19,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "5 HTL systems",
+      "level": 1,
+      "content": "HTL process can be performed both in batch and continuous-flow systems. Although most of the studies were performed with batch systems due to limitations, the ultimate goal for full-scale applications is to use continuous-flow systems, particularly for biomass available on a continuous basis, such as municipal sludge. Both reactor systems have their advantages and disadvantages. To determine the effect of reactor type on bio-crude yield and quality, Biller et al.238 performed HTL assays using the same substrate in both types of reactors, which were set to $3 5 0 ^ { \\circ } \\mathrm { C }$ . They reported $3 4 . 5 \\%$ and $4 4 . 3 \\%$ bio-crude yields for batch and continuous-flow testing, respectively. The difference was caused by lower temperature in the batch reactor, which was able to reach $3 4 0 ^ { \\circ } \\mathrm { C }$ , and better mixing in the continuous-flow system. According to their results, while the batch reactor bio-crude had better quality, continuous-flow system bio-crude had higher energy recovery due to higher bio-crude yield.\n\nKristiano et al.182 also investigated the effect of reactor type on the HTL of concentrated acid hydrolysis lignin. They used $5 0 \\%$ ethanol and formic acid as solvent and catalyst, respectively, at a reaction temperature of $3 0 0 ^ { \\circ } \\mathrm { C }$ for batch, and $3 5 0 ^ { \\circ } \\mathrm { C }$ for the continuously stirred-tank reactor (CSTR). They reported a $6 1 . 9 \\%$ bio-crude yield with an $8 9 6 . 5 \\ \\mathrm { g }$ molecular weight in the batch reactor. On the other hand, the bio-crude yield was $5 9 . 9 2 \\%$ , with a molecular weight of $6 1 4 . 7 \\ \\mathrm { g }$ in the continuous-flow HTL system.",
+      "stats": {
+        "char_count": 1693,
+        "word_count": 309,
+        "sentence_count": 19,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.1 Batch HTL systems",
+      "level": 1,
+      "content": "Batch HTL systems are widespread in laboratory-scale applications all over the world. Compared to continuous-flow systems, controlling and monitoring the process parameters in batch systems are much easier. This makes them ideal for research purposes. However, to expand research to higher heating rates to maximize bio-crude yield as previously discussed in Section 4.2, small reactors, or a batch reactor with a powerful heater is required. High ramping time in standard batch reactors can cause an increase in repolymerization reactions and decrease the biocrude yield. Therefore, it is not possible to determine the true bio-crude potential of a substrate with batch reactors with a low heating rate344. Another disadvantage of the batch systems is the headspace purging requirement to avoid liquid loss and to get rid of oxygen. This is not a major problem at lab-scale; however, at full-scale, purging would increase operational costs significantly.\n\nBatch HTL systems are also able to utilize not pumpable substrates with higher solid content. Due to their simplicity, major continuous-flow HTL system problems, such as clogging, do not develop in batch systems18. Since the substrate in the continuously stirred batch reactor stays homogenous during the process, it is also possible to obtain samples from both slurry and gas. On the other hand, as a drawback, batch reactor stirring systems are not so efficient as continuousflow conditions. Batch studies in the literature reported agitation speeds ranging between $5 0 \\mathrm { r p m } ^ { 3 2 2 }$ to $1 3 0 0 \\mathrm { r p m } ^ { 3 3 8 }$ depending on the reactor volume and stirring equipment. Among batch studies in the literature, no study considered agitation as a significant HTL parameter. A potential full-scale batch HTL system is presented in Figure 19.\n\n[Image]\nFigure 19. A potential full-scale batch HTL reactor system\n\nIn this design, after the HTL reaction is complete, in order to achieve heat recovery, this system needs to send the effluent to an insulated tank. After emptying the reactor, valve B is closed, and the hot effluent collected in the insulated tank is pumped to the heat exchanger along with feed being pumped into the reactor. The preheated substrate can be further heated to the desired temperature in the batch reactor. However, pumping the effluent into another tank after the reaction and waiting for the reactor to be drained entirely result in a considerable amount of energy loss. For that reason, in terms of heat recovery, batch HTL systems are inefficient and can not be applied at full-scale. Also, due to the filling and draining times of the batch reactor, the reactor volume can not be used efficiently throughout the operation. Continuous-flow HTL systems can overcome all the limitations mentioned above and issues that a full-scale batch HTL reactor would face.",
+      "stats": {
+        "char_count": 2875,
+        "word_count": 468,
+        "sentence_count": 24,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "5.2 Continuous-flow HTL systems",
+      "level": 1,
+      "content": "Continuous-flow systems are the best option for pilot- and full-scale applications. Although a high-pressure pumping, up to 220 bar, is required for feeding the reactor, the higher heat recovery rate makes these systems effective. Anastasakis et al.15 reported heat recovery rates between 66.5- $7 9 . 9 \\%$ in their continuous-flow HTL system. Another major advantage of these systems is the high heating (ramping) rate, which was reported in the literature as $1 0 0 ^ { \\circ } \\mathrm { C } / \\mathrm { m i n } ^ { 1 5 , 1 7 }$ or even 200- $4 0 0 ^ { \\circ } \\mathrm { C } / \\mathrm { m i n } ^ { 1 9 \\intercal }$ . HTL conditions with lower ramping times lead to a higher bio-crude yield139,267,291 and decrease the required reactor volume significantly. HTL reactors need to be built from expensive, heat and corrosion-resistant alloys due to the high temperatures that they are operated. Therefore, smaller reactor volumes can lower the capital costs drastically and make continuousflow HTL systems more affordable. The main units of a full-scale continuous-flow HTL system are feeding pump, heat exchanger, electric heater, a plug flow reactor and a pressure regulator, presented in Figure 20.\n\n[Image]\nFigure 20. A typical full-scale continuous-flow HTL reactor design\n\nThe primary purpose of the electric heater and plug flow reactor is to reach the desired temperature and provide retention time; therefore, they can also be combined and designed as a CSTR reactor345. The order and design of phase separation units can vary depending on the type of substrate and budget.\n\nResearch on continuous-flow HTL systems can be conducted with both lab-scale continuousflow reactors and fast heating batch reactors. However, building a lab-scale continuous-flow system is challenging due to the complexity of system, safety concerns, and scaling down limitations, such as acquiring a lab-scale high-pressure pump346. Therefore, most of the studies on continuous-flow HTL systems have been conducted with reactors between lab- and pilot-scale. In their study, Wagner et al.344 described the design of an inexpensive lab-scale continuous-flow HTL system by using high-pressure ${ \\Nu } _ { 2 }$ for feeding. Mørup et al.346 also published a very detailed study that describes the design and construction of a continuous-flow HTL reactor used in Aarhus University. This study includes the mechanical properties of selected units and acquisition of reactor with LabVIEW software. Details of current continuous flow HTL studies around the globe are summarized in Table 9.\n\nTable 9. Summary of continuous-flow HTL studies\n\n<html><body><table><tr><td colspan=\"5\">HTL conditions</td><td rowspan=\"2\">im HTL yield</td><td rowspan=\"2\">Reference</td></tr><tr><td> Substrate</td><td>Catalyst(s)</td><td></td><td>Repetionre</td><td>Retention</td></tr><tr><td></td><td></td><td></td><td>350℃</td><td>6 min</td><td></td><td>17</td></tr><tr><td>Dried distillers grains with solubles</td><td>2% KCO3</td><td>1:5</td><td>340℃</td><td>20 min</td><td>38.9% dafa</td><td>157</td></tr><tr><td>Blend of sewage sludge and scum from primary settling</td><td></td><td>N/A</td><td>350°℃</td><td>10-30 min</td><td>50%</td><td>347</td></tr><tr><td>sulphuraria</td><td></td><td>1:20</td><td>350℃</td><td>5 min</td><td>16.9% 23%</td><td>20</td></tr><tr><td>sOOS Saccharina spp.</td><td></td><td>1:5</td><td>364℃</td><td>40 min</td><td>27.7% daf</td><td>164</td></tr><tr><td>Algae: Solix LEA NALI8, Cellana HLe</td><td></td><td>Solix LEA: 1:6 NB238: 1:5 Cella L Cellana HL:</td><td>344-362℃</td><td>27-40 min</td><td>53.2% daf</td><td>165</td></tr><tr><td>Oedogonium intermedium</td><td></td><td>1:3 1:20</td><td>300℃</td><td>5 min</td><td>63.6% daf 25% daf</td><td>21</td></tr><tr><td>strain TSV2 Dewatered</td><td></td><td>1:5</td><td>290-300℃</td><td>260 min</td><td>48% daf</td><td>348</td></tr><tr><td>Chlorella</td><td></td><td>1:10</td><td>350℃</td><td>3 min</td><td>41.7% daf</td><td>177</td></tr><tr><td>Concentrated hydrodysis</td><td>3% HCOOH</td><td>1:3</td><td>350℃</td><td>28 min</td><td>59.92%</td><td>182</td></tr><tr><td>lignin Douglas fir wood</td><td></td><td>1:5</td><td>340℃</td><td>60 min</td><td>33%</td><td>14</td></tr><tr><td>Grape pomace</td><td>1% NazCO3</td><td>3:25-17:100</td><td>350℃</td><td>30 min</td><td>Montepulciano: 3abedaft sauvignon: 41% daf</td><td>185</td></tr></table></body></html>\n\n<html><body><table><tr><td>PSe, Ssf, DSg</td><td></td><td>ss0</td><td>350℃</td><td>min</td><td></td><td>187</td></tr><tr><td>Rubberso</td><td>0.14% KOH</td><td>1:36</td><td>310℃</td><td>10 min</td><td>25.31% daf</td><td>192</td></tr><tr><td>Swine manure</td><td></td><td>1:5</td><td>305℃</td><td>80 min</td><td>70% daf</td><td>195,349</td></tr><tr><td></td><td>1.</td><td></td><td>350℃</td><td>5.6 min</td><td></td><td>15</td></tr><tr><td>1:1 Aspen wood and glycerol</td><td>4.2% KCO3</td><td>7:20</td><td>400℃</td><td>43 min</td><td>~31%.</td><td>197</td></tr><tr><td>Acid treated Douglas tid wood</td><td>0.1% NazCO3</td><td>3:25</td><td>332℃</td><td>100 min</td><td>56.8% daf</td><td>11</td></tr><tr><td> Nasochloro</td><td></td><td>1:5</td><td>350℃</td><td>N/A</td><td>64% daf</td><td>350</td></tr><tr><td>Kraft lignin</td><td>5%NaOH</td><td>1:20</td><td>240C</td><td>2 min</td><td>N/A</td><td>351</td></tr><tr><td>SL ande HLe</td><td></td><td>SL:3120</td><td>350℃</td><td>27 min</td><td>SL:71% daf</td><td>352</td></tr><tr><td> Kraft lignin</td><td>NkOH/K3CO3</td><td>1:20</td><td>350℃</td><td>6 min</td><td>37.60%</td><td>353</td></tr><tr><td>2-raftipnin1</td><td>1.3% KOH</td><td>1:20</td><td>350℃</td><td>6 min</td><td>61%</td><td>354</td></tr><tr><td> Kraft lignin</td><td>1.6% KOO</td><td>1:20</td><td>350℃</td><td>12 min</td><td>44%</td><td>355</td></tr><tr><td>Chlorella</td><td></td><td>1:10</td><td>350°℃</td><td>1.4 min</td><td>39.7% daf</td><td>356</td></tr><tr><td></td><td></td><td></td><td>350℃</td><td>6 min</td><td>42.5% 4a</td><td>357</td></tr><tr><td>S. cerevisiae</td><td>0.9%KCO3</td><td>7:25 Saccharomyce</td><td>400°℃</td><td>2 min</td><td>51.40%</td><td>358</td></tr><tr><td></td><td>0.-.0%</td><td>1:5</td><td>400°℃</td><td>2 min</td><td>47.4%</td><td>359</td></tr><tr><td>Food waste Distiller dried</td><td>1.5% KCO3</td><td>3:25</td><td>330C</td><td>10 min</td><td>13%</td><td>360</td></tr><tr><td>grains with solubles Primary</td><td>2% K2CO3</td><td>1:5</td><td>350℃</td><td>15 min</td><td>39%</td><td>346</td></tr><tr><td>sewage sludge</td><td>5% NazCO3</td><td>1:5</td><td>275℃</td><td>261 min</td><td>36.3% daf</td><td>361</td></tr><tr><td>Kraft lignin</td><td>4.1% Pcol</td><td>1:20</td><td>290℃</td><td>10-13 min</td><td>6.6%</td><td>362</td></tr><tr><td>Sewge</td><td>1</td><td>1:5</td><td>350℃</td><td>N/A</td><td>45%</td><td>301</td></tr></table></body></html>\n\n<html><body><table><tr><td>Namnochloro</td><td></td><td>N/A</td><td>380℃</td><td>0.5 min</td><td>38%</td><td>363</td></tr><tr><td>Rhizopuss</td><td></td><td>1:25</td><td>400℃C</td><td>12 min</td><td>60.9% daf</td><td>364</td></tr><tr><td></td><td>2.5% K3C0;</td><td>1:4</td><td>350°℃</td><td>N/A</td><td>33.9%</td><td>365</td></tr><tr><td>Scenedesmus</td><td>1</td><td>1:20</td><td>350℃</td><td>30 min</td><td>35% daf</td><td>366</td></tr><tr><td>Scenedermus</td><td>1</td><td>1:20</td><td>344℃</td><td>N/A</td><td>21.2%</td><td>344</td></tr><tr><td>Supurpet</td><td>1</td><td>N/A</td><td>350℃</td><td>15 min</td><td>~67% daf</td><td>367</td></tr><tr><td>Anyotype of</td><td>K2CO</td><td>-</td><td>341℃C</td><td>30 min</td><td>45%</td><td>368</td></tr></table></body></html>\n\nadaf: Dry ash-free, bLL: Low lipid, cHL: High lipid, dSL: Standard lipid, ePS: Primary sludge, fSS: Secondary sludge, gDS: Digested sludge, hWAS: Waste activated sludge\n\nThe literature indicates that continuous-flow HTL systems have, on average, shorter reaction times and higher bio-crude yields compared to batch HTL reactor results. Although there have been many projects and large investments from the industry, there is a lack of information regarding process performance failures and challenges revealed during design, construction, startup, and operation in the industry. This situation creates a major obstacle to the development and scale-up of HTL technology as a reliable process at full-scale. Future studies in partnership with industry and research institutions should allow for dissemination of results to general public that would help to overcome these challenges.",
+      "stats": {
+        "char_count": 8456,
+        "word_count": 700,
+        "sentence_count": 65,
+        "line_count": 20
+      }
+    },
+    {
+      "heading": "6 Techno-economical analysis of the HTL process",
+      "level": 1,
+      "content": "The major operating expenses in a full-scale HTL process are caused by substrate production or supply, dewatering, pumping, heating, phase separation, chemicals (solvents, catalysts), and waste management for product streams (aqueous and hydrochar). Among the major expenses, if algae or agricultural sources biomass is used, substrate supply would constitute the majority of the total cost369. Hence, the most economical option is to couple HTL plants with waste-producing facilities, such as wastewater treatment plants. As an important advantage among biomass valorization methods, HTL does not require a biomass dying process, which is an energy sink12. The bottleneck of the HTL process is the energy consumption for heating the substrate to the desired temperature. However, by incorporating a heat exchanger and efficient heat insulation, this energy consumption can be lowered. Furthermore, the application of the right catalyst to the HTL process can decrease the process temperature and input energy costs significantly. Energy consumption points and amounts of a continuous-flow HTL system are given in Figure 21. Calculations were done by assuming a $1 5 \\%$ solid content of substrates and $5 0 \\%$ (daf) bio-crude yield in the HTL process.\n\n[Image]\nFigure 21. Summary of costs in the HTL process (data obtained from15,370–373)\n\nIn the literature, production costs of microalgae/cyanobacteria, macroalgae and lignocellulose were reported as $\\mathrm { U S } \\mathbb { S }$ 1253 /tonne (daf)374, $\\operatorname { U S } \\$ 5$ 757 /tonne $\\left( \\mathrm { d a f } \\right) ^ { 3 7 5 }$ and $\\operatorname { U S } \\$ 5$ 96 /tonne $( \\mathrm { d a f } ) ^ { 3 7 6 }$ , respectively. Since it is a waste, and it is assumed that the HTL plant will be coupled with a wastewater treatment plant, the cost of municipal sludge production was assumed as $\\mathrm { U S } \\$ 0$ /tonne (daf). Since the substrate cost is the main cost in the total operational cost, municipal sludge-based bio-crude was found to be cheaper than the other bio-crudes. For the substrate of municipal sludge, microalgae or cyanobacteria, macroalgae, and lignocellulose, the cost of producing a liter of upgraded bio-crude by HTL was found to be $\\mathrm { U S } \\$ 0.74,\\mathrm { U S } \\$ 3.24,\\mathrm { U S } \\$ 0$ 2.25, and $\\mathrm { U S } \\$ 0.93$ , respectively. Results indicate that elimination or reduction in substrate costs plays a major role in the final product's price. Funkenbusch et al.377 investigated coupling an HTL plant with a Kraft pulping process and found that Kraft lignin-based bio-crude can be produced for $\\mathrm { U S } \\$ 0.41 { - 0 .4 3}/ \\mathrm { L }$ if the hydrodeoxygenation process for fuel upgrading is performed on-site. Zhu et al.378 reported a $\\mathrm { U S } \\$ 1.29/\\mathrm { L }$ bio-crude cost produced from lignocellulosic sources, whereas Ramirez et al.379 found the minimum selling price of wood-based bio-crude as $\\mathrm { U S } \\$ 1.17/ L$ . Also, Perkins et al.380 underlined that with current production costs, the minimum bio-crude selling price should be $\\mathrm { U S } \\$ 0.92 – 1 .10/ L$ .\n\nThese cost calculations do not include valorization or treatment of HTL aqueous, hydrochar, and gases. Among those co-products, HTL aqueous has the potential to affect bio-crude costs considerably. One of the most efficient ways of valorizing HTL aqueous is to use it in anaerobic hydrogen or methane production due to presence of soluble organics. Although producing hydrogen seems to be the right approach to decrease the cost of hydrodeoxygenation fuel upgrading process, HTL aqueous may not be an ideal substrate for biochemical hydrogen or methane production due to its high concentrations of inhibitory and recalcitrant compounds381,382. Si et al.383 found that in an up-flow anaerobic sludge blanket reactor, by the addition of $8 \\mathrm { g C O D / L }$ equivalent HTL aqueous, biohydrogen fermentation and subsequent methane fermentation were inhibited $1 0 0 \\%$ and $5 0 \\%$ , respectively. Another alternative is to dilute HTL aqueous and utilize it in an anaerobic digestion process. Produced methane from this process can be converted to electricity and heat on-site and used in HTL or hydrodeoxygenation processes. Coupling an HTL plant with an anaerobic digestion process was also found beneficial in terms of energy recovery384,385. However, adding an anaerobic process for hydrogen or methane production increases capital costs. Davidson et al.386 calculated that if co-products are processed on-site, waste disposal would only increase the bio-crude cost by $\\mathrm { U S } \\$ 4\\ /\\mathrm { / L }$ . If the HTL aqueous is used in a treatment process instead of valorization, capital investments required for condensed phase ketonization, dual-bed steam reforming, and catalytic hydrothermal gasification processes were reported as US\\$ 34.1M, $\\mathrm { U S } \\$ 34.10$ and $\\mathrm { U S } \\$ 16.8 M ^ { 38 7 }$ , respectively.\n\nThe handling cost of the HTL aqueous phase from an HTL utilizing lignocellulosic biomass with low moisture would be lower since it can be recirculated in the HTL process. Knorr et al.388 also stated that direct aqueous phase recirculation increases heat recovery significantly. They found that an HTL aqueous recirculating plant has the lowest operating cost with $\\mathrm { U S } \\$ 22.5\\mathrm { M }$ year. However, it was also reported in the literature that over six times of recirculation of the HTL aqueous phase could lower bio-crude yield and quality157,201,205. Furthermore, recirculation causes the accumulation of inhibitors and recalcitrant substances, which increases the treatment cost of the aqueous phase. If the substrate is municipal sludge in the HTL process, the aqueous phase might be returned to the treatment plant to not to add an extra treatment cost to the process. However, the effect of the inhibitory compounds in the aqueous phase, mainly nitrogen-containing organics and aromatic compounds389, on wastewater treatment processes is unknown.\n\nHTL gas and hydrochar are the other co-products that need handling. Hydrochar can be landfilled, combusted, or valorized by the application of further processes. Generally, hydrochar amount produced in the HTL process is so low ${ < } 2 0 \\%$ on a dry basis) that its effect on total process cost is negligible. The only concerns about hydrochar are its heavy metal and persistent organic pollutant concentrations. However, Li et al.269 reported that HTL reduced the high environmental risk due to the immobilization of heavy metals in the raw substrate (animal manures) to medium for hydrochar. Therefore, it is even possible to use hydrochar in soil amendment safely. Some studies also showed that HTL can destroy most persistent organic pollutants present in the substrate390. On the other hand, since the major fraction of HTL gas is $\\mathrm { C O } _ { 2 }$ and it does not contain any dangerous compounds, it can be released into the atmosphere. However, to make the HTL process more environmentally friendly, greenhouse gases, including $\\mathrm { C O } _ { 2 }$ can be captured by adsorption391. The addition of the gas adsorption process would cause an extra operating cost of $\\mathrm { U S } \\mathbb { S }$ 60-190/tonne of $\\mathrm { C O } _ { 2 }$ captured392.",
+      "stats": {
+        "char_count": 7327,
+        "word_count": 1220,
+        "sentence_count": 68,
+        "line_count": 12
+      }
+    },
+    {
+      "heading": "7 Conclusion and recommendations for future research",
+      "level": 1,
+      "content": "As one of the most efficient ways of converting biomass into biofuels, the development of the HTL process is both economically and environmentally crucial. This review is aimed to be a source study for HTL researchers by summarizing the key design and operational parameters to optimize process performance and energy/product recovery. The key findings of this review are presented below.\n\nOptimum HTL process conditions for bio-crude production require short ramping (high heating rate) and retention times. Optimum values of other HTL conditions, on the other hand, differ depending on the substrate type.\nAmong the five most studied substrate types, municipal sludge was found to be the most suitable feedstock for HTL due to its availability and biochemical composition.\nIn the techno-economical analysis, bio-crude upgrading was found as the highest operating cost.\n• The effect of catalysts was found to be substrate-specific. Therefore, it is not possible to define a common catalyst for all substrate types.\n\nCatalysts can decrease the required HTL severity for the bio-crude generation. Utilization of the right catalyst type in the right concentration can lower the operation cost. In HTL of lignocellulosic substrates and macroalgae, bio-crude yields were found lower compared to the other substrates due to the accumulation of organic acids. Therefore, to reach higher bio-crude yields, alkaline catalysts should be used for these substrates. HTL substrates should have a balanced carbohydrate to protein ratio to take advantage of Maillard reactions in the HTL process. Carbohydrate-rich and protein-rich substrates were found to have high amounts of organic acids and amides in HTL aqueous, respectively. Alcohol solvents were found beneficial on the HTL of carbohydrate-rich biomasses. They increase the bio-crude yield by undergoing an esterification reaction with carboxylic acids. This reaction can be catalyzed by zeolite or acid catalysts for further increase.\n\nAlthough this promising technology has come a long way, there is still much room for development. Once the research gaps of HTL are filled, it has the potential to minimize our dependence on fossil fuels without changing our current fuel utilizing infrastructure. Hereof, there is still much to explore for researchers and the industry. Recommendations for future research are given below.\n\nThere are still unknown HTL pathways due to the vast number of organic molecules involved in the process. Revealing the unknown pathways and reaction kinetics would be beneficial to provide a deeper understanding of the process and product optimization. To the best of our knowledge, there is no published study focusing on the HTL parameter of pressure, possibly to difficulties in logistics to separate temperature from the pressure affect at the lab- or pilot-scale. Studies differentiating the effect of temperature and pressure on bio-crude yield are required. More studies regarding producing higher quality bio-crude that does not require an upgrading process and research on more economical upgrading processes are needed. There are still important research gaps for the utilization/safe disposal of co-products of HTL, aqueous phase, and hydrochar. For the co-products, more research towards valorization, treatment, and environmental impact of disposal is required.\n\nCatalysts are crucial in the HTL process in order to decrease reaction severity and costs while increasing bio-crude yield and quality. Although many studies investigated the use of catalysts, their specific effect on pathways and kinetics are generally not reported. Hence, more studies focusing on the catalytic effects are needed for the development of HTL technology at full-scale.\nStudies that investigate optimum HTL conditions are limited. More substrate-specific optimization studies that use more comprehensive experimental designs and statistical methods are required.\nFor future studies, it would be beneficial if the results were reported in the energy recovery (ER) unit instead of bio-crude yield (wt $\\%$ ). This way, both the quality and quantity of biocrude can be included in the comparison of results.\nHTL technology is both costly and scientifically complex. Therefore, long-term interdisciplinary collaborations in partnership with academia and key industry are essential for process development at full-scale and sharing/dissemination of knowledge.\nThe majority of the studies do not provide sufficient information regarding mechanical issues encountered with continuous-flow HTL systems. Further studies assessing continuous-flow HTL systems using various substrates are needed.",
+      "stats": {
+        "char_count": 4651,
+        "word_count": 681,
+        "sentence_count": 40,
+        "line_count": 18
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "2 Y. Yang, J. Sep. Sci., 2007, 30, 1131–1140.",
+      "title": "J. Sep. Sci., Vol. 30, Page 1131–1140, (2007)"
+    },
+    {
+      "text": "3 D. Luong, M. A. Sephton and J. S. Watson, Anal. Chim. Acta, 2015, 879, 48–57.",
+      "title": "Anal. Chim. Acta, Page 48–57, (2015)"
+    },
+    {
+      "text": "4 G. C. Akerlof and H. I. Oshry, J. Am. Chem. Soc., 1950, 72, 2844–2847.",
+      "title": "J. Am. Chem. Soc., Vol. 72, Page 2844–2847, (1950)"
+    },
+    {
+      "text": "5 D. C. Elliott, Energy and Fuels, 2007, 21, 1792–1815.",
+      "title": "Energy and Fuels, Vol. 21, Page 1792–1815, (2007)"
+    },
+    {
+      "text": "8 T. M. Aida, A. Ikarashi, Y. Saito, M. Watanabe, R. L. Smith and K. Arai, J. Supercrit. Fluids, 2009, 50, 257–264.",
+      "title": "J. Supercrit. Fluids, Vol. 50, Page 257–264, (2009)"
+    },
+    {
+      "text": "9 E. De Mey, H. De Maere, H. Paelinck and I. Fraeye, Crit. Rev. Food Sci. Nutr., 2017, 57, 2909–2923. I. M. Weiss, C. Muth, R. Drumm and H. O. K. Kirchner, bioRxiv, , DOI:10.1101/119123. P. F. Fox and J. M. Wallace, in Advances in Applied Microbiology, 1997, pp. 17–85. K. Yoneda, J. Fukuda, H. Sakuraba and T. Ohshima, J. Biol. Chem., 2010, 285, 8444– 8453. J. R. Lorenzo, L. G. Alonso and I. E. Sánchez, PLoS One, 2015, 10, e0145186. J. K. Christiansen, J. E. Hughes, D. L. Welker, B. T. Rodríguez, J. L. Steele and J. R. Broadbent, Appl. Environ. Microbiol., 2008, 74, 416–423.",
+      "title": "Crit. Rev. Food Sci. Nutr., bioRxiv, in Advances in Applied Microbiology, J. Biol. Chem., PLoS One, Appl. Environ. Microbiol., Vol. 57, , , 285, 10, 74, Page 2909–2923, DOI:10.1101/119123,  17–85, 8444– 8453, e0145186, 416–423, (2017, , 1997, 2010, 2015, 2008)"
+    },
+    {
+      "text": "5 K. Vivekanandan and R. L. Narayanan, Int. Lett. Chem. Phys. Astron., 2015, 45, 66–72. P. Jegatheesan, D. Ramani, M. Lhuillier, N. El-Hafaia, R. Ramassamy, M. Aboubacar, S. Nakib, H. Chen, C. Garbay, N. Neveux, C. Loï, L. Cynober and J.-P. de Bandt, Nutrients, 2019, 11, 2637. P. Millard, R. Wendler, A. Hepburn and A. Smith, Plant, Cell Environ., 1998, 21, 715– 722.",
+      "title": "Int. Lett. Chem. Phys. Astron., Nutrients, Plant, Cell Environ., Vol. 45, 11, 21, Page 66–72, 2637, 715–722, (2015, 2019, 1998)"
+    },
+    {
+      "text": "8 J. M. Landete, M. E. Arena, I. Pardo, M. C. Manca de Nadra and S. Ferrer, Food Microbiol., 2008, 25, 882–887. S. Sharma, S. Shinde and P. E. Verslues, BMC Plant Biol., 2013, 13, 182.",
+      "title": "Food Microbiol., BMC Plant Biol., Vol. 25, 13, Page 882–887, 182, (2008, 2013)"
+    },
+    {
+      "text": "00 L. Wunderlichová, L. Buňková, M. Koutný, P. Jančová and F. Buňka, Compr. Rev. Food Sci. Food Saf., 2014, 13, 1012–1030.",
+      "title": "Compr. Rev. Food Sci. Food Saf., Vol. 13, Page 1012–1030, (2014)"
+    },
+    {
+      "text": "01 M. Cao, S. H. R. Mulagapati, B. Vemulapalli, J. Wang, S. V. Saveliev, M. Urh, A. Hunter and D. Liu, Anal. Biochem., 2019, 566, 151–159.",
+      "title": "Anal. Biochem., Page 151–159, (2019)"
+    },
+    {
+      "text": "02 J. F. Sydow, F. Lipsmeier, V. Larraillet, M. Hilger, B. Mautz, M. Mølhøj, J. Kuentzer, S. Klostermann, J. Schoch, H. R. Voelger, J. T. Regula, P. Cramer, A. Papadimitriou and H. Kettenberger, PLoS One, 2014, 9, e100736.",
+      "title": "PLoS One, Vol. 9, Page e100736, (2014)"
+    },
+    {
+      "text": "03 J. L. Zheng, M. Q. Zhu and H. tang Wu, Waste Manag., 2015, 43, 230–238.",
+      "title": "Waste Manag., Page 230–238, (2015)"
+    },
+    {
+      "text": "04 B. Zhang, Z. He, H. Chen, S. Kandasamy, Z. Xu, X. Hu and H. Guo, Bioresour. Technol., 2018, 270, 129–137.",
+      "title": "Bioresour. Technol., Page 129–137, (2018)"
+    },
+    {
+      "text": "05 J. Poerschmann, B. Weiner, R. Koehler and F. D. Kopinke, Chemosphere, 2015, 131, 71– 77.",
+      "title": "Chemosphere, Page 71–77, (2015)"
+    },
+    {
+      "text": "06 D. Derewiaka, D. Zaręba, M. Obiedziński and A. Matuszewska-Janica, Eur. J. Lipid Sci. Technol., , DOI:10.1002/ejlt.201600486.",
+      "title": "Eur. J. Lipid Sci. Technol."
+    },
+    {
+      "text": "107 M. Ahmadi, E. E. Macias, J. B. Jasinski, P. Ratnasamy and M. A. Carreon, J. Mol. Catal. A Chem., 2014, 386, 14–19.",
+      "title": "J. Mol. Catal. A Chem., Page 14–19, (2014)"
+    },
+    {
+      "text": "108 Z. Kong, L. He, Y. Shi, Q. Guan and P. Ning, Heliyon, 2020, 6, e03446.",
+      "title": "Heliyon, Vol. 6, Page e03446, (2020)"
+    },
+    {
+      "text": "109 C. Len and R. Luque, Sustain. Chem. Process., , DOI:10.1186/2043-7129-2-1.",
+      "title": "Sustain. Chem. Process."
+    },
+    {
+      "text": "110 E. T. Roe, J. M. Stutzman, J. T. Scanlan and D. Swern, J. Am. Oil Chem. Soc., 1952, 29, 18–22.",
+      "title": "J. Am. Oil Chem. Soc., Vol. 29, Page 18–22, (1952)"
+    },
+    {
+      "text": "111 S. L. Zhang and Z. Q. Deng, Org. Biomol. Chem., 2016, 14, 8966–8970.",
+      "title": "Org. Biomol. Chem., Vol. 14, Page 8966–8970, (2016)"
+    },
+    {
+      "text": "112 M. Rueping, A. Kuenkel, F. Tato and J. W. Bats, Angew. Chemie Int. Ed., 2009, 48, 3699 3702.",
+      "title": "Angew. Chemie Int. Ed., Vol. 48, Page 3699 3702, (2009)"
+    },
+    {
+      "text": "113 D. Y. Murzin, A. Bernas, J. Wärnå, J. Myllyoja and T. Salmi, React. Kinet. Mech. Catal., 2019, 126, 601–610.",
+      "title": "React. Kinet. Mech. Catal., Vol. 126, Page 601–610, (2019)"
+    },
+    {
+      "text": "114 D. A. G. Aranda, R. T. P. Santos, N. C. O. Tapanes, A. L. D. Ramos and O. A. C. Antunes, Catal. Letters, 2008, 122, 20–25.",
+      "title": "Catal. Letters, Page 20–25, (2008)"
+    },
+    {
+      "text": "115 F. González-López de Turiso and D. P. Curran, Org. Lett., 2005, 7, 151–154.",
+      "title": "Org. Lett., Vol. 7, Page 151–154, (2005)"
+    },
+    {
+      "text": "116 T. J. Benson, R. Hernandez, M. G. White, W. T. French, E. E. Alley, W. E. Holmes and B. Thompson, CLEAN - Soil, Air, Water, 2008, 36, 652–656.",
+      "title": "CLEAN - Soil, Air, Water, Vol. 36, Page 652–656, (2008)"
+    },
+    {
+      "text": "117 T. Sommer, M. Zapletal and J. Trejbal, Chem. Pap., 2018, 72, 2397–2412.",
+      "title": "Chem. Pap., Vol. 72, Page 2397–2412, (2018)"
+    },
+    {
+      "text": "118 N. Kumar, M. Raghavendra, J. Tokas and H. R. Singal, in Nutrients in Dairy and their Implications on Health and Disease, Elsevier, 2017, pp. 123–135.",
+      "title": "Nutrients in Dairy and their Implications on Health and Disease"
+    },
+    {
+      "title": "Parasite, Vol. 23, Page 15, (2016)",
+      "text": "120 K. Traoré, C. Arama, M. Médebielle, O. Doumbo and S. Picot, Parasite, 2016, 23, 15."
+    },
+    {
+      "text": "121 G. Feiner, Meat products handbook, Woodhead Publishing, 2006.",
+      "title": "Meat products handbook"
+    },
+    {
+      "text": "122 F. L. Chu and V. A. Yaylayan, Ann. N. Y. Acad. Sci., 2008, 1126, 30–37.",
+      "title": "Ann. N. Y. Acad. Sci., Vol. 1126, Page 30–37, (2008)"
+    },
+    {
+      "text": "123 P. Y. Nikolov and V. A. Yaylayan, Food Chem., 2010, 123, 684–690.",
+      "title": "Food Chem., Vol. 123, Page 684–690, (2010)"
+    },
+    {
+      "text": "124 D. López Barreiro, W. Prins, F. Ronsse and W. Brilman, Biomass and Bioenergy, 2013, 53, 113–127.",
+      "title": "Biomass and Bioenergy, Page 113–127, (2013)"
+    },
+    {
+      "text": "125 D. López Barreiro, B. R. Gómez, F. Ronsse, U. Hornung, A. Kruse and W. Prins, Fuel Process. Technol., 2016, 148, 117–127.",
+      "title": "Fuel Process. Technol., Page 117–127, (2016)"
+    },
+    {
+      "text": "126 M. Sharma, J. Singh, C. Baskar and A. Kumar, Biotechnologia, 2019, 100, 179–194.",
+      "title": "Biotechnologia, Vol. 100, Page 179–194, (2019)"
+    },
+    {
+      "text": "127 M. Lavanya, A. Meenakshisundaram, S. Renganathan, S. Chinnasamy, D. M. Lewis, J. Nallasivam and S. Bhaskar, Bioresour. Technol., 2016, 203, 228–235.",
+      "title": "Bioresour. Technol., Page 228–235, (2016)"
+    },
+    {
+      "text": "128 S. Badoga, A. Alvarez-Majmutov, T. Xing, R. Gieleciak and J. Chen, Energy and Fuels, 2020, 34, 7160–7169.",
+      "title": "Energy and Fuels, Vol. 34, Page 7160–7169, (2020)"
+    },
+    {
+      "text": "129 R. Carpio, C. T. Kuo, R. De Leon, L. C. Schideman and Y. Zhang, Int. J. Smart Grid Clean Energy, 2018, 7, 13–23.",
+      "title": "Int. J. Smart Grid Clean Energy, Vol. 7, Page 13–23, (2018)"
+    },
+    {
+      "text": "130 M. Haider, D. Castello, K. Michalski, T. Pedersen and L. Rosendahl, Energies, 2018, 11, 3360.",
+      "title": "Energies, Vol. 11, Page 3360, (2018)"
+    },
+    {
+      "text": "131 J. Arun, K. P. Gopinath, S. J. Shreekanth, R. Sahana, M. S. Raghavi and D. Gnanaprakash, Pet. Chem., 2019, 59, 194–200.",
+      "title": "Pet. Chem., Vol. 59, Page 194–200, (2019)"
+    },
+    {
+      "text": "132 T. Aysu, A. Demirbaş, A. Ş. Bengü and M. M. Küçük, Process Saf. Environ. Prot., 2015, 94, 339–349.",
+      "title": "Process Saf. Environ. Prot., Vol. 94, Page 339–349, (2015)"
+    },
+    {
+      "text": "133 R. S. Badrolnizam, O. S. J. Elham, S. N. Hadzifah, M. H. N. Husain, A. R. Hidayu, N. F. Mohammad and A. R. Mohamad Daud, J. Phys. Conf. Ser., 2019, 1349, 012108.",
+      "title": "J. Phys. Conf. Ser., Vol. 1349, Page 012108, (2019)"
+    },
+    {
+      "text": "134 T. M. Brown, P. Duan and P. E. Savage, Energy and Fuels, 2010, 24, 3639–3646.",
+      "title": "Energy and Fuels, Vol. 24, Page 3639–3646, (2010)"
+    },
+    {
+      "text": "135 B. de Caprariis, P. De Filippis, A. Petrullo and M. Scarsella, Fuel, 2017, 208, 618–625.",
+      "title": "Fuel, Vol. 208, Page 618–625, (2017)"
+    },
+    {
+      "text": "136 Y. J. Ding, C. X. Zhao and Z. C. Liu, Bioresour. Technol., 2019, 294, 122097.",
+      "title": "Bioresour. Technol., Vol. 294, Page 122097, (2019)"
+    },
+    {
+      "text": "137 L. Hadhoum, M. Balistrou, G. Burnens, K. Loubar and M. Tazerout, Bioresour. Technol., 2016, 218, 9–17.",
+      "title": "Bioresour. Technol., Vol. 218, Page 9–17, (2016)"
+    },
+    {
+      "text": "138 D. López Barreiro, S. Riede, U. Hornung, A. Kruse and W. Prins, Algal Res., 2015, 12, 206–212.",
+      "title": "Algal Res., Vol. 12, Page 206–212, (2015)"
+    },
+    {
+      "text": "139 D. Xu, G. Lin, L. Liu, Y. Wang, Z. Jing and S. Wang, Energy, 2018, 159, 686–695.",
+      "title": "Energy, Page 686–695, (2018)"
+    },
+    {
+      "text": "140 W. Yang, X. Li, S. Liu and L. Feng, Energy Convers. Manag., 2014, 87, 938–945.",
+      "title": "Energy Convers. Manag., Page 938–945, (2014)"
+    },
+    {
+      "text": "141 R. Obeid, D. M. Lewis, N. Smith, T. Hall and P. Van Eyk, Energy and Fuels, 2020, 34, 419–429.",
+      "title": "Energy and Fuels, Vol. 34, Page 419–429, (2020)"
+    },
+    {
+      "text": "142 C. Yuan, S. Wang, L. Qian, B. Barati, X. Gong, A. E. F. Abomohra, X. Wang, S. Esakkimuthu, Y. Hu and L. Liu, Int. J. Energy Res., 2019, 43, 8841–8851.",
+      "title": "Int. J. Energy Res., Vol. 43, Page 8841–8851, (2019)"
+    },
+    {
+      "text": "143 B. Zhang, J. Chen, S. Kandasamy and Z. He, Energy, 2020, 193, 116645.",
+      "title": "Energy, Vol. 193, Page 116645, (2020)"
+    },
+    {
+      "text": "144 J. L. Zheng, M. Q. Zhu and H. tang Wu, Waste Manag., 2015, 43, 230–238.",
+      "title": "Waste Manag., Vol. 43, Page 230–238, (2015)"
+    },
+    {
+      "text": "145 D. Zhou, L. Zhang, S. Zhang, H. Fu and J. Chen, Energy and Fuels, 2010, 24, 4054–4061.",
+      "title": "Energy and Fuels, Vol. 24, Page 4054–4061, (2010)"
+    },
+    {
+      "text": "146 Z. Zhu, L. Rosendahl, S. S. Toor, D. Yu and G. Chen, Appl. Energy, 2015, 137, 183–192.",
+      "title": "Appl. Energy, Page 183–192, (2015)"
+    },
+    {
+      "text": "147 Z. Zhu, S. S. Toor, L. Rosendahl, D. Yu and G. Chen, Energy, 2015, 80, 284–292.",
+      "title": "Energy, Vol. 80, Page 284–292, (2015)"
+    },
+    {
+      "text": "148 S. Zou, Y. Wu, M. Yang, C. Li and J. Tong, Energy Environ. Sci., 2010, 3, 1073–1078.",
+      "title": "Energy Environ. Sci., Vol. 3, Page 1073–1078, (2010)"
+    },
+    {
+      "text": "149 E. Akalin, Y. M. Kim, K. Alper, V. Oja, K. Tekin, I. Durukan, M. Z. Siddiqui and S. Karagöz, Energy and Fuels, 2019, 33, 7424–7435.",
+      "title": "Energy and Fuels, Vol. 33, Page 7424–7435, (2019)"
+    },
+    {
+      "text": "150 Y. Alhassan, N. Kumar and I. M. Bugaje, Bioresour. Technol., 2016, 199, 375–381.",
+      "title": "Bioresour. Technol., Vol. 199, Page 375–381, (2016)"
+    },
+    {
+      "text": "151 K. Anastasakis and A. B. Ross, Fuel, 2015, 139, 546–553.",
+      "title": "Fuel, Page 546–553, (2015)"
+    },
+    {
+      "text": "152 K. Anastasakis and A. B. Ross, Bioresour. Technol., 2011, 102, 4876–4883.",
+      "title": "Bioresour. Technol., Vol. 102, Page 4876–4883, (2011)"
+    },
+    {
+      "text": "153 T. Aysu and H. Durak, J. Supercrit. Fluids, 2015, 102, 98–114.",
+      "title": "J. Supercrit. Fluids, Page 98–114, (2015)"
+    },
+    {
+      "text": "154 Q. V. Bach, M. V. Sillero, K. Q. Tran and J. Skjermo, Algal Res., 2014, 6, 271–276.",
+      "title": "Algal Res., Vol. 6, Page 271–276, (2014)"
+    },
+    {
+      "text": "155 P. Biller, A. B. Ross, S. C. Skill, A. Lea-Langton, B. Balasundaram, C. Hall, R. Riley and C. A. Llewellyn, Algal Res., 2012, 1, 70–76.",
+      "title": "Algal Res., Vol. 1, Page 70–76, (2012)"
+    },
+    {
+      "text": "156 P. Biller, I. Johannsen, J. S. dos Passos and L. D. M. Ottosen, Water Res., 2018, 130, 58– 68.",
+      "title": "Water Res., Page 58–68, (2018)"
+    },
+    {
+      "text": "157 P. Biller, R. B. Madsen, M. Klemmer, J. Becker, B. B. Iversen and M. Glasius, Bioresour. Technol., 2016, 220, 190–199.",
+      "title": "Bioresour. Technol., Page 190–199, (2016)"
+    },
+    {
+      "text": "158 M. P. Caporgno, J. Pruvost, J. Legrand, O. Lepine, M. Tazerout and C. Bengoa, Bioresour. Technol., 2016, 214, 404–410.",
+      "title": "Bioresour. Technol., Page 404–410, (2016)"
+    },
+    {
+      "text": "159 G. Chen, M. Hu, G. Du, S. Tian, Z. He, B. Liu and W. Ma, Energy & Fuels, 2020, 34, 1145–1152.",
+      "title": "Energy & Fuels, Vol. 34, Page 1145–1152, (2020)"
+    },
+    {
+      "text": "160 W. Costanzo, R. Hilten, U. Jena, K. C. Das and J. R. Kastner, Algal Res., 2016, 13, 53–68.",
+      "title": "Algal Res., Vol. 13, Page 53–68, (2016)"
+    },
+    {
+      "text": "161 B. de Caprariis, M. P. Bracciale, I. Bavasso, G. Chen, M. Damizia, V. Genova, F. Marra, L. Paglia, G. Pulci, M. Scarsella, L. Tai and P. De Filippis, Sci. Total Environ., 2020, 709, 136215.",
+      "title": "Sci. Total Environ., Page 136215, (2020)"
+    },
+    {
+      "text": "162 B. de Caprariis, I. Bavasso, M. P. Bracciale, M. Damizia, P. De Filippis and M. Scarsella, J. Anal. Appl. Pyrolysis, 2019, 139, 123–130.",
+      "title": "J. Anal. Appl. Pyrolysis, Page 123–130, (2019)"
+    },
+    {
+      "text": "163 B. E. O. Eboibi, D. M. Lewis, P. J. Ashman and S. Chinnasamy, Bioresour. Technol., 2014, 174, 212–221.",
+      "title": "Bioresour. Technol., Vol. 174, Page 212–221, (2014)"
+    },
+    {
+      "text": "164 D. C. Elliott, T. R. Hart, G. G. Neuenschwander, L. J. Rotness, G. Roesijadi, A. H. Zacher and J. K. Magnuson, ACS Sustain. Chem. Eng., 2014, 2, 207–215.",
+      "title": "ACS Sustain. Chem. Eng., Vol. 2, Page 207–215, (2014)"
+    },
+    {
+      "text": "165 D. C. Elliott, T. R. Hart, A. J. Schmidt, G. G. Neuenschwander, L. J. Rotness, M. V. Olarte, A. H. Zacher, K. O. Albrecht, R. T. Hallen and J. E. Holladay, Algal Res., 2013, 2, 445–454.",
+      "title": "Algal Res., Vol. 2, Page 445–454, (2013)"
+    },
+    {
+      "text": "166 J. L. Faeth, P. J. Valdez and P. E. Savage, Energy and Fuels, 2013, 27, 1391–1398.",
+      "title": "Energy and Fuels, Vol. 27, Page 1391–1398, (2013)"
+    },
+    {
+      "text": "167 L. Garcia Alba, C. Torri, C. Samorì, J. Van Der Spek, D. Fabbri, S. R. A. Kersten and D. W. F. Brilman, Energy and Fuels, 2012, 26, 642–657.",
+      "title": "Energy and Fuels, Vol. 26, Page 642–657, (2012)"
+    },
+    {
+      "text": "168 A. Gollakota and P. E. Savage, Energy and Fuels, 2019, 33, 11328–11338.",
+      "title": "Energy and Fuels, Vol. 33, Page 11328–11338, (2019)"
+    },
+    {
+      "text": "169 A. V. Grigorenko, Y. I. Kostyukevich, N. I. Chernova, S. V. Kiseleva, E. A. Kiseleva, O. S. Popel, G. N. Vladimirov, E. N. Nikolaev, V. Kumar and M. S. Vlaskin, Russ. J. Appl. Chem., 2019, 92, 1480–1486.",
+      "title": "Russ. J. Appl. Chem., Vol. 92, Page 1480–1486, (2019)"
+    },
+    {
+      "text": "170 Y. Guo, W. Song, J. Lu, Q. Ma, D. Xu and S. Wang, Algal Res., 2015, 11, 242–247.",
+      "title": "Algal Res., Vol. 11, Page 242–247, (2015)"
+    },
+    {
+      "text": "171 G. Haarlemmer, C. Guizani, S. Anouti, M. Déniel, A. Roubaud and S. Valin, Fuel, 2016,",
+      "title": "Fuel, (2016)"
+    },
+    {
+      "text": "212 M. S. Vlaskin, A. V. Grigorenko, M. S. Kotelev, D. S. Kopitsyn, K. M. Mazurova and E. V. Ivanov, Chem. Technol. Fuels Oils, 2019, 55, 373–377.",
+      "title": "Chem. Technol. Fuels Oils, Vol. 55, Page 373–377, (2019)"
+    },
+    {
+      "text": "213 B. E. Eboibi, Vol, Icsher J., 2015, 1, 47–55.",
+      "title": "Icsher J., Vol. 1, Page 47–55, (2015)"
+    },
+    {
+      "text": "214 F. Wang, Z. Chang, P. Duan, W. Yan, Y. Xu, L. Zhang, J. Miao and Y. Fan, Bioresour. Technol., 2013, 149, 509–515.",
+      "title": "Bioresour. Technol., Page 509–515, (2013)"
+    },
+    {
+      "text": "215 C. Xu and T. Etcheverry, Fuel, 2008, 87, 335–345.",
+      "title": "Fuel, Vol. 87, Page 335–345, (2008)"
+    },
+    {
+      "text": "216 D. Xu and P. E. Savage, Algal Res., 2014, 6, 1–7.",
+      "title": "Algal Res., Vol. 6, Page 1–7, (2014)"
+    },
+    {
+      "text": "217 D. Xu, Y. Wang, G. Lin, S. Guo, S. Wang and Z. Wu, Renew. Energy, 2019, 138, 1143– 1151.",
+      "title": "Renew. Energy, Page 1143–1151, (2019)"
+    },
+    {
+      "text": "218 I. Nava Bravo, S. B. Velásquez-Orta, R. Cuevas-García, I. Monje-Ramírez, A. Harvey and M. T. Orta Ledesma, Fuel, 2019, 241, 255–263.",
+      "title": "Fuel, Page 255–263, (2019)"
+    },
+    {
+      "text": "219 W. H. Yan, P. G. Duan, F. Wang and Y. P. Xu, Fuel, 2016, 185, 229–235.",
+      "title": "Fuel, Page 229–235, (2016)"
+    },
+    {
+      "text": "220 C. Yang, L. Jia, C. Chen, G. Liu and W. Fang, Bioresour. Technol., 2011, 102, 4580– 4584.",
+      "title": "Bioresour. Technol., Vol. 102, Page 4580–4584, (2011)"
+    },
+    {
+      "text": "221 C. Yang, S. Wang, M. Ren, Y. Li and W. Song, Energy and Fuels, 2019, 33, 11302– 11309.",
+      "title": "Energy and Fuels, Vol. 33, Page 11302–11309, (2019)"
+    },
+    {
+      "text": "222 L. Yang, L. Nazari, Z. Yuan, K. Corscadden, C. C. Xu and Q. S. He, Biomass and Bioenergy, 2016, 86, 191–198.",
+      "title": "Biomass and Bioenergy, Vol. 86, Page 191–198, (2016)"
+    },
+    {
+      "text": "223 T. Yang, X. Liu, R. Li, B. Li and X. Kai, J. Supercrit. Fluids, 2019, 144, 28–38.",
+      "title": "J. Supercrit. Fluids, Page 28–38, (2019)"
+    },
+    {
+      "text": "224 Y. F. Yang, C. P. Feng, Y. Inamori and T. Maekawa, Resour. Conserv. Recycl., 2004, 43, 21–33.",
+      "title": "Resour. Conserv. Recycl., Vol. 43, Page 21–33, (2004)"
+    },
+    {
+      "text": "225 S. Yin, R. Dolan, M. Harris and Z. Tan, Bioresour. Technol., 2010, 101, 3657–3664.",
+      "title": "Bioresour. Technol., Vol. 101, Page 3657–3664, (2010)"
+    },
+    {
+      "text": "226 S. ya Yokoyama, A. Suzuki, M. Murakami, T. Ogi, K. Koguchi and E. Nakamura, Fuel, 1987, 66, 1150–1155.",
+      "title": "Fuel, Vol. 66, Page 1150–1155, (1987)"
+    },
+    {
+      "text": "227 J. M. Jarvis, K. O. Albrecht, J. M. Billing, A. J. Schmidt, R. T. Hallen and T. M. Schaub, Energy and Fuels, 2018, 32, 8483–8493.",
+      "title": "Energy and Fuels, Vol. 32, Page 8483–8493, (2018)"
+    },
+    {
+      "text": "228 A. H. Zacher, M. V. Olarte, D. M. Santosa, D. C. Elliott and S. B. Jones, Green Chem., 2014, 16, 491–515.",
+      "title": "Green Chem., Vol. 16, Page 491–515, (2014)"
+    },
+    {
+      "text": "229 J. J. Milledge and S. Heaven, Rev. Environ. Sci. Biotechnol., 2013, 12, 165–178.",
+      "title": "Rev. Environ. Sci. Biotechnol., Vol. 12, Page 165–178, (2013)"
+    },
+    {
+      "text": "230 A. Demirbas, Appl. Energy, 2011, 88, 17–28.",
+      "title": "Appl. Energy, Vol. 88, Page 17–28, (2011)"
+    },
+    {
+      "text": "231 K. F. Tzanetis, J. A. Posada and A. Ramirez, Renew. Energy, 2017, 113, 1388–1398.",
+      "title": "Renew. Energy, Vol. 113, Page 1388–1398, (2017)"
+    },
+    {
+      "text": "232 Q. Zhang, J. Chang, T. Wang and Y. Xu, Energy Convers. Manag., 2007, 48, 87–92.",
+      "title": "Energy Convers. Manag., Vol. 48, Page 87–92, (2007)"
+    },
+    {
+      "text": "233 A. Oasmaa and S. Czernik, Energy and Fuels, 1999, 13, 914–921.",
+      "title": "Energy and Fuels, Vol. 13, Page 914–921, (1999)"
+    },
+    {
+      "text": "234 P. J. Valdez, J. G. Dickinson and P. E. Savage, Energy and Fuels, 2011, 25, 3235–3243.",
+      "title": "Energy and Fuels, Vol. 25, Page 3235–3243, (2011)"
+    },
+    {
+      "text": "235 N. U. Saqib, H. B. Sharma, S. Baroutian, B. Dubey and A. K. Sarmah, Sci. Total Environ., 2019, 690, 261–276.",
+      "title": "Sci. Total Environ., Page 261–276, (2019)"
+    },
+    {
+      "text": "236 S. Papadokonstantakis, A. Gambardella, J. Askmar and Y. Ding, Superstructure investigation for $P$ -recovery technologies integration with macroalgae based hydrothermal liquefaction, Elsevier Masson SAS, 2018, vol. 44.",
+      "title": "Superstructure investigation for $P$ -recovery technologies integration with macroalgae based hydrothermal liquefaction"
+    },
+    {
+      "text": "237 L. Leng, J. Li, Z. Wen and W. Zhou, Bioresour. Technol., 2018, 256, 529–542.",
+      "title": "Bioresour. Technol., Page 529–542, (2018)"
+    },
+    {
+      "text": "238 P. Biller, R. B. Madsen, M. Klemmer, J. Becker, B. B. Iversen and M. Glasius, Bioresour. Technol., 2016, 220, 190–199.",
+      "title": "Bioresour. Technol., Page 190–199, (2016)"
+    },
+    {
+      "text": "239 L. Garcia Alba, C. Torri, D. Fabbri, S. R. A. Kersten and D. W. F. Wim Brilman, Chem. Eng. J., 2013, 228, 214–223.",
+      "title": "Chem. Eng. J., Page 214–223, (2013)"
+    },
+    {
+      "text": "240 B. Zhang, H. Chen and Z. He, Int. J. Energy Res., 2019, 43, 7135–7145.",
+      "title": "Int. J. Energy Res., Vol. 43, Page 7135–7145, (2019)"
+    },
+    {
+      "text": "241 B. Maddi, E. Panisko, T. Wietsma, T. Lemmon, M. Swita, K. Albrecht and D. Howe, ACS Sustain. Chem. Eng., 2017, 5, 2205–2214.",
+      "title": "ACS Sustain. Chem. Eng., Vol. 5, Page 2205–2214, (2017)"
+    },
+    {
+      "text": "242 P. Biller, D. Lawson, R. B. Madsen, J. Becker, B. B. Iversen and M. Glasius, Biomass Convers. Biorefinery, 2017, 7, 467–477.",
+      "title": "Biomass Convers. Biorefinery, Vol. 7, Page 467–477, (2017)"
+    },
+    {
+      "text": "243 E. Ovsyannikova, A. Kruse and G. C. Becker, Energies, 2020, 13, 379.",
+      "title": "Energies, Vol. 13, Page 379, (2020)"
+    },
+    {
+      "text": "244 P. H. Chen, J. L. Venegas Jimenez, S. M. Rowland, J. C. Quinn and L. M. L. Laurens, Algal Res., 2020, 46, 101776.",
+      "title": "Algal Res., Vol. 46, Page 101776, (2020)"
+    },
+    {
+      "text": "245 P. Das, M. AbdulQuadir, M. Thaher, S. Khan, A. K. Chaudhary and H. Al-Jabri, Bioresour. Technol., 2020, 295, 122310.",
+      "title": "Bioresour. Technol., Page 122310, (2020)"
+    },
+    {
+      "text": "246 Y. Zhou, L. Schideman, M. Zheng, A. Martin-Ryals, P. Li, G. Tommaso and Y. Zhang, Water Sci. Technol., 2015, 72, 2139–2147.",
+      "title": "Water Sci. Technol., Vol. 72, Page 2139–2147, (2015)"
+    },
+    {
+      "text": "247 H. Chen, S. Hao, Z. Chen, S. O-Thong, J. Fan, J. Clark, G. Luo and S. Zhang, Water Res., 2020, 168, 115199.",
+      "title": "Water Res., Page 115199, (2020)"
+    },
+    {
+      "text": "248 F. Monlau, C. Sambusiti, A. Barakat, M. Quéméneur, E. Trably, J. P. Steyer and H. Carrère, Biotechnol. Adv., 2014, 32, 934–951.",
+      "title": "Biotechnol. Adv., Vol. 32, Page 934–951, (2014)"
+    },
+    {
+      "text": "249 A. Barakat, F. Monlau, J. Steyer and H. Carrere, Bioresour. Technol., 2012, 104, 90–99.",
+      "title": "Bioresour. Technol., Page 90–99, (2012)"
+    },
+    {
+      "text": "250 D. Xu, L. Liu, N. Wei, Y. Guo, S. Wang, Z. Wu and P. Duan, Int. J. Hydrogen Energy, 2019, 44, 26181–26192.",
+      "title": "Int. J. Hydrogen Energy, Vol. 44, Page 26181–26192, (2019)"
+    },
+    {
+      "text": "251 R. Cherad, J. A. Onwudili, P. Biller, P. T. Williams and A. B. Ross, Fuel, 2016, 166, 24– 28.",
+      "title": "Fuel, Vol. 166, Page 24-28, (2016)"
+    },
+    {
+      "text": "252 X. Zhuang, Y. Huang, Y. Song, H. Zhan, X. Yin and C. Wu, Bioresour. Technol., 2017, 245, 463–470.",
+      "title": "Bioresour. Technol., Page 463–470, (2017)"
+    },
+    {
+      "text": "253 U. Jena, N. Vaidyanathan, S. Chinnasamy and K. C. Das, Bioresour. Technol., 2011, 102, 3380–3387.",
+      "title": "Bioresour. Technol., Vol. 102, Page 3380–3387, (2011)"
+    },
+    {
+      "text": "254 M. Pham, L. Schideman, J. Scott, N. Rajagopalan and M. J. Plewa, Environ. Sci. Technol., 2013, 47, 2131–2138.",
+      "title": "Environ. Sci. Technol., Vol. 47, Page 2131–2138, (2013)"
+    },
+    {
+      "text": "255 K. Bustos-Ramirez, C. E. Barrera-Diaz, M. De Icaza, A. L. Martínez-Hernández and C. Velasco-Santos, J. Chem., 2015, 2015, 1–10.",
+      "title": "J. Chem., Vol. 2015, Page 1–10, (2015)"
+    },
+    {
+      "text": "256 B. H. Y. Ong, T. G. Walmsley, M. J. Atkins and M. R. W. Walmsley, J. Clean. Prod., 2018, 199, 737–750.",
+      "title": "J. Clean. Prod., Page 737–750, (2018)"
+    },
+    {
+      "text": "258 T. Minowa, F. Zhen and T. Ogi, J. Supercrit. Fluids, 1998, 13, 253–259.",
+      "title": "J. Supercrit. Fluids, Vol. 13, Page 253–259, (1998)"
+    },
+    {
+      "text": "259 Y. H. Zhang, G. Yu, L. C. Schideman and Y. Zhou, Anim. Prod. Technol. Int. Conf. Agric. Eng. - CIGR-AgEng 2012 Agric. Eng. a Heal. Life, Val. Spain, 8-12 July 2012., 2012, C– 1694.",
+      "title": "Anim. Prod. Technol. Int. Conf. Agric. Eng. - CIGR-AgEng 2012 Agric. Eng. a Heal. Life, Val. Spain, 8-12 July 2012., Page C– 1694, (2012)"
+    },
+    {
+      "text": "261 L. Cao, G. Luo, S. Zhang and J. Chen, RSC Adv., 2016, 6, 15260–15270.",
+      "title": "RSC Adv., Vol. 6, Page 15260–15270, (2016)"
+    },
+    {
+      "text": "262 F. Cheng, K. Mallick, S. M. Henkanatte Gedara, J. M. Jarvis, T. Schaub, U. Jena, N. Nirmalakhandan and C. E. Brewer, Bioresour. Technol., 2019, 292, 121884.",
+      "title": "Bioresour. Technol., Page 121884, (2019)"
+    },
+    {
+      "text": "263 N. I. Chernova, S. V. Kiseleva, M. S. Vlaskin, A. V. Grigorenko and Y. Y. Rafikova, in IOP Conference Series: Materials Science and Engineering, 2019, vol. 564.",
+      "title": "IOP Conference Series: Materials Science and Engineering, Vol. 564, (2019)"
+    },
+    {
+      "text": "264 G. Goswami, B. B. Makut and D. Das, Sci. Rep., 2019, 9, 1–12.",
+      "title": "Sci. Rep., Vol. 9, Page 1–12, (2019)"
+    },
+    {
+      "text": "265 G. Goswami, A. Sinha, R. Kumar, B. Chandra Dutta, H. Singh and D. Das, Energy, 2019, 189, 116136.",
+      "title": "Energy, Page 116136, (2019)"
+    },
+    {
+      "text": "266 Y. Herng, S. Yusup, A. T. Quitain, R. R. Tan and M. Sasaki, Energy Convers. Manag., 2015, 104, 180–188.",
+      "title": "Energy Convers. Manag., Page 180–188, (2015)"
+    },
+    {
+      "text": "267 D. C. Hietala, J. L. Faeth and P. E. Savage, Bioresour. Technol., 2016, 214, 102–111.",
+      "title": "Bioresour. Technol., Vol. 214, Page 102–111, (2016)"
+    },
+    {
+      "text": "268 M. León, A. F. Marcilla and Á. N. García, Waste Manag., 2019, 99, 49–59.",
+      "title": "Waste Manag., Page 49–59, (2019)"
+    },
+    {
+      "text": "269 H. Li, J. Lu, Y. Zhang and Z. Liu, J. Anal. Appl. Pyrolysis, 2018, 135, 133–140.",
+      "title": "J. Anal. Appl. Pyrolysis, Vol. 135, Page 133–140, (2018)"
+    },
+    {
+      "text": "270 R. B. Madsen and M. Glasius, Ind. Eng. Chem. Res., 2019, 58, 17583–17600.",
+      "title": "Ind. Eng. Chem. Res., Vol. 58, Page 17583–17600, (2019)"
+    },
+    {
+      "text": "271 S. Marx, R. J. Venter, C. Stols and D. Bartlett, Eur. Biomass Conf. Exhib. Proc., 2019, 141–147.",
+      "title": "Eur. Biomass Conf. Exhib. Proc., Page 141–147, (2019)"
+    },
+    {
+      "text": "272 R. Obeid, D. Lewis, N. Smith and P. van Eyk, Chem. Eng. J., 2019, 370, 637–645.",
+      "title": "Chem. Eng. J., Vol. 370, Page 637–645, (2019)"
+    },
+    {
+      "text": "273 D. Sahoo, A. Awasthi, V. Dhyani, B. Biswas, J. Kumar, Y. S. Reddy, V. P. Adarsh, A. Puthiyamadam, K. K. Mallapureddy, R. K. Sukumaran, S. B. Ummalyma and T. Bhaskar, Carbon Resour. Convers., 2019, 2, 233–241.",
+      "title": "Carbon Resour. Convers., Vol. 2, Page 233–241, (2019)"
+    },
+    {
+      "text": "274 T. Shahi, B. Beheshti, A. Zenouzi and M. Almasi, Biocatal. Agric. Biotechnol., 2020, 23, 101494.",
+      "title": "Biocatal. Agric. Biotechnol., Vol. 23, Page 101494, (2020)"
+    },
+    {
+      "text": "275 R. Singh, K. Chaudhary, B. Biswas, B. Balagurumurthy and T. Bhaskar, J. Supercrit. Fluids, 2015, 104, 70–75.",
+      "title": "J. Supercrit. Fluids, Vol. 104, Page 70–75, (2015)"
+    },
+    {
+      "text": "276 Y. Tian, F. Wang, J. O. Djandja, S.-L. Zhang, Y.-P. Xu and P.-G. Duan, Fuel, 2020, 265, 116946.",
+      "title": "Fuel, Vol. 265, Page 116946, (2020)"
+    },
+    {
+      "text": "277 P. J. Valdez, M. C. Nelson, H. Y. Wang, X. N. Lin and P. E. Savage, Biomass and Bioenergy, 2012, 46, 317–331.",
+      "title": "Biomass and Bioenergy, Vol. 46, Page 317–331, (2012)"
+    },
+    {
+      "text": "278 G. Yu, Y. Zhang, L. Schideman, T. Funk and Z. Wang, Energy Environ. Sci., 2011, 4, 4587–4595.",
+      "title": "Energy Environ. Sci., Vol. 4, Page 4587–4595, (2011)"
+    },
+    {
+      "text": "279 J. Zhang, B. Jiang and D. Wang, Algal Res., 2016, 18, 45–50.",
+      "title": "Algal Res., Vol. 18, Page 45–50, (2016)"
+    },
+    {
+      "text": "280 B. Biswas, A. Arun Kumar, Y. Bisht, R. Singh, J. Kumar and T. Bhaskar, Bioresour. Technol., 2017, 242, 344–350.",
+      "title": "Bioresour. Technol., Page 344–350, (2017)"
+    },
+    {
+      "text": "281 S. Raikova, C. D. Le, T. A. Beacham, R. W. Jenkins, M. J. Allen and C. J. Chuck, Biomass and Bioenergy, 2017, 107, 244–253.",
+      "title": "Biomass and Bioenergy, Page 244–253, (2017)"
+    },
+    {
+      "text": "282 B. Biswas, A. C. Fernandes, J. Kumar, U. D. Muraleedharan and T. Bhaskar, Fuel, 2018, 222, 394–401.",
+      "title": "Fuel, Page 394–401, (2018)"
+    },
+    {
+      "text": "283 L. Yan, Y. Wang, J. Li, Y. Zhang, L. Ma, F. Fu, B. Chen and H. Liu, Bioresour. Technol., 2019, 292, 121286.",
+      "title": "Bioresour. Technol., Vol. 292, Page 121286, (2019)"
+    },
+    {
+      "text": "284 J. Lu, J. Zhang, Z. Zhu, Y. Zhang, Y. Zhao, R. Li, J. Watson, B. Li and Z. Liu, Energy Convers. Manag., 2017, 134, 340–346.",
+      "title": "Energy Convers. Manag., Page 340–346, (2017)"
+    },
+    {
+      "text": "285 A. Mathanker, D. Pudasainee, A. Kumar and R. Gupta, Fuel, 2020, 271, 117534.",
+      "title": "Fuel, Vol. 271, Page 117534, (2020)"
+    },
+    {
+      "text": "286 D. C. Elliott, in Thermochemical Processing of Biomass: Conversion into Fuels, Chemicals and Power, John Wiley & Sons, Ltd, 2011, pp. 200–231.",
+      "title": "Thermochemical Processing of Biomass: Conversion into Fuels, Chemicals and Power"
+    },
+    {
+      "title": "J. Biofuels, Vol. 6, Page 38, (2015)",
+      "text": "287 Y. Alhassan and N. Kumar, J. Biofuels, 2015, 6, 38."
+    },
+    {
+      "text": "288 A. Mishra, S. Gautam and T. Sharma, Int. J. Coal Sci. Technol., 2018, 5, 113–125.",
+      "title": "Int. J. Coal Sci. Technol., Vol. 5, Page 113–125, (2018)"
+    },
+    {
+      "text": "289 S. C. Yim, A. T. Quitain, S. Yusup, M. Sasaki, Y. Uemura and T. Kida, J. Supercrit. Fluids, 2017, 120, 384–394.",
+      "title": "J. Supercrit. Fluids, Page 384–394, (2017)"
+    },
+    {
+      "text": "290 A. A. Peterson, F. Vogel, R. P. Lachance, M. Fröling, M. J. Antal, J. W. Tester, M. J. Antal, Jr., J. W. Tester, M. J. Antal and J. W. Tester, Energy Environ. Sci., 2008, 1, 32– 65.",
+      "title": "Energy Environ. Sci., Vol. 1, Page 32–65, (2008)"
+    },
+    {
+      "text": "291 L. Qian, S. Wang and P. E. Savage, Bioresour. Technol., 2017, 232, 27–34.",
+      "title": "Bioresour. Technol., Vol. 232, Page 27–34, (2017)"
+    },
+    {
+      "text": "292 S. Sangon, S. Ratanavaraha, S. Ngamprasertsith and P. Prasassarakich, Fuel Process. Technol., 2006, 87, 201–207.",
+      "title": "Fuel Process. Technol., Vol. 87, Page 201–207, (2006)"
+    },
+    {
+      "text": "293 R. P. Overend and E. Chornet, Philos. Trans. R. Soc. London. Ser. A, Math. Phys. Sci., 1987, 321, 523–536.",
+      "title": "Philos. Trans. R. Soc. London. Ser. A, Math. Phys. Sci., Vol. 321, Page 523–536, (1987)"
+    },
+    {
+      "text": "294 D. J. Brasch and K. W. Free, Tappi, 1965, 48, 245–248.",
+      "title": "Tappi, Vol. 48, Page 245–248, (1965)"
+    },
+    {
+      "text": "295 J. L. Faeth and P. E. Savage, Bioresour. Technol., 2016, 206, 290–293.",
+      "title": "Bioresour. Technol., Page 290–293, (2016)"
+    },
+    {
+      "text": "296 X. Tang, C. Zhang, Z. Li and X. Yang, Bioresour. Technol., 2016, 202, 8–14.",
+      "title": "Bioresour. Technol., Page 8–14, (2016)"
+    },
+    {
+      "text": "297 M. Parsa, H. Jalilzadeh, M. Pazoki, R. Ghasemzadeh and M. Abduli, Bioresour. Technol., 2018, 250, 26–34.",
+      "title": "Bioresour. Technol., Page 26–34, (2018)"
+    },
+    {
+      "text": "298 J. L. Faeth and P. E. Savage, Bioresour. Technol., 2016, 206, 290–293.",
+      "title": "Bioresour. Technol., Page 290–293, (2016)"
+    },
+    {
+      "text": "299 X. Tang, C. Zhang and X. Yang, J. Clean. Prod., 2020, 258, 120660.",
+      "title": "J. Clean. Prod., Vol. 258, Page 120660, (2020)"
+    },
+    {
+      "text": "300 K. Q. Tran, Bioresour. Technol., 2016, 213, 327–332.",
+      "title": "Bioresour. Technol., Page 327–332, (2016)"
+    },
+    {
+      "text": "301 J. Oyler, in Biosolids & Renewable Energy Innovation Technology Seminar, 2017.",
+      "title": "Biosolids & Renewable Energy Innovation Technology Seminar, Page 301, (2017)"
+    },
+    {
+      "text": "303 S. Zhang, S. Zhou, X. Yang, W. Xi, K. Zheng, C. Chu, M. Ju and L. Liu, Environ. Sci. Pollut. Res., , DOI:10.1007/s11356-019-07267-4.",
+      "title": "Environ. Sci. Pollut. Res."
+    },
+    {
+      "text": "304 S. Feng, R. Wei, M. Leitch and C. C. Xu, Energy, 2018, 155, 234–241.",
+      "title": "Energy, Vol. 155, Page 234–241, (2018)"
+    },
+    {
+      "text": "305 R. Jogi, P. Mäki-Arvela, P. Virtanen, N. Kumar, J. Hemming, A. Smeds, T. A. Lestander and J. P. Mikkola, J. Chem. Technol. Biotechnol., 2019, 94, 3736–3744.",
+      "title": "J. Chem. Technol. Biotechnol., Vol. 94, Page 3736–3744, (2019)"
+    },
+    {
+      "text": "306 B. Meryemoǧlu, A. Hasanoǧlu, S. Irmak and O. Erbatur, Bioresour. Technol., 2014, 151, 278–283.",
+      "title": "Bioresour. Technol., Page 278–283, (2014)"
+    },
+    {
+      "text": "307 P. T. Patil, U. Armbruster and A. Martin, J. Supercrit. Fluids, 2014, 93, 121–129.",
+      "title": "J. Supercrit. Fluids, Page 121–129, (2014)"
+    },
+    {
+      "text": "308 S. Cheng, I. DCruz, M. Wang, M. Leitch and C. Xu, Energy and Fuels, 2010, 24, 4659– 4667.",
+      "title": "Energy and Fuels, Vol. 24, Page 4659–4667, (2010)"
+    },
+    {
+      "text": "309 R. Sarwono, Andreas, T. B. Bardant and S. Tursiloadi, in AIP Conference Proceedings, 2019, vol. 2175, p. 020035.",
+      "title": "AIP Conference Proceedings, Vol. 2175, Page 020035, (2019)"
+    },
+    {
+      "text": "310 B. Wang, Y. Huang and J. Zhang, J. Anal. Appl. Pyrolysis, 2014, 110, 382–389.",
+      "title": "J. Anal. Appl. Pyrolysis, Vol. 110, Page 382–389, (2014)"
+    },
+    {
+      "text": "311 X. F. Wu, J. J. Zhang, Y. H. Huang, M. F. Li, J. Bian and F. Peng, Ind. Crops Prod., 2019, 140, 111695.",
+      "title": "Ind. Crops Prod., Page 111695, (2019)"
+    },
+    {
+      "text": "312 J. Zhang, Y. Zhang and Z. Luo, Energy Procedia, 2014, 61, 1961–1964.",
+      "title": "Energy Procedia, Vol. 61, Page 1961–1964, (2014)"
+    },
+    {
+      "text": "313 Z. Zhang, T. Murayama, M. Sadakane, H. Ariga, N. Yasuda, N. Sakaguchi, K. Asakura and W. Ueda, Nat. Commun., 2015, 6, 1–10.",
+      "title": "Nat. Commun., Vol. 6, Page 1–10, (2015)"
+    },
+    {
+      "text": "314 B. M. Omar, M. Bita, I. Louafi and A. Djouadi, MethodsX, 2018, 5, 277–282.",
+      "title": "MethodsX, Vol. 5, Page 277–282, (2018)"
+    },
+    {
+      "text": "315 X. F. Wu, J. J. Zhang, M. F. Li, J. Bian and F. Peng, Energy Convers. Manag., 2019, 199, 111955.",
+      "title": "Energy Convers. Manag., Page 111955, (2019)"
+    },
+    {
+      "text": "316 S. Yin, A. K. Mehrotra and Z. Tan, Bioresour. Technol., 2011, 102, 6605–6610.",
+      "title": "Bioresour. Technol., Vol. 102, Page 6605–6610, (2011)"
+    },
+    {
+      "text": "317 Y. Chen, L. Dong, J. Miao, J. Wang, C. Zhu, Y. Xu, G. Y. Chen and J. Liu, Bioresour. Technol., 2019, 294, 122148.",
+      "title": "Bioresour. Technol., Vol. 294, Page 122148, (2019)"
+    },
+    {
+      "text": "318 A. Demirbaş, Energy Convers. Manag., 2000, 41, 1601–1607.",
+      "title": "Energy Convers. Manag., Vol. 41, Page 1601–1607, (2000)"
+    },
+    {
+      "text": "319 H. Durak and S. Genel, Energy Sources, Part A Recover. Util. Environ. Eff., 2020, 00, 1– 11.",
+      "title": "Energy Sources, Part A Recover. Util. Environ. Eff., Page 1–11, (2020)"
+    },
+    {
+      "text": "320 L. Nazari, Z. Yuan, M. B. Ray and C. (Charles) Xu, Appl. Energy, 2017, 203, 1–10.",
+      "title": "Appl. Energy, Page 1–10, (2017)"
+    },
+    {
+      "text": "321 Y. Zhang, J. Minaret, Z. Yuan, A. Dutta and C. Xu, Energies, 2018, 11, 3129.",
+      "title": "Energies, Vol. 11, Page 3129, (2018)"
+    },
+    {
+      "text": "322 R. Singh, B. Balagurumurthy, A. Prakash and T. Bhaskar, Bioresour. Technol., 2015, 178, 157–165.",
+      "title": "Bioresour. Technol., Page 157–165, (2015)"
+    },
+    {
+      "text": "323 G. Verkerk dr., J. B. Broens drs., W. Kranendonk drs., F. J. v. d. Puijl drs. and C. W. Stam drs., Binas; Informatieboek vwo/havo voor het onderwijs in de natuurwetenschappen, 1986.",
+      "title": "Binas; Informatieboek vwo/havo voor het onderwijs in de natuurwetenschappen"
+    },
+    {
+      "text": "324 C. Lou, G. Feng, F. Cao and Y. Chen, IOP Conf. Ser. Earth Environ. Sci., 2019, 332, 022021.",
+      "title": "IOP Conf. Ser. Earth Environ. Sci., Vol. 332, Page 022021, (2019)"
+    },
+    {
+      "text": "325 Y. Dote, S. Sawayama, S. Inoue, T. Minowa and S. ya Yokoyama, Fuel, 1994, 73, 1855– 1857.",
+      "title": "Fuel, Vol. 73, Page 1855–1857, (1994)"
+    },
+    {
+      "text": "326 S. Inoue, Y. Dote, S. Sawayama, T. Minowa, T. Ogi and S. ya Yokoyama, Biomass and Bioenergy, 1994, 6, 269–274.",
+      "title": "Biomass and Bioenergy, Vol. 6, Page 269–274, (1994)"
+    },
+    {
+      "text": "327 T. H. Pedersen and L. A. Rosendahl, Biomass and Bioenergy, 2015, 83, 206–215.",
+      "title": "Biomass and Bioenergy, Page 206–215, (2015)"
+    },
+    {
+      "text": "328 O. Beeck, Catalysis and the Adsorption of Hydrogen on Metal Catalysts, 1950, vol. 2.",
+      "title": "Catalysis and the Adsorption of Hydrogen on Metal Catalysts"
+    },
+    {
+      "text": "329 U. K. Singh and M. A. Vannice, Appl. Catal. A Gen., 2001, 213, 1–24.",
+      "title": "Appl. Catal. A Gen., Vol. 213, Page 1–24, (2001)"
+    },
+    {
+      "text": "330 L. Liu and A. Corma, Chem. Rev., 2018, 118, 4981–5079.",
+      "title": "Chem. Rev., Vol. 118, Page 4981–5079, (2018)"
+    },
+    {
+      "text": "331 S. De, B. Saha and R. Luque, Bioresour. Technol., 2015, 178, 108–118.",
+      "title": "Bioresour. Technol., Page 108–118, (2015)"
+    },
+    {
+      "text": "332 P. Duan and P. E. Savage, Ind. Eng. Chem. Res., 2011, 50, 52–61.",
+      "title": "Ind. Eng. Chem. Res., Vol. 50, Page 52–61, (2011)"
+    },
+    {
+      "text": "333 G. Govindasamy, R. Sharma and S. Subramanian, Bull. Chem. React. Eng. Catal., 2020, 15, 186–198.",
+      "title": "Bull. Chem. React. Eng. Catal., Vol. 15, Page 186–198, (2020)"
+    },
+    {
+      "text": "334 R. Jaswal, A. Shende, W. Nan, V. Amar and R. Shende, Energy and Fuels, 2019, 33, 6454–6462.",
+      "title": "Energy and Fuels, Vol. 33, Page 6454–6462, (2019)"
+    },
+    {
+      "text": "335 S. Kandasamy, B. Zhang, Z. He, H. Chen, H. Feng, Q. Wang, B. Wang, N. Bhuvanendran, S. Esakkimuthu, V. Ashokkumar and M. Krishnamoorthi, Biomass and Bioenergy, 2019, 131, 105417.",
+      "title": "Biomass and Bioenergy, Page 105417, (2019)"
+    },
+    {
+      "text": "336 M. S. Kotelev, D. S. Kopitsyn, M. S. Vlaskin, V. B. Mel’nikov, A. V. Grigorenko and E. V. Ivanov, Chem. Technol. Fuels Oils, 2019, 55, 511–514.",
+      "title": "Chem. Technol. Fuels Oils, Vol. 55, Page 511–514, (2019)"
+    },
+    {
+      "text": "337 M. Kotelev, I. Tiunov, E. Ivanov and Z. Namsaraev, IOP Conf. Ser. Earth Environ. Sci., 2019, 337, 012011.",
+      "title": "IOP Conf. Ser. Earth Environ. Sci., Vol. 337, Page 012011, (2019)"
+    },
+    {
+      "text": "338 R. Tungal and R. V. Shende, Appl. Energy, 2014, 134, 401–412.",
+      "title": "Appl. Energy, Page 401–412, (2014)"
+    },
+    {
+      "text": "339 Y. Xu, X. Zheng, H. Yu and X. Hu, Bioresour. Technol., 2014, 156, 1–5.",
+      "title": "Bioresour. Technol., Page 1–5, (2014)"
+    },
+    {
+      "text": "340 P. Losch, A. B. Pinar, M. G. Willinger, K. Soukup, S. Chavan, B. Vincent, P. Pale and B. Louis, J. Catal., 2017, 345, 11–23.",
+      "title": "J. Catal., Vol. 345, Page 11–23, (2017)"
+    },
+    {
+      "text": "341 K. Tekin, S. Karagöz and S. Bektaş, J. Supercrit. Fluids, 2012, 72, 134–139.",
+      "title": "J. Supercrit. Fluids, Vol. 72, Page 134–139, (2012)"
+    },
+    {
+      "text": "342 J. A. Delgado, S. Castillón, D. Curulla-Ferré, C. Claver and C. Godard, Catal. Commun., 2015, 71, 88–92.",
+      "title": "Catal. Commun., Vol. 71, Page 88–92, (2015)"
+    },
+    {
+      "text": "343 Y. Hirano, Y. Miyata, M. Taniguchi, N. Funakoshi, Y. Yamazaki, C. Ogino and Y. Kita, J. Anal. Appl. Pyrolysis, 2020, 145, 104719.",
+      "title": "J. Anal. Appl. Pyrolysis, Page 104719, (2020)"
+    },
+    {
+      "text": "344 J. L. Wagner, C. D. Le, V. P. Ting and C. J. Chuck, Fuel Process. Technol., 2017, 165, 102–111.",
+      "title": "Fuel Process. Technol., Page 102–111, (2017)"
+    },
+    {
+      "text": "345 D. L. Barreiro, B. R. Gómez, U. Hornung, A. Kruse and W. Prins, Energy and Fuels, 2015, 29, 6422–6432.",
+      "title": "Energy and Fuels, Vol. 29, Page 6422–6432, (2015)"
+    },
+    {
+      "text": "346 A. J. Mørup, J. Becker, P. S. Christensen, K. Houlberg, E. Lappa, M. Klemmer, R. B. Madsen, M. Glasius and B. B. Iversen, Ind. Eng. Chem. Res., 2015, 54, 5935–5947.",
+      "title": "Ind. Eng. Chem. Res., Vol. 54, Page 5935–5947, (2015)"
+    },
+    {
+      "text": "348 S. Itoh, A. Suzuki, T. Nakamura and S. ya Yokoyama, Desalination, 1994, 98, 127–133.",
+      "title": "Desalination, Page 127–133, (1994)"
+    },
+    {
+      "text": "349 K. S. Ocfemia, Y. Zhang and T. Funk, Trans. ASABE, 2006, 49, 1897–1904.",
+      "title": "Trans. ASABE, Vol. 49, Page 1897–1904, (2006)"
+    },
+    {
+      "text": "350 N. Sudasinghe, B. Dungan, P. Lammers, K. Albrecht, D. Elliott, R. Hallen and T. Schaub, FUEL, 2014, 119, 47–56.",
+      "title": "FUEL, Page 47–56, (2014)"
+    },
+    {
+      "text": "351 O. Y. Abdelaziz, K. Li, P. Tunå and C. P. Hulteberg, Biomass Convers. Biorefinery, 2018, 8, 455–470.",
+      "title": "Biomass Convers. Biorefinery, Vol. 8, Page 455–470, (2018)"
+    },
+    {
+      "text": "352 K. O. Albrecht, Y. Zhu, A. J. Schmidt, J. M. Billing, T. R. Hart, S. B. Jones, G. Maupin, R. Hallen, T. Ahrens and D. Anderson, Algal Res., 2016, 14, 17–27.",
+      "title": "Algal Res., Vol. 14, Page 17–27, (2016)"
+    },
+    {
+      "text": "353 T. Belkheiri, S. I. Andersson, C. Mattsson, L. Olausson, H. Theliander and L. Vamling, Biomass Convers. Biorefinery, 2018, 8, 585–595.",
+      "title": "Biomass Convers. Biorefinery, Vol. 8, Page 585–595, (2018)"
+    },
+    {
+      "text": "354 T. Belkheiri, S. I. Andersson, C. Mattsson, L. Olausson, H. Theliander and L. Vamling, Energy and Fuels, 2018, 32, 5923–5932.",
+      "title": "Energy and Fuels, Vol. 32, Page 5923–5932, (2018)"
+    },
+    {
+      "text": "355 T. Belkheiri, C. Mattsson, S. I. Andersson, L. Olausson, L. E. Åmand, H. Theliander and L. Vamling, Energy and Fuels, 2016, 30, 4916–4924.",
+      "title": "Energy and Fuels, Vol. 30, Page 4916–4924, (2016)"
+    },
+    {
+      "text": "356 P. Biller, B. K. Sharma, B. Kunwar and A. B. Ross, Fuel, 2015, 159, 197–205.",
+      "title": "Fuel, Page 197–205, (2015)"
+    },
+    {
+      "text": "357 F. Goudriaan and D. G. R. Peferoen, Chem. Eng. Sci., 1990, 45, 2729–2734.",
+      "title": "Chem. Eng. Sci., Vol. 45, Page 2729–2734, (1990)"
+    },
+    {
+      "text": "358 A. Hammerschmidt, N. Boukis, U. Galla, E. Dinjus and B. Hitzmann, Fuel, 2011, 90, 3424–3432.",
+      "title": "Fuel, Vol. 90, Page 3424–3432, (2011)"
+    },
+    {
+      "text": "359 A. Hammerschmidt, N. Boukis, U. Galla, T. Zevaco, E. Dinjus and B. Hitzmann, Biomass A. Hammerschmidt, N. Boukis, E. Hauer, U. Galla, E. Dinjus, B. Hitzmann, T. Larsen and S. D. Nygaard, Fuel, 2011, 90, 555–562.",
+      "title": "Fuel, Vol. 90, Page 555–562, (2011)"
+    },
+    {
+      "text": "379 J. A. Ramirez, R. J. Brown and T. J. Rainey, Energies, 2015, 8, 6765–6794.",
+      "title": "Energies, Vol. 8, Page 6765–6794, (2015)"
+    },
+    {
+      "text": "380 G. Perkins, N. Batalha, A. Kumar, T. Bhaskar and M. Konarova, Renew. Sustain. Energy Rev., 2019, 115, 109400.",
+      "title": "Renew. Sustain. Energy Rev., Vol. 115, Page 109400, (2019)"
+    },
+    {
+      "text": "381 M. Usman, S. Hao, H. Chen, S. Ren, D. C. W. Tsang, S. O-Thong, G. Luo and S. Zhang, Environ. Int., 2019, 133, 105257.",
+      "title": "Environ. Int., Page 105257, (2019)"
+    },
+    {
+      "text": "382 S. Hao, S. Ren, N. Zhou, H. Chen, M. Usman, C. He, Q. Shi, G. Luo and S. Zhang, J. Hazard. Mater., 2020, 383, 121163.",
+      "title": "J. Hazard. Mater., Page 121163, (2020)"
+    },
+    {
+      "text": "383 B. C. Si, J. M. Li, Z. B. Zhu, Y. H. Zhang, J. W. Lu, R. X. Shen, C. Zhang, X. H. Xing and Z. Liu, Biotechnol. Biofuels, 2016, 9, 1–15.",
+      "title": "Biotechnol. Biofuels, Vol. 9, Page 1–15, (2016)"
+    },
+    {
+      "text": "384 R. Posmanik, R. A. Labatut, A. H. Kim, J. G. Usack, J. W. Tester and L. T. Angenent, Bioresour. Technol., 2017, 233, 134–143.",
+      "title": "Bioresour. Technol., Vol. 233, Page 134–143, (2017)"
+    },
+    {
+      "text": "385 N. Kassem, D. Sills, R. Posmanik, C. Blair and J. W. Tester, Waste Manag., 2020, 103, 228–239.",
+      "title": "Waste Manag., Page 228–239, (2020)"
+    },
+    {
+      "text": "386 S. D. Davidson, J. A. Lopez-Ruiz, Y. Zhu, A. R. Cooper, K. O. Albrecht and R. A. Dagle, ACS Sustain. Chem. Eng., 2019, 7, 19889–19901.",
+      "title": "ACS Sustain. Chem. Eng., Vol. 7, Page 19889–19901, (2019)"
+    },
+    {
+      "text": "388 D. Knorr, J. Lukas and P. Schoen, Contract, 2013, 303, 275–3000.",
+      "title": "Contract, Vol. 303, Page 275–3000, (2013)"
+    },
+    {
+      "text": "389 D. C. Elliott, in Advances in Thermochemical Biomass Conversion, 1993, pp. 1299–1313.",
+      "title": "Advances in Thermochemical Biomass Conversion, Page 1299–1313, (1993)"
+    },
+    {
+      "text": "390 A. V. Mitroshkov, L. Zhong and L. M. P. Thomas, Analysis of Perfluorinated, Pharmaceutical, Personal Care Compounds and Heavy Metals in Waste Water Sludge using GC-MS/MS and Multicollector ICP-MS, Richland, WA (United States), 2019.",
+      "title": "Analysis of Perfluorinated, Pharmaceutical, Personal Care Compounds and Heavy Metals in Waste Water Sludge using GC-MS/MS and Multicollector ICP-MS"
+    },
+    {
+      "text": "391 C. H. Yu, C. H. Huang and C. S. Tan, Aerosol Air Qual. Res., 2012, 12, 745–769.",
+      "title": "Aerosol Air Qual. Res., Vol. 12, Page 745–769, (2012)"
+    },
+    {
+      "text": "392 A. Sinha, L. A. Darunte, C. W. Jones, M. J. Realff and Y. Kawajiri, Ind. Eng. Chem. Res., 2017, 56, 750–764.",
+      "title": "Ind. Eng. Chem. Res., Vol. 56, Page 750–764, (2017)"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Human\\Environmental Science\\A review on key design and operational parameters to optimize and develop hydrothermal liquefaction of biomass for biorefinery applications_split.json",
+    "processed_date": "2025-12-28T03:41:01.378951",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": false
+    }
+  }
+}

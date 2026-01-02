@@ -1,0 +1,353 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Quantum many-body scars and Hilbert space fragmentation- a review of exact results."
+    ],
+    [
+      1,
+      "Quantum Many-Body Scars and Hilbert Space Fragmentation: A Review of Exact Results"
+    ],
+    [
+      2,
+      "1. Introduction and Background"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Quantum Many-Body Scars (QMBS)"
+    ],
+    [
+      3,
+      "2.2 Hilbert Space Fragmentation (HSF)"
+    ],
+    [
+      3,
+      "2.3 Classical vs. Quantum Fragmentation"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 The Rydberg Surprise (2017)"
+    ],
+    [
+      3,
+      "3.2 The AKLT Model and Exact Scars (2018)"
+    ],
+    [
+      3,
+      "3.3 Systematization via Embedding (2017-2019)"
+    ],
+    [
+      3,
+      "3.4 Fractons and Dipole Conservation (2019-2020)"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Shiraishi-Mori (SM) Embedding Formalism"
+    ],
+    [
+      3,
+      "4.2 Spectrum Generating Algebras (SGA)"
+    ],
+    [
+      3,
+      "4.3 Commutant Algebras and Bond Algebras"
+    ],
+    [
+      3,
+      "4.4 Fisher Zeros and Complex Temperature Analysis (2024-2025)"
+    ],
+    [
+      3,
+      "4.5 Quantum Machine Learning (QML) Detection"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 The PXP Model"
+    ],
+    [
+      3,
+      "5.2 Dipole-Conserving Models (Fractons)"
+    ],
+    [
+      3,
+      "5.3 Lattice Gauge Theories (LGTs)"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Stability and Perturbation"
+    ],
+    [
+      3,
+      "6.2 The Thermodynamic Limit"
+    ],
+    [
+      3,
+      "6.3 Classical-Quantum Correspondence"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Higher Dimensions"
+    ],
+    [
+      3,
+      "7.2 Open Quantum Systems"
+    ],
+    [
+      3,
+      "7.3 Unifying Frameworks"
+    ],
+    [
+      3,
+      "7.4 Experimental Realization of Fractonic Scars"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Quantum many-body scars and Hilbert space fragmentation- a review of exact results.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 15:12:30*\n*Progress: [12/21]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Quantum_many-body_scars_and_Hilbert_space_fragmentation-_a_r_20251226_151230.md*\n---"
+    },
+    {
+      "heading": "Quantum Many-Body Scars and Hilbert Space Fragmentation: A Review of Exact Results",
+      "level": 1,
+      "content": "**Key Points**\n*   **Paradigm Shift:** Quantum many-body scars (QMBS) and Hilbert space fragmentation (HSF) represent novel mechanisms of weak ergodicity breaking, violating the Eigenstate Thermalization Hypothesis (ETH) without relying on disorder (like Many-Body Localization).\n*   **Exact Constructions:** The field has moved from numerical observation to rigorous analytical frameworks, primarily utilizing Shiraishi-Mori embedding, Spectrum Generating Algebras (SGA), and Commutant Algebras to construct exact non-thermal eigenstates.\n*   **Fragmentation:** HSF is characterized by the exponential shattering of the Hilbert space into dynamically disconnected sectors due to kinetic constraints (often linked to dipole conservation and fracton physics), definable via the commutant algebra dimension.\n*   **New Detection Methods:** Recent advances (2024-2025) have introduced \"Fisher Zeros\" in the complex temperature plane and Quantum Machine Learning (QML) techniques as powerful tools to identify scarred eigenstates without exhaustive diagonalization.\n*   **Classical-Quantum Correspondence:** Emerging research is re-evaluating the link between QMBS and Unstable Periodic Orbits (UPOs), proposing a distinction between \"thermal\" and \"non-thermal\" scars.\n\n---"
+    },
+    {
+      "heading": "1. Introduction and Background",
+      "level": 2,
+      "content": "The statistical mechanics of isolated quantum systems rests fundamentally on the Eigenstate Thermalization Hypothesis (ETH). ETH posits that for generic non-integrable systems, individual energy eigenstates are locally indistinguishable from a thermal ensemble, allowing the system to relax to thermal equilibrium solely through unitary evolution [cite: 1, 2]. For decades, the primary exception to this rule was Many-Body Localization (MBL), where strong disorder prevents thermalization across the entire spectrum.\n\nHowever, recent experimental and theoretical discoveries have unveiled a new regime of \"weak\" ergodicity breaking. This began with the observation of coherent, long-lived oscillations in a chain of Rydberg atoms, a system expected to be non-integrable and thermalizing [cite: 2, 3]. This phenomenon, termed **Quantum Many-Body Scars (QMBS)**, involves a small number of non-thermal eigenstates embedded within a dense spectrum of thermal states. Unlike MBL, where all states violate ETH, QMBS constitutes a violation of the strong ETH while potentially satisfying the weak ETH (where most states are thermal).\n\nParallel to this, the concept of **Hilbert Space Fragmentation (HSF)** emerged, describing systems where kinetic constraints fracture the Hilbert space into an exponentially large number of dynamically disconnected sectors [cite: 4, 5]. While QMBS and HSF share phenomenological similarities—such as the failure to thermalize from specific initial states—they represent distinct algebraic structures.\n\nThis review focuses on the \"exact results\" in this field. While early work relied heavily on numerics, the maturation of the field has provided rigorous frameworks—such as the Shiraishi-Mori embedding, commutant algebras, and spectrum-generating algebras—that allow for the analytical construction of Hamiltonians hosting these exotic states [cite: 6, 7]. We further review the most recent developments from 2023-2025, including the application of Fisher zeros [cite: 8, 9] and quantum machine learning [cite: 10] for scar detection."
+    },
+    {
+      "heading": "2.1 Quantum Many-Body Scars (QMBS)",
+      "level": 3,
+      "content": "QMBS are defined as a set of measure-zero eigenstates in a many-body Hamiltonian that exhibit sub-volume law entanglement entropy (often area-law or logarithmic) despite lying at high energy densities where volume-law entanglement is typical [cite: 2, 6].\nKey signatures include:\n*   **Revivals:** High-fidelity periodic revivals of the wavefunction $|\\psi(t)\\rangle$ when initialized in specific product states (e.g., the Néel state).\n*   **Non-thermal Expectation Values:** Local observables in scarred eigenstates deviate significantly from the microcanonical ensemble predictions.\n*   **Tower of States:** Scars often appear as a tower of eigenstates equally spaced in energy, $E_n \\approx E_0 + n\\omega$, facilitating coherent dynamics [cite: 3, 11]."
+    },
+    {
+      "heading": "2.2 Hilbert Space Fragmentation (HSF)",
+      "level": 3,
+      "content": "HSF occurs when the Hilbert space $\\mathcal{H}$ decomposes into a direct sum of dynamically disconnected Krylov subspaces, $\\mathcal{H} = \\bigoplus_\\lambda \\mathcal{K}_\\lambda$, such that the Hamiltonian is block-diagonal [cite: 4, 12].\n*   **Strong Fragmentation:** The dimension of the largest Krylov subspace vanishes relative to the total Hilbert space dimension in the thermodynamic limit ($D_{max}/D_{total} \\to 0$).\n*   **Weak Fragmentation:** The largest subspace dominates, but exponentially many smaller, disconnected subspaces persist.\n*   **Commutant Algebra Definition:** HSF is rigorously defined when the dimension of the commutant algebra (the set of operators commuting with all local Hamiltonian terms) grows exponentially with system size [cite: 4, 5]."
+    },
+    {
+      "heading": "2.3 Classical vs. Quantum Fragmentation",
+      "level": 3,
+      "content": "A crucial distinction exists between fragmentation in the product state basis (classical) and fragmentation that requires an entangled basis (quantum). Classical fragmentation is often visible in the connectivity graph of Fock states, while quantum fragmentation requires algebraic analysis of the bond algebra [cite: 4, 5]."
+    },
+    {
+      "heading": "3.1 The Rydberg Surprise (2017)",
+      "level": 3,
+      "content": "The field was ignited by the experiment of Bernien et al. (2017) using a 51-atom Rydberg simulator. The system, modeled by the PXP Hamiltonian, showed unexpected revivals from the antiferromagnetic state. This contradicted the prediction of rapid thermalization for non-integrable models [cite: 2, 3]."
+    },
+    {
+      "heading": "3.2 The AKLT Model and Exact Scars (2018)",
+      "level": 3,
+      "content": "Following the PXP discovery, Moudgalya et al. and others identified exact towers of scarred eigenstates in the Affleck-Kennedy-Lieb-Tasaki (AKLT) model. This provided the first analytical proof of QMBS, showing that the ground state of the AKLT model could be \"lifted\" to high energies as exact excited states [cite: 1, 6, 13]."
+    },
+    {
+      "heading": "3.3 Systematization via Embedding (2017-2019)",
+      "level": 3,
+      "content": "Shiraishi and Mori (2017) provided a systematic method to embed non-thermal states into non-integrable Hamiltonians using local projectors. This formally established that ETH violation could be constructed analytically, moving the field beyond serendipitous discovery [cite: 3, 14]."
+    },
+    {
+      "heading": "3.4 Fractons and Dipole Conservation (2019-2020)",
+      "level": 3,
+      "content": "The connection between HSF and fracton phases of matter was established by analyzing models with dipole moment conservation (e.g., conserving both charge $Q = \\sum n_i$ and dipole $P = \\sum i n_i$). These constraints were shown to lead to extensive fragmentation, linking condensed matter topological phases with non-ergodic dynamics [cite: 15, 16, 17]."
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "The theoretical backbone of QMBS and HSF relies on algebraic constructions that allow for exact solutions."
+    },
+    {
+      "heading": "4.1 Shiraishi-Mori (SM) Embedding Formalism",
+      "level": 3,
+      "content": "The SM formalism constructs a Hamiltonian $H$ such that a target subspace of states $\\mathcal{T}$ is an eigenspace. The Hamiltonian takes the form:\n$$ H = \\sum_j P_j h_j P_j + H' $$\nwhere $P_j$ are local projectors satisfying $P_j |\\psi\\rangle = 0$ for all $|\\psi\\rangle \\in \\mathcal{T}$. The \"target space\" $\\mathcal{T}$ is annihilated by the local operators, making them exact eigenstates of $H'$ (and thus $H$) if $[H', P_j]=0$ or if $H'$ is chosen appropriately. This method allows the embedding of low-entanglement states into thermal spectra [cite: 3, 14, 18].\n*   **Recent Extensions:** This formalism has been extended to open quantum systems (Liouvillians), creating decoherence-free subspaces that host scars [cite: 18]."
+    },
+    {
+      "heading": "4.2 Spectrum Generating Algebras (SGA)",
+      "level": 3,
+      "content": "SGA explains the \"tower\" structure of scars. If a Hamiltonian $H$ possesses a ladder operator $Q^\\dagger$ such that:\n$$ [H, Q^\\dagger] = \\omega Q^\\dagger $$\nand there exists a reference state $|\\psi_0\\rangle$ (often the ground state), then the states $|\\psi_n\\rangle = (Q^\\dagger)^n |\\psi_0\\rangle$ are exact eigenstates with energy $E_n = E_0 + n\\omega$.\n*   **Restricted SGA (RSGA):** In many cases, the commutation relation only holds within a specific subspace or when acting on specific states. This \"restricted\" algebra is responsible for scars in the AKLT and Hubbard models (via $\\eta$-pairing) [cite: 11, 19, 20, 21]."
+    },
+    {
+      "heading": "4.3 Commutant Algebras and Bond Algebras",
+      "level": 3,
+      "content": "To rigorously define HSF, one analyzes the **commutant algebra** $\\mathcal{C}$, defined as the set of all operators that commute with every local term $h_i$ of the Hamiltonian $H = \\sum h_i$.\n*   **Fragmentation Criterion:** If $\\dim(\\mathcal{C})$ scales exponentially with system size $L$, the system is fragmented. If it scales polynomially (e.g., due to $U(1)$ or $SU(2)$ symmetry), it is not fragmented in the HSF sense [cite: 4, 5].\n*   **Bond Algebra:** The algebra generated by the local terms themselves. The structure of the bond algebra dictates the commutant. This framework distinguishes \"classical\" fragmentation (diagonal in product basis) from \"quantum\" fragmentation (involving entangled bases like the Temperley-Lieb chains) [cite: 4, 5]."
+    },
+    {
+      "heading": "4.4 Fisher Zeros and Complex Temperature Analysis (2024-2025)",
+      "level": 3,
+      "content": "A novel detection method involves the **Fisher zeros** of the partition function $Z(\\beta) = \\text{Tr}(e^{-\\beta H})$ analytically continued to the complex $\\beta$ plane.\n*   **Mechanism:** For thermal systems, Fisher zeros typically lie on the imaginary axis (Lee-Yang zeros) or form specific patterns. Recent work shows that QMBS causes a continuous line of Fisher zeros to extend off the imaginary axis, separating the $\\beta$-plane into regions with distinct thermalization behaviors [cite: 8, 9].\n*   **Significance:** This provides a \"statistical mechanics\" approach to detecting scars without needing to compute entanglement entropy for every eigenstate, linking scars to dynamical phase transitions [cite: 22]."
+    },
+    {
+      "heading": "4.5 Quantum Machine Learning (QML) Detection",
+      "level": 3,
+      "content": "With the complexity of many-body systems, QML has emerged as a tool to identify scars.\n*   **Techniques:** Quantum Convolutional Neural Networks (QCNNs) and Variational Autoencoders (VAEs) have been trained to distinguish scarred eigenstates from thermal ones based on entanglement features and correlation properties.\n*   **Performance:** QCNNs have demonstrated >99% accuracy in identifying known scars and have discovered new non-thermal states in models like the extended Su-Schrieffer-Heeger model [cite: 10, 23]."
+    },
+    {
+      "heading": "5.1 The PXP Model",
+      "level": 3,
+      "content": "The PXP model, describing Rydberg atoms under blockade, remains the paradigmatic case. While not integrable, it hosts a set of states with high overlap with the $\\mathbb{Z}_2$ ordered state. Exact results here are often approximate or rely on perturbations of the exact PXP limit, but the SM embedding can construct \"parent Hamiltonians\" for which PXP-like scars are exact [cite: 2, 3]."
+    },
+    {
+      "heading": "5.2 Dipole-Conserving Models (Fractons)",
+      "level": 3,
+      "content": "Models conserving charge and dipole moment ($U(1) \\times U(1)_{dipole}$) exhibit strong fragmentation.\n*   **Mechanism:** A single charge cannot move because it would change the dipole moment. Charges can only move in bound pairs (dipoles) or by emitting dipoles. This kinetic constraint shatters the Hilbert space [cite: 15, 17, 24].\n*   **1D Spin-1 Models:** The Hamiltonian $H = \\sum S^+_j (S^-_{j+1})^2 S^+_{j+2} + h.c.$ is a canonical example where the commutant algebra grows exponentially, proving the existence of non-thermalizing subspaces [cite: 4, 15]."
+    },
+    {
+      "heading": "5.3 Lattice Gauge Theories (LGTs)",
+      "level": 3,
+      "content": "QMBS has been identified as a robust feature in LGTs, particularly in $U(1)$ and $\\mathbb{Z}_2$ gauge theories.\n*   **Confinement:** Scars in these models are often interpreted as confined meson excitations that fail to decay.\n*   **Robustness:** Unlike some fine-tuned scar models, scars in LGTs appear robust against certain perturbations that preserve gauge invariance. Recent work (2023-2025) has extended this to non-Abelian $SU(2)$ LGTs, showing that scarring is not limited to simple Abelian groups [cite: 25, 26, 27]."
+    },
+    {
+      "heading": "6.1 Stability and Perturbation",
+      "level": 3,
+      "content": "A major open question is the stability of QMBS under generic perturbations. While SM embedding creates exact scars, adding an arbitrary small perturbation $\\epsilon V$ usually destroys the exact scar. However, the *dynamical* signature (revivals) often persists for long times. Understanding the timescale of this decay—whether it is perturbative or non-perturbative—remains a challenge [cite: 25, 28]."
+    },
+    {
+      "heading": "6.2 The Thermodynamic Limit",
+      "level": 3,
+      "content": "For some models, it is debated whether the fraction of scarred states vanishes in the thermodynamic limit or if they constitute a finite density of states in specific regimes. In strong fragmentation, the ratio of the largest sector to the total space vanishes, but in weak fragmentation, the \"thermal\" sector dominates [cite: 12, 29]."
+    },
+    {
+      "heading": "6.3 Classical-Quantum Correspondence",
+      "level": 3,
+      "content": "The relationship between QMBS and classical chaos is complex. Early work suggested scars were quantization of Unstable Periodic Orbits (UPOs). However, recent studies (2024) have found \"thermal QMBS\" that originate from UPOs but satisfy ETH, contrasting with the standard \"non-thermal\" scars. This suggests the need to refine the definition of scars when mapping to semiclassical limits [cite: 30, 31, 32, 33]."
+    },
+    {
+      "heading": "7.1 Higher Dimensions",
+      "level": 3,
+      "content": "Most exact results are limited to 1D spin chains. Extending the commutant algebra and SGA frameworks to 2D and 3D systems is a frontier. Recent work on \"lifting\" 1D fragmented models to higher dimensions using subsystem symmetries is a promising step [cite: 12]."
+    },
+    {
+      "heading": "7.2 Open Quantum Systems",
+      "level": 3,
+      "content": "Engineering scars in dissipative systems (Lindblad dynamics) to create decoherence-free subspaces for quantum information storage is a key application. The extension of SM embedding to Liouvillians provides a theoretical roadmap for this [cite: 18, 34]."
+    },
+    {
+      "heading": "7.3 Unifying Frameworks",
+      "level": 3,
+      "content": "While SGA, SM embedding, and commutant algebras explain many cases, a single unified framework encompassing all forms of weak ergodicity breaking is still lacking. The \"group-invariant\" formalism and \"quasisymmetry\" approaches are attempts to bridge these gaps [cite: 3, 35]."
+    },
+    {
+      "heading": "7.4 Experimental Realization of Fractonic Scars",
+      "level": 3,
+      "content": "While Rydberg atoms realized PXP scars, experimentally verifying the strong fragmentation predicted in dipole-conserving models remains a goal, likely suited for digital quantum simulators or ultracold atoms in tilted optical lattices [cite: 24, 27]."
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "The study of Quantum Many-Body Scars and Hilbert Space Fragmentation has fundamentally altered our understanding of thermalization in isolated quantum systems. Moving beyond the dichotomy of \"Integrable vs. Chaotic,\" these phenomena demonstrate that exact, non-thermal eigenstates can be systematically constructed and embedded within thermal spectra. The development of rigorous analytical tools—specifically Shiraishi-Mori embedding, Spectrum Generating Algebras, and Commutant Algebras—has transformed the field from phenomenological observation to exact mathematical construction.\n\nCurrent research is rapidly expanding into detection methodologies, with Fisher zeros and Quantum Machine Learning offering new diagnostic powers. Furthermore, the intersection with Lattice Gauge Theories and Fracton physics highlights the interdisciplinary importance of these concepts, linking condensed matter constraints with high-energy physics phenomena. As the field matures, the focus is shifting toward harnessing these ergodicity-breaking states for robust quantum information processing, turning the \"bug\" of non-thermalization into a \"feature\" for quantum memory."
+    }
+  ],
+  "references": [
+    "[cite: 3] Shiraishi, N., & Mori, T. (2017). Systematic Construction of Counterexamples to the Eigenstate Thermalization Hypothesis. *Physical Review Letters*. [cite: 3, 14, 18]",
+    "[cite: 18] Gotta, L. (2025). Open-system quantum many-body scars: a theory. *Physics*. [cite: 18, 34]",
+    "[cite: 1] Moudgalya, S., et al. (2018). Exact Excited States of Non-Integrable Models. *Physical Review B*. [cite: 1, 13]",
+    "[cite: 2] Turner, C. J., et al. (2018). Weak ergodicity breaking from quantum many-body scars. *Nature Physics*. [cite: 2, 25, 36]",
+    "[cite: 14] Shiraishi, N., & Mori, T. (2017). *arXiv preprint*. [cite: 14]",
+    "[cite: 4] Moudgalya, S., & Motrunich, O. I. (2021). Hilbert Space Fragmentation and Commutant Algebras. *Physical Review X*. [cite: 4, 5, 37]",
+    "[cite: 5] Moudgalya, S., & Motrunich, O. I. (2022). *arXiv preprint*. [cite: 5]",
+    "[cite: 37] Moudgalya, S. (2022). Hilbert Space Fragmentation and Commutant Algebras. *Benasque Talk*. [cite: 37]",
+    "[cite: 38] APS Global Physics Summit. (2025). Fragmenting Hilbert space: Polynomial Factorization and Commutant Algebra. [cite: 38]",
+    "[cite: 39] Moudgalya, S., et al. (2022). Quantum many-body scars and Hilbert space fragmentation: a review of exact results. *Reports on Progress in Physics*. [cite: 6, 7, 39]",
+    "[cite: 40] City of Gold Coast Time. (2025). [cite: 40]",
+    "[cite: 6] Moudgalya, S., Bernevig, B. A., & Regnault, N. (2022). Quantum many-body scars and Hilbert space fragmentation: a review of exact results. *Reports on Progress in Physics*. [cite: 6, 7]",
+    "[cite: 34] Gotta, L. (2025). Open-system quantum many-body scars: a theory. [cite: 34]",
+    "[cite: 7] Moudgalya, S., et al. (2021). *arXiv preprint*. [cite: 7]",
+    "[cite: 41] ResearchGate. (2025). Quantum Many-Body Scars and Hilbert Space Fragmentation. [cite: 41]",
+    "[cite: 36] Serbyn, M., Abanin, D. A., & Papić, Z. (2021). Quantum many-body scars and weak breaking of ergodicity. *Nature Physics*. [cite: 36]",
+    "[cite: 19] Encyclopedia of Math. (2020). Spectrum generating algebra. [cite: 19]",
+    "[cite: 42] Kusnezov, D. (2019). Quantum Systems, Spectrum Generating Algebras and Non-Compact Lie Algebras. [cite: 42]",
+    "[cite: 11] Moudgalya, S., Regnault, N., & Bernevig, B. A. (2020). $\\eta$-Pairing in Hubbard Models: From Spectrum Generating Algebras to Quantum Many-Body Scars. *Physical Review B*. [cite: 11]",
+    "[cite: 43] CBPF. (2023). N = 2 Superconformal Quantum Mechanics. [cite: 43]",
+    "[cite: 44] Sigma Journal. (2013). Dynamical Equations... Spectrum Generating Algebras. [cite: 44]",
+    "[cite: 45] arXiv. (2024). Hilbert Space Fragmentation and Subspace Scar Time-Crystallinity. [cite: 45]",
+    "[cite: 46] Will, M., Moessner, R., & Pollmann, F. (2023). Realization of Hilbert Space Fragmentation and Fracton Dynamics in 2D. [cite: 46]",
+    "[cite: 12] arXiv. (2025). Hilbert space fragmentation in high dimensions. [cite: 12]",
+    "[cite: 29] arXiv. (2025). HSF fractures the full Hilbert space. [cite: 29]",
+    "[cite: 47] ResearchGate. (2024). Tunable Hilbert space fragmentation. [cite: 47]",
+    "[cite: 28] ETH Zurich. (2024). Quantum scars as a way out of thermalisation. [cite: 28]",
+    "[cite: 30] Evrard, B., et al. (2024). Quantum many-body scars from unstable periodic orbits. *Physical Review B*. [cite: 30, 31, 32, 33, 48, 49]",
+    "[cite: 31] Evrard, B., et al. (2024). *Scholars Mine*. [cite: 31]",
+    "[cite: 25] Halimeh, J. C., et al. (2023). Robust quantum many-body scars in lattice gauge theories. *Quantum*. [cite: 25, 50]",
+    "[cite: 10] Feng, J., et al. (2025). Uncovering Quantum Many-body Scars with Quantum Machine Learning. *npj Quantum Information*. [cite: 10, 23, 51]",
+    "[cite: 52] SciSpace. (2020). Revealing quantum chaos with machine learning. [cite: 52]",
+    "[cite: 51] Semantic Scholar. (2025). Uncovering quantum many-body scars. [cite: 51]",
+    "[cite: 53] CoLab. (2025). Shallow quantum circuits are robust hunters for quantum many-body scars. [cite: 53]",
+    "[cite: 54] Zhang, B. (2025). Research Portfolio. [cite: 54]",
+    "[cite: 8] Meng, Y., et al. (2025). Detecting Many-Body Scars from Fisher Zeros. *Physical Review Letters*. [cite: 8, 9, 22, 55]",
+    "[cite: 9] Meng, Y., et al. (2025). *arXiv preprint*. [cite: 9]",
+    "[cite: 55] Semantic Scholar. (2025). Detecting Many-Body Scars from Fisher Zeros. [cite: 55]",
+    "[cite: 22] arXiv. (2025). Abstract: Detecting Many-Body Scars from Fisher Zeros. [cite: 22]",
+    "[cite: 25] Quantum Journal. (2023). References in Halimeh et al. [cite: 25]",
+    "[cite: 56] arXiv. (2025). Fidelity zeros and Lee-Yang framework. [cite: 56]",
+    "[cite: 57] Semantic Scholar. (2025). Dynamical quantum phase transitions. [cite: 57]",
+    "[cite: 58] Scribd. (2025). Fisher Zeros document. [cite: 58]",
+    "[cite: 32] arXiv. (2024). Quantum many-body scars from unstable periodic orbits. [cite: 32]",
+    "[cite: 59] Bohrium. (2024). Quantum many-body scars as remnants of stable many-body periodic orbits. [cite: 59]",
+    "[cite: 33] arXiv. (2024). Full text: Quantum many-body scars from unstable periodic orbits. [cite: 33]",
+    "[cite: 48] Semantic Scholar. (2024). Quantum many-body scars from unstable periodic orbits. [cite: 48]",
+    "[cite: 49] Harvard. (2024). Publication record. [cite: 49]",
+    "[cite: 8] ResearchGate. (2025). Detecting Many-Body Scars from Fisher Zeros. [cite: 8]",
+    "[cite: 22] arXiv. (2025). Abstract: Fisher Zeros. [cite: 22]",
+    "[cite: 9] arXiv. (2025). Full text: Fisher Zeros. [cite: 9]",
+    "[cite: 58] Scribd. (2025). Fisher Zeros. [cite: 58]",
+    "[cite: 55] Semantic Scholar. (2025). Fisher Zeros. [cite: 55]",
+    "[cite: 6] Caltech. (2022). Review of exact results. [cite: 6]",
+    "[cite: 7] arXiv. (2021). Review of exact results. [cite: 7]",
+    "[cite: 41] ResearchGate. (2025). Review of exact results. [cite: 41]",
+    "[cite: 34] Semantic Scholar. (2021). Review of exact results. [cite: 34]",
+    "[cite: 13] Shamra Academia. (2018). Entanglement of Exact Excited States. [cite: 13]",
+    "[cite: 10] ResearchGate. (2025). Uncovering QMBS with QML. [cite: 10]",
+    "[cite: 52] SciSpace. (2020). Machine Learning and Chaos. [cite: 52]",
+    "[cite: 51] Semantic Scholar. (2025). QML and Scars. [cite: 51]",
+    "[cite: 23] ResearchGate. (2025). QML and Scars (Full text). [cite: 23]",
+    "[cite: 53] CoLab. (2025). Shallow circuits for scars. [cite: 53]",
+    "[cite: 35] ResearchGate. (2024). Many-Body Scars as a Group Invariant Sector. [cite: 35]",
+    "[cite: 60] ResearchGate. (2024). Numerical methods for detecting symmetries. [cite: 60]",
+    "[cite: 20] U-Tokyo. (2024). Thesis on QMBS and SGA. [cite: 20]",
+    "[cite: 14] ResearchGate. (2025). Systematic Construction of Counterexamples. [cite: 14]",
+    "[cite: 21] ResearchGate. (2020). Unified structure for exact towers. [cite: 21]",
+    "[cite: 25] Quantum Journal. (2023). Robust scars in LGT. [cite: 25]",
+    "[cite: 61] Munich Workshop. (2022). QMBS in Abelian LGT. [cite: 61]",
+    "[cite: 26] INIS. (2025). QMBS in non-Abelian LGT. [cite: 26]",
+    "[cite: 50] Semantic Scholar. (2022). Robust scars in LGT. [cite: 50]",
+    "[cite: 27] SCL. (2023). Scars in truncated Schwinger model. [cite: 27]",
+    "[cite: 15] TUM. (2020). Hilbert space fragmentation and fractons. [cite: 15]",
+    "[cite: 16] arXiv. (2019). Ergodicity breaking from fragmentation. [cite: 16]",
+    "[cite: 17] ResearchGate. (2020). Ergodicity Breaking Arising from HSF. [cite: 17]",
+    "[cite: 62] Semantic Scholar. (2023). Local Integrals of Motion. [cite: 62]",
+    "[cite: 24] YouTube (BSS Physics School). (2023). Pollmann on HSF and Fractons. [cite: 24]"
+  ]
+}

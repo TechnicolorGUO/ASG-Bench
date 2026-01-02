@@ -1,0 +1,689 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Quantitative evidence synthesis- a practical guide on meta-analysis, meta-regression, and publication bias tests for environmental sciences."
+    ],
+    [
+      1,
+      "Quantitative Evidence Synthesis in Environmental Sciences: A Systematic Review of Methods, Challenges, and Best Practices"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Systematic Review vs. Meta-Analysis"
+    ],
+    [
+      3,
+      "2.2 Effect Size"
+    ],
+    [
+      3,
+      "2.3 Heterogeneity"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 Origins in Other Disciplines"
+    ],
+    [
+      3,
+      "3.2 Introduction to Ecology"
+    ],
+    [
+      3,
+      "3.3 Evolution of Methodological Complexity"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 From Random-Effects to Multilevel Models"
+    ],
+    [
+      3,
+      "4.2 Meta-Regression"
+    ],
+    [
+      3,
+      "4.3 Handling Non-Independence"
+    ],
+    [
+      3,
+      "4.4 Publication Bias Tests"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Biodiversity and Climate Change"
+    ],
+    [
+      3,
+      "5.2 Environmental Health and Toxicology"
+    ],
+    [
+      3,
+      "5.3 Conservation Interventions"
+    ],
+    [
+      3,
+      "5.4 Case Study: The Value of Statistical Life (VSL)"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 The \"Apples and Oranges\" Critique"
+    ],
+    [
+      3,
+      "6.2 Reporting Deficiencies"
+    ],
+    [
+      3,
+      "6.3 Complexity of Non-Independence"
+    ],
+    [
+      3,
+      "6.4 Publication Bias in Heterogeneous Data"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Adoption of Reporting Standards (PRISMA-EcoEvo)"
+    ],
+    [
+      3,
+      "7.2 Open Science Practices"
+    ],
+    [
+      3,
+      "7.3 Advanced Methodological Training"
+    ],
+    [
+      3,
+      "7.4 Improving Bias Detection"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "9. References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Quantitative evidence synthesis- a practical guide on meta-analysis, meta-regression, and publication bias tests for environmental sciences.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 20:59:54*\n*Progress: [28/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Quantitative_evidence_synthesis-_a_practical_guide_on_meta-a_20251226_205954.md*\n---",
+      "stats": {
+        "char_count": 192,
+        "word_count": 10,
+        "sentence_count": 2,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "**Background:** Quantitative evidence synthesis, particularly meta-analysis, has become an indispensable tool in environmental sciences for aggregating disparate research findings into robust, generalizable conclusions. As the volume of ecological data expands, the need for rigorous statistical integration to inform policy and conservation has never been greater.\n**Objectives:** This systematic literature review aims to synthesize the current state of meta-analytic practice in environmental sciences, focusing on the transition from traditional models to multilevel frameworks. It critically evaluates methodologies for meta-regression, heterogeneity quantification, and publication bias testing.\n**Methods:** A comprehensive review of methodological guidelines, historical milestones, and contemporary applications was conducted. Key sources include seminal works on ecological meta-analysis and recent proposals for reporting standards such as PRISMA-EcoEvo.\n**Results:** The review identifies a critical paradigm shift towards multilevel meta-analytic models that explicitly account for non-independence—a pervasive feature of ecological data (e.g., phylogenetic relatedness, multiple estimates per study). Despite this methodological maturation, current practices often lag; surveys indicate that fewer than half of environmental meta-analyses adequately report heterogeneity or assess publication bias.\n**Conclusions:** To ensure the reliability of evidence synthesis in environmental policy, researchers must adopt advanced hierarchical models and adhere to rigorous reporting guidelines. Future research should prioritize open science practices and the development of bias detection methods suitable for highly heterogeneous datasets.\n\n---",
+      "stats": {
+        "char_count": 1751,
+        "word_count": 211,
+        "sentence_count": 13,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The field of environmental science is characterized by an explosion of primary research data, often distributed across diverse taxa, ecosystems, and experimental designs. While this accumulation of knowledge is valuable, it presents a significant challenge: how to synthesize conflicting or variable results into coherent conclusions that can guide environmental management and policy [cite: 1, 2]. Traditional narrative reviews, while useful for hypothesis generation, are often susceptible to subjectivity and \"vote-counting\" bias, where the significance of results is tallied without regard for sample size or effect magnitude [cite: 3].\n\nQuantitative evidence synthesis, primarily through systematic review and meta-analysis, offers a rigorous alternative. By statistically combining effect sizes from multiple independent studies, meta-analysis increases statistical power, improves the precision of effect estimates, and allows for the exploration of sources of variation (heterogeneity) [cite: 4, 5]. In environmental sciences, these tools are increasingly used to address pressing global issues, such as biodiversity loss, climate change impacts, and pollution risks [cite: 6, 7].\n\nHowever, the application of meta-analysis in ecology and evolution faces unique challenges compared to its origins in medicine and social sciences. Ecological data are frequently non-independent, highly heterogeneous, and subject to complex interaction effects [cite: 8, 9]. Recent surveys of the literature reveal concerning gaps in methodological rigor; for instance, a 2023 survey found that only approximately 40% of environmental meta-analyses reported heterogeneity statistics, and fewer than half assessed publication bias [cite: 5, 10].\n\nThis paper provides a comprehensive review of quantitative evidence synthesis in environmental sciences. It serves as a practical guide to the theoretical underpinnings and application of meta-analysis, meta-regression, and publication bias tests, with a specific focus on the necessity of multilevel modeling to address the complex structure of environmental data.\n\n---",
+      "stats": {
+        "char_count": 2106,
+        "word_count": 284,
+        "sentence_count": 12,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2. Key Concepts and Definitions",
+      "level": 2,
+      "content": "To navigate the landscape of quantitative synthesis, it is essential to define the core components that distinguish it from other forms of literature review.",
+      "stats": {
+        "char_count": 157,
+        "word_count": 24,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2.1 Systematic Review vs. Meta-Analysis",
+      "level": 3,
+      "content": "While often used interchangeably, these terms represent distinct processes. A **systematic review** is a formalized process of identifying, selecting, and appraising literature using explicit, reproducible methods to minimize bias [cite: 6, 11]. A **meta-analysis** is the statistical procedure used to integrate the quantitative results (effect sizes) of the studies identified in the systematic review [cite: 4, 6]. In environmental health and ecology, these are often combined (SRMA) to provide the highest level of evidence for decision-making [cite: 6].",
+      "stats": {
+        "char_count": 558,
+        "word_count": 78,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2.2 Effect Size",
+      "level": 3,
+      "content": "The fundamental unit of a meta-analysis is the effect size—a standardized metric quantifying the magnitude and direction of a biological phenomenon. Common effect sizes in environmental sciences include:\n*   **Standardized Mean Difference (SMD):** Used when studies measure outcomes on different scales (e.g., Hedges' *g*) [cite: 12].\n*   **Log Response Ratio (lnRR):** Widely used in ecology to compare treatment means to control means; it is interpretable as a proportional change [cite: 12, 13].\n*   **Correlation Coefficients (Zr):** Used for associating continuous variables, often Fisher-transformed to stabilize variance [cite: 12].",
+      "stats": {
+        "char_count": 639,
+        "word_count": 88,
+        "sentence_count": 6,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "2.3 Heterogeneity",
+      "level": 3,
+      "content": "Heterogeneity refers to the variation in effect sizes across studies that cannot be attributed to sampling error alone [cite: 5, 14]. In ecology, high heterogeneity is the norm rather than the exception, driven by variations in species, study sites, and experimental conditions. It is quantified using statistics such as $Q$, $\\tau^2$ (between-study variance), and $I^2$ (percentage of variation due to heterogeneity) [cite: 14, 15].\n\n---",
+      "stats": {
+        "char_count": 438,
+        "word_count": 65,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "3.1 Origins in Other Disciplines",
+      "level": 3,
+      "content": "The conceptual roots of combining research results trace back to astronomy in the 17th and 18th centuries, where mathematicians like Gauss and Laplace developed methods to combine observations [cite: 16]. The first medical application is often attributed to Karl Pearson in 1904, who aggregated typhoid inoculation data [cite: 4, 16]. The term \"meta-analysis\" was formally coined by Gene Glass in 1976 in the context of social sciences, defining it as the \"analysis of analyses\" [cite: 4, 16].",
+      "stats": {
+        "char_count": 493,
+        "word_count": 77,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.2 Introduction to Ecology",
+      "level": 3,
+      "content": "Meta-analysis was introduced to ecology and evolutionary biology in the early 1990s, significantly later than in medicine [cite: 1, 3]. Early proponents, such as Gurevitch and Hedges, argued for its utility in replacing narrative reviews [cite: 1, 2]. The establishment of the National Center for Ecological Analysis and Synthesis (NCEAS) in 1995 played a pivotal role in promoting these methods, providing a venue for synthesizing vast datasets to address macro-ecological questions [cite: 1].",
+      "stats": {
+        "char_count": 494,
+        "word_count": 73,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.3 Evolution of Methodological Complexity",
+      "level": 3,
+      "content": "Initially, ecologists adopted fixed-effect and simple random-effects models from medicine. However, it became increasingly apparent that ecological data violated the assumptions of these models due to complex dependencies (e.g., phylogenetic relatedness). This led to the development of mixed-effects models and, more recently, the advocacy for multilevel (hierarchical) meta-analytic models that can explicitly handle non-independence [cite: 5, 8].\n\n---",
+      "stats": {
+        "char_count": 454,
+        "word_count": 58,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "The current best practices in environmental meta-analysis have moved beyond simple weighting schemes to sophisticated modeling frameworks that reflect the biological reality of the data.",
+      "stats": {
+        "char_count": 186,
+        "word_count": 25,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.1 From Random-Effects to Multilevel Models",
+      "level": 3,
+      "content": "The standard random-effects model assumes that while true effects vary across studies, the effect sizes within a study are independent. This assumption is frequently violated in environmental sciences, where a single paper may report multiple effect sizes (e.g., multiple species, time points, or treatments) [cite: 5, 8].\n\n**Multilevel meta-analysis** addresses this by introducing additional random effects. For example, a three-level model might include:\n1.  **Level 1:** Sampling variance (within-estimate error).\n2.  **Level 2:** Within-study variance (variation among effect sizes from the same study).\n3.  **Level 3:** Between-study variance (variation across different studies) [cite: 17, 18].\n\nRecent guidelines explicitly recommend environmental scientists abandon the standard random-effects model in favor of multilevel models to avoid Type I errors and spuriously precise confidence intervals [cite: 5, 10].",
+      "stats": {
+        "char_count": 920,
+        "word_count": 124,
+        "sentence_count": 12,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "4.2 Meta-Regression",
+      "level": 3,
+      "content": "When heterogeneity is detected, the goal shifts from merely summarizing the mean effect to explaining the variation. **Meta-regression** extends the meta-analytic model by including moderator variables (covariates) that may influence the effect size [cite: 5, 19].\n*   **Ecological Moderators:** Latitude, temperature, species traits, or experimental conditions.\n*   **Methodological Moderators:** Study duration, sample size, or measurement technique.\nMeta-regression allows researchers to quantify how much of the heterogeneity ($R^2$) is explained by these predictors [cite: 14].",
+      "stats": {
+        "char_count": 582,
+        "word_count": 74,
+        "sentence_count": 5,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "4.3 Handling Non-Independence",
+      "level": 3,
+      "content": "Non-independence is a critical threat to validity. Two primary forms dominate environmental data:\n1.  **Phylogenetic Non-independence:** Closely related species tend to respond similarly to environmental stressors due to shared evolutionary history. This is handled by incorporating a phylogenetic correlation matrix into the multilevel model [cite: 12, 20].\n2.  **Hierarchical/Nested Data:** Multiple observations from the same research group or site.\nSolutions include using Robust Variance Estimation (RVE) or constructing a variance-covariance matrix to model the dependencies explicitly [cite: 8, 21].",
+      "stats": {
+        "char_count": 606,
+        "word_count": 79,
+        "sentence_count": 7,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "4.4 Publication Bias Tests",
+      "level": 3,
+      "content": "Publication bias, or the \"file-drawer problem,\" occurs when studies with significant or positive results are more likely to be published. Traditional detection methods like the visual inspection of **funnel plots** or **Egger’s regression** are often ill-suited for ecological data because high heterogeneity can distort funnel plot asymmetry, mimicking bias where none exists [cite: 22, 23].\n\n**State-of-the-art approaches include:**\n*   **Multilevel Meta-Regression for Bias:** Extending Egger's regression to hierarchical models to test for bias while accounting for non-independence [cite: 22, 24].\n*   **Time-lag Bias Tests:** Assessing whether effect sizes decrease over time (the \"decline effect\") [cite: 22].\n*   **Selection Models:** More complex approaches that model the probability of publication based on p-values, though these are computationally demanding [cite: 22].\n\n---",
+      "stats": {
+        "char_count": 887,
+        "word_count": 119,
+        "sentence_count": 6,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "5. Applications and Case Studies",
+      "level": 2,
+      "content": "Quantitative synthesis has been applied to a wide array of environmental questions, influencing both basic science and policy.",
+      "stats": {
+        "char_count": 126,
+        "word_count": 18,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.1 Biodiversity and Climate Change",
+      "level": 3,
+      "content": "Meta-analyses have been instrumental in quantifying the global fingerprint of climate change. Landmark studies have synthesized data on phenological shifts (e.g., earlier flowering times) and range contractions [cite: 7, 25]. For instance, highly cited meta-analyses have aggregated local studies to reveal global patterns of species redistribution, providing the evidence base for IPCC reports [cite: 7].",
+      "stats": {
+        "char_count": 405,
+        "word_count": 55,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.2 Environmental Health and Toxicology",
+      "level": 3,
+      "content": "In environmental health, Systematic Review and Meta-Analysis (SRMA) are used to assess the risks of chemical exposures. A review of 48 environmental health SRMAs demonstrated their utility in linking chronic low-dose exposures to health outcomes, although it noted weaknesses in how exposure heterogeneity was handled [cite: 6, 26].",
+      "stats": {
+        "char_count": 332,
+        "word_count": 48,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.3 Conservation Interventions",
+      "level": 3,
+      "content": "Meta-analyses evaluate the efficacy of conservation strategies. For example, syntheses have examined the impact of protected areas on species abundance or the effectiveness of different restoration techniques. These studies often employ \"forest plots\" to visualize the effectiveness of interventions across different biomes or taxa [cite: 20].",
+      "stats": {
+        "char_count": 343,
+        "word_count": 46,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.4 Case Study: The Value of Statistical Life (VSL)",
+      "level": 3,
+      "content": "In environmental economics, meta-analyses of VSL estimates are crucial for cost-benefit analyses of environmental regulations. Recent studies have employed two-stage random-effects and multilevel models to synthesize VSL estimates, accounting for the non-independence of multiple estimates derived from the same survey populations [cite: 17].\n\n---",
+      "stats": {
+        "char_count": 347,
+        "word_count": 44,
+        "sentence_count": 3,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "6. Challenges and Open Problems",
+      "level": 2,
+      "content": "Despite methodological advances, the field faces significant hurdles.",
+      "stats": {
+        "char_count": 69,
+        "word_count": 8,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.1 The \"Apples and Oranges\" Critique",
+      "level": 3,
+      "content": "A persistent criticism is that meta-analysis combines studies that are too dissimilar (\"mixing apples and oranges\") [cite: 2]. In ecology, where no two field sites are identical, this is a valid concern. However, proponents argue that exploring this heterogeneity is the very purpose of meta-analysis—to determine if effects are generalizable across different contexts [cite: 2, 19].",
+      "stats": {
+        "char_count": 383,
+        "word_count": 56,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.2 Reporting Deficiencies",
+      "level": 3,
+      "content": "A major impediment is the quality of reporting in primary studies and meta-analyses themselves.\n*   **Primary Studies:** Often fail to report sample sizes, variances, or necessary statistics to calculate effect sizes, leading to data exclusion [cite: 5].\n*   **Meta-Analyses:** A 2023 survey revealed that less than 50% of environmental meta-analyses reported heterogeneity statistics or tested for publication bias [cite: 5, 10]. This lack of transparency undermines the reproducibility and credibility of the findings.",
+      "stats": {
+        "char_count": 520,
+        "word_count": 73,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "6.3 Complexity of Non-Independence",
+      "level": 3,
+      "content": "While multilevel models offer a solution, they require sophisticated statistical knowledge and software proficiency (e.g., R). Many practicing ecologists may lack the training to implement these models correctly, leading to the continued use of inappropriate fixed or simple random-effects models [cite: 3, 5].",
+      "stats": {
+        "char_count": 310,
+        "word_count": 43,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.4 Publication Bias in Heterogeneous Data",
+      "level": 3,
+      "content": "Detecting publication bias remains difficult when heterogeneity is high. Standard tests (e.g., Trim-and-Fill) perform poorly in the presence of high between-study variance, which is characteristic of ecological data. There is a lack of consensus on the best bias correction methods for complex, non-independent data structures [cite: 22, 23].\n\n---",
+      "stats": {
+        "char_count": 347,
+        "word_count": 49,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "7. Future Research Directions",
+      "level": 2,
+      "content": "To advance the field of quantitative evidence synthesis in environmental sciences, several directions must be pursued.",
+      "stats": {
+        "char_count": 118,
+        "word_count": 16,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.1 Adoption of Reporting Standards (PRISMA-EcoEvo)",
+      "level": 3,
+      "content": "The medical field has benefited immensely from the PRISMA (Preferred Reporting Items for Systematic Reviews and Meta-Analyses) guidelines. The recently developed **PRISMA-EcoEvo** extension addresses the specific needs of ecology and evolution [cite: 27, 28]. Widespread adoption of these guidelines by journals and authors is essential to improve the transparency and utility of meta-analyses [cite: 5, 29].",
+      "stats": {
+        "char_count": 408,
+        "word_count": 56,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.2 Open Science Practices",
+      "level": 3,
+      "content": "Future meta-analyses should embrace open science by archiving data and analysis code (e.g., R scripts) in public repositories. This allows for reproducibility, updates as new data become available, and the use of data for \"second-order\" meta-analyses [cite: 30, 31].",
+      "stats": {
+        "char_count": 266,
+        "word_count": 39,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.3 Advanced Methodological Training",
+      "level": 3,
+      "content": "There is a clear need for curriculum development to train the next generation of environmental scientists in advanced meta-analytic techniques. This includes training in:\n*   **Network Meta-Analysis:** To compare multiple interventions simultaneously [cite: 4].\n*   **Spatial Meta-Analysis:** To explicitly model spatial dependencies and autocorrelation in environmental data [cite: 32].\n*   **Phylogenetic Comparative Methods:** Integration of evolutionary history into evidence synthesis [cite: 3].",
+      "stats": {
+        "char_count": 500,
+        "word_count": 62,
+        "sentence_count": 4,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "7.4 Improving Bias Detection",
+      "level": 3,
+      "content": "Research is needed to develop and validate publication bias tests that are robust to high heterogeneity and non-independence. Simulation studies comparing the performance of selection models versus multilevel regression approaches in ecological scenarios are critical [cite: 22, 24].\n\n---",
+      "stats": {
+        "char_count": 288,
+        "word_count": 39,
+        "sentence_count": 3,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "Quantitative evidence synthesis has transformed environmental sciences from a descriptive discipline into one capable of generating rigorous, generalized inferences. The transition from simple statistical models to advanced multilevel frameworks represents a necessary maturation of the field, acknowledging the inherent complexity and non-independence of ecological data.\n\nHowever, the potential of meta-analysis is currently limited by suboptimal reporting practices and the slow adoption of these advanced methods. As environmental challenges such as climate change and biodiversity loss accelerate, the scientific community must commit to higher standards of evidence synthesis. This involves not only the application of robust statistical models—specifically multilevel meta-regression—but also a cultural shift towards transparency, open data, and adherence to reporting guidelines like PRISMA-EcoEvo. By doing so, environmental scientists can ensure that policy and management decisions are based on the most reliable and comprehensive evidence available.\n\n---",
+      "stats": {
+        "char_count": 1067,
+        "word_count": 137,
+        "sentence_count": 7,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Meta-analysis in Ecology: Lessons, Challenges and Future",
+      "number": null,
+      "title": "Meta-analysis in Ecology: Lessons, Challenges and Future"
+    },
+    {
+      "text": "Meta-analysis in applied ecology",
+      "number": null,
+      "title": "Meta-analysis in applied ecology"
+    },
+    {
+      "text": "Handbook of Meta-analysis in Ecology and Evolution",
+      "number": null,
+      "title": "Handbook of Meta-analysis in Ecology and Evolution"
+    },
+    {
+      "text": "Meta-analysis",
+      "number": null,
+      "title": "Meta-analysis"
+    },
+    {
+      "text": "A historical perspective on meta-analysis",
+      "number": null,
+      "title": "A historical perspective on meta-analysis"
+    },
+    {
+      "text": "Quantitative evidence synthesis: a practical guide on meta-analysis, meta-regression, and publication bias tests for environmental sciences",
+      "number": null,
+      "title": "Quantitative evidence synthesis: a practical guide on meta-analysis, meta-regression, and publication bias tests for environmental sciences"
+    },
+    {
+      "text": "Quantitative evidence synthesis: a practical guide...",
+      "number": null,
+      "title": "Quantitative evidence synthesis: a practical guide..."
+    },
+    {
+      "text": "Quantitative evidence synthesis...",
+      "number": null,
+      "title": "Quantitative evidence synthesis..."
+    },
+    {
+      "text": "Meta-analysis tutorial",
+      "number": null,
+      "title": "Meta-analysis tutorial"
+    },
+    {
+      "text": "Method for systematic literature review and meta-analysis studies on environmental science",
+      "number": null,
+      "title": "Method for systematic literature review and meta-analysis studies on environmental science"
+    },
+    {
+      "text": "Systematic review and meta-analysis in environmental health...",
+      "number": null,
+      "title": "Systematic review and meta-analysis in environmental health..."
+    },
+    {
+      "text": "Use of Systematic Review and Meta-Analysis in Environmental Health Epidemiology",
+      "number": null,
+      "title": "Use of Systematic Review and Meta-Analysis in Environmental Health Epidemiology"
+    },
+    {
+      "text": "Harnessing meta-analyses' insights in ecology and evolution",
+      "number": null,
+      "title": "Harnessing meta-analyses' insights in ecology and evolution"
+    },
+    {
+      "text": "Transparency and reproducibility...",
+      "number": null,
+      "title": "Transparency and reproducibility..."
+    },
+    {
+      "text": "Landmark meta-analysis environmental science examples",
+      "number": null,
+      "title": "Landmark meta-analysis environmental science examples"
+    },
+    {
+      "text": "CADDIS Case Studies",
+      "number": null,
+      "title": "CADDIS Case Studies"
+    },
+    {
+      "text": "Methods for testing publication bias in ecological and evolutionary meta-analyses",
+      "number": null,
+      "title": "Methods for testing publication bias in ecological and evolutionary meta-analyses"
+    },
+    {
+      "text": "Publication bias tests...",
+      "number": null,
+      "title": "Publication bias tests..."
+    },
+    {
+      "text": "Methods for testing publication bias...",
+      "number": null,
+      "title": "Methods for testing publication bias..."
+    },
+    {
+      "text": "Meta-analysis of Ecological Data: Publication Bias",
+      "number": null,
+      "title": "Meta-analysis of Ecological Data: Publication Bias"
+    },
+    {
+      "text": "Highly cited papers in biodiversity and climate change research",
+      "number": null,
+      "title": "Highly cited papers in biodiversity and climate change research"
+    },
+    {
+      "text": "Hot topics in biodiversity and climate change research",
+      "number": null,
+      "title": "Hot topics in biodiversity and climate change research"
+    },
+    {
+      "text": "Handling nonindependence in ecological meta-analysis",
+      "number": null,
+      "title": "Handling nonindependence in ecological meta-analysis"
+    },
+    {
+      "text": "Nonindependence and sensitivity analyses in ecological and evolutionary meta-analyses",
+      "number": null,
+      "title": "Nonindependence and sensitivity analyses in ecological and evolutionary meta-analyses"
+    },
+    {
+      "text": "Non-independence and sensitivity analyses",
+      "number": null,
+      "title": "Non-independence and sensitivity analyses"
+    },
+    {
+      "text": "Statistical Models for the Meta-analysis of Nonindependent Data",
+      "number": null,
+      "title": "Statistical Models for the Meta-analysis of Nonindependent Data"
+    },
+    {
+      "text": "Comment on Song et al.",
+      "number": null,
+      "title": "Comment on Song et al."
+    },
+    {
+      "text": "Examples of forest plots",
+      "number": null,
+      "title": "Examples of forest plots"
+    },
+    {
+      "text": "Methodological issues and advances in biological meta-analysis",
+      "number": null,
+      "title": "Methodological issues and advances in biological meta-analysis"
+    },
+    {
+      "text": "Guidelines for Preparing Economic Analyses",
+      "number": null,
+      "title": "Guidelines for Preparing Economic Analyses"
+    },
+    {
+      "text": "Methodological issues...",
+      "number": null,
+      "title": "Methodological issues..."
+    },
+    {
+      "text": "The nutritional ecology of obesity",
+      "number": null,
+      "title": "The nutritional ecology of obesity"
+    },
+    {
+      "text": "Quantitative evidence synthesis",
+      "number": null,
+      "title": "Quantitative evidence synthesis"
+    },
+    {
+      "text": "Nuisance heterogeneity...",
+      "number": null,
+      "title": "Nuisance heterogeneity..."
+    },
+    {
+      "text": "Harnessing meta-analyses' insights...",
+      "number": null,
+      "title": "Harnessing meta-analyses' insights..."
+    },
+    {
+      "text": "Preferred reporting items for systematic reviews and meta-analyses in ecology and evolutionary biology: a PRISMA extension",
+      "number": null,
+      "title": "Preferred reporting items for systematic reviews and meta-analyses in ecology and evolutionary biology: a PRISMA extension"
+    },
+    {
+      "text": "PRISMA-EcoEvo...",
+      "number": null,
+      "title": "PRISMA-EcoEvo..."
+    },
+    {
+      "text": "Preferred Reporting Items",
+      "number": null,
+      "title": "Preferred Reporting Items"
+    },
+    {
+      "text": "PRISMA Statement",
+      "number": null,
+      "title": "PRISMA Statement"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Gemini\\Environmental Science\\Quantitative_evidence_synthesis-_a_practical_guide_on_meta-a_20251226_205954_split.json",
+    "processed_date": "2025-12-31T00:55:32.221567",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

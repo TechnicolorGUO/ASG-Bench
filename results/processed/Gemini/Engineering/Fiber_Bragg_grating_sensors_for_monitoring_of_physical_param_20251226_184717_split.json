@@ -1,0 +1,864 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Fiber Bragg grating sensors for monitoring of physical parameters  a comprehensive review."
+    ],
+    [
+      1,
+      "Fiber Bragg Grating Sensors for Monitoring of Physical Parameters: A Comprehensive Review"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1. Operating Principle"
+    ],
+    [
+      3,
+      "2.2. Types of Gratings"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1. Discovery (1978)"
+    ],
+    [
+      3,
+      "3.2. The Holographic Method (1989)"
+    ],
+    [
+      3,
+      "3.3. Modern Fabrication Evolution"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1. Fabrication Techniques"
+    ],
+    [
+      3,
+      "4.2. Interrogation Techniques"
+    ],
+    [
+      4,
+      "4.2.1. Passive Interrogation"
+    ],
+    [
+      4,
+      "4.2.2. Active Interrogation"
+    ],
+    [
+      4,
+      "4.2.3. Advanced Demodulation"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1. Structural Health Monitoring (SHM)"
+    ],
+    [
+      3,
+      "5.2. Aerospace"
+    ],
+    [
+      3,
+      "5.3. Biomedical Engineering"
+    ],
+    [
+      3,
+      "5.4. Specialized Physical Parameter Sensors"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1. Cross-Sensitivity"
+    ],
+    [
+      3,
+      "6.2. Packaging and Strain Transfer"
+    ],
+    [
+      3,
+      "6.3. Interrogation Cost and Complexity"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1. AI and Deep Learning for Demodulation"
+    ],
+    [
+      3,
+      "7.2. Lab-on-Fiber Technology"
+    ],
+    [
+      3,
+      "7.3. IoT and Smart City Integration"
+    ],
+    [
+      3,
+      "7.4. Additive Manufacturing (3D Printing)"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "9. References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Fiber Bragg grating sensors for monitoring of physical parameters  a comprehensive review.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 18:47:17*\n*Progress: [15/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Fiber_Bragg_grating_sensors_for_monitoring_of_physical_param_20251226_184717.md*\n---",
+      "stats": {
+        "char_count": 192,
+        "word_count": 10,
+        "sentence_count": 2,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "Fiber Bragg Grating Sensors for Monitoring of Physical Parameters: A Comprehensive Review",
+      "level": 1,
+      "content": "**Abstract**\nFiber Bragg Grating (FBG) sensors have established themselves as a cornerstone of modern optical metrology, offering unparalleled advantages over traditional electromechanical sensors, including immunity to electromagnetic interference, multiplexing capabilities, and suitability for harsh environments. This comprehensive review systematically examines the evolution, theoretical underpinnings, and state-of-the-art applications of FBG technology in monitoring physical parameters such as strain, temperature, pressure, acceleration, and tilt. We trace the historical trajectory from Ken Hill’s serendipitous discovery to the latest femtosecond laser inscription techniques. The paper critically analyzes current interrogation methods, ranging from passive edge filtering to active tunable laser scanning, and evaluates their performance in static and dynamic sensing. Furthermore, we explore diverse applications across structural health monitoring (SHM), aerospace, and biomedical fields. Significant attention is verified to persistent challenges, particularly temperature-strain cross-sensitivity and packaging durability. Finally, the review identifies emerging research frontiers, including the integration of Artificial Intelligence (AI) for spectral demodulation, \"Lab-on-Fiber\" technologies, and the role of FBGs in the Internet of Things (IoT) ecosystem.\n\n---",
+      "stats": {
+        "char_count": 1383,
+        "word_count": 164,
+        "sentence_count": 8,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The monitoring of physical parameters is a fundamental requirement across a spectrum of industries, ranging from civil infrastructure and aerospace to energy production and healthcare. Traditional sensing technologies, primarily based on resistive strain gauges, thermocouples, and piezoelectric transducers, have long served these industries. However, these electrical sensors face inherent limitations, including susceptibility to electromagnetic interference (EMI), signal attenuation over long distances, and the risk of sparking in explosive environments [cite: 1, 2].\n\nOptical fiber sensors (OFS) have emerged as a robust alternative, with Fiber Bragg Gratings (FBGs) representing the most mature and widely adopted segment of this technology [cite: 3]. An FBG is a periodic modulation of the refractive index within the core of an optical fiber, acting as a wavelength-selective mirror. The reflected wavelength, known as the Bragg wavelength, shifts linearly in response to external physical perturbations such as strain and temperature [cite: 4, 5].\n\nThe motivation for this review stems from the rapid diversification of FBG applications and the recent technological leaps in fabrication and interrogation. While early research focused on basic strain and temperature sensing, contemporary studies have expanded into complex parameter monitoring, including liquid level, inclination, and vibration, often utilizing advanced materials and signal processing techniques [cite: 6, 7, 8]. Furthermore, the integration of FBG sensors into smart structures and the Internet of Things (IoT) represents a paradigm shift in how critical assets are monitored [cite: 9, 10].\n\nThis paper aims to provide a rigorous, systematic review of FBG sensors for monitoring physical parameters. It covers the theoretical background, historical milestones, fabrication techniques, and interrogation methods. It critically evaluates applications in Structural Health Monitoring (SHM), aerospace, and biomedical engineering, while addressing the significant challenges of cross-sensitivity and packaging. Finally, it outlines future research directions, emphasizing the convergence of photonics with deep learning and nanotechnology.",
+      "stats": {
+        "char_count": 2217,
+        "word_count": 298,
+        "sentence_count": 13,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "2.1. Operating Principle",
+      "level": 3,
+      "content": "The fundamental principle of an FBG sensor relies on the Bragg condition. When a broadband light source is injected into the fiber, the grating reflects a narrow spectral band centered at the Bragg wavelength ($\\lambda_B$), while transmitting all other wavelengths. The Bragg wavelength is defined by the equation:\n\n\\[ \\lambda_B = 2 n_{eff} \\Lambda \\]\n\nwhere $n_{eff}$ is the effective refractive index of the fiber core and $\\Lambda$ is the grating period [cite: 5, 11].\n\nExternal physical parameters perturb the grating by altering either the refractive index ($n_{eff}$) or the grating period ($\\Lambda$).\n*   **Strain Sensing:** Longitudinal strain ($\\epsilon$) elongates the fiber (changing $\\Lambda$) and alters the refractive index via the photo-elastic effect. The wavelength shift ($\\Delta \\lambda_B$) is expressed as:\n    \\[ \\frac{\\Delta \\lambda_B}{\\lambda_B} = (1 - p_e) \\epsilon \\]\n    where $p_e$ is the effective strain-optic coefficient [cite: 12, 13].\n*   **Temperature Sensing:** Temperature changes ($\\Delta T$) induce thermal expansion (changing $\\Lambda$) and alter the refractive index via the thermo-optic effect. The shift is given by:\n    \\[ \\frac{\\Delta \\lambda_B}{\\lambda_B} = (\\alpha + \\zeta) \\Delta T \\]\n    where $\\alpha$ is the thermal expansion coefficient and $\\zeta$ is the thermo-optic coefficient [cite: 11, 12].",
+      "stats": {
+        "char_count": 1347,
+        "word_count": 192,
+        "sentence_count": 8,
+        "line_count": 13
+      }
+    },
+    {
+      "heading": "2.2. Types of Gratings",
+      "level": 3,
+      "content": "While the uniform FBG is the standard, several variants exist for specialized applications:\n*   **Chirped FBGs (CFBG):** These have a varying grating period along the fiber axis, resulting in a broad reflection spectrum. They are used for dispersion compensation and sensing over large strain gradients [cite: 14, 15].\n*   **Tilted FBGs (TFBG):** The grating planes are tilted relative to the fiber axis, coupling light into cladding modes. This makes them highly sensitive to the surrounding refractive index (SRI), useful for biochemical sensing [cite: 15, 16].\n*   **Long Period Gratings (LPG):** These have a much longer period (100s of $\\mu m$) and couple core modes to co-propagating cladding modes, offering high sensitivity to external environmental changes but lower strain sensitivity compared to FBGs [cite: 1, 14].",
+      "stats": {
+        "char_count": 826,
+        "word_count": 125,
+        "sentence_count": 5,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The trajectory of FBG technology is marked by two distinct eras: the discovery of photosensitivity and the development of practical inscription methods.",
+      "stats": {
+        "char_count": 152,
+        "word_count": 22,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.1. Discovery (1978)",
+      "level": 3,
+      "content": "The phenomenon of photosensitivity in optical fibers was discovered serendipitously in 1978 by Ken Hill and colleagues at the Communications Research Centre in Canada. While studying nonlinear effects in germanium-doped silica fibers using an argon-ion laser, they observed a permanent increase in the refractive index, forming a standing wave pattern. This resulted in the first \"Hill gratings\" [cite: 17, 18]. However, these gratings could only reflect the wavelength of light used to create them, severely limiting their utility.",
+      "stats": {
+        "char_count": 532,
+        "word_count": 78,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.2. The Holographic Method (1989)",
+      "level": 3,
+      "content": "A transformative milestone occurred in 1989 when Gerald Meltz and his team demonstrated the transverse holographic method. They utilized two interfering ultraviolet (UV) laser beams incident from the side of the fiber to create the interference pattern. This technique allowed for the inscription of gratings at any desired wavelength by adjusting the angle between the UV beams [cite: 1, 17, 18]. This breakthrough decoupled the writing wavelength from the sensing wavelength, paving the way for the mass production of FBGs for telecommunications (specifically Wavelength Division Multiplexing or WDM) and sensing.",
+      "stats": {
+        "char_count": 615,
+        "word_count": 90,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.3. Modern Fabrication Evolution",
+      "level": 3,
+      "content": "Following Meltz's work, the **phase mask technique** was developed, which simplified the manufacturing process and improved reproducibility by using a diffractive optical element to generate the interference pattern [cite: 1, 19]. More recently, **femtosecond (fs) laser inscription** has revolutionized the field. Unlike UV inscription, which requires photosensitive fibers (often hydrogen-loaded), fs lasers can inscribe gratings in almost any transparent material, including pure silica and sapphire fibers, through non-linear multiphoton absorption. This allows for \"through-coating\" inscription, where gratings are written without stripping the fiber's protective polymer coating, significantly retaining the mechanical strength of the sensor [cite: 3, 20].",
+      "stats": {
+        "char_count": 762,
+        "word_count": 97,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.1. Fabrication Techniques",
+      "level": 3,
+      "content": "Current fabrication methods prioritize mechanical integrity and thermal stability.\n*   **Draw-Tower Gratings (DTG):** Gratings are written during the fiber drawing process before the primary coating is applied. This results in sensors with high mechanical strength, suitable for high-strain applications, as the pristine glass surface is never exposed to the environment [cite: 21, 22].\n*   **Femtosecond Laser Inscription:** As noted, this method enables the creation of Type II gratings, which are stable at extreme temperatures (up to 1000°C) where standard Type I UV-written gratings would be erased (annealed out) [cite: 3, 20].",
+      "stats": {
+        "char_count": 633,
+        "word_count": 91,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.2. Interrogation Techniques",
+      "level": 3,
+      "content": "The interrogation system, which extracts the wavelength shift, is critical for sensor performance. Techniques are generally categorized into passive and active methods.",
+      "stats": {
+        "char_count": 168,
+        "word_count": 22,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.2.1. Passive Interrogation",
+      "level": 4,
+      "content": "*   **Edge Filtering:** This method converts wavelength shifts into intensity variations using a filter with a linear spectral response (e.g., a matched FBG or a thin-film filter). It offers high-speed demodulation (kHz to MHz range) suitable for dynamic sensing (vibration, acoustics) but typically has a limited dynamic range and lower resolution [cite: 23, 24, 25].\n*   **Spectrometers (CCD/Linear Arrays):** Light is dispersed onto a detector array. This is robust and allows for WDM (multiplexing many sensors), but the scanning speed and resolution are limited by the pixel density and readout electronics [cite: 22].",
+      "stats": {
+        "char_count": 623,
+        "word_count": 93,
+        "sentence_count": 6,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "4.2.2. Active Interrogation",
+      "level": 4,
+      "content": "*   **Tunable Lasers:** A narrowband laser sweeps across the spectral range. As the laser matches the FBG wavelength, a reflection is detected. This method offers high spectral resolution and high signal-to-noise ratio (SNR) over long distances, making it the industry standard for static and quasi-static SHM [cite: 23, 26].\n*   **Optical Frequency Domain Reflectometry (OFDR):** This technique allows for distributed sensing with high spatial resolution (millimeter scale) over tens of meters. It treats the entire fiber as a continuous grating, enabling the mapping of strain fields with unprecedented detail [cite: 27, 28].",
+      "stats": {
+        "char_count": 627,
+        "word_count": 92,
+        "sentence_count": 5,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "4.2.3. Advanced Demodulation",
+      "level": 4,
+      "content": "Recent advancements utilize **Fourier Domain Mode-Locked (FDML)** lasers for ultra-fast interrogation, enabling dynamic strain monitoring at rates exceeding 100 kHz [cite: 26]. Additionally, **microwave photonics** techniques are being explored to translate optical shifts into the radio-frequency domain, leveraging high-precision electronic frequency counters [cite: 29].",
+      "stats": {
+        "char_count": 373,
+        "word_count": 44,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5. Applications and Case Studies",
+      "level": 2,
+      "content": "The versatility of FBG sensors has led to their adoption in diverse sectors.",
+      "stats": {
+        "char_count": 76,
+        "word_count": 13,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.1. Structural Health Monitoring (SHM)",
+      "level": 3,
+      "content": "SHM is the largest application domain for FBGs.\n*   **Civil Infrastructure:** FBGs are embedded in bridges, tunnels, and dams to monitor strain, crack propagation, and vibration. For instance, FBG sensors have been successfully deployed to monitor the Golden Gate Bridge and the Shanghai Tower [cite: 30]. Their immunity to lightning and long-distance transmission capability (tens of kilometers) makes them superior to electrical strain gauges for large structures [cite: 15, 31].\n*   **Geotechnical Engineering:** FBG-based inclinometers and tilt sensors are used for landslide monitoring and ground movement detection. Recent designs utilize 3D-printed probes and cantilever beams to enhance sensitivity to tilt angles, achieving resolutions as fine as 0.002 degrees [cite: 7, 32].",
+      "stats": {
+        "char_count": 784,
+        "word_count": 111,
+        "sentence_count": 7,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.2. Aerospace",
+      "level": 3,
+      "content": "In the aerospace industry, weight reduction and safety are paramount.\n*   **Composite Monitoring:** FBGs are embedded directly into Carbon Fiber Reinforced Polymer (CFRP) composite wings and fuselages during manufacturing. This allows for \"smart structures\" that can monitor the curing process (temperature/strain) and operational loads (wing bending, impact detection) in real-time [cite: 28, 31, 33].\n*   **Propulsion Systems:** High-temperature stable FBGs (e.g., sapphire or regenerated gratings) are used to monitor exhaust temperatures and turbine blade strain in jet engines, environments where conventional electronics fail [cite: 20, 34].",
+      "stats": {
+        "char_count": 647,
+        "word_count": 86,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.3. Biomedical Engineering",
+      "level": 3,
+      "content": "FBG sensors are increasingly used in minimally invasive surgery and physiological monitoring due to their biocompatibility and miniature size.\n*   **Smart Textiles and Wearables:** FBGs embedded in flexible polymers (e.g., PDMS) or woven into textiles monitor respiratory rate, heart rate, and body temperature. They are MRI-compatible, allowing for monitoring during imaging procedures [cite: 35].\n*   **Shape Sensing:** Arrays of FBGs (often multicore fibers) are integrated into catheters and biopsy needles to reconstruct the 3D shape and position of the instrument inside the body without using X-ray fluoroscopy [cite: 35, 36].",
+      "stats": {
+        "char_count": 633,
+        "word_count": 90,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.4. Specialized Physical Parameter Sensors",
+      "level": 3,
+      "content": "Beyond direct strain/temp measurement, FBGs are transduced to measure other parameters:\n*   **Accelerometers:** FBG accelerometers utilize a mass-spring system where the fiber acts as the spring or is attached to a cantilever. Vibration causes oscillating strain in the FBG. These are used for vibration monitoring in machinery and seismic detection, offering insensitivity to EMI and high sensitivity (e.g., >500 pm/g) [cite: 37, 38, 39].\n*   **Liquid Level and Flow:** FBG arrays measure liquid level by detecting the temperature difference between the liquid and the gas above it (using the self-heating of the sensor or ambient differences). This is critical in fuel tanks and cryogenic storage (liquid nitrogen/oxygen) [cite: 6, 40, 41].\n*   **Pressure:** FBGs are bonded to diaphragms or bellows. Fluid pressure deforms the diaphragm, straining the FBG. These are widely used in downhole oil and gas monitoring [cite: 42, 43].",
+      "stats": {
+        "char_count": 932,
+        "word_count": 141,
+        "sentence_count": 10,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "6. Challenges and Open Problems",
+      "level": 2,
+      "content": "Despite their success, FBG sensors face technical hurdles that limit wider adoption.",
+      "stats": {
+        "char_count": 84,
+        "word_count": 12,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.1. Cross-Sensitivity",
+      "level": 3,
+      "content": "The most significant challenge is the simultaneous sensitivity of FBGs to both strain and temperature. A wavelength shift can be caused by either parameter, leading to measurement ambiguity [cite: 3, 33].\n*   **Mitigation Strategies:**\n    *   **Reference FBG:** Using a second, strain-free FBG in close proximity to measure temperature only, which is then subtracted from the sensing FBG [cite: 11, 12].\n    *   **Dual-Wavelength/Parameter Matrix:** Using two FBGs with different sensitivities (e.g., different cladding diameters or materials) and solving a matrix equation to decouple the parameters [cite: 27, 33].\n    *   **Superstructure Gratings:** Utilizing complex grating structures like Tilted FBGs where core and cladding modes exhibit different sensitivities to strain and temperature [cite: 27, 44].",
+      "stats": {
+        "char_count": 812,
+        "word_count": 112,
+        "sentence_count": 7,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6.2. Packaging and Strain Transfer",
+      "level": 3,
+      "content": "Bare optical fibers are fragile. Packaging them into robust housings (steel tubes, composite patches) is necessary but introduces \"strain transfer\" losses. The strain experienced by the FBG is often less than the strain in the host structure due to the shear deformation of the adhesive and protective layers [cite: 1, 45].\n*   **High-Temperature Issues:** In high-temperature applications, standard epoxy adhesives degrade or creep, causing sensor drift. Metal-embedded FBGs (using ultrasonic additive manufacturing or casting) are being explored to solve this, but they introduce thermal residual stresses [cite: 46, 47, 48].",
+      "stats": {
+        "char_count": 627,
+        "word_count": 90,
+        "sentence_count": 5,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "6.3. Interrogation Cost and Complexity",
+      "level": 3,
+      "content": "High-speed, high-resolution interrogation units (tunable lasers) remain expensive compared to electrical data acquisition systems. This cost barrier inhibits the use of FBG systems in cost-sensitive applications like residential monitoring or simple industrial control [cite: 3, 24].",
+      "stats": {
+        "char_count": 283,
+        "word_count": 36,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7. Future Research Directions",
+      "level": 2,
+      "content": "The future of FBG sensing lies in the convergence of advanced photonics, material science, and data analytics.",
+      "stats": {
+        "char_count": 110,
+        "word_count": 17,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.1. AI and Deep Learning for Demodulation",
+      "level": 3,
+      "content": "As sensor networks grow in density, spectral overlap becomes a problem. Traditional peak-tracking algorithms fail when FBG peaks merge. Recent research utilizes **Deep Learning (DL)**, specifically Convolutional Neural Networks (CNNs) and Gated Recurrent Units (GRUs), to demodulate overlapping spectra. These AI models can extract accurate wavelength shifts from complex, distorted signals, significantly increasing the multiplexing capacity of FBG networks [cite: 8, 49, 50].",
+      "stats": {
+        "char_count": 477,
+        "word_count": 63,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.2. Lab-on-Fiber Technology",
+      "level": 3,
+      "content": "\"Lab-on-Fiber\" aims to integrate functional nanostructures (plasmonic metasurfaces, biological recognition layers) directly onto the fiber tip or grating area. This transforms the FBG from a physical sensor into a highly specific biochemical probe, capable of detecting biomarkers, pH, or gas concentrations at the micro-scale [cite: 36, 51, 52].",
+      "stats": {
+        "char_count": 346,
+        "word_count": 48,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.3. IoT and Smart City Integration",
+      "level": 3,
+      "content": "The integration of FBG interrogators with IoT modules is a growing trend. \"Smart\" interrogators with edge computing capabilities can process data locally and transmit actionable insights (e.g., \"Bridge Integrity: 98%\") to the cloud. This is vital for the realization of Smart Cities, where thousands of sensors monitor infrastructure health, traffic loads, and environmental conditions in real-time [cite: 9, 10].",
+      "stats": {
+        "char_count": 413,
+        "word_count": 59,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.4. Additive Manufacturing (3D Printing)",
+      "level": 3,
+      "content": "Embedding FBGs into 3D-printed metal or polymer parts allows for the creation of \"self-sensing\" components. Ultrasonic Additive Manufacturing (UAM) allows fibers to be embedded in metals at low temperatures, protecting the grating while creating robust sensors for aerospace and automotive components [cite: 46, 47].",
+      "stats": {
+        "char_count": 316,
+        "word_count": 44,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "Fiber Bragg Grating sensors have matured from a laboratory curiosity into a robust industrial technology. Their intrinsic advantages—EMI immunity, multiplexing, and durability—have made them indispensable in structural health monitoring, aerospace, and energy sectors. The field has evolved through significant milestones, from the holographic inscription method to the current era of femtosecond laser fabrication and AI-assisted interrogation.\n\nHowever, challenges remain. Decoupling strain and temperature effects requires careful sensor design, and the cost of interrogation systems must decrease to compete with legacy electrical sensors in broader markets. The future of FBG technology is poised at the intersection of hardware and software: advanced \"Lab-on-Fiber\" devices will open new frontiers in biomedical sensing, while Deep Learning algorithms will enhance the resolution and capacity of sensor networks. As these technologies converge, FBG sensors will play a pivotal role in the digitalization of the physical world, serving as the nervous system of next-generation smart infrastructure and intelligent machines.",
+      "stats": {
+        "char_count": 1128,
+        "word_count": 152,
+        "sentence_count": 7,
+        "line_count": 3
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Applications of FBG sensors in structural health monitoring and biomedical",
+      "number": null,
+      "title": "Applications of FBG sensors in structural health monitoring and biomedical"
+    },
+    {
+      "text": "Applications of fiber Bragg grating sensors in structural health monitoring",
+      "number": null,
+      "title": "Applications of fiber Bragg grating sensors in structural health monitoring"
+    },
+    {
+      "text": "Applications of FBG sensors",
+      "number": null,
+      "title": "Applications of FBG sensors"
+    },
+    {
+      "text": "Structural monitoring of bridges and wind turbines",
+      "number": null,
+      "title": "Structural monitoring of bridges and wind turbines"
+    },
+    {
+      "text": "FBG sensors for aerospace applications",
+      "number": null,
+      "title": "FBG sensors for aerospace applications"
+    },
+    {
+      "text": "Working principle of a fiber Bragg grating sensor.",
+      "number": null,
+      "title": "Working principle of a fiber Bragg grating sensor."
+    },
+    {
+      "text": "Fiber Bragg Grating Sensors: Principles",
+      "number": null,
+      "title": "Fiber Bragg Grating Sensors: Principles"
+    },
+    {
+      "text": "Fiber Bragg Grating Based Sensors",
+      "number": null,
+      "title": "Fiber Bragg Grating Based Sensors"
+    },
+    {
+      "text": "Fiber Bragg Grating Sensor and How it Works",
+      "number": null,
+      "title": "Fiber Bragg Grating Sensor and How it Works"
+    },
+    {
+      "text": "What is a Fiber Bragg Grating?",
+      "number": null,
+      "title": "What is a Fiber Bragg Grating?"
+    },
+    {
+      "text": "Fiber Bragg grating sensors for monitoring of physical parameters: a comprehensive review",
+      "number": null,
+      "title": "Fiber Bragg grating sensors for monitoring of physical parameters: a comprehensive review"
+    },
+    {
+      "text": "Fiber Bragg grating sensors for monitoring of physical parameters",
+      "number": null,
+      "title": "Fiber Bragg grating sensors for monitoring of physical parameters"
+    },
+    {
+      "text": "Fiber Bragg Grating Sensors: A Comprehensive Review",
+      "number": null,
+      "title": "Fiber Bragg Grating Sensors: A Comprehensive Review"
+    },
+    {
+      "text": "Fiber Bragg Grating sensors for monitoring",
+      "number": null,
+      "title": "Fiber Bragg Grating sensors for monitoring"
+    },
+    {
+      "text": "Fiber Bragg grating sensors review",
+      "number": null,
+      "title": "Fiber Bragg grating sensors review"
+    },
+    {
+      "text": "Historical development of Fiber Bragg grating sensors",
+      "number": null,
+      "title": "Historical development of Fiber Bragg grating sensors"
+    },
+    {
+      "text": "Fiber Bragg Grating",
+      "number": null,
+      "title": "Fiber Bragg Grating"
+    },
+    {
+      "text": "History of FBG Device Development",
+      "number": null,
+      "title": "History of FBG Device Development"
+    },
+    {
+      "text": "Leveraging three decades of FBG technology",
+      "number": null,
+      "title": "Leveraging three decades of FBG technology"
+    },
+    {
+      "text": "Recent advancements in FBG sensor fabrication for biomedical",
+      "number": null,
+      "title": "Recent advancements in FBG sensor fabrication for biomedical"
+    },
+    {
+      "text": "Recent advancements in FBG sensor fabrication",
+      "number": null,
+      "title": "Recent advancements in FBG sensor fabrication"
+    },
+    {
+      "text": "Embedded FBG sensors fabricated by ultrasonic additive manufacturing",
+      "number": null,
+      "title": "Embedded FBG sensors fabricated by ultrasonic additive manufacturing"
+    },
+    {
+      "text": "Low-temperature ultrasonic additive manufacturing for FBG",
+      "number": null,
+      "title": "Low-temperature ultrasonic additive manufacturing for FBG"
+    },
+    {
+      "text": "FBG liquid level sensor review",
+      "number": null,
+      "title": "FBG liquid level sensor review"
+    },
+    {
+      "text": "FBG Liquid Level Sensor",
+      "number": null,
+      "title": "FBG Liquid Level Sensor"
+    },
+    {
+      "text": "Liquid level measurement based on FBG",
+      "number": null,
+      "title": "Liquid level measurement based on FBG"
+    },
+    {
+      "text": "FBG liquid level sensor system",
+      "number": null,
+      "title": "FBG liquid level sensor system"
+    },
+    {
+      "text": "Liquid-level sensor using FBG",
+      "number": null,
+      "title": "Liquid-level sensor using FBG"
+    },
+    {
+      "text": "Strain temperature monitoring and decoupling",
+      "number": null,
+      "title": "Strain temperature monitoring and decoupling"
+    },
+    {
+      "text": "Methods to decouple strain and temperature",
+      "number": null,
+      "title": "Methods to decouple strain and temperature"
+    },
+    {
+      "text": "Decoupling strain and temperature in FBG",
+      "number": null,
+      "title": "Decoupling strain and temperature in FBG"
+    },
+    {
+      "text": "Decoupled temperature and strain measurements",
+      "number": null,
+      "title": "Decoupled temperature and strain measurements"
+    },
+    {
+      "text": "New Method of Temperature and Strain Decoupling",
+      "number": null,
+      "title": "New Method of Temperature and Strain Decoupling"
+    },
+    {
+      "text": "Interrogation-Based Fiber-Optic Sensors: A Comprehensive Review",
+      "number": null,
+      "title": "Interrogation-Based Fiber-Optic Sensors: A Comprehensive Review"
+    },
+    {
+      "text": "Interrogation techniques for FBG sensors",
+      "number": null,
+      "title": "Interrogation techniques for FBG sensors"
+    },
+    {
+      "text": "Interrogation Techniques for Fiber Grating Sensors",
+      "number": null,
+      "title": "Interrogation Techniques for Fiber Grating Sensors"
+    },
+    {
+      "text": "FBG Sensors and Interrogation",
+      "number": null,
+      "title": "FBG Sensors and Interrogation"
+    },
+    {
+      "text": "Low cost FBG interrogation",
+      "number": null,
+      "title": "Low cost FBG interrogation"
+    },
+    {
+      "text": "FBG Accelerometers",
+      "number": null,
+      "title": "FBG Accelerometers"
+    },
+    {
+      "text": "Comprehensive Review on Sensitivity Determination in FBG Accelerometer",
+      "number": null,
+      "title": "Comprehensive Review on Sensitivity Determination in FBG Accelerometer"
+    },
+    {
+      "text": "Fiber Bragg grating based acceleration sensors review",
+      "number": null,
+      "title": "Fiber Bragg grating based acceleration sensors review"
+    },
+    {
+      "text": "FBG based accelerometer working principle",
+      "number": null,
+      "title": "FBG based accelerometer working principle"
+    },
+    {
+      "text": "FBG Accelerometer",
+      "number": null,
+      "title": "FBG Accelerometer"
+    },
+    {
+      "text": "Future research directions FBG sensors",
+      "number": null,
+      "title": "Future research directions FBG sensors"
+    },
+    {
+      "text": "FBG sensors in Smart Cities",
+      "number": null,
+      "title": "FBG sensors in Smart Cities"
+    },
+    {
+      "text": "FBG sensors driven SHM using IoT",
+      "number": null,
+      "title": "FBG sensors driven SHM using IoT"
+    },
+    {
+      "text": "FBG based sensors review of technology and SHM",
+      "number": null,
+      "title": "FBG based sensors review of technology and SHM"
+    },
+    {
+      "text": "FBG inclinometer probe",
+      "number": null,
+      "title": "FBG inclinometer probe"
+    },
+    {
+      "text": "FBG tilt sensor inclinometer",
+      "number": null,
+      "title": "FBG tilt sensor inclinometer"
+    },
+    {
+      "text": "Cantilever-based biaxial FBG inclinometer",
+      "number": null,
+      "title": "Cantilever-based biaxial FBG inclinometer"
+    },
+    {
+      "text": "FBG Tilt Sensor",
+      "number": null,
+      "title": "FBG Tilt Sensor"
+    },
+    {
+      "text": "T510 Static Inclinometer",
+      "number": null,
+      "title": "T510 Static Inclinometer"
+    },
+    {
+      "text": "History of FBG",
+      "number": null,
+      "title": "History of FBG"
+    },
+    {
+      "text": "Fiber Bragg Grating Technology Fundamentals",
+      "number": null,
+      "title": "Fiber Bragg Grating Technology Fundamentals"
+    },
+    {
+      "text": "FBG strain sensors review",
+      "number": null,
+      "title": "FBG strain sensors review"
+    },
+    {
+      "text": "FBG sensors for monitoring physical parameters",
+      "number": null,
+      "title": "FBG sensors for monitoring physical parameters"
+    },
+    {
+      "text": "FBG sensors comprehensive review",
+      "number": null,
+      "title": "FBG sensors comprehensive review"
+    },
+    {
+      "text": "Recent review FBG sensors",
+      "number": null,
+      "title": "Recent review FBG sensors"
+    },
+    {
+      "text": "FBG sensors for ocean temperature and depth",
+      "number": null,
+      "title": "FBG sensors for ocean temperature and depth"
+    },
+    {
+      "text": "FBG sensors review",
+      "number": null,
+      "title": "FBG sensors review"
+    },
+    {
+      "text": "State of the art interrogation techniques",
+      "number": null,
+      "title": "State of the art interrogation techniques"
+    },
+    {
+      "text": "FBG Interrogation Method",
+      "number": null,
+      "title": "FBG Interrogation Method"
+    },
+    {
+      "text": "High resolution interrogation method",
+      "number": null,
+      "title": "High resolution interrogation method"
+    },
+    {
+      "text": "Interrogation Based Fiber Optic Sensors",
+      "number": null,
+      "title": "Interrogation Based Fiber Optic Sensors"
+    },
+    {
+      "text": "Lab-on-fiber FBG sensors review",
+      "number": null,
+      "title": "Lab-on-fiber FBG sensors review"
+    },
+    {
+      "text": "Lab on Fiber Technology",
+      "number": null,
+      "title": "Lab on Fiber Technology"
+    },
+    {
+      "text": "Lab-on-fiber FBG sensors",
+      "number": null,
+      "title": "Lab-on-fiber FBG sensors"
+    },
+    {
+      "text": "Challenges in FBG packaging for high temperature",
+      "number": null,
+      "title": "Challenges in FBG packaging for high temperature"
+    },
+    {
+      "text": "Challenges in FBG packaging.",
+      "number": null,
+      "title": "Challenges in FBG packaging."
+    },
+    {
+      "text": "Packaging and Temperature Compensation of FBG",
+      "number": null,
+      "title": "Packaging and Temperature Compensation of FBG"
+    },
+    {
+      "text": "Challenges in FBG packaging",
+      "number": null,
+      "title": "Challenges in FBG packaging"
+    },
+    {
+      "text": "Improvement in temperature sensitivity of FBG",
+      "number": null,
+      "title": "Improvement in temperature sensitivity of FBG"
+    },
+    {
+      "text": "Typical sensitivity of FBG sensors",
+      "number": null,
+      "title": "Typical sensitivity of FBG sensors"
+    },
+    {
+      "text": "Strain coefficient versus temperature",
+      "number": null,
+      "title": "Strain coefficient versus temperature"
+    },
+    {
+      "text": "How is the DTG wavelength changing",
+      "number": null,
+      "title": "How is the DTG wavelength changing"
+    },
+    {
+      "text": "FBG strain gage",
+      "number": null,
+      "title": "FBG strain gage"
+    },
+    {
+      "text": "Long-gauge FBG strain sensor",
+      "number": null,
+      "title": "Long-gauge FBG strain sensor"
+    },
+    {
+      "text": "Machine learning FBG sensor demodulation",
+      "number": null,
+      "title": "Machine learning FBG sensor demodulation"
+    },
+    {
+      "text": "Spectral demodulation of mixed linewidth FBG",
+      "number": null,
+      "title": "Spectral demodulation of mixed linewidth FBG"
+    },
+    {
+      "text": "Spectral Demodulation of FBG based on Deep CNN",
+      "number": null,
+      "title": "Spectral Demodulation of FBG based on Deep CNN"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Gemini\\Engineering\\Fiber_Bragg_grating_sensors_for_monitoring_of_physical_param_20251226_184717_split.json",
+    "processed_date": "2025-12-31T00:07:09.164760",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

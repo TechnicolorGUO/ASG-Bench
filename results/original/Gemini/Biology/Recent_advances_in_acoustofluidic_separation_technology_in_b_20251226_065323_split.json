@@ -1,0 +1,278 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Recent advances in acoustofluidic separation technology in biology."
+    ],
+    [
+      1,
+      "Recent Advances in Acoustofluidic Separation Technology in Biology: A Systematic Literature Review"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Acoustic Radiation Force (ARF)"
+    ],
+    [
+      3,
+      "2.2 Acoustic Streaming (AS)"
+    ],
+    [
+      3,
+      "2.3 Wave Modes"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Tilted-Angle Standing Surface Acoustic Waves (taSSAW)"
+    ],
+    [
+      3,
+      "4.2 Acoustofluidic Centrifugation"
+    ],
+    [
+      3,
+      "4.3 Bessel Beam Excitation Separation Technology (BEST)"
+    ],
+    [
+      3,
+      "4.4 High-Throughput Acoustofluidic Tweezers (3D-AFT)"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Circulating Tumor Cell (CTC) Isolation"
+    ],
+    [
+      3,
+      "5.2 Exosome and Extracellular Vesicle (EV) Separation"
+    ],
+    [
+      3,
+      "5.3 Virus Isolation (Virology)"
+    ],
+    [
+      3,
+      "5.4 Blood Component Separation"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Acoustothermal Heating"
+    ],
+    [
+      3,
+      "6.2 Throughput vs. Precision Trade-off"
+    ],
+    [
+      3,
+      "6.3 Device Fabrication and Integration"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Recent advances in acoustofluidic separation technology in biology.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 06:53:23*\n*Progress: [22/25]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Recent_advances_in_acoustofluidic_separation_technology_in_b_20251226_065323.md*\n---"
+    },
+    {
+      "heading": "Recent Advances in Acoustofluidic Separation Technology in Biology: A Systematic Literature Review",
+      "level": 1,
+      "content": "**Key Points**\n*   **Acoustofluidics** merges acoustics and microfluidics to manipulate particles using sound waves, offering a label-free, contact-free, and biocompatible method for biological separation.\n*   **Mechanisms:** The technology relies primarily on **Acoustic Radiation Force (ARF)** for particle migration and **Acoustic Streaming (AS)** for fluid drag, allowing separation based on size, density, and compressibility.\n*   **Recent Breakthroughs (2020–2024):**\n    *   **Bessel Beam Excitation Separation Technology (BEST):** A 2024 milestone enabling the isolation of viruses (e.g., SARS-CoV-2) and nanoparticles with high resolution.\n    *   **Acoustofluidic Centrifugation:** A novel method using spinning droplets to concentrate and separate exosomes and DNA.\n    *   **High-Throughput Systems:** Innovations like 3D Acoustofluidic Tweezers (3D-AFT) have pushed flow rates to 500 µL/min, bridging the gap toward clinical utility.\n*   **Applications:** The field has expanded from separating blood cells and Circulating Tumor Cells (CTCs) to isolating sub-micron bioparticles like exosomes and viruses, which are critical for liquid biopsy and early disease detection.\n*   **Challenges:** Managing **acoustothermal heating** remains a critical hurdle for maintaining biological integrity, though new heat-dissipation strategies and pulsed-wave protocols are mitigating these effects.\n\n---"
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The precise separation of biological targets from complex fluids is a cornerstone of modern biomedical research, diagnostics, and therapeutics. Traditional separation modalities, such as centrifugation, filtration, and fluorescence-activated cell sorting (FACS), have long served as the gold standards. However, these methods often suffer from limitations including high equipment costs, sample contamination risks, potential bio-damage due to high shear forces, and the requirement for biochemical labeling [cite: 1, 2]. As the demand for point-of-care (POC) diagnostics and liquid biopsy technologies grows, there is an urgent need for separation techniques that are rapid, label-free, biocompatible, and capable of handling small sample volumes with high precision.\n\nAcoustofluidics, the integration of acoustics and microfluidics, has emerged as a transformative solution to these challenges. By utilizing sound waves to manipulate fluids and suspended particles within microchannels, acoustofluidics offers a non-contact mechanism to sort bioparticles based on their intrinsic physical properties—specifically size, density, and compressibility [cite: 3, 4, 5]. This technology eliminates the need for external tagging (label-free) and operates at power intensities similar to ultrasonic imaging, ensuring high biocompatibility [cite: 3].\n\nIn the last decade, and particularly between 2020 and 2024, the field has witnessed a paradigm shift from the manipulation of micron-sized cells to the isolation of nanoscale bioparticles, such as exosomes and viruses [cite: 6, 7]. This review provides a comprehensive analysis of these recent advances. It examines the fundamental physical principles, categorizes state-of-the-art device architectures (including Surface Acoustic Wave and Bulk Acoustic Wave systems), details breakthrough applications in virology and oncology, and critically assesses the challenges impeding widespread clinical translation."
+    },
+    {
+      "heading": "2. Key Concepts and Definitions",
+      "level": 2,
+      "content": "To understand the recent technological leaps, one must first establish the theoretical framework governing acoustofluidic interactions. The manipulation of particles in an acoustic field is primarily driven by two physical phenomena: the Acoustic Radiation Force (ARF) and Acoustic Streaming (AS)."
+    },
+    {
+      "heading": "2.1 Acoustic Radiation Force (ARF)",
+      "level": 3,
+      "content": "The ARF is a time-averaged force exerted on a particle suspended in a fluid when it interacts with an acoustic wave. In a standing wave field, this force directs particles toward either pressure nodes (minimum pressure amplitude) or antinodes (maximum pressure amplitude), depending on the particle's acoustic contrast factor relative to the medium [cite: 1, 8].\n\nThe primary ARF ($F_{rad}$) acting on a small spherical particle in a 1D standing wave is given by the Gor'kov potential:\n\\[ F_{rad} = -\\left( \\frac{\\pi p_0^2 V_p \\beta_f}{2\\lambda} \\right) \\phi (\\beta, \\rho) \\sin(2kx) \\]\nWhere:\n*   $p_0$ is the acoustic pressure amplitude.\n*   $V_p$ is the particle volume (proportional to $r^3$).\n*   $\\lambda$ is the wavelength.\n*   $\\phi$ is the acoustic contrast factor, determined by the density ($\\rho$) and compressibility ($\\beta$) of the particle and the fluid.\n\nCrucially, the force scales with the volume of the particle ($r^3$). This cubic dependence means that while micron-sized cells (e.g., 10–20 µm) experience strong acoustic forces, manipulating nanoparticles (e.g., viruses <150 nm) requires significantly higher frequencies or alternative mechanisms, a challenge that recent innovations like Bessel beams have sought to address [cite: 6, 9]."
+    },
+    {
+      "heading": "2.2 Acoustic Streaming (AS)",
+      "level": 3,
+      "content": "Acoustic streaming refers to the steady fluid flow induced by the viscous attenuation of acoustic waves. As the wave propagates and dissipates energy into the fluid, it generates a momentum flux that drives fluid motion [cite: 1, 10].\n*   **Bulk Streaming (Eckart):** Occurs in the bulk fluid, typically dominant in large chambers.\n*   **Boundary-Driven Streaming (Rayleigh/Schlichting):** Occurs within the viscous boundary layer near channel walls or particle surfaces.\n\nThe drag force ($F_{drag}$) induced by streaming is proportional to the particle radius ($r$), unlike the ARF which is proportional to $r^3$. Consequently, for sufficiently small particles (nanoparticles), the streaming-induced drag force often dominates over the radiation force, a phenomenon that can be exploited for mixing or trapping but can also hinder separation efficiency if not carefully controlled [cite: 9, 11]."
+    },
+    {
+      "heading": "2.3 Wave Modes",
+      "level": 3,
+      "content": "*   **Bulk Acoustic Waves (BAW):** Generated by piezoelectric transducers attached to the microfluidic chip (often glass or silicon). The entire channel acts as a resonator. BAW devices are robust and capable of high throughput but are generally limited to lower frequencies [cite: 12, 13].\n*   **Surface Acoustic Waves (SAW):** Generated by interdigital transducers (IDTs) deposited on a piezoelectric substrate (e.g., Lithium Niobate). SAWs travel along the surface and couple into the fluid. They offer higher precision, higher frequencies, and versatility (Standing SAW vs. Traveling SAW) [cite: 12, 14]."
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The roots of acoustofluidics trace back to the 18th and 19th centuries with the observations of Chladni (1787) and Faraday (1831), who noted the patterning of particles on vibrating plates [cite: 15, 16]. Lord Rayleigh (1883) later provided the theoretical underpinnings of acoustic streaming. However, the modern era of acoustofluidics began in the early 2000s with the miniaturization of transducers and the rise of microfabrication techniques.\n\n*   **Early 2000s:** Initial demonstrations of particle focusing and separation using BAW resonators in glass capillaries.\n*   **2008-2010:** The formalization of \"acoustofluidics\" as a discipline, with Henrik Bruus and others establishing comprehensive theoretical models [cite: 1].\n*   **2012-2015:** The development of **tilted-angle Standing Surface Acoustic Waves (taSSAW)**. This was a critical milestone that allowed for continuous, label-free separation of cells by angling the pressure nodes relative to the flow direction, significantly improving separation resolution [cite: 17, 18].\n*   **2018-2019:** Introduction of **3D Acoustofluidic Tweezers (3D-AFT)**, enabling simultaneous 3D manipulation and high-throughput processing [cite: 19].\n*   **2020-2024 (Recent Era):** The field expanded into the nano-regime. Key milestones include the development of **acoustofluidic centrifugation** for exosome isolation [cite: 7] and the **Bessel Beam Excitation Separation Technology (BEST)** for virus isolation [cite: 6], marking the technology's maturation into sub-micron clinical applications."
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "Recent years have seen the diversification of acoustofluidic configurations to address specific biological challenges. The current state-of-the-art can be categorized by the wave propagation mode and the specific engineering innovations applied."
+    },
+    {
+      "heading": "4.1 Tilted-Angle Standing Surface Acoustic Waves (taSSAW)",
+      "level": 3,
+      "content": "The taSSAW configuration remains a gold standard for continuous cell separation. By orienting the IDTs at a specific angle (e.g., 15°–30°) relative to the microchannel, the pressure nodes cross the fluid flow at an angle. As particles flow through the channel, they are pushed toward the nodes. Larger particles experience a stronger force and migrate laterally across the channel faster than smaller particles, exiting through different outlets.\n*   **Advantage:** Allows for high-resolution separation based on compressibility and size simultaneously.\n*   **Recent Optimization:** Numerical models and \"acoustic stencils\" have recently been employed to optimize the tilt angle and electrode design for sub-micron particle separation [cite: 20, 21, 22]."
+    },
+    {
+      "heading": "4.2 Acoustofluidic Centrifugation",
+      "level": 3,
+      "content": "A breakthrough in nanoparticle manipulation, this technique utilizes the interaction between surface acoustic waves and a sessile droplet. The SAW induces intense rotational streaming (spinning) within the droplet, mimicking a centrifuge but at the microscale.\n*   **Mechanism:** The spinning creates a centrifugal force while the acoustic field exerts radiation forces. This \"entanglement\" of forces allows for the rapid concentration of nanoparticles (down to 20 nm) and exosomes in less than one minute [cite: 7, 23].\n*   **Significance:** It overcomes the limitations of traditional ultracentrifugation, which is time-consuming and requires bulky equipment."
+    },
+    {
+      "heading": "4.3 Bessel Beam Excitation Separation Technology (BEST)",
+      "level": 3,
+      "content": "Introduced in 2024, BEST represents the cutting edge of viral isolation. Traditional Gaussian acoustic beams suffer from diffraction, losing energy and focus over distance.\n*   **Innovation:** Researchers designed Bessel Interdigital Transducers (BIDTs) to generate a non-diffractive, \"self-healing\" Bessel beam within the microchannel.\n*   **Performance:** This beam maintains high acoustic intensity over a long working distance, enabling the precise manipulation of particles as small as 50 nm. It has successfully isolated SARS-CoV-2 viruses from saliva with >90% purity [cite: 6, 24]."
+    },
+    {
+      "heading": "4.4 High-Throughput Acoustofluidic Tweezers (3D-AFT)",
+      "level": 3,
+      "content": "To address the low throughput of early SAW devices, 3D-AFT integrates vertical and horizontal acoustic resonators.\n*   **Capability:** This system can process samples at flow rates up to 500 µL/min, an order of magnitude higher than conventional SAW devices.\n*   **Application:** It enables the simultaneous separation of multiple blood components (RBCs, WBCs, platelets) in a single pass, making it viable for clinical apheresis applications [cite: 19, 25]."
+    },
+    {
+      "heading": "5. Applications and Case Studies",
+      "level": 2,
+      "content": "The versatility of acoustofluidics has led to its adoption across a wide spectrum of biological applications, ranging from whole-cell sorting to the isolation of genetic material."
+    },
+    {
+      "heading": "5.1 Circulating Tumor Cell (CTC) Isolation",
+      "level": 3,
+      "content": "CTCs are rare cancer cells shed into the bloodstream, serving as vital biomarkers for metastasis. Isolating them is a \"needle in a haystack\" problem (1 CTC per billion blood cells).\n*   **Method:** Acoustofluidic devices exploit the size and compressibility difference between CTCs (typically larger and stiffer) and blood cells.\n*   **Case Study:** Using taSSAW devices, researchers have achieved recovery rates >83% and purity >90% for CTCs from prostate cancer patient blood samples. The process is contact-free, preserving the cells' phenotypic and genotypic integrity for downstream culture and sequencing [cite: 4, 26, 27]."
+    },
+    {
+      "heading": "5.2 Exosome and Extracellular Vesicle (EV) Separation",
+      "level": 3,
+      "content": "Exosomes (30–150 nm) are critical for cell-cell communication and disease diagnosis. Traditional isolation (ultracentrifugation) takes hours and damages vesicles.\n*   **Recent Advance:** The **Acoustofluidic Centrifuge** and **integrated acoustic-microfluidic modules** have demonstrated the ability to isolate exosomes from whole blood with a removal rate of blood cells over 99.999%.\n*   **Impact:** These devices can process samples in minutes rather than hours, enabling point-of-care exosome analysis for cancer and neurodegenerative disease monitoring [cite: 3, 4, 20]."
+    },
+    {
+      "heading": "5.3 Virus Isolation (Virology)",
+      "level": 3,
+      "content": "The COVID-19 pandemic accelerated the need for rapid viral isolation.\n*   **Case Study (2024):** The **BEST platform** was applied to isolate SARS-CoV-2 from human saliva. By tuning the acoustic parameters, the device trapped large debris and flushed small contaminants, directing viruses (50–150 nm) to a collection outlet. The isolated viruses retained high RNA integrity, facilitating accurate PCR detection [cite: 6, 24, 28]. This represents a significant leap over filtration or chemical precipitation methods."
+    },
+    {
+      "heading": "5.4 Blood Component Separation",
+      "level": 3,
+      "content": "Routine blood analysis requires the separation of plasma, platelets, WBCs, and RBCs.\n*   **Application:** Acoustofluidic chips have been designed to perform \"acoustic washing\" or plasmapheresis. For example, high-throughput BAW devices can separate platelets from whole blood with high purity, offering a miniaturized alternative to clinical centrifuges [cite: 4, 12, 29]."
+    },
+    {
+      "heading": "6. Challenges and Open Problems",
+      "level": 2,
+      "content": "Despite significant progress, several technical and physical barriers remain before acoustofluidics can become a ubiquitous clinical tool."
+    },
+    {
+      "heading": "6.1 Acoustothermal Heating",
+      "level": 3,
+      "content": "The dissipation of acoustic energy into the fluid generates heat (acoustothermal effect).\n*   **Problem:** Excessive heating (>37°C) can damage sensitive biological samples, denature proteins, or alter cell physiology [cite: 30, 31].\n*   **Current Status:** While cooling systems (Peltier elements, heat sinks) and pulsed-wave operation modes have been developed to mitigate this, maintaining physiological temperatures at the high power levels required for nanoparticle manipulation remains a challenge [cite: 31, 32, 33]."
+    },
+    {
+      "heading": "6.2 Throughput vs. Precision Trade-off",
+      "level": 3,
+      "content": "There is an inherent trade-off between processing speed and separation resolution.\n*   **Issue:** High-throughput devices (like 3D-AFT) often sacrifice some selectivity, while high-precision devices (like BEST) operate at lower flow rates (e.g., 18 µL/min) [cite: 34].\n*   **Challenge:** Scaling up nano-separation devices to process clinically relevant volumes (mL to L) without clogging or losing resolution is an active area of research."
+    },
+    {
+      "heading": "6.3 Device Fabrication and Integration",
+      "level": 3,
+      "content": "*   **Complexity:** High-performance SAW devices require cleanroom microfabrication (photolithography) and piezoelectric substrates (LiNbO3), which are expensive and brittle compared to standard PDMS/glass microfluidics [cite: 13, 21].\n*   **Integration:** Integrating acoustic modules with downstream analysis (e.g., PCR, sequencing) on a single chip (\"Sample-in-Answer-out\") is complex due to the differing material and power requirements of each module."
+    },
+    {
+      "heading": "7. Future Research Directions",
+      "level": 2,
+      "content": "The future of acoustofluidics lies in integration, automation, and the exploration of new physical regimes.\n\n1.  **Clinical Translation and Standardization:** Developing robust, user-friendly systems that can be operated by non-experts in clinical settings. This involves standardizing chip designs and coupling layers to ensure reproducibility [cite: 35, 36].\n2.  **Integration with Biosensors:** Combining acoustofluidic separation with integrated optical or electrochemical sensors to create real-time diagnostic platforms. For instance, an acoustofluidic chip that isolates viruses and immediately detects them via an on-chip CRISPR assay [cite: 29, 30].\n3.  **Nanofluidics and Sub-50nm Manipulation:** Pushing the limits of ARF to manipulate even smaller particles, such as individual proteins or DNA fragments, potentially by using ultra-high frequency (>1 GHz) transducers and metamaterials [cite: 7, 15].\n4.  **AI-Driven Acoustofluidics:** Utilizing machine learning algorithms to optimize electrode designs and real-time feedback control systems that adjust acoustic power based on flow conditions to maximize separation efficiency [cite: 29, 37].\n5.  **Disposable and Flexible Acoustics:** Research into thin-film piezoelectric materials (e.g., ZnO, AlN on polymers) to create disposable, flexible acoustofluidic patches for wearable health monitoring [cite: 13, 33]."
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "Acoustofluidic separation technology has evolved from a niche physics experiment into a powerful, versatile tool for biomedical engineering. By harnessing the gentle yet precise forces of sound, it addresses the critical limitations of traditional separation methods, offering biocompatibility, label-free operation, and the ability to manipulate matter from the micro- to the nanoscale.\n\nThe years 2020–2024 have been particularly transformative, marked by the conquest of the \"nano-barrier.\" Innovations like the Bessel Beam Excitation Separation Technology (BEST) and acoustofluidic centrifugation have unlocked the ability to isolate viruses and exosomes with unprecedented ease, paving the way for next-generation liquid biopsies and rapid infectious disease diagnostics. While challenges regarding thermal management and mass manufacturability persist, the trajectory of the field suggests that acoustofluidics is poised to become a standard modality in clinical diagnostics and biological research, fundamentally changing how we process and analyze complex biological fluids."
+    }
+  ],
+  "references": [
+    "[cite: 3] Huang, T. J. (2020). Acoustofluidics: merging acoustics and microfluidics for biomedical applications. *iCANX Talks*. [cite: 3]",
+    "[cite: 4] Wu, M. (2018). *Systematic studies on acoustofluidic separation technology*. Pennsylvania State University Dissertation. [cite: 4]",
+    "[cite: 1] Fan, Y., Wang, X., Ren, J., Lin, F., & Wu, J. (2022). Recent advances in acoustofluidic separation technology in biology. *Microsystems & Nanoengineering*, 8, 94. [cite: 1, 38]",
+    "[cite: 39] Wu, M., et al. (2019). Acoustofluidic separation of bacteria from blood cells. *Microsystems & Nanoengineering*. [cite: 39]",
+    "[cite: 5] Wu, M., Ozcelik, A., Rufo, J., et al. (2019). Acoustofluidic separation of cells and particles. *Microsystems & Nanoengineering*, 5, 32. [cite: 5]",
+    "[cite: 10] Doinikov, A. A., et al. (2023). Mechanisms of acoustic streaming and acoustofluidics. *Reviews of Modern Physics*. [cite: 10]",
+    "[cite: 11] Bruus, H. (2012). Acoustofluidics 2: Perturbation theory and ultrasound resonance modes. *Lab on a Chip*. [cite: 11]",
+    "[cite: 8] Elveflow. (n.d.). Acoustofluidics: Cutting-Edge Techniques for Microfluidic Particle Manipulation. [cite: 8]",
+    "[cite: 9] Steinberg, A., et al. (2025). Numerical framework of particle separation via acoustofluidics. *Physics of Fluids*. [cite: 9]",
+    "[cite: 2] Fan, Y., et al. (2022). Acoustofluidic separation of cells and particles. *Microsystems & Nanoengineering*. [cite: 2]",
+    "[cite: 12] Gao, Y., Wu, M., Lin, Y., & Xu, J. (2020). Acoustic microfluidic separation techniques and bioapplications: A review. *Micromachines*, 11(10), 921. [cite: 12]",
+    "[cite: 14] Xie, Y., et al. (2023). Acoustofluidics: A Versatile Tool for Micro/Nano Separation. *Advanced Materials Technologies*. [cite: 14]",
+    "[cite: 21] Liu, Y., et al. (2024). Advances in Particle Manipulation. *Analytical Chemistry*. [cite: 21]",
+    "[cite: 40] Fan, Y., et al. (2022). Recent advances in acoustofluidic separation technology in biology. *Microsystems & Nanoengineering*. [cite: 40]",
+    "[cite: 38] Fan, Y., et al. (2022). Recent advances in acoustofluidic separation technology in biology. *Microsystems & Nanoengineering*. [cite: 38]",
+    "[cite: 20] Wu, M., et al. (2024). Recent advances in acoustofluidic separation. *Microsystems & Nanoengineering*. [cite: 20]",
+    "[cite: 15] Friend, J. (2023). Acoustofluidics. *Frontiers in Acoustics*. [cite: 15]",
+    "[cite: 16] Friend, J. (2023). Acoustofluidics highlights. *Frontiers in Acoustics*. [cite: 16]",
+    "[cite: 41] Duke University. (n.d.). Overview: Acoustofluidics. *Huang Group*. [cite: 41]",
+    "[cite: 35] Friend, J., Rufo, J., Cai, F., & Huang, T. J. (2023). Acoustofluidics. *Nature Reviews Methods Primers*. [cite: 35]",
+    "[cite: 26] Li, P., et al. (2019). Acoustofluidic separation of CTCs. *Lab on a Chip*. [cite: 26]",
+    "[cite: 21] Xia, J., et al. (2024). Advances in Technology Development. *Analytical Chemistry*. [cite: 21]",
+    "[cite: 40] Fan, Y., et al. (2022). Recent advances in acoustofluidic separation technology in biology. *Microsystems & Nanoengineering*. [cite: 40]",
+    "[cite: 3] Huang, T. J. (2020). Acoustofluidics: merging acoustics and microfluidics. *iCANX Talks*. [cite: 3]",
+    "[cite: 2] Fan, Y., et al. (2022). Acoustofluidic separation of cells and particles. *Microsystems & Nanoengineering*. [cite: 2]",
+    "[cite: 20] Xia, J., et al. (2024). Breakthrough acoustofluidic separation virus exosome. *ACS Nano*. [cite: 20]",
+    "[cite: 14] Xie, Y., et al. (2023). Acoustofluidics: A Versatile Tool. *Advanced Materials Technologies*. [cite: 14]",
+    "[cite: 38] Fan, Y., et al. (2022). Recent advances in acoustofluidic separation technology in biology. *Microsystems & Nanoengineering*. [cite: 38]",
+    "[cite: 6] Xia, J., Wang, Z., Becker, R., et al. (2024). Acoustofluidic Virus Isolation via Bessel Beam Excitation Separation Technology. *ACS Nano*, 18(33), 22596-22607. [cite: 6, 24, 34, 42, 43]",
+    "[cite: 13] Nourbakhsh, A. (2022). Acoustofluidic separation of micro and nanoparticles in Newtonian and non-Newtonian fluids: A review. *Challenges in Nano and Micro Scale Science and Technology*. [cite: 13]",
+    "[cite: 44] Xie, Y., et al. (2023). Acoustofluidics is an emerging interdisciplinary research field. *Microsystems & Nanoengineering*. [cite: 44]",
+    "[cite: 19] Wu, M., et al. (2018). High-throughput cell focusing and separation via acoustofluidic tweezers. *Lab on a Chip*, 18, 3003-3010. [cite: 19, 25, 45]",
+    "[cite: 37] Klymkovych, T., et al. (2025). Enhancing Microparticle Separation Efficiency in Acoustofluidic Chips via Machine Learning. *Italian National Conference on Sensors*. [cite: 37]",
+    "[cite: 23] Li, L., et al. (2023). Smart Microfluidic System Enabled High-Throughput Nanoparticle Separation. *ResearchGate*. [cite: 23]",
+    "[cite: 30] Rasouli, R., et al. (2023). Acoustofluidics – changing paradigm in tissue engineering. *Lab on a Chip*. [cite: 30]",
+    "[cite: 31] Zheng, et al. (2023). Acoustofluidic separation biocompatibility heating issues solutions. *Nanomaterials*. [cite: 31]",
+    "[cite: 46] Fan, Y., et al. (2022). Recent advances in acoustofluidic separation technology in biology. *Microsystems & Nanoengineering*. [cite: 46]",
+    "[cite: 29] Richard, et al. (2024). Acoustofluidic Cell Sorting. *Micromachines*. [cite: 29]",
+    "[cite: 7] Gu, Y., et al. (2021). Acoustofluidic centrifugation for nanoparticle enrichment and separation. *Science Advances*, 7(1), eabc0467. [cite: 7, 47, 48]",
+    "[cite: 36] Dong, F., et al. (2025). Droplet acoustofluidics: From acoustic principles to biochemical applications. *Physics of Fluids*. [cite: 36]",
+    "[cite: 49] Chen, C., et al. (2023). Dual-Wave Acoustofluidic Centrifuge for Ultrafast Concentration of Nanoparticles. *Small*. [cite: 49]",
+    "[cite: 17] Li, P., et al. (2014). Cell separation using tilted-angle standing surface acoustic waves. *PNAS*. [cite: 17, 18]",
+    "[cite: 27] Huang, T. J. (n.d.). Cell Separation Using Tilted-Angle Standing Surface Acoustic Waves. *Duke University*. [cite: 27]",
+    "[cite: 22] Seemann, R., et al. (2024). Lab-on-a-Chip devices based on tilted-angle standing surface acoustic waves. *Micromachines*. [cite: 22]",
+    "[cite: 28] Duke Pratt School of Engineering. (2024). Separating Viruses from Saliva with Sound Waves. [cite: 28]",
+    "[cite: 29] Wu, M., et al. (2024). High-Throughput Cell Focusing and Separation via Acoustofluidic Tweezers. *Micromachines*. [cite: 29]",
+    "[cite: 50] Wu, M., et al. (2019). Label-free separation of leukocyte subpopulations using high throughput multiplex acoustophoresis. *Lab on a Chip*. [cite: 50]",
+    "[cite: 32] Gupta, A., et al. (2025). Acoustothermal effect: mechanism and quantification of the heat source. *Journal of Fluid Mechanics*. [cite: 32]",
+    "[cite: 51] Dong, F., et al. (2025). Self-heating and acoustothermal heating in microfluidics. *Sensors and Actuators A: Physical*. [cite: 51]",
+    "[cite: 33] Fu, Y., et al. (2023). Acoustothermal heating in surface acoustic wave microfluidics. *ResearchGate*. [cite: 33]"
+  ]
+}

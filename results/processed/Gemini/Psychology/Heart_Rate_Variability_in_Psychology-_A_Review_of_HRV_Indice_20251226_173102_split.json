@@ -1,0 +1,798 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Heart Rate Variability in Psychology- A Review of HRV Indices and an Analysis Tutorial."
+    ],
+    [
+      1,
+      "Heart Rate Variability in Psychology: A Review of HRV Indices and an Analysis Tutorial"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Theoretical Frameworks in Psychological HRV Research"
+    ],
+    [
+      3,
+      "2.1 The Neurovisceral Integration Model (NIM)"
+    ],
+    [
+      3,
+      "2.2 The Polyvagal Theory"
+    ],
+    [
+      3,
+      "2.3 The Vagal Tank Theory (VTT)"
+    ],
+    [
+      2,
+      "3. Key Concepts and Review of HRV Indices"
+    ],
+    [
+      3,
+      "3.1 Time-Domain Indices"
+    ],
+    [
+      3,
+      "3.2 Frequency-Domain Indices"
+    ],
+    [
+      3,
+      "3.3 Critical Analysis: The LF/HF Ratio Controversy"
+    ],
+    [
+      3,
+      "3.4 Non-Linear Indices"
+    ],
+    [
+      2,
+      "4. Analysis Tutorial: State-of-the-Art Methods"
+    ],
+    [
+      3,
+      "4.1 Data Acquisition and Preprocessing"
+    ],
+    [
+      3,
+      "4.2 Software Comparison"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies in Psychology"
+    ],
+    [
+      3,
+      "5.1 Psychopathology and Transdiagnostic Biomarkers"
+    ],
+    [
+      3,
+      "5.2 Emotion Regulation and Positive Affect"
+    ],
+    [
+      3,
+      "5.3 Sleep and Health Prognostics (2025 Findings)"
+    ],
+    [
+      3,
+      "5.4 Resonance Frequency Breathing (Biofeedback)"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 The Respiration Confound"
+    ],
+    [
+      3,
+      "6.2 Reproducibility and Standardization"
+    ],
+    [
+      3,
+      "6.3 The \"Vagal\" Assumption"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 AI and Machine Learning Integration"
+    ],
+    [
+      3,
+      "7.2 Wearable Technology and Ecological Momentary Assessment (EMA)"
+    ],
+    [
+      3,
+      "7.3 Refining the Vagal Tank Theory"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Heart Rate Variability in Psychology- A Review of HRV Indices and an Analysis Tutorial.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 17:31:02*\n*Progress: [6/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Heart_Rate_Variability_in_Psychology-_A_Review_of_HRV_Indice_20251226_173102.md*\n---",
+      "stats": {
+        "char_count": 191,
+        "word_count": 10,
+        "sentence_count": 2,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "Heart Rate Variability in Psychology: A Review of HRV Indices and an Analysis Tutorial",
+      "level": 1,
+      "content": "**Key Points**\n*   **Heart Rate Variability (HRV)** is a robust biomarker reflecting the interplay between the parasympathetic and sympathetic branches of the autonomic nervous system (ANS), serving as a proxy for emotional regulation, cognitive flexibility, and psychopathological status.\n*   **Theoretical Frameworks:** The field is dominated by the **Neurovisceral Integration Model (NIM)**, which links prefrontal cortex activity to cardiac vagal tone, and the **Vagal Tank Theory**, which views self-regulation as a finite physiological resource managed through resting, reactivity, and recovery phases.\n*   **Methodological Controversy:** The traditional **LF/HF ratio** (Low Frequency/High Frequency) has been widely criticized as an inaccurate measure of \"sympathovagal balance,\" with recent literature urging a shift toward vagally-mediated indices like **RMSSD** and **HF-HRV**.\n*   **Technological Evolution:** While software like **Kubios** remains a gold standard for GUI-based analysis, there is a significant shift toward open-source Python toolkits (e.g., **NeuroKit2**) to enhance reproducibility and handle large datasets from wearable technology.\n*   **Emerging Frontiers:** Research in 2024–2025 highlights the predictive power of nocturnal HRV for long-term health outcomes (e.g., stroke, depression) and the integration of Artificial Intelligence (AI) to decode non-linear HRV features for stress detection.\n\n---",
+      "stats": {
+        "char_count": 1434,
+        "word_count": 185,
+        "sentence_count": 10,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "Heart Rate Variability (HRV)—the fluctuation in time intervals between adjacent heartbeats—has evolved from a clinical marker of cardiac health to a cornerstone psychophysiological index in psychology. This review provides a comprehensive synthesis of HRV research, focusing on its application in understanding the mind-body connection. We examine the theoretical underpinnings, specifically the Neurovisceral Integration Model and Polyvagal Theory, which posit HRV as an index of central-autonomic integration and social engagement. A critical analysis of HRV indices is presented, contrasting time-domain, frequency-domain, and non-linear metrics, while addressing the pervasive controversy surrounding the LF/HF ratio. Furthermore, this paper serves as a methodological tutorial, outlining best practices for signal preprocessing, artifact correction, and software selection (comparing Kubios and Python-based NeuroKit2). Finally, we explore state-of-the-art applications in psychopathology, emotion regulation, and sleep research, concluding with a discussion on the integration of AI and wearable technology in future psychological inquiry.\n\n---",
+      "stats": {
+        "char_count": 1150,
+        "word_count": 145,
+        "sentence_count": 7,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The study of the interaction between the brain and the heart has a long history in physiology, but recent decades have seen an explosion of interest within the field of psychology. Heart Rate Variability (HRV) represents the variation in the time interval between consecutive heartbeats, known as the inter-beat interval (IBI) or RR interval. Unlike heart rate (HR), which provides a static average, HRV offers a dynamic window into the autonomic nervous system's (ANS) ability to adapt to environmental and psychological challenges [cite: 1, 2].\n\nIn psychology, HRV is not merely a measure of cardiac function but is increasingly viewed as a biomarker of self-regulation, emotional flexibility, and cognitive control. A complex, variable heart rate is indicative of a healthy, responsive regulatory system capable of rapid adjustment, whereas reduced HRV is often associated with rigid, maladaptive responses, psychopathology, and poor health outcomes [cite: 2, 3].\n\nThe motivation for this review stems from the \"reproducibility crisis\" and the methodological heterogeneity that currently plagues the field. Despite the popularity of HRV, the analytical pipelines used to derive indices are often complex and inconsistent across studies [cite: 4, 5]. This paper aims to bridge the gap between physiological theory and psychological application by providing a rigorous review of indices, a critique of outdated metrics, and a tutorial on modern analysis techniques.\n\n---",
+      "stats": {
+        "char_count": 1471,
+        "word_count": 219,
+        "sentence_count": 9,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "2. Theoretical Frameworks in Psychological HRV Research",
+      "level": 2,
+      "content": "To understand why HRV is relevant to psychology, one must examine the theoretical models that link cardiac function to neural and behavioral processes.",
+      "stats": {
+        "char_count": 151,
+        "word_count": 23,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2.1 The Neurovisceral Integration Model (NIM)",
+      "level": 3,
+      "content": "Proposed by Thayer and Lane, the Neurovisceral Integration Model is arguably the most influential framework in this domain. It posits that the heart and brain are connected via the vagus nerve in a feedback loop that facilitates organismic self-regulation [cite: 6, 7].\n*   **Central Autonomic Network (CAN):** The model identifies a network of brain structures—including the medial prefrontal cortex (mPFC), anterior cingulate cortex (ACC), and amygdala—that regulates physiological, cognitive, and emotional responses [cite: 6, 8].\n*   **Inhibitory Control:** The prefrontal cortex exerts tonic inhibitory control over the amygdala and sympathoexcitatory circuits. When this prefrontal \"brake\" is active, the system remains in a parasympathetic state (high HRV). Under stress or threat, this inhibition is withdrawn, leading to sympathetic dominance (low HRV) [cite: 7, 9].\n*   **Psychological Correlate:** Therefore, resting vagally-mediated HRV (vmHRV) serves as a peripheral index of prefrontal cortical function. High resting HRV is associated with better executive function, emotion regulation, and behavioral flexibility [cite: 10, 11, 12].",
+      "stats": {
+        "char_count": 1148,
+        "word_count": 158,
+        "sentence_count": 8,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "2.2 The Polyvagal Theory",
+      "level": 3,
+      "content": "Stephen Porges’ Polyvagal Theory emphasizes the evolutionary development of the autonomic nervous system. It distinguishes between the primitive unmyelinated vagus (immobilization/freeze response) and the phylogenetically newer myelinated vagus (social engagement system) [cite: 13, 14].\n*   **Vagal Brake:** This theory suggests that the myelinated vagus acts as a \"brake\" on the heart's pacemaker. Rapid withdrawal of this brake allows for immediate mobilization (fight/flight) without engaging the sympathetic adrenal system.\n*   **Social Engagement:** In psychology, this theory links high HRV to the capacity for social connection, facial expressivity, and prosocial behavior [cite: 15, 16].",
+      "stats": {
+        "char_count": 696,
+        "word_count": 92,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "2.3 The Vagal Tank Theory (VTT)",
+      "level": 3,
+      "content": "Building on the NIM, Laborde et al. (2018) proposed the Vagal Tank Theory to operationalize self-regulation as a finite resource. This theory introduces the metaphor of a \"tank\" that can be depleted and replenished [cite: 17, 18, 19].\n*   **The Three Rs:** The theory emphasizes analyzing HRV across three phases: **Resting** (baseline capacity), **Reactivity** (response to challenge), and **Recovery** (replenishment).\n*   **Adaptive Withdrawal:** Contrary to the assumption that high HRV is always better, VTT suggests that a metabolic or cognitive challenge *should* induce a vagal withdrawal (reactivity). The crucial marker of health is the speed and completeness of the subsequent recovery [cite: 17, 20].\n\n---",
+      "stats": {
+        "char_count": 717,
+        "word_count": 105,
+        "sentence_count": 7,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3. Key Concepts and Review of HRV Indices",
+      "level": 2,
+      "content": "HRV analysis is generally categorized into time-domain, frequency-domain, and non-linear methods. Understanding the physiological basis of these indices is critical for appropriate psychological interpretation.",
+      "stats": {
+        "char_count": 210,
+        "word_count": 24,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.1 Time-Domain Indices",
+      "level": 3,
+      "content": "Time-domain measures are statistical calculations derived directly from the RR intervals. They are generally more robust to noise than frequency measures [cite: 2, 21].\n\n*   **SDNN (Standard Deviation of NN intervals):** This measures the variability of all NN (normal-to-normal) intervals in the recording. It reflects the ebb and flow of all factors contributing to HRV (sympathetic, parasympathetic, circadian, etc.). It is highly dependent on recording length; SDNN from a 5-minute recording cannot be compared to a 24-hour recording [cite: 21].\n*   **RMSSD (Root Mean Square of Successive Differences):** This is the primary time-domain measure used in psychology. It is calculated by squaring the differences between successive RR intervals, averaging them, and taking the square root. Because it focuses on beat-to-beat changes, it is the primary marker of **vagal tone** (parasympathetic activity) and is relatively free from respiratory influences compared to other metrics [cite: 2, 21, 22].",
+      "stats": {
+        "char_count": 1001,
+        "word_count": 146,
+        "sentence_count": 9,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "3.2 Frequency-Domain Indices",
+      "level": 3,
+      "content": "Spectral analysis decomposes the HRV signal into component frequencies, usually via Fast Fourier Transform (FFT) or Autoregressive (AR) modeling [cite: 2, 21].\n\n*   **High Frequency (HF) (0.15–0.40 Hz):** This band is synonymous with Respiratory Sinus Arrhythmia (RSA)—the oscillation of heart rate with breathing. It is a pure marker of parasympathetic (vagal) activity [cite: 2, 3].\n*   **Low Frequency (LF) (0.04–0.15 Hz):** Historically attributed to sympathetic activity, this interpretation is now heavily contested (see section 3.3). It is likely a mix of sympathetic and parasympathetic activity, influenced by baroreflex activity [cite: 3, 23].\n*   **Very Low Frequency (VLF) (0.0033–0.04 Hz):** Associated with thermoregulation and hormonal cycles (renin-angiotensin). It requires long-duration recordings (>24 hours) for reliable interpretation and is often excluded in short-term psychological studies [cite: 2, 24].",
+      "stats": {
+        "char_count": 928,
+        "word_count": 126,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3 Critical Analysis: The LF/HF Ratio Controversy",
+      "level": 3,
+      "content": "For decades, the LF/HF ratio was widely used in psychology as a measure of \"sympathovagal balance.\" The assumption was that LF represented sympathetic tone and HF represented parasympathetic tone.\n\n**Current Consensus:** This view is now considered physiologically flawed and outdated [cite: 23, 25, 26].\n*   **Billman’s Critique:** Extensive reviews by Billman (2013) and others demonstrate that LF power is not a pure index of sympathetic drive. In fact, during slow breathing (resonance frequency), LF power can be almost entirely vagal. Furthermore, the relationship between the sympathetic and parasympathetic branches is non-linear and often non-reciprocal [cite: 23, 26, 27].\n*   **Recommendation:** Recent guidelines strongly advise against using LF/HF as a direct measure of autonomic balance. Researchers are encouraged to report RMSSD or HF-HRV as indices of vagal control and to avoid making specific claims about sympathetic activity based solely on HRV [cite: 25, 28].",
+      "stats": {
+        "char_count": 982,
+        "word_count": 143,
+        "sentence_count": 8,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.4 Non-Linear Indices",
+      "level": 3,
+      "content": "The heart is a complex non-linear system. Traditional linear measures may miss subtle irregularities indicative of health [cite: 2, 29].\n*   **Poincaré Plot (SD1/SD2):** A visual technique where each RR interval is plotted against the next. SD1 correlates with RMSSD (short-term variability), while SD2 correlates with SDNN (long-term variability) [cite: 2].\n*   **Entropy (Sample Entropy, Approximate Entropy):** These measure the randomness or complexity of the signal. Higher entropy generally indicates a healthier, more adaptable system [cite: 2].\n*   **Detrended Fluctuation Analysis (DFA):** Measures the fractal correlation properties of the RR series. DFA $\\alpha_1$ is useful for detecting long-range correlations [cite: 2, 30].\n\n---",
+      "stats": {
+        "char_count": 743,
+        "word_count": 103,
+        "sentence_count": 9,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "4. Analysis Tutorial: State-of-the-Art Methods",
+      "level": 2,
+      "content": "This section outlines the standard pipeline for HRV analysis, contrasting the two dominant tools: **Kubios** (GUI-based) and **NeuroKit2** (Python-based).",
+      "stats": {
+        "char_count": 154,
+        "word_count": 19,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.1 Data Acquisition and Preprocessing",
+      "level": 3,
+      "content": "Reliable HRV analysis begins with high-quality data.\n*   **ECG vs. PPG:** Electrocardiography (ECG) remains the gold standard. Photoplethysmography (PPG), common in wearables, measures blood volume pulse. While PPG is convenient, it is less accurate for short-term variability metrics (like RMSSD) due to the lack of a sharp fiducial point compared to the ECG R-peak [cite: 28, 31].\n*   **Artifact Correction:** Ectopic beats and motion artifacts must be removed.\n    *   *Kubios:* Uses a threshold-based artifact correction algorithm (e.g., identifying beats that differ by >0.25s from the local average) and replaces them using cubic spline interpolation [cite: 21, 32].\n    *   *NeuroKit2:* Offers various cleaning algorithms (e.g., Pan-Tompkins) and interpolation methods to maintain signal continuity without introducing bias [cite: 4, 31].\n*   **Detrending:** Slow non-stationary trends (drift) must be removed, especially for frequency analysis. The \"smoothness priors\" method is the industry standard for detrending, acting as a time-varying high-pass filter [cite: 30, 32, 33].",
+      "stats": {
+        "char_count": 1086,
+        "word_count": 151,
+        "sentence_count": 15,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "4.2 Software Comparison",
+      "level": 3,
+      "content": "| Feature | Kubios HRV (Standard/Scientific) | NeuroKit2 (Python) |\n| :--- | :--- | :--- |\n| **Interface** | Graphical User Interface (GUI) | Command Line / Scripting |\n| **Accessibility** | Paid (Scientific) / Free (Standard) | Open Source (Free) |\n| **Reproducibility** | Lower (Manual adjustments) | High (Code-based pipelines) |\n| **Batch Processing** | Available in Premium versions | Native (Looping through files) |\n| **Primary Use** | Clinical / Sports / Non-coders | Research / Data Science / Large Datasets |\n| **Citations** | [cite: 21, 34] | [cite: 1, 4] |\n\n**Tutorial Summary (NeuroKit2 Pipeline):**\n1.  **Load Data:** Import ECG signal.\n2.  **Process:** Use `nk.ecg_process()` to clean signal and detect R-peaks.\n3.  **Analyze:** Use `nk.hrv()` to compute indices.\n4.  **Output:** Generates a dataframe with Time, Frequency, and Non-linear domains [cite: 2, 4].\n\n---",
+      "stats": {
+        "char_count": 880,
+        "word_count": 139,
+        "sentence_count": 11,
+        "line_count": 16
+      }
+    },
+    {
+      "heading": "5.1 Psychopathology and Transdiagnostic Biomarkers",
+      "level": 3,
+      "content": "Low resting HRV is increasingly recognized as a transdiagnostic biomarker for psychopathology.\n*   **Depression and Anxiety:** Meta-analyses consistently show reduced RMSSD and HF-HRV in Major Depressive Disorder (MDD) and Generalized Anxiety Disorder (GAD). This supports the NIM, suggesting a failure of prefrontal inhibitory control over negative affect [cite: 2, 35].\n*   **Schizophrenia:** Patients exhibit reduced vagal tone and autonomic dysregulation, which correlates with the severity of psychotic symptoms and auditory hallucinations [cite: 36, 37].",
+      "stats": {
+        "char_count": 560,
+        "word_count": 74,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.2 Emotion Regulation and Positive Affect",
+      "level": 3,
+      "content": "While much research focuses on negative states, recent reviews (2025) highlight the link between HRV and Positive Affect (PA).\n*   **Resting State:** Higher resting HRV predicts a greater capacity to experience joy and enthusiasm.\n*   **Stress Reactivity:** Individuals with higher baseline HRV show more adaptive regulation of positive emotions during stress recovery, aligning with the Vagal Tank Theory [cite: 9, 38].",
+      "stats": {
+        "char_count": 420,
+        "word_count": 61,
+        "sentence_count": 3,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.3 Sleep and Health Prognostics (2025 Findings)",
+      "level": 3,
+      "content": "A landmark 2025 study presented at the European Academy of Neurology utilized nocturnal HRV to predict long-term health outcomes.\n*   **The Study:** Analyzed 4,170 individuals over 13 years.\n*   **Findings:** Nocturnal HRV patterns predicted stroke, depression, and cognitive dysfunction years before clinical symptoms appeared. Specifically, low nocturnal HRV was a precursor to depression, while erratic/high HRV patterns were linked to stroke risk. This suggests HRV during sleep is a \"window\" into neuro-autonomic health that standard sleep metrics (duration, fragmentation) miss [cite: 39, 40, 41, 42].",
+      "stats": {
+        "char_count": 607,
+        "word_count": 85,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.4 Resonance Frequency Breathing (Biofeedback)",
+      "level": 3,
+      "content": "HRV Biofeedback (HRV-B) is a therapeutic application where individuals breathe at their unique \"resonance frequency\" (usually ~6 breaths/min or 0.1 Hz).\n*   **Mechanism:** Breathing at this rate synchronizes respiration with the baroreflex, maximizing RSA and stimulating the vagus nerve.\n*   **Efficacy:** It has shown efficacy in reducing anxiety, improving depression scores, and enhancing autonomic balance [cite: 43, 44, 45, 46].\n\n---",
+      "stats": {
+        "char_count": 439,
+        "word_count": 61,
+        "sentence_count": 5,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6.1 The Respiration Confound",
+      "level": 3,
+      "content": "Respiration profoundly influences HRV, particularly the HF band (RSA). If participants breathe at different rates, HF power changes even if vagal tone remains constant.\n*   **Problem:** Slow breathing increases HF power; fast breathing decreases it.\n*   **Solution:** Some researchers advocate for \"pacing\" breathing during recording, while others argue this induces cognitive load. Statistical correction for respiration rate is another approach [cite: 3, 4].",
+      "stats": {
+        "char_count": 460,
+        "word_count": 63,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "6.2 Reproducibility and Standardization",
+      "level": 3,
+      "content": "The field suffers from a lack of standardization in data collection (e.g., length of recording, body position, time of day).\n*   **Impact:** A 2021 review emphasized that without standardized pipelines (like those offered by NeuroKit2), comparing results across studies is nearly impossible [cite: 3, 4].",
+      "stats": {
+        "char_count": 304,
+        "word_count": 45,
+        "sentence_count": 4,
+        "line_count": 2
+      }
+    },
+    {
+      "heading": "6.3 The \"Vagal\" Assumption",
+      "level": 3,
+      "content": "While RMSSD is a good proxy for vagal tone, it is not a direct measure of vagal nerve firing. It measures the *effect* of the vagus on the sinoatrial node. Factors like receptor saturation or cardiac structure can decouple nerve activity from HRV [cite: 22].\n\n---",
+      "stats": {
+        "char_count": 263,
+        "word_count": 46,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "7.1 AI and Machine Learning Integration",
+      "level": 3,
+      "content": "The future of HRV lies in automated feature extraction. A 2025 scoping review highlights the use of AI to analyze non-linear HRV metrics for stress prediction. Machine learning models (e.g., Random Forests, Neural Networks) can integrate HRV with other physiological signals (EDA, EMG) to detect stress with higher accuracy than linear indices alone [cite: 47].",
+      "stats": {
+        "char_count": 361,
+        "word_count": 55,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.2 Wearable Technology and Ecological Momentary Assessment (EMA)",
+      "level": 3,
+      "content": "The transition from lab to life is accelerating.\n*   **Opportunity:** Wearables allow for longitudinal monitoring (e.g., the 2025 sleep study).\n*   **Challenge:** Data quality and artifact handling in free-moving subjects remain significant hurdles. Future algorithms must become more robust to motion artifacts [cite: 39, 41, 48].",
+      "stats": {
+        "char_count": 331,
+        "word_count": 46,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "7.3 Refining the Vagal Tank Theory",
+      "level": 3,
+      "content": "Future research should test the specific predictions of the VTT regarding the \"3Rs.\" Specifically, does the *rate* of recovery predict resilience better than baseline levels? Longitudinal studies in sports and clinical psychology are needed to validate this dynamic model [cite: 19, 20].\n\n---",
+      "stats": {
+        "char_count": 292,
+        "word_count": 43,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "Heart Rate Variability has established itself as a vital tool in psychology, offering a non-invasive, objective window into the neurophysiological processes underlying mental health and behavior. The field has matured from simple associations between \"stress and heart rate\" to complex theoretical models like the Neurovisceral Integration Model and Vagal Tank Theory, which explain how the brain and heart collaborate to navigate a changing world.\n\nHowever, the field is at a crossroads. The reliance on outdated metrics like the LF/HF ratio must be abandoned in favor of physiologically valid indices (RMSSD, HF). Furthermore, the adoption of open-source, reproducible analysis pipelines is essential for the credibility of future research. As we move into 2025 and beyond, the integration of HRV with AI and wearable technology promises to unlock new diagnostic and therapeutic potentials, potentially allowing for the early detection of neuropsychiatric disorders long before they manifest clinically.\n\n---",
+      "stats": {
+        "char_count": 1010,
+        "word_count": 146,
+        "sentence_count": 7,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Heart Rate Variability in Psychology: A Review of HRV Indices and an Analysis Tutorial",
+      "number": null,
+      "title": "Heart Rate Variability in Psychology: A Review of HRV Indices and an Analysis Tutorial"
+    },
+    {
+      "text": "Heart rate variability, sleep and sleep disorders",
+      "number": null,
+      "title": "Heart rate variability, sleep and sleep disorders"
+    },
+    {
+      "text": "Heart rate variability and occupational stress-systematic review",
+      "number": null,
+      "title": "Heart rate variability and occupational stress-systematic review"
+    },
+    {
+      "text": "Heart Rate Variability (HRV): Analysis and Clinical Significance",
+      "number": null,
+      "title": "Heart Rate Variability (HRV): Analysis and Clinical Significance"
+    },
+    {
+      "text": "Systematic Review of PA and HRV",
+      "number": null,
+      "title": "Systematic Review of PA and HRV"
+    },
+    {
+      "text": "The Polyvagal Theory and HRV",
+      "number": null,
+      "title": "The Polyvagal Theory and HRV"
+    },
+    {
+      "text": "Scoping Review on AI and HRV",
+      "number": null,
+      "title": "Scoping Review on AI and HRV"
+    },
+    {
+      "text": "Heart rate variability during sleep may reveal early signs of stroke, depression or cognitive dysfunction",
+      "number": null,
+      "title": "Heart rate variability during sleep may reveal early signs of stroke, depression or cognitive dysfunction"
+    },
+    {
+      "text": "An Overview of Heart Rate Variability Metrics and Norms",
+      "number": null,
+      "title": "An Overview of Heart Rate Variability Metrics and Norms"
+    },
+    {
+      "text": "NeuroKit2: A Python toolbox for neurophysiological signal processing",
+      "number": null,
+      "title": "NeuroKit2: A Python toolbox for neurophysiological signal processing"
+    },
+    {
+      "text": "Which Heart Rate Variability (HRV) Indices Should I Use?",
+      "number": null,
+      "title": "Which Heart Rate Variability (HRV) Indices Should I Use?"
+    },
+    {
+      "text": "Heart Rate Variability and Cardiac Vagal Tone in Psychophysiological Research – Recommendations for Experiment Planning, Data Analysis, and Data Reporting",
+      "number": null,
+      "title": "Heart Rate Variability and Cardiac Vagal Tone in Psychophysiological Research – Recommendations for Experiment Planning, Data Analysis, and Data Reporting"
+    },
+    {
+      "text": "Detailed breakdown of HRV indices",
+      "number": null,
+      "title": "Detailed breakdown of HRV indices"
+    },
+    {
+      "text": "The Role of Heart Rate Variability in Mental Wellness",
+      "number": null,
+      "title": "The Role of Heart Rate Variability in Mental Wellness"
+    },
+    {
+      "text": "Review of HRV reproducibility",
+      "number": null,
+      "title": "Review of HRV reproducibility"
+    },
+    {
+      "text": "Reduced heart rate variability is related to fluctuations in psychological stress levels in daily life",
+      "number": null,
+      "title": "Reduced heart rate variability is related to fluctuations in psychological stress levels in daily life"
+    },
+    {
+      "text": "Factors influencing heart rate variability–a narrative review",
+      "number": null,
+      "title": "Factors influencing heart rate variability–a narrative review"
+    },
+    {
+      "text": "hrv-analysis: A Python package for Heart Rate Variability analysis",
+      "number": null,
+      "title": "hrv-analysis: A Python package for Heart Rate Variability analysis"
+    },
+    {
+      "text": "pyHRV Documentation",
+      "number": null,
+      "title": "pyHRV Documentation"
+    },
+    {
+      "text": "Kubios Python Package",
+      "number": null,
+      "title": "Kubios Python Package"
+    },
+    {
+      "text": "Kubios HRV Analysis Methods",
+      "number": null,
+      "title": "Kubios HRV Analysis Methods"
+    },
+    {
+      "text": "Kubios Software Overview",
+      "number": null,
+      "title": "Kubios Software Overview"
+    },
+    {
+      "text": "Limitations of Frequency Domain Analysis",
+      "number": null,
+      "title": "Limitations of Frequency Domain Analysis"
+    },
+    {
+      "text": "The LF/HF ratio does not accurately measure cardiac sympatho-vagal balance",
+      "number": null,
+      "title": "The LF/HF ratio does not accurately measure cardiac sympatho-vagal balance"
+    },
+    {
+      "text": "Review of HRV in Psychiatric Populations",
+      "number": null,
+      "title": "Review of HRV in Psychiatric Populations"
+    },
+    {
+      "text": "Critique of LF/HF",
+      "number": null,
+      "title": "Critique of LF/HF"
+    },
+    {
+      "text": "HRV in Major Depression: A Meta-analysis",
+      "number": null,
+      "title": "HRV in Major Depression: A Meta-analysis"
+    },
+    {
+      "text": "Vagal Tank Theory: The Three Rs of Cardiac Vagal Control Functioning",
+      "number": null,
+      "title": "Vagal Tank Theory: The Three Rs of Cardiac Vagal Control Functioning"
+    },
+    {
+      "text": "Vagal Tank Theory Application",
+      "number": null,
+      "title": "Vagal Tank Theory Application"
+    },
+    {
+      "text": "Vagal Tank Theory Abstract",
+      "number": null,
+      "title": "Vagal Tank Theory Abstract"
+    },
+    {
+      "text": "Vagal Tank Theory Updates",
+      "number": null,
+      "title": "Vagal Tank Theory Updates"
+    },
+    {
+      "text": "Heart rate variability in sport psychology",
+      "number": null,
+      "title": "Heart rate variability in sport psychology"
+    },
+    {
+      "text": "Resonance Frequency Breathing Mechanisms",
+      "number": null,
+      "title": "Resonance Frequency Breathing Mechanisms"
+    },
+    {
+      "text": "Heart rate variability biofeedback: how and why does it work?",
+      "number": null,
+      "title": "Heart rate variability biofeedback: how and why does it work?"
+    },
+    {
+      "text": "HRV and Planetary Resonance",
+      "number": null,
+      "title": "HRV and Planetary Resonance"
+    },
+    {
+      "text": "Resonance Frequency Breathing and Baroreflex",
+      "number": null,
+      "title": "Resonance Frequency Breathing and Baroreflex"
+    },
+    {
+      "text": "Clinical implications of HRV",
+      "number": null,
+      "title": "Clinical implications of HRV"
+    },
+    {
+      "text": "Claude Bernard and the heart-brain connection: Further elaboration of a model of neurovisceral integration",
+      "number": null,
+      "title": "Claude Bernard and the heart-brain connection: Further elaboration of a model of neurovisceral integration"
+    },
+    {
+      "text": "Neurovisceral Integration Model and Cognitive Control",
+      "number": null,
+      "title": "Neurovisceral Integration Model and Cognitive Control"
+    },
+    {
+      "text": "Brain and Vagus Nerve Stimulation",
+      "number": null,
+      "title": "Brain and Vagus Nerve Stimulation"
+    },
+    {
+      "text": "Neurovisceral Integration Model Chapter",
+      "number": null,
+      "title": "Neurovisceral Integration Model Chapter"
+    },
+    {
+      "text": "HRV and Emotion Regulation",
+      "number": null,
+      "title": "HRV and Emotion Regulation"
+    },
+    {
+      "text": "An advanced detrending method with application to HRV analysis",
+      "number": null,
+      "title": "An advanced detrending method with application to HRV analysis"
+    },
+    {
+      "text": "Smoothness priors detrending",
+      "number": null,
+      "title": "Smoothness priors detrending"
+    },
+    {
+      "text": "Kubios Preprocessing Methods",
+      "number": null,
+      "title": "Kubios Preprocessing Methods"
+    },
+    {
+      "text": "Preprocessing methods for HRV time series",
+      "number": null,
+      "title": "Preprocessing methods for HRV time series"
+    },
+    {
+      "text": "Signal Preprocessing for HRV",
+      "number": null,
+      "title": "Signal Preprocessing for HRV"
+    },
+    {
+      "text": "LF/HF Ratio Controversy",
+      "number": null,
+      "title": "LF/HF Ratio Controversy"
+    },
+    {
+      "text": "LF/HF Ratio Limitations",
+      "number": null,
+      "title": "LF/HF Ratio Limitations"
+    },
+    {
+      "text": "Sympatho-vagal balance critique",
+      "number": null,
+      "title": "Sympatho-vagal balance critique"
+    },
+    {
+      "text": "2D Representation of HRV",
+      "number": null,
+      "title": "2D Representation of HRV"
+    },
+    {
+      "text": "Citation in Motriz",
+      "number": null,
+      "title": "Citation in Motriz"
+    },
+    {
+      "text": "Reviewer Reports on Pham et al.",
+      "number": null,
+      "title": "Reviewer Reports on Pham et al."
+    },
+    {
+      "text": "Abstract",
+      "number": null,
+      "title": "Abstract"
+    },
+    {
+      "text": "Full Text",
+      "number": null,
+      "title": "Full Text"
+    },
+    {
+      "text": "Semantic Scholar Record for Pham et al.",
+      "number": null,
+      "title": "Semantic Scholar Record for Pham et al."
+    },
+    {
+      "text": "Macquarie University Record",
+      "number": null,
+      "title": "Macquarie University Record"
+    },
+    {
+      "text": "EAN Congress News",
+      "number": null,
+      "title": "EAN Congress News"
+    },
+    {
+      "text": "Study links sleep HRV to stroke",
+      "number": null,
+      "title": "Study links sleep HRV to stroke"
+    },
+    {
+      "text": "EurekAlert Press Release",
+      "number": null,
+      "title": "EurekAlert Press Release"
+    },
+    {
+      "text": "Brighter Side News",
+      "number": null,
+      "title": "Brighter Side News"
+    },
+    {
+      "text": "Economic Times Health",
+      "number": null,
+      "title": "Economic Times Health"
+    },
+    {
+      "text": "Vagal Tank Theory Review",
+      "number": null,
+      "title": "Vagal Tank Theory Review"
+    },
+    {
+      "text": "Vagal Tank Theory in Sports",
+      "number": null,
+      "title": "Vagal Tank Theory in Sports"
+    },
+    {
+      "text": "Vagal Tank Theory and Polyvagal Theory",
+      "number": null,
+      "title": "Vagal Tank Theory and Polyvagal Theory"
+    },
+    {
+      "text": "Vagal Tank Theory and vmHRV",
+      "number": null,
+      "title": "Vagal Tank Theory and vmHRV"
+    },
+    {
+      "text": "Vagal Tank Theory PDF",
+      "number": null,
+      "title": "Vagal Tank Theory PDF"
+    },
+    {
+      "text": "Neurovisceral Integration Model",
+      "number": null,
+      "title": "Neurovisceral Integration Model"
+    },
+    {
+      "text": "NIM and HRV",
+      "number": null,
+      "title": "NIM and HRV"
+    },
+    {
+      "text": "NIM Book Chapter",
+      "number": null,
+      "title": "NIM Book Chapter"
+    },
+    {
+      "text": "NIM and Pain",
+      "number": null,
+      "title": "NIM and Pain"
+    },
+    {
+      "text": "NIM and Emotion Regulation",
+      "number": null,
+      "title": "NIM and Emotion Regulation"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Gemini\\Psychology\\Heart_Rate_Variability_in_Psychology-_A_Review_of_HRV_Indice_20251226_173102_split.json",
+    "processed_date": "2025-12-31T02:22:09.473034",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

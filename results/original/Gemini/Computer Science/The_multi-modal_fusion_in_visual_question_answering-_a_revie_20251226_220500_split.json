@@ -1,0 +1,279 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: The multi-modal fusion in visual question answering- a review of attention mechanisms."
+    ],
+    [
+      1,
+      "Multi-Modal Fusion in Visual Question Answering: A Systematic Review of Attention Mechanisms"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 The VQA Formulation"
+    ],
+    [
+      3,
+      "2.2 Taxonomy of Attention"
+    ],
+    [
+      2,
+      "3. Historical Development: From Spatial Attention to Bilinear Pooling"
+    ],
+    [
+      3,
+      "3.1 Spatial and Channel-Wise Attention"
+    ],
+    [
+      3,
+      "3.2 Bilinear Pooling and Tucker Decomposition"
+    ],
+    [
+      3,
+      "3.3 Co-Attention and Dense Interactions"
+    ],
+    [
+      3,
+      "3.4 Graph-Based Attention"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art: Transformers and Foundation Models"
+    ],
+    [
+      3,
+      "4.1 Early Vision-Language Transformers"
+    ],
+    [
+      3,
+      "4.2 Unified Foundation Models: BEiT-3"
+    ],
+    [
+      3,
+      "4.3 Generative and Few-Shot Models: Flamingo and BLIP-2"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Medical VQA (Med-VQA)"
+    ],
+    [
+      3,
+      "5.2 Remote Sensing VQA (RSVQA)"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Explainability and Trustworthiness"
+    ],
+    [
+      3,
+      "6.2 Computational Complexity"
+    ],
+    [
+      3,
+      "6.3 Neuro-Symbolic Reasoning"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: The multi-modal fusion in visual question answering- a review of attention mechanisms.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 22:05:00*\n*Progress: [36/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/The_multi-modal_fusion_in_visual_question_answering-_a_revie_20251226_220500.md*\n---"
+    },
+    {
+      "heading": "Multi-Modal Fusion in Visual Question Answering: A Systematic Review of Attention Mechanisms",
+      "level": 1,
+      "content": "**Abstract**\nVisual Question Answering (VQA) represents a quintessential multi-modal artificial intelligence task, requiring the synergistic processing of visual data (images/videos) and textual data (natural language questions) to generate accurate answers. The core challenge in VQA lies in the effective fusion of these heterogeneous modalities. While early approaches relied on simple concatenation or element-wise operations, the field has been revolutionized by attention mechanisms. This paper provides a comprehensive systematic literature review of attention-based multi-modal fusion in VQA. We trace the evolution from early spatial and channel-wise attention to bilinear pooling techniques (MUTAN, MFB), co-attention networks (BAN, MCAN), and graph-based reasoning (ReGAT). Furthermore, we critically analyze the paradigm shift toward Transformer-based architectures, examining state-of-the-art foundation models such as BEiT-3, Flamingo, and BLIP-2. We also explore domain-specific applications in medical and remote sensing VQA, discuss explainability via attention maps, and identify open challenges regarding computational efficiency and neuro-symbolic reasoning.\n\n---"
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "Visual Question Answering (VQA) is a testbed for evaluating an AI system's ability to understand and reason about the world across modalities. Formally, given an image $I$ and a natural language question $Q$, the system must predict an answer $A$ [cite: 1, 2]. This task transcends simple object recognition or text classification; it requires a fine-grained semantic understanding of visual content, linguistic syntax, and, crucially, the alignment between the two [cite: 3, 4].\n\nThe fundamental bottleneck in VQA is **multi-modal fusion**—the mechanism by which visual features (typically from Convolutional Neural Networks or Vision Transformers) and textual features (from Recurrent Neural Networks or Transformers) are integrated into a joint representation [cite: 2, 5]. Early methods utilized \"shallow\" fusion techniques such as element-wise multiplication or concatenation, which often failed to capture complex, high-order interactions between specific image regions and question words [cite: 6, 7].\n\nThe introduction of **attention mechanisms** marked a pivotal turning point. Inspired by human cognitive processes, attention allows models to dynamically weigh the importance of different input features—focusing on specific image regions (\"where to look\") or question segments (\"what to listen to\") [cite: 8, 9]. This review systematically categorizes and analyzes these mechanisms, ranging from early spatial attention to the sophisticated Querying Transformers (Q-Formers) used in modern Large Vision-Language Models (LVLMs).\n\n---"
+    },
+    {
+      "heading": "2.1 The VQA Formulation",
+      "level": 3,
+      "content": "VQA is typically modeled as a classification problem (selecting an answer from a candidate set) or a generation problem (producing free-form text). The process generally involves three stages:\n1.  **Image Featurization:** Extracting features $V$ using backbones like VGG, ResNet, or ViT [cite: 1, 3].\n2.  **Question Featurization:** Encoding the question $Q$ using LSTM, GRU, or BERT [cite: 3, 10].\n3.  **Fusion and Reasoning:** Combining $V$ and $Q$ to predict $A$. This is where attention mechanisms operate [cite: 2]."
+    },
+    {
+      "heading": "2.2 Taxonomy of Attention",
+      "level": 3,
+      "content": "Attention in VQA can be broadly categorized into:\n*   **Visual Attention:** Assigning weights to spatial grid features or object proposals based on the question context [cite: 1, 11].\n*   **Textual Attention:** Weighing specific words in the question that are most relevant to the visual content [cite: 8].\n*   **Co-Attention:** Jointly learning attention weights for both image and question simultaneously, often in a hierarchical or dense manner [cite: 4, 12].\n*   **Self-Attention:** A mechanism (popularized by Transformers) where elements within a single modality attend to each other to capture global dependencies [cite: 13, 14].\n\n---"
+    },
+    {
+      "heading": "3.1 Spatial and Channel-Wise Attention",
+      "level": 3,
+      "content": "Initial attention models in VQA focused on **spatial attention**. Instead of using a global image vector, these models generated a probability map over the spatial grid of the CNN output, allowing the model to focus on relevant regions (e.g., a specific dog) when asked a question (e.g., \"What color is the dog?\") [cite: 1, 9].\n\nHowever, spatial attention alone ignores the fact that CNN features are also distributed across channels (filters). **SCA-CNN (Spatial and Channel-wise Attention CNN)** introduced the concept of attending to specific channels (semantic attributes) in addition to spatial locations. This multi-layer attention mechanism allowed the model to select *what* features to look for (channel) and *where* to look for them (spatial) [cite: 11, 15]."
+    },
+    {
+      "heading": "3.2 Bilinear Pooling and Tucker Decomposition",
+      "level": 3,
+      "content": "A significant limitation of simple fusion (e.g., element-wise product) is its inability to model complex multiplicative interactions between modalities. **Bilinear pooling** addresses this by calculating the outer product of visual and textual vectors, capturing all pairwise interactions. However, the full outer product results in prohibitively high dimensionality [cite: 7, 16].\n\nSeveral efficient approximations were developed:\n*   **MCB (Multimodal Compact Bilinear pooling):** Used Count Sketch projection to approximate the outer product in lower dimensions [cite: 7, 17].\n*   **MLB (Multimodal Low-rank Bilinear pooling):** Used Hadamard products with low-rank constraints [cite: 7].\n*   **MUTAN (Multimodal Tucker Fusion):** A major milestone that applied **Tucker decomposition** to the interaction tensor. MUTAN factorized the massive bilinear tensor into a core tensor and factor matrices, allowing for a parameter-efficient model that could learn rich, high-order interactions [cite: 7, 18].\n*   **MFB (Multimodal Factorized Bilinear pooling):** Further refined this by factorizing the projection matrices, becoming a standard benchmark, particularly in medical VQA [cite: 19, 20]."
+    },
+    {
+      "heading": "3.3 Co-Attention and Dense Interactions",
+      "level": 3,
+      "content": "Moving beyond attending to one modality conditioned on the other, **Co-Attention** mechanisms treat vision and language symmetrically.\n*   **Hierarchical Co-Attention (HieCoAtt):** Proposed attending to the image and question at three levels: word, phrase, and sentence. This allowed the model to reason about the question hierarchy (e.g., \"red object\" vs. \"red ball\") [cite: 8, 12].\n*   **BAN (Bilinear Attention Networks):** Combined bilinear pooling with co-attention. BAN considers every pair of question words and image regions, utilizing a bilinear attention map to seamlessly fuse information. It significantly outperformed previous methods by capturing dense interactions [cite: 4, 21, 22].\n*   **MCAN (Deep Modular Co-Attention Networks):** Addressed the depth limitation of previous models. MCAN consists of deep cascades of Modular Co-Attention (MCA) layers, which model self-attention (within modality) and guided-attention (across modalities). This architecture paved the way for Transformer-like deep fusion [cite: 4, 23]."
+    },
+    {
+      "heading": "3.4 Graph-Based Attention",
+      "level": 3,
+      "content": "Images are not just bags of objects; they contain structured relationships. **ReGAT (Relation-aware Graph Attention Network)** encodes the image as a graph where objects are nodes and relationships are edges. It models two types of relations:\n1.  **Explicit Relations:** Geometric positions and semantic interactions (e.g., \"man holding cup\").\n2.  **Implicit Relations:** Hidden dynamics captured via a graph attention mechanism.\nReGAT demonstrated that modeling inter-object dynamics is crucial for answering semantically complicated questions [cite: 24, 25].\n\n---"
+    },
+    {
+      "heading": "4. Current State-of-the-Art: Transformers and Foundation Models",
+      "level": 2,
+      "content": "The advent of the Transformer architecture shifted the paradigm from specialized attention modules to unified, large-scale pre-trained models."
+    },
+    {
+      "heading": "4.1 Early Vision-Language Transformers",
+      "level": 3,
+      "content": "Models like **VisualBERT**, **ViLBERT**, and **LXMERT** adapted the BERT architecture for VQA.\n*   **VisualBERT** treats image regions (from an object detector) as visual tokens, feeding them alongside text tokens into a single Transformer stack. This allows self-attention to implicitly align text and image elements [cite: 26].\n*   **LXMERT** and **ViLBERT** employ a dual-stream architecture with specific cross-modality attention layers to fuse information from separate vision and language encoders [cite: 27, 28]."
+    },
+    {
+      "heading": "4.2 Unified Foundation Models: BEiT-3",
+      "level": 3,
+      "content": "**BEiT-3** represents a convergence of vision and language modeling, often termed \"Image as a Foreign Language.\" It utilizes **Multiway Transformers**, a modular architecture that enables both deep fusion and modality-specific encoding.\n*   **Mechanism:** The model uses a shared self-attention module across modalities but routes tokens to different feed-forward networks (experts) depending on whether they are visual or textual.\n*   **Impact:** This allows the model to be fine-tuned as a fusion encoder for VQA, achieving state-of-the-art performance by treating image patches and text tokens in a unified masked modeling framework [cite: 29, 30, 31]."
+    },
+    {
+      "heading": "4.3 Generative and Few-Shot Models: Flamingo and BLIP-2",
+      "level": 3,
+      "content": "Recent advancements focus on leveraging frozen, pre-trained Large Language Models (LLMs) and Vision Encoders, bridging them with lightweight, trainable attention modules.\n\n*   **Flamingo:** Designed for few-shot learning, Flamingo keeps the vision encoder and LLM frozen. It introduces the **Perceiver Resampler**, an attention module that converts a variable number of visual features (from images or video) into a fixed number of visual tokens. These tokens condition the LLM via **Gated Cross-Attention** layers interleaved within the LLM, allowing the model to generate answers based on visual context without retraining the backbone [cite: 32, 33, 34].\n\n*   **BLIP-2 (Bootstrapping Language-Image Pre-training):** BLIP-2 addresses the computational cost of end-to-end training. It introduces the **Q-Former (Querying Transformer)**, a lightweight module initialized with learnable query embeddings.\n    *   **Mechanism:** The Q-Former interacts with the frozen image encoder via cross-attention and the text via self-attention. It acts as an information bottleneck, extracting only the visual features most relevant to the text before feeding them into a frozen LLM.\n    *   **Significance:** This architecture decouples the vision and language scaling, allowing state-of-the-art VQA performance with significantly fewer trainable parameters [cite: 35, 36, 37, 38].\n\n*   **PaLI (Pathways Language and Image):** PaLI scales both the vision (ViT) and language components (Encoder-Decoder) to billions of parameters. It treats VQA as a generative text task, leveraging massive multi-lingual pre-training on the WebLI dataset [cite: 39, 40, 41].\n\n---"
+    },
+    {
+      "heading": "5.1 Medical VQA (Med-VQA)",
+      "level": 3,
+      "content": "Medical VQA faces unique challenges: data scarcity, high class imbalance, and the need for precise anatomical understanding.\n*   **Dominance of Bilinear Pooling:** Unlike general VQA where Transformers dominate, **MFB (Multimodal Factorized Bilinear pooling)** remains highly effective and popular in Med-VQA due to its efficiency with smaller datasets [cite: 19, 20, 42].\n*   **Attention to Regions:** Recent works emphasize localized attention to answer questions about specific anomalies or regions of interest, often outperforming global feature models [cite: 43].\n*   **OMniBAN:** A recent innovation, the Orthogonal Multi-head Bilinear Attention Network, combines bilinear attention with orthogonality constraints to improve efficiency in medical contexts [cite: 44]."
+    },
+    {
+      "heading": "5.2 Remote Sensing VQA (RSVQA)",
+      "level": 3,
+      "content": "RSVQA involves analyzing satellite or aerial imagery, which differs significantly from natural images due to scale, rotation, and object density.\n*   **MADNet (Mask-based Dual-stream feature mutual Attention Network):** This model addresses inter-class interference in remote sensing. It uses a dual-stream feature extraction (global and local) and a mask-based attention mechanism to filter irrelevant answers and focus on specific land-cover types [cite: 45, 46].\n*   **Segmentation-Guided Attention:** Recent approaches embed segmentation maps into the attention pipeline to provide contextual understanding of specific objects (e.g., buildings, roads) in high-resolution orthophotos [cite: 47, 48].\n\n---"
+    },
+    {
+      "heading": "6.1 Explainability and Trustworthiness",
+      "level": 3,
+      "content": "While attention maps are often cited as explanations (\"The model looked at the dog\"), research indicates they do not always correlate with the reasoning process. **VQA-HAT** and **VQA-X** are datasets designed to evaluate this by comparing human attention maps with model attention. There is a \"black box\" problem where models may predict the correct answer based on language biases (e.g., answering \"white\" for \"What color...\" questions regardless of the image) rather than visual evidence [cite: 49, 50, 51]."
+    },
+    {
+      "heading": "6.2 Computational Complexity",
+      "level": 3,
+      "content": "The shift toward Transformers and Bilinear Attention Networks has increased computational costs.\n*   **Bilinear Complexity:** Full bilinear interactions are computationally expensive ($O(n^2)$), necessitating factorized approximations like MUTAN or MFB [cite: 7, 16].\n*   **Transformer Scaling:** Models like PaLI and Flamingo require massive resources for pre-training. Efficient adaptation methods (like BLIP-2's Q-Former) are attempts to mitigate this, but inference on edge devices remains a challenge [cite: 35, 52]."
+    },
+    {
+      "heading": "6.3 Neuro-Symbolic Reasoning",
+      "level": 3,
+      "content": "Deep learning models struggle with multi-step logic and counting. **Neuro-symbolic** approaches (e.g., on the CLEVR dataset) attempt to combine the perception power of neural networks with the reasoning rigor of symbolic logic (e.g., scene graphs, logic programs). Integrating these explicitly into large-scale attention models remains an open research area [cite: 53, 54, 55].\n\n---"
+    },
+    {
+      "heading": "7. Future Research Directions",
+      "level": 2,
+      "content": "1.  **Efficient Multi-Modal Fusion:** Continued development of lightweight fusion modules like the Q-Former and Perceiver Resampler to enable VQA on consumer hardware [cite: 35, 52].\n2.  **Neuro-Symbolic Integration:** Hybridizing Large Vision-Language Models with symbolic reasoning engines to improve consistency, counting, and logic-based VQA [cite: 56, 57].\n3.  **Generalized Foundation Models:** Moving toward \"One Model for All\" (like BEiT-3 and PaLI) that can handle VQA, captioning, and retrieval across multiple languages and domains without task-specific fine-tuning [cite: 29, 39].\n4.  **Reduced Hallucination:** Improving grounding mechanisms to ensure answers are strictly derived from visual evidence rather than language priors, potentially via reinforcement learning or better calibration of attention weights [cite: 50, 58].\n\n---"
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "The field of Visual Question Answering has evolved from simple feature concatenation to sophisticated, attention-driven architectures. The trajectory of research highlights a consistent drive toward deeper, more dense interactions between modalities. **Bilinear pooling methods** (MUTAN, MFB) solved the dimensionality issues of early fusion, while **Co-Attention networks** (BAN, MCAN) enabled symmetric reasoning. The current era is defined by **Transformers** (BEiT-3, BLIP-2, Flamingo), which leverage massive pre-training and learnable query mechanisms to achieve human-level performance on benchmarks. However, as models grow in complexity, the focus must return to efficiency, explainability, and robust reasoning to bridge the gap between academic benchmarks and real-world utility in critical domains like medicine and remote sensing.\n\n---"
+    }
+  ],
+  "references": [
+    "[cite: 1] Tips and Tricks for Visual Question Answering: Learnings from the 2017 Challenge. [cite: 1]",
+    "[cite: 10] Taxonomy of attention models in VQA. [cite: 10]",
+    "[cite: 12] Visual Question Answering with Hierarchical Question-Image Co-Attention. [cite: 12]",
+    "[cite: 8] Hierarchical Question-Image Co-Attention for Visual Question Answering. [cite: 8]",
+    "[cite: 5] Visual Question Answering (VQA) is a significant cross-disciplinary issue. [cite: 5]",
+    "[cite: 2] Visual Question Answering (VQA) is a significant cross-disciplinary issue. [cite: 2]",
+    "[cite: 59] Visual question answering has been introduced in RS. [cite: 59]",
+    "[cite: 3] Visual Question Answering: From Early Developments to Recent Advances - A Survey. [cite: 3]",
+    "[cite: 13] Attention (machine learning). [cite: 13]",
+    "[cite: 9] A Survey of Visual Attention Mechanisms in Deep Learning. [cite: 9]",
+    "[cite: 14] From Multi-Head to Latent Attention: The Evolution of Attention Mechanisms. [cite: 14]",
+    "[cite: 6] The initial model for VQA employed deep convolutional neural networks. [cite: 6]",
+    "[cite: 60] Learning Visual Question Answering by Bootstrapping Hard Attention. [cite: 60]",
+    "[cite: 11] SCA-CNN: Spatial and Channel-wise Attention in Convolutional Neural Networks. [cite: 11]",
+    "[cite: 15] Channel and Spatial Attention. [cite: 15]",
+    "[cite: 24] Relation-aware Graph Attention Network for Visual Question Answering. [cite: 24]",
+    "[cite: 25] Relation-Aware Graph Attention Network for Visual Question Answering. [cite: 25]",
+    "[cite: 4] Deep Modular Co-Attention Networks for Visual Question Answering. [cite: 4]",
+    "[cite: 61] An effective Dense Co-attention Networks (DCAN) for the VQA task. [cite: 61]",
+    "[cite: 62] Dense Co-Attention Networks (DCAN). [cite: 62]",
+    "[cite: 23] Deep Modular Co-Attention Network (MCAN). [cite: 23]",
+    "[cite: 27] To address the task of VQA grounding in transformer-based architectures. [cite: 27]",
+    "[cite: 26] VisualBERT: A Simple and Performant Baseline for Vision and Language. [cite: 26]",
+    "[cite: 28] Results of performance for the three VQA models-ViLT, ViLBERT, and LXMERT. [cite: 28]",
+    "[cite: 7] MUTAN: Multimodal Tucker Fusion for Visual Question Answering. [cite: 7]",
+    "[cite: 53] A Survey of Neurosymbolic Visual Reasoning with Scene Graphs. [cite: 53]",
+    "[cite: 54] A Survey of Neurosymbolic Visual Reasoning with Scene Graphs. [cite: 54]",
+    "[cite: 56] Neuro-Symbolic Visual Graph Question Answering with LLMs. [cite: 56]",
+    "[cite: 55] A Neuro-Symbolic ASP Pipeline for Visual Question Answering. [cite: 55]",
+    "[cite: 57] A neuro-symbolic ASP pipeline for visual question answering. [cite: 57]",
+    "[cite: 32] Flamingo Simulation Variant. [cite: 32]",
+    "[cite: 33] DeepMind Flamingo: A Visual Language Model for Few-Shot Learning. [cite: 33]",
+    "[cite: 34] Flamingo Intuitively and Exhaustively Explained. [cite: 34]",
+    "[cite: 63] Understanding Flamingo Visual Language Models. [cite: 63]",
+    "[cite: 39] PaLI: Pathways Language and Image model. [cite: 39]",
+    "[cite: 40] PaLI: A Jointly-Scaled Multilingual Language-Image Model. [cite: 40]",
+    "[cite: 64] PaLI-X: Scaling up. [cite: 64]",
+    "[cite: 41] PaLI: A Jointly-Scaled Multilingual Language-Image Model. [cite: 41]",
+    "[cite: 45] Enhancing Remote Sensing Visual Question Answering: A Mask-Based Dual-Stream Feature Mutual Attention Network. [cite: 45]",
+    "[cite: 47] Visual Question Answering for Remote Sensing (RSVQA). [cite: 47]",
+    "[cite: 48] Segmentation-guided Attention for Visual Question Answering from Remote Sensing Images. [cite: 48]",
+    "[cite: 65] Medical Visual Question Answering: A Review. [cite: 65]",
+    "[cite: 66] Medical Visual Question Answering. [cite: 66]",
+    "[cite: 42] Medical Visual Question Answering (MedVQA). [cite: 42]",
+    "[cite: 19] A Co-Attention Mechanism for Medical Visual Question Answering. [cite: 19]",
+    "[cite: 49] Explainable Visual Question Answering. [cite: 49]",
+    "[cite: 50] Guiding Visual Question Answering With Attention Priors. [cite: 50]",
+    "[cite: 51] Attention-map-guided visual explanations for deep neural networks. [cite: 51]",
+    "[cite: 35] BLIP-2: Bootstrapping Language-Image Pre-training. [cite: 35]",
+    "[cite: 36] BLIP-2: Bootstrapping Language-Image Pre-training. [cite: 36]",
+    "[cite: 37] Inside BLIP-2: How Queries Extract Meaning from Images. [cite: 37]",
+    "[cite: 38] BLIP-2: Bootstrapping Language-Image Pre-training. [cite: 38]",
+    "[cite: 29] Image as a Foreign Language: BEiT Pretraining. [cite: 29]",
+    "[cite: 30] Image as a Foreign Language: BEiT Pretraining. [cite: 30]",
+    "[cite: 31] Image as a Foreign Language: BEiT Pretraining. [cite: 31]",
+    "[cite: 24] Relation-Aware Graph Attention Network for Visual Question Answering. [cite: 24]",
+    "[cite: 25] Relation-Aware Graph Attention Network for Visual Question Answering. [cite: 25]",
+    "[cite: 7] MUTAN: Multimodal Tucker Fusion for Visual Question Answering. [cite: 7]",
+    "[cite: 16] Multimodal tucker fusion. [cite: 16]",
+    "[cite: 18] MUTAN: Multimodal Tucker Fusion for Visual Question Answering. [cite: 18]",
+    "[cite: 21] Hierarchical Question-Image Co-Attention for Visual Question Answering. [cite: 21]",
+    "[cite: 22] Bilinear Attention Networks. [cite: 22]",
+    "[cite: 17] Bilinear attention networks. [cite: 17]",
+    "[cite: 52] Flamingo: a Visual Language Model for Few-Shot Learning. [cite: 52]",
+    "[cite: 44] Efficient Bilinear Attention-based Fusion for Medical Visual Question Answering. [cite: 44]",
+    "[cite: 43] Medical Visual Question Answering. [cite: 43]",
+    "[cite: 45] Enhancing Remote Sensing Visual Question Answering: A Mask-Based Dual-Stream Feature Mutual Attention Network. [cite: 45]",
+    "[cite: 46] Enhancing Remote Sensing Visual Question Answering. [cite: 46]",
+    "[cite: 58] MADNet for RS VQA tasks. [cite: 58]",
+    "[cite: 20] Co-attention Mechanism with Multi-Modal Factorized Bilinear Pooling for Medical Image Question Answering. [cite: 20]",
+    "[cite: 67] A Co-Attention Mechanism for Medical Visual Question Answering. [cite: 67]"
+  ]
+}

@@ -1,0 +1,454 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of Endosymbiosis of Wolbachia in Biology"
+    ],
+    [
+      1,
+      "1 Abstract"
+    ],
+    [
+      1,
+      "2 Introduction"
+    ],
+    [
+      1,
+      "3 Evolutionary Computation in Biological Systems"
+    ],
+    [
+      2,
+      "3.1 Computational Modeling of Evolutionary Dynamics"
+    ],
+    [
+      3,
+      "3.1.1 Emergent Adaptation in Artificial Ecosystems"
+    ],
+    [
+      3,
+      "3.1.2 Informational Evolution and Categorical Frameworks"
+    ],
+    [
+      2,
+      "3.2 Algorithmic Approaches to Symbiotic Systems"
+    ],
+    [
+      3,
+      "3.2.1 Neural Cellular Automata and Embodied Learning"
+    ],
+    [
+      3,
+      "3.2.2 Evolutionary Search and Self-Replicating Prompts"
+    ],
+    [
+      2,
+      "3.3 Systematic Evaluation of Evolutionary Mechanisms"
+    ],
+    [
+      3,
+      "3.3.1 Robustness in Evolving Open Systems"
+    ],
+    [
+      3,
+      "3.3.2 Predictive Accuracy and State Space Compression"
+    ],
+    [
+      1,
+      "4 Symbiosis and Endosymbiont Modeling"
+    ],
+    [
+      2,
+      "4.1 Image-Based Analysis of Symbiotic Structures"
+    ],
+    [
+      3,
+      "4.1.1 Automated Segmentation and Measurement of Lichens"
+    ],
+    [
+      3,
+      "4.1.2 Image Perspective Correction and Binary Segmentation"
+    ],
+    [
+      2,
+      "4.2 Genomic and Phylogenetic Studies of Symbionts"
+    ],
+    [
+      3,
+      "4.2.1 Genome Assembly and Transcriptome Analysis"
+    ],
+    [
+      3,
+      "4.2.2 Phylogenetic Approaches and Amplicon Sequencing"
+    ],
+    [
+      2,
+      "4.3 Transcriptomic and Functional Studies of Endosymbionts"
+    ],
+    [
+      3,
+      "4.3.1 Gene Expression Dynamics in *Wolbachia*"
+    ],
+    [
+      3,
+      "4.3.2 Host-Symbiont Interaction Networks"
+    ],
+    [
+      1,
+      "5 Bioinformatics and Genomic Analysis of Microbial Interactions"
+    ],
+    [
+      2,
+      "5.1 Mathematical and Computational Models of Infection"
+    ],
+    [
+      3,
+      "5.1.1 Ordinary and Partial Differential Equation Models"
+    ],
+    [
+      3,
+      "5.1.2 Stability and Invasion Dynamics"
+    ],
+    [
+      2,
+      "5.2 Experimental and Theoretical Investigations of Symbiosis"
+    ],
+    [
+      3,
+      "5.2.1 Non-Uniform Conditions and Bacterial Motility"
+    ],
+    [
+      3,
+      "5.2.2 Ecological Influence of Endosymbionts"
+    ],
+    [
+      2,
+      "5.3 Synthetic and Engineering Approaches to Symbiosis"
+    ],
+    [
+      3,
+      "5.3.1 Extremophile-Engineered Symbiosis"
+    ],
+    [
+      3,
+      "5.3.2 Bioengineering for Martian Habitability"
+    ],
+    [
+      1,
+      "6 Future Directions"
+    ],
+    [
+      1,
+      "7 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of Endosymbiosis of Wolbachia in Biology",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Abstract",
+      "level": 1,
+      "content": "The study of endosymbiosis has long been a cornerstone of evolutionary and ecological research, offering profound insights into the intricate relationships between organisms and their environments. This survey paper provides a comprehensive overview of the current understanding of endosymbiotic relationships, with a particular focus on the role of *Wolbachia* and its interactions with host organisms. The purpose of this work is to synthesize key findings from computational, genomic, and ecological perspectives, while evaluating the methodologies used to study these complex interactions. The main contributions of this survey include an analysis of the mechanisms by which *Wolbachia* influences host reproduction and population dynamics, the application of mathematical and computational models to understand symbiotic spread, and the integration of genomic and transcriptomic data to explore gene expression dynamics. Additionally, the paper highlights the potential of synthetic biology and extremophile-engineered symbiosis for applications in biotechnology and space exploration. This review serves as a valuable resource for researchers seeking to deepen their understanding of endosymbiotic relationships and their broader implications across disciplines.",
+      "stats": {
+        "char_count": 1268,
+        "word_count": 168,
+        "sentence_count": 6,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2 Introduction",
+      "level": 1,
+      "content": "The study of endosymbiosis has long been a cornerstone of evolutionary and ecological research, offering profound insights into the intricate relationships between organisms and their environments. Endosymbiotic associations, particularly those involving microbial symbionts like *Wolbachia*, have been shown to influence a wide array of biological processes, from reproduction and development to immune function and host adaptation. These interactions are not only critical for understanding the evolution of complex life forms but also have significant implications for fields such as medicine, agriculture, and biotechnology. As research in this area has expanded, so too has the need for a comprehensive and systematic review of the mechanisms, models, and applications that underpin endosymbiotic relationships. This survey paper aims to synthesize the current state of knowledge on endosymbiosis, with a particular focus on the role of *Wolbachia* and its interactions with host organisms.\n\nThis survey paper examines the role of *Wolbachia* in endosymbiotic relationships, emphasizing its impact on host biology, evolutionary dynamics, and ecological interactions. The study explores the mechanisms by which *Wolbachia* influences host reproduction, such as cytoplasmic incompatibility, parthenogenesis, and male killing, as well as its broader implications for population genetics and speciation [1]. Additionally, it investigates the computational and mathematical models used to understand the spread and persistence of *Wolbachia* within host populations. The paper also delves into the genomic and transcriptomic analyses of *Wolbachia* and its host, highlighting the complexity of gene expression dynamics and the potential for horizontal gene transfer. By integrating these perspectives, the survey provides a holistic view of the biological and computational dimensions of *Wolbachia* endosymbiosis.\n\nThe paper begins with an exploration of the computational modeling of evolutionary dynamics, focusing on emergent adaptation in artificial ecosystems and the role of informational evolution within categorical frameworks. These sections highlight how computational approaches can simulate and predict the behavior of complex systems, offering insights into the principles of adaptation and self-organization. The discussion then transitions to algorithmic approaches to symbiotic systems, including the use of neural cellular automata for embodied learning and the application of evolutionary search in optimizing self-replicating prompts. These methodologies provide a foundation for understanding how artificial and biological systems can evolve and adapt in response to environmental challenges. Finally, the paper addresses the systematic evaluation of evolutionary mechanisms, focusing on robustness in evolving open systems and the trade-offs involved in predictive accuracy and state space compression. These analyses underscore the importance of balance and efficiency in designing adaptive systems, both natural and artificial.\n\nThis survey paper contributes to the field of endosymbiosis research by offering a comprehensive synthesis of current knowledge, integrating computational, genomic, and ecological perspectives. It provides a critical evaluation of the methodologies used to study *Wolbachia* and its host interactions, highlighting both the advancements and the limitations of existing approaches [1]. Furthermore, the paper identifies key areas for future research, including the development of more sophisticated models for predicting symbiotic outcomes and the exploration of novel applications in synthetic biology and space exploration. By bridging theoretical and experimental insights, this work serves as a valuable resource for researchers seeking to deepen their understanding of endosymbiotic relationships and their broader implications.",
+      "stats": {
+        "char_count": 3885,
+        "word_count": 519,
+        "sentence_count": 20,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "3.1.1 Emergent Adaptation in Artificial Ecosystems",
+      "level": 3,
+      "content": "Emergent adaptation in artificial ecosystems refers to the spontaneous development of complex, adaptive behaviors within computational systems that mimic biological evolution. This phenomenon arises through iterative processes of self-replication, mutation, and selection, where systems evolve strategies to better navigate dynamic and often unpredictable environments [2]. Unlike traditional algorithmic approaches, which rely on predefined rules, emergent adaptation allows for the discovery of novel solutions through decentralized, bottom-up interactions. These systems often exhibit properties such as robustness, scalability, and resilience, as they continuously refine their internal representations and decision-making mechanisms in response to environmental feedback. The underlying mechanisms are closely aligned with evolutionary principles, where fitness landscapes shape the trajectory of adaptation over successive generations.\n\nArtificial ecosystems designed for emergent adaptation typically incorporate elements of multi-agent systems, where individual components interact and co-evolve in a shared environment. These interactions can lead to the emergence of collective behaviors that are not explicitly programmed but instead arise from the interplay of simple rules and environmental constraints. The complexity of these systems is further amplified by the presence of feedback loops, which can either stabilize or destabilize the ecosystem depending on the balance between innovation and selection pressures. Such systems are particularly relevant in domains like robotics, autonomous systems, and adaptive computing, where the ability to respond to changing conditions is critical. The study of these ecosystems provides insights into how complexity can arise from simplicity, offering a framework for designing more adaptive and self-organizing technologies.\n\nThe exploration of emergent adaptation in artificial ecosystems also raises important theoretical and practical questions about the nature of adaptation itself. While biological systems have evolved over millions of years, artificial systems can achieve similar outcomes in a fraction of the time, enabling rapid experimentation and iteration. This accelerated adaptation process, however, introduces challenges related to interpretability, control, and the emergence of unintended behaviors. Researchers must carefully balance the autonomy of the system with the need for oversight and alignment with human objectives. As the field progresses, understanding the conditions under which emergent adaptation leads to beneficial outcomes will be crucial for the development of more intelligent and adaptive artificial systems.",
+      "stats": {
+        "char_count": 2706,
+        "word_count": 352,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.1.2 Informational Evolution and Categorical Frameworks",
+      "level": 3,
+      "content": "Informational evolution and categorical frameworks represent a critical intersection where computational models of adaptation mirror biological processes, particularly through self-replicating and mutating systems. This section explores how the principles of evolutionary self-replication, as observed in biological life, can be abstracted into computational frameworks that enable the development of adaptive systems [2]. By treating prompts or programs as self-replicating entities, the process of mutation, selection, and survival of the fittest becomes a mechanism for refining and optimizing system behavior. This analogy extends beyond traditional evolutionary algorithms, suggesting that information itself can undergo dynamic transformations, guided by fitness criteria that reflect the environment's demands. Such frameworks are essential for understanding how complex systems, whether biological or artificial, can evolve to meet new challenges.\n\nCategorical frameworks provide a structured approach to modeling these evolutionary processes by formalizing the relationships between system components, their transformations, and the environmental context in which they operate. These frameworks allow for the classification of fitness functions, the identification of dynamic behaviors, and the characterization of fixed points or stable states within the system [3]. By abstracting the evolutionary process into categorical terms, researchers can develop more generalizable models that capture the essence of adaptation across diverse domains. This formalization also facilitates the analysis of system behavior under varying conditions, enabling the prediction of emergent properties and the identification of critical thresholds for change. Such insights are vital for designing systems that can adapt autonomously and efficiently.\n\nThe integration of informational evolution with categorical frameworks also raises fundamental questions about the nature of adaptability and the role of structured representation in complex systems. By examining how information is encoded, transformed, and selected within these systems, researchers can uncover deeper principles that govern adaptation. This perspective not only enhances our understanding of biological and artificial systems but also informs the development of more robust and flexible computational models. Ultimately, the exploration of informational evolution within categorical frameworks offers a powerful lens for analyzing and designing systems that can evolve and respond to dynamic environments.",
+      "stats": {
+        "char_count": 2569,
+        "word_count": 334,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.1 Neural Cellular Automata and Embodied Learning",
+      "level": 3,
+      "content": "Neural cellular automata (NCA) represent a convergence of neural networks and cellular automata, enabling the modeling of complex, spatially distributed systems through local interactions. By integrating neural network components into the update rules of cellular automata, NCAs allow for the emergence of dynamic patterns and behaviors that are both structured and adaptive. This framework is particularly suited for embodied learning scenarios, where agents interact with their environment through continuous feedback loops. The ability of NCAs to encode and evolve spatial representations makes them a powerful tool for simulating and understanding the interplay between perception, action, and environmental adaptation in embodied systems.\n\nEmbodied learning, in this context, emphasizes the role of physical interaction in shaping intelligence, where the agent's body and environment are integral to the learning process. Neural cellular automata provide a natural platform for such learning by enabling the development of policies that are spatially and temporally coherent. These policies can be trained through reinforcement learning or unsupervised methods, allowing agents to develop strategies that are not only effective but also robust to environmental variability. The integration of NCAs with embodied systems opens new avenues for research in autonomous robotics, adaptive control, and distributed intelligence, where the agent's physical form and environmental context are central to its behavior.\n\nThe synergy between neural cellular automata and embodied learning also highlights the potential for emergent behaviors that are not explicitly programmed but arise from the interaction of simple rules and environmental feedback. This emergent complexity mirrors biological systems, where local interactions give rise to global patterns. As such, NCAs offer a promising approach for studying and replicating the principles of biological intelligence in artificial systems. By leveraging the spatial and temporal dynamics of NCAs, researchers can explore new paradigms of learning that are more aligned with the principles of embodied cognition, paving the way for more adaptive and intelligent autonomous agents.",
+      "stats": {
+        "char_count": 2228,
+        "word_count": 310,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.2 Evolutionary Search and Self-Replicating Prompts",
+      "level": 3,
+      "content": "Evolutionary search and self-replicating prompts represent a paradigm shift in the design and optimization of artificial intelligence systems, drawing inspiration from biological evolution [2]. This approach leverages principles such as mutation, selection, and reproduction to iteratively refine prompts or strategies, enabling the system to adapt autonomously. By framing prompt optimization as an evolutionary process, the method mimics the natural selection of traits that enhance performance in dynamic environments. This framework not only reduces the need for manual intervention but also allows for the discovery of novel and effective strategies that may not be apparent through conventional design methods. The self-replicating nature of these prompts ensures that successful configurations are preserved and refined across generations, leading to increasingly optimized outcomes.\n\nThe implementation of evolutionary search in prompt design typically involves a fitness function that evaluates the effectiveness of generated prompts based on specific criteria, such as task accuracy or coherence [2]. Through iterative cycles of mutation and selection, the algorithm explores the space of possible prompts, gradually converging on high-performing solutions. This process is particularly effective in low-shot regimes, where the availability of labeled data is limited, as it relies on the intrinsic adaptability of the evolutionary mechanism. The framework also incorporates mechanisms for maintaining diversity within the population of prompts, preventing premature convergence and ensuring a broader exploration of the solution space. By emulating the adaptive dynamics observed in biological systems, this approach enhances the robustness and generalizability of AI models.\n\nA key advantage of evolutionary search and self-replicating prompts is their ability to generate strategies that evolve in response to changing conditions, making them highly adaptable to real-world applications [2]. This dynamic adaptation is crucial in scenarios where the environment or task requirements are not static, such as in natural language processing or autonomous decision-making systems. The framework's reliance on self-replication ensures that successful traits are preserved and propagated, leading to a continuous improvement in performance over time. Moreover, by reducing the dependency on human-defined rules, the system can uncover emergent patterns and behaviors that may not be explicitly programmed. This capability not only enhances the efficiency of AI systems but also opens new avenues for exploring the intersection of evolutionary computation and machine learning.",
+      "stats": {
+        "char_count": 2683,
+        "word_count": 366,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.1 Robustness in Evolving Open Systems",
+      "level": 3,
+      "content": "Robustness in evolving open systems is a critical aspect of ensuring stability and adaptability in dynamic environments where interactions and external influences continuously shape system behavior. These systems, often characterized by their openness and complexity, require mechanisms that allow them to maintain functionality despite perturbations, uncertainties, and evolving conditions. The challenge lies in designing systems that can self-regulate, self-correct, and evolve in response to changing inputs and environmental constraints. This necessitates a balance between flexibility and control, where robustness is not merely about resisting change but about embracing it in a structured and purposeful manner. The integration of evolutionary principles, such as self-replication and adaptation, provides a framework for achieving this balance, enabling systems to iteratively refine their strategies and responses over time [2].\n\nThe concept of evolutionary self-replication, inspired by biological systems, offers a powerful approach to enhancing robustness in open systems [2]. By mimicking the processes of genetic variation and natural selection, these systems can generate diverse solutions that are tested and refined through iterative cycles of adaptation. This process allows for the emergence of unexpected yet effective strategies that may not be apparent through traditional design methods. Moreover, the application of evolutionary algorithms and fitness functions enables the system to explore a broader solution space, increasing the likelihood of discovering robust configurations. This approach aligns with the idea of open-ended innovation, where the system is not constrained by pre-defined objectives but instead evolves toward increasingly complex and adaptive behaviors through continuous interaction with its environment.\n\nIn practice, achieving robustness in evolving open systems involves addressing challenges such as computational efficiency, scalability, and the management of uncertainty. Techniques like model-based evolution, where fitness functions guide the adaptation process, help in identifying optimal configurations while maintaining system coherence. Additionally, the use of distributed and parallel computing architectures can enhance the system's ability to handle large-scale and high-dimensional problems. By integrating these methodologies, evolving open systems can demonstrate resilience and adaptability, making them suitable for applications in areas such as autonomous robotics, multi-agent systems, and adaptive control. Ultimately, the pursuit of robustness in such systems reflects a deeper understanding of how complexity and adaptability can coexist and reinforce each other in dynamic environments.",
+      "stats": {
+        "char_count": 2763,
+        "word_count": 363,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.2 Predictive Accuracy and State Space Compression",
+      "level": 3,
+      "content": "Predictive accuracy in the context of state space compression (SSC) is fundamentally tied to the ability to maintain the essential dynamics of a system while reducing its complexity. This involves a careful balance between preserving the predictive power of the compressed representation and minimizing the computational resources required for its implementation. The effectiveness of SSC is determined by how well the macrostate variables, derived from the original microstate variables, can capture the relevant features of the system's behavior over time. This trade-off is critical, as overly simplified representations may lead to significant loss of predictive fidelity, while retaining too much detail can negate the benefits of compression.\n\nThe process of state space compression inherently involves mapping high-dimensional microstate variables into a lower-dimensional space of macrostate variables [4]. This mapping must be designed to retain the essential information needed for accurate prediction of the quantity of interest. The dynamics of these macrostate variables are governed by an evolution map that must be carefully constructed to ensure that the compressed system behaves in a manner consistent with the original [4]. The evaluation of such a system requires not only assessing the accuracy of its predictions but also considering the efficiency gains achieved through the compression process.\n\nIn practice, achieving optimal state space compression involves defining two cost functions: one that quantifies the predictive accuracy and another that measures the computational or measurement cost. These cost functions guide the trade-off between fidelity and efficiency, allowing for the identification of the most effective compression strategies. The choice of these cost functions is highly dependent on the specific application and the characteristics of the system being modeled. By systematically exploring this trade-off, researchers can develop more efficient and accurate models that are better suited for real-world applications.",
+      "stats": {
+        "char_count": 2064,
+        "word_count": 292,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.1 Automated Segmentation and Measurement of Lichens",
+      "level": 3,
+      "content": "Automated segmentation and measurement of lichens is a critical component in lichenometry, enabling precise quantification of lichen cover, size, and distribution [5]. This process involves the application of image acquisition and processing techniques to extract relevant features from digital images. The methodologies include image perspective correction, scaling, and the use of computer vision and machine learning algorithms to automate the identification and measurement of lichen thalli [5]. These tools are designed to reduce the time and effort required for manual data collection, while also improving the accuracy and consistency of measurements in field studies. By leveraging advanced image processing techniques, researchers can efficiently analyze large datasets and obtain reliable data for ecological and geological applications.\n\nThe integration of machine learning algorithms has significantly enhanced the ability to segment and measure lichens in complex and heterogeneous environments. These algorithms are trained on annotated datasets to recognize lichen structures and distinguish them from background elements. Techniques such as convolutional neural networks (CNNs) and object detection models have shown promise in accurately identifying individual lichen thalli and estimating their size and coverage. Additionally, image processing pipelines incorporate pre-processing steps like noise reduction, contrast enhancement, and edge detection to improve the quality of input data. These methods collectively contribute to a more robust and scalable approach for lichenometric analysis, enabling large-scale and high-resolution studies.\n\nDespite the advancements in automated segmentation and measurement, challenges remain in handling variations in lichen morphology, lighting conditions, and image resolution [5]. The development of adaptable and generalizable models is essential to ensure consistent performance across different environments and imaging platforms. Future work should focus on refining these techniques to improve accuracy, reduce computational overhead, and integrate them into user-friendly software tools. By addressing these challenges, automated lichenometry can become a more reliable and widely adopted method for ecological monitoring and environmental research.",
+      "stats": {
+        "char_count": 2315,
+        "word_count": 303,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.2 Image Perspective Correction and Binary Segmentation",
+      "level": 3,
+      "content": "Image perspective correction and binary segmentation play a critical role in enhancing the accuracy and reliability of image analysis in biological and ecological studies. Perspective correction addresses distortions caused by camera angles or object orientation, ensuring that measurements and segmentations reflect true spatial relationships. This is particularly important in applications such as lichenometry, where precise measurements of thallus dimensions are essential for age estimation and environmental monitoring [5]. Techniques such as homography transformation and vanishing point detection are commonly employed to rectify perspective distortions, enabling more accurate representation of objects in 2D images. These corrections are foundational for subsequent segmentation processes, which aim to isolate objects of interest from the background.\n\nBinary segmentation involves partitioning an image into two distinct regions, typically foreground and background, to facilitate object identification and quantification. This process is often achieved through thresholding techniques, such as Otsu's method, which automatically determines an optimal threshold to separate pixel intensities. In the context of lichen studies, binary segmentation allows for the delineation of thalli from complex backgrounds, enabling automated measurement of area, perimeter, and other morphological features [5]. Advanced machine learning algorithms, including convolutional neural networks, have also been applied to improve segmentation accuracy, particularly in images with varying lighting conditions or overlapping structures. These methods contribute to reducing manual effort and increasing the consistency of data collection.\n\nThe integration of perspective correction and binary segmentation techniques has significantly enhanced the efficiency and precision of image-based analysis in ecological research. By correcting geometric distortions and accurately isolating objects of interest, these methods support more reliable data extraction and interpretation. This is especially valuable in field studies where manual measurement is time-consuming and prone to error. Furthermore, the automation of these processes through computer vision and machine learning tools enables large-scale data analysis, facilitating broader ecological and environmental assessments. As such, the development and refinement of these techniques continue to be a key area of focus in advancing image analysis methodologies for biological applications.",
+      "stats": {
+        "char_count": 2536,
+        "word_count": 326,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.1 Genome Assembly and Transcriptome Analysis",
+      "level": 3,
+      "content": "Genome assembly and transcriptome analysis have become central to modern genomics, enabling researchers to reconstruct and interpret genetic information from complex biological systems. Advances in sequencing technologies, such as next-generation sequencing (NGS), have significantly improved the resolution and accuracy of genome assemblies, allowing for the identification of both coding and non-coding regions. These assemblies are often validated using tools like CEGMA, which assesses the completeness of gene sets by mapping them against conserved eukaryotic genes. Similarly, transcriptome analysis provides insights into gene expression patterns, facilitating the identification of differentially expressed genes under various conditions. The integration of genome and transcriptome data enhances the understanding of functional genomics and evolutionary relationships.\n\nThe process of genome assembly involves overcoming challenges such as repetitive sequences, polyploidy, and the presence of multiple haplotypes, which can lead to fragmented or incomplete assemblies. Techniques like gap-filling and scaffolding are employed to improve contiguity and accuracy. In transcriptome analysis, the use of RNA-seq has revolutionized the study of gene expression, offering higher sensitivity and dynamic range compared to traditional methods. However, transcriptome assemblies can also be affected by biases in sequencing depth and the presence of alternative splicing events. To address these issues, various bioinformatics tools and pipelines have been developed to ensure robust and reproducible results.\n\nThe application of genome and transcriptome analysis extends across diverse fields, including microbial ecology, plant biology, and medical research. These approaches enable the identification of novel genes, regulatory elements, and functional pathways, contributing to a deeper understanding of biological systems. Moreover, the availability of large genomic datasets has facilitated comparative studies, revealing conserved and divergent features among different species. As these technologies continue to evolve, they will play an increasingly critical role in advancing our knowledge of genetic diversity and function.",
+      "stats": {
+        "char_count": 2235,
+        "word_count": 291,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.2 Phylogenetic Approaches and Amplicon Sequencing",
+      "level": 3,
+      "content": "Phylogenetic approaches have become a cornerstone in understanding the evolutionary relationships and ecological associations of microbial communities, particularly when applied to amplicon sequencing data [6]. By analyzing conserved genetic markers such as the 16S rRNA gene, researchers can infer phylogenetic trees that reveal patterns of relatedness among organisms. These analyses have shown that closely related sequences often share similar habitats, suggesting that habitat preferences are largely conserved over short evolutionary timescales. However, evidence also indicates that transitions between habitats can occur over longer periods, highlighting the dynamic nature of ecological adaptation. Such insights are critical for interpreting microbial diversity and its functional implications in various environments.\n\nThe application of phylogenetic frameworks to amplicon data has been instrumental in addressing questions about the directionality and mechanisms of ecological transitions [6]. Early studies focused on constructing phylogenetic trees to identify clades that correspond to specific environmental conditions, thereby inferring the evolutionary history of habitat associations. These methods have been refined with the development of advanced computational tools, allowing for more accurate and comprehensive analyses. The integration of phylogenetic information with ecological data enables researchers to explore how environmental pressures shape microbial community structures and evolutionary trajectories, providing a deeper understanding of biodiversity patterns.\n\nDespite the progress, challenges remain in distinguishing between phylogenetic signal and noise, particularly when dealing with high-throughput amplicon data. The accuracy of phylogenetic inferences depends heavily on the quality of the sequence data, the choice of analytical methods, and the appropriate modeling of evolutionary processes. Ongoing advancements in sequencing technologies and computational algorithms continue to enhance the resolution and reliability of phylogenetic studies. These developments are essential for improving our ability to interpret microbial diversity and its ecological significance, ultimately contributing to broader applications in environmental and biomedical research.",
+      "stats": {
+        "char_count": 2307,
+        "word_count": 290,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.1 Gene Expression Dynamics in *Wolbachia*",
+      "level": 3,
+      "content": "Gene expression dynamics in *Wolbachia* represent a complex interplay of regulatory mechanisms that underpin its symbiotic and pathogenic interactions with host organisms [1]. The transcriptional activity of *Wolbachia* is influenced by both host-derived signals and intrinsic genetic factors, leading to a highly responsive and adaptable gene expression profile. Studies have revealed that key metabolic and virulence-related genes exhibit variable expression levels depending on the host species, developmental stage, and environmental conditions. This dynamic regulation is further complicated by the presence of fragmented or pseudogenized Wolbachia-like sequences in certain hosts, which may indicate evolutionary remnants or non-functional genetic elements. Understanding these expression patterns is critical for elucidating the functional roles of *Wolbachia* in host biology and its potential as a tool for biological control.\n\nThe analysis of gene expression in *Wolbachia* has been facilitated by advances in transcriptomic and genomic technologies, enabling the identification of differentially expressed genes across various host contexts. Comparative studies have highlighted the presence of conserved core genes involved in essential cellular processes, alongside lineage-specific genes that may contribute to host-specific adaptations. These findings suggest that *Wolbachia* undergoes transcriptional reprogramming to maintain symbiotic stability or manipulate host physiology. However, the presence of numerous non-functional or disrupted gene sequences in some hosts raises questions about the extent to which these organisms retain active gene expression. This variability underscores the need for more targeted investigations into the functional relevance of Wolbachia-derived transcripts in different host systems.\n\nDespite these insights, the mechanisms governing gene expression dynamics in *Wolbachia* remain incompletely understood, particularly in cases where the symbiont is not fully integrated into the host genome [1]. The identification of Wolbachia-like sequences in host nuclear assemblies suggests a potential for horizontal gene transfer or genomic integration, which may influence both host and symbiont gene regulation. Future research should focus on characterizing the transcriptional activity of these sequences and determining their impact on host biology. Such studies will be essential for unraveling the full complexity of *Wolbachia* gene expression and its implications for symbiotic relationships [1].",
+      "stats": {
+        "char_count": 2549,
+        "word_count": 334,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.2 Host-Symbiont Interaction Networks",
+      "level": 3,
+      "content": "Host-symbiont interaction networks represent complex systems where the dynamics of microbial recruitment, retention, and expulsion play critical roles in maintaining symbiotic relationships. In the case of *Vibrio fischeri* and the bobtail squid, symbionts are continuously cycled between the host's light organ and the surrounding seawater, with approximately 90% of the bacterial population being vented daily [6]. This frequent habitat transition contrasts with the more static interactions observed in other symbiotic systems, highlighting the unique evolutionary pressures that shape these networks. Such dynamic exchanges suggest that host-symbiont interactions are not only governed by immediate physiological needs but also by long-term evolutionary adaptations that facilitate stable yet flexible associations.\n\nThese interaction networks extend beyond marine systems, as similar habitat transitions are observed in other horizontally transmitted symbioses, including those involving marine mollusks, annelids, and plant root nodules [6]. However, the focus of this review is on long-term evolutionary transitions, which can be more effectively analyzed through phylogenetic comparisons. The timescales over which these transitions occur vary widely, ranging from rapid, daily exchanges to ancient, million-year-old adaptations. Understanding these temporal dimensions is essential for unraveling the mechanisms that govern the stability and resilience of symbiotic partnerships across diverse ecological contexts.\n\nThe complexity of host-symbiont interaction networks is further reflected in the interplay between microbial and host genetic elements. In some systems, symbiont-derived genes have been integrated into host genomes, suggesting a deep evolutionary integration. Additionally, the mutualistic dependencies between hosts and symbionts, such as those observed in nematodes and *Wolbachia*, underscore the functional and evolutionary significance of these networks. By examining these interactions through both ecological and evolutionary lenses, researchers can better understand the mechanisms that underpin the persistence and adaptability of symbiotic relationships in nature.",
+      "stats": {
+        "char_count": 2199,
+        "word_count": 283,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.1 Ordinary and Partial Differential Equation Models",
+      "level": 3,
+      "content": "Ordinary and partial differential equation models have long served as foundational tools for analyzing dynamic systems in biological and ecological contexts. These models provide a structured framework to represent interactions among populations, accounting for both temporal and spatial dimensions. In the study of host-symbiont-parasitoid systems, ordinary differential equations (ODEs) are particularly useful for capturing the continuous-time evolution of population densities, while partial differential equations (PDEs) extend this analysis by incorporating spatial heterogeneity. Such models enable researchers to explore the effects of factors like vertical transmission, cytoplasmic incompatibility, and environmental variability on system behavior.\n\nThe application of ODEs in this domain often involves simplifying assumptions to isolate key interactions, such as the influence of Wolbachia infections on host population dynamics [1]. These models typically focus on the rates of transmission, reproduction, and mortality, allowing for the derivation of equilibrium states and stability analyses. In contrast, PDE models introduce spatial components, enabling the investigation of how local interactions and dispersal patterns affect the spread of symbionts or pathogens. This added complexity allows for a more nuanced understanding of ecological processes, such as the spatial distribution of infected individuals and the role of environmental gradients in shaping system outcomes.\n\nBoth ODE and PDE models contribute to the broader goal of understanding how microbial interactions influence evolutionary trajectories. By integrating parameters such as transmission efficacies and age-dependent effects, these models offer insights into the mechanisms driving symbiotic relationships and their ecological consequences. The development of such models is crucial for predicting system responses to perturbations and for informing strategies in biological control and conservation. Their continued refinement enhances the ability to address complex questions in population biology and ecosystem dynamics.",
+      "stats": {
+        "char_count": 2114,
+        "word_count": 276,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.2 Stability and Invasion Dynamics",
+      "level": 3,
+      "content": "Stability and invasion dynamics play a critical role in understanding the long-term behavior of biological systems, particularly in the context of synthetic biology and ecological modeling. These dynamics involve the analysis of equilibrium states and the conditions under which new species or genetic traits can successfully establish themselves within an existing population. Mathematical models, often based on differential equations, are employed to simulate the interactions between hosts, symbionts, and environmental factors. These models help identify thresholds for invasion success, such as transmission efficacies, cytoplasmic incompatibility levels, and fitness costs, which determine whether a novel trait can spread through a population. The stability of these equilibria is essential for predicting the resilience of engineered organisms in novel environments.\n\nThe complexity of invasion dynamics increases when considering structured populations, such as those with age or stage-specific interactions. Age-structured models introduce additional layers of dynamical behavior, allowing for more precise representation of biological processes like reproduction, mortality, and infection. These models can capture how age-dependent factors influence the spread of endosymbionts or genetic modifications, providing deeper insights into the ecological and evolutionary implications of such interventions. The inclusion of structured populations also enables the study of phenomena such as age-dependent killing of infected individuals, which can significantly affect the stability of the system. These models, while more mathematically challenging, offer greater explanatory power and predictive accuracy.\n\nInvasion dynamics are further influenced by the interplay between endogenous and exogenous forces, such as environmental stressors, genetic variability, and ecological interactions. The ability to manipulate these factors through synthetic biology opens new avenues for controlling population dynamics in both terrestrial and extraterrestrial contexts. By integrating mathematical modeling with empirical data, researchers can explore the conditions under which engineered organisms can either persist or be displaced within an ecosystem. This approach not only enhances our understanding of ecological stability but also informs the design of robust biological systems for applications ranging from bioremediation to space colonization.",
+      "stats": {
+        "char_count": 2455,
+        "word_count": 319,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.1 Non-Uniform Conditions and Bacterial Motility",
+      "level": 3,
+      "content": "Non-uniform environmental conditions significantly influence bacterial motility, which is critical for survival and function in diverse habitats. Bacteria exhibit a range of motility mechanisms, including flagellar rotation, twitching, and gliding, each adapted to specific physical and chemical gradients. In non-uniform conditions, such as varying nutrient concentrations, temperature fluctuations, or mechanical stress, these motility strategies are modulated to optimize resource acquisition and stress response. The interplay between environmental heterogeneity and bacterial movement is particularly relevant in extreme or extraterrestrial settings, where spatial and temporal variations can drastically alter microbial behavior and ecological interactions [6].\n\nThe adaptation of bacterial motility to non-uniform conditions is further complicated by the presence of external stressors, such as radiation, low pressure, or chemical toxins. These factors can either enhance or inhibit motility, depending on the species and the specific environmental context. For instance, certain extremophiles demonstrate enhanced motility under stress, enabling them to seek more favorable microhabitats. This dynamic response is crucial for understanding microbial survival in challenging environments, such as those found on Mars or in deep-sea hydrothermal vents. The ability to adjust motility in response to environmental cues is a key factor in the success of microbial life in non-uniform conditions.\n\nResearch into bacterial motility under non-uniform conditions often involves computational modeling and experimental validation to capture the complexity of microbial behavior. These studies reveal how motility patterns are influenced by both intrinsic bacterial traits and extrinsic environmental factors. Understanding these interactions is essential for applications in biotechnology, environmental remediation, and astrobiology. By elucidating the mechanisms that govern bacterial movement in heterogeneous environments, researchers can better predict microbial behavior and develop strategies for harnessing or mitigating its effects in various contexts.",
+      "stats": {
+        "char_count": 2161,
+        "word_count": 277,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.2 Ecological Influence of Endosymbionts",
+      "level": 3,
+      "content": "The ecological influence of endosymbionts is a critical area of study, particularly in the context of bioengineered systems designed for extraterrestrial environments. Endosymbionts, such as Wolbachia, play a pivotal role in shaping the fitness and reproductive success of their hosts, often through mechanisms like cytoplasmic incompatibility and parthenogenesis [1]. These interactions can significantly affect population dynamics, influencing the spread and persistence of specific traits within a host population. In ecological terms, the presence of endosymbionts can alter competitive interactions, predator-prey relationships, and even community structure, making them key players in the stability of biological systems. Understanding these effects is essential for predicting how endosymbiont-host relationships might function in engineered environments, such as those proposed for Mars colonization.\n\nThe interplay between endosymbionts and their hosts is governed by both intrinsic and extrinsic factors, which determine the success or extinction of the symbiotic relationship [7]. Transmission efficiency, host fitness costs, and environmental pressures all contribute to the equilibrium of endosymbiont populations [7]. Mathematical models have been developed to analyze these dynamics, providing insights into conditions under which endosymbionts can persist or be eliminated. These models are particularly useful in assessing the potential for endosymbionts to be harnessed in synthetic biology applications, such as driving genetic modifications or enhancing microbial resilience. The ecological implications of such interventions must be carefully evaluated to ensure they do not disrupt existing biological balances or introduce unintended consequences.\n\nIn the broader context of ecological systems, endosymbionts can act as both stabilizers and disruptors, depending on the environmental context and the nature of their interactions. Their influence extends beyond individual hosts, potentially affecting entire ecosystems through changes in species interactions and resource utilization. This makes them a subject of intense research, especially in the development of bioengineered solutions for extreme environments. As synthetic biology advances, the ability to manipulate endosymbiont-host relationships offers new possibilities for ecological engineering, but also raises important questions about long-term sustainability and ecological impact. The study of these influences remains a vital component of ecological and biotechnological research.",
+      "stats": {
+        "char_count": 2570,
+        "word_count": 334,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.1 Extremophile-Engineered Symbiosis",
+      "level": 3,
+      "content": "Extremophile-engineered symbiosis represents a transformative strategy for developing life-support systems on Mars by leveraging the natural resilience of extremophiles and the precision of synthetic biology [8]. This approach involves the genetic modification of symbiotic relationships to enhance the survival and functionality of engineered organisms in the Martian environment. By integrating extremophiles' unique metabolic pathways and stress tolerance mechanisms into symbiotic hosts, researchers aim to create self-sustaining biological systems capable of performing essential functions such as nutrient cycling, waste degradation, and atmospheric modification. These engineered symbioses could serve as foundational elements for future Martian habitats, enabling long-term human presence through biological adaptation rather than purely mechanical solutions [8].\n\nThe design of extremophile-engineered symbiosis requires careful consideration of host-symbiont compatibility, genetic stability, and environmental responsiveness. Synthetic biology tools, including CRISPR-based gene editing and synthetic gene circuits, allow for the precise manipulation of symbiotic interactions to optimize their performance under Martian conditions. This includes enhancing the symbiont's ability to withstand low temperatures, high radiation, and limited water availability, while ensuring the host organism remains viable and functional. Additionally, the integration of feedback mechanisms and adaptive responses can improve the resilience of these systems, allowing them to dynamically adjust to changing environmental parameters and maintain long-term stability.\n\nThe development of extremophile-engineered symbiosis also raises important questions regarding the ethical and ecological implications of introducing such organisms to Mars [8]. While these systems are designed to operate within controlled environments, the potential for unintended consequences necessitates rigorous risk assessment and planetary protection protocols. Furthermore, the long-term sustainability of these symbiotic relationships will depend on their ability to maintain genetic integrity and functional efficiency over multiple generations. As research in this area advances, it will be critical to establish robust frameworks for monitoring, managing, and regulating the deployment of engineered symbioses in extraterrestrial environments.",
+      "stats": {
+        "char_count": 2419,
+        "word_count": 298,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.2 Bioengineering for Martian Habitability",
+      "level": 3,
+      "content": "Bioengineering for Martian Habitability explores the development of organisms capable of surviving and thriving in the harsh conditions of Mars [8]. This involves the genetic modification of extremophiles and the design of synthetic biological systems to address environmental challenges such as low atmospheric pressure, high radiation, and the presence of toxic regolith. Researchers have proposed the use of biological consortia, where multiple engineered organisms interact to create a self-sustaining ecosystem. These systems aim to support human life by producing oxygen, recycling waste, and providing food sources. The integration of synthetic biology with extremophile traits offers a pathway to create organisms that can contribute to the long-term habitability of Mars [8].\n\nExperimental frameworks for Martian bioengineering include laboratory models that simulate Martian conditions, such as low-pressure environments and UV radiation exposure. These models help assess the viability of engineered organisms and their interactions within controlled settings. Additionally, bioengineering strategies focus on enhancing microbial resilience through genetic modifications that improve stress tolerance and metabolic efficiency. By leveraging the natural adaptability of microorganisms, scientists aim to develop life forms that can contribute to terraforming efforts, such as breaking down regolith to release essential nutrients or producing biofuels for energy. These approaches are critical for establishing a sustainable presence on Mars.\n\nEthical and political considerations are integral to the development of bioengineered life for Mars [8]. The introduction of engineered organisms raises concerns about planetary protection, ecological disruption, and the potential for unintended consequences. International collaboration and regulatory frameworks are essential to ensure responsible and transparent research practices. Furthermore, the long-term implications of altering Martian ecosystems must be carefully evaluated. As bioengineering advances, it becomes increasingly important to balance scientific innovation with environmental stewardship, ensuring that the pursuit of Martian habitability aligns with broader ethical and ecological principles.",
+      "stats": {
+        "char_count": 2271,
+        "word_count": 294,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6 Future Directions",
+      "level": 1,
+      "content": "Despite significant advances in the study of endosymbiosis, several limitations and gaps remain in the current understanding of symbiotic relationships, particularly in the context of *Wolbachia* and its interactions with host organisms. One major limitation is the incomplete characterization of gene expression dynamics in *Wolbachia*, especially in cases where the symbiont is not fully integrated into the host genome. The presence of fragmented or pseudogenized Wolbachia-like sequences in some hosts complicates the interpretation of transcriptional activity and its functional relevance. Additionally, the mechanisms governing host-symbiont communication and the regulation of symbiotic stability remain poorly understood, particularly in non-model systems. These gaps hinder the development of predictive models that can accurately simulate symbiotic outcomes and their ecological consequences. Furthermore, the integration of computational, genomic, and ecological data into a unified framework is still in its early stages, limiting the ability to draw comprehensive conclusions about the long-term evolutionary trajectories of symbiotic systems.\n\nTo address these challenges, future research should focus on several key directions. First, there is a need for more comprehensive transcriptomic and genomic analyses of *Wolbachia* in diverse host species, with a particular emphasis on identifying functional gene expression patterns and their regulatory networks. Advanced sequencing technologies and machine learning approaches can aid in distinguishing active from non-functional genetic elements, providing a clearer picture of *Wolbachia*’s role in host physiology. Second, the development of more sophisticated computational models that integrate both population-level dynamics and molecular interactions will be critical for predicting the spread and persistence of symbionts in natural and engineered systems. These models should account for environmental variability, host genetic diversity, and the potential for horizontal gene transfer. Additionally, experimental validation of these models through controlled laboratory and field studies will be essential for refining their accuracy and applicability. Finally, interdisciplinary collaboration between biologists, computational scientists, and synthetic biologists will be necessary to bridge the gap between theoretical insights and practical applications.\n\nThe proposed future work has the potential to significantly advance the field of endosymbiosis research and its applications in synthetic biology and space exploration. By improving the understanding of gene expression dynamics and host-symbiont interactions, researchers can develop more effective strategies for manipulating symbiotic relationships to achieve desired outcomes, such as enhancing host fitness or controlling pest populations. The integration of advanced computational models with empirical data will also enable more accurate predictions of symbiotic behavior under different environmental conditions, which is crucial for designing resilient biological systems. In the context of space exploration, these advancements could lead to the development of engineered symbioses capable of supporting human life on Mars or other extraterrestrial environments. Ultimately, the continued exploration of endosymbiotic relationships will not only deepen our understanding of biological complexity but also open new possibilities for biotechnological and ecological innovations.",
+      "stats": {
+        "char_count": 3516,
+        "word_count": 455,
+        "sentence_count": 18,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "7 Conclusion",
+      "level": 1,
+      "content": "The conclusion of this survey paper provides a comprehensive synthesis of the key findings and discussions presented throughout the study. The research has highlighted the critical role of *Wolbachia* in endosymbiotic relationships, emphasizing its influence on host biology, evolutionary dynamics, and ecological interactions. Through an exploration of computational models, such as ordinary and partial differential equations, as well as algorithmic approaches like neural cellular automata and evolutionary search, the paper has demonstrated the potential of these methodologies in understanding and predicting the behavior of complex symbiotic systems. Additionally, the study has examined the genomic and transcriptomic dynamics of *Wolbachia*, revealing the intricate interplay between host and symbiont gene expression, and the potential for horizontal gene transfer. The integration of these perspectives has provided a holistic view of the biological and computational dimensions of endosymbiosis, underscoring the importance of interdisciplinary approaches in advancing the field.\n\nThe significance of this survey lies in its contribution to the broader understanding of endosymbiotic relationships and their implications for both natural and engineered systems. By bridging the gap between experimental and computational research, the paper offers a critical evaluation of existing methodologies and identifies key areas for future investigation. It emphasizes the need for more sophisticated models that can accurately predict symbiotic outcomes and explores the potential applications of endosymbiosis in fields such as synthetic biology, agriculture, and space exploration. The survey also highlights the importance of integrating ecological, genomic, and computational perspectives to gain a deeper understanding of the mechanisms underlying symbiotic interactions. These insights are crucial for advancing research in endosymbiosis and for developing practical applications that harness the power of symbiotic relationships.\n\nLooking ahead, this survey calls for continued interdisciplinary collaboration and innovation in the study of endosymbiosis. Researchers are encouraged to explore novel computational frameworks that can better capture the complexity of symbiotic systems and to conduct experimental studies that validate theoretical predictions. The development of robust and scalable models is essential for addressing the challenges posed by dynamic and unpredictable environments. Furthermore, the ethical and ecological implications of manipulating symbiotic relationships must be carefully considered, particularly in the context of synthetic biology and space exploration. By fostering a deeper understanding of endosymbiosis, this work lays the foundation for future research that can unlock new possibilities in both biological and technological domains. The pursuit of knowledge in this field remains a vital endeavor, with the potential to transform our understanding of life and its adaptability in diverse environments.",
+      "stats": {
+        "char_count": 3056,
+        "word_count": 407,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "[1] Structured and unstructured continuous models for Wolbachia infections",
+      "number": null,
+      "title": "structured and unstructured continuous models for wolbachia infections"
+    },
+    {
+      "text": "[2] Evolving Prompts In-Context  An Open-ended, Self-replicating Perspective",
+      "number": null,
+      "title": "evolving prompts in-context an open-ended, self-replicating perspective"
+    },
+    {
+      "text": "[3] Universal evolutionary model for periodical species",
+      "number": null,
+      "title": "universal evolutionary model for periodical species"
+    },
+    {
+      "text": "[4] A quantitative definition of organismality and its application to lichen",
+      "number": null,
+      "title": "a quantitative definition of organismality and its application to lichen"
+    },
+    {
+      "text": "[5] Image analysis for automatic measurement of crustose lichens",
+      "number": null,
+      "title": "image analysis for automatic measurement of crustose lichens"
+    },
+    {
+      "text": "[6] Habitat transition in the evolution of bacteria and archaea",
+      "number": null,
+      "title": "habitat transition in the evolution of bacteria and archaea"
+    },
+    {
+      "text": "[7] Bacteriophage effect on parasitism resistance",
+      "number": null,
+      "title": "bacteriophage effect on parasitism resistance"
+    },
+    {
+      "text": "[8] Engineering Microbial Symbiosis for Mars Habitability",
+      "number": null,
+      "title": "engineering microbial symbiosis for mars habitability"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\InteractiveSurvey\\Biology\\survey_Endosymbiosis of Wolbachia in Biology_split.json",
+    "processed_date": "2025-12-30T20:33:38.974565",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

@@ -1,0 +1,489 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of Wearable Health Devices in Health Care"
+    ],
+    [
+      1,
+      "1 Abstract"
+    ],
+    [
+      1,
+      "2 Introduction"
+    ],
+    [
+      1,
+      "3 Machine Learning for Health Monitoring"
+    ],
+    [
+      2,
+      "3.1 Algorithmic Approaches for Real Time Health Analysis"
+    ],
+    [
+      3,
+      "3.1.1 Deep Learning Models for Automated Data Interpretation"
+    ],
+    [
+      3,
+      "3.1.2 Ensemble Techniques for Enhanced Predictive Accuracy"
+    ],
+    [
+      2,
+      "3.2 Data Integration and Pattern Recognition"
+    ],
+    [
+      3,
+      "3.2.1 Multimodal Data Fusion for Comprehensive Health Assessment"
+    ],
+    [
+      3,
+      "3.2.2 Anomaly Detection in Dynamic Patient Environments"
+    ],
+    [
+      2,
+      "3.3 System Optimization for Resource Constrained Settings"
+    ],
+    [
+      3,
+      "3.3.1 Lightweight Model Architectures for Mobile Deployment"
+    ],
+    [
+      3,
+      "3.3.2 Edge Computing for Real Time Processing"
+    ],
+    [
+      1,
+      "4 Wireless and Secure Medical Communication"
+    ],
+    [
+      2,
+      "4.1 Wireless Communication Technologies for Medical Devices"
+    ],
+    [
+      3,
+      "4.1.1 In Vivo Signal Transmission and Channel Characterization"
+    ],
+    [
+      3,
+      "4.1.2 Body Area Networks for Continuous Monitoring"
+    ],
+    [
+      2,
+      "4.2 Security and Privacy in Medical Data Transmission"
+    ],
+    [
+      3,
+      "4.2.1 Blockchain for Secure Health Data Exchange"
+    ],
+    [
+      3,
+      "4.2.2 Encryption and Access Control for Device Integrity"
+    ],
+    [
+      2,
+      "4.3 Future Communication Paradigms"
+    ],
+    [
+      3,
+      "4.3.1 6G Enabled Intelligent Healthcare Systems"
+    ],
+    [
+      3,
+      "4.3.2 Quality of Service and User Experience in Telemedicine"
+    ],
+    [
+      1,
+      "5 Wearable Sensor Development and Integration"
+    ],
+    [
+      2,
+      "5.1 Material and Fabrication Innovations"
+    ],
+    [
+      3,
+      "5.1.1 Polymer Based Sensors for Flexible Health Monitoring"
+    ],
+    [
+      3,
+      "5.1.2 3D Printing for Complex Sensor Structures"
+    ],
+    [
+      2,
+      "5.2 Sensor Integration and System Design"
+    ],
+    [
+      3,
+      "5.2.1 Multi Sensor Fusion for Enhanced Diagnostic Capabilities"
+    ],
+    [
+      3,
+      "5.2.2 Wearable and Implantable Devices for Long Term Use"
+    ],
+    [
+      2,
+      "5.3 Biomedical Applications and Performance Evaluation"
+    ],
+    [
+      3,
+      "5.3.1 Video Capsule Endoscopy and Ingestible Sensors"
+    ],
+    [
+      3,
+      "5.3.2 Clinical Validation of Wearable Diagnostic Tools"
+    ],
+    [
+      1,
+      "6 Future Directions"
+    ],
+    [
+      1,
+      "7 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of Wearable Health Devices in Health Care",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Abstract",
+      "level": 1,
+      "content": "Wearable health devices have emerged as a transformative force in modern healthcare, offering continuous, real-time, and personalized health monitoring. These devices, ranging from simple fitness trackers to advanced implantable sensors, integrate innovations in materials science, wireless communication, and artificial intelligence to enable proactive healthcare management. As the global population ages and chronic diseases become more prevalent, the role of wearable health devices in improving patient outcomes has grown significantly. This survey paper provides a comprehensive overview of the current state of wearable health technologies, focusing on their integration into healthcare systems, technological advancements, and challenges in deployment. The paper highlights key developments in sensor technologies, data integration, machine learning, and wireless communication, while also addressing issues such as data accuracy, power consumption, and user compliance. It explores the convergence of wearables with emerging technologies like edge computing, 6G, and blockchain, which are expected to enhance their capabilities and security. The contributions of this survey include a systematic review of recent advancements, a critical analysis of existing challenges, and insights into future research directions. By synthesizing the existing literature, this paper aims to provide a foundation for further innovation and development in the field of wearable health technology.",
+      "stats": {
+        "char_count": 1489,
+        "word_count": 197,
+        "sentence_count": 8,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2 Introduction",
+      "level": 1,
+      "content": "Wearable health devices have become a cornerstone of modern healthcare, driven by the increasing demand for continuous, real-time, and personalized health monitoring [1]. These devices, ranging from simple fitness trackers to sophisticated implantable sensors, leverage advances in materials science, wireless communication, and artificial intelligence to provide actionable insights into an individual's health status. The integration of these technologies has enabled the transition from reactive to proactive healthcare, where early detection of health anomalies and continuous monitoring can significantly improve patient outcomes. As the global population ages and chronic diseases become more prevalent, the role of wearable health devices in managing and preventing health complications has grown substantially. This evolution has been further accelerated by the development of more advanced sensor technologies, improved data analytics, and the rise of connected health ecosystems, which together have redefined the landscape of modern medical care.\n\nThis survey paper focuses on the integration of wearable health devices within the broader context of healthcare, emphasizing their role in health monitoring, diagnostics, and therapeutic applications [2]. The paper explores the technological advancements that have enabled the development of more accurate, efficient, and user-friendly wearable systems. It examines the challenges and opportunities in deploying these devices in both clinical and non-clinical settings, including issues related to data accuracy, power consumption, and user compliance. Additionally, the paper investigates the convergence of wearable devices with emerging technologies such as machine learning, edge computing, and 6G communication, which are expected to further enhance their capabilities. By providing a comprehensive overview of the current state of wearable health devices, this survey aims to highlight the key research directions and potential future developments in this rapidly evolving field.\n\nThe paper is structured to first present a detailed overview of the technological foundations of wearable health devices, including sensor development, data integration, and system optimization [1]. It then delves into the specific applications of these devices in health monitoring, such as real-time physiological data acquisition, anomaly detection, and predictive analytics. The discussion also covers the challenges associated with deploying these systems in dynamic and resource-constrained environments, including the need for lightweight models, edge computing, and secure communication protocols. Furthermore, the paper examines the integration of wearable devices with broader healthcare infrastructures, exploring topics such as wireless communication, data security, and interoperability [3]. Through this comprehensive exploration, the paper provides a clear picture of the current state of wearable health devices and the key areas that require further research and development [2].\n\nThe contributions of this survey paper are threefold. First, it offers a systematic review of the latest advancements in wearable health device technology, covering both hardware and software innovations. Second, it provides a critical analysis of the challenges and limitations that hinder the widespread adoption of these devices, offering insights into potential solutions and future research directions [4]. Finally, the paper highlights the transformative potential of wearable health devices in reshaping healthcare delivery, emphasizing their role in enabling personalized, preventive, and continuous care. By synthesizing the existing literature and identifying key gaps, this survey aims to serve as a valuable reference for researchers, practitioners, and policymakers in the field of wearable health technology.",
+      "stats": {
+        "char_count": 3867,
+        "word_count": 520,
+        "sentence_count": 20,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "3.1.1 Deep Learning Models for Automated Data Interpretation",
+      "level": 3,
+      "content": "Deep learning models have emerged as a pivotal tool for automated data interpretation, particularly in complex domains where traditional methods struggle with scalability and adaptability. These models excel at extracting high-level features from raw data, enabling the identification of patterns that are often imperceptible to human analysts. In the context of decision support systems, deep learning frameworks are employed to integrate diverse data sources, such as machine log data and enterprise data, to enhance predictive accuracy. By leveraging historical escalation data as labels, these models can continuously refine their estimates of customer sentiment, offering a more objective basis for decision-making [5]. The ability to process and interpret large volumes of heterogeneous data in real-time underscores the transformative potential of deep learning in automated data interpretation.\n\nThe application of deep learning in automated data interpretation is further enhanced by its capacity to handle unstructured and noisy data, such as audio signals and time-series measurements. Techniques like time-frequency analysis and signal processing are often used as preprocessing steps to extract meaningful features before feeding them into deep learning models. This is particularly relevant in healthcare, where acoustic signals from inhalation can be analyzed to detect drug inhalation onset and respiratory phases [6]. The integration of deep learning with such signal processing techniques allows for the development of robust classification models that can operate effectively even in the presence of missing or incomplete data. This synergy between preprocessing and deep learning models significantly improves the reliability and interpretability of automated systems.\n\nIn addition to improving accuracy, deep learning models contribute to the interpretability of automated systems through the use of explainable AI techniques. This is crucial in healthcare and other critical domains where the transparency of AI-driven insights is essential for trust and adoption. Models like SlowFast1 and UniTS are being adapted to recognize activities and detect anomalies in real-time, while also providing explanations that align with human expertise. The deployment of these models in resource-constrained environments, such as wearable devices, is made feasible through optimizations like TensorFlow Lite, which enables efficient inference on mobile and embedded platforms [7]. These advancements highlight the growing role of deep learning in enabling automated, interpretable, and efficient data interpretation across various applications.",
+      "stats": {
+        "char_count": 2654,
+        "word_count": 366,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.1.2 Ensemble Techniques for Enhanced Predictive Accuracy",
+      "level": 3,
+      "content": "Ensemble techniques have emerged as a powerful strategy to enhance the predictive accuracy of machine learning models by combining multiple base learners. These methods leverage the diversity of individual models to reduce variance, bias, and overfitting, thereby improving generalization and robustness. Common ensemble approaches include bagging, boosting, and stacking, each with distinct mechanisms for aggregating predictions. Bagging, such as in Random Forests, reduces variance by training multiple models on bootstrap samples and averaging their outputs. Boosting, on the other hand, sequentially trains models to correct the errors of previous ones, with techniques like AdaBoost and Gradient Boosting achieving high performance in various domains. Stacking combines predictions from multiple models using a meta-learner, often leading to improved accuracy by capturing complex patterns that individual models may miss.\n\nIn the context of predictive maintenance and health monitoring, ensemble methods have been particularly effective in handling noisy and heterogeneous data sources. By integrating predictions from diverse models, such as decision trees, neural networks, and support vector machines, ensemble techniques can better capture the underlying patterns in complex datasets. For instance, in the analysis of event log data for intrusion detection or failure prediction, ensembles have demonstrated superior performance compared to single-model approaches. Additionally, the use of weighted ensemble strategies, where models are assigned different levels of influence based on their performance, further enhances the reliability of predictions. These techniques are especially valuable in scenarios where high accuracy and robustness are critical, such as in real-time monitoring systems or clinical decision support.\n\nRecent advancements in ensemble learning have also focused on improving interpretability and computational efficiency. Techniques such as feature importance analysis and model selection strategies help in understanding the contribution of individual models within the ensemble. Moreover, the integration of deep learning with traditional ensemble methods has opened new avenues for improving predictive accuracy in high-dimensional data. As the complexity of predictive tasks increases, the role of ensemble techniques in achieving reliable and accurate predictions becomes even more pronounced, making them an essential component of modern machine learning workflows.",
+      "stats": {
+        "char_count": 2507,
+        "word_count": 336,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.1 Multimodal Data Fusion for Comprehensive Health Assessment",
+      "level": 3,
+      "content": "Multimodal data fusion plays a critical role in achieving a comprehensive health assessment by integrating diverse data sources that capture different aspects of a patient's condition. This approach combines physiological signals, environmental data, and behavioral metrics to provide a more holistic view of health status. By leveraging data from wearable devices, IoT sensors, and clinical records, multimodal systems can detect subtle changes in health indicators that may not be apparent through single-modal analysis. The integration of these data streams enables more accurate diagnosis, personalized treatment planning, and early detection of potential health risks, thereby enhancing overall patient care and outcomes.\n\nThe technical challenges in multimodal data fusion include aligning heterogeneous data types, handling missing or noisy information, and ensuring temporal coherence across different data sources. Feature extraction and representation are essential steps in this process, where domain-specific knowledge is used to identify relevant patterns and correlations. Advanced machine learning techniques, such as deep learning and ensemble methods, are often employed to model complex interactions between modalities. Additionally, the fusion process must account for varying data sampling rates and sensor characteristics, which can affect the reliability and consistency of the fused data. These challenges necessitate robust preprocessing and normalization strategies to ensure the integrity of the fused information.\n\nRecent advancements in multimodal data fusion have focused on real-time processing and adaptive learning to improve the responsiveness and accuracy of health monitoring systems. Techniques such as dynamic weighting, context-aware fusion, and hybrid model architectures have been proposed to address the variability and uncertainty inherent in multimodal data. These approaches enable systems to adjust their fusion strategies based on the specific health context, leading to more reliable and actionable insights. As the field continues to evolve, the development of standardized frameworks and benchmarking protocols will be crucial for evaluating the effectiveness of different fusion methods and promoting their adoption in clinical practice.",
+      "stats": {
+        "char_count": 2287,
+        "word_count": 309,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.2 Anomaly Detection in Dynamic Patient Environments",
+      "level": 3,
+      "content": "Anomaly detection in dynamic patient environments is a critical component of modern health monitoring systems, particularly in scenarios where patient conditions and environmental factors continuously evolve [8]. This domain leverages a combination of physiological and contextual data to identify deviations from normal patterns, enabling early intervention and improved clinical outcomes. The integration of wearable sensors, ambient monitoring systems, and real-time data analytics plays a pivotal role in detecting subtle changes that may indicate deteriorating health or unexpected events. Unlike static monitoring approaches, dynamic environments require adaptive algorithms capable of handling temporal and spatial variability, ensuring accurate and timely anomaly detection.\n\nThe methodologies employed in this area often involve advanced signal processing techniques, such as time-frequency analysis and machine learning models, to extract meaningful features from complex data streams. These models are trained to recognize baseline behaviors and detect anomalies by comparing real-time data against learned patterns. Deep learning approaches, in particular, have shown promise in capturing intricate temporal dependencies and contextual cues, making them well-suited for dynamic patient settings. Additionally, the use of multi-modal data fusion enhances the robustness of anomaly detection systems by incorporating diverse data sources, such as acoustic signals, motion data, and environmental sensors, to provide a more comprehensive view of patient status.\n\nRecent advancements have also focused on optimizing computational efficiency and reducing data redundancy in dynamic monitoring systems. Techniques such as selective masking and adaptive data collection help minimize resource consumption while maintaining high detection accuracy. These strategies are essential for deploying anomaly detection systems in real-world clinical settings, where continuous monitoring must be balanced with limited computational and energy resources [8]. As the complexity of patient environments increases, the development of scalable and context-aware anomaly detection frameworks remains a key research direction, with significant implications for personalized healthcare and remote patient monitoring [8].",
+      "stats": {
+        "char_count": 2309,
+        "word_count": 299,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.1 Lightweight Model Architectures for Mobile Deployment",
+      "level": 3,
+      "content": "Lightweight model architectures are essential for mobile deployment in healthcare applications, where computational resources and power constraints are critical. These models are designed to maintain acceptable performance while significantly reducing model size and inference latency. Techniques such as model pruning, quantization, and knowledge distillation are commonly employed to achieve this balance. In the context of mobile health systems, lightweight models enable real-time processing of sensor data, such as heart rate or activity recognition, without compromising accuracy. This is particularly important for applications that require continuous monitoring and immediate feedback, such as anomaly detection or patient surveillance.\n\nEfficientDetLite models, part of the TensorFlow Lite ecosystem, exemplify the trade-off between model complexity and performance. These models are optimized for mobile and embedded devices, leveraging efficient CNN backbones that allow for fast inference while maintaining reasonable accuracy. Similarly, other frameworks provide tailored solutions for mobile deployment, including specialized architectures that reduce memory footprint and computational load. The selection of an appropriate lightweight model depends on the specific requirements of the application, such as the type of data being processed, the available hardware, and the desired response time. These models are often evaluated in real-world scenarios to ensure they meet the demands of mobile and edge computing environments.\n\nThe integration of lightweight models into mobile healthcare systems also involves addressing challenges related to model adaptation and deployment. For instance, models must be capable of operating under varying network conditions and device capabilities. Additionally, the deployment of these models on mobile devices requires careful consideration of data preprocessing, model compression, and runtime optimization. By leveraging lightweight architectures, healthcare applications can achieve scalability, reduce energy consumption, and improve user experience, making them more viable for widespread adoption in clinical and home settings.",
+      "stats": {
+        "char_count": 2187,
+        "word_count": 286,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.2 Edge Computing for Real Time Processing",
+      "level": 3,
+      "content": "Edge computing has emerged as a critical enabler for real-time processing in distributed systems, particularly in scenarios where latency, bandwidth, and computational efficiency are paramount. By decentralizing data processing closer to the data source, edge computing reduces the reliance on centralized cloud infrastructures, thereby minimizing delays and improving response times. This is especially important in applications such as healthcare monitoring, industrial IoT, and autonomous systems, where timely decision-making is essential. The integration of edge computing with real-time processing allows for on-device data analysis, enabling immediate insights without the overhead of transmitting large volumes of raw data to remote servers. This paradigm shift not only enhances system responsiveness but also addresses the growing demand for low-latency services in resource-constrained environments.\n\nThe implementation of edge computing for real-time processing involves a careful balance between computational capabilities and energy efficiency. Edge devices, such as smartphones, gateways, and embedded systems, often have limited processing power and memory, necessitating the use of optimized algorithms and lightweight models. Techniques such as model compression, quantization, and edge-specific neural network architectures are employed to ensure that real-time inference can be performed efficiently. Additionally, the use of edge computing facilitates the deployment of distributed processing pipelines, where data is pre-processed and filtered at the edge before being sent to the cloud for further analysis. This approach not only reduces network congestion but also enhances data privacy and security by minimizing the exposure of sensitive information.\n\nIn the context of real-time applications, edge computing also supports dynamic resource allocation and adaptive processing strategies. For instance, in healthcare monitoring systems, edge nodes can prioritize critical data streams based on urgency or patient conditions, ensuring that vital information is processed and acted upon immediately. Moreover, the integration of machine learning models at the edge enables real-time anomaly detection and predictive analytics, further enhancing the responsiveness of the system. As the demand for real-time processing continues to grow, edge computing provides a scalable and efficient solution that aligns with the evolving needs of modern applications [9].",
+      "stats": {
+        "char_count": 2481,
+        "word_count": 333,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.1 In Vivo Signal Transmission and Channel Characterization",
+      "level": 3,
+      "content": "In vivo signal transmission and channel characterization form a critical foundation for the development of reliable wireless communication systems within the human body. These systems are essential for enabling seamless data exchange between implanted medical devices and external monitoring equipment. The in vivo environment presents unique challenges due to the complex dielectric properties of biological tissues, which significantly affect signal propagation. Factors such as tissue composition, body geometry, and the presence of fluids influence signal attenuation, reflection, and dispersion, necessitating detailed channel modeling to ensure robust communication links. Understanding these characteristics is crucial for optimizing the performance of in-body communication systems, particularly in applications such as implantable sensors and drug delivery devices.\n\nThe characterization of in vivo channels involves both empirical measurements and theoretical modeling to capture the dynamic behavior of signal propagation within the body [10]. Experimental setups often utilize phantom models or in vivo testing to simulate real-world conditions and assess the impact of various physiological parameters on signal integrity. Key parameters such as path loss, channel bandwidth, and signal-to-noise ratio are analyzed to determine the feasibility of different communication techniques, including inductive coupling and radio frequency (RF) transmission. These studies help identify optimal frequency bands and antenna configurations that minimize interference and maximize data transmission efficiency in the challenging in vivo environment.\n\nFurthermore, the development of accurate channel models is essential for the design of efficient communication protocols and hardware for wireless body area networks (WBANs). These models must account for the variability introduced by different body positions, movement, and physiological changes, which can alter the communication channel in real-time. By incorporating these factors into channel characterization, researchers can enhance the reliability and performance of in vivo communication systems, paving the way for more advanced and personalized medical applications [10]. This section provides a comprehensive overview of the current state of in vivo signal transmission research and highlights the key challenges and opportunities in this domain.",
+      "stats": {
+        "char_count": 2411,
+        "word_count": 319,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.2 Body Area Networks for Continuous Monitoring",
+      "level": 3,
+      "content": "Body Area Networks (BANs) represent a critical advancement in continuous health monitoring, enabling the seamless integration of wireless biosensors to track physiological parameters in real-time. These networks consist of miniaturized, low-power devices that can be either noninvasive or minimally invasive, allowing for long-term patient monitoring without significant discomfort. BANs are particularly effective in detecting episodic events such as arrhythmias, hypoxia, or falls, which may otherwise go unnoticed in traditional healthcare settings. The deployment of such networks is facilitated by advancements in wireless communication protocols, which ensure reliable data transmission between sensors and external monitoring systems. This capability is essential for proactive healthcare management, especially in chronic disease monitoring and post-operative care.\n\nThe architecture of BANs typically involves a hierarchical structure, where individual sensors communicate with a central node, often a wearable device or a smartphone, which then transmits data to cloud-based platforms for analysis. This setup allows for efficient data aggregation and processing, enabling early detection of anomalies and timely interventions. Moreover, the integration of machine learning algorithms enhances the predictive capabilities of BANs, allowing for personalized health insights and adaptive monitoring strategies. The use of energy-efficient communication methods, such as Bluetooth Low Energy (BLE) or Zigbee, further extends the operational life of these networks, making them suitable for continuous, long-term use in diverse clinical and home environments.\n\nDespite their potential, BANs face several challenges, including signal interference, power constraints, and the need for robust security measures to protect sensitive health data. Ensuring reliable communication in dynamic environments, where the human body acts as a medium for signal propagation, remains a complex task. Additionally, the integration of multiple sensors into a cohesive network requires standardized protocols and interoperability frameworks. Addressing these challenges is essential for the widespread adoption of BANs in clinical practice, paving the way for more intelligent and responsive healthcare systems.",
+      "stats": {
+        "char_count": 2299,
+        "word_count": 303,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.1 Blockchain for Secure Health Data Exchange",
+      "level": 3,
+      "content": "Blockchain technology has emerged as a promising solution for securing health data exchange within Body Sensor Networks (BSNs). By leveraging its decentralized and immutable characteristics, blockchain ensures data integrity, transparency, and traceability, which are critical for maintaining the confidentiality and authenticity of health records. In the context of BSNs, where multiple devices and stakeholders interact, blockchain provides a framework for establishing trust without relying on a central authority. This is particularly important for managing electronic health records (EHRs), where secure and controlled access is essential to protect patient privacy while enabling efficient data sharing among authorized entities.\n\nThe integration of smart contracts further enhances the functionality of blockchain in health data exchange by automating processes such as access control, data sharing, and consent management [1]. These self-executing contracts can enforce predefined rules, ensuring that data is only accessed by authorized parties and that all transactions are logged and auditable. This not only reduces the risk of unauthorized access but also minimizes human intervention, thereby increasing operational efficiency. Additionally, the use of permissioned blockchains allows for controlled access, ensuring that only verified participants can interact with the network, which is crucial for maintaining compliance with data protection regulations [1].\n\nMoreover, blockchain can address the challenges of interoperability and data fragmentation in healthcare systems by providing a unified and standardized platform for data exchange. This is particularly beneficial in scenarios where multiple stakeholders, such as healthcare providers, researchers, and patients, need to access and share health data securely. By enabling secure and seamless data sharing, blockchain supports the development of more integrated and patient-centric healthcare systems [1]. As BSNs continue to evolve, the adoption of blockchain technology is expected to play a pivotal role in ensuring the security, reliability, and efficiency of health data exchange.",
+      "stats": {
+        "char_count": 2160,
+        "word_count": 293,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.2 Encryption and Access Control for Device Integrity",
+      "level": 3,
+      "content": "Encryption and access control play a critical role in ensuring the integrity of devices within a body area network (BSN). Given the sensitive nature of health data and the potential for malicious interference, robust encryption mechanisms are essential to protect data during transmission and storage. Advanced encryption standards such as AES-256 are commonly employed to secure communication between implanted devices and external systems, preventing unauthorized access and data tampering. These encryption protocols must be integrated with efficient key management strategies to ensure secure and scalable operations, particularly in environments where multiple devices interact dynamically.\n\nAccess control mechanisms further enhance device integrity by regulating who or what can interact with the BSN components. Role-based access control (RBAC) and attribute-based encryption (ABE) are two approaches that provide granular control over data access, ensuring that only authorized entities can perform specific actions. These methods are especially important in multi-agent BSN architectures, where different stakeholders such as healthcare providers, patients, and monitoring systems must have varying levels of access. By enforcing strict access policies, the risk of unauthorized modifications or data breaches is significantly reduced, thereby maintaining the reliability and trustworthiness of the system.\n\nIn addition to encryption and access control, secure communication protocols must be designed to withstand potential threats such as eavesdropping, replay attacks, and spoofing. Techniques like mutual authentication and secure channel establishment are vital to ensure that all interactions within the BSN are legitimate and protected. The integration of these security measures not only safeguards the integrity of individual devices but also contributes to the overall resilience of the BSN against evolving cyber threats. As BSNs become more pervasive, the development of standardized and interoperable security frameworks remains a key challenge for future research.",
+      "stats": {
+        "char_count": 2088,
+        "word_count": 284,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.1 6G Enabled Intelligent Healthcare Systems",
+      "level": 3,
+      "content": "The integration of 6G communication technology into healthcare systems is poised to revolutionize the delivery of medical services by enabling ultra-reliable, low-latency, and high-bandwidth connectivity [11]. This advancement facilitates the seamless operation of intelligent healthcare systems, where real-time monitoring, autonomous decision-making, and remote interventions become feasible. 6G networks support the deployment of advanced Body Sensor Networks (BSNs) that incorporate a vast array of wireless biosensors, capable of continuously collecting and analyzing physiological data [12]. These systems are designed to operate with minimal power consumption while ensuring high data integrity and security, addressing critical challenges such as interoperability and data privacy. The enhanced capabilities of 6G also allow for the integration of artificial intelligence and edge computing, enabling on-device processing and reducing reliance on centralized cloud infrastructure.\n\nThe deployment of 6G in healthcare extends beyond traditional monitoring to include complex applications such as telesurgery, remote diagnostics, and real-time patient management. These applications demand not only high-speed data transmission but also the ability to handle massive volumes of data with minimal delay. 6G networks support the use of holographic communication and augmented reality, which can significantly enhance the accuracy and effectiveness of remote medical procedures [11]. Furthermore, the integration of 6G with blockchain technology ensures secure and tamper-proof data management, reinforcing trust in the healthcare system. As a result, 6G-enabled intelligent healthcare systems are expected to reduce the burden on healthcare providers, improve patient outcomes, and enable more personalized and proactive care.\n\nDespite the promising potential, the implementation of 6G in healthcare faces several technical and operational challenges [11]. These include the need for standardized protocols to ensure interoperability among diverse medical devices, the development of robust security frameworks to protect sensitive patient data, and the optimization of energy-efficient communication protocols for implanted and wearable devices. Additionally, the design of in vivo wireless communication channels requires careful consideration to maintain reliable connectivity between implanted devices and external systems [10]. Addressing these challenges is essential to fully realize the transformative impact of 6G on intelligent healthcare, ensuring that the technology is both effective and sustainable in real-world medical environments.",
+      "stats": {
+        "char_count": 2652,
+        "word_count": 346,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.2 Quality of Service and User Experience in Telemedicine",
+      "level": 3,
+      "content": "Quality of Service (QoS) and User Experience (QoE) are critical components in the success of telemedicine systems, directly influencing the effectiveness and acceptance of remote healthcare services. QoS metrics such as latency, bandwidth, packet loss, and reliability determine the technical performance of telemedicine platforms, ensuring seamless communication between patients and healthcare providers. These metrics are particularly important in real-time applications like remote consultations, telesurgery, and continuous patient monitoring. Ensuring high QoS requires robust network infrastructure, efficient data transmission protocols, and adaptive resource allocation to accommodate varying user demands and network conditions. The integration of advanced communication technologies, such as 5G and edge computing, further enhances the ability to meet stringent QoS requirements in telemedicine environments.\n\nUser Experience (QoE) extends beyond technical performance to encompass the overall satisfaction and usability of telemedicine services from the patient's perspective. Factors such as ease of access, intuitive interfaces, response times, and the clarity of communication significantly impact QoE. A positive user experience encourages patient engagement, adherence to treatment plans, and long-term adoption of telemedicine solutions. Designing telemedicine systems with user-centered approaches, including accessibility for diverse populations and customization for individual needs, is essential. Moreover, the integration of artificial intelligence and machine learning can personalize interactions, improve diagnostic accuracy, and enhance the overall user experience. Balancing technical QoS with a seamless QoE is vital to ensuring that telemedicine not only functions effectively but also meets the expectations and needs of its users.\n\nThe interplay between QoS and QoE in telemedicine is further influenced by the evolving landscape of healthcare technology and patient expectations. As telemedicine expands to include more complex services such as remote diagnostics, virtual rehabilitation, and continuous health monitoring, the demands on both QoS and QoE will increase. Ensuring consistent and reliable service delivery while maintaining a user-friendly environment requires ongoing research and innovation. Additionally, addressing challenges such as data security, interoperability, and regulatory compliance is essential to building trust and ensuring the sustainability of telemedicine solutions. By focusing on both technical performance and user satisfaction, telemedicine can achieve its full potential in transforming healthcare delivery.",
+      "stats": {
+        "char_count": 2680,
+        "word_count": 343,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.1 Polymer Based Sensors for Flexible Health Monitoring",
+      "level": 3,
+      "content": "Polymer-based sensors have emerged as a pivotal technology in the development of flexible health monitoring systems, offering advantages such as mechanical compliance, biocompatibility, and ease of integration with wearable platforms. These sensors leverage the unique properties of conductive polymers, piezoelectric polymers, and responsive hydrogels to detect physiological signals such as heart rate, respiration, and body motion. Their flexibility allows for conformal contact with the skin, ensuring reliable and continuous data acquisition even during dynamic movements. Additionally, the tunable electrical and mechanical properties of polymers enable the design of sensors tailored for specific health monitoring applications, from cardiovascular to respiratory systems.\n\nThe integration of polymer-based sensors into wearable devices has been driven by advancements in material science and microfabrication techniques, enabling the creation of ultra-thin, lightweight, and stretchable sensor arrays. These arrays can be embedded within flexible substrates such as elastomers or textile fibers, allowing for seamless incorporation into clothing or adhesive patches. Recent developments in inkjet printing and screen printing have further facilitated the large-scale production of polymer sensors, reducing costs and improving scalability. Moreover, the compatibility of polymers with organic electronics has enabled the realization of self-powered sensors that can harvest energy from body movements or environmental sources, enhancing the autonomy of wearable health monitoring systems.\n\nDespite their promising potential, polymer-based sensors still face challenges related to long-term stability, signal drift, and environmental sensitivity. Research efforts are ongoing to improve the durability and reliability of these sensors through advanced material engineering and hybrid sensor configurations. The combination of polymer sensors with complementary technologies such as microelectromechanical systems (MEMS) and flexible electronics is also being explored to enhance overall system performance. As the demand for continuous and personalized health monitoring grows, polymer-based sensors are poised to play a central role in the next generation of wearable health technologies.",
+      "stats": {
+        "char_count": 2296,
+        "word_count": 298,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.2 3D Printing for Complex Sensor Structures",
+      "level": 3,
+      "content": "3D printing has emerged as a transformative technology in the fabrication of complex sensor structures, enabling the creation of intricate geometries that are difficult to achieve with conventional manufacturing methods. By leveraging computer-aided design (CAD) and layer-by-layer additive manufacturing, 3D printing allows for the integration of multiple materials and functional components within a single device [13]. This capability is particularly valuable in the development of compact, multifunctional sensors, where spatial constraints and material compatibility play critical roles. The ability to produce three-dimensional metal-plastic structures further enhances the potential for miniaturization, offering significant advantages over traditional planar electronics in terms of form factor and performance [13].\n\nThe application of 3D printing in sensor fabrication extends to a wide range of fields, including smart electronics, telecommunications, and micro/nano-sensors. The formation of precise metal patterns on three-dimensional plastic substrates has become a focal point of research, driven by the demand for advanced sensor systems with enhanced functionality. Traditional microfabrication techniques, such as lithography and etching, face limitations when applied to complex 3D geometries, making 3D printing an attractive alternative [13]. This technology facilitates the production of interconnected sensor networks, enabling the development of more sophisticated and integrated sensing solutions that can operate in challenging environments.\n\nDespite its advantages, 3D printing for complex sensor structures still faces challenges related to material limitations, resolution, and process control. The development of novel inks and printing techniques is essential to expand the range of applications and improve the reliability of printed sensors. As the technology continues to evolve, it holds great promise for advancing the design and performance of wearable and implantable sensor systems, paving the way for next-generation health monitoring and diagnostic devices.",
+      "stats": {
+        "char_count": 2098,
+        "word_count": 277,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.1 Multi Sensor Fusion for Enhanced Diagnostic Capabilities",
+      "level": 3,
+      "content": "Multi-sensor fusion plays a critical role in enhancing the diagnostic capabilities of wearable health monitoring systems by integrating data from multiple sensor modalities. This approach leverages the strengths of different sensor types, such as acoustic, optical, and electrical sensors, to provide a more comprehensive and accurate assessment of physiological conditions. By combining signals from internal body sounds, opto-electric measurements, and other biometric data, the system can detect subtle changes in cardiovascular, respiratory, and digestive functions that may not be identifiable through single-sensor analysis [14]. This integration not only improves the reliability of diagnostic outputs but also enables the identification of complex health patterns that are indicative of various medical conditions.\n\nThe implementation of multi-sensor fusion requires advanced signal processing algorithms capable of handling heterogeneous data streams. These algorithms must account for variations in sensor characteristics, noise levels, and temporal synchronization to ensure coherent and meaningful data interpretation. Techniques such as Kalman filtering, Bayesian inference, and machine learning are commonly employed to fuse sensor data and extract relevant diagnostic features. Furthermore, the fusion process must be optimized for real-time operation to support continuous health monitoring, especially in devices designed for long-term autonomous use. This necessitates efficient computational architectures that balance accuracy with power consumption and processing speed.\n\nThe benefits of multi-sensor fusion extend beyond improved diagnostic accuracy to include enhanced user experience and broader applicability in home healthcare settings. By incorporating multiple sensor inputs, wearable devices can provide more context-aware feedback, reducing false positives and improving the overall reliability of health monitoring. This capability is particularly valuable in detecting transient or episodic health events that require timely intervention. As wearable technologies continue to evolve, the integration of multi-sensor fusion will remain a key enabler for developing more intelligent, responsive, and effective health monitoring systems.",
+      "stats": {
+        "char_count": 2266,
+        "word_count": 293,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.2 Wearable and Implantable Devices for Long Term Use",
+      "level": 3,
+      "content": "Wearable and implantable devices for long-term use represent a critical advancement in the field of health monitoring, enabling continuous and real-time data acquisition over extended periods [1]. These devices are designed to operate reliably under varying physiological and environmental conditions, necessitating robust power management, biocompatibility, and minimal user intervention. The integration of multiple sensing modalities, such as electrocardiography (ECG), photoplethysmography (PPG), and inertial measurement units (IMU), allows for comprehensive health assessments, while advancements in flexible electronics and miniaturization support seamless integration with the human body. The challenge lies in ensuring consistent performance over months or years, which requires careful material selection, energy-efficient circuit design, and reliable data transmission mechanisms.\n\nRecent developments in wearable technology have focused on improving user comfort and device longevity, particularly for applications involving chronic disease management [2]. For instance, the Patchkeeper wearable electronic stethoscope exemplifies the potential of such devices, combining ECG, PPG, and IMU sensors in a compact form factor that can be adhered to various body parts [14]. This design enables continuous monitoring of cardiac and respiratory functions, offering a non-invasive alternative to traditional diagnostic tools. Similarly, ingestible and implantable devices are being explored for internal health monitoring, with technologies like capsule endoscopy providing insights into gastrointestinal health [15]. These innovations highlight the growing trend toward personalized, continuous health monitoring solutions that can significantly improve patient outcomes [3].\n\nDespite these advancements, challenges remain in achieving long-term reliability, especially in terms of power supply, data accuracy, and biocompatibility. Energy harvesting techniques, such as thermoelectric or piezoelectric systems, are being investigated to extend device operational life without frequent recharging. Additionally, the development of biodegradable and biocompatible materials is essential for implantable devices to minimize long-term health risks. As the field progresses, the convergence of advanced materials, miniaturized sensors, and intelligent data processing will be key to realizing the full potential of wearable and implantable devices for long-term health monitoring and therapeutic applications.",
+      "stats": {
+        "char_count": 2512,
+        "word_count": 316,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.1 Video Capsule Endoscopy and Ingestible Sensors",
+      "level": 3,
+      "content": "Video capsule endoscopy and ingestible sensors represent a transformative approach in gastrointestinal diagnostics, enabling non-invasive, real-time monitoring of the digestive tract [15]. These devices, typically encapsulated in a pill-sized format, integrate advanced imaging systems, wireless communication, and sensor arrays to capture high-resolution video and physiological data. Recent advancements in miniaturization and power management have significantly extended the operational duration of these systems, allowing for comprehensive examination of the entire gastrointestinal tract. The integration of complementary opto-electric sensors further enhances diagnostic capabilities, enabling the detection of subtle pathological changes that may be missed by conventional imaging techniques.\n\nIn parallel, ingestible sensors have evolved to include a wide range of functionalities, from pH and temperature monitoring to the detection of biomarkers and drug release mechanisms. These sensors are often designed to operate autonomously for extended periods, leveraging energy-efficient microelectronics and wireless data transmission protocols. The development of biocompatible materials and flexible electronics has also improved the safety and comfort of these devices, making them suitable for long-term use. Additionally, the incorporation of machine learning algorithms allows for real-time data analysis, facilitating early detection of abnormalities and improving diagnostic accuracy.\n\nThe convergence of video capsule endoscopy with ingestible sensor technology has opened new frontiers in personalized and continuous health monitoring [15]. By combining visual and physiological data, these systems offer a holistic view of gastrointestinal health, supporting both diagnostic and therapeutic applications. The ongoing refinement of hardware components, such as image sensors and power sources, alongside the development of robust software frameworks, continues to drive the field forward. As these technologies mature, they are poised to play a pivotal role in the future of remote patient monitoring and precision medicine.",
+      "stats": {
+        "char_count": 2139,
+        "word_count": 277,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.2 Clinical Validation of Wearable Diagnostic Tools",
+      "level": 3,
+      "content": "Clinical validation of wearable diagnostic tools is a critical phase in ensuring their reliability, accuracy, and effectiveness in real-world healthcare settings. This process involves rigorous testing under controlled and clinical environments to evaluate the performance of devices against established medical standards. Wearable systems, particularly those integrating multiple sensor modalities such as opto-electric and internal body sound sensors, must demonstrate consistent data acquisition and interpretation over extended periods [14]. The challenge lies in maintaining high data fidelity while ensuring long operational times, which is essential for capturing episodic health events related to cardiovascular, respiratory, and digestive functions. Successful validation requires alignment with clinical workflows and regulatory frameworks to support adoption in both home and clinical monitoring scenarios.\n\nThe validation process also encompasses the evaluation of diagnostic algorithms that process the data collected by wearable devices. These algorithms must be robust enough to handle the variability in physiological signals and provide actionable insights. For instance, devices capable of detecting abnormal heart rhythms or respiratory patterns require extensive testing to minimize false positives and negatives. Additionally, the integration of machine learning techniques enhances the ability of wearables to adapt to individual user profiles, improving diagnostic accuracy over time. However, the complexity of these systems necessitates thorough validation through multi-center trials and longitudinal studies to ensure generalizability across diverse populations and clinical conditions.\n\nDespite advancements, challenges remain in achieving widespread clinical acceptance of wearable diagnostic tools. Factors such as data privacy, interoperability with existing healthcare systems, and user compliance significantly influence the validation outcomes. Moreover, the transition from prototype to commercial product involves navigating regulatory approvals and ensuring business sustainability. Addressing these challenges requires collaboration between engineers, clinicians, and regulatory bodies to establish standardized validation protocols. As the field progresses, the development of more sophisticated and user-friendly devices will further enhance the clinical relevance and impact of wearable diagnostics in healthcare.",
+      "stats": {
+        "char_count": 2454,
+        "word_count": 307,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6 Future Directions",
+      "level": 1,
+      "content": "Current research on wearable health devices has made significant strides in improving the accuracy, efficiency, and usability of these systems. However, several limitations remain that hinder their broader adoption and effectiveness in real-world healthcare settings. One major limitation is the inconsistency in data accuracy across different devices and environments, which can lead to unreliable health assessments and misdiagnoses. Additionally, the power consumption of wearable systems, particularly those with continuous monitoring capabilities, remains a challenge, limiting their long-term usability. Furthermore, the integration of multiple sensors and the processing of heterogeneous data streams require advanced algorithms that are not yet fully optimized for real-time applications. These limitations highlight the need for further research to address the technical and practical barriers that impede the seamless integration of wearable health devices into clinical and everyday use.\n\nFuture research should focus on developing more accurate and reliable sensor technologies that can adapt to varying physiological and environmental conditions. This includes exploring novel materials and fabrication techniques that enhance sensor durability, sensitivity, and biocompatibility. Additionally, research into energy-efficient computing and power management strategies, such as advanced energy harvesting methods and low-power microcontrollers, will be crucial for extending the operational life of wearable devices. Another key area for future work is the development of more sophisticated data fusion and machine learning algorithms that can effectively integrate and interpret multi-modal sensor data in real-time. These algorithms must be optimized for edge computing environments to reduce latency and improve responsiveness. Furthermore, the integration of secure and scalable communication protocols, such as blockchain and 6G-enabled networks, will be essential for ensuring data integrity and interoperability across diverse healthcare ecosystems. By addressing these challenges, future work can significantly enhance the performance, reliability, and usability of wearable health devices, paving the way for more effective and accessible healthcare solutions.\n\nThe proposed future work has the potential to significantly impact the field of wearable health technology and, by extension, the broader healthcare industry. Improved sensor accuracy and reliability will lead to more trustworthy health monitoring systems, enabling early detection of medical conditions and more personalized treatment strategies. Enhanced power efficiency and long-term usability will make wearable devices more practical for continuous use, particularly in chronic disease management and remote patient monitoring. The development of advanced data processing algorithms and secure communication frameworks will also support the integration of wearable systems into larger healthcare infrastructures, facilitating seamless data exchange and interoperability. These advancements will not only improve patient outcomes but also reduce healthcare costs by enabling proactive and preventive care. Ultimately, the successful implementation of these future research directions will contribute to the evolution of wearable health devices into essential tools for modern, data-driven healthcare.",
+      "stats": {
+        "char_count": 3388,
+        "word_count": 441,
+        "sentence_count": 19,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "7 Conclusion",
+      "level": 1,
+      "content": "The survey paper has provided a comprehensive overview of the current state and future directions of wearable health devices, highlighting their critical role in transforming modern healthcare. The integration of advanced sensor technologies, machine learning algorithms, and secure communication protocols has enabled the development of highly accurate, efficient, and user-friendly wearable systems. These devices have demonstrated significant potential in real-time health monitoring, diagnostics, and therapeutic applications, particularly in managing chronic diseases and enabling early intervention. The discussion also emphasized the importance of addressing key challenges such as data accuracy, power consumption, and user compliance, while exploring the convergence of wearable systems with emerging technologies like 6G, edge computing, and blockchain. The analysis of multimodal data fusion, anomaly detection, and lightweight model architectures further underscored the need for adaptive and scalable solutions to support real-time processing in dynamic environments.\n\nThe significance of this survey lies in its ability to synthesize the latest advancements and challenges in the field, offering a structured framework for understanding the technological, clinical, and operational aspects of wearable health devices. By identifying key research gaps and opportunities, the paper serves as a valuable reference for researchers, clinicians, and policymakers aiming to advance the integration of wearable technologies into mainstream healthcare. The insights presented here highlight the transformative potential of these devices in enabling personalized, preventive, and continuous care, while also emphasizing the need for robust security, interoperability, and ethical considerations in their deployment.\n\nLooking ahead, the continued development of wearable health devices requires a multidisciplinary approach that bridges engineering, clinical medicine, and data science. Future research should focus on improving the accuracy and reliability of sensor systems, enhancing the efficiency of machine learning models, and ensuring seamless integration with existing healthcare infrastructures. Moreover, the promotion of open standards and collaborative frameworks will be essential in accelerating the adoption of wearable technologies and ensuring their long-term impact on public health. As the field progresses, it is imperative to prioritize user-centered design, data privacy, and regulatory compliance to build trust and ensure the sustainable growth of wearable health solutions.",
+      "stats": {
+        "char_count": 2602,
+        "word_count": 340,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "[1] hChain 4.0  A Secure and Scalable Permissioned Blockchain for EHR Management in Smart Healthcare",
+      "number": null,
+      "title": "0 a secure and scalable permissioned blockchain for ehr management in smart healthcare"
+    },
+    {
+      "text": "[2] Latest Progresses in Developing Wearable Monitoring and Therapy Systems for Managing Chronic Disease",
+      "number": null,
+      "title": "latest progresses in developing wearable monitoring and therapy systems for managing chronic disease"
+    },
+    {
+      "text": "[3] Deep Reinforcement Learning Empowered Activity-Aware Dynamic Health Monitoring Systems",
+      "number": null,
+      "title": "deep reinforcement learning empowered activity-aware dynamic health monitoring systems"
+    },
+    {
+      "text": "[4] Safeguarding Smart Inhaler Devices and Patient Privacy in Respiratory Health Monitoring",
+      "number": null,
+      "title": "safeguarding smart inhaler devices and patient privacy in respiratory health monitoring"
+    },
+    {
+      "text": "[5] System Design for a Data-driven and Explainable Customer Sentiment Monitor",
+      "number": null,
+      "title": "system design for a data-driven and explainable customer sentiment monitor"
+    },
+    {
+      "text": "[6] AI-enabled Sound Pattern Recognition on Asthma Medication Adherence  Evaluation with the RDA Benchma",
+      "number": null,
+      "title": "ai-enabled sound pattern recognition on asthma medication adherence evaluation with the rda benchma"
+    },
+    {
+      "text": "[7] Automated Medical Device Display Reading Using Deep Learning Object Detection",
+      "number": null,
+      "title": "automated medical device display reading using deep learning object detection"
+    },
+    {
+      "text": "[8] AI on the Pulse  Real-Time Health Anomaly Detection with Wearable and Ambient Intelligence",
+      "number": null,
+      "title": "ai on the pulse real-time health anomaly detection with wearable and ambient intelligence"
+    },
+    {
+      "text": "[9] Ajalon  Simplifying the Authoring of Wearable Cognitive Assistants",
+      "number": null,
+      "title": "ajalon simplifying the authoring of wearable cognitive assistants"
+    },
+    {
+      "text": "[10] Experimental Characterization of In Vivo Wireless Communication Channels",
+      "number": null,
+      "title": "experimental characterization of in vivo wireless communication channels"
+    },
+    {
+      "text": "[11] 6G Communication Technology  A Vision on Intelligent Healthcare",
+      "number": null,
+      "title": "6g communication technology a vision on intelligent healthcare"
+    },
+    {
+      "text": "[12] A Study of Implanted and Wearable Body Sensor Networks",
+      "number": null,
+      "title": "a study of implanted and wearable body sensor networks"
+    },
+    {
+      "text": "[13] New metal-plastic hybrid additive manufacturing strategy  Fabrication of arbitrary metal-patterns on",
+      "number": null,
+      "title": "new metal-plastic hybrid additive manufacturing strategy fabrication of arbitrary metal-patterns on"
+    },
+    {
+      "text": "[14] The Patchkeeper  An Integrated Wearable Electronic Stethoscope with Multiple Sensors",
+      "number": null,
+      "title": "the patchkeeper an integrated wearable electronic stethoscope with multiple sensors"
+    },
+    {
+      "text": "[15] Video Capsule Endoscopy and Ingestible Electronics  Emerging Trends in Sensors, Circuits, Materials,",
+      "number": null,
+      "title": "video capsule endoscopy and ingestible electronics emerging trends in sensors, circuits, materials"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\InteractiveSurvey\\Medicine\\survey_Wearable Health Devices in Health Care_split.json",
+    "processed_date": "2025-12-30T20:33:40.579745",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

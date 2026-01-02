@@ -1,0 +1,606 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: A review on non-Hermitian skin effect."
+    ],
+    [
+      1,
+      "The Non-Hermitian Skin Effect: A Review of Mechanisms, Topology, and Applications"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1. Breakdown of Conventional Bulk-Boundary Correspondence"
+    ],
+    [
+      3,
+      "2.2. The Hatano-Nelson Model"
+    ],
+    [
+      3,
+      "2.3. Point-Gap Topology"
+    ],
+    [
+      3,
+      "2.4. Non-Bloch Band Theory and the Generalized Brillouin Zone (GBZ)"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1. Early Foundations (1996–2018)"
+    ],
+    [
+      3,
+      "3.2. The Topological Turn and Formalization (2018–2019)"
+    ],
+    [
+      3,
+      "3.3. Experimental Realizations (2020–Present)"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1. Higher-Dimensional NHSE and Geometry Dependence"
+    ],
+    [
+      3,
+      "4.2. Algebraic Non-Hermitian Skin Effect"
+    ],
+    [
+      3,
+      "4.3. Relative and Global Skin Effects"
+    ],
+    [
+      3,
+      "4.4. Hybrid Skin-Topological Effects"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1. Ultrasensitive Sensors"
+    ],
+    [
+      3,
+      "5.2. Topological Lasers and Light Funneling"
+    ],
+    [
+      3,
+      "5.3. Topoelectric Circuits"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1. Theoretical Completeness in Higher Dimensions"
+    ],
+    [
+      3,
+      "6.2. Numerical Instabilities"
+    ],
+    [
+      3,
+      "6.3. Many-Body and Interacting Systems"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1. Non-Hermitian Quantum Metrology"
+    ],
+    [
+      3,
+      "7.2. Nonlinear Non-Hermitian Skin Effect"
+    ],
+    [
+      3,
+      "7.3. Dynamic and Time-Domain Skin Effects"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: A review on non-Hermitian skin effect.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 15:32:31*\n*Progress: [14/21]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/A_review_on_non-Hermitian_skin_effect_20251226_153231.md*\n---",
+      "stats": {
+        "char_count": 169,
+        "word_count": 10,
+        "sentence_count": 2,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "The Non-Hermitian Skin Effect: A Review of Mechanisms, Topology, and Applications",
+      "level": 1,
+      "content": "**Key Points**\n*   **Definition:** The Non-Hermitian Skin Effect (NHSE) is a phenomenon in open quantum and classical wave systems where an extensive number of bulk eigenstates accumulate at the system boundaries, defying the conventional Bloch band theory.\n*   **Origin:** It arises from the non-trivial topology of the energy spectrum in the complex plane (point-gap topology) and the breakdown of the conventional bulk-boundary correspondence.\n*   **Theory:** The effect is mathematically described by the Non-Bloch Band Theory and the Generalized Brillouin Zone (GBZ), which extend wavevectors into the complex plane to account for spatial localization.\n*   **Applications:** NHSE enables novel technologies including ultra-sensitive topological sensors, single-mode high-power lasers, and unidirectional light funnels.\n*   **Frontiers:** Current research is expanding into higher dimensions (geometry-dependent and algebraic skin effects), many-body interactions, and nonlinear regimes.\n\n---",
+      "stats": {
+        "char_count": 996,
+        "word_count": 130,
+        "sentence_count": 6,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "The Non-Hermitian Skin Effect (NHSE) represents a paradigm shift in the understanding of topological phases in open, non-conservative systems. Unlike Hermitian systems, where bulk states are extended and boundary states are sparse, the NHSE is characterized by the macroscopic accumulation of bulk eigenstates at the boundaries of a lattice under open boundary conditions. This review provides a comprehensive systematic analysis of the NHSE, tracing its historical emergence from the Hatano-Nelson model to contemporary developments in higher-dimensional spectral theory. We elucidate the fundamental theoretical frameworks, specifically the non-Bloch band theory and the concept of the Generalized Brillouin Zone (GBZ), which resolve the breakdown of the conventional bulk-boundary correspondence. Furthermore, we critically examine state-of-the-art advancements, including the algebraic skin effect, geometry-dependent localization, and hybrid skin-topological phases. The review surveys transformative applications in photonics, acoustics, and electric circuits, highlighting the use of NHSE for enhanced sensing and lasing. Finally, we identify persistent challenges in higher-dimensional classifications and many-body interactions, outlining a roadmap for future research in non-Hermitian physics.\n\n---",
+      "stats": {
+        "char_count": 1308,
+        "word_count": 166,
+        "sentence_count": 8,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The study of topological phases of matter has traditionally relied on the assumption of Hermiticity, which guarantees real energy spectra and orthogonal eigenstates, reflecting the conservation of probability in isolated quantum systems. However, physical systems are rarely truly isolated; they exchange energy and particles with their environment. In recent years, the focus of condensed matter physics and photonics has expanded to include non-Hermitian Hamiltonians, which effectively describe open systems featuring gain, loss, and non-reciprocal couplings [cite: 1, 2].\n\nWithin this non-Hermitian framework, a striking phenomenon has emerged that has no counterpart in Hermitian physics: the Non-Hermitian Skin Effect (NHSE). In systems exhibiting NHSE, the bulk eigenstates—which would be extended Bloch waves under periodic boundary conditions (PBC)—undergo a drastic restructuring under open boundary conditions (OBC), becoming exponentially localized at the system's edges [cite: 3, 4]. This localization is not a trivial edge effect but a macroscopic accumulation of the bulk modes themselves, scaling with the system size.\n\nThe discovery of the NHSE has necessitated a fundamental re-evaluation of band theory. It demonstrates that the energy spectrum of a non-Hermitian system is hypersensitive to boundary conditions, leading to the breakdown of the conventional bulk-boundary correspondence (BBC) that underpins topological insulators [cite: 3, 5]. The motivation for studying NHSE extends beyond theoretical curiosity; it promises a new generation of devices capable of unidirectional transport, light funneling, and sensing sensitivities that scale exponentially with system size [cite: 6, 7].\n\nThis review aims to provide a rigorous and comprehensive synthesis of the NHSE literature. We will explore the theoretical underpinnings that replaced the standard Brillouin zone with the Generalized Brillouin Zone (GBZ), examine the rich phenomenology in higher dimensions, and evaluate the practical applications that have been realized in experimental platforms ranging from topoelectric circuits to photonic crystals.\n\n---",
+      "stats": {
+        "char_count": 2138,
+        "word_count": 294,
+        "sentence_count": 12,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2.1. Breakdown of Conventional Bulk-Boundary Correspondence",
+      "level": 3,
+      "content": "In Hermitian topological insulators, the bulk-boundary correspondence dictates that the topological invariants calculated from the bulk Hamiltonian (under PBC) predict the existence of robust boundary states under OBC. In non-Hermitian systems, this principle often fails. The spectrum under PBC can differ drastically from the spectrum under OBC. For instance, the PBC spectrum may form loops in the complex energy plane, while the OBC spectrum collapses into lines or arcs within the interior of those loops [cite: 2, 8]. This spectral collapse is the spectral signature of the NHSE.",
+      "stats": {
+        "char_count": 585,
+        "word_count": 88,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2.2. The Hatano-Nelson Model",
+      "level": 3,
+      "content": "The prototypical model for understanding the NHSE is the Hatano-Nelson (HN) model, originally proposed to describe flux lines in superconductors. It consists of a one-dimensional tight-binding chain with asymmetric hopping amplitudes ($t_L \\neq t_R$) between nearest neighbors [cite: 1, 4].\n$$ H = \\sum_n (t_L c^\\dagger_{n-1} c_n + t_R c^\\dagger_{n+1} c_n) $$\nUnder PBC, the eigenstates are delocalized Bloch waves. Under OBC, however, the asymmetry acts as an imaginary gauge field, driving all eigenstates to pile up at one boundary. This exponential localization is the hallmark of the skin effect.",
+      "stats": {
+        "char_count": 601,
+        "word_count": 90,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "2.3. Point-Gap Topology",
+      "level": 3,
+      "content": "Non-Hermitian systems exhibit two distinct types of energy gaps: line gaps and point gaps. A line gap separates bands in the complex plane, similar to Hermitian gaps. A point gap occurs when the complex energy bands form a loop that encircles a specific point (often the origin) in the complex plane without crossing it [cite: 8, 9]. The NHSE is intrinsically linked to non-trivial point-gap topology. A non-zero spectral winding number under PBC indicates that the system will exhibit the skin effect under OBC, topologically necessitating the accumulation of states [cite: 4, 10].",
+      "stats": {
+        "char_count": 582,
+        "word_count": 93,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2.4. Non-Bloch Band Theory and the Generalized Brillouin Zone (GBZ)",
+      "level": 3,
+      "content": "To restore the bulk-boundary correspondence, the conventional Bloch wavevector $k$ must be generalized to a complex value $k \\to k + i\\kappa$, where $\\kappa$ represents the inverse localization length of the skin modes. The set of complex wavevectors that form the continuum of bulk bands under OBC constitutes the Generalized Brillouin Zone (GBZ) [cite: 3, 11].\nUnlike the standard Brillouin zone, which is always a unit circle in the complex deformation factor $\\beta = e^{ik}$ plane ($|\\beta|=1$), the GBZ is a generic closed loop that may deviate significantly from the unit circle. The \"Non-Bloch Band Theory\" utilizes the GBZ to accurately calculate energy spectra and topological invariants that remain valid for open systems [cite: 3, 11].\n\n---",
+      "stats": {
+        "char_count": 752,
+        "word_count": 117,
+        "sentence_count": 5,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "3.1. Early Foundations (1996–2018)",
+      "level": 3,
+      "content": "The roots of the field lie in the work of Hatano and Nelson (1996), who studied localization transitions in superconductors with columnar defects. They identified that non-reciprocity could lead to delocalization-localization transitions, though the topological implications were not fully formalized at the time [cite: 4]. For two decades, non-Hermitian physics focused largely on Parity-Time ($\\mathcal{PT}$) symmetry and Exceptional Points (EPs).",
+      "stats": {
+        "char_count": 449,
+        "word_count": 60,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.2. The Topological Turn and Formalization (2018–2019)",
+      "level": 3,
+      "content": "The modern era of NHSE began around 2018 with seminal papers by Yao and Wang, and independently by other groups, who identified that the breakdown of the bulk-boundary correspondence in non-Hermitian systems was due to the skin effect [cite: 3]. They introduced the non-Bloch band theory and the concept of the GBZ, providing the mathematical rigor needed to predict skin modes. This period established that the skin effect is not merely an artifact but a fundamental topological phase of matter [cite: 12].",
+      "stats": {
+        "char_count": 507,
+        "word_count": 82,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.3. Experimental Realizations (2020–Present)",
+      "level": 3,
+      "content": "Theoretical predictions were rapidly followed by experimental verifications in 2020. Three landmark studies published nearly simultaneously demonstrated the NHSE in different platforms:\n*   **Quantum Walks:** Xiao et al. observed the skin effect in the dynamics of single photons [cite: 13].\n*   **Topoelectric Circuits:** Helbig et al. utilized electric circuits with operational amplifiers to create non-reciprocal couplings, mapping the admittance response to the NHSE [cite: 13].\n*   **Photonic Lattices:** Weidemann et al. demonstrated the \"funneling\" of light in robotic-controlled optical fiber loops, confirming the macroscopic accumulation of energy [cite: 13, 14].\n\nThese experiments confirmed that the NHSE is a universal wave phenomenon, realizable in quantum, electromagnetic, and acoustic systems.\n\n---",
+      "stats": {
+        "char_count": 816,
+        "word_count": 109,
+        "sentence_count": 9,
+        "line_count": 8
+      }
+    },
+    {
+      "heading": "4.1. Higher-Dimensional NHSE and Geometry Dependence",
+      "level": 3,
+      "content": "While 1D NHSE is well-understood, extending the theory to two or more dimensions (2D+) has proven challenging due to the complexity of boundary conditions. Recent work has revealed the **Geometry-Dependent Skin Effect (GDSE)**, where the presence and localization of skin modes depend on the specific shape of the lattice boundary (e.g., square vs. triangle) [cite: 10, 15]. In 2D, skin modes can localize at corners, edges, or both, leading to a hierarchy of \"Higher-Order Non-Hermitian Skin Effects\" [cite: 1, 16, 17].",
+      "stats": {
+        "char_count": 520,
+        "word_count": 81,
+        "sentence_count": 6,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.2. Algebraic Non-Hermitian Skin Effect",
+      "level": 3,
+      "content": "A significant recent development (2024-2025) is the discovery of the **Algebraic Non-Hermitian Skin Effect**. In certain higher-dimensional systems, or systems with specific symmetries, the skin modes do not decay exponentially (as $e^{-\\kappa x}$) but rather follow a power-law decay (algebraic localization) [cite: 18, 19]. This phenomenon challenges the standard GBZ framework, which assumes exponential behavior. New theoretical tools, such as generalized Fermi surface formulas, have been developed to characterize these algebraic modes, which are robust in 2D and 3D systems [cite: 20, 21].",
+      "stats": {
+        "char_count": 596,
+        "word_count": 83,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.3. Relative and Global Skin Effects",
+      "level": 3,
+      "content": "Recent theoretical refinements have distinguished between **Global Skin Effects**, where all bulk states localize, and **Relative Skin Effects**, a newly identified type where localization occurs relative to specific reference frames or within perturbative regimes beyond standard GBZ predictions [cite: 22]. This nuance is critical for understanding systems where competing non-Hermitian terms (e.g., real-space vs. momentum-space non-reciprocity) interact.",
+      "stats": {
+        "char_count": 458,
+        "word_count": 57,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.4. Hybrid Skin-Topological Effects",
+      "level": 3,
+      "content": "Researchers have successfully engineered systems that combine the NHSE with conventional topological protection. In **Hybrid Skin-Topological Effects**, the skin effect selectively acts on topological boundary modes while leaving bulk modes extended, or vice versa. This leads to exotic states like \"skin-topological\" modes that are both topologically protected and macroscopically localized, offering dual robustness [cite: 2, 23, 24].\n\n---",
+      "stats": {
+        "char_count": 441,
+        "word_count": 58,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5. Applications and Case Studies",
+      "level": 2,
+      "content": "The extreme sensitivity of the NHSE to boundary conditions and the massive accumulation of energy have led to several transformative application concepts.",
+      "stats": {
+        "char_count": 154,
+        "word_count": 22,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.1. Ultrasensitive Sensors",
+      "level": 3,
+      "content": "One of the most promising applications is in sensing. In Hermitian sensors, sensitivity typically scales linearly with system size. However, in systems exhibiting NHSE, the energy splitting or spectral shift due to a perturbation at the boundary can scale exponentially with the system size ($e^{\\alpha N}$) [cite: 6, 7]. This has led to the proposal of **Non-Hermitian Topological Sensors (NTOS)**. Recent work has distinguished this sensitivity from that of Exceptional Points (EPs), showing that while EPs offer root-scaling sensitivity ($N^{1/k}$), the skin effect offers exponential enhancement, particularly for detecting boundary defects [cite: 25, 26].",
+      "stats": {
+        "char_count": 660,
+        "word_count": 94,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.2. Topological Lasers and Light Funneling",
+      "level": 3,
+      "content": "The NHSE allows for the control of optical gain and loss to an unprecedented degree.\n*   **Lasing:** By utilizing the \"selective\" skin effect, researchers can design lasers where only the fundamental mode is localized at the gain medium (skin mode) while higher-order modes remain extended and lossy. This mechanism enables single-mode lasing with significantly lower thresholds and high power output [cite: 27, 28, 29].\n*   **Light Funneling:** The unidirectional nature of the skin effect creates a \"light funnel\" where all excitations, regardless of their initial position, are transported to and trapped at a specific interface. This has been experimentally demonstrated in photonic mesh lattices [cite: 14, 30].",
+      "stats": {
+        "char_count": 716,
+        "word_count": 107,
+        "sentence_count": 5,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "5.3. Topoelectric Circuits",
+      "level": 3,
+      "content": "Electric circuits have become a primary testbed for NHSE applications due to their tunability. They have been used to realize \"Topological Ohmmeters\" and to simulate higher-order skin interfaces. These circuits allow for the precise manipulation of non-reciprocity via active components, enabling the study of complex phases like the $Z_2$ skin effect and hybrid skin-topological states in a controlled environment [cite: 31, 32].\n\n---",
+      "stats": {
+        "char_count": 435,
+        "word_count": 63,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "6.1. Theoretical Completeness in Higher Dimensions",
+      "level": 3,
+      "content": "Despite progress with GDSE and algebraic skin effects, a unified theory for NHSE in arbitrary dimensions and geometries remains elusive. The \"Amoeba theory\" and other mathematical frameworks attempt to generalize the GBZ, but calculating the spectrum for arbitrary shapes (e.g., a fractal boundary) is computationally and theoretically demanding [cite: 13, 33]. The interplay between lattice geometry and spectral topology is not fully classified.",
+      "stats": {
+        "char_count": 447,
+        "word_count": 63,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.2. Numerical Instabilities",
+      "level": 3,
+      "content": "The NHSE is inherently related to the extreme non-normality of the Hamiltonian matrix. This leads to severe numerical instabilities; the spectrum of a large finite matrix ($N=1000$) can look vastly different from the infinite limit, and standard diagonalization algorithms may fail or produce significant errors due to floating-point precision limits when handling exponentially large/small numbers [cite: 33].",
+      "stats": {
+        "char_count": 410,
+        "word_count": 57,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.3. Many-Body and Interacting Systems",
+      "level": 3,
+      "content": "Most current understanding is based on single-particle or mean-field descriptions. The interplay between NHSE and quantum many-body interactions (e.g., Hubbard interaction) is a major open problem. It is unclear how the skin effect survives or transforms in the presence of strong correlations, entanglement, and the \"Many-Body Skin Effect\" [cite: 2, 13, 34].\n\n---",
+      "stats": {
+        "char_count": 364,
+        "word_count": 53,
+        "sentence_count": 6,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "7.1. Non-Hermitian Quantum Metrology",
+      "level": 3,
+      "content": "While classical sensing benefits from NHSE, the quantum regime is more complex. Recent studies suggest a dichotomy: while NHSE can suppress the Quantum Fisher Information (sensitivity) in some regimes due to state non-orthogonality, it can enhance it in others. Establishing the fundamental quantum limits (Heisenberg limit vs. super-Heisenberg scaling) in non-Hermitian skin systems is a critical future direction [cite: 26].",
+      "stats": {
+        "char_count": 426,
+        "word_count": 60,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.2. Nonlinear Non-Hermitian Skin Effect",
+      "level": 3,
+      "content": "Real physical systems, especially lasers and biological media, are nonlinear. The extension of NHSE to nonlinear regimes is just beginning. Nonlinearities can induce \"trap-skin states\" or modify the localization length dynamically. Understanding the stability and dynamics of skin modes in nonlinear equations (e.g., nonlinear Schrödinger) will be vital for practical optical devices [cite: 35, 36].",
+      "stats": {
+        "char_count": 399,
+        "word_count": 55,
+        "sentence_count": 6,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.3. Dynamic and Time-Domain Skin Effects",
+      "level": 3,
+      "content": "Moving beyond static spectral properties, future research will focus on the time dynamics of the skin effect. This includes \"dynamical skin effects\" where the localization emerges or oscillates in time, and the study of relaxation times in open quantum systems. Phenomena like the \"non-Hermitian edge burst\" and \"dynamic sticky effect\" are recent discoveries that require further exploration [cite: 37].\n\n---",
+      "stats": {
+        "char_count": 408,
+        "word_count": 60,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "The Non-Hermitian Skin Effect has rapidly evolved from a theoretical curiosity to a cornerstone of modern non-Hermitian physics. By invalidating the traditional Bloch band theory, it has forced the development of the Generalized Brillouin Zone and non-Bloch band theory, enriching our understanding of spectral topology. The field has matured to include higher-dimensional phenomena, such as the geometry-dependent and algebraic skin effects, and has found robust experimental validation across diverse platforms.\n\nThe implications of the NHSE are profound. It provides a mechanism for macroscopic energy concentration, enabling exponentially sensitive sensors and highly efficient lasers. However, significant challenges remain in unifying the theory across dimensions and incorporating many-body interactions. As research moves toward quantum metrology and nonlinear regimes, the NHSE promises to remain a fertile ground for discovering novel phases of matter and engineering next-generation wave-based technologies.\n\n---",
+      "stats": {
+        "char_count": 1023,
+        "word_count": 136,
+        "sentence_count": 8,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Generalized Non-Hermitian Skin Effect",
+      "number": null,
+      "title": "Generalized Non-Hermitian Skin Effect"
+    },
+    {
+      "text": "Edge states and topological invariants of non-Hermitian systems",
+      "number": null,
+      "title": "Edge states and topological invariants of non-Hermitian systems"
+    },
+    {
+      "text": "Generalized Brillouin zone and non-Hermitian band theory",
+      "number": null,
+      "title": "Generalized Brillouin zone and non-Hermitian band theory"
+    },
+    {
+      "text": "Non-Hermitian topological phases and generalized boundary conditions",
+      "number": null,
+      "title": "Non-Hermitian topological phases and generalized boundary conditions"
+    },
+    {
+      "text": "Algebraic non-Hermitian skin effect and generalized Fermi surface formula in arbitrary dimensions",
+      "number": null,
+      "title": "Algebraic non-Hermitian skin effect and generalized Fermi surface formula in arbitrary dimensions"
+    },
+    {
+      "text": "A review on non-Hermitian skin effect",
+      "number": null,
+      "title": "A review on non-Hermitian skin effect"
+    },
+    {
+      "text": "Topological Non-Hermitian skin effect",
+      "number": null,
+      "title": "Topological Non-Hermitian skin effect"
+    },
+    {
+      "text": "Non-Hermitian skin effect (NHSE)",
+      "number": null,
+      "title": "Non-Hermitian skin effect (NHSE)"
+    },
+    {
+      "text": "Control of non-Hermitian skin effect by staggered synthetic gauge fields",
+      "number": null,
+      "title": "Control of non-Hermitian skin effect by staggered synthetic gauge fields"
+    },
+    {
+      "text": "The Topological Origin of Non-Hermitian Skin Effect",
+      "number": null,
+      "title": "The Topological Origin of Non-Hermitian Skin Effect"
+    },
+    {
+      "text": "Topological Origin of Non-Hermitian Skin Effects",
+      "number": null,
+      "title": "Topological Origin of Non-Hermitian Skin Effects"
+    },
+    {
+      "text": "Non-Hermitian Systems with a Real Spectrum and Selective Skin Effect",
+      "number": null,
+      "title": "Non-Hermitian Systems with a Real Spectrum and Selective Skin Effect"
+    },
+    {
+      "text": "Anomalous single-mode lasing induced by nonlinearity and the non-Hermitian skin effect",
+      "number": null,
+      "title": "Anomalous single-mode lasing induced by nonlinearity and the non-Hermitian skin effect"
+    },
+    {
+      "text": "Ultrafast topological non-Hermitian skin effect in a laser",
+      "number": null,
+      "title": "Ultrafast topological non-Hermitian skin effect in a laser"
+    },
+    {
+      "text": "The non-Hermitian skin effect: A perspective",
+      "number": null,
+      "title": "The non-Hermitian skin effect: A perspective"
+    },
+    {
+      "text": "The Non-Hermitian Skin Effect as Light Funnel",
+      "number": null,
+      "title": "The Non-Hermitian Skin Effect as Light Funnel"
+    },
+    {
+      "text": "Topological funneling of light",
+      "number": null,
+      "title": "Topological funneling of light"
+    },
+    {
+      "text": "Geometry-dependent skin effect",
+      "number": null,
+      "title": "Geometry-dependent skin effect"
+    },
+    {
+      "text": "Observation of geometry-dependent skin effect in non-Hermitian phononic crystals",
+      "number": null,
+      "title": "Observation of geometry-dependent skin effect in non-Hermitian phononic crystals"
+    },
+    {
+      "text": "Enhanced sensitivity in non-Hermitian systems at infernal points",
+      "number": null,
+      "title": "Enhanced sensitivity in non-Hermitian systems at infernal points"
+    },
+    {
+      "text": "Non-Hermitian topological sensors",
+      "number": null,
+      "title": "Non-Hermitian topological sensors"
+    },
+    {
+      "text": "Non-Hermitian Quantum Metrology Enhancement and Skin Effect Suppression",
+      "number": null,
+      "title": "Non-Hermitian Quantum Metrology Enhancement and Skin Effect Suppression"
+    },
+    {
+      "text": "Coupled non-Hermitian skin effect reveals exceptional points",
+      "number": null,
+      "title": "Coupled non-Hermitian skin effect reveals exceptional points"
+    },
+    {
+      "text": "Observation of hybrid higher-order skin-topological effect in non-Hermitian topolectrical circuits",
+      "number": null,
+      "title": "Observation of hybrid higher-order skin-topological effect in non-Hermitian topolectrical circuits"
+    },
+    {
+      "text": "Observation of higher-order non-Hermitian skin effect",
+      "number": null,
+      "title": "Observation of higher-order non-Hermitian skin effect"
+    },
+    {
+      "text": "Observation of hybrid higher-order skin-topological effect",
+      "number": null,
+      "title": "Observation of hybrid higher-order skin-topological effect"
+    },
+    {
+      "text": "Experimental observation of non-Hermitian higher-order skin interface states in topological electric circuits",
+      "number": null,
+      "title": "Experimental observation of non-Hermitian higher-order skin interface states in topological electric circuits"
+    },
+    {
+      "text": "Exceptional points and non-Hermitian skin effects under nonlinearity of eigenvalues",
+      "number": null,
+      "title": "Exceptional points and non-Hermitian skin effects under nonlinearity of eigenvalues"
+    },
+    {
+      "text": "Workshop “Non-Hermitian topology and skin effects”",
+      "number": null,
+      "title": "Workshop “Non-Hermitian topology and skin effects”"
+    },
+    {
+      "text": "Algebraic non-Hermitian skin effect and generalized Fermi surface formula",
+      "number": null,
+      "title": "Algebraic non-Hermitian skin effect and generalized Fermi surface formula"
+    },
+    {
+      "text": "Algebraic non-Hermitian skin effect",
+      "number": null,
+      "title": "Algebraic non-Hermitian skin effect"
+    },
+    {
+      "text": "Algebraic non-Hermitian skin effect and unified non-Bloch band theory",
+      "number": null,
+      "title": "Algebraic non-Hermitian skin effect and unified non-Bloch band theory"
+    },
+    {
+      "text": "Non-Hermitian sensing applications with electrical circuits",
+      "number": null,
+      "title": "Non-Hermitian sensing applications with electrical circuits"
+    },
+    {
+      "text": "Non-Hermitian skin effect in semiconductor photonic crystal slabs",
+      "number": null,
+      "title": "Non-Hermitian skin effect in semiconductor photonic crystal slabs"
+    },
+    {
+      "text": "Geometry-adaptive non-Bloch band theory",
+      "number": null,
+      "title": "Geometry-adaptive non-Bloch band theory"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Gemini\\Physics\\A_review_on_non-Hermitian_skin_effect_20251226_153231_split.json",
+    "processed_date": "2025-12-31T01:30:38.733387",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

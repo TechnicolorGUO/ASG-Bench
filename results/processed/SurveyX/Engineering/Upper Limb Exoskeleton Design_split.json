@@ -1,0 +1,689 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of Assistive Exoskeleton Design for Upper Limb Rehabilitation Integrating Biomechanics and Human-Robot Interaction"
+    ],
+    [
+      1,
+      "Abstract"
+    ],
+    [
+      1,
+      "1 Introduction"
+    ],
+    [
+      1,
+      "1.1 Significance of Assistive Exoskeletons in Rehabilitation Engineering"
+    ],
+    [
+      1,
+      "1.2 Challenges and Opportunities in Exoskeleton Design"
+    ],
+    [
+      1,
+      "1.3 Integration of Biomechanics and Human-Robot Interaction"
+    ],
+    [
+      1,
+      "1.4 Role of Motion Control in Enhancing Mobility"
+    ],
+    [
+      1,
+      "1.5 Structure of the Survey"
+    ],
+    [
+      1,
+      "2 Background"
+    ],
+    [
+      1,
+      "2.1 Historical Evolution of Rehabilitation Robotics"
+    ],
+    [
+      1,
+      "2.2 Biomechanical Foundations in Exoskeleton Design"
+    ],
+    [
+      1,
+      "2.3 Human-Robot Interaction in Therapeutic Contexts"
+    ],
+    [
+      1,
+      "3 Design Principles of Upper Limb Exoskeletons"
+    ],
+    [
+      1,
+      "3.1 Mechanical Structure and Lightweight Design"
+    ],
+    [
+      1,
+      "3.2 Actuation Mechanisms and Force Control"
+    ],
+    [
+      1,
+      "3.3 Material Selection and Wearability"
+    ],
+    [
+      1,
+      "4 Biomechanics in Exoskeleton Design"
+    ],
+    [
+      1,
+      "4.1 Joint Kinematics and Load Distribution"
+    ],
+    [
+      1,
+      "4.2 Muscle-Tendon Dynamics and Force Generation"
+    ],
+    [
+      1,
+      "4.3 Biomechanical Modeling and Simulation"
+    ],
+    [
+      1,
+      "5 Human-Robot Interaction and Control Strategies"
+    ],
+    [
+      1,
+      "5.1 User Intent Detection and Adaptive Control"
+    ],
+    [
+      1,
+      "5.2 Advanced Control Strategies"
+    ],
+    [
+      1,
+      "5.3 Feedback Mechanisms and Safety"
+    ],
+    [
+      1,
+      "6 Challenges and Future Directions"
+    ],
+    [
+      1,
+      "6.1 Current Limitations and Technological Gaps"
+    ],
+    [
+      1,
+      "6.2 Integration of AI and Soft Robotics"
+    ],
+    [
+      1,
+      "6.4 Ethical and Practical Considerations"
+    ],
+    [
+      1,
+      "7 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ],
+    [
+      1,
+      "Disclaimer:"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of Assistive Exoskeleton Design for Upper Limb Rehabilitation Integrating Biomechanics and Human-Robot Interaction",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 1,
+      "content": "This survey paper comprehensively examines the design and implementation of assistive exoskeletons for upper limb rehabilitation, integrating principles from biomechanics, human-robot interaction (HRI), and motion control. We systematically analyze the biomechanical foundations of exoskeleton design, emphasizing joint kinematics, muscle-tendon dynamics, and patient-specific adaptation, while highlighting challenges such as computational complexity and anatomical fidelity. Advanced control strategies, including reinforcement learning and decentralized nonlinear control, are evaluated for their efficacy in achieving adaptive, safe, and intuitive HRI. The survey also explores material innovations and lightweight mechanical structures that balance rigidity and flexibility to enhance wearability. Current limitations in energy efficiency, clinical validation, and user adaptability are critically assessed, alongside emerging opportunities in AI integration and soft robotics. By synthesizing multidisciplinary advancements, this paper provides a roadmap for future research, emphasizing the need for rigorous clinical testing, ethical considerations, and standardized frameworks to bridge the gap between technological innovation and therapeutic application in rehabilitation engineering.",
+      "stats": {
+        "char_count": 1295,
+        "word_count": 152,
+        "sentence_count": 6,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Introduction",
+      "level": 1,
+      "content": "The field of rehabilitation engineering has witnessed significant advancements with the integration of assistive exoskeletons, devices designed to support and enhance the rehabilitation process for individuals with mobility impairments. These technologies have the potential to transform traditional rehabilitation practices by providing tailored support that aligns with the unique needs of each patient. The significance of assistive exoskeletons extends beyond mere mechanical assistance; they embody a convergence of biomechanics, robotics, and user-centered design principles aimed at improving therapeutic outcomes. As the demand for effective rehabilitation solutions grows, understanding the multifaceted role of these devices becomes increasingly critical. This review aims to systematically explore the current state of assistive exoskeletons, highlighting their significance, challenges, and opportunities within the broader context of rehabilitation engineering.",
+      "stats": {
+        "char_count": 974,
+        "word_count": 121,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1.1 Significance of Assistive Exoskeletons in Rehabilitation Engineering",
+      "level": 1,
+      "content": "Assistive exoskeletons have emerged as transformative tools in rehabilitation engineering, addressing critical challenges in upper limb recovery through biomechanically informed design and adaptive control. These systems significantly enhance rehabilitation outcomes by providing individualized motion planning that adapts to patient-specific needs while ensuring safety during therapeutic exercises [1]. The capability to mimic natural human movements, as demonstrated in bimanual manipulation tasks [2], translates directly to improved mobility restoration in patients with upper limb impairments. The integration of these devices into therapeutic settings not only facilitates physical recovery but also promotes psychological well-being by fostering a sense of independence and agency in patients.\n\n[Image]\nFigure 1: chapter structure\n\nFrom a biomechanical perspective, exoskeletons leverage advanced modeling techniques to accurately represent human dynamics during rehabilitation exercises [3]. This precision is particularly crucial for high-intensity movements that traditional rehabilitation methods often inadequately address. Current systems face limitations in adaptability, as highlighted by [4], where the lack of patient-specific assistance modes reduces therapeutic efficacy. However, emerging designs incorporate user-oriented assessment frameworks [5] to optimize comfort and functionality simultaneously. Such innovations are essential for ensuring that exoskeletons can meet the diverse needs of patients, particularly in dynamic and unpredictable rehabilitation environments.\n\nThe clinical impact extends beyond patient recovery, with exoskeletons substantially reducing therapist workload through automated assistance protocols. By integrating real-time motion adaptation and advanced force control mechanisms, these systems effectively reduce compensatory movements while ensuring that therapeutic intensity is maintained. This approach leverages an Adaptive Integral Terminal Sliding Mode (AITSM) controller, enhanced by Deep Reinforcement Learning techniques, to dynamically adjust to user needs and environmental changes. Such integration not only optimizes the interaction between active and passive joints but also enhances the adaptability and compliance of robotic systems, thereby facilitating more effective rehabilitation and support for individuals with motor impairments. Additionally, the incorporation of compliant control dynamics allows for precise trajectory generation, ultimately improving the overall efficacy of therapeutic interventions [6, 7, 8]. The dual benefit of enhanced patient outcomes and reduced clinical resource requirements positions exoskeletons as pivotal tools in modern rehabilitation paradigms, bridging the gap between therapeutic requirements and engineering solutions.\n\nThe significance of assistive exoskeletons in rehabilitation engineering cannot be overstated, as they represent a convergence of technology and patient-centered care. By addressing the multifaceted challenges of rehabilitation, these devices not only facilitate physical recovery but also enhance the overall therapeutic experience. The ongoing development and refinement of exoskeleton technology promise to further improve outcomes for individuals with mobility impairments, paving the way for more effective and personalized rehabilitation strategies. As research continues to evolve, the integration of advanced technologies and interdisciplinary approaches will be crucial in maximizing the potential of assistive exoskeletons in clinical practice.",
+      "stats": {
+        "char_count": 3590,
+        "word_count": 444,
+        "sentence_count": 19,
+        "line_count": 10
+      }
+    },
+    {
+      "heading": "1.2 Challenges and Opportunities in Exoskeleton Design",
+      "level": 1,
+      "content": "The design of assistive exoskeletons for upper limb rehabilitation presents a complex interplay of mechanical, biomechanical, and computational challenges, while simultaneously offering transformative opportunities through emerging technologies. A primary mechanical limitation lies in actuation systems, where high reflected inertia and impedance restrict natural movement and fail to provide adequate support during dynamic tasks [9]. These constraints are exacerbated by the coupling of actuator and contact forces, which complicates control computations [10], and the oversimplification of anatomical variations that limits dexterity [11]. The inability to accurately represent interand intra-joint dependencies further restricts motion range [12], while the computational burden of existing methods forces trade-offs between accuracy and speed [13].\n\nUser adaptability remains a critical challenge, particularly in addressing the diverse rehabilitation needs of stroke patients. Existing methods often fail to provide real-time, customized assistance that aligns with varying medical conditions [4]. The complexity of bimanual manipulation, with its large state and action spaces and the need for spatial and temporal synchronization, further highlights the challenges in achieving natural user interaction [2]. Residual vibrations in exoskeletons complicate user experience and satisfaction, underscoring the need for improved dynamic stability [5]. Additionally, the lack of intuitive and standardized methods for describing human movements in machine learning applications hinders effective communication among biomechanics experts [14].\n\nBiomechanical modeling presents significant hurdles, with traditional approaches struggling to capture human dynamics comprehensively. Current musculoskeletal simulators often neglect muscle inertia effects [15], and the assumption of mechanical energy conservation fails during high-intensity movements [3]. The inability to model interactions between active and passive joints under varying external conditions further limits predictive accuracy [7]. Joint axis estimation methods face inaccuracies under varying motion speeds [16], and existing benchmarks often lack the complexity required for effective muscle-actuated control [17].\n\nEmerging opportunities address these limitations through innovative approaches. Differentiable simulation methods offer potential solutions for improving biomechanical accuracy [15], while artificial intelligence enables more precise prediction of user intentions [18]. Advanced computational methods enhance parameter estimation efficiency [19], and novel materials may resolve current structural limitations. The development of accessible programming frameworks for biomechanical simulations could democratize research [20], while insights from molecular motor mechanochemistry may inform new design principles [21]. These advancements collectively point toward a new generation of exoskeletons capable of addressing diverse rehabilitation needs through sophisticated biomechanical integration and adaptive control.\n\nThe exploration of challenges and opportunities in exoskeleton design underscores the importance of continued innovation and interdisciplinary collaboration. By addressing the mechanical and computational hurdles, researchers can enhance the functionality and adaptability of these devices, ultimately improving rehabilitation outcomes for a wide range of patients. The integration of emerging technologies and methodologies will play a crucial role in shaping the future of assistive exoskeletons, paving the way for more effective and personalized rehabilitation solutions.",
+      "stats": {
+        "char_count": 3680,
+        "word_count": 456,
+        "sentence_count": 21,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "1.3 Integration of Biomechanics and Human-Robot Interaction",
+      "level": 1,
+      "content": "The integration of biomechanics and human-robot interaction (HRI) is pivotal in developing exoskeletons that achieve both physiological fidelity and adaptive responsiveness. Biomechanical modeling provides the foundation for understanding joint kinematics and muscle-tendon dynamics, while HRI ensures seamless adaptation to user intent and environmental constraints. Recent advancements in reinforcement learning, such as those integrated with the ArtiSynth platform, demonstrate how biomechanics and motor control can be bridged to achieve efficient and stable muscle activation patterns [22]. This synergy is further exemplified by motion planning schemes that leverage human demonstrations and interactive learning, enabling exoskeletons to adapt to individual user needs while maintaining safety [1].\n\nControl strategies in HRI must address the inherent uncertainty of human motion, particularly in complex tasks like bimanual manipulation. The SCREWMIMIC framework interprets such tasks as screw actions, highlighting the interplay between biomechanics (in human motion) and robotic control [2]. This approach is complemented by generative models that create tailored rehabilitation trajectories, accommodating both active and passive training modes to enhance user adaptability [4]. Input shaping techniques further improve HRI by minimizing residual vibrations, thereby enhancing user comfort and satisfaction [5].\n\nBiomechanical insights into human-like movement mechanisms, such as coordinated and compliant motion, inform the design of exoskeletons that mimic natural kinematics [7]. These principles are critical for ensuring that exoskeletons not only replicate human motion but also adapt to varying user conditions and environmental constraints. The integration of biomechanical constraints with adaptive HRI paradigms enables exoskeletons to achieve high precision in trajectory alignment while maintaining intuitive responsiveness. Future research should focus on refining these integrative approaches, particularly in developing unified frameworks that combine biomechanical accuracy with real-time adaptive control, ultimately advancing the efficacy of rehabilitation exoskeletons.\n\nThe successful integration of biomechanics and human-robot interaction represents a significant step toward creating more effective rehabilitation solutions. By ensuring that exoskeletons can respond dynamically to user needs while adhering to biomechanical principles, researchers can enhance both the functionality and user experience of these devices. As advancements in technology continue to evolve, the potential for improved rehabilitation outcomes through this integration becomes increasingly promising.",
+      "stats": {
+        "char_count": 2714,
+        "word_count": 344,
+        "sentence_count": 15,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "1.4 Role of Motion Control in Enhancing Mobility",
+      "level": 1,
+      "content": "Advanced motion control strategies are fundamental to optimizing exoskeleton performance and ensuring user compliance in upper limb rehabilitation. These strategies leverage artificial intelligence to dynamically adjust support based on real-time patient data, enabling personalized rehabilitation experiences that adapt to individual needs [23]. The integration of cloud computing and soft wearable sensors further enhances motion prediction and assistance, as demonstrated by intelligent exoskeletons that utilize muscle signals for precise control [18]. Such systems exemplify the potential of adaptive control to bridge the gap between biomechanical fidelity and user-specific requirements.\n\nDecentralized nonlinear control approaches address the complexity of redundant systems by implementing natural adaptation laws (NALs), which reduce the number of required adaptation gains and eliminate the need for predefined bounds [24]. This simplification enhances real-time responsiveness while maintaining stability, particularly in contact-rich interactions where safety is paramount [25]. The Safe and Individualized Motion Planning Scheme (SIMPS) further refines motion control by generating and adjusting trajectories based on real-time patient feedback, ensuring both safety and therapeutic efficacy [1]. These methods highlight the critical role of adaptive algorithms in achieving natural and intuitive exoskeleton behavior.\n\nHuman-robot skill transfer techniques optimize motion control by extracting dynamic features from human trajectories, improving both stability and human-likeness in reproduced movements [26]. Complementing this, input shaping techniques such as the zero vibration derivative (ZVD) shaper minimize residual vibrations, enhancing user comfort and satisfaction during operation [5]. The integration of realistic muscle dynamics simulations, as enabled by platforms like MyoSuite, further refines control strategies by accurately modeling muscle-tendon interactions and their impact on exoskeleton performance [6].\n\nFuture advancements in motion control should prioritize the integration of diverse methodologies into unified frameworks that enhance biomechanical accuracy, adaptive responsiveness, and computational efficiency. This integration should leverage insights from human biomechanics, focusing on compliant control dynamics and the interaction of active and passive joints to improve adaptability under external disturbances. Additionally, the incorporation of advanced networking and computing technologies, such as edge and cloud computing, can facilitate interdisciplinary collaboration and address current challenges in biomechanical research. By developing sophisticated simulation environments like MyoSuite, which accurately models musculoskeletal systems and supports complex, skillful tasks, researchers can create more effective control strategies that reflect the intricacies of human motor control and improve applications in rehabilitation and assistive technologies [6, 7, 27]. Emerging trends suggest a shift toward hybrid control paradigms that integrate machine learning with traditional control theory, enabling exoskeletons to learn from user behavior while maintaining robust performance under varying conditions. The continued development of such strategies will be pivotal in overcoming current limitations and realizing the full potential of assistive exoskeletons in rehabilitation engineering.\n\nThe role of motion control in enhancing mobility through assistive exoskeletons emphasizes the importance of adaptive and intelligent systems in rehabilitation. By advancing control methodologies, researchers can significantly improve user experiences and outcomes, paving the way for more effective rehabilitation solutions. As the field progresses, the integration of innovative technologies and approaches will be essential in addressing the diverse needs of individuals undergoing rehabilitation.",
+      "stats": {
+        "char_count": 3961,
+        "word_count": 497,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "1.5 Structure of the Survey",
+      "level": 1,
+      "content": "This survey systematically examines the multidisciplinary aspects of assistive exoskeleton design for upper limb rehabilitation, organized into seven comprehensive sections. Section 1 introduces the significance of exoskeletons in rehabilitation engineering, highlighting their transformative potential through biomechanically informed design and adaptive control, while also addressing key challenges such as user adaptability and clinical validation.\n\nSection 2 establishes the historical and theoretical foundations of rehabilitation robotics by tracing the evolution of this field and detailing the biomechanical principles essential for exoskeleton design. It emphasizes key aspects such as joint kinematics, which governs the movement of joints, and muscle-tendon dynamics, which are critical for understanding how forces are transmitted and managed during rehabilitation. Furthermore, the section highlights the transition from traditional rigid robotic structures to more advanced soft exoskeletons that offer enhanced flexibility, comfort, and adaptability, thereby addressing the diverse rehabilitation needs of patients. By incorporating insights from recent studies, it underscores the importance of integrating intelligent systems that can learn from patient data to improve the efficacy of rehabilitation protocols [6, 7, 23]. Section 3 analyzes core design principles, focusing on mechanical structure, actuation mechanisms, and material selection, with particular emphasis on the trade-offs between rigidity and flexibility.\n\nSection 4 explores the application of biomechanics in exoskeleton design, examining joint kinematics, load distribution, and muscle-tendon dynamics, while highlighting the role of biomechanical modeling and simulation in predicting performance. Section 5 delves into the intricacies of humanrobot interaction and control strategies, focusing on user intent detection, adaptive control algorithms that optimize robotic movements based on human biomechanics, and feedback mechanisms that enhance user satisfaction and comfort, particularly in the context of wearable robotic systems and prosthetic devices [6, 28, 7, 5].\n\nSection 6 identifies current limitations and future directions, discussing technological gaps, the integration of AI and soft robotics, and the need for rigorous clinical validation. In conclusion, Section 7 synthesizes the key findings from the research, emphasizing the critical role of integrating biomechanics and human-robot interaction in the design of assistive exoskeletons. This integration is essential for creating devices that not only mimic human-like movement through optimized control frameworks but also adapt to individual patient needs by utilizing artificial intelligence. By focusing on the compliance and adaptability of exoskeletons, the section highlights the potential for these technologies to enhance rehabilitation outcomes and bridge the gap between theoretical advancements and practical applications in clinical settings [7, 23].The following sections are organized as shown in Figure 1.",
+      "stats": {
+        "char_count": 3079,
+        "word_count": 403,
+        "sentence_count": 14,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "2.1 Historical Evolution of Rehabilitation Robotics",
+      "level": 1,
+      "content": "Rehabilitation robotics has evolved significantly, marked by milestones in biomechanics, control theory, and human-robot interaction. Early systems focused on basic mechanical assistance with rigid structures, laying the groundwork for later innovations but often lacking the nuanced support necessary for effective rehabilitation. The introduction of optimal control methods like direct multiple shooting (DMS) and direct collocation (DC) improved trajectory planning and dynamic optimization, facilitating a shift from passive to active assistance paradigms [29]. These advancements enabled exoskeletons to dynamically adjust support based on real-time biomechanical feedback, enhancing therapeutic efficacy.\n\nProgress in actuation mechanisms and lightweight materials further improved exoskeleton functionality, allowing for natural and energy-efficient movements. The integration of biomechanical modeling with robotic control led to systems that accurately replicate human joint kinematics and muscle-tendon dynamics, addressing challenges in high-intensity rehabilitation tasks [3]. Adaptive control strategies, including reinforcement learning and impedance control, emerged as significant advancements, enhancing exoskeleton responsiveness to user intent and environmental constraints [22].\n\nRecent developments emphasize human-robot interaction in therapeutic contexts, with exoskeletons increasingly incorporating user-oriented assessment frameworks and real-time motion adaptation [5]. The shift toward personalized rehabilitation, supported by AI-driven motion planning and cloud-based analytics, reflects the field’s evolution toward intuitive and effective solutions [18]. Exploration of soft robotics and advanced biomechanical simulations promises enhanced adaptability and clinical efficacy, paving the way for innovations that better meet diverse rehabilitation needs.\n\nThe historical trajectory of rehabilitation robotics illustrates continuous improvement in technology and therapeutic approaches. By integrating insights from biomechanics and control theory, researchers have developed sophisticated systems that assist patients physically and engage them in their rehabilitation process. This evolution highlights the importance of interdisciplinary collaboration in advancing rehabilitation technologies and underscores the need for future research to integrate emerging technologies such as soft robotics and AI-driven analytics to enhance rehabilitation interventions.",
+      "stats": {
+        "char_count": 2493,
+        "word_count": 295,
+        "sentence_count": 13,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "2.2 Biomechanical Foundations in Exoskeleton Design",
+      "level": 1,
+      "content": "Exoskeleton design is rooted in biomechanical foundations that encompass joint kinematics, muscletendon dynamics, and patient-specific movement patterns, ensuring anatomical fidelity and functional efficacy. Accurate modeling of joint kinematics aligns robotic movements with natural human motion, overcoming traditional constraints that reduce dexterity [12]. Recent advancements incorporate patient-specific geometries, enhancing exoskeleton adaptability to individual users [30]. The SCREWMIMIC framework further refines kinematic modeling by interpreting bimanual tasks as screw actions, emphasizing the interplay between joint constraints and motion synchronization [2].\n\nMuscle-tendon dynamics add complexity due to nonlinear and time-dependent behavior, especially during high-intensity exercises. The time-fitness-dependent Hamiltonian framework underscores the need to account for energy dissipation and mechanical variability in dynamic movements, crucial for designing exoskeletons capable of supporting diverse therapeutic tasks [3]. Generative models enable patient-specific adaptation by continuously adjusting assistance based on real-time biomechanical feedback [4]. Converting keypoint data into viewpoint-independent joint angles enhances movement data interpretability, allowing accurate modeling of muscle-tendon interactions and their influence on exoskeleton control [14].\n\nIntegrating these biomechanical principles into exoskeleton design requires robust frameworks for motion planning and dynamic adaptation. Safe and individualized motion planning schemes leverage biomechanical insights to generate trajectories that align with patient-specific needs while ensuring safety [1]. Future research should focus on unifying these principles into cohesive design paradigms that balance computational efficiency with physiological accuracy, advancing the efficacy of exoskeletons in rehabilitation engineering. Emerging trends suggest a shift toward hybrid modeling approaches combining real-time adaptive control with advanced biomechanical simulations, addressing variability and unpredictability in human movement.\n\nThe biomechanical foundations of exoskeleton design are crucial for ensuring effective and intuitive rehabilitation devices. By aligning robotic movements with human biomechanics, researchers can create systems that assist and enhance natural movement patterns, maximizing therapeutic benefits. Continued exploration of innovative modeling techniques and adaptive control strategies is essential for refining the interplay between biomechanics and robotic assistance.",
+      "stats": {
+        "char_count": 2606,
+        "word_count": 305,
+        "sentence_count": 15,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "2.3 Human-Robot Interaction in Therapeutic Contexts",
+      "level": 1,
+      "content": "Human-robot interaction (HRI) in therapeutic applications hinges on precise user intent detection and adaptive control, ensuring exoskeletons respond intuitively to patient-specific needs. Accurate intent detection relies on robust kinematic modeling to minimize interference from skin movement artifacts [31]. Recent advancements in edge and cloud computing enable real-time processing of biomechanical data, facilitating dynamic adaptation to user movements with low latency, crucial for therapeutic applications [27]. These computational paradigms integrate multimodal sensory feedback, enhancing exoskeletons’ ability to interpret and respond to user intentions with high fidelity.\n\nAdaptive control strategies in therapeutic HRI must balance safety, responsiveness, and biomechanical accuracy. Reinforcement learning frameworks combined with high-dimensional continuous control show potential in achieving stable muscle activation patterns aligned with therapeutic goals [22]. The SCREWMIMIC approach refines adaptive control by interpreting bimanual tasks through screw theory, enabling synchronization that mirrors natural human coordination [2]. Decentralized nonlinear control architectures reduce computational complexity while preserving stability during contact-rich interactions [24].\n\nThe therapeutic efficacy of HRI systems depends on balancing assistive forces with patient volition, addressed through dual-mode individualized rehabilitation frameworks. These frameworks switch dynamically between active and passive training modes based on real-time feedback, ensuring optimal therapeutic intensity while minimizing compensatory movements [4]. Input shaping techniques, such as the zero vibration derivative (ZVD) shaper, enhance user comfort by mitigating residual vibrations [5]. Emerging networking technologies, including 5G and software-defined networking (SDN), promise to overcome current limitations in data transmission latency and bandwidth, enabling sophisticated HRI paradigms [27].\n\nFuture directions in therapeutic HRI should focus on unifying biomechanical modeling with adaptive control through hybrid architectures leveraging both model-based and data-driven approaches. Integrating advanced networking solutions with real-time biomechanical simulations will be critical in developing exoskeletons capable of seamless adaptation to diverse rehabilitation scenarios. Innovative approaches using low-cost RGBD cameras for upper-limb kinematics and differentiable biomechanical modeling for motion capture show promising agreement with traditional methods, highlighting their potential to provide accurate insights into rehabilitation progress. Evaluating these technologies in clinical settings is crucial to confirm their effectiveness in real-world applications [12, 32, 33, 34, 23].",
+      "stats": {
+        "char_count": 2817,
+        "word_count": 338,
+        "sentence_count": 16,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "3 Design Principles of Upper Limb Exoskeletons",
+      "level": 1,
+      "content": "Upper limb exoskeletons require a deliberate integration of design principles to enhance rehabilitation outcomes, focusing on mechanical structure, actuation mechanisms, and material selection. This section explores foundational aspects, illustrating how these principles improve exoskeleton effectiveness and user experience in clinical settings. Figure 2 illustrates the hierarchical structure of these design principles, detailing key aspects such as mechanical structure, actuation mechanisms, and material selection. Each category provides insights into optimization, lightweight design, precision force control, energy efficiency, and material health compatibility, emphasizing future research directions and technological advancements.\n\n[Image]\nFigure 2: This figure illustrates the hierarchical structure of design principles for upper limb exoskeletons, detailing key aspects such as mechanical structure, actuation mechanisms, and material selection. Each category provides insights into optimization, lightweight design, precision force control, energy efficiency, and material health compatibility, emphasizing future research directions and technological advancements.",
+      "stats": {
+        "char_count": 1181,
+        "word_count": 139,
+        "sentence_count": 6,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "3.1 Mechanical Structure and Lightweight Design",
+      "level": 1,
+      "content": "The mechanical structure of upper limb exoskeletons must balance rigidity for support and flexibility for natural movement to optimize rehabilitation. The quasi-direct drive soft exoskeleton (QDSE) achieves this by employing a lightweight design that minimizes mass while providing adaptive torque assistance aligned with user biomechanics [9]. Anatomical fidelity is crucial, as demonstrated by the ACB Hand, which models human hand structure to ensure dexterity and accommodate natural motion ranges [11].\n\nThis balance between rigidity and flexibility, along with the innovative use of materials and modular architectures, is succinctly illustrated in Figure 3. The figure emphasizes the hierarchical structure of mechanical design principles for upper limb exoskeletons, highlighting the integration of lightweight materials such as carbon fiber and advanced polymers that reduce inertial loads, thereby enhancing wearability and long-term compliance. Furthermore, modular architectures allow customization to individual needs, integrating generative models and cloud-based learning for real-time intention recognition [4, 18, 27, 23]. Future advancements in material science and additive manufacturing will likely yield even lighter and adaptable structures, incorporating smart materials for dynamic stiffness adjustment, further enhancing therapeutic effectiveness.\n\n[Image]\nFigure 3: This figure illustrates the hierarchical structure of mechanical design principles for upper limb exoskeletons, emphasizing the balance between rigidity and flexibility, the use of innovative materials and modular architectures, and future advancements in material science and manufacturing techniques.",
+      "stats": {
+        "char_count": 1694,
+        "word_count": 219,
+        "sentence_count": 8,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "3.2 Actuation Mechanisms and Force Control",
+      "level": 1,
+      "content": "Actuation mechanisms must balance precision force control, energy efficiency, and lightweight construction for therapeutic efficacy. The MR-Hydrostatic system combines magnetorheological clutches with hydrostatic transmission to achieve high-fidelity force modulation while maintaining compactness [35]. Control strategies, such as Adaptive Integral Terminal Sliding Mode Control (AITSMC), ensure robust performance and precise force tracking in contact-rich environments [8]. Energy efficiency challenges are addressed by hybrid actuation architectures that integrate fluidic systems with electromechanical components. Future research should focus on energy-regenerative mechanisms and adaptive impedance control to optimize power efficiency while meeting therapeutic force requirements [36, 27]. Such innovations are crucial for widespread clinical adoption of upper limb exoskeletons.",
+      "stats": {
+        "char_count": 887,
+        "word_count": 105,
+        "sentence_count": 6,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.3 Material Selection and Wearability",
+      "level": 1,
+      "content": "Material selection involves balancing durability, flexibility, and anatomical compatibility to ensure performance and comfort. Durability is achieved through high-strength composites in systems like the QDSE, enhancing longevity [9]. Flexibility is crucial for natural movement, exemplified by the MR-Hydrostatic system’s compliant hydraulic lines [35]. Anatomical compatibility is addressed with breathable, antimicrobial fabrics for hygienic interfaces. Emerging smart materials, such as shape-memory alloys, offer dynamic adaptation to movement requirements. Future research should focus on composite materials integrating mechanical, thermal, and biological properties, supported by manufacturing techniques like 3D printing for patient-specific customization [37, 27]. These advancements will bridge the gap between clinical efficacy and user acceptance in exoskeleton design.",
+      "stats": {
+        "char_count": 881,
+        "word_count": 107,
+        "sentence_count": 7,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4 Biomechanics in Exoskeleton Design",
+      "level": 1,
+      "content": "The design of exoskeletons is fundamentally governed by biomechanics, which influences structural integrity and functional efficacy in assisting human movement. Biomechanics studies mechanical laws as they apply to living organisms, offering insights for engineering exoskeletons that enhance human capabilities. This section investigates the integration of biomechanics into exoskeleton design, beginning with an examination of joint kinematics and load distribution. These considerations are crucial for exoskeletons to align with human anatomical and physiological traits, thus improving rehabilitation outcomes. Incorporating biomechanics not only enhances user experience but also facilitates effective utilization in therapeutic and assistive applications.",
+      "stats": {
+        "char_count": 762,
+        "word_count": 94,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.1 Joint Kinematics and Load Distribution",
+      "level": 1,
+      "content": "Optimizing joint kinematics and load distribution necessitates precise alignment with human biomechanics to ensure natural movement patterns and reduce user fatigue during rehabilitation. Mechanisms like the MR-Hydrostatic system achieve this by minimizing friction and inertia, delivering rapid, controlled interaction forces [35]. This is crucial for dynamic tasks where joint kinematics must adapt to various speeds and loads without sacrificing movement fidelity [16]. Input shaping techniques further enhance performance by reducing vibrations, improving user comfort [5]. Mechanical properties mimicking human joints significantly elevate rehabilitation success.\n\nAnatomical fidelity, as demonstrated by the ACB Hand, includes precise joint structure representation to reduce fatigue and compensatory movements through biomechanically congruent load distribution [11]. Standardizing movement descriptions via Joint Angle Representation augments recognition accuracy, accommodating variations in patient-specific motion [14]. Cross-modal diffusion techniques align dynamics across movement modalities, ensuring consistent load distribution while maintaining biomechanical plausibility [38]. These advances underscore anatomical considerations in design, directly influencing device effectiveness and user acceptance.\n\nMachine learning enhances kinematics by learning boundary functions to maintain natural movement ranges [12]. The Global Optimisation method refines joint angle estimations, addressing inaccuracies from skin artifacts to enhance load distribution accuracy [31]. Motion capture systems validate kinematic data, enabling analyses that refine joint mechanics [39]. These integrated methods advance designs replicating natural kinematics and efficiently distributing mechanical loads, enhancing therapeutic efficacy and user comfort. Continuous evolution in these technologies promises to bridge human biomechanics and robotic assistance, improving rehabilitation solutions.",
+      "stats": {
+        "char_count": 1993,
+        "word_count": 237,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2 Muscle-Tendon Dynamics and Force Generation",
+      "level": 1,
+      "content": "Muscle-tendon dynamics underpin force generation in human movement, significantly impacting exoskeletons designed to replicate natural kinematics and energetics. The time-fitness-dependent Hamiltonian framework offers insight into muscle-tendon force modulation, accounting for energy dissipation during high-intensity exercises [3]. This extends beyond linear models by using fractional derivatives to capture complex tissue relaxation, enhancing force prediction fidelity [40]. Identifying oscillation modes with Riemannian metrics refines these dynamics, ensuring stable force generation across conditions [41]. These theoretical foundations are crucial for exoskeletons mimicking muscle behavior during rehabilitation.\n\nAdvanced control strategies emulate natural force mechanisms. Reinforcement learning frameworks effectively train biomechanical models for efficient, stable control in high-dimensional spaces [22]. Such control approaches optimize joint interactions, adhering to human-like principles for improved compliance [7]. Metabolic models inform actuation by optimizing force generation based on work and energy efficiency, especially in repetitive tasks [36]. Integration of biomechanics into control algorithms is vital for enhancing exoskeleton performance.\n\nComputational advancements bridge biomechanics with practical implementation. Neural networkbased surrogate modeling reduces computational demands of finite element methods, accurately predicting muscle-tendon behavior [42]. Real-time biomechanical analysis enables high-fidelity simulations for force control systems [33]. These approaches collectively advance exoskeletons replicating natural force generation while optimizing energy use, enhancing therapeutic efficacy and comfort. Future research should focus on unified frameworks combining computational methods with control algorithms to refine force modulation, supporting users through rehabilitation.",
+      "stats": {
+        "char_count": 1938,
+        "word_count": 223,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3 Biomechanical Modeling and Simulation",
+      "level": 1,
+      "content": "Biomechanical modeling and simulation are essential for predicting performance and optimizing user interaction, though current methods face challenges in data quality and validation [32]. Converting biomechanical models to open-source formats improves simulation speed and broadens accessibility [43]. Evaluating techniques such as direct multiple shooting and collocation methods offers benchmarks for control problems in motion planning [29]. Robust modeling is needed to accurately represent human biomechanics in exoskeleton applications.\n\nAdvanced estimation techniques like Data2LD offer stable solutions for modeling linear systems by minimizing dynamic model-fit criteria [19]. Hamiltonian formulations simulate realistic interactions, incorporating dissipative forces in human motion [44]. Ricci flow dynamics further refine models by linking geometry to energy dissipation during exercises [45]. Sophisticated modeling approaches are pivotal for exoskeletons mimicking human motion, adapting to users’ needs.\n\nMultiscale modeling presents challenges in design, requiring spatial and temporal scale coupling for accurate representation [46]. Monte Carlo simulations account for geometric uncertainties, quantifying sensitivity of performance to anatomical variations [30]. Future research should integrate modeling approaches into frameworks balancing efficiency and physiological accuracy, with standardized validation protocols bridging simulation and clinical use. Emerging hybrid paradigms combining simulations with data-driven techniques promise robust predictions of exoskeleton behavior, enhancing design and applications for improved rehabilitation outcomes.",
+      "stats": {
+        "char_count": 1676,
+        "word_count": 202,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5 Human-Robot Interaction and Control Strategies",
+      "level": 1,
+      "content": "Table 1: This table provides a comprehensive overview of the methods and approaches used in human-robot interaction and control strategies within rehabilitation robotics. It categorizes the techniques into user intent detection and adaptive control, advanced control strategies, and feedback mechanisms and safety, highlighting the specific features and methods employed in each category. References to the original studies are included to guide further exploration of these methodologies.\n\n<html><body><table><tr><td>Category</td><td>Feature</td><td>Method</td></tr><tr><td>UserIntentDetection and Adaptive Control</td><td>Energy and Efficiency Optimization Localized and Adaptive Control Learning and Prediction Models</td><td>PSV[42] ADCS[25] OCF-HLM[7]</td></tr><tr><td>Advanced Control Strategies</td><td>Adaptive Control Strategies Generative and Predictive Models Intention and Coordination</td><td>AITSMC[8],DSIM[15] MACMDF[38], GM-ULE[4] SM[2]</td></tr><tr><td>Feedback Mechanisms and Safety</td><td>Adaptive Feedback Strategies</td><td>MR-HAS[35], NAL-VDC[24], IULE[18],AAC- EEM[36],ARL[22],MPS[1],[5]</td></tr></table></body></html>\n\nUnderstanding human-robot interaction dynamics is crucial for effective communication and control in rehabilitation robotics. This involves a deep comprehension of user intent detection and adaptive control, essential for customizing robotic assistance to individual needs. By examining these elements, the complexities in optimizing exoskeleton performance and enhancing user experience are better appreciated. Table 1 presents a detailed summary of the various methods implemented in the domain of human-robot interaction and control strategies, emphasizing their application in enhancing exoskeleton performance and user experience. Additionally, Table 2 presents a comprehensive comparison of methods in human-robot interaction and control strategies, emphasizing their role in optimizing exoskeleton performance and user experience. The following subsection delves into user intent detection mechanisms and the role of adaptive control strategies in fostering effective human-exoskeleton interactions.",
+      "stats": {
+        "char_count": 2151,
+        "word_count": 232,
+        "sentence_count": 9,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1 User Intent Detection and Adaptive Control",
+      "level": 1,
+      "content": "Effective human-exoskeleton interaction in rehabilitation hinges on sophisticated algorithms for user intent detection and adaptive control. Energy efficiency metrics, such as those derived from metabolic patterns during asynchronous arm-cranking, inform adaptive control strategies by correlating mechanical work with movement selection [36]. Real-time torque estimation enhances intent detection by monitoring interaction forces, allowing exoskeletons to adjust assistance levels while ensuring safety [25]. Reinforcement learning frameworks using proximal policy optimization (PPO) further refine control by estimating muscle activations in biomechanical models, achieving stable control in high-dimensional state spaces [22].\n\nNeural network-based surrogate modeling reduces the computational demands of intent detection, enabling real-time predictions while maintaining dynamic movement analysis accuracy [42]. Safe motion planning schemes use these efficiencies to generate adaptive trajectories based on real-time feedback, ensuring therapeutic efficacy and safety [1]. The SCREWMIMIC framework simplifies bimanual task modeling through screw actions, enhancing exoskeleton learning and synchronization with human movements [2]. This aligns with optimal control principles to enhance compliance and adaptability, achieving precise trajectory generation through biomechanically informed optimization [7].\n\nGenerative modeling techniques allow individualized assistance by adjusting trajectories based on patient feedback, accommodating both active and passive training modes to optimize outcomes [4]. User-oriented assessment frameworks validate these strategies, evaluating comfort and interaction effectiveness, particularly in reducing residual vibrations [5]. Future research should integrate these methodologies into unified control architectures that combine computational efficiency with clinical precision, advancing neural interfaces for intuitive intent detection. Hybrid approaches merging model-based control with data-driven learning, possibly leveraging musculoskeletal simulations, could refine adaptive algorithms in real-time scenarios.",
+      "stats": {
+        "char_count": 2159,
+        "word_count": 252,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2 Advanced Control Strategies",
+      "level": 1,
+      "content": "Advancements in exoskeleton control strategies have enhanced precision, adaptability, and safety in rehabilitation. Impedance control frameworks, like the Adaptive Integral Terminal Sliding Mode Control (AITSMC), address nonlinear dynamics and disturbances by ensuring finite-time convergence and robust performance, minimizing chattering while maintaining precise force tracking [8]. These methods, integrated with MR-Hydrostatic actuation, achieve high-bandwidth force modulation without compromising energy efficiency [35].\n\nNeural interfaces revolutionize control by decoding user intent from neuromuscular signals, enabling intuitive assistance. Intelligent exoskeletons process EMG signals in real-time, adjusting support based on muscle activation patterns [18]. Reinforcement learning frameworks refine these interfaces, achieving stable control in high-dimensional spaces [22]. The SCREWMIMIC framework enhances efficacy by interpreting bimanual tasks through screw theory, simplifying intent detection while synchronizing with human coordination [2].\n\nHybrid control architectures blend model-based and data-driven approaches, overcoming traditional limitations. Decentralized nonlinear control reduces complexity through natural adaptation laws, maintaining stability without predefined bounds [24]. Generative models create tailored trajectories, switching between training modes based on biomechanical feedback [4]. Cross-modal diffusion techniques ensure consistent performance across modalities [38].\n\nEmerging trends emphasize integrating musculoskeletal simulations with real-time adaptive algorithms. Differentiable simulation methods optimize control parameters by providing analytical gradients [15]. The OpenCap bench framework validates control strategies against motion capture data [39]. Future research should unify these approaches into cohesive control architectures, leveraging computational advancements, sensor technology, and biomechanical modeling to achieve unprecedented precision and adaptability in rehabilitation exoskeletons.",
+      "stats": {
+        "char_count": 2063,
+        "word_count": 232,
+        "sentence_count": 15,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "5.3 Feedback Mechanisms and Safety",
+      "level": 1,
+      "content": "Feedback mechanisms in upper limb exoskeletons are vital for user safety and therapeutic efficacy, utilizing real-time monitoring and adaptive responses to biomechanical and environmental conditions. Multimodal sensory feedback, including force, position, and physiological signals, allows exoskeletons to detect hazards and adjust assistance levels. The Safe and Individualized Motion Planning Scheme (SIMPS) continuously evaluates biomechanical constraints to prevent unsafe movements while maintaining therapeutic intensity [1]. This is supported by decentralized nonlinear control architectures ensuring stability through natural adaptation laws [24].\n\nHaptic feedback systems enhance safety by providing tactile cues about exoskeleton state and interactions, as seen in the MR-Hydrostatic arm’s force-controllable interface [35]. Input shaping techniques like the zero vibration derivative (ZVD) shaper minimize residual vibrations, improving comfort and control precision [5]. Edge and cloud computing frameworks process feedback signals in real-time, ensuring low-latency responses for safety-critical applications [27].\n\nPhysiological monitoring extends safety to include metabolic state and fatigue levels, optimizing energy strategies to prevent overexertion while maintaining effectiveness [36]. Reinforcement learning frameworks train control policies encompassing biomechanical and physiological variables, achieving stable operation across scenarios [22].\n\nFuture advancements should focus on predictive safety systems using machine learning to anticipate hazards. Standardized safety protocols and validation frameworks are essential for reliability in clinical settings. Emerging technologies like soft sensors and neural interfaces enhance safety by providing direct feedback channels [18]. These innovations require rigorous clinical testing to establish clear correlations between feedback mechanisms, safety, and therapeutic efficacy across patient populations.\n\n<html><body><table><tr><td>Feature</td><td>User Intent Detection and Adaptive ControlAdvanced Control StrategiesFeedback Mechanisms and Safety</td><td></td><td></td></tr><tr><td>Control Strategy</td><td>Reinforcement Learning</td><td>Impedance Control</td><td>Decentralized Nonlinear Control</td></tr><tr><td>Feedback Mechanism</td><td>Real-time Torque Estimation</td><td>Neural Interfaces</td><td>Haptic Feedback Systems</td></tr><tr><td>Adaptability</td><td>Neural Network Models</td><td>Hybrid Control Architectures</td><td>Physiological Monitoring</td></tr></table></body></html>\n\nTable 2: This table provides a comparative analysis of various methods implemented in human-robot interaction and control strategies, focusing on user intent detection, advanced control strategies, and feedback mechanisms for safety. It highlights the control strategies, feedback mechanisms, and adaptability features that are integral to enhancing exoskeleton performance and user experience in rehabilitation robotics.",
+      "stats": {
+        "char_count": 2989,
+        "word_count": 320,
+        "sentence_count": 15,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "6 Challenges and Future Directions",
+      "level": 1,
+      "content": "Understanding the challenges and future directions in assistive exoskeleton technologies necessitates recognizing the current limitations that hinder widespread adoption. Addressing these technological gaps, particularly in computational efficiency, anatomical fidelity, and control complexity, is crucial for future innovations. By identifying these issues, researchers and practitioners can enhance the practical application of these technologies in rehabilitation settings.",
+      "stats": {
+        "char_count": 476,
+        "word_count": 55,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.1 Current Limitations and Technological Gaps",
+      "level": 1,
+      "content": "Assistive exoskeletons face significant limitations in computational efficiency, anatomical fidelity, control complexity, and clinical adaptability, affecting their rehabilitation application. Computational challenges arise in muscle-actuated systems, where complex models hinder user adaptability and muscle dynamics understanding. Muscle interaction intricacies lead to control algorithm inefficiencies, impacting performance during varied rehabilitation tasks [17]. Reinforcement learning policies also struggle with target orientation accuracy in posterior postures, revealing observability issues in high-dimensional control environments [22]. Energy efficiency models show gaps in movement selection prediction, limiting rehabilitation outcome optimization [36].\n\nAnatomical fidelity issues persist in joint angle estimation, where reduced markers compromise accuracy compared to traditional motion capture systems, affecting exoskeleton performance [33]. Low-quality datasets further degrade joint angle-based method performance, creating a cycle of subpar data leading to ineffective rehabilitation strategies [14]. Traditional biomechanics models fail to simulate high-intensity movements accurately, necessitating advanced Hamiltonian approaches for time-fitness-dependent dynamics [3]. Improved methodologies are needed to capture human movement complexity.\n\nControl system architectures face scalability issues, particularly in decentralized nonlinear frameworks requiring extensive parameter tuning, which is time-consuming and resource-intensive [25]. Dependence on accurate feedback and sensor data introduces vulnerabilities to external factors and patient variability, significantly affecting performance [4]. Neural network-based visualization methods introduce approximation errors through sparse grid surrogates, affecting real-time predictive performance [42]. Safe motion planning schemes face generalization challenges across diverse patient populations, limiting clinical applicability [1]. Integrated solutions addressing computational efficiency, anatomical accuracy, control robustness, and clinical adaptability are needed to advance exoskeleton technologies for rehabilitation.",
+      "stats": {
+        "char_count": 2206,
+        "word_count": 244,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6.2 Integration of AI and Soft Robotics",
+      "level": 1,
+      "content": "Integrating artificial intelligence (AI) and soft robotics offers transformative solutions to enhance adaptability, control precision, and anatomical compatibility in assistive exoskeleton design. AIdriven control strategies show promise in improving human-robot interaction, with reinforcement learning frameworks excelling in high-dimensional control environments by adapting to individual movements, thereby enhancing exoskeleton functionality [22]. Future refinements should enhance observability and incorporate physiologically detailed models to improve muscle excitation estimations, enabling more natural exoskeleton behavior. The SCREWMIMIC framework exemplifies this direction, with potential AI-driven multi-task model extensions overcoming bimanual control challenges [2].\n\nSoft robotics complements AI by enabling compliant, lightweight structures that conform to human anatomy, reducing energy consumption and enhancing user comfort during rehabilitation. Future research should optimize control parameters and framework robustness under diverse conditions, as highlighted in studies of human-like movement mechanisms [7]. Integrating machine learning with RGBD-based pose estimation could further enhance anatomical fidelity by addressing motion tracking accuracy gaps [33]. AI and soft materials synergy enables exoskeletons to dynamically adapt to individual biomechanical variations while maintaining therapeutic efficacy.\n\nEmerging differentiable simulation methods bridge AI and soft robotics through gradient-based learning, with markerless motion capture systems promising clinical adoption. This approach accurately tracks user movements without cumbersome markers, enhancing user experience and data quality. Efficient sampling methods could overcome challenges in quantifying geometric uncertainty in boundary-value problems, improving soft robotic exoskeleton design accuracy [30]. Future research should optimize model architectures for joint angle data, enhancing movement pattern interpretability and informing intuitive control interface design [14]. These advancements point toward a new generation of exoskeletons capable of seamless adaptation to individual rehabilitation needs through sophisticated biomechanical integration and adaptive control.\n\n6.3 Clinical Validation and Biomechanical Modeling\n\n<html><body><table><tr><td>Benchmark</td><td>Size</td><td>Domain</td><td>Task Format</td><td>Metric</td></tr><tr><td>MMC[34]</td><td>1,160</td><td>Biomechanics</td><td>Functional Task Assessment</td><td>RMSE, r</td></tr><tr><td>DMS-DC[29]</td><td>1,000</td><td>Biomechanics</td><td>Optimal Control Problem</td><td>Convergence Rate, CPU Time</td></tr><tr><td>OpenCapBench[39]</td><td>1,600</td><td>Biomechanics</td><td>Pose Estimation</td><td>RMSE</td></tr><tr><td>OstrichRL[17]</td><td>82</td><td>Biomechanics</td><td>Locomotion</td><td>Reward,Tracking Error</td></tr></table></body></html>\n\nTable 3: This table presents a comprehensive comparison of four biomechanics benchmarks, detailing their respective sizes, domains, task formats, and evaluation metrics. The benchmarks include MMC, DMS-DC, OpenCapBench, and OstrichRL, each contributing distinct insights into functional task assessment, optimal control problems, pose estimation, and locomotion within the biomechanics domain. The evaluation metrics employed, such as RMSE, convergence rate, and tracking error, are critical for assessing the performance and efficacy of biomechanical models and simulations.\n\nRigorous clinical validation and advanced biomechanical modeling are crucial for ensuring assistive exoskeletons’ efficacy, safety, and adaptability in upper limb rehabilitation. Clinical validation must incorporate patient-specific biomechanical responses and longitudinal therapeutic outcomes, essential for understanding user interaction over time, as emphasized by the need for extensive testing of individualized motion planning schemes [1]. Dual-mode rehabilitation frameworks show clinical adaptation potential but require systematic robustness evaluation across diverse patient populations and extended therapeutic durations [4]. Input shaping techniques for vibration control highlight the importance of comparative clinical studies to assess effectiveness against alternative methods in enhancing user comfort [5].\n\nBiomechanical modeling faces challenges in capturing exoskeleton-human physiology dynamics, particularly time-dependent fitness factors influencing rehabilitation outcomes. The time-fitnessdependent Hamiltonian framework provides a theoretical foundation for modeling complex interactions, though clinical applicability requires validation across diverse movement intensities and patient conditions [3]. Advanced modeling approaches must address muscle-tendon unit nonlinear dynamics during rehabilitation, incorporating active and passive tissue properties to predict exoskeleton-user interactions accurately. Integrating real-time sensory feedback mechanisms with these models could enhance predictive capabilities while maintaining computational tractability for clinical implementation [4]. Table 3 provides a detailed overview of representative biomechanics benchmarks, which are essential for evaluating the performance of biomechanical modeling and simulation frameworks in the context of assistive exoskeletons.\n\nFuture research should prioritize three synergistic objectives: developing standardized clinical protocols to evaluate short-term biomechanical responses and long-term therapeutic outcomes across diverse populations, refining biomechanical models through adaptive learning algorithms accounting for anatomical variations and evolving needs, and establishing robust benchmarking frameworks bridging simulation and clinical practice for consistent exoskeleton performance evaluation under real-world conditions. These efforts must be complemented by rigorous testing of safety-critical systems to establish evidence-based clinical deployment guidelines [1]. Integrating validation and modeling approaches will advance assistive exoskeletons from prototypes to clinically viable rehabilitation tools.",
+      "stats": {
+        "char_count": 6148,
+        "word_count": 659,
+        "sentence_count": 29,
+        "line_count": 17
+      }
+    },
+    {
+      "heading": "6.4 Ethical and Practical Considerations",
+      "level": 1,
+      "content": "Developing and deploying assistive exoskeletons for upper limb rehabilitation requires addressing ethical and practical challenges intersecting technological innovation, clinical implementation, and societal impact. Privacy concerns arise in systems using cross-modal diffusion techniques for biomechanical data reconstruction, where inferring missing movement data raises questions about patient consent and data security. These concerns are particularly salient in advanced machine learning algorithms analyzing sensitive data, necessitating stringent protocols to safeguard patient information [38]. Reliance on advanced computational models, such as time-fitness-dependent Hamiltonian frameworks, requiring specialized expertise and infrastructure, potentially limits accessibility for under-resourced rehabilitation centers [3].\n\nPractical constraints in material science and biomechanical modeling present additional ethical dilemmas. Theoretical models of orthotropic incompressible materials, while promising for exoskeleton design, often lack comprehensive experimental validation, raising concerns about safe clinical implementation [47]. Initial stress symmetry principles illustrate this challenge, as their restricted applicability to specific material behaviors may limit the diversity of patient populations benefiting from exoskeleton technologies [48]. Transparent communication between researchers, clinicians, and patients regarding current technologies’ capabilities and constraints is essential to align expectations with reality.\n\nClinical deployment introduces challenges related to cost-effectiveness and equitable access. The computational intensity of advanced control strategies, such as reinforcement learning in highdimensional spaces, may create disparities in healthcare delivery between institutions with varying technological resources [22]. Developing individualized motion planning schemes must balance therapeutic efficacy with scalability to ensure broad clinical adoption [1]. Future directions should prioritize establishing ethical data governance guidelines, standardized clinical validation protocols, and inclusive design principles addressing diverse patient needs while maintaining scientific rigor and technological feasibility. These considerations will foster an equitable environment where assistive technologies can thrive and benefit all users.",
+      "stats": {
+        "char_count": 2395,
+        "word_count": 273,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "7 Conclusion",
+      "level": 1,
+      "content": "This survey has delved into the intricate landscape of assistive exoskeleton design for upper limb rehabilitation, underscoring the pivotal integration of biomechanics, human-robot interaction, and sophisticated control strategies. The fusion of biomechanical insights with robotic technologies is fundamental in crafting exoskeletons that not only emulate natural movement patterns but also cater to individual rehabilitation demands. Theoretical frameworks such as time-fitness-dependent Hamiltonian models offer a robust basis for comprehending joint kinematics and muscle-tendon dynamics, thereby enhancing rehabilitation exercises. Advanced simulation techniques further facilitate the prediction and optimization of exoskeleton performance across varied conditions, thereby refining design parameters to bolster therapeutic outcomes. This synergy between biomechanics and robotics not only enhances the efficacy of rehabilitation tools but also sets the stage for future innovations that may bridge the divide between human capabilities and robotic assistance.\n\nHuman-robot interaction is a cornerstone in exoskeleton design, with adaptive control strategies showing immense promise in boosting therapeutic effectiveness. Reinforcement learning frameworks contribute to stable muscle activation in high-dimensional control environments, fostering naturalistic movements during rehabilitation. Decentralized nonlinear control architectures ensure robust performance in contact-rich interactions, thereby enhancing user safety and minimizing injury risks. The amalgamation of these approaches with user-centered assessment frameworks has augmented the comfort and functionality of rehabilitation exoskeletons, empowering users to engage more comprehensively in their recovery journeys. Despite these advancements, challenges in computational efficiency and clinical adaptability persist, necessitating ongoing research to refine these technologies for broader application in diverse clinical settings.\n\nInnovations in material science and mechanical design have addressed critical trade-offs between rigidity and flexibility, with lightweight structures and compliant actuation mechanisms enhancing wearability without compromising performance. Anatomically faithful designs ensure natural movement patterns and minimize compensatory motions, thereby improving the overall therapeutic efficacy. Future research should prioritize the integration of artificial intelligence and soft robotics to overcome current limitations in adaptability and energy efficiency, as these technologies hold the potential to create more responsive and user-friendly exoskeletons. Moreover, rigorous clinical validation is essential to translate technological advancements into measurable therapeutic outcomes, establishing a clear link between innovation and patient improvement in rehabilitation contexts.\n\nThe ethical and practical considerations surrounding exoskeleton deployment highlight the necessity for inclusive design principles and standardized validation protocols. As the field evolves, the continued integration of biomechanical insights with adaptive control paradigms will be crucial in developing exoskeletons that not only restore mobility but also enhance the quality of life for individuals with upper limb impairments. The convergence of these multidisciplinary approaches promises to redefine the boundaries of rehabilitation engineering, offering transformative solutions for personalized and effective upper limb rehabilitation. By fostering collaboration across disciplines, the potential for creating groundbreaking rehabilitation technologies becomes increasingly attainable, ultimately contributing to a more inclusive society where individuals with disabilities can thrive through enhanced mobility and independence.",
+      "stats": {
+        "char_count": 3830,
+        "word_count": 458,
+        "sentence_count": 18,
+        "line_count": 7
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Safe and individualized motion planning for upper-limb exoskeleton robots using human demonstration and interactive learning",
+      "number": null,
+      "title": "Safe and individualized motion planning for upper-limb exoskeleton robots using human demonstration and interactive learning"
+    },
+    {
+      "text": "Screwmimic: Bimanual imitation from human videos with screw space projection",
+      "number": null,
+      "title": "Screwmimic: Bimanual imitation from human videos with screw space projection"
+    },
+    {
+      "text": "Time fitness-dependent hamiltonian biomechanics",
+      "number": null,
+      "title": "Time fitness-dependent hamiltonian biomechanics"
+    },
+    {
+      "text": "Upperlimb rehabilitation with a dual-mode individualized exoskeleton robot: A generative-modelbased solution",
+      "number": null,
+      "title": "Upperlimb rehabilitation with a dual-mode individualized exoskeleton robot: A generative-modelbased solution"
+    },
+    {
+      "text": "User oriented assessment of vibration suppression by command shaping in a supernumerary wearable robotic arm",
+      "number": null,
+      "title": "User oriented assessment of vibration suppression by command shaping in a supernumerary wearable robotic arm"
+    },
+    {
+      "text": "Myosuite – a contact-rich simulation suite for musculoskeletal motor control",
+      "number": null,
+      "title": "Myosuite – a contact-rich simulation suite for musculoskeletal motor control"
+    },
+    {
+      "text": "Uncovering the secrets of human-like movement: A fresh perspective on motion planning",
+      "number": null,
+      "title": "Uncovering the secrets of human-like movement: A fresh perspective on motion planning"
+    },
+    {
+      "text": "Adaptive terminal sliding mode control using deep reinforcement learning for zero-force control of exoskeleton robot systems",
+      "number": null,
+      "title": "Adaptive terminal sliding mode control using deep reinforcement learning for zero-force control of exoskeleton robot systems"
+    },
+    {
+      "text": "Design and control of a quasi-direct drive soft exoskeleton for knee injury prevention during squatting",
+      "number": null,
+      "title": "Design and control of a quasi-direct drive soft exoskeleton for knee injury prevention during squatting"
+    },
+    {
+      "text": "Inverse dynamics with rigid contact and friction",
+      "number": null,
+      "title": "Inverse dynamics with rigid contact and friction"
+    },
+    {
+      "text": "Design of the anatomically correct, biomechatronic hand",
+      "number": null,
+      "title": "Design of the anatomically correct, biomechatronic hand"
+    },
+    {
+      "text": "Learning realistic joint space boundaries for range of motion analysis of healthy and impaired human arms",
+      "number": null,
+      "title": "Learning realistic joint space boundaries for range of motion analysis of healthy and impaired human arms"
+    },
+    {
+      "text": "Leveraging symbolic algebra systems to simulate contact dynamics in rigid body systems",
+      "number": null,
+      "title": "Leveraging symbolic algebra systems to simulate contact dynamics in rigid body systems"
+    },
+    {
+      "text": "Using joint angles based on the international biomechanical standards for human action recognition and related tasks",
+      "number": null,
+      "title": "Using joint angles based on the international biomechanical standards for human action recognition and related tasks"
+    },
+    {
+      "text": "Differentiable simulation of inertial musculotendons",
+      "number": null,
+      "title": "Differentiable simulation of inertial musculotendons"
+    },
+    {
+      "text": "Joint axis estimation for fast and slow movements using weighted gyroscope and acceleration constraints",
+      "number": null,
+      "title": "Joint axis estimation for fast and slow movements using weighted gyroscope and acceleration constraints"
+    },
+    {
+      "text": "Ostrichrl: A musculoskeletal ostrich simulation to study bio-mechanical locomotion",
+      "number": null,
+      "title": "Ostrichrl: A musculoskeletal ostrich simulation to study bio-mechanical locomotion"
+    },
+    {
+      "text": "Intelligent upper-limb exoskeleton integrated with soft wearable bioelectronics and deep-learning for human intention-driven strength augmentation based on sensory feedback",
+      "number": null,
+      "title": "Intelligent upper-limb exoskeleton integrated with soft wearable bioelectronics and deep-learning for human intention-driven strength augmentation based on sensory feedback"
+    },
+    {
+      "text": "Fast stable parameter estimation for linear dynamical",
+      "number": null,
+      "title": "Fast stable parameter estimation for linear dynamical"
+    },
+    {
+      "text": "Ib2d: a python and matlab implementation of the immersed boundary method",
+      "number": null,
+      "title": "Ib2d: a python and matlab implementation of the immersed boundary method"
+    },
+    {
+      "text": "Mechanics, energetics, entropy and kinetics of a binary mechanical model system",
+      "number": null,
+      "title": "Mechanics, energetics, entropy and kinetics of a binary mechanical model system"
+    },
+    {
+      "text": "Reinforcement learning for high-dimensional continuous control in biomechanics: An intro to artisynth-rl",
+      "number": null,
+      "title": "Reinforcement learning for high-dimensional continuous control in biomechanics: An intro to artisynth-rl"
+    },
+    {
+      "text": "An overview of artificial intelligence-based soft upper limb exoskeleton for rehabilitation: A descriptive review",
+      "number": null,
+      "title": "An overview of artificial intelligence-based soft upper limb exoskeleton for rehabilitation: A descriptive review"
+    },
+    {
+      "text": "Decentralized nonlinear control of redundant upper limb exoskeleton with natural adaptation law",
+      "number": null,
+      "title": "Decentralized nonlinear control of redundant upper limb exoskeleton with natural adaptation law"
+    },
+    {
+      "text": "Physical human-robot interaction control of an upper limb exoskeleton with a decentralized neuro-adaptive control scheme",
+      "number": null,
+      "title": "Physical human-robot interaction control of an upper limb exoskeleton with a decentralized neuro-adaptive control scheme"
+    },
+    {
+      "text": "Human-robot skill transfer with enhanced compliance via dynamic movement primitives",
+      "number": null,
+      "title": "Human-robot skill transfer with enhanced compliance via dynamic movement primitives"
+    },
+    {
+      "text": "Networking and computing in biomechanical research: Challenges and directions",
+      "number": null,
+      "title": "Networking and computing in biomechanical research: Challenges and directions"
+    },
+    {
+      "text": "Learning predictive models for ergonomic control of prosthetic devices",
+      "number": null,
+      "title": "Learning predictive models for ergonomic control of prosthetic devices"
+    },
+    {
+      "text": "Direct multiple shooting and direct collocation perform similarly in biomechanical predictive simulations",
+      "number": null,
+      "title": "Direct multiple shooting and direct collocation perform similarly in biomechanical predictive simulations"
+    },
+    {
+      "text": "Random boundaries: quantifying segmentation uncertainty in solutions to boundary value problems",
+      "number": null,
+      "title": "Random boundaries: quantifying segmentation uncertainty in solutions to boundary value problems"
+    },
+    {
+      "text": "Evaluation of the global optimisation method within the upper limb kinematics analysis",
+      "number": null,
+      "title": "Evaluation of the global optimisation method within the upper limb kinematics analysis"
+    },
+    {
+      "text": "Challenges and opportunities associated with technology driven biomechanical simulations",
+      "number": null,
+      "title": "Challenges and opportunities associated with technology driven biomechanical simulations"
+    },
+    {
+      "text": "Real-time, accurate, and open source upper-limb musculoskeletal analysis using a single rgbd camera",
+      "number": null,
+      "title": "Real-time, accurate, and open source upper-limb musculoskeletal analysis using a single rgbd camera"
+    },
+    {
+      "text": "Differentiable biomechanics for markerless motion capture in upper limb stroke rehabilitation: A comparison with optical motion capture",
+      "number": null,
+      "title": "Differentiable biomechanics for markerless motion capture in upper limb stroke rehabilitation: A comparison with optical motion capture"
+    },
+    {
+      "text": "A lightweight force-controllable wearable arm based on magnetorheological-hydrostatic actuators",
+      "number": null,
+      "title": "A lightweight force-controllable wearable arm based on magnetorheological-hydrostatic actuators"
+    },
+    {
+      "text": "Patterns of selection of human movements iv: Energy efficiency, mechanical advantage, and asynchronous arm-cranking",
+      "number": null,
+      "title": "Patterns of selection of human movements iv: Energy efficiency, mechanical advantage, and asynchronous arm-cranking"
+    },
+    {
+      "text": "Enhancing the performance of a biomimetic robotic elbow-and-forearm system through bionics-inspired optimization",
+      "number": null,
+      "title": "Enhancing the performance of a biomimetic robotic elbow-and-forearm system through bionics-inspired optimization"
+    },
+    {
+      "text": "Cross-modal diffusion for biomechanical dynamical systems through local manifold alignment",
+      "number": null,
+      "title": "Cross-modal diffusion for biomechanical dynamical systems through local manifold alignment"
+    },
+    {
+      "text": "Opencapbench: A benchmark to bridge pose estimation and biomechanics",
+      "number": null,
+      "title": "Opencapbench: A benchmark to bridge pose estimation and biomechanics"
+    },
+    {
+      "text": "Oscillations and damping in the fractional maxwell materials",
+      "number": null,
+      "title": "Oscillations and damping in the fractional maxwell materials"
+    },
+    {
+      "text": "One-dimensional solution families of nonlinear systems characterized by scalar functions on riemannian manifolds",
+      "number": null,
+      "title": "One-dimensional solution families of nonlinear systems characterized by scalar functions on riemannian manifolds"
+    },
+    {
+      "text": "Persival: Neural-network-based visualisation for pervasive continuum-mechanical simulations in musculoskeletal biomechanics",
+      "number": null,
+      "title": "Persival: Neural-network-based visualisation for pervasive continuum-mechanical simulations in musculoskeletal biomechanics"
+    },
+    {
+      "text": "Converting biomechanical models from opensim to mujoco",
+      "number": null,
+      "title": "Converting biomechanical models from opensim to mujoco"
+    },
+    {
+      "text": "Jet spaces in modern hamiltonian biomechanics",
+      "number": null,
+      "title": "Jet spaces in modern hamiltonian biomechanics"
+    },
+    {
+      "text": "Jet-ricci geometry of time-dependent human biomechanics",
+      "number": null,
+      "title": "Jet-ricci geometry of time-dependent human biomechanics"
+    },
+    {
+      "text": "Multiscale modeling, discretization, and algorithms: a survey in biomechanics",
+      "number": null,
+      "title": "Multiscale modeling, discretization, and algorithms: a survey in biomechanics"
+    },
+    {
+      "text": "Inhomogeneous shear of orthotropic incompressible non-linearly elastic solids: singular solutions and biomechanical interpretation",
+      "number": null,
+      "title": "Inhomogeneous shear of orthotropic incompressible non-linearly elastic solids: singular solutions and biomechanical interpretation"
+    },
+    {
+      "text": "Initial stress symmetry and applications in elasticity",
+      "number": null,
+      "title": "Initial stress symmetry and applications in elasticity"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\SurveyX\\Engineering\\Upper Limb Exoskeleton Design_split.json",
+    "processed_date": "2025-12-31T13:52:20.166643",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

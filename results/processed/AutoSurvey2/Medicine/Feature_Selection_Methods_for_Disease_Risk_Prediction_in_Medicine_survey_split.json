@@ -1,0 +1,211 @@
+{
+  "outline": [
+    [
+      1,
+      "Feature Selection Methods for Disease Risk Prediction in Medicine: A Comprehensive Survey"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "Keywords"
+    ],
+    [
+      2,
+      "Introduction"
+    ],
+    [
+      2,
+      "Background"
+    ],
+    [
+      2,
+      "Current State of the Art"
+    ],
+    [
+      2,
+      "Future Directions"
+    ],
+    [
+      2,
+      "Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Feature Selection Methods for Disease Risk Prediction in Medicine: A Comprehensive Survey",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "**Abstract** The increasing availability of diverse medical data, including electronic health records, genomic information, and real-world evidence, has driven the development of machine learning models for disease risk prediction. However, the high dimensionality and complexity of these data necessitate effective feature selection methods to identify relevant predictors and improve model performance and interpretability. This survey paper provides a comprehensive overview of feature selection techniques applied in the context of medical risk prediction. It begins with an introduction to the challenges posed by high-dimensional biomedical data and the critical role of feature selection in addressing them. The background section outlines traditional and modern approaches, emphasizing their relevance in clinical settings. The current state of the art is discussed, highlighting advances in machine learning-driven methods, interpretability requirements, and strategies for handling class imbalance and data heterogeneity. The paper also explores emerging trends, including hybrid and metaheuristic techniques, which offer improved adaptability and robustness. Finally, future directions are outlined, focusing on the need for more interpretable, efficient, and clinically aligned feature selection frameworks. This work contributes to the growing body of literature by synthesizing key methodologies, evaluating their strengths and limitations, and identifying opportunities for further research. The survey aims to guide researchers and practitioners in selecting and developing feature selection strategies that enhance the accuracy, reliability, and clinical utility of disease risk prediction models.",
+      "stats": {
+        "char_count": 1714,
+        "word_count": 222,
+        "sentence_count": 10,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Keywords",
+      "level": 2,
+      "content": "large language models, multimodal learning, natural language processing, machine learning, artificial intelligence",
+      "stats": {
+        "char_count": 114,
+        "word_count": 12,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Introduction",
+      "level": 2,
+      "content": "The increasing availability of diverse medical data, including electronic health records (EHRs), genomic information, and real-world evidence, has spurred the development of machine learning (ML) models for disease risk prediction. However, the high dimensionality and complexity of these data pose significant challenges in identifying the most relevant features that contribute to accurate and interpretable predictions. Feature selection methods have emerged as a critical component in this process, enabling the identification of key biomarkers, lifestyle factors, and clinical variables that are most informative for predicting disease outcomes. This survey paper provides a comprehensive overview of feature selection techniques applied in the context of disease risk prediction in medicine, highlighting their evolution, applications, and challenges. Over the past few years, research has increasingly focused on personalization, leveraging real-world data, and improving model interpretability, with many studies emphasizing the importance of tailoring feature selection strategies to individual patient characteristics. For instance, automated pipelines for extracting disease risk factors from medical literature have demonstrated the potential of natural language processing (NLP) and machine learning in curating structured datasets [1]. At the same time, the limitations of traditional data sources such as ICD codes have been increasingly recognized, as they often fail to capture the nuanced clinical and demographic details necessary for robust machine learning models [3]. This has led to a growing emphasis on the integration of lifestyle data, temporal hospital trajectories, and advanced representation learning techniques to enhance the predictive power of risk models. Attention-based learning methods have shown particular promise in highlighting the most relevant features from complex cardiovascular data, while temporal clustering approaches have enabled more personalized risk assessments by capturing the dynamic nature of patient health [2]. Additionally, the use of deep learning and self-supervised methods has opened new avenues for feature selection, allowing models to learn meaningful representations from unstructured or partially labeled medical data. Despite these advancements, challenges remain, including the need for more interpretable models, the integration of heterogeneous data sources, and the validation of feature selection methods in real-world clinical settings. As the field continues to evolve, the development of robust, generalizable, and clinically relevant feature selection techniques will be essential for improving the accuracy and practical utility of disease risk prediction models.",
+      "stats": {
+        "char_count": 2744,
+        "word_count": 367,
+        "sentence_count": 12,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Background",
+      "level": 2,
+      "content": "Feature selection plays a critical role in building accurate and interpretable models for disease risk prediction in medicine. As the volume and complexity of biomedical data continue to grow, the ability to identify relevant features that contribute to predictive performance has become increasingly important. Traditional approaches to feature selection often rely on statistical tests, filter methods, or embedded techniques, but recent advances in machine learning have introduced more sophisticated strategies that incorporate domain knowledge, deep learning, and attention mechanisms. These methods are particularly valuable in medical applications where data is often high-dimensional, noisy, and subject to biases, making feature selection not only a technical challenge but also a key determinant of clinical utility. Several recent studies have explored various feature selection techniques tailored for medical prediction tasks, highlighting the importance of integrating multi-modal data, ensuring model interpretability, and avoiding common pitfalls such as label or feature leakage. For instance, the dual-feature extraction approach in DFDRNN demonstrates how combining similarity and association features can enhance drug-disease association prediction, while MKDTI leverages graph attention networks and kernel fusion to improve the accuracy of drug-target interaction models. These methods underscore the growing trend of using deep learning and attention mechanisms to extract meaningful patterns from complex biomedical data. In addition, the use of large language models (LLMs) for integrating social determinants of health data has shown promise in improving the predictive power of models for conditions such as heart failure readmission. This reflects a broader shift toward leveraging diverse data sources and advanced feature encoding strategies to build more robust and generalizable models. Another key development is the emphasis on interpretability, as seen in methods like SUWR, which formalizes the problem of feature leakage and introduces a local feature selection approach that enhances model transparency without sacrificing performance. This focus on interpretability is crucial in medical applications, where decisions must be explainable and reliable. Furthermore, the application of prompting techniques in whole slide image analysis demonstrates the potential of leveraging pre-trained models to extract genetic biomarkers, offering a new avenue for feature selection in pathology-based predictions. Overall, the evolution of feature selection methods in disease risk prediction has been driven by the need to handle complex, multi-modal data while maintaining model accuracy and interpretability. As the field continues to advance, the integration of domain-specific knowledge, the development of robust feature encoding strategies, and the emphasis on model transparency will remain central to the success of these methods in real-world medical applications.",
+      "stats": {
+        "char_count": 3001,
+        "word_count": 408,
+        "sentence_count": 14,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Current State of the Art",
+      "level": 2,
+      "content": "The current state of the art in feature selection methods for disease risk prediction in medicine is marked by a convergence of advanced machine learning techniques, interpretability demands, and the need for robust and efficient models in clinical settings. Recent research has increasingly focused on addressing the challenges posed by high-dimensional biomedical data, class imbalance, and the necessity for models that align with clinical expertise. Feature selection has evolved from traditional statistical methods to more sophisticated approaches that integrate deep learning, hybrid models, and domain-specific knowledge to enhance both model performance and interpretability. One of the central themes in current research is the emphasis on model interpretability, particularly in medical applications where decisions must be transparent and aligned with clinical reasoning. For instance, in the context of tuberculosis detection using chest X-ray imaging, pre-training on proxy tasks combined with the MOON (Mutual Opposite Contrastive Learning) technique has been shown to improve model reliability by aligning decision-making with expert annotations [6]. This highlights a growing trend toward developing models that not only perform well but also provide insights into their decision-making processes, thereby increasing trust and usability in clinical practice. Another key development is the integration of deep learning with traditional machine learning techniques for feature selection and risk prediction. The XGB-DL model, for example, demonstrated significant improvements in mortality prediction for ICU stroke patients by combining XGBoost for feature selection and deep learning for modeling complex patterns, resulting in a reduction of the feature set from 1095 to 30 while improving AUROC by 13\\ Feature selection techniques are also being refined to address the challenges of high-dimensional data and limited clinical resources. In the case of clinical trial enrollment prediction, the use of LLM-augmented deep and cross networks has enabled the extraction of meaningful features from unstructured eligibility criteria, leading to improved performance with a PR-AUC of 0.7002 [5]. This approach not only enhances predictive accuracy but also introduces interpretability through semantic analysis of text-based features, making it easier for clinicians to understand and validate model outputs. In addition, the role of retrieval-based methods in medical coding has been highlighted, with the Retrieve-Rank system achieving 100\\ The use of neural ordinary differential equations (ODEs) in medical image sequence regression, as seen in the NODER framework, further illustrates the trend toward more efficient and accurate modeling of dynamic biomedical processes [5]. By reducing computational costs and improving accuracy with minimal input data, such approaches are particularly well-suited for real-world clinical scenarios where data may be sparse or costly to acquire. Despite these advancements, challenges remain in the field. Many models still rely on expert annotations for training, which can be time-consuming and subject to variability. Additionally, the need for robustness in the face of class imbalance and domain shifts continues to drive the development of techniques such as SMOTE and MOON. The growing availability of open-source code and datasets also plays a critical role in fostering reproducibility and accelerating progress in the field. Overall, the current state of feature selection methods for disease risk prediction in medicine reflects a dynamic and rapidly evolving landscape. The integration of deep learning, hybrid models, and interpretability techniques has led to significant improvements in both model performance and clinical utility. As research continues, the focus will likely remain on developing methods that are not only accurate but also transparent, efficient, and adaptable to the diverse and complex nature of medical data.",
+      "stats": {
+        "char_count": 4000,
+        "word_count": 566,
+        "sentence_count": 20,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Future Directions",
+      "level": 2,
+      "content": "Feature selection plays a pivotal role in disease risk prediction, particularly in the context of medical data, where high dimensionality, heterogeneity, and the need for interpretability pose significant challenges. The reviewed literature highlights a growing emphasis on developing robust, adaptive, and interpretable feature selection methods that can effectively handle complex medical datasets. Recent advances have shown that hybrid approaches, combining filter, wrapper, and metaheuristic techniques, offer superior performance in identifying relevant features while reducing computational complexity and improving model generalization. For instance, the integration of genetic algorithms with distance-based mutual congestion methods has demonstrated effectiveness in managing high-dimensional medical data, particularly in scenarios with limited sample sizes [12]. Similarly, heuristic-based feature selection methods, such as those using imperialist competitive algorithms and bat algorithms, have shown promising results in improving classification accuracy for breast cancer prediction [8]. These approaches underscore the importance of incorporating domain-specific knowledge and leveraging optimization techniques to enhance the efficiency and reliability of feature selection processes. The increasing adoption of machine learning and deep learning in medical applications has further highlighted the need for feature selection techniques that can adapt to the complexities of real-world healthcare data. Federated learning, for example, has emerged as a powerful framework for addressing data heterogeneity across institutions, enabling the development of predictive models without compromising patient privacy [10]. This approach not only facilitates the integration of diverse data sources but also emphasizes the importance of feature-based clustering and event-based reporting to improve model performance. In addition, the use of knowledge graph embeddings in adverse drug reaction prediction models has demonstrated the potential of incorporating structured domain knowledge to enhance feature representation and model accuracy [13]. Such integrative strategies are likely to become more prevalent as the healthcare landscape continues to evolve, with an increasing focus on personalized and precision medicine. Interpretability and explainability remain critical concerns in medical applications, as clinicians require transparent and reliable models to support decision-making. Several studies have emphasized the need for feature selection methods that not only improve predictive performance but also provide insights into the underlying biological or clinical mechanisms driving disease risk. This trend is reflected in the use of explainable AI techniques, such as attention mechanisms and feature importance analysis, which help to identify key predictors and enhance model trustworthiness [9]. Moreover, the integration of clinical knowledge graphs with deep learning models has shown promise in bridging the gap between data-driven predictions and clinical expertise [14]. These developments suggest that future feature selection methods will need to be more interpretable, adaptable, and aligned with clinical workflows. Looking ahead, there is a clear need for more sophisticated feature selection techniques that can handle the increasing complexity and diversity of medical data. This includes the development of methods that can dynamically adapt to changing data distributions, incorporate multi-modal data sources, and account for temporal and spatial dependencies. Additionally, there is a growing interest in leveraging pre-trained models and transfer learning to improve feature representation in scenarios with limited labeled data [11]. As the field continues to advance, interdisciplinary collaboration between computer scientists, clinicians, and data analysts will be essential in designing feature selection methods that are both effective and clinically relevant. Future research should also explore the ethical and regulatory implications of automated feature selection in medical decision-making, ensuring that these techniques are developed and deployed responsibly.",
+      "stats": {
+        "char_count": 4218,
+        "word_count": 552,
+        "sentence_count": 21,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Conclusion",
+      "level": 2,
+      "content": "In conclusion, this survey paper has provided a comprehensive overview of feature selection methods for disease risk prediction in medicine, highlighting their critical role in enhancing model performance, interpretability, and clinical relevance. The key findings emphasize that feature selection is essential for managing the high dimensionality and complexity of modern medical data, such as electronic health records and genomic information. The paper has reviewed traditional and advanced techniques, including filter, wrapper, and embedded methods, as well as hybrid and metaheuristic approaches, demonstrating their effectiveness in improving predictive accuracy while reducing model complexity. The current state of the field reflects a shift toward more sophisticated and adaptive feature selection strategies that address the unique challenges of medical data, such as class imbalance, feature redundancy, and the need for clinical interpretability. Recent advances have shown that integrating domain knowledge with machine learning techniques can lead to more reliable and actionable models. Moreover, there is a growing recognition of the importance of transparency and explainability in medical AI, which further underscores the significance of effective feature selection. Despite these advances, several challenges remain. Future research should focus on developing methods that are more robust to data heterogeneity, scalable for large datasets, and capable of adapting to dynamic clinical environments. Additionally, there is a need for standardized evaluation metrics and benchmarking frameworks to facilitate the comparison and adoption of feature selection techniques in real-world medical applications. The integration of explainable AI and human-in-the-loop approaches also presents promising avenues for future exploration. In summary, feature selection remains a vital and evolving area in medical machine learning. As the field continues to advance, the development of more accurate, interpretable, and clinically relevant feature selection methods will be crucial for realizing the full potential of AI in healthcare. By addressing the remaining challenges and embracing interdisciplinary collaboration, researchers can contribute to the creation of more effective and trustworthy disease risk prediction systems.",
+      "stats": {
+        "char_count": 2339,
+        "word_count": 315,
+        "sentence_count": 13,
+        "line_count": 1
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "1. Automatic Extraction of Disease Risk Factors from Medical Publications",
+      "number": null,
+      "title": "automatic extraction of disease risk factors from medical publications"
+    },
+    {
+      "text": "2. {ICD",
+      "number": null,
+      "title": "{icd"
+    },
+    {
+      "text": "3. Towards Personalised Patient Risk Prediction Using Temporal Hospital Data Trajectories",
+      "number": null,
+      "title": "towards personalised patient risk prediction using temporal hospital data trajectories"
+    },
+    {
+      "text": "4. Large language models are good medical coders, if provided with tools",
+      "number": null,
+      "title": "large language models are good medical coders, if provided with tools"
+    },
+    {
+      "text": "5. TrialEnroll: Predicting Clinical Trial Enrollment Success with Deep {\\&",
+      "number": null,
+      "title": "trialenroll: predicting clinical trial enrollment success with deep {\\&"
+    },
+    {
+      "text": "6. Refining Tuberculosis Detection in {CXR",
+      "number": null,
+      "title": "refining tuberculosis detection in {cxr"
+    },
+    {
+      "text": "7. Advanced Predictive Modeling for Enhanced Mortality Prediction in ICU Stroke Patients Using Clinical Data",
+      "number": null,
+      "title": "advanced predictive modeling for enhanced mortality prediction in icu stroke patients using clinical data"
+    },
+    {
+      "text": "8. Two new feature selection methods based on learn-heuristic techniques for breast cancer prediction: A comprehensive analysis",
+      "number": null,
+      "title": "two new feature selection methods based on learn-heuristic techniques for breast cancer prediction: a comprehensive analysis"
+    },
+    {
+      "text": "9. Enhancing skin disease classification leveraging transformer-based deep learning architectures and explainable {AI",
+      "number": null,
+      "title": "enhancing skin disease classification leveraging transformer-based deep learning architectures and explainable {ai"
+    },
+    {
+      "text": "10. Addressing Data Heterogeneity in Federated Learning of Cox Proportional Hazards Models",
+      "number": null,
+      "title": "addressing data heterogeneity in federated learning of cox proportional hazards models"
+    },
+    {
+      "text": "11. Exploiting Pre-trained Models for Drug Target Affinity Prediction with Nearest Neighbors",
+      "number": null,
+      "title": "exploiting pre-trained models for drug target affinity prediction with nearest neighbors"
+    },
+    {
+      "text": "12. Distance-based mutual congestion feature selection with genetic algorithm for high-dimensional medical datasets",
+      "number": null,
+      "title": "distance-based mutual congestion feature selection with genetic algorithm for high-dimensional medical datasets"
+    },
+    {
+      "text": "13. Research on Adverse Drug Reaction Prediction Model Combining Knowledge Graph Embedding and Deep Learning",
+      "number": null,
+      "title": "research on adverse drug reaction prediction model combining knowledge graph embedding and deep learning"
+    },
+    {
+      "text": "14. Integrating Clinical Knowledge Graphs and Gradient-Based Neural Systems for Enhanced Melanoma Diagnosis via the 7-Point Checklist",
+      "number": null,
+      "title": "integrating clinical knowledge graphs and gradient-based neural systems for enhanced melanoma diagnosis via the 7-point checklist"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\AutoSurvey2\\Medicine\\Feature_Selection_Methods_for_Disease_Risk_Prediction_in_Medicine_survey_split.json",
+    "processed_date": "2025-12-30T20:33:35.736347",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

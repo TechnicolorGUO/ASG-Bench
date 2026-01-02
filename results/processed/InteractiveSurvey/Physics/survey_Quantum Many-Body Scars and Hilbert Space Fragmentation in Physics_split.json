@@ -1,0 +1,489 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of Quantum Many-Body Scars and Hilbert Space Fragmentation in Physics"
+    ],
+    [
+      1,
+      "1 Abstract"
+    ],
+    [
+      1,
+      "2 Introduction"
+    ],
+    [
+      1,
+      "3 Hilbert Space Characterization and Subspace Analysis"
+    ],
+    [
+      2,
+      "3.1 Spectral and Structural Analysis of Hilbert Spaces"
+    ],
+    [
+      3,
+      "3.1.1 Exact Diagonalization and Matrix Product State Techniques"
+    ],
+    [
+      3,
+      "3.1.2 Algebraic Factorization and Commutant Algebra Structures"
+    ],
+    [
+      2,
+      "3.2 Dynamical Properties and Ergodicity Breaking"
+    ],
+    [
+      3,
+      "3.2.1 Krylov Subspace Imprinting and Thermalization Restrictions"
+    ],
+    [
+      3,
+      "3.2.2 Spectral Embedding and Symmetry-Induced Fragmentation"
+    ],
+    [
+      2,
+      "3.3 Subspace Construction and Invariant Structures"
+    ],
+    [
+      3,
+      "3.3.1 Tree Structures and Fock Space Representations"
+    ],
+    [
+      3,
+      "3.3.2 Restricted Spectrum Generating Algebras and Hidden Symmetries"
+    ],
+    [
+      1,
+      "4 Experimental and Dynamical Studies of Quantum Scars"
+    ],
+    [
+      2,
+      "4.1 Quantum Thermalization and Krylov Subspace Dynamics"
+    ],
+    [
+      3,
+      "4.1.1 Rydberg Atom Arrays and Z2k Scarring Mechanisms"
+    ],
+    [
+      3,
+      "4.1.2 Cold Atoms and Weak Ergodicity Breaking"
+    ],
+    [
+      2,
+      "4.2 Perturbative and Non-Perturbative Dynamics"
+    ],
+    [
+      3,
+      "4.2.1 Schrieffer-Wolff Transformations and Emergent Symmetries"
+    ],
+    [
+      3,
+      "4.2.2 Dynamical Freezing and Magnetometry in Spin Systems"
+    ],
+    [
+      2,
+      "4.3 Subspace Characterization and Measurement Techniques"
+    ],
+    [
+      3,
+      "4.3.1 Monte Carlo Importance Sampling and Krylov Dimensions"
+    ],
+    [
+      3,
+      "4.3.2 Quench Dynamics and Non-Equilibrium Observables"
+    ],
+    [
+      1,
+      "5 Numerical Simulations and Model Engineering for Many-Body Scars"
+    ],
+    [
+      2,
+      "5.1 Model Realizations and Quantum Simulators"
+    ],
+    [
+      3,
+      "5.1.1 Tilted Optical Lattices and PXP Model Emulation"
+    ],
+    [
+      3,
+      "5.1.2 Bose-Hubbard Simulators and Entanglement Dynamics"
+    ],
+    [
+      2,
+      "5.2 Theoretical and Computational Frameworks"
+    ],
+    [
+      3,
+      "5.2.1 Hamiltonian Dimerization and Fidelity Oscillations"
+    ],
+    [
+      3,
+      "5.2.2 Quasiparticle Approaches and Constructive Model Building"
+    ],
+    [
+      2,
+      "5.3 Finite Temperature and Robustness Studies"
+    ],
+    [
+      3,
+      "5.3.1 Classical and Quantum Simulations of Quenches"
+    ],
+    [
+      3,
+      "5.3.2 Thermal Stability of Quantum Scars in PXP Model"
+    ],
+    [
+      1,
+      "6 Future Directions"
+    ],
+    [
+      1,
+      "7 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of Quantum Many-Body Scars and Hilbert Space Fragmentation in Physics",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Abstract",
+      "level": 1,
+      "content": "Quantum many-body systems have been a central focus in condensed matter and statistical physics, offering profound insights into quantum coherence, entanglement, and thermalization. The emergence of non-thermal states, such as quantum many-body scars (QMBS), has challenged traditional thermalization paradigms, highlighting the role of symmetry, conservation laws, and Hilbert space fragmentation in shaping quantum dynamics. This survey paper provides a comprehensive overview of the theoretical and numerical techniques used to study QMBS and Hilbert space fragmentation, emphasizing their structural and dynamical properties, as well as experimental realizations in cold-atom and Rydberg-atom systems. The paper synthesizes recent advances in understanding the interplay between symmetry, conservation laws, and non-thermal dynamics, while identifying open questions and potential research directions. It highlights the significance of these phenomena in probing the limits of thermalization in isolated quantum systems and their implications for quantum simulation and information processing. This work contributes to a deeper understanding of non-ergodic behavior in quantum many-body systems and serves as a foundation for future research in this rapidly evolving field.",
+      "stats": {
+        "char_count": 1277,
+        "word_count": 168,
+        "sentence_count": 6,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2 Introduction",
+      "level": 1,
+      "content": "Quantum many-body systems have long been a focal point of condensed matter and statistical physics, offering profound insights into the nature of quantum coherence, entanglement, and thermalization [1]. As the complexity of these systems increases, so does the need for advanced theoretical and computational tools to unravel their intricate behaviors. The emergence of non-thermal states, such as quantum many-body scars (QMBS), has challenged traditional notions of thermalization and highlighted the role of symmetry, conservation laws, and Hilbert space fragmentation in shaping the dynamics of quantum systems [2]. These phenomena, often observed in strongly correlated and constrained systems, have sparked significant interest in understanding the conditions under which non-ergodic behavior persists and how such states can be manipulated or harnessed for quantum technologies [3].\n\nThis survey paper focuses on the interplay between quantum many-body scars and Hilbert space fragmentation, with an emphasis on the theoretical and numerical techniques used to study these phenomena [4]. It explores the structural and dynamical properties of fragmented Hilbert spaces, the role of conserved quantities and symmetry in defining Krylov subspaces, and the emergence of non-thermal eigenstates [5]. The paper also examines experimental realizations in cold-atom and Rydberg-atom systems, as well as the implications of these findings for quantum simulation and information processing [6]. By synthesizing current research, the survey provides a comprehensive overview of the key concepts, methods, and challenges in the study of quantum many-body scars and Hilbert space fragmentation [7].\n\nThe paper begins with an analysis of Hilbert space characterization and subspace analysis, focusing on spectral and structural properties of quantum systems. It details the role of exact diagonalization and matrix product state techniques in probing the low-energy spectrum and entanglement structure of many-body systems. The discussion then extends to algebraic factorization and commutant algebra structures, which provide a mathematical framework for understanding the decomposition of Hilbert spaces into dynamically disconnected subspaces. The paper next addresses the dynamical properties of these subspaces, including Krylov subspace imprinting, thermalization restrictions, and spectral embedding. It explores how these features contribute to the emergence of quantum many-body scars and the breakdown of the eigenstate thermalization hypothesis [2]. The final section of this part examines the construction of invariant subspaces, including tree structures in Fock space and the role of restricted spectrum generating algebras in defining partially solvable models.\n\nThis survey paper makes several key contributions to the field of quantum many-body physics [8]. It provides a systematic overview of the theoretical and numerical methods used to study quantum many-body scars and Hilbert space fragmentation, offering a unified perspective on the interplay between symmetry, conservation laws, and non-thermal dynamics [4]. By synthesizing recent advances in both theoretical and experimental research, the paper highlights the significance of these phenomena in understanding the limits of thermalization in isolated quantum systems [9]. Furthermore, it identifies open questions and potential directions for future research, including the development of more efficient computational tools and the exploration of novel quantum systems with tailored dynamical properties. These contributions aim to advance the understanding of non-ergodic behavior in quantum many-body systems and its implications for quantum information science [4].",
+      "stats": {
+        "char_count": 3741,
+        "word_count": 513,
+        "sentence_count": 19,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "3.1.1 Exact Diagonalization and Matrix Product State Techniques",
+      "level": 3,
+      "content": "Exact diagonalization (ED) and matrix product state (MPS) techniques are fundamental numerical tools for studying quantum many-body systems, particularly in the context of strongly correlated and low-dimensional systems. ED involves direct computation of the eigenvalues and eigenvectors of the Hamiltonian matrix, providing exact solutions for small system sizes. This method is especially useful for analyzing ground states, excited states, and spectral properties, but its applicability is limited by the exponential growth of the Hilbert space with system size. In contrast, MPS techniques, rooted in the density matrix renormalization group (DMRG), offer a more scalable approach by representing quantum states as a tensor network with a controlled bond dimension. This allows for efficient simulation of one-dimensional systems and captures entanglement structures that are critical for understanding quantum dynamics and phase transitions.\n\nBoth methods have been instrumental in uncovering the intricate behavior of quantum systems, such as the emergence of quantum many-body scars (QMBS) and the phenomenon of Hilbert space fragmentation [7]. ED is often used to identify zero-energy states and their properties, while MPS techniques enable the study of time evolution and the characterization of entanglement dynamics. These techniques are particularly valuable in systems where exact solutions are not available, such as in the PXP model or other kinetically constrained models. By leveraging the strengths of both approaches, researchers can gain insights into the interplay between entanglement, thermalization, and non-thermal dynamics in complex quantum systems [5].\n\nRecent advancements have extended the utility of these methods by integrating them with symmetry-based analyses and efficient state preparation strategies. For instance, the identification of SU(M) representations within the nullspace of certain Hamiltonians has provided a framework for understanding the structure of fragmented Hilbert spaces. Additionally, the use of MPS techniques for simulating large systems with controlled accuracy has enabled the exploration of phenomena such as slow thermalization and persistent oscillations in local observables. These developments highlight the critical role of ED and MPS in advancing the theoretical and computational understanding of quantum complexity and non-thermal dynamics in many-body systems.",
+      "stats": {
+        "char_count": 2432,
+        "word_count": 335,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.1.2 Algebraic Factorization and Commutant Algebra Structures",
+      "level": 3,
+      "content": "Algebraic factorization and commutant algebra structures play a central role in understanding the decomposition of Hilbert spaces in quantum many-body systems, particularly in the context of Hilbert space fragmentation. The commutant algebra, defined as the set of operators that commute with the Hamiltonian, provides a mathematical framework to characterize the structure of Krylov subspaces [10]. This algebraic structure reveals how the Hilbert space can be partitioned into dynamically disconnected sectors, each governed by distinct dynamical rules. The presence of conserved quantities and symmetries further influences this decomposition, as they can lead to the emergence of fragmented subspaces that do not fully adhere to the eigenstate thermalization hypothesis (ETH). These subspaces often exhibit non-ergodic behavior, with eigenstates that are localized or exhibit reduced thermalization properties [9].\n\nThe interplay between the commutant algebra and the underlying symmetries of the Hamiltonian is crucial for identifying the number and nature of these fragmented subspaces. In systems with nonlocal conserved quantities, the commutant algebra can be significantly enriched, leading to a more complex fragmentation structure. For instance, in models with subsystem symmetries, such as those conserving magnetization along rows and columns of a lattice, the commutant algebra reflects the presence of these conservation laws. This results in a Hilbert space that is partitioned into subspaces with distinct dynamical properties. The algebraic factorization of the Hamiltonian, when possible, further aids in decomposing the system into smaller, more tractable components, each of which can be analyzed independently.\n\nMoreover, the study of commutant algebras provides insights into the emergence of zero modes and other special eigenstates. These states often reside in specific subspaces that are protected by the algebraic structure of the Hamiltonian. The presence of such states can significantly affect the dynamics and thermalization properties of the system. In particular, the commutant algebra can be used to identify subspaces that support quantum many-body scar states (QMBS), which exhibit non-thermal behavior despite the overall complexity of the system. Understanding these algebraic structures is essential for characterizing the interplay between symmetry, conservation laws, and the dynamical properties of quantum many-body systems.",
+      "stats": {
+        "char_count": 2469,
+        "word_count": 342,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.1 Krylov Subspace Imprinting and Thermalization Restrictions",
+      "level": 3,
+      "content": "Krylov subspace imprinting plays a critical role in understanding the dynamics and thermalization properties of quantum many-body systems. The structure of Krylov subspaces, defined by the repeated application of the Hamiltonian on an initial state, determines the accessible evolution space of the system. In systems with strong Hilbert space fragmentation, these subspaces can become dynamically disconnected, leading to restricted thermalization [7]. This fragmentation is often linked to the presence of conserved quantities or symmetries that prevent the system from exploring the full Hilbert space [11]. As a result, initial states confined to specific Krylov subspaces may exhibit non-thermal behavior, such as persistent oscillations or slow entanglement growth, even in non-integrable systems [5]. The imprinting of these subspaces thus imposes fundamental constraints on the system's ability to thermalize.\n\nThe restriction of thermalization in certain Krylov subspaces is closely tied to the emergence of quantum many-body scar (QMBS) states, which are non-thermal eigenstates embedded within the thermal spectrum [2]. These states often arise from the structure of the Hamiltonian, particularly in systems with partial solvability or specific symmetry properties. The presence of QMBS can lead to a breakdown of the eigenstate thermalization hypothesis (ETH) in certain subspaces, as these states do not exhibit the typical thermal properties expected of high-energy eigenstates [2]. This phenomenon highlights the importance of Krylov subspace structure in determining the long-time behavior of quantum systems, especially when the subspace contains states with low entanglement or specific correlation patterns that resist thermalization [5].\n\nFurthermore, the statistical dominance of certain Krylov subspaces, particularly those associated with large \"drums\" in the Hilbert space, can significantly influence the thermalization dynamics of typical initial states [11]. These subspaces, characterized by their extensive size, may contain states that do not thermalize with respect to certain observables, such as spin correlations or entanglement entropy. The identification and characterization of these subspaces are essential for understanding the conditions under which non-thermal behavior persists in quantum systems [9]. By analyzing the structure and properties of Krylov subspaces, researchers can gain deeper insights into the mechanisms that govern thermalization and the emergence of non-thermal states in isolated quantum systems [5].",
+      "stats": {
+        "char_count": 2563,
+        "word_count": 352,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.2 Spectral Embedding and Symmetry-Induced Fragmentation",
+      "level": 3,
+      "content": "Spectral embedding plays a crucial role in analyzing the structure of fragmented Hilbert spaces, particularly in systems exhibiting symmetry-induced fragmentation [10]. By mapping quantum states into a lower-dimensional spectral space, one can uncover the underlying organization of dynamically disconnected subspaces. This technique is especially powerful when applied to models with kinetic constraints or conserved quantities, as it reveals how the interplay between symmetry and dynamics leads to the emergence of distinct subspaces. The spectral properties of such systems often display a block-diagonal structure, where each block corresponds to a Krylov subspace that remains invariant under the action of the Hamiltonian. This fragmentation is not merely a consequence of local symmetries but is deeply tied to the algebraic structure of the Hamiltonian, particularly the commutant algebra, which governs the number and nature of these subspaces.\n\nSymmetry-induced fragmentation arises when the presence of conserved quantities or specific symmetry operations partitions the Hilbert space into sectors that are dynamically decoupled. These sectors can be further characterized by their spectral properties, which may exhibit either integrable or non-integrable behavior. In some cases, the fragmented subspaces host quantum many-body scars, which are eigenstates that deviate from the typical thermalization behavior predicted by the eigenstate thermalization hypothesis (ETH) [2]. The presence of such scars indicates a weak violation of ETH and is often linked to the interplay between chiral and spatial inversion symmetries. Spectral embedding techniques allow for the identification of these scarred states by highlighting their unique spectral signatures, which persist even in the presence of fragmentation.\n\nThe study of spectral embedding in the context of symmetry-induced fragmentation provides a framework for understanding the complex interplay between dynamics, symmetry, and quantum coherence. By systematically varying parameters such as the strength of kinetic constraints or the presence of conserved quantities, one can observe how the fragmentation structure evolves and how it influences the thermalization properties of the system. This approach not only aids in distinguishing between weak and strong fragmentation but also offers insights into the emergence of non-ergodic behavior in quantum many-body systems [4]. Ultimately, spectral embedding serves as a vital tool for probing the intricate architecture of fragmented Hilbert spaces and their implications for quantum dynamics.",
+      "stats": {
+        "char_count": 2614,
+        "word_count": 362,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.1 Tree Structures and Fock Space Representations",
+      "level": 3,
+      "content": "Tree structures provide a powerful framework for visualizing the dynamics of quantum systems within Fock space, particularly in the context of Hilbert space fragmentation. These structures represent the connectivity of basis states under the action of the Hamiltonian, where each node corresponds to a state and edges denote possible transitions. In systems with kinetic constraints, such as those discussed in the context of the Hamiltonian $ H^{\\mathcal{N}(1)} $, the resulting tree structures often exhibit a hierarchical, fractal-like organization. This organization reflects the presence of dynamically disconnected sectors, where each sector corresponds to a distinct subspace of the full Hilbert space. The tree structure thus serves as a geometric representation of the system's complexity and the constraints governing its evolution.\n\nFock space representations further refine this understanding by encoding the occupation numbers of particles or spins in a structured manner. In models with integrable structures, such as those with hidden symmetry factors (HSF), the Fock space can be decomposed into subspaces that preserve integrability even under perturbations. These subspaces are often defined by irreducible strings or other frozen configurations, which act as building blocks for the overall Hilbert space. The tree structure in such cases can be seen as a mapping of the Fock space, where each level of the tree corresponds to a different configuration of particles or spins. This hierarchical representation is crucial for analyzing the spectral properties and the emergence of non-thermal states, such as quantum many-body scars [8].\n\nThe interplay between tree structures and Fock space representations becomes particularly significant in systems with fragmented Hilbert spaces. Here, the tree structure not only captures the connectivity of states but also reveals the underlying symmetries and conservation laws that govern the system's dynamics. By decomposing the Hilbert space into dynamically disconnected sectors, the tree structure allows for a more granular analysis of the system's behavior. This approach is instrumental in understanding how certain subspaces maintain integrability or exhibit unique spectral features, even when the full system is non-integrable [12]. Such insights are essential for exploring the broader implications of Hilbert space fragmentation in quantum many-body systems [7].",
+      "stats": {
+        "char_count": 2434,
+        "word_count": 348,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.2 Restricted Spectrum Generating Algebras and Hidden Symmetries",
+      "level": 3,
+      "content": "Restricted spectrum generating algebras (rSGAs) provide a powerful framework for understanding the spectral properties of quantum many-body systems, particularly in the context of partially solvable models. These algebras define a set of operators that, when restricted to a specific subspace, commute with the Hamiltonian and generate its spectrum. This structure allows for the explicit construction of energy eigenstates within the solvable subspace by applying the spectrum generating operator to a known reference state [12]. The presence of such algebras often indicates the existence of hidden symmetries, which can significantly influence the system's dynamics and thermalization behavior. These symmetries are typically more subtle than conventional ones, emerging from the interplay between the Hamiltonian and the subspace structure.\n\nIn systems exhibiting rSGAs, the restricted Hamiltonian often possesses additional commutation relations that arise from the underlying symmetry. These relations can lead to the emergence of conserved quantities, which in turn affect the system's ergodicity and thermalization properties. When the restricted Hamiltonian is integrable, these conserved quantities may originate from the Yang-Baxter equation, giving rise to an infinite set of commuting transfer matrices [12]. However, in most known cases, the presence of rSGAs does not necessarily imply full integrability, but rather a partial solvability that allows for the identification of specific subspaces with distinct spectral features. This partial solvability is crucial for distinguishing between different Krylov sectors and understanding the complexity-driven resources that govern the system's behavior.\n\nThe role of rSGAs in revealing hidden symmetries is further highlighted by their connection to the commutant algebra, which commutes with the Hamiltonian's generators and plays a key role in structuring the Hilbert space. This algebra often reflects remnants of more fundamental structures, such as the Read-Saleur algebra, and provides a means to classify states based on their symmetry properties. By identifying the nullspace of the Hamiltonian and analyzing its structure, one can uncover the presence of zero-energy eigenstates and other non-thermal features. These insights are essential for understanding the interplay between symmetry, spectral properties, and the emergence of quantum many-body scars in complex systems [8].",
+      "stats": {
+        "char_count": 2451,
+        "word_count": 339,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.1 Rydberg Atom Arrays and Z2k Scarring Mechanisms",
+      "level": 3,
+      "content": "Rydberg atom arrays have emerged as a powerful platform for investigating quantum many-body systems, particularly in the context of weak ergodicity breaking and quantum many-body scars (QMBSs) [13]. These systems leverage strong, tunable interactions between atoms excited to Rydberg states, enabling the simulation of complex spin models with controllable parameters [6]. In particular, the PXP model and its generalizations have been realized in such arrays, where kinetic constraints lead to the formation of Z₂k scarring mechanisms. These mechanisms arise from the interplay between the Rydberg blockade effect and the specific spatial arrangement of atoms, resulting in the emergence of non-thermal eigenstates that violate the Eigenstate Thermalization Hypothesis (ETH) within specific subspaces of the Hilbert space [11].\n\nThe Z₂k scarring mechanisms represent a generalization of earlier Z₂ scarring observed in cold-atom systems, where the symmetry of the system leads to the formation of distinct Krylov subspaces. In Rydberg atom arrays, these subspaces are characterized by the spatial configuration of Rydberg excitations, which restrict the system's evolution to specific sectors of the Hilbert space [6]. This fragmentation of the Hilbert space leads to a restricted thermalization process, where thermalization occurs within a Krylov subspace but is prevented between different subspaces [5]. Such behavior is a direct manifestation of the Krylov-restricted ETH and highlights the role of symmetry and conservation laws in the emergence of QMBSs.\n\nRecent experimental studies have demonstrated the existence of Z₂k scarring in Rydberg atom arrays, where the system exhibits dynamical revivals and non-thermal eigenstates that persist over long timescales [1]. These observations provide strong evidence for the role of kinetic constraints in generating QMBSs and offer a pathway to explore the interplay between Hilbert space fragmentation and thermalization [2]. The study of Z₂k scarring not only deepens our understanding of weak ergodicity breaking but also opens new avenues for engineering non-thermal states in quantum many-body systems [1].",
+      "stats": {
+        "char_count": 2164,
+        "word_count": 309,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.2 Cold Atoms and Weak Ergodicity Breaking",
+      "level": 3,
+      "content": "Cold atoms provide a versatile platform for studying quantum many-body systems, particularly in the context of weak ergodicity breaking [4]. These systems can be engineered to exhibit non-thermal behavior through the presence of quantum many-body scars (QMBSs), which are rare eigenstates that do not conform to the eigenstate thermalization hypothesis (ETH) [2]. While the majority of energy eigenstates in these systems thermalize, QMBSs remain localized and display non-ergodic dynamics [2]. This phenomenon has been observed in various cold-atom setups, including Rydberg atom arrays and tilted optical lattices, where the interplay between interactions and external potentials leads to the formation of non-thermal states [6]. The presence of these states challenges the conventional understanding of thermalization in isolated quantum systems and highlights the role of specific symmetries and conservation laws [9].\n\nHilbert space fragmentation is another mechanism contributing to weak ergodicity breaking in cold-atom systems [14]. This occurs when the Hilbert space is divided into dynamically disconnected subspaces, preventing full thermalization [2]. In such cases, the system's evolution is restricted to a subset of the total Hilbert space, leading to the emergence of non-thermal states and slow dynamics. This fragmentation can arise from conservation laws, such as charge or dipole conservation, or from the presence of specific interactions that constrain the system's evolution. Experimental observations in Rydberg atom systems have demonstrated that these fragmented Krylov subspaces can exhibit thermalization within themselves, but not across different subspaces, thereby violating the ETH on a global scale [5].\n\nThe study of weak ergodicity breaking in cold atoms has also revealed the importance of Krylov-restricted thermalization, where thermalization occurs only within specific subspaces of the Hilbert space [5]. This phenomenon has been linked to the presence of conserved quantities and the structure of the underlying Hamiltonian. In particular, the interplay between local interactions and global constraints leads to the emergence of non-thermal eigenstates that persist over long timescales [15]. These findings have significant implications for understanding the limits of thermalization in isolated quantum systems and for designing quantum systems with tailored dynamical properties [9]. The experimental realization of such effects in cold-atom platforms continues to drive progress in the field of quantum many-body physics [3].",
+      "stats": {
+        "char_count": 2571,
+        "word_count": 359,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.1 Schrieffer-Wolff Transformations and Emergent Symmetries",
+      "level": 3,
+      "content": "The Schrieffer-Wolff (SW) transformation provides a powerful framework for deriving effective Hamiltonians in strongly correlated systems by systematically eliminating high-energy degrees of freedom. This method has been instrumental in uncovering emergent symmetries that govern the low-energy physics of quantum many-body systems. In particular, when applied to models such as the PXP model or tilted Fermi-Hubbard systems, the SW transformation reveals the emergence of approximately conserved quantities that significantly alter the system's dynamical behavior. These emergent symmetries often lead to the formation of non-thermal eigenstates, which are central to the phenomenon of weak ergodicity breaking. The presence of such symmetries can result in the fragmentation of the Hilbert space into dynamically isolated subspaces, where thermalization is restricted or suppressed [9].\n\nThe interplay between SW transformations and emergent symmetries becomes even more intricate when considering nested transformations, which are required to account for additional conserved quantities. These nested SW approaches yield effective Hamiltonians that accurately describe the slow relaxation dynamics observed in systems like Rydberg atom arrays or the AKLT spin chain. The emergence of these symmetries is often linked to algebraic structures such as nearly-SU(2) algebras, which underpin the non-thermal properties of these systems. By enforcing these symmetries through canonical transformations, the effective Hamiltonians capture the essential physics of the original models while simplifying the analysis of their long-time behavior.\n\nHilbert space fragmentation, driven by these emergent symmetries, leads to the formation of Krylov subspaces with distinct dynamical properties [10]. These subspaces are not defined by conventional quantum numbers but can be characterized by statistically localized integrals of motion or commutant algebras [10]. The resulting fragmentation significantly affects the system's thermalization dynamics, leading to scenarios where different initial states evolve in markedly different ways under the same Hamiltonian. This phenomenon highlights the profound impact of emergent symmetries on the structure of quantum many-body systems and underscores the importance of SW transformations in uncovering their underlying mechanisms.",
+      "stats": {
+        "char_count": 2368,
+        "word_count": 315,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.2 Dynamical Freezing and Magnetometry in Spin Systems",
+      "level": 3,
+      "content": "Dynamical freezing in spin systems refers to the phenomenon where certain observables, such as magnetization, fail to thermalize even in the absence of conserved quantities or strong integrability. This behavior arises from the interplay between the system's Hamiltonian and the initial state, leading to persistent oscillations or non-ergodic dynamics. In particular, domain wall conservation has been identified as a key mechanism responsible for such freezing in both one- and two-dimensional systems. The conservation of domain walls restricts the system's accessible Hilbert space, preventing full thermalization and resulting in long-lived correlations. This effect is not limited to specific lattice geometries but extends to higher-dimensional systems, where similar conservation laws can lead to analogous dynamical constraints.\n\nMagnetometry in spin systems often relies on the detection of persistent magnetization patterns that arise from non-thermal dynamics. In systems exhibiting dynamical freezing, the magnetization does not equilibrate to the expected thermal value, instead maintaining a memory of the initial state. This behavior is particularly relevant in the context of quantum simulators, where the ability to control and measure magnetization over time provides insight into the underlying dynamics. The persistence of magnetization can be linked to the existence of scarred eigenstates or fragmented Hilbert spaces, which hinder the system's ability to explore the full phase space. These effects are crucial for understanding the limits of thermalization in isolated quantum systems and have implications for quantum information processing and metrology [9].\n\nThe study of dynamical freezing and magnetometry in spin systems also highlights the role of symmetry and conservation laws in shaping the long-time behavior of quantum many-body systems. While the eigenstate thermalization hypothesis (ETH) predicts thermalization for generic systems, deviations from this behavior, such as those observed in the PXP model or Rydberg atom arrays, indicate the presence of non-thermal eigenstates or fragmented Hilbert spaces [9]. These findings suggest that the interplay between conservation laws, symmetry, and initial conditions can lead to a rich variety of dynamical behaviors. Understanding these mechanisms is essential for developing new approaches to control and manipulate quantum systems, with potential applications in quantum computing and precision measurement.",
+      "stats": {
+        "char_count": 2496,
+        "word_count": 346,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.1 Monte Carlo Importance Sampling and Krylov Dimensions",
+      "level": 3,
+      "content": "Monte Carlo importance sampling is a powerful technique used to estimate properties of complex systems by efficiently sampling configurations that contribute most significantly to the desired observables. In the context of the Vicsek fractal lattice, this method is employed to estimate the dimensions of symmetry sectors with a small number of domain walls [10]. By focusing on these critical configurations, the approach allows for a more accurate characterization of the system's behavior under various conditions. The results highlight the intricate structure of the Hilbert space, where symmetry sectors exhibit distinct dimensional properties, reflecting the underlying constraints and interactions within the lattice.\n\nThe dimension of the largest Krylov subspace within each symmetry sector is also estimated, revealing that these subspaces represent only a small fraction of the full symmetry sector. This observation underscores the complexity of the system's dynamics, as the Krylov subspaces are not governed by conventional quantum numbers but may instead be associated with statistically localized integrals of motion or commutant algebras [10]. These findings suggest that the system's evolution is constrained to specific subspaces, leading to non-ergodic behavior and potentially challenging the assumptions of the Eigenstate Thermalization Hypothesis (ETH) [15].\n\nThe interplay between Monte Carlo importance sampling and Krylov dimensions provides critical insights into the structure of fragmented Hilbert spaces. While the Krylov subspaces are not described by standard symmetries, their statistical properties indicate a form of effective integrability [10]. This has important implications for understanding thermalization in such systems, as the presence of these subspaces can lead to slow relaxation dynamics and deviations from typical thermal behavior. These results contribute to a deeper understanding of how quantum systems with constrained dynamics evolve over time.",
+      "stats": {
+        "char_count": 1998,
+        "word_count": 277,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.2 Quench Dynamics and Non-Equilibrium Observables",
+      "level": 3,
+      "content": "Quench dynamics in isolated quantum systems provide a critical framework for understanding non-equilibrium behavior and the emergence of thermalization or its absence. When a system is driven out of equilibrium through a sudden change in parameters, the subsequent time evolution reveals insights into the underlying many-body dynamics. In particular, the long-time average of the autocorrelation function of a local observable serves as a key indicator of whether the system thermalizes or retains memory of its initial state. For systems exhibiting Hilbert space fragmentation, this time-averaged autocorrelation function often fails to converge to the predictions of the microcanonical ensemble, highlighting the nonthermal nature of the dynamics. This deviation is further quantified by comparison with the Mazur bound, which provides a lower limit on the long-time average of such correlations, revealing the presence of conserved quantities that hinder equilibration.\n\nThe study of quench dynamics in systems with strong kinetic constraints, such as the PXP model, reveals a complex interplay between conservation laws and the structure of the Hilbert space. These systems exhibit a hierarchy of time scales, where relaxation processes are significantly slowed due to the presence of fragmented Krylov subspaces. The nested Schrieffer-Wolff approach, which accounts for these constraints, predicts slower relaxation dynamics compared to traditional methods, but discrepancies with numerical simulations suggest limitations in the applicability of such approximations. The failure of the traditional Schrieffer-Wolff approach to capture the correct relaxation times underscores the importance of considering the full structure of the Hilbert space and the role of emergent conserved quantities in shaping the non-equilibrium dynamics.\n\nNon-equilibrium observables, such as the time-averaged autocorrelation function, are essential for characterizing the long-time behavior of quantum systems. In systems with strong fragmentation, these observables reveal persistent oscillations and non-thermal steady states, indicating the presence of effective conserved quantities beyond those of the original Hamiltonian. The analysis of such observables also highlights the distinction between strongly and weakly fragmented regimes, depending on the density of domain walls or other structural features [10]. These findings underscore the significance of non-equilibrium dynamics in probing the fundamental mechanisms of thermalization and the role of conservation laws in determining the evolution of quantum systems far from equilibrium.",
+      "stats": {
+        "char_count": 2635,
+        "word_count": 359,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.1 Tilted Optical Lattices and PXP Model Emulation",
+      "level": 3,
+      "content": "Tilted optical lattices provide a versatile platform for emulating the PXP model, a canonical system exhibiting many-body scarring. By introducing a tilt via a magnetic field gradient, the Hamiltonian of the system can be engineered to mimic the PXP model's effective interactions, where Rydberg excitations are constrained by strong nearest-neighbor repulsion [7]. This setup allows for the study of quasiparticle dynamics and the emergence of non-thermal states, even under finite-temperature conditions [8]. The tilt introduces a spatial asymmetry that can stabilize specific quantum states, enabling the observation of robust many-body scarring signatures. These findings are supported by both classical simulations and quantum hardware experiments, demonstrating the feasibility of such emulations in real-world systems.\n\nThe PXP model's unique properties, such as the presence of long-lived quasiparticles and the absence of thermalization in certain initial states, are preserved even when the system is subjected to finite temperatures. This contrasts with other models like the spin-1 XY magnet, where QMBS signatures decay rapidly with increasing temperature [13]. The robustness of the PXP model's scarring under thermal perturbations suggests that it is particularly well-suited for quantum simulation and the exploration of non-ergodic dynamics. Furthermore, the ability to tune the tilt and interaction strength allows for the investigation of how these parameters influence the stability and lifetime of scarred states, offering insights into the underlying mechanisms of quantum many-body localization.\n\nExperiments using tilted optical lattices have revealed that the PXP model can be realized with high fidelity, enabling the study of its dynamical properties in both equilibrium and out-of-equilibrium regimes. The presence of a strong tilt leads to the emergence of distinct dynamical features, such as persistent revivals and the formation of two-fold PXP-like structures. These phenomena are attributed to the effective dimerization of the Hamiltonian, which separates the system into independent subsystems. However, when the tilt is detuned from the interaction strength, the scarred states rapidly disappear, highlighting the sensitivity of these non-thermal states to parameter variations. This work underscores the potential of tilted optical lattices as a tool for exploring and controlling quantum many-body dynamics [4].",
+      "stats": {
+        "char_count": 2450,
+        "word_count": 343,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.2 Bose-Hubbard Simulators and Entanglement Dynamics",
+      "level": 3,
+      "content": "Bose-Hubbard simulators have emerged as a powerful platform for studying quantum many-body dynamics, particularly in the context of entanglement generation and non-ergodic behavior [1]. These systems, typically realized with ultracold atoms in optical lattices, allow for precise control over parameters such as interaction strength, tunneling rates, and external potentials. The interplay between these parameters leads to rich dynamical phenomena, including the formation of entangled states and the emergence of non-thermal steady states. In particular, the Bose-Hubbard model serves as a prototypical system for investigating the role of interactions in driving entanglement dynamics, with applications ranging from quantum metrology to the simulation of complex many-body systems.\n\nRecent studies have highlighted the ability of Bose-Hubbard simulators to exhibit many-body scarring, a phenomenon characterized by the persistence of coherent oscillations and the formation of non-thermal states [1]. This behavior is often linked to the presence of special eigenstates that do not thermalize, even in the presence of strong interactions. In the context of the PXP model, which is effectively realized through tilted optical lattices, such scarring signatures have been observed under finite-temperature quench protocols. These findings challenge the conventional understanding of thermalization in interacting quantum systems and suggest that certain initial states can lead to long-lived, non-ergodic dynamics [15]. The robustness of these effects under experimental conditions underscores the potential of Bose-Hubbard simulators for probing the boundaries of quantum thermalization [4].\n\nThe entanglement dynamics in these systems reveal a complex interplay between coherence, interactions, and system size. While thermalization typically leads to a rapid increase in entanglement entropy, the presence of scarring can result in sub-thermal entanglement growth, indicating the formation of non-ergodic states [1]. This behavior has been observed in both classical simulations and quantum experiments, including implementations on quantum computers. The ability to control and manipulate entanglement in Bose-Hubbard simulators opens new avenues for quantum information processing and the study of non-equilibrium quantum dynamics, further emphasizing their importance in the broader landscape of quantum many-body physics.",
+      "stats": {
+        "char_count": 2430,
+        "word_count": 325,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.1 Hamiltonian Dimerization and Fidelity Oscillations",
+      "level": 3,
+      "content": "Hamiltonian dimerization refers to the division of a many-body Hamiltonian into two isolated subparts, typically separated by parity or spatial symmetry, which can be independently analyzed and mapped to simpler models such as the PXP model. This decomposition enables the study of quantum many-body scarring (QMBS) by isolating subsystems that exhibit long-lived period oscillations and ergodicity-breaking dynamics [1]. When the system is prepared in a specific initial state, such as a $\\mathbb{Z}_2$-symmetric configuration, the dimerized Hamiltonian allows for the emergence of persistent revivals and nested oscillatory patterns in the fidelity dynamics. These features arise due to the interplay between the two independent subparts, each contributing distinct dynamical signatures that collectively shape the overall behavior of the system.\n\nFidelity oscillations, which quantify the overlap between the initial state and the time-evolved state, reveal critical insights into the post-quench dynamics of the system. In the context of Hamiltonian dimerization, these oscillations exhibit period-renormalized behavior, where the oscillation frequency is modified by the coupling between the isolated subparts [14]. The presence of such oscillations indicates the system's deviation from thermalization, as the dynamics remain confined within a low-entropy subspace. This confinement is a hallmark of QMBS, where the system fails to explore the full Hilbert space and instead remains trapped in a restricted region, leading to non-ergodic behavior and prolonged coherence times [4].\n\nThe interplay between Hamiltonian dimerization and fidelity oscillations is further influenced by external parameters such as detuning and interaction strength. When the system is subjected to a tilted potential, the scarred states rapidly decay, demonstrating the sensitivity of QMBS to perturbations. This behavior underscores the importance of maintaining symmetry and specific parameter regimes to observe robust scarring effects. The detailed analysis of these phenomena provides a deeper understanding of the mechanisms underlying non-ergodic dynamics in quantum many-body systems, offering valuable insights for the design of quantum simulations and error-resilient quantum protocols [1].",
+      "stats": {
+        "char_count": 2284,
+        "word_count": 312,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.2 Quasiparticle Approaches and Constructive Model Building",
+      "level": 3,
+      "content": "Quasiparticle approaches provide a powerful framework for understanding the dynamics of quantum many-body systems, particularly in the context of non-ergodic behavior and the stabilization of long-lived excitations [8]. These methods often rely on identifying conserved quantities or symmetries that protect quasiparticles from decay, allowing them to persist even at higher energies. In systems where such protections are absent, quasiparticles typically exhibit rapid decay, leading to thermalization. However, in certain models, such as the PXP model, quasiparticles can remain stable at finite temperatures due to the presence of exact algebraic structures or constraints. This stability is critical for experimental realizations, as it enables the observation of non-ergodic dynamics in quantum hardware, offering new pathways for quantum simulation and computation.\n\nConstructive model building complements quasiparticle approaches by focusing on the design of Hamiltonians that explicitly encode the desired quasiparticle properties. This involves engineering systems with specific symmetries, interactions, or constraints that lead to the emergence of long-lived quasiparticles. For example, models with conserved quantities or those that exhibit many-body localization can support quasiparticle-like excitations that resist decay. In the PXP model, the interplay between local constraints and the absence of certain decay channels results in a unique quasiparticle structure, which can be harnessed for quantum information tasks. These models not only provide insights into the fundamental mechanisms of quasiparticle stabilization but also serve as testbeds for exploring non-thermal dynamics in controlled environments.\n\nThe development of such models is closely tied to the experimental realization of quasiparticle phenomena, particularly in the context of quantum simulations. By preparing initial states that correspond to quasiparticle excitations and observing their evolution under a target Hamiltonian, researchers can probe the stability and lifetime of these excitations. This approach has been successfully applied to systems like the PXP model, where quasiparticle scars persist despite thermal fluctuations. These findings underscore the importance of both theoretical and experimental efforts in constructing models that preserve quasiparticle coherence, paving the way for future advancements in quantum many-body physics and quantum technologies.",
+      "stats": {
+        "char_count": 2473,
+        "word_count": 329,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.1 Classical and Quantum Simulations of Quenches",
+      "level": 3,
+      "content": "Classical and quantum simulations of quenches play a crucial role in understanding the nonequilibrium dynamics of quantum many-body systems, particularly in the context of thermalization and scar dynamics. These simulations allow for the investigation of how systems evolve after a sudden change in their Hamiltonian, providing insights into the interplay between integrability, localization, and thermalization. In particular, the Loschmidt echo, a diagnostic tool that measures the overlap between the initial and time-evolved states, has been widely used to detect signatures of non-thermal behavior. For systems with exact quantum many-body scar states, such as the spin-1 XY model, the echo can be accurately modeled by focusing on the ground state contribution, suggesting a simplified picture of post-quench dynamics [13]. However, this approximation breaks down in more complex systems, such as the PXP model, where finite-temperature quenches reveal more intricate scar dynamics.\n\nQuantum simulations, especially with platforms like IBM quantum computers, have become essential for probing these phenomena in controlled environments. These simulations enable the study of systems that are intractable for classical methods, particularly when dealing with large Hilbert spaces and long-time dynamics. The PXP model, for instance, exhibits strong scarring effects that persist even at finite temperatures, challenging the conventional understanding of thermalization. The interplay between the system's integrability and the presence of scar states leads to non-ergodic behavior, which is not captured by the eigenstate thermalization hypothesis [8]. Such observations highlight the importance of quantum simulation in validating theoretical models and uncovering new dynamical regimes.\n\nClassical simulations, on the other hand, provide a complementary approach by offering insights into the underlying mechanisms of quench dynamics. Techniques such as exact diagonalization and matrix product state methods allow for the exploration of both short- and long-time behavior, revealing the emergence of coherent oscillations and persistent memory effects. These methods are particularly useful for benchmarking quantum simulations and identifying the conditions under which scarring becomes prominent. Together, classical and quantum simulations form a powerful framework for studying quenches, bridging the gap between theoretical predictions and experimental observations in the realm of quantum many-body systems.",
+      "stats": {
+        "char_count": 2521,
+        "word_count": 342,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.2 Thermal Stability of Quantum Scars in PXP Model",
+      "level": 3,
+      "content": "The thermal stability of quantum scars in the PXP model is a critical aspect of understanding their robustness under finite-temperature conditions. Unlike ground-state dynamics, where scarring is often observed in isolated systems, finite-temperature quenches reveal a more complex interplay between thermalization and non-thermal features. In the PXP model, the initial state's thermal fluctuations can significantly alter the scarring dynamics, leading to a breakdown of the simple ground-state approximation of the Loschmidt echo [13]. This suggests that the presence of thermal noise can either suppress or enhance scarring, depending on the specific parameters of the system and the nature of the initial state. The PXP model's unique structure, characterized by a combination of hard-core bosonic interactions and a specific symmetry, plays a key role in determining how scars respond to temperature.\n\nAt finite temperatures, the thermal distribution of states introduces a broader range of energy contributions, which can interfere with the coherent dynamics typically associated with scars. However, the PXP model exhibits a peculiar resilience where certain scarred states persist even in the presence of thermal noise. This is attributed to the model's underlying structure, which supports a set of low-entanglement, long-lived states that are less susceptible to thermalization. These states maintain their coherence over extended periods, leading to more pronounced scarring signatures than expected from a purely thermalized system. The interplay between the system's energy landscape and the initial state's thermal distribution determines the extent to which these scars remain stable.\n\nThe thermal stability of quantum scars in the PXP model has significant implications for experimental realizations and quantum simulation protocols. As temperature increases, the fidelity of state preparation decreases, potentially affecting the observation of scarring. However, the model's robustness under certain conditions suggests that scarring can still be observed in moderately thermalized systems. This resilience is crucial for applications in quantum information processing and the study of non-thermal dynamics in many-body systems. Understanding these effects is essential for developing protocols that can reliably harness scarring in experimental settings, even in the presence of thermal fluctuations.",
+      "stats": {
+        "char_count": 2420,
+        "word_count": 336,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6 Future Directions",
+      "level": 1,
+      "content": "Future Work\n\nDespite significant progress in understanding quantum many-body scars (QMBS) and Hilbert space fragmentation, several limitations and gaps remain in the current research landscape. One major limitation is the lack of a unified theoretical framework that can systematically describe the interplay between symmetry, conservation laws, and non-thermal dynamics across different quantum systems. While various models have been studied, the generalization of these findings to more complex or higher-dimensional systems remains challenging. Additionally, the computational tools used to analyze these phenomena are often limited in scalability, particularly for large systems where exact diagonalization becomes infeasible. Furthermore, the experimental realization of QMBS in diverse platforms, such as ultracold atoms, Rydberg atoms, and superconducting circuits, is still in its early stages, and the robustness of these states under realistic conditions is not fully understood. These limitations hinder the development of a comprehensive understanding of non-ergodic behavior in quantum many-body systems.\n\nTo address these challenges, future research should focus on developing more efficient and scalable numerical methods for studying Hilbert space fragmentation and QMBS. This includes the refinement of tensor network techniques, such as matrix product states and projected entangled pair states, to handle larger systems with greater accuracy. Additionally, the integration of machine learning algorithms with traditional computational approaches could enable the discovery of new patterns and structures in fragmented Hilbert spaces. Another promising direction is the exploration of novel quantum systems with tailored dynamical properties, such as those with engineered symmetries or conservation laws, which could lead to the emergence of robust QMBS. Experimental efforts should also be expanded to include a wider range of platforms and to investigate the stability of QMBS under varying conditions, including finite temperatures and external perturbations. Theoretical studies should aim to establish a more general understanding of the conditions under which QMBS can arise and how they interact with thermalization processes.\n\nThe proposed future work has the potential to significantly advance the field of quantum many-body physics and its applications in quantum information science. A deeper understanding of QMBS and Hilbert space fragmentation could lead to the development of new quantum technologies, such as quantum simulators and error-resilient quantum protocols. By identifying and characterizing non-thermal states, researchers can gain insights into the limits of thermalization in isolated quantum systems, which has implications for quantum computing and information processing. Moreover, the exploration of novel systems and the refinement of computational tools could enable the design of quantum devices with tailored dynamical properties, opening new avenues for quantum engineering. Ultimately, these efforts could contribute to a more complete picture of the complex interplay between symmetry, conservation laws, and quantum coherence in many-body systems.",
+      "stats": {
+        "char_count": 3207,
+        "word_count": 436,
+        "sentence_count": 17,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "7 Conclusion",
+      "level": 1,
+      "content": "This survey paper provides a comprehensive overview of the interplay between quantum many-body scars (QMBS) and Hilbert space fragmentation, emphasizing the theoretical and numerical techniques used to study these phenomena. The analysis highlights the role of conserved quantities, symmetries, and dynamical constraints in shaping the structure of fragmented Hilbert spaces, leading to the emergence of non-thermal eigenstates. Through the exploration of exact diagonalization, matrix product state methods, algebraic factorization, and commutant algebra structures, the paper elucidates the mechanisms underlying the formation of Krylov subspaces and their impact on thermalization dynamics. Experimental realizations in cold-atom and Rydberg-atom systems further demonstrate the relevance of these concepts in understanding the limits of thermalization in isolated quantum systems. The study also addresses the dynamical properties of fragmented subspaces, including Krylov subspace imprinting, spectral embedding, and the role of restricted spectrum generating algebras in defining partially solvable models. These findings collectively contribute to a deeper understanding of the complex interplay between symmetry, conservation laws, and non-thermal dynamics in quantum many-body systems.\n\nThe significance of this survey lies in its synthesis of current research on quantum many-body scars and Hilbert space fragmentation, offering a unified perspective on the theoretical and experimental advancements in the field. By bridging the gap between abstract mathematical frameworks and concrete physical realizations, the paper provides a valuable resource for researchers aiming to explore the non-ergodic behavior of quantum systems. The identification of open questions and potential research directions, such as the development of more efficient computational tools and the exploration of novel quantum systems, underscores the broader implications of these phenomena for quantum information science and quantum simulation. The insights gained from this survey not only advance the theoretical understanding of quantum many-body dynamics but also inform the design of experimental platforms capable of harnessing non-thermal states for practical applications.\n\nAs the study of quantum many-body scars and Hilbert space fragmentation continues to evolve, there is a pressing need for interdisciplinary collaboration between theoretical physicists, computational scientists, and experimentalists. Future research should focus on refining numerical methods to better capture the dynamics of fragmented Hilbert spaces, as well as on extending the scope of experimental platforms to probe more complex systems. Additionally, the development of novel quantum technologies that leverage non-thermal states could open new avenues for quantum computation and information processing. By fostering a deeper understanding of the mechanisms governing non-ergodic behavior, the field can move closer to realizing the full potential of quantum systems in both fundamental and applied contexts. The insights presented in this survey serve as a foundation for future investigations into the rich and intricate world of quantum many-body dynamics.",
+      "stats": {
+        "char_count": 3236,
+        "word_count": 434,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "[1] Observation of many-body scarring in a Bose--Hubbard quantum simulator",
+      "number": null,
+      "title": "observation of many-body scarring in a bose--hubbard quantum simulator"
+    },
+    {
+      "text": "[2] Zero-energy Quantum Many-Body Scar under Emergent Chiral Symmetry and Pseudo Hilbert Space Fragmenta",
+      "number": null,
+      "title": "zero-energy quantum many-body scar under emergent chiral symmetry and pseudo hilbert space fragmenta"
+    },
+    {
+      "text": "[3] Weak ergodicity breaking through the lens of quantum entanglement",
+      "number": null,
+      "title": "weak ergodicity breaking through the lens of quantum entanglement"
+    },
+    {
+      "text": "[4] Ergodicity Breaking Under Confinement in Cold-Atom Quantum Simulators",
+      "number": null,
+      "title": "ergodicity breaking under confinement in cold-atom quantum simulators"
+    },
+    {
+      "text": "[5] Observation of quantum thermalization restricted to Hilbert space fragments",
+      "number": null,
+      "title": "observation of quantum thermalization restricted to hilbert space fragments"
+    },
+    {
+      "text": "[6] Emergent symmetries and slow quantum dynamics in a Rydberg-atom chain with confinement",
+      "number": null,
+      "title": "emergent symmetries and slow quantum dynamics in a rydberg-atom chain with confinement"
+    },
+    {
+      "text": "[7] Quantum Complexity in Constrained Many-Body Models  Scars, Fragmentation, and Chaos",
+      "number": null,
+      "title": "quantum complexity in constrained many-body models scars, fragmentation, and chaos"
+    },
+    {
+      "text": "[8] Quantum Many-Body Scars  A Quasiparticle Perspective",
+      "number": null,
+      "title": "quantum many-body scars a quasiparticle perspective"
+    },
+    {
+      "text": "[9] Hilbert subspace ergodicity",
+      "number": null,
+      "title": "hilbert subspace ergodicity"
+    },
+    {
+      "text": "[10] Hilbert space fragmentation from lattice geometry",
+      "number": null,
+      "title": "hilbert space fragmentation from lattice geometry"
+    },
+    {
+      "text": "[11] Strong Hilbert space fragmentation via emergent quantum drums in two dimensions",
+      "number": null,
+      "title": "strong hilbert space fragmentation via emergent quantum drums in two dimensions"
+    },
+    {
+      "text": "[12] Boundary dissipative spin chains with partial solvability inherited from system Hamiltonians",
+      "number": null,
+      "title": "boundary dissipative spin chains with partial solvability inherited from system hamiltonians"
+    },
+    {
+      "text": "[13] Robust Finite-Temperature Many-Body Scarring on a Quantum Computer",
+      "number": null,
+      "title": "robust finite-temperature many-body scarring on a quantum computer"
+    },
+    {
+      "text": "[14] Strongly-tilted field induced Hamiltonian dimerization and nested quantum scars in the 1D spinless F",
+      "number": null,
+      "title": "strongly-tilted field induced hamiltonian dimerization and nested quantum scars in the 1d spinless f"
+    },
+    {
+      "text": "[15] Bipartite Sachdev-Ye Models with Read-Saleur Symmetries",
+      "number": null,
+      "title": "bipartite sachdev-ye models with read-saleur symmetries"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\InteractiveSurvey\\Physics\\survey_Quantum Many-Body Scars and Hilbert Space Fragmentation in Physics_split.json",
+    "processed_date": "2025-12-30T20:33:40.761455",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

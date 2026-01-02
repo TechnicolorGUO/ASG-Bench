@@ -1,0 +1,323 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Physics-informed neural networks (PINNs) for fluid mechanics- a review."
+    ],
+    [
+      1,
+      "Physics-Informed Neural Networks (PINNs) for Fluid Mechanics: A Review"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 The PINN Architecture"
+    ],
+    [
+      3,
+      "2.2 Automatic Differentiation"
+    ],
+    [
+      3,
+      "2.3 Navier-Stokes Formulation"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 Pre-Deep Learning Era"
+    ],
+    [
+      3,
+      "3.2 The PINN Breakthrough (2017-2019)"
+    ],
+    [
+      3,
+      "3.3 Expansion into Turbulence and Complexity (2020-Present)"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Domain Decomposition: cPINNs and XPINNs"
+    ],
+    [
+      3,
+      "4.2 Mitigating Spectral Bias"
+    ],
+    [
+      3,
+      "4.3 Causal Training for Transient Flows"
+    ],
+    [
+      3,
+      "4.4 Hard Constraints and Distance Functions"
+    ],
+    [
+      3,
+      "4.5 Operator Learning (DeepONet and FNO)"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Inverse Problems and Hidden Fluid Mechanics"
+    ],
+    [
+      3,
+      "5.2 Turbulence Modeling"
+    ],
+    [
+      3,
+      "5.3 Hemodynamics and Biomedical Engineering"
+    ],
+    [
+      3,
+      "5.4 Multiphase and High-Speed Flows"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Optimization Stiffness and Convergence"
+    ],
+    [
+      3,
+      "6.2 Computational Cost (Training vs. Inference)"
+    ],
+    [
+      3,
+      "6.3 Spectral Bias in Turbulence"
+    ],
+    [
+      3,
+      "6.4 Extrapolation and Generalization"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Hybrid Solvers"
+    ],
+    [
+      3,
+      "7.2 Second-Order Optimization"
+    ],
+    [
+      3,
+      "7.3 Foundation Models for Physics"
+    ],
+    [
+      3,
+      "7.4 Standardized Benchmarking"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Physics-informed neural networks (PINNs) for fluid mechanics- a review.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 16:22:26*\n*Progress: [19/21]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Physics-informed_neural_networks_PINNs_for_fluid_mechanics-__20251226_162226.md*\n---"
+    },
+    {
+      "heading": "Physics-Informed Neural Networks (PINNs) for Fluid Mechanics: A Review",
+      "level": 1,
+      "content": "**Key Points**\n*   **Paradigm Shift:** PINNs represent a convergence of deep learning and classical computational fluid dynamics (CFD), embedding physical laws (Navier-Stokes equations) directly into the loss function of neural networks.\n*   **Inverse Problem Dominance:** While PINNs can solve forward problems (simulation), their most distinct advantage lies in inverse problems—inferring hidden fluid properties (e.g., viscosity, pressure fields) from sparse, noisy observational data.\n*   **Current Limitations:** Despite success in laminar flows, standard PINNs struggle with high-frequency phenomena (turbulence), stiff gradients (boundary layers), and chaotic dynamics due to \"spectral bias\" and optimization difficulties.\n*   **State-of-the-Art Solutions:** Recent innovations such as Causal Training, Domain Decomposition (XPINNs), and Fourier Feature embeddings are addressing these limitations, pushing PINNs toward industrial applicability in fields like hemodynamics and aerodynamics.\n\n---"
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "The integration of deep learning with physical laws has emerged as a transformative approach in computational science. Physics-Informed Neural Networks (PINNs) constitute a class of deep learning algorithms capable of solving forward and inverse problems involving partial differential equations (PDEs) by embedding the governing physical laws into the network's objective function. This review provides a comprehensive analysis of PINNs within the specific domain of fluid mechanics. We examine the foundational architectures, mathematical formulations, and the historical trajectory from simple laminar flow solvers to complex turbulence modeling. The review critically assesses state-of-the-art techniques designed to mitigate spectral bias and optimization stiffness, including domain decomposition (cPINNs, XPINNs), causal training strategies, and hard-constraint enforcement. Furthermore, we explore diverse applications ranging from hemodynamic super-resolution to high-Reynolds-number aerodynamic flows. Finally, we identify persistent challenges regarding computational efficiency and convergence in chaotic regimes, outlining future research directions for hybridizing PINNs with traditional solvers and neural operators."
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "Fluid mechanics, governed by the nonlinear and coupled Navier-Stokes equations, presents some of the most challenging problems in classical physics and engineering. Traditional Computational Fluid Dynamics (CFD) relies on mesh-based numerical methods—such as Finite Difference (FDM), Finite Volume (FVM), and Finite Element Methods (FEM)—to discretize the spatial and temporal domains [cite: 1, 2]. While these methods have achieved high fidelity, they face significant limitations: they are computationally expensive for high-dimensional problems, require laborious mesh generation for complex geometries, and struggle to seamlessly integrate noisy observational data for inverse problems [cite: 3, 4, 5].\n\nIn recent years, Scientific Machine Learning (SciML) has emerged as a paradigm to bridge the gap between data-driven models and physical principles. Among these, Physics-Informed Neural Networks (PINNs), introduced in the seminal work by Raissi et al. (2019), have garnered intense interest [cite: 3]. Unlike purely data-driven approaches that require massive labeled datasets, PINNs leverage the governing differential equations as a regularization mechanism, allowing them to learn from sparse data or, in forward problems, from no labeled data at all [cite: 6, 7].\n\nThe motivation for applying PINNs to fluid mechanics is threefold. First, PINNs offer a mesh-free alternative, potentially circumventing the difficulties of grid generation in complex domains [cite: 6]. Second, they excel at inverse modeling, enabling the reconstruction of flow fields and the estimation of unknown parameters (e.g., Reynolds number, viscosity) directly from sparse measurements [cite: 4, 8]. Third, they provide a unified framework for data assimilation, blending experimental results (e.g., PIV, MRI) with physical laws to enhance resolution and accuracy [cite: 9, 10]."
+    },
+    {
+      "heading": "2.1 The PINN Architecture",
+      "level": 3,
+      "content": "A PINN is a deep neural network, typically a Multi-Layer Perceptron (MLP), that approximates the solution variables of a PDE. In the context of fluid mechanics, the network takes spatiotemporal coordinates $(x, y, z, t)$ as inputs and outputs the flow variables, such as velocity components $(u, v, w)$ and pressure $(p)$ [cite: 3].\n\nThe defining characteristic of a PINN is its composite loss function, $L(\\theta)$, which is minimized during training:\n\\[ L(\\theta) = w_{data}L_{data} + w_{PDE}L_{PDE} + w_{BC}L_{BC} \\]\nwhere:\n*   **$L_{data}$:** Measures the discrepancy between network predictions and observed data (if available).\n*   **$L_{PDE}$ (Physics Loss):** Measures the residual of the governing equations (e.g., Navier-Stokes). If the network output satisfies the physics, this term should be zero.\n*   **$L_{BC}$:** Enforces boundary and initial conditions.\n*   **$w$:** Weighting coefficients to balance the loss terms [cite: 3, 6]."
+    },
+    {
+      "heading": "2.2 Automatic Differentiation",
+      "level": 3,
+      "content": "Unlike traditional mesh-based methods that approximate derivatives using truncation errors (e.g., Taylor series expansions), PINNs utilize Automatic Differentiation (AD). AD leverages the chain rule to compute exact derivatives of the network outputs with respect to inputs (space and time) to machine precision [cite: 3]. This allows the PDE residuals to be evaluated directly on a set of scattered \"collocation points\" without a fixed grid."
+    },
+    {
+      "heading": "2.3 Navier-Stokes Formulation",
+      "level": 3,
+      "content": "For an incompressible flow, the PINN minimizes the residuals of the momentum and continuity equations. For a 2D flow, the residuals $f$ (physics loss) are defined as:\n\\[ f_u = \\frac{\\partial u}{\\partial t} + (u \\frac{\\partial u}{\\partial x} + v \\frac{\\partial u}{\\partial y}) + \\frac{\\partial p}{\\partial x} - \\nu (\\frac{\\partial^2 u}{\\partial x^2} + \\frac{\\partial^2 u}{\\partial y^2}) \\]\n\\[ f_v = \\frac{\\partial v}{\\partial t} + (u \\frac{\\partial v}{\\partial x} + v \\frac{\\partial v}{\\partial y}) + \\frac{\\partial p}{\\partial y} - \\nu (\\frac{\\partial^2 v}{\\partial x^2} + \\frac{\\partial^2 v}{\\partial y^2}) \\]\n\\[ f_{mass} = \\frac{\\partial u}{\\partial x} + \\frac{\\partial v}{\\partial y} \\]\nThe network is trained to minimize the mean squared error of these residuals over the domain [cite: 3, 6]."
+    },
+    {
+      "heading": "3.1 Pre-Deep Learning Era",
+      "level": 3,
+      "content": "The concept of using neural networks to solve differential equations dates back to the 1990s. Lagaris et al. (1998) proposed using shallow neural networks to solve ODEs and PDEs by constructing trial solutions that satisfied boundary conditions by design [cite: 11]. However, limited computational power and the lack of sophisticated optimization algorithms (like Adam) restricted these early attempts to simple problems."
+    },
+    {
+      "heading": "3.2 The PINN Breakthrough (2017-2019)",
+      "level": 3,
+      "content": "The modern era of physics-informed learning began with Raissi, Perdikaris, and Karniadakis (2019), who formalized the PINN framework [cite: 3]. They demonstrated the method's ability to solve the Navier-Stokes equations for laminar wake flows and introduced the concept of \"hidden fluid mechanics,\" where scalar transport data (e.g., dye concentration) could be used to infer velocity and pressure fields without direct flow measurements [cite: 3, 12]."
+    },
+    {
+      "heading": "3.3 Expansion into Turbulence and Complexity (2020-Present)",
+      "level": 3,
+      "content": "Following the foundational work, research shifted toward addressing the limitations of vanilla PINNs. Key milestones include:\n*   **2020:** Introduction of Domain Decomposition methods (cPINNs, XPINNs) to handle multi-scale problems [cite: 13, 14].\n*   **2021:** Identification of \"spectral bias\" in PINNs and the introduction of Fourier feature embeddings to resolve high-frequency flow features [cite: 15, 16].\n*   **2022:** Development of \"Causal PINNs\" to address the violation of temporal causality in transient flow simulations [cite: 17, 18].\n*   **2024-2025:** Application of PINNs to fully turbulent flows (DNS/LES scales) using advanced architectures like \"PirateNet\" and self-adaptive loss weighting [cite: 19]."
+    },
+    {
+      "heading": "4.1 Domain Decomposition: cPINNs and XPINNs",
+      "level": 3,
+      "content": "Standard PINNs struggle with large domains or multi-scale physics due to the complexity of the optimization landscape. To address this, domain decomposition techniques have been introduced:\n*   **Conservative PINNs (cPINNs):** Tailored for conservation laws, cPINNs divide the domain into sub-regions and enforce flux continuity across interfaces. This is particularly useful for flows with shocks [cite: 13, 20].\n*   **Extended PINNs (XPINNs):** A generalized framework that allows arbitrary domain decomposition (space and time). Each subdomain employs a separate neural network, allowing for different hyperparameters (depth, width, activation) based on the local complexity of the flow. This enables parallelization and improves representation capacity for complex geometries [cite: 13, 14, 21]."
+    },
+    {
+      "heading": "4.2 Mitigating Spectral Bias",
+      "level": 3,
+      "content": "Neural networks inherently suffer from \"spectral bias,\" meaning they learn low-frequency functions quickly but struggle to capture high-frequency details [cite: 16, 22]. In fluid mechanics, this leads to poor performance in turbulent or multi-scale flows.\n*   **Fourier Features:** Mapping input coordinates to a higher-dimensional Fourier space (using sine and cosine functions) before passing them to the network allows PINNs to learn high-frequency modes effectively [cite: 15, 23, 24].\n*   **Rowdy Activation Functions:** Jagtap et al. proposed adaptive activation functions with sinusoidal fluctuations (Rowdy topology) to prevent saturation and accelerate convergence in optimization [cite: 25]."
+    },
+    {
+      "heading": "4.3 Causal Training for Transient Flows",
+      "level": 3,
+      "content": "In time-dependent problems, standard PINNs treat the entire space-time domain simultaneously. This violates the principle of causality, as the network might minimize errors at late times before resolving the early evolution. Wang et al. (2022) introduced a causal training formulation that modifies the loss function to strictly enforce temporal causality, significantly improving accuracy for chaotic systems like the Kuramoto-Sivashinsky and Navier-Stokes equations [cite: 17, 18, 26]."
+    },
+    {
+      "heading": "4.4 Hard Constraints and Distance Functions",
+      "level": 3,
+      "content": "Vanilla PINNs enforce boundary conditions (BCs) as \"soft constraints\" (penalty terms in the loss function). This leads to a competition between the PDE loss and the BC loss. \"Hard constraint\" methods construct the network output ansatz such that BCs are satisfied by construction. For complex geometries, distance functions (calculated via Eikonal equations or R-functions) are used to smoothly blend boundary values into the domain, ensuring exact BC satisfaction and leaving the optimizer to focus solely on the PDE residual [cite: 27, 28, 29]."
+    },
+    {
+      "heading": "4.5 Operator Learning (DeepONet and FNO)",
+      "level": 3,
+      "content": "While PINNs solve a specific instance of a PDE, Neural Operators learn the mapping between infinite-dimensional function spaces (e.g., mapping an initial condition function to a solution function).\n*   **Fourier Neural Operators (FNO):** Use Fourier transforms to perform convolution in the frequency domain, offering mesh-invariant resolution and faster inference than PINNs for families of PDEs [cite: 30, 31, 32].\n*   **DeepONet:** Uses a \"branch\" and \"trunk\" network architecture to learn operators. Physics-Informed DeepONets combine the data-driven operator learning with physical constraints [cite: 33, 34]."
+    },
+    {
+      "heading": "5.1 Inverse Problems and Hidden Fluid Mechanics",
+      "level": 3,
+      "content": "The most successful application of PINNs is in inverse problems. Raissi et al. demonstrated \"Hidden Fluid Mechanics\" (HFM), where the network infers velocity and pressure fields solely from visualizations of a passive scalar (dye) concentration, governed by the advection-diffusion equation [cite: 12]. This capability has been extended to estimate unknown rheological parameters (e.g., viscosity) and boundary conditions in experimental setups where only sparse velocity data is available [cite: 8, 35]."
+    },
+    {
+      "heading": "5.2 Turbulence Modeling",
+      "level": 3,
+      "content": "Simulating turbulence remains a frontier for PINNs.\n*   **RANS-PINNs:** PINNs have been successfully used to solve Reynolds-Averaged Navier-Stokes (RANS) equations. By embedding turbulence closure models (like $k-\\epsilon$ or $k-\\omega$) into the PINN, researchers have improved the prediction of Reynolds stresses using sparse data [cite: 11, 36].\n*   **DNS-scale Modeling:** Recent work (2025) using the \"PirateNet\" architecture has demonstrated the ability to simulate fully turbulent flows (e.g., Taylor-Green vortex, turbulent channel flow) without turbulence models, reproducing energy spectra and enstrophy peaks consistent with Direct Numerical Simulation (DNS) [cite: 19]."
+    },
+    {
+      "heading": "5.3 Hemodynamics and Biomedical Engineering",
+      "level": 3,
+      "content": "PINNs are revolutionizing cardiovascular modeling by integrating sparse medical imaging data (e.g., 4D Flow MRI) with fluid physics.\n*   **Super-Resolution:** 4D Flow MRI often suffers from low spatiotemporal resolution. PINNs act as a super-resolution tool, upsampling the data while ensuring the high-resolution fields satisfy mass and momentum conservation [cite: 10, 37, 38].\n*   **Aneurysm Analysis:** PINNs have been used to estimate Wall Shear Stress (WSS)—a critical biomarker for aneurysm rupture—from sparse velocity measurements, achieving high accuracy even with uncertain boundary conditions [cite: 39, 40, 41]."
+    },
+    {
+      "heading": "5.4 Multiphase and High-Speed Flows",
+      "level": 3,
+      "content": "*   **Multiphase Flows:** PINNs have been applied to solve the Cahn-Hilliard and Navier-Stokes equations for two-phase flows (e.g., bubble dynamics), successfully capturing interface tracking with errors below 1-5% compared to traditional CFD [cite: 42].\n*   **High-Speed Flows:** For transonic and supersonic flows, PINNs must capture shocks (discontinuities). Methods using adaptive sampling and specific loss weightings have been developed to resolve sharp gradients in compressible Euler and Navier-Stokes equations [cite: 4, 43]."
+    },
+    {
+      "heading": "6.1 Optimization Stiffness and Convergence",
+      "level": 3,
+      "content": "The loss landscape of PINNs is notoriously non-convex and \"stiff,\" meaning the gradients of different loss terms (PDE vs. BCs) can vary by orders of magnitude. This leads to unbalanced back-propagation, where the optimizer prioritizes one term over others, often resulting in convergence to trivial or non-physical solutions [cite: 44, 45, 46]. While adaptive weighting algorithms (e.g., GradNorm) help, robust convergence for complex 3D flows remains a challenge."
+    },
+    {
+      "heading": "6.2 Computational Cost (Training vs. Inference)",
+      "level": 3,
+      "content": "For forward problems, PINNs are generally orders of magnitude slower to train than running a traditional CFD solver (FVM/FEM) for a single instance [cite: 47, 48]. The advantage of PINNs appears primarily in inverse problems or when the trained network is used as a surrogate model for rapid re-evaluation (though Neural Operators are often better for the latter) [cite: 30, 49]."
+    },
+    {
+      "heading": "6.3 Spectral Bias in Turbulence",
+      "level": 3,
+      "content": "Despite improvements with Fourier features, capturing the full energy cascade of high-Reynolds-number turbulence is difficult. PINNs tend to smooth out high-frequency fluctuations, acting numerically diffusive [cite: 50, 51]. Capturing the \"inertial subrange\" of turbulence requires massive networks and specialized architectures that are computationally expensive to train."
+    },
+    {
+      "heading": "6.4 Extrapolation and Generalization",
+      "level": 3,
+      "content": "Standard PINNs do not generalize; a network trained on one set of boundary conditions must be retrained if those conditions change. While operator learning (DeepONet/FNO) addresses this, \"vanilla\" PINNs are limited to the specific instance they were trained on [cite: 34, 49]."
+    },
+    {
+      "heading": "7.1 Hybrid Solvers",
+      "level": 3,
+      "content": "The future likely lies in hybridizing PINNs with traditional numerical methods. For example, using a coarse CFD solver to generate a low-fidelity solution that initializes a PINN, or using PINNs to correct the errors of a RANS solver (turbulence closure modeling) [cite: 2, 52]."
+    },
+    {
+      "heading": "7.2 Second-Order Optimization",
+      "level": 3,
+      "content": "Moving beyond first-order optimizers (Adam/L-BFGS) to second-order methods (e.g., NysNewton-CG) could resolve the stiffness issues in the PINN loss landscape, enabling faster and more accurate convergence for stiff PDEs [cite: 53, 54]."
+    },
+    {
+      "heading": "7.3 Foundation Models for Physics",
+      "level": 3,
+      "content": "Leveraging the \"pre-training + fine-tuning\" paradigm seen in NLP, future research may focus on developing large-scale \"foundation models\" for fluid dynamics—networks pre-trained on vast amounts of CFD data and physical laws that can be rapidly fine-tuned for specific engineering problems [cite: 49, 55]."
+    },
+    {
+      "heading": "7.4 Standardized Benchmarking",
+      "level": 3,
+      "content": "The field currently lacks a unified, rigorous benchmark suite for comparing PINN variants against high-order CFD methods. Establishing standard datasets (e.g., turbulent channel flow, flow over a cylinder) with strict error metrics is crucial for maturing the field [cite: 8, 19]."
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "Physics-Informed Neural Networks have established themselves as a powerful paradigm in fluid mechanics, offering a unique capability to blend data and physics. While they are not yet a replacement for traditional CFD in standard forward simulations due to computational costs and optimization challenges, they are transformative for inverse problems, data assimilation, and surrogate modeling. With the advent of advanced architectures like XPINNs, causal training, and operator learning, PINNs are progressively overcoming their initial limitations, paving the way for real-time, high-fidelity digital twins in aerospace, biomedical, and industrial engineering."
+    }
+  ],
+  "references": [
+    "*   **[cite: 3]** Raissi, M., Perdikaris, P., & Karniadakis, G. E. (2019). Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations. *Journal of Computational Physics*, 378, 686-707.",
+    "*   **[cite: 8]** New, A., et al. (2024). Equation identification for fluid flows via physics-informed neural networks. *arXiv preprint arXiv:2408.17271*.",
+    "*   **[cite: 56]** Cai, S., et al. (2021). Physics-informed neural networks (PINNs) for fluid mechanics: A review. *Acta Mechanica Sinica*, 37, 1727-1738.",
+    "*   **[cite: 57]** Sun, Y., et al. (2024). Recent advances on machine learning for computational fluid dynamics: A survey. *arXiv:2408.12171*.",
+    "*   **[cite: 1]** Sharma, P., et al. (2023). A Review of Physics-Informed Machine Learning in Fluid Mechanics. *Energies*, 16(5), 2343.",
+    "*   **[cite: 4]** Cai, S., Mao, Z., Wang, Z., Yin, M., & Karniadakis, G. E. (2021). Physics-informed neural networks (PINNs) for fluid mechanics: a review. *Acta Mechanica Sinica*.",
+    "*   **[cite: 58]** Wang, Y., et al. (2024). Multi-scale physics-informed neural networks for solving high Reynolds number boundary layer flows based on matched asymptotic expansions. *Theoretical and Applied Mechanics Letters*.",
+    "*   **[cite: 43]** Ren, X., et al. (2024). Physics-informed neural networks for transonic flow around a cylinder with high Reynolds number. *Physics of Fluids*.",
+    "*   **[cite: 59]** Eivazi, H., et al. (2022). Physics-informed neural networks for solving Reynolds-averaged Navier–Stokes equations. *Physics of Fluids*, 34(7).",
+    "*   **[cite: 6]** Gupta, D. (2024). Solving the Navier-Stokes Equations with Physics-Informed Neural Networks (PINNs). *Medium*.",
+    "*   **[cite: 42]** Punyatirta. (2025). Comparing Neural Network and Numerical Method to Solve Multiphase Flow Problem: A Review. *Medium*.",
+    "*   **[cite: 36]** Kumar, S., et al. (2025). A physics-informed neural network for turbulent wake simulation behind wind turbines. *Physics of Fluids*, 37(1).",
+    "*   **[cite: 2]** Luo, S., et al. (2020). Parameter Identification of RANS Turbulence Model Using Physics-Embedded Neural Network. *ISC Workshops*.",
+    "*   **[cite: 11]** Pioch, F., et al. (2023). Physics-Informed Neural Networks for RANS Turbulence Modeling. *Fluids*, 8(2).",
+    "*   **[cite: 13]** Jagtap, A. D., & Karniadakis, G. E. (2020). Extended Physics-Informed Neural Networks (XPINNs): A Generalized Space-Time Domain Decomposition Based Deep Learning Framework. *Communications in Computational Physics*.",
+    "*   **[cite: 20]** Shukla, K., Jagtap, A. D., & Karniadakis, G. E. (2021). Parallel Physics-Informed Neural Networks via Domain Decomposition. *Journal of Computational Physics*.",
+    "*   **[cite: 33]** Goswami, S., et al. (2022). Physics-Informed Deep Neural Operator Networks. *arXiv preprint*.",
+    "*   **[cite: 34]** Lu, L., et al. (2021). Learning nonlinear operators via DeepONet based on the universal approximation theorem of operators. *Nature Machine Intelligence*.",
+    "*   **[cite: 27]** Liu, Y., et al. (2025). Hybrid Boundary Physics-Informed Neural Networks for Solving Navier-Stokes Equations with Complex Boundary. *ResearchGate*.",
+    "*   **[cite: 28]** Liu, Y., et al. (2024). Physics-Informed Neural Networks with Complementary Soft and Hard Constraints. *arXiv preprint arXiv:2411.08122*.",
+    "*   **[cite: 29]** Sun, L., et al. (2024). Physics-Informed Neural Networks with Hard Constraints for Inverse Design. *Applied Sciences*, 14(2).",
+    "*   **[cite: 23]** Sallam, O., & Fürth, M. (2023). On the use of Fourier Features-Physics Informed Neural Networks (FF-PINN) for forward and inverse fluid mechanics problems. *Proceedings of the Institution of Mechanical Engineers*.",
+    "*   **[cite: 15]** Wang, S., et al. (2021). On the eigenvector bias of Fourier feature networks: From regression to solving multi-scale PDEs with physics-informed neural networks. *Computer Methods in Applied Mechanics and Engineering*.",
+    "*   **[cite: 30]** Li, Z., et al. (2021). Fourier Neural Operator for Parametric Partial Differential Equations. *ICLR*.",
+    "*   **[cite: 25]** Jagtap, A. D., et al. (2022). Rowdy Activation Functions for Deep Learning. *arXiv preprint*.",
+    "*   **[cite: 12]** Raissi, M., et al. (2020). Hidden Fluid Mechanics: Learning Velocity and Pressure Fields from Flow Visualizations. *Science*.",
+    "*   **[cite: 50]** Chuang, P. Y., & Barba, L. A. (2023). Predictive Limitations of Physics-Informed Neural Networks in Vortex Shedding. *Fluids*.",
+    "*   **[cite: 17]** Wang, S., Sankaran, S., & Perdikaris, P. (2022). Respecting causality is all you need for training physics-informed neural networks. *Journal of Computational Physics*.",
+    "*   **[cite: 19]** Wang, S., et al. (2025). Continuous simulation of fully developed turbulence with physics-informed neural networks. *arXiv preprint arXiv:2507.08972*.",
+    "*   **[cite: 60]** Zhang, Y., et al. (2025). Physics-informed neural networks for hemodynamics: A review. *Engineering Applications of Artificial Intelligence*.",
+    "*   **[cite: 44]** Rathore, P., et al. (2024). Challenges in Training PINNs: A Loss Landscape Perspective. *ICML*.",
+    "*   **[cite: 10]** Shitole, V., et al. (2024). PI-GNN: Physics-Informed Graph Neural Network for Super-Resolution of 4D Flow MRI. *IEEE*.",
+    "*   **[cite: 39]** Fierro, F., et al. (2022). Estimation of hemodynamics in an intracranial aneurysm using PINNs. *ResearchGate*.",
+    "*   **[cite: 61]** Lu, L., et al. (2021). DeepXDE: A Deep Learning Library for Solving Differential Equations. *SIAM Review*.",
+    "*   **[cite: 46]** Wang, S., et al. (2021). Understanding and Mitigating Gradient Flow Pathologies in Physics-Informed Neural Networks. *SIAM Journal on Scientific Computing*."
+  ]
+}

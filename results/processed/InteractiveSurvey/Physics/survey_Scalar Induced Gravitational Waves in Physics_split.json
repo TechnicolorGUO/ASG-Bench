@@ -1,0 +1,893 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of Scalar Induced Gravitational Waves in Physics"
+    ],
+    [
+      1,
+      "1 Abstract"
+    ],
+    [
+      1,
+      "2 Introduction"
+    ],
+    [
+      1,
+      "3 Analytical and Numerical Methods for Scalar-Induced Gravitational Waves"
+    ],
+    [
+      2,
+      "3.1 Analytical Derivations of Correlation Function Contributions"
+    ],
+    [
+      3,
+      "3.1.1 Derivation of 6- and 8-point correlation functions using Wick’s theorem"
+    ],
+    [
+      3,
+      "3.1.2 Numerical evaluation of high-dimensional integrals via Monte Carlo methods"
+    ],
+    [
+      2,
+      "3.2 Higher-Order Induced Gravitational Wave Frameworks"
+    ],
+    [
+      3,
+      "3.2.1 Vertex and loop diagram approaches for arbitrary higher-order scenarios"
+    ],
+    [
+      3,
+      "3.2.2 Tree diagram generation for systematic exploration of gravitational wave contributions"
+    ],
+    [
+      2,
+      "3.3 Impact of Silk Damping on Scalar-Induced Gravitational Waves"
+    ],
+    [
+      3,
+      "3.3.1 Frequency-dependent suppression in SIGW spectrum as a probe for new physics"
+    ],
+    [
+      3,
+      "3.3.2 Theoretical and computational analysis of damping effects on wave propagation"
+    ],
+    [
+      2,
+      "3.4 Theoretical and Computational Analysis of EFT Validity"
+    ],
+    [
+      3,
+      "3.4.1 Examination of EFT parameters and their influence on power spectrum"
+    ],
+    [
+      3,
+      "3.4.2 Validation of EFT under varying physical conditions"
+    ],
+    [
+      2,
+      "3.5 Gauge-Invariant Derivations During Radiation Domination"
+    ],
+    [
+      3,
+      "3.5.1 Analytic treatment across nine gauges using xPand package"
+    ],
+    [
+      3,
+      "3.5.2 Gauge transformation techniques for arbitrary gauge results"
+    ],
+    [
+      2,
+      "3.6 Background Evolution and Linear Perturbation Analysis"
+    ],
+    [
+      3,
+      "3.6.1 Derivation of equations of motion for background and perturbations"
+    ],
+    [
+      3,
+      "3.6.2 Calculation of power spectra for scalar-induced gravitational waves"
+    ],
+    [
+      1,
+      "4 Parameterization and Observational Analysis of SIGW Spectra"
+    ],
+    [
+      2,
+      "4.1 Bispectrum Geometry and Shape Correlator Analysis"
+    ],
+    [
+      3,
+      "4.1.1 Scale-dependent shape correlator for bispectrum similarity measurement"
+    ],
+    [
+      3,
+      "4.1.2 Local-like bispectrum estimator capturing main features of full bispectrum"
+    ],
+    [
+      2,
+      "4.2 Log-Normal Power Spectrum and Oscillation Average Scheme"
+    ],
+    [
+      3,
+      "4.2.1 Computation of bispectrum and skewness using log-normal curvature perturbations"
+    ],
+    [
+      3,
+      "4.2.2 Conservation of skewness through alternative oscillation average method"
+    ],
+    [
+      2,
+      "4.3 Feynman Diagrammatic Approach for GW Spectra"
+    ],
+    [
+      3,
+      "4.3.1 Evaluation of integrals associated with Feynman-like diagrams"
+    ],
+    [
+      3,
+      "4.3.2 Dictionary relating diagrams to their corresponding integrals"
+    ],
+    [
+      2,
+      "4.4 Parameterization of Scalar Power Spectrum for SIGW Computation"
+    ],
+    [
+      3,
+      "4.4.1 Sharp and broad spike approximations for small-scale power spectrum"
+    ],
+    [
+      3,
+      "4.4.2 Study of waveform and power spectrum relationship in SIGW"
+    ],
+    [
+      2,
+      "4.5 Trispectrum Analysis in Ghost Inflation Framework"
+    ],
+    [
+      3,
+      "4.5.1 Computation of SIGW power spectrum for four different trispectra"
+    ],
+    [
+      3,
+      "4.5.2 Impact of parity-even and parity-odd trispectra on GW power spectrum"
+    ],
+    [
+      2,
+      "4.6 PPTA Data Analysis for Inflationary Model Constraints"
+    ],
+    [
+      3,
+      "4.6.1 Derivation of analytical expression for primordial power spectrum"
+    ],
+    [
+      3,
+      "4.6.2 Analysis of SIGW energy density spectrum using PPTA DR3 data"
+    ],
+    [
+      2,
+      "4.7 MCMC Simulation for Energy Spectrum Parameterization"
+    ],
+    [
+      3,
+      "4.7.1 Smooth broken power-law parameterization of energy spectrum"
+    ],
+    [
+      3,
+      "4.7.2 Monte Carlo Markov Chain simulation for IGW energy spectra analysis"
+    ],
+    [
+      1,
+      "5 Gauge-Invariant Approaches and Non-Perturbative Studies of SIGWs"
+    ],
+    [
+      2,
+      "5.1 Lattice Simulation for Non-Gaussian Effects in SIGWs"
+    ],
+    [
+      3,
+      "5.1.1 Numerical investigation of scalar-induced gravitational waves with isocurvature perturbations"
+    ],
+    [
+      3,
+      "5.1.2 Extension of lattice methods to mixed initial conditions and non-Gaussian effects"
+    ],
+    [
+      2,
+      "5.2 Peak Theory for SIGW Contribution Estimation"
+    ],
+    [
+      3,
+      "5.2.1 Statistical analysis of curvature perturbation peaks and their role in SIGW generation"
+    ],
+    [
+      3,
+      "5.2.2 Compact expression for the size of the SIGW background from peak theory"
+    ],
+    [
+      2,
+      "5.3 Pulsed Timing Array Data for Gravitational Effects"
+    ],
+    [
+      3,
+      "5.3.1 Observational techniques for investigating scalar-induced gravitational effects"
+    ],
+    [
+      3,
+      "5.3.2 Data processing methods for gravitational phenomenon analysis"
+    ],
+    [
+      2,
+      "5.4 Gauge-Invariant Observables for SIGW Computation"
+    ],
+    [
+      3,
+      "5.4.1 Focus on physical observables vanishing in homogeneous background"
+    ],
+    [
+      3,
+      "5.4.2 Gauge-invariance of magnetic part of Weyl tensor and Cotton tensor"
+    ],
+    [
+      2,
+      "5.5 Phenomenological Implications in Double Monodromy Inflation"
+    ],
+    [
+      3,
+      "5.5.1 Comparison of tensor modes from gauge field instability with scalar-induced GWs"
+    ],
+    [
+      3,
+      "5.5.2 Analysis of phenomenological consequences of scalar-induced GWs"
+    ],
+    [
+      2,
+      "5.6 Non-Gaussianities and Anisotropies in SIGW"
+    ],
+    [
+      3,
+      "5.6.1 Study of primordial non-Gaussianities in scalar-induced gravitational waves"
+    ],
+    [
+      3,
+      "5.6.2 Statistical analysis of anisotropies in SIGW using cosmological perturbation theory"
+    ],
+    [
+      2,
+      "5.7 Covariant Transverse-Traceless Projection for GW Energy Density"
+    ],
+    [
+      3,
+      "5.7.1 Definition of GW energy density independent of background spacetime"
+    ],
+    [
+      3,
+      "5.7.2 Non-perturbative analysis through gauge-invariant projection method"
+    ],
+    [
+      1,
+      "6 Future Directions"
+    ],
+    [
+      1,
+      "7 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of Scalar Induced Gravitational Waves in Physics",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Abstract",
+      "level": 1,
+      "content": "**Abstract** Scalar-induced gravitational waves (SIGWs) have emerged as a critical tool for probing the physics of the early universe, offering insights into inflationary mechanisms, primordial density fluctuations, and non-Gaussian features. This survey paper provides a comprehensive overview of the theoretical and computational methods used to study SIGWs, with a focus on analytical and numerical techniques for calculating their energy density spectra. The purpose of this work is to consolidate the current understanding of SIGWs, highlighting key findings and contributions to the field.  The main findings include the derivation of higher-order correlation functions using Wick’s theorem and the numerical evaluation of high-dimensional integrals via Monte Carlo methods, which are essential for capturing the non-Gaussian features of SIGWs. Additionally, the study explores the impact of Silk damping on the SIGW spectrum, demonstrating how frequency-dependent suppression can serve as a probe for new physics beyond the Standard Model. The paper also examines the framework for gauge-invariant derivations and the role of parity-even and parity-odd trispectra in shaping the GW power spectrum. These contributions collectively advance our ability to model and observe SIGWs, providing a foundation for future research. In conclusion, this survey highlights the significance of SIGWs in cosmological studies and underscores the importance of continued theoretical and",
+      "stats": {
+        "char_count": 1477,
+        "word_count": 205,
+        "sentence_count": 8,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2 Introduction",
+      "level": 1,
+      "content": "The study of scalar-induced gravitational waves (SIGWs) has emerged as a vital research area in modern cosmology, offering a unique window into the dynamics of the early universe [1]. The generation of gravitational waves from nonlinear interactions of scalar perturbations provides a powerful tool for probing the physics of inflation and the structure of primordial density fluctuations [2]. These waves, which are produced as a second-order effect in cosmological perturbation theory, carry information about the statistical properties of the early universe, including non-Gaussian features that may arise from complex inflationary mechanisms or phase transitions. The theoretical and observational study of SIGWs has gained significant momentum in recent years, driven by the development of advanced analytical and numerical methods that allow for precise calculations of their energy density spectra and waveforms [3].\n\nThis survey paper focuses on the theoretical and computational aspects of scalar-induced gravitational waves, with particular emphasis on the analytical and numerical methods used to compute their energy density spectra [4]. The paper explores the derivation of higher-order correlation functions, such as the 6- and 8-point functions, using Wick’s theorem, and discusses the numerical evaluation of high-dimensional integrals via Monte Carlo methods [5]. These techniques are essential for capturing the non-Gaussian features of SIGWs and their potential observability [6]. The paper also examines the framework for",
+      "stats": {
+        "char_count": 1541,
+        "word_count": 217,
+        "sentence_count": 8,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "3.1.1 Derivation of 6- and 8-point correlation functions using Wick’s theorem",
+      "level": 3,
+      "content": "The derivation of 6- and 8-point correlation functions using Wick’s theorem is a fundamental step in analyzing the non-Gaussian features of scalar-induced gravitational waves (SIGWs). By leveraging the Gaussian nature of primordial curvature perturbations, Wick’s theorem allows the decomposition of higher-order correlation functions into products of two-point functions. This approach simplifies the computation of complex integrals that arise from nonlinear couplings of scalar perturbations. Specifically, the 6-point function is constructed by considering all possible pairings of the six scalar fields, while the 8-point function involves a more intricate combinatorial structure. These correlation functions serve as the building blocks for calculating the energy density spectra of induced gravitational waves, providing insights into the non-linear dynamics of the early Universe.\n\nThe application of Wick’s theorem to the 6- and 8-point correlation functions requires careful handling of the symmetries and normalization of the scalar perturbations [5]. The resulting expressions are then used to evaluate the corresponding power spectra, which are essential for predicting the amplitude and frequency distribution of SIGWs [7]. The derivation involves expanding the scalar perturbations in Fourier space and expressing the correlation functions in terms of the power spectrum of the primordial curvature perturbations. This process leads to convolution integrals that encapsulate the nonlinear interactions between different modes. The (d, s) variables introduced in the literature are employed to systematically organize these integrals, ensuring that the contributions from different scales are properly accounted for in the final spectra.\n\nThe results of these derivations are crucial for understanding the statistical properties of SIGWs and their potential observability [8]. The 6- and 8-point correlation functions capture the higher-order non-Gaussianities that arise from the nonlinear evolution of scalar perturbations, which can significantly influence the shape of the gravitational wave spectrum. By computing these functions analytically and validating them through numerical methods, the study provides a robust framework for investigating the effects of non-Gaussianity on the energy density of SIGWs [8]. This approach not only enhances the accuracy of theoretical predictions but also lays the groundwork for future observational studies aimed at probing the early Universe through gravitational wave signals [1].",
+      "stats": {
+        "char_count": 2542,
+        "word_count": 347,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.1.2 Numerical evaluation of high-dimensional integrals via Monte Carlo methods",
+      "level": 3,
+      "content": "The numerical evaluation of high-dimensional integrals is a critical component in the computation of power spectra for scalar-induced gravitational waves (SIGWs) [4]. These integrals arise from the convolution of correlation functions of primordial curvature perturbations, often involving multiple variables and non-linear terms. Due to the complexity of the integrands, traditional analytical methods become intractable, especially for higher-order contributions. Monte Carlo methods provide a robust framework for approximating these integrals by sampling the high-dimensional space efficiently. This approach is particularly advantageous when dealing with non-Gaussian features and multi-point correlation functions, as it allows for the inclusion of all relevant contributions without imposing simplifying assumptions.\n\nIn the context of SIGWs, Monte Carlo techniques are employed to evaluate the energy density spectra by integrating over the (d, s) variables, which parameterize the mode couplings in the convolution integrals. These methods enable the exploration of the full parameter space, capturing the intricate dependencies between the scalar seeds and the resulting gravitational wave spectra. The accuracy of the Monte Carlo integration is enhanced through variance reduction techniques and adaptive sampling strategies, which are essential for handling the high-dimensional and potentially singular integrands. Furthermore, the implementation of these methods requires careful treatment of the numerical stability, especially in the subhorizon regime where the induced GW amplitudes exhibit strong gauge dependence.\n\nThe application of Monte Carlo methods to the calculation of SIGW power spectra also facilitates the study of non-Gaussian contributions up to fifth-order in the scalar seeds. By leveraging the Wick’s theorem and generating random samples from the primordial curvature perturbation correlation functions, the numerical integration can capture the full statistical structure of the problem. This approach is particularly effective in scenarios where the non-Gaussian parameters are not hierarchically ordered, ensuring that all relevant terms are accounted for. The resulting energy density spectra provide crucial insights into the early Universe, offering a powerful tool for probing new physics beyond the standard model.",
+      "stats": {
+        "char_count": 2357,
+        "word_count": 316,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.1 Vertex and loop diagram approaches for arbitrary higher-order scenarios",
+      "level": 3,
+      "content": "The vertex and loop diagram approaches provide a robust framework for analyzing higher-order induced gravitational waves (GWs) in arbitrary scenarios. These methods enable the systematic computation of GW spectra by decomposing the problem into contributions from tree-level and loop diagrams. The vertex approach, rooted in perturbation theory, allows the generation of all possible tree diagrams corresponding to a given order in the perturbative expansion. By summing these diagrams, one can derive the specific expressions for higher-order GWs, which is particularly useful for exploring non-Gaussian features and complex interactions. This formalism is essential for handling scenarios where multiple sources contribute to the GW signal, such as those involving isocurvature perturbations or higher-order correlation functions.\n\nLoop diagram approaches extend the vertex method by incorporating quantum corrections and higher-order radiative effects, which are critical for accurate predictions in strongly coupled regimes. These diagrams account for the self-interactions of GWs and their coupling to other fields, offering a more comprehensive picture of the GW spectrum. However, the complexity of loop calculations increases rapidly with the order of perturbation, making them computationally intensive. Despite this, the combination of vertex and loop techniques allows for a thorough exploration of arbitrary higher-order scenarios, including those with non-linearities and non-Gaussian initial conditions. This synergy is particularly valuable in models where the standard linear approximation fails, such as in the presence of strong coupling or divergent gauge dependencies.\n\nThe application of these approaches is crucial for addressing the challenges posed by higher-order GWs, especially in models with extended gauge symmetries or modified gravity theories. By systematically handling the contributions from both tree and loop diagrams, researchers can disentangle the effects of different physical mechanisms and assess the robustness of their predictions. This methodological rigor is essential for understanding the behavior of GWs in complex cosmological settings and for validating theoretical models against observational constraints. Ultimately, the vertex and loop diagram approaches provide a powerful toolset for probing the intricate structure of higher-order GW phenomena [2].",
+      "stats": {
+        "char_count": 2406,
+        "word_count": 326,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.2 Tree diagram generation for systematic exploration of gravitational wave contributions",
+      "level": 3,
+      "content": "Tree diagram generation serves as a fundamental tool for systematically exploring the contributions of gravitational waves (GWs) in the context of nonlinear cosmological perturbations. By leveraging the vertex rules derived from the equations of motion, one can construct all possible tree-level diagrams corresponding to the $n$-th order induced GWs [2]. These diagrams represent the interactions between scalar perturbations and the resulting GW production, enabling a structured approach to compute the contributions of higher-order terms. The process involves identifying the relevant Feynman-like vertices, which encode the coupling strengths between different perturbation modes, and then summing over all possible configurations to obtain the total GW amplitude. This method provides a transparent and systematic framework for analyzing the nonlinear effects that generate GWs from primordial scalar fluctuations [9].\n\nThe generation of tree diagrams is particularly crucial in the study of scalar-induced gravitational waves (SIGWs), where the nonlinear couplings of scalar perturbations lead to the production of GWs [1]. Each diagram corresponds to a specific interaction channel, and their summation accounts for all possible contributions to the GW spectrum. This approach not only clarifies the underlying physical processes but also allows for the identification of dominant terms in the perturbative expansion. By systematically generating and evaluating these diagrams, researchers can isolate the contributions from different perturbation modes and assess their impact on the overall GW signal [10]. This level of detail is essential for accurately modeling the GW background and understanding its connection to early Universe physics.\n\nFurthermore, the tree diagram method facilitates the extension of GW studies to higher-order perturbations, where traditional analytical approaches become intractable. By automating the generation of diagrams using symbolic computation tools, it becomes feasible to explore complex interactions that arise in the nonlinear regime. This technique is especially valuable for investigating the effects of primordial perturbations on the GW spectrum, including the formation of primordial black holes and the generation of large-scale GW signals [11]. The systematic nature of tree diagram generation ensures that all relevant contributions are accounted for, providing a robust foundation for both theoretical analysis and observational predictions.",
+      "stats": {
+        "char_count": 2500,
+        "word_count": 343,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.1 Frequency-dependent suppression in SIGW spectrum as a probe for new physics",
+      "level": 3,
+      "content": "The frequency-dependent suppression observed in the scalar-induced gravitational wave (SIGW) spectrum offers a unique window into new physics beyond the Standard Model [1]. This suppression arises from the interplay between the dynamics of weakly interacting particles and the evolution of curvature perturbations in the early Universe. Specifically, Silk damping effects, which are known to suppress small-scale fluctuations in the cosmic microwave background, can similarly affect the energy density of SIGWs [1]. The suppression is most pronounced at high frequencies, corresponding to small-scale perturbations, and provides a distinct signature that can be probed by future gravitational wave observatories. This feature is particularly valuable as it encodes information about the interactions of particles that are not directly accessible through conventional observational methods.\n\nThe suppression mechanism is governed by the strength and nature of the interactions of these weakly coupled particles, including neutrinos and potential beyond Standard Model (BSM) candidates with even weaker couplings. The damping effect is sensitive to the energy scale of these interactions, making it a potential probe of high-energy physics. By analyzing the frequency dependence of the SIGW spectrum, one can infer the properties of these particles and their role in the early Universe [11]. This connection between the observed suppression and fundamental particle physics underscores the importance of SIGWs as a tool for testing new theories and constraining the parameter space of BSM models.\n\nFuture multi-band gravitational wave observations, including space-based interferometers and pulsar timing arrays, will be critical in detecting and characterizing this frequency-dependent suppression [4]. The ability to disentangle the contributions of different physical mechanisms to the SIGW spectrum will depend on precise theoretical modeling and the inclusion of higher-order effects [7]. As such, the study of frequency-dependent suppression in SIGWs not only deepens our understanding of early Universe cosmology but also provides a powerful avenue for exploring new physics through the lens of gravitational wave astronomy [1].",
+      "stats": {
+        "char_count": 2233,
+        "word_count": 312,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.2 Theoretical and computational analysis of damping effects on wave propagation",
+      "level": 3,
+      "content": "Theoretical and computational analysis of damping effects on wave propagation involves examining how perturbations in the early universe, such as curvature and isocurvature fluctuations, influence the generation and evolution of gravitational waves. Damping mechanisms, such as Silk damping, play a crucial role in suppressing small-scale perturbations by erasing density fluctuations in the cosmic plasma [1]. This suppression affects the energy-density spectrum of scalar-induced gravitational waves (SIGWs), leading to a frequency-dependent reduction in their amplitude. Understanding these effects requires a detailed analysis of the interplay between scalar perturbations and tensor modes, particularly in the context of second-order perturbations where nonlinear interactions become significant. The damping process is closely tied to the thermalization and diffusion of particles, which determine the scale at which perturbations are erased.\n\nComputationally, the analysis of damping effects involves solving higher-order cosmological perturbation equations, which become increasingly complex as the order of perturbations increases. Traditional methods face limitations in handling these higher-order calculations, necessitating the use of advanced computational tools such as the xPand package. These tools enable the derivation of key relations and the exploration of results in arbitrary gauges, which is essential for ensuring the consistency of theoretical frameworks. The inclusion of damping effects in these computations is vital for accurately predicting the characteristics of SIGWs, particularly on sub-Mpc scales where CMB constraints are no longer applicable. The resulting power spectra of gravitational waves must account for the suppression caused by damping mechanisms to provide reliable observational forecasts.\n\nThe impact of damping on wave propagation also has broader implications for probing new physics, as the frequency-dependent suppression of SIGWs can reveal information about the decoupling of weakly interacting particles [1]. This provides a unique avenue for testing beyond-standard-model scenarios through gravitational wave observations. Theoretical models must incorporate these damping effects to ensure that predictions align with both cosmological constraints and potential future observational data. By integrating damping mechanisms into the computational framework, researchers can develop a more comprehensive understanding of how perturbations evolve and influence the generation of gravitational waves, ultimately enhancing the predictive power of cosmological models.",
+      "stats": {
+        "char_count": 2621,
+        "word_count": 342,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.4.1 Examination of EFT parameters and their influence on power spectrum",
+      "level": 3,
+      "content": "The examination of EFT parameters and their influence on the power spectrum is crucial for understanding the generation and characteristics of scalar-induced gravitational waves (SIGWs) [4]. The effective field theory (EFT) framework provides a systematic way to parameterize the behavior of primordial curvature perturbations, which directly affects the resulting power spectra of SIGWs [8]. By modifying EFT parameters, one can control the strength of nonlinear interactions between scalar and tensor perturbations, thereby influencing the amplitude and shape of the induced GW spectra. This approach allows for a more flexible and controlled analysis compared to traditional models that rely on specific inflationary potentials [6]. The interplay between these parameters and the resulting power spectra is essential for predicting detectable signatures in future gravitational wave experiments [4].\n\nThe influence of EFT parameters on the power spectrum is further constrained by physical requirements such as causality and the validity of the EFT itself [12]. These constraints limit the extent to which the power spectrum can be enhanced, ensuring that the theoretical predictions remain consistent with observational bounds [12]. For instance, the growth of the power spectrum is typically limited during periods when the inflationary potential becomes nearly flat, leading to specific values of the slow-roll parameters. Such scenarios can result in a brief phase of enhanced power, but they must still satisfy the conditions for the EFT to remain applicable. These considerations are vital for establishing a robust theoretical framework that connects model parameters with observable GW signals.\n\nMoreover, the power spectrum of SIGWs is sensitive to the amplitude of primordial curvature perturbations, which is encapsulated in the expansion parameter $A_\\zeta$ [8]. Higher-order contributions, such as third-order effects, become increasingly significant in the context of current pulsar timing array (PTA) observations, highlighting the need for a comprehensive analysis of EFT parameters. The inclusion of these higher-order terms can lead to deviations in the derived primordial perturbation parameters if neglected, emphasizing the importance of a detailed examination of the EFT framework. This analysis not only deepens our understanding of SIGW generation but also provides a foundation for interpreting future gravitational wave data [13].",
+      "stats": {
+        "char_count": 2459,
+        "word_count": 349,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.4.2 Validation of EFT under varying physical conditions",
+      "level": 3,
+      "content": "The validation of Effective Field Theories (EFT) under varying physical conditions is a critical aspect of ensuring the robustness of theoretical predictions in cosmology. This section examines how EFT frameworks maintain their validity across different cosmological epochs, particularly in the context of scalar-induced gravitational waves (SIGWs) [1]. By analyzing the behavior of secondary GWs in different gauges—such as the longitudinal, uniform-expansion, Newtonian-motion, and N-body gauges—it is observed that while late-time energy density spectra converge, subhorizon modes exhibit significant gauge dependence [9]. This divergence highlights the limitations of EFT in certain regimes and underscores the necessity of careful gauge selection and consistency checks when modeling high-energy phenomena.\n\nThe EFT approach is further tested by considering the impact of varying energy scales and the presence of nonlinear interactions between scalar and tensor perturbations. These interactions can amplify GW spectra, potentially leading to divergences that challenge the EFT's applicability [9]. To address this, causality bounds and other constraints are applied to limit the growth of the power spectrum, ensuring that the EFT remains valid [12]. Additionally, the requirement for the EFT to be consistent with the semi-classical or WKB regime imposes further restrictions on the frequency range and parameter space. These constraints are crucial for maintaining the predictive power of the EFT in high-energy environments, such as those present in the early Universe.\n\nFinally, the validation of EFT under varying physical conditions also involves assessing the accuracy of perturbation expansions and higher-order effects. While second-order SIGWs have been extensively studied, recent research emphasizes the importance of third-order contributions in accurately modeling current PTA observations. Neglecting these higher-order effects can lead to significant deviations in the inferred parameters of primordial perturbations. By incorporating these effects and validating the EFT across different scenarios, the framework remains a reliable tool for probing new physics and understanding the early Universe.",
+      "stats": {
+        "char_count": 2222,
+        "word_count": 303,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.5.1 Analytic treatment across nine gauges using xPand package",
+      "level": 3,
+      "content": "The analytic treatment of induced gravitational waves (SIGWs) across nine different gauges using the xPand package is a critical component of our investigation into the gauge dependence of isocurvature-induced GWs [9]. By employing the xPand package, we systematically derive the gauge transformations and corresponding kernels for each of the nine gauges, including the longitudinal, uniform electric (UE), and N-body (Nb) gauges. This approach allows for a consistent and controlled comparison of the resulting energy density spectra, ensuring that the physical predictions remain invariant under gauge transformations. The xPand package facilitates the computation of the quadratic action and the integral kernels, enabling a precise analysis of the late-time behavior of secondary GWs across all gauges.\n\nThe analysis reveals significant gauge-dependent variations in both the kernels and the resulting spectra, particularly in the late-time evolution of the GWs [9]. While the kernels remain finite in the longitudinal, UE, Nm, and Nb gauges, other gauges exhibit growing modes that require careful handling to avoid unphysical divergences [9]. The xPand package provides the necessary tools to resolve these divergences, ensuring that the energy density spectra are consistent with the physical requirement of gauge invariance. This systematic approach not only clarifies the gauge dependence of the results but also strengthens the reliability of the computed energy density spectra for SIGWs [8].\n\nBy leveraging the xPand package, we achieve a comprehensive analytic treatment that spans the nine gauges, offering a robust framework for studying the implications of gauge choices on the energy density of induced GWs. This method ensures that the results are not only mathematically consistent but also physically meaningful, providing a solid foundation for further investigations into the properties of SIGWs. The insights gained from this analysis contribute to a deeper understanding of the role of gauge transformations in the study of cosmological gravitational waves.",
+      "stats": {
+        "char_count": 2082,
+        "word_count": 301,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.5.2 Gauge transformation techniques for arbitrary gauge results",
+      "level": 3,
+      "content": "Gauge transformation techniques play a critical role in ensuring the consistency and reliability of results derived in different gauge choices when analyzing scalar-induced gravitational waves (SIGWs) [9]. These techniques allow for the conversion of physical quantities, such as the kernels governing the generation of secondary gravitational waves, between various gauges, including longitudinal, comoving-orthogonal (CO), synchronous (TT), uniform-curvature (UC), and Newtonian-motion (Nm) gauges. By applying well-defined gauge transformations, one can derive the corresponding expressions in any desired gauge, thereby enabling a systematic comparison of results across different frameworks. This is particularly important in the context of SIGWs, where the late-time behavior of the kernels and the resulting energy density spectra can exhibit significant gauge dependence, necessitating a rigorous transformation approach [9].\n\nThe process of gauge transformation involves expressing the perturbations in terms of gauge-invariant quantities or by explicitly applying the transformation rules for tensor perturbations. For instance, the kernels in the longitudinal gauge can be transformed to other gauges by accounting for the differences in the gauge conditions and the associated perturbation variables. This transformation not only ensures the physical equivalence of results but also helps in identifying gauge-dependent features that may arise due to the choice of coordinates. The transformation techniques are especially crucial when dealing with higher-order induced gravitational waves, where the complexity of the equations and the convolution integrals increases significantly, requiring careful handling of gauge dependencies [9].\n\nIn practice, the implementation of gauge transformation techniques involves deriving the explicit form of the transformation matrices or functions that relate the perturbations in different gauges. This is often achieved by solving the gauge transformation equations for the tensor perturbations and then applying them to the kernels and power spectra. The resulting expressions are then analyzed to assess their behavior in different gauges, particularly in the late-time regime where the effects of gauge dependence become more pronounced. These techniques are essential for validating the robustness of the results and for ensuring that the conclusions drawn about the properties of SIGWs are independent of the gauge choice.",
+      "stats": {
+        "char_count": 2479,
+        "word_count": 336,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.6.1 Derivation of equations of motion for background and perturbations",
+      "level": 3,
+      "content": "The derivation of equations of motion for the background and perturbations in symmetric teleparallel gravity involves a systematic approach based on the variation of the action with respect to the metric and the connection [8]. Starting from the Einstein-Hilbert action generalized by a linear combination of quadratic monomials of the non-metricity tensor, the field equations are obtained by considering both the background evolution and linear scalar perturbations [8]. These equations encapsulate the dynamics of the cosmological background and the behavior of small deviations from it, which are essential for understanding the evolution of structures in the early Universe. The formalism ensures that the resulting equations are consistent with the principles of general relativity while incorporating the specific features of the non-metricity-based gravitational theory.\n\nFor the linear scalar perturbations, the equations of motion are derived by expanding the field equations to first order in perturbations. This process involves identifying the relevant degrees of freedom and separating the equations into distinct sectors, such as scalar, vector, and tensor modes. The resulting equations describe the propagation and interaction of perturbations, with particular attention given to the coupling between scalar and tensor modes. These couplings are crucial for the generation of scalar-induced gravitational waves, as they provide the source terms necessary for the production of tensor perturbations [1]. The solutions to these equations during the radiation-dominated era are obtained by analyzing the behavior of the perturbations under the specific conditions of that epoch.\n\nThe derivation of the equations of motion for perturbations is further refined by considering the gauge transformations and the projection of physical tensor modes. This involves isolating the freely propagating oscillatory components, such as $\\sin(k\\eta)$ and $\\cos(k\\eta)$, which represent genuine gravitational radiation. By eliminating gauge artifacts, the resulting equations yield a gauge-independent description of the perturbations, ensuring that the physical results are robust and consistent across different gauges. This approach is essential for accurately calculating the power spectra of scalar-induced gravitational waves and for understanding their cosmological implications [4].",
+      "stats": {
+        "char_count": 2390,
+        "word_count": 328,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.6.2 Calculation of power spectra for scalar-induced gravitational waves",
+      "level": 3,
+      "content": "The calculation of power spectra for scalar-induced gravitational waves (SIGWs) involves a systematic analysis of the nonlinear couplings between primordial scalar perturbations and the resulting tensor perturbations [1]. This process begins with the derivation of the second-order equations of motion for tensor perturbations, which are sourced by the quadratic terms of the scalar perturbations. The energy density of the induced GWs is then determined by integrating over the nonlinear interactions, leading to a power spectrum that depends on the four-point correlation function of the scalar perturbations. This approach requires solving the equations of motion in the radiation-dominated era, where the background evolution and linear scalar perturbations are well understood, and extending them to the nonlinear regime to capture the induced GWs.\n\nThe power spectrum of SIGWs is typically computed using a perturbative expansion, where the nonlinear terms are treated as small corrections to the linear scalar perturbations [7]. This involves evaluating the integral kernel that arises from the quadratic action of the scalar perturbations, which encapsulates the coupling between different modes. The resulting power spectrum is sensitive to the shape and amplitude of the primordial curvature perturbation spectrum, particularly in regions where the power is enhanced [2]. This sensitivity allows for the exploration of various cosmological scenarios, such as those involving non-Gaussian features or large-scale variations in the inflationary potential, which can lead to significant contributions to the SIGW background.\n\nThe calculation also incorporates the effects of damping mechanisms, such as Silk damping, which suppress the power spectrum on small scales due to the finite mean free path of photons in the early Universe. These effects must be carefully accounted for to ensure that the predicted power spectra are consistent with observational constraints. Additionally, the gauge dependence of the induced GWs necessitates a careful choice of gauge conditions to ensure that the results are physically meaningful and independent of the coordinate system [9]. Overall, the computation of the power spectra for SIGWs provides a crucial tool for probing the early Universe and testing theoretical models of inflation and primordial perturbations [11].",
+      "stats": {
+        "char_count": 2369,
+        "word_count": 341,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.1 Scale-dependent shape correlator for bispectrum similarity measurement",
+      "level": 3,
+      "content": "The scale-dependent shape correlator for bispectrum similarity measurement is a critical tool for analyzing the geometric structure of non-Gaussian features in scalar-induced gravitational waves (SIGWs). This method quantifies the degree of similarity between the full bispectrum and a set of well-defined reference shapes, such as equilateral, local, and folded configurations [14]. By accounting for the scale dependence of the bispectrum, the correlator enables a systematic decomposition of the non-Gaussian signal into its dominant geometric components. This approach is particularly useful in scenarios where the curvature perturbations exhibit complex spectral features, as it allows for the identification of dominant contributions from different physical mechanisms [11]. The correlator's ability to disentangle scale- and shape-dependent effects is essential for interpreting the statistical properties of SIGWs in the context of early universe models.\n\nThe construction of the scale-dependent shape correlator involves defining a similarity measure that compares the full bispectrum to reference shapes across a range of scales [14]. This measure is sensitive to the relative contributions of different configurations, such as equilateral, local, and collinear, and can reveal how these contributions evolve with scale. In particular, the correlator can detect the presence of non-Gaussian features that are not captured by standard Gaussian assumptions. For example, the oscillatory nature of SIGWs can lead to a flattened-type bispectrum, which differs from the equilateral configuration typically assumed in previous studies [3]. By analyzing the correlation between the full bispectrum and reference shapes, the method provides insights into the underlying physics that generated the non-Gaussian signal.\n\nThe application of the scale-dependent shape correlator is especially relevant for distinguishing between different inflationary models that produce distinct non-Gaussian signatures. The correlator can reveal how the bispectrum's geometry changes with scale, offering a way to test theoretical predictions against observational data. This technique is also valuable for understanding the relationship between the curvature power spectrum's spectral width and the intrinsic non-Gaussianity of SIGWs [3]. By isolating the contributions of different bispectrum shapes, the correlator enhances our ability to probe the early universe's dynamics and the mechanisms responsible for generating primordial perturbations.",
+      "stats": {
+        "char_count": 2533,
+        "word_count": 341,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.2 Local-like bispectrum estimator capturing main features of full bispectrum",
+      "level": 3,
+      "content": "The local-like bispectrum estimator is designed to capture the essential features of the full bispectrum while significantly reducing computational complexity. This estimator is inspired by the structure of the local-type non-Gaussianity, where the scale-dependence of the power spectrum plays a crucial role [14]. By incorporating this scale-dependence, the local-like estimator effectively mimics the behavior of the full bispectrum in key configurations, such as the equilateral and flattened shapes. This approach allows for a more efficient analysis of the non-Gaussian features of the primordial curvature perturbations, particularly in the context of scalar-induced gravitational waves (SIGWs) [6]. The estimator is particularly useful in scenarios where the full bispectrum exhibits complex geometric structures, as it provides a simplified yet accurate representation of the underlying physics.\n\nThe local-like bispectrum estimator is constructed by considering the dominant contributions from the full bispectrum, focusing on configurations that are most sensitive to the non-Gaussian features of the primordial density fluctuations. This involves identifying the characteristic shapes and dependencies that govern the bispectrum's behavior, such as the collinear and triangle configurations. By parameterizing these features, the estimator can be efficiently computed without the need for extensive numerical simulations. This simplification is especially valuable when analyzing large datasets, such as those from pulsar timing arrays, where computational resources are a limiting factor. The estimator's ability to retain the essential characteristics of the full bispectrum ensures that it remains a reliable tool for probing the early universe's physics.\n\nThe effectiveness of the local-like bispectrum estimator is validated through comparisons with the full bispectrum in various cosmological models. These comparisons demonstrate that the estimator accurately reproduces the main features, including the scale-dependence and shape variations, while significantly reducing the computational burden. This makes it a practical tool for parameter estimation and model testing in the context of stochastic gravitational wave backgrounds [13]. Furthermore, the estimator's simplicity facilitates its integration into broader analyses, such as Monte Carlo Markov Chain simulations, enabling a more systematic exploration of the parameter space. Overall, the local-like bispectrum estimator provides a robust and efficient method for capturing the key aspects of the full bispectrum in studies of primordial non-Gaussianity.",
+      "stats": {
+        "char_count": 2634,
+        "word_count": 352,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.1 Computation of bispectrum and skewness using log-normal curvature perturbations",
+      "level": 3,
+      "content": "The computation of the bispectrum and skewness using log-normal curvature perturbations involves a detailed analysis of the non-Gaussian features of the primordial scalar perturbations. By assuming a log-normal distribution for the curvature perturbations, the statistical properties of the perturbations can be systematically studied, allowing for the derivation of the bispectrum, which quantifies the three-point correlation function. This approach enables the exploration of the non-linear interactions between different modes of the curvature perturbations, particularly in the context of scalar-induced gravitational waves (SIGWs) [1]. The log-normal model provides a flexible framework that can capture the enhanced amplitude of the power spectrum at small scales, which is crucial for understanding the generation of SIGWs and their observational signatures [7].\n\nThe skewness, as a measure of the asymmetry of the distribution, is computed from the bispectrum and serves as an indicator of the level of non-Gaussianity in the curvature perturbations [3]. In the case of log-normal perturbations, the skewness is directly related to the spectral width of the power spectrum, with narrower spectra leading to higher intrinsic non-Gaussianity. This relationship is essential for connecting theoretical models to observational data, as it provides a means to constrain the parameters of the underlying inflationary models [6]. The computation of the bispectrum and skewness involves both analytical derivations and numerical simulations, ensuring that the results are consistent with the expected behavior of the curvature perturbations in different cosmological epochs [3].\n\nThe analysis of the bispectrum and skewness using log-normal curvature perturbations also reveals important insights into the geometry of the three-point function. The bispectrum exhibits distinct features depending on the configuration of the wavevectors, such as collinear and triangular configurations, which are sensitive to the underlying physics of the early Universe. These features are particularly relevant for understanding the generation of SIGWs and their angular power spectrum [7]. By studying the interplay between the bispectrum and the power spectrum, researchers can gain a deeper understanding of the mechanisms that lead to the formation of non-Gaussian structures in the early Universe and their potential observational implications.",
+      "stats": {
+        "char_count": 2435,
+        "word_count": 338,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.2 Conservation of skewness through alternative oscillation average method",
+      "level": 3,
+      "content": "The conservation of skewness through the alternative oscillation average method is a critical aspect in the accurate modeling of scalar-induced gravitational waves (SIGWs). Traditional oscillation average techniques, while effective in reducing computational complexity, have been shown to fail in preserving the skewness of SIGW signals. This is particularly problematic when analyzing non-Gaussian features, as the skewness encapsulates essential information about the underlying perturbations. The alternative oscillation average method addresses this limitation by incorporating a more refined averaging procedure that maintains the statistical properties of the original oscillatory signal. This approach ensures that the skewness, which is a measure of the asymmetry in the distribution of the signal, remains intact, thereby preserving the integrity of the non-Gaussian features in the SIGW spectrum.\n\nThe implementation of the alternative oscillation average method involves a detailed re-examination of the oscillatory behavior of SIGWs, particularly in the context of their energy density spectrum [3]. By accounting for the frequency and amplitude variations of the oscillations, this method enables a more accurate representation of the signal's statistical properties. This is especially important in scenarios where the scalar power spectrum exhibits sharp or broad features, as these can significantly influence the shape and characteristics of the resulting SIGW signal [7]. The method's effectiveness is further validated through its ability to maintain the skewness across different scales, ensuring that the non-Gaussian signatures are not distorted during the averaging process.\n\nThis alternative approach has significant implications for the study of the stochastic gravitational wave background (SGWB) and its connection to early universe physics [3]. By preserving the skewness, the method allows for a more precise analysis of the relationship between the scalar perturbations and the resulting GW signals. This is crucial for distinguishing between different inflationary models and for understanding the mechanisms that generate non-Gaussian features in the early universe [6]. Overall, the conservation of skewness through the alternative oscillation average method represents a substantial advancement in the computational techniques used to study SIGWs and their implications for cosmology [3].",
+      "stats": {
+        "char_count": 2423,
+        "word_count": 331,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.1 Evaluation of integrals associated with Feynman-like diagrams",
+      "level": 3,
+      "content": "The evaluation of integrals associated with Feynman-like diagrams is a critical component in the computation of the stochastic gravitational wave background (SIGW) energy density spectrum. These diagrams, which represent the interactions of scalar perturbations in the early universe, require the integration over internal momenta to account for the convolution of Green's functions. The complexity of these integrals increases significantly with the number of loops and the structure of the underlying field theory, necessitating the development of systematic techniques to handle them. This involves not only the identification of relevant diagrammatic contributions but also the derivation of semi-analytic expressions that can be efficiently evaluated numerically.\n\nA key challenge in this process is the classification and categorization of Feynman-like diagrams based on their topological structure and the corresponding integrals they generate. This classification allows for the establishment of a dictionary that maps each diagram to its integral representation, facilitating a more structured and scalable approach to the computation of higher-order correlators. Additionally, the evaluation of these integrals must take into account the perturbative regime of the theory, ensuring that the contributions from loop corrections remain subdominant compared to tree-level terms. This is crucial for maintaining the validity of the theoretical framework and ensuring that the resulting SIGW spectra are physically meaningful [10].\n\nThe angular power spectrum of SIGWs further complicates the evaluation of these integrals, as it incorporates both the initial inhomogeneities and the effects of wave propagation through the expanding universe [6]. While propagation effects are analogous to those in the cosmic microwave background, the initial inhomogeneities demand a more nuanced treatment, often requiring the extension of standard diagrammatic techniques. This necessitates the development of specialized methods to handle the angular dependence and to accurately capture the non-Gaussian features of the SIGW spectrum, which are essential for distinguishing between different early-universe scenarios.",
+      "stats": {
+        "char_count": 2212,
+        "word_count": 301,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.2 Dictionary relating diagrams to their corresponding integrals",
+      "level": 3,
+      "content": "The section on \"Dictionary relating diagrams to their corresponding integrals\" serves as a critical bridge between theoretical frameworks and computational implementations in the analysis of stochastic gravitational wave (SIGW) backgrounds. This dictionary systematically maps Feynman-like diagrams, which represent the interactions and correlations of scalar perturbations, to their corresponding mathematical integrals. Each diagram encodes a specific contribution to the energy density spectrum of SIGWs, and the dictionary provides a structured approach to evaluate these contributions. By defining a clear correspondence between diagrammatic structures and integral expressions, this framework enables efficient and accurate computation of higher-order correlation functions, such as the bispectrum, which are essential for probing non-Gaussian features in the early universe.\n\nThe development of this dictionary involves a detailed classification of Feynman-like diagrams based on their topological structure and the associated integration variables. For instance, diagrams involving internal momenta are linked to multi-dimensional integrals that account for the convolution of Green's functions and the propagation of perturbations. The dictionary also incorporates the parametric dependencies of the scalar power spectrum, allowing for the systematic evaluation of integrals under different parameterizations. This approach ensures that the complexity of multi-loop and multi-point correlators is managed through a structured and scalable methodology, facilitating the exploration of parameter spaces that are otherwise intractable with traditional techniques.\n\nFurthermore, the dictionary plays a pivotal role in connecting theoretical predictions with observational data. By enabling the computation of SIGW energy spectra and their statistical properties, it supports the analysis of datasets from pulsar timing arrays such as NANOGrav, PPTA, and EPTA. The systematic evaluation of integrals through this dictionary not only enhances the accuracy of theoretical models but also provides a robust foundation for testing inflationary scenarios, primordial black hole formation, and other early universe phenomena. This structured approach ensures that the intricate relationships between diagrams and integrals are preserved, allowing for a deeper understanding of the underlying physics.",
+      "stats": {
+        "char_count": 2398,
+        "word_count": 311,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.4.1 Sharp and broad spike approximations for small-scale power spectrum",
+      "level": 3,
+      "content": "The section on sharp and broad spike approximations for the small-scale power spectrum explores parameterizations that capture the behavior of scalar perturbations in the early universe, particularly focusing on regions where the power spectrum exhibits localized enhancements. These approximations are essential for modeling the energy density spectrum of stochastic gravitational wave backgrounds (SIGWs) and understanding their connection to primordial non-Gaussianity [13]. A sharp spike model assumes a narrow peak in the power spectrum, while a broad spike model allows for a wider distribution, each reflecting different underlying physical mechanisms. These parameterizations enable a more flexible analysis of the scalar perturbations and their impact on the resulting SIGW signal.\n\nBy employing these approximations, researchers can investigate how variations in the shape of the power spectrum influence the characteristics of the induced gravitational wave signal [4]. The sharp spike model is particularly useful for scenarios where the perturbations are highly localized, such as in the formation of primordial black holes, while the broad spike model is more suitable for cases with extended features. These models are integrated into Monte Carlo Markov Chain simulations to estimate the parameters that best fit observational data from pulsar timing arrays. This approach allows for a quantitative assessment of the energy spectrum of SIGWs and provides insights into the early universe's dynamics, including inflationary models and non-Gaussian features [15].\n\nThe analysis of these spike approximations also highlights the importance of accurately capturing the scale dependence of the power spectrum. The probability distribution of large fluctuations can differ significantly from the peak of the power spectrum, which has implications for the formation of primordial black holes and the frequency content of SIGWs [14]. By comparing the results from both sharp and broad spike models, researchers can better constrain the parameters of early universe models and improve the predictive power of theoretical frameworks. This section thus serves as a critical foundation for interpreting the observational data and advancing our understanding of the early universe's structure [15].",
+      "stats": {
+        "char_count": 2300,
+        "word_count": 327,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.4.2 Study of waveform and power spectrum relationship in SIGW",
+      "level": 3,
+      "content": "The study of the relationship between the waveform and power spectrum of stochastic gravitational waves (SIGWs) is crucial for understanding their origin and properties [13]. In this section, we explore how the shape of the energy density spectrum $\\Omega_{\\mathrm{GW}}(f) h_0^2$ is influenced by the underlying scalar perturbations in the early universe [16]. By parameterizing the scalar power spectrum using a smooth broken power-law, we investigate how variations in the spectral indices and break scales affect the resulting SIGW waveform [7]. This analysis provides a framework for connecting theoretical models of early universe physics, such as inflation and primordial black hole (PBH) formation, to observational data from pulsar timing arrays (PTAs) [3].\n\nThe waveform of SIGWs is closely tied to the statistical properties of the scalar perturbations that generate them [8]. We examine the connection between the power spectrum of curvature perturbations and the resulting SIGW energy density, focusing on how features such as sharp or broad spikes in the power spectrum translate into specific characteristics of the gravitational wave signal [8]. This relationship is essential for interpreting the observed stochastic gravitational wave background (SGWB) and for constraining cosmological models [3]. Our analysis reveals that the spectral shape of the power spectrum directly influences the frequency distribution and amplitude of the gravitational wave signal [4].\n\nTo further elucidate this relationship, we consider two parameterizations of the scalar power spectrum: one with a sharp spike and another with a broad feature. These models allow us to study how different structures in the power spectrum manifest in the waveform of SIGWs [7]. By comparing the resulting energy density spectra, we demonstrate that the waveform contains critical information about the underlying physics of the early universe. This work provides a foundation for future studies that aim to use SIGW observations to probe the nature of primordial fluctuations and their implications for cosmology [3].",
+      "stats": {
+        "char_count": 2100,
+        "word_count": 309,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.5.1 Computation of SIGW power spectrum for four different trispectra",
+      "level": 3,
+      "content": "The computation of the stochastic gravitational wave (SIGW) power spectrum for four different trispectra involves a detailed analysis of the higher-order correlations in the primordial curvature perturbations. These trispectra, which represent the four-point correlation functions of the scalar field, are classified based on their symmetry properties and the nature of the interactions that generate them. The first trispectrum arises from scalar-exchange diagrams, leading to a symmetric contribution to the GW power spectrum. The second is derived from contact interactions, which yield a different functional form. The third and fourth trispectra are parity-odd, contributing to the GW spectrum in a manner that distinguishes between left- and right-handed polarizations. These distinctions are crucial for identifying parity-violating effects in the early universe and for constraining models of inflation and non-Gaussianity [10].\n\nThe computation of the SIGW power spectrum involves integrating over the trispectra using the formalism of linearized gravitational wave perturbations [10]. This process accounts for the contributions from different momentum configurations, such as collinear and triangular arrangements, and incorporates the effects of the background cosmological evolution. The resulting power spectra are evaluated for their dependence on the frequency and the shape of the primordial power spectrum. Special attention is given to the conditions under which the trispectra produce non-vanishing contributions, particularly those that are even or odd functions of scalar products involving the wavevectors. These conditions determine the overall structure of the SIGW spectrum and its detectability in current and future pulsar timing array experiments.\n\nFinally, the analysis compares the trispectrum-induced SIGW power spectra with the Gaussian contribution, ensuring perturbative consistency and validating the computational framework [10]. The results highlight the sensitivity of the SIGW spectrum to the specific form of the primordial non-Gaussianity and the underlying inflationary model [6]. By examining the interplay between the trispectra and the energy density spectrum, this section provides a comprehensive understanding of how higher-order statistical features of the early universe influence the characteristics of the stochastic gravitational wave background.",
+      "stats": {
+        "char_count": 2400,
+        "word_count": 324,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.5.2 Impact of parity-even and parity-odd trispectra on GW power spectrum",
+      "level": 3,
+      "content": "The impact of parity-even and parity-odd trispectra on the gravitational wave (GW) power spectrum is a critical aspect of understanding the non-Gaussian features of the stochastic gravitational wave background (SGWB). Parity-even trispectra, which are symmetric under spatial inversion, contribute to the GW power spectrum through standard scalar-exchange and contact diagrams. These contributions are generally constrained by perturbative conditions and can lead to significant modifications in the shape of the GW spectrum, particularly in scenarios with enhanced scalar perturbations. The resulting GW power spectrum reflects the underlying primordial non-Gaussianity, providing a means to probe the physics of the early universe [6]. The interplay between the trispectrum and the GW spectrum is essential for distinguishing between different inflationary models and early-universe scenarios.\n\nParity-odd trispectra, on the other hand, introduce asymmetries in the GW power spectrum by generating distinct power for left- and right-handed polarizations. These trispectra are associated with specific operators that violate parity, leading to unique signatures in the GW signal [10]. The presence of such parity-violating contributions can significantly alter the angular distribution and statistical properties of the SGWB. The analysis of these effects requires careful consideration of the trispectrum's structure, particularly its dependence on scalar products and vector cross products. The resulting GW power spectrum can exhibit features that are not present in parity-even cases, offering a new avenue for testing fundamental symmetries in the early universe.\n\nThe constraints on the relative importance of parity-even and parity-odd trispectra are derived from both theoretical considerations and observational bounds [10]. These constraints are crucial for validating models that predict non-Gaussian features in the GW spectrum. The interplay between parity-even and parity-odd contributions can influence the overall shape and amplitude of the GW power spectrum, affecting the detectability of the SGWB by current and future gravitational wave observatories [6]. Understanding these effects is essential for interpreting the data from pulsar timing arrays and space-based interferometers, as they provide insights into the nature of primordial fluctuations and the physics of the early universe.",
+      "stats": {
+        "char_count": 2409,
+        "word_count": 330,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.6.1 Derivation of analytical expression for primordial power spectrum",
+      "level": 3,
+      "content": "The derivation of an analytical expression for the primordial power spectrum is a critical step in connecting theoretical models of the early universe to observational data [11]. This involves formulating a mathematical representation of the scalar perturbations that seeded the large-scale structure of the cosmos. Typically, such expressions are derived from the dynamics of inflationary models, where the power spectrum is shaped by the evolution of the inflaton field and its interactions. By parameterizing the power spectrum using functions such as broken power-laws or log-normal profiles, researchers can efficiently explore the parameter space and relate theoretical predictions to the observed stochastic gravitational wave background (SGWB) [4]. These analytical forms enable precise calculations of the induced gravitational wave energy density, which is essential for interpreting data from pulsar timing arrays and other experiments [3].\n\nThe analytical expressions for the primordial power spectrum are often constructed to capture specific features such as enhanced power at certain scales, which may arise from non-standard inflationary scenarios or phase transitions in the early universe. For instance, models with non-minimal derivative couplings or those involving non-Gaussian features can lead to distinct spectral shapes that deviate from the standard nearly scale-invariant spectrum. These deviations are crucial for understanding phenomena like primordial black hole (PBH) formation and the generation of stochastic gravitational wave signals. The derivation process typically involves solving the equations of motion for scalar perturbations, incorporating the relevant cosmological parameters, and expressing the resulting power spectrum in a form that is both tractable and informative for data analysis.\n\nIn practice, the analytical expressions are validated through numerical simulations and compared against observational constraints. This ensures that the derived power spectrum accurately reflects the physical conditions of the early universe and can be used to make testable predictions. The ability to derive such expressions efficiently is particularly valuable in the context of parameter estimation, where the goal is to determine the most likely values of model parameters given the data. By leveraging these analytical tools, researchers can systematically explore the implications of different inflationary models and their impact on the SGWB, thereby advancing our understanding of the universe's earliest moments [15].",
+      "stats": {
+        "char_count": 2563,
+        "word_count": 354,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.6.2 Analysis of SIGW energy density spectrum using PPTA DR3 data",
+      "level": 3,
+      "content": "The analysis of the stochastic gravitational wave (SIGW) energy density spectrum using the Parkes Pulsar Timing Array (PPTA) Data Release 3 (DR3) data involves a detailed examination of the frequency-dependent characteristics of the energy density parameter $\\Omega_{\\mathrm{GW}}(f) h_0^2$ [15]. This section employs a smooth broken power-law parameterization to model the energy spectrum, enabling a robust statistical estimation of the parameters that define its shape. The methodology includes a Monte Carlo Markov Chain (MCMC) simulation, which allows for a comprehensive exploration of the parameter space and quantification of uncertainties. By leveraging the high-precision timing data from PPTA DR3, the analysis aims to constrain the amplitude and spectral features of the SIGW background, providing insights into the underlying physics of the early universe [11].\n\nThe PPTA DR3 dataset, covering a wide frequency range, is particularly sensitive to the low-frequency components of the SIGW energy density spectrum. This sensitivity is crucial for detecting potential signatures of enhanced scalar perturbations, which could arise from inflationary models with nonminimal derivative couplings or from the formation of primordial black holes [14]. The analysis accounts for the statistical correlations between pulsar timing residuals and the expected SIGW signal, ensuring that the results are consistent with the Hellings-Downs spatial correlation pattern. By comparing the observed data with theoretical predictions, the study investigates the compatibility of various early universe scenarios with the measured energy density spectrum.\n\nThe results of this analysis contribute to a broader understanding of the energy density distribution of SIGWs and its implications for cosmological models [8]. The derived constraints on the energy spectrum provide valuable input for testing inflationary theories and PBH formation mechanisms [15]. Furthermore, the methodology employed in this section serves as a template for future studies using upcoming data releases from PTA collaborations. The detailed investigation of the PPTA DR3 data highlights the importance of precise parameter estimation and statistical analysis in uncovering the properties of the stochastic gravitational wave background.",
+      "stats": {
+        "char_count": 2305,
+        "word_count": 319,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.7.1 Smooth broken power-law parameterization of energy spectrum",
+      "level": 3,
+      "content": "The smooth broken power-law parameterization of the energy spectrum is a critical tool for modeling the stochastic gravitational wave background (SGWB) and extracting physical insights from observational data [4]. This approach allows for a flexible representation of the energy density spectrum $\\Omega_{\\mathrm{GW}}(f)h_0^2$, capturing both the overall shape and localized features such as peaks or breaks. By introducing a smooth transition between different power-law segments, this parameterization avoids the discontinuities inherent in sharp broken power-law models, thereby enabling more accurate and stable statistical inferences. The model is particularly useful in scenarios where the underlying physics, such as inflation or primordial black hole (PBH) formation, leads to non-trivial spectral features that deviate from a simple power-law behavior.\n\nThe parameterization is typically defined by a set of parameters that control the amplitude, slope, and break frequency of the spectrum. These parameters are constrained using Bayesian inference techniques, such as Markov Chain Monte Carlo (MCMC) simulations, which allow for a comprehensive exploration of the parameter space and the quantification of uncertainties. The smoothness of the transition is often achieved through a sigmoid-like function or similar mathematical formulation, ensuring that the spectral indices vary continuously across the break frequency. This flexibility is essential for fitting observational data from pulsar timing arrays (PTAs) like NANOGrav, PPTA, and EPTA, which are sensitive to the SGWB and can provide constraints on the energy spectrum's shape [11].\n\nThe application of the smooth broken power-law model is particularly relevant in the context of early universe cosmology, where the energy spectrum can encode information about inflationary models, non-Gaussianity, and the formation of PBHs [15]. By fitting this model to observational data, researchers can infer the statistical properties of primordial perturbations and test theoretical predictions. The analytical tractability of the model further facilitates the development of efficient parameter estimation methods, enabling a deeper understanding of the physical processes that shaped the early universe.",
+      "stats": {
+        "char_count": 2267,
+        "word_count": 311,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.7.2 Monte Carlo Markov Chain simulation for IGW energy spectra analysis",
+      "level": 3,
+      "content": "Monte Carlo Markov Chain (MCMC) simulations play a crucial role in analyzing the energy spectra of primordial gravitational waves (IGWs) by enabling a robust exploration of parameter space. In this context, the energy spectrum is typically parameterized using a smooth broken power-law model, which allows for flexible representation of the spectral shape. By employing MCMC techniques, we systematically sample the posterior distribution of the model parameters, such as the spectral indices and normalization, based on observational data. This statistical approach ensures that uncertainties in the parameters are quantified, providing a comprehensive understanding of the underlying physical processes that generate the IGW energy spectra.\n\nThe application of MCMC simulations to IGW energy spectra analysis is particularly valuable for investigating early Universe physics, including inflationary models and the formation of primordial black holes (PBHs) [15]. By fitting the observed data to theoretical predictions, MCMC methods allow for the identification of parameter combinations that best explain the data, while also revealing potential deviations from standard models. This process is essential for distinguishing between different inflationary scenarios and assessing the viability of PBH formation mechanisms [5]. The ability to handle complex, multi-dimensional parameter spaces makes MCMC an indispensable tool in the study of IGW energy spectra.\n\nFurthermore, the MCMC framework facilitates the incorporation of prior information and the assessment of model consistency with observational constraints. This is particularly important when analyzing datasets from pulsar timing arrays such as NANOGrav, PPTA, and EPTA, which provide critical insights into the stochastic gravitational wave background [17]. By combining theoretical predictions with empirical data, MCMC simulations enable a detailed exploration of the IGW energy spectra, shedding light on the dynamics of the early Universe and the nature of primordial perturbations [15].",
+      "stats": {
+        "char_count": 2056,
+        "word_count": 283,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.1 Numerical investigation of scalar-induced gravitational waves with isocurvature perturbations",
+      "level": 3,
+      "content": "The numerical investigation of scalar-induced gravitational waves (SIGWs) in the presence of isocurvature perturbations involves a detailed analysis of how non-adiabatic density fluctuations contribute to the generation of tensor modes through second-order gravitational interactions [2]. These perturbations, which arise from differences in the energy densities of distinct components in the early Universe, can significantly alter the amplitude and spectrum of the resulting gravitational wave background [2]. By employing lattice simulations, researchers can model the nonlinear evolution of scalar perturbations and their coupling to tensor modes, providing a more accurate picture of the GW signal than purely analytical approaches. This method allows for the study of complex initial conditions and the effects of multiple field interactions, which are critical in scenarios involving multi-field inflation or dark matter sector couplings.\n\nThe numerical framework typically involves solving the Einstein equations at second order in perturbation theory, incorporating both adiabatic and isocurvature modes. This approach enables the computation of the energy density and power spectrum of the induced GWs, which are essential for assessing their detectability with current and future observatories. The inclusion of isocurvature perturbations introduces additional complexity, as they can lead to distinct signatures in the GW spectrum, such as enhanced power at specific frequencies or non-Gaussian features. These effects are crucial for distinguishing SIGWs from other sources of gravitational radiation and for constraining early Universe models that predict such perturbations [1].\n\nFurthermore, the numerical investigation highlights the importance of gauge-invariant quantities in defining the physical content of SIGWs. By focusing on observables that are independent of the choice of coordinates, the analysis ensures that the results are robust and directly comparable across different theoretical frameworks. This approach also facilitates a clearer interpretation of the GW signal in terms of underlying cosmological parameters, such as the amplitude and spectral shape of the initial perturbations [18]. Overall, the numerical study of SIGWs with isocurvature perturbations provides valuable insights into the nonlinear dynamics of the early Universe and the potential observational signatures of primordial density fluctuations [17].",
+      "stats": {
+        "char_count": 2454,
+        "word_count": 333,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.2 Extension of lattice methods to mixed initial conditions and non-Gaussian effects",
+      "level": 3,
+      "content": "The extension of lattice methods to handle mixed initial conditions and non-Gaussian effects represents a significant advancement in the numerical study of scalar-induced gravitational waves (SIGWs). Traditional approaches often assume purely adiabatic initial conditions, but real cosmological scenarios involve a mixture of adiabatic and isocurvature perturbations. Lattice simulations, which discretize the field equations on a grid, provide a robust framework to capture these complex initial conditions. By incorporating both types of perturbations, the method enables a more accurate representation of the early Universe's inhomogeneous density distribution, which is crucial for computing the GW energy density at nonlinear orders. This extension allows for a more comprehensive analysis of how different initial conditions influence the generation of SIGWs.\n\nNon-Gaussian effects further complicate the analysis, as they introduce higher-order correlations that cannot be captured by linear perturbation theory. Lattice methods inherently account for nonlinear interactions, making them well-suited to study the impact of non-Gaussianity on GW production. The inclusion of non-Gaussian initial conditions in lattice simulations enables the investigation of how higher-order statistical properties of density fluctuations affect the amplitude and spectrum of SIGWs. This is particularly important for understanding the role of non-Gaussianity in enhancing or suppressing the GW signal, which has implications for observational constraints and model discrimination.\n\nBy systematically extending lattice methods to mixed initial conditions and non-Gaussian effects, this work provides a more realistic and physically consistent approach to studying SIGWs. The ability to handle these complex scenarios opens new avenues for exploring the early Universe's dynamics, including the formation of primordial black holes and the evolution of cosmological structures [13]. This advancement not only improves the accuracy of numerical predictions but also enhances the interpretability of GW signals, offering a clearer connection between theoretical models and observational data.",
+      "stats": {
+        "char_count": 2178,
+        "word_count": 290,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.1 Statistical analysis of curvature perturbation peaks and their role in SIGW generation",
+      "level": 3,
+      "content": "The statistical analysis of curvature perturbation peaks plays a critical role in understanding the generation of scalar-induced gravitational waves (SIGWs) [8]. Peaks in the curvature perturbation field correspond to regions of enhanced density fluctuations, which can act as strong sources for SIGWs through nonlinear gravitational interactions [3]. These peaks are typically identified using peak theory, which characterizes the statistical distribution of such structures in the early Universe. The amplitude and spatial distribution of these peaks directly influence the strength and spectral features of the resulting SIGW background. By analyzing the statistical properties of curvature perturbation peaks, researchers can estimate the contribution of these structures to the overall SIGW energy density, providing a link between primordial density fluctuations and the gravitational wave signal [3].\n\nThe role of curvature perturbation peaks in SIGW generation is further elucidated by considering the nonlinear coupling between scalar and tensor perturbations [13]. The source term for SIGWs is proportional to the product of the curvature perturbation and its second derivatives, making regions with high curvature gradients—such as peaks—dominant contributors [13]. This implies that the statistical distribution of peaks, including their height, width, and spatial correlation, significantly affects the resulting GW spectrum. Additionally, the presence of multiple peaks can lead to a complex, non-Gaussian SIGW signal, which may be detectable through future gravitational wave observatories. Understanding these statistical features is essential for accurately modeling the SIGW background and distinguishing it from other sources of GWs.\n\nThe interplay between the statistical properties of curvature perturbations and the resulting SIGW spectrum highlights the importance of peak analysis in cosmological studies [14]. By quantifying the contribution of peaks to the SIGW energy density, researchers can develop more precise models of the early Universe and its gravitational wave signatures [11]. This analysis also provides insights into the underlying physics of density fluctuations, such as their origin from inflationary mechanisms or other early Universe processes [15]. Ultimately, a thorough statistical examination of curvature perturbation peaks is indispensable for interpreting the SIGW background and advancing our understanding of the primordial cosmos [3].",
+      "stats": {
+        "char_count": 2488,
+        "word_count": 339,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.2 Compact expression for the size of the SIGW background from peak theory",
+      "level": 3,
+      "content": "The size of the scalar-induced gravitational wave (SIGW) background can be compactly expressed using peak theory, which provides a framework to estimate the contribution of large density perturbations to the GW spectrum [13]. By focusing on the peaks of the curvature perturbation $\\zeta$, one can isolate the regions where the nonlinear sourcing of tensor modes is most significant. This approach leverages the fact that the SIGW source term is proportional to $\\zeta \\partial_i \\partial_j \\zeta$, implying that the largest contributions arise from points with high curvature and strong spatial gradients. Peak theory allows for a statistical characterization of these regions, enabling a more precise estimation of the overall GW amplitude without requiring full numerical simulations.\n\nThe compact expression derived from peak theory incorporates the statistical properties of the curvature perturbation field, such as the peak height distribution and the spatial correlation function [19]. This leads to a formulation that depends on the amplitude and width of the perturbation spectrum, as well as the characteristic scale of the peaks. By assuming a Gaussian distribution for the curvature perturbations, one can express the SIGW energy density in terms of the variance of $\\zeta$ and the peak height threshold. This analytical approach simplifies the calculation of the GW background and provides a direct link between the primordial density fluctuations and the resulting gravitational wave signal [13].\n\nThe resulting expression is particularly useful for estimating the amplitude of the SIGW background in scenarios with large density perturbations, such as those arising from isocurvature modes or primordial black hole formation [13]. It offers a computationally efficient alternative to full second-order perturbation theory, while maintaining physical accuracy for the dominant contributions. This compact formulation not only facilitates comparisons with observational constraints but also enables a deeper understanding of the relationship between early Universe physics and the GW signal, providing a valuable tool for future studies of the cosmological gravitational wave background [1].",
+      "stats": {
+        "char_count": 2205,
+        "word_count": 316,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.1 Observational techniques for investigating scalar-induced gravitational effects",
+      "level": 3,
+      "content": "Observational techniques for investigating scalar-induced gravitational effects primarily rely on detecting the stochastic gravitational wave background (SGWB) generated by primordial scalar perturbations [13]. These effects are typically probed through indirect methods, such as analyzing the energy density and power spectrum of gravitational waves, which are derived from second-order perturbation theory [4]. The challenge lies in distinguishing scalar-induced gravitational waves from other sources, requiring precise modeling of the underlying cosmological scenarios [13]. Pulsar timing arrays (PTAs) are among the most sensitive instruments for detecting low-frequency gravitational waves, offering a unique window into the early universe and the nonlinear dynamics of scalar perturbations [15].\n\nIn addition to PTAs, future space-based gravitational wave detectors, such as LISA, Taiji, and TianQin, will play a crucial role in probing scalar-induced effects across a broader frequency range. These instruments are designed to detect higher-frequency gravitational waves, enabling the study of scalar-induced signals from different epochs of the universe [19]. The development of numerical relativity techniques further enhances the ability to model nonlinear gravitational interactions, providing a more accurate description of scalar-induced tensor modes. These methods are essential for understanding the physical mechanisms that generate such waves, including the amplification of scalar perturbations during phase transitions or in specific inflationary models.\n\nThe interpretation of observational data is complicated by the need to disentangle scalar-induced signals from other cosmological and astrophysical contributions. This necessitates the use of robust statistical techniques and the development of gauge-invariant observables that are independent of the choice of coordinate system. By focusing on physical quantities that are directly measurable, such as the tensor power spectrum or the energy density of the SGWB, researchers can extract meaningful information about the early universe. These observational strategies are critical for testing theoretical models and advancing our understanding of the interplay between scalar perturbations and gravitational wave generation [13].",
+      "stats": {
+        "char_count": 2305,
+        "word_count": 302,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.2 Data processing methods for gravitational phenomenon analysis",
+      "level": 3,
+      "content": "Data processing methods for gravitational phenomenon analysis play a crucial role in extracting meaningful information from the complex signals generated by gravitational waves (GWs). These methods typically involve solving the Einstein equations to second order in a specific gauge to compute scalar-induced gravitational waves (SIGWs) [4]. The resulting wave equations are then used to determine the energy density or power spectrum of the GWs, leveraging standard linear theory formulas. However, such approaches are inherently gauge-dependent, which can introduce ambiguities in the interpretation of the physical effects. To address this, recent studies have emphasized the need for gauge-invariant observables that can be reliably computed across different gauges, ensuring consistency in the analysis of GW signals.\n\nA key challenge in data processing is the accurate modeling of nonlinear gravitational effects, particularly in scenarios involving primordial black holes (PBHs) or cosmological structure formation. These regimes often require numerical relativity (NR) techniques to capture the full dynamics of tensor perturbations on a Friedmann-Lemaître-Robertson-Walker (FLRW) background. Additionally, the presence of a cosmological GW background necessitates the use of advanced signal processing techniques to distinguish between stochastic and individual GW events. This includes the application of cross-correlation methods and Bayesian inference to extract weak signals from noisy data, enabling the detection of both isolated events and background fluctuations.\n\nThe development of robust data processing frameworks is essential for the next generation of GW observatories, which aim to probe the early universe through SIGWs and other nonlinear phenomena. These frameworks must account for the complex interplay between scalar and tensor perturbations, as well as the influence of early-universe dynamics such as inflation or an early matter-dominated epoch. By integrating theoretical models with advanced computational tools, researchers can enhance the accuracy and reliability of GW analysis, paving the way for new discoveries in cosmology and fundamental physics.",
+      "stats": {
+        "char_count": 2189,
+        "word_count": 299,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.4.1 Focus on physical observables vanishing in homogeneous background",
+      "level": 3,
+      "content": "The section focuses on physical observables that vanish in a homogeneous background, which is crucial for defining gauge-invariant quantities in cosmological perturbation theory. In the context of gravitational wave (GW) studies, such observables are essential to isolate physically meaningful signals from gauge-dependent artifacts [1]. When considering scalar-induced GWs, which arise from second-order gravitational interactions of primordial scalar perturbations, it is necessary to identify observables that are insensitive to the choice of gauge [9]. These observables, by construction, depend only on vector and tensor perturbations at first order, ensuring their invariance under gauge transformations. This approach allows for a consistent and unambiguous characterization of GW signals, particularly in scenarios where nonlinear effects play a significant role.\n\nBy focusing on observables that vanish in the homogeneous background, one can effectively disentangle the contributions of different perturbation types, such as scalar, vector, and tensor modes. This is particularly important in the study of GWs generated by nonlinear dynamics, where gauge-dependent terms can obscure the true physical signal. The method ensures that the resulting GW energy density is not affected by arbitrary coordinate choices, thereby providing a robust framework for comparing theoretical predictions with observational data. Moreover, this approach enables a clearer understanding of how different cosmological scenarios, such as inflation or phase transitions, contribute to the GW background.\n\nThe use of such observables also facilitates the analysis of GW signals in the context of early Universe physics, where the interplay between different perturbation types is complex. By ensuring that the defined quantities are gauge-invariant and physically meaningful, the method provides a solid foundation for studying the phenomenological implications of scalar-induced GWs. This is especially relevant in models like double monodromy inflation, where the GW signal is a mixture of chiral and non-chiral components, and the relative contributions depend on the underlying scalar potential [20]. The approach thus offers a powerful tool for probing the early Universe through gravitational wave observations [1].",
+      "stats": {
+        "char_count": 2309,
+        "word_count": 318,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.4.2 Gauge-invariance of magnetic part of Weyl tensor and Cotton tensor",
+      "level": 3,
+      "content": "The gauge-invariance of the magnetic part of the Weyl tensor and the Cotton tensor plays a critical role in the formulation of physical observables in gravitational wave physics [4]. These tensors are constructed from the curvature of spacetime and are inherently tied to the geometric structure of the manifold. The magnetic part of the Weyl tensor, in particular, encodes information about the tidal gravitational fields and is sensitive to the propagation of gravitational waves in vacuum [4]. However, its definition and interpretation depend on the choice of spatial slicing and time coordinate, which introduces gauge dependencies. The Cotton tensor, defined on three-dimensional spatial hypersurfaces, similarly exhibits gauge behavior unless properly constrained. Ensuring gauge-invariance for these quantities is essential for constructing reliable and physically meaningful measures of gravitational wave energy.\n\nTo address the gauge dependence, one must consider the construction of gauge-invariant combinations that isolate the physical degrees of freedom. The magnetic part of the Weyl tensor can be made gauge-invariant by projecting it onto a specific spatial hypersurface and ensuring that it vanishes in the homogeneous background. This approach allows for a consistent interpretation of the tensor in different gauges, particularly in the context of cosmological perturbation theory. Similarly, the Cotton tensor can be rendered gauge-invariant by incorporating the constraints of the spatial geometry and ensuring that it only responds to the tensor perturbations at first order. These constructions are crucial for defining the energy density of gravitational waves in a covariant and physically meaningful manner.\n\nThe implications of gauge-invariance for the magnetic part of the Weyl tensor and the Cotton tensor extend beyond theoretical consistency. They provide a robust framework for analyzing the nonlinear behavior of gravitational waves and their interactions with matter perturbations. In particular, these tensors can serve as diagnostic tools for distinguishing between different sources of gravitational waves, such as those induced by scalar perturbations or gauge field instabilities. By ensuring that the observables are independent of the choice of coordinates, one can achieve a more accurate and universal description of the gravitational wave background, which is vital for both theoretical and observational studies.",
+      "stats": {
+        "char_count": 2459,
+        "word_count": 348,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.5.1 Comparison of tensor modes from gauge field instability with scalar-induced GWs",
+      "level": 3,
+      "content": "The comparison of tensor modes generated by gauge field instability and scalar-induced gravitational waves (SIGWs) reveals distinct physical origins and characteristics [9]. Gauge field instability, as seen in scenarios like double monodromy inflation, produces chiral tensor modes due to the amplification of a specific gauge field helicity mode [20]. These modes are sourced by the nonlinear dynamics of the gauge field during inflation, leading to a distinctive chiral GW signal [20]. In contrast, scalar-induced GWs arise from second-order gravitational interactions of scalar perturbations, resulting in non-chiral tensor modes [16]. The chiral nature of gauge field-induced GWs offers a unique signature that can be distinguished from the more isotropic SIGWs, which are determined by the statistical properties of the primordial curvature perturbations [3]. This distinction is crucial for interpreting future GW observations and understanding the underlying physics of early Universe dynamics.\n\nThe gauge dependence of tensor modes in second-order perturbation theory complicates the direct comparison between these two mechanisms. While scalar-induced GWs are typically calculated in specific gauges, such as the Newtonian gauge, the resulting GW energy density can vary depending on the gauge choice. On the other hand, tensor modes from gauge field instability are inherently gauge-dependent due to the nonlinear coupling of the gauge field with the spacetime geometry. This gauge dependence raises challenges in establishing a universal framework for comparing the two mechanisms. However, recent efforts have focused on defining physical observables that are gauge-invariant, such as the magnetic part of the Weyl tensor or the Cotton tensor, which provide a consistent basis for analyzing the properties of both chiral and non-chiral tensor modes.\n\nThe interplay between gauge field instability and scalar-induced GWs in models like double monodromy inflation suggests a rich phenomenology [20]. The presence of a tachyonic gauge field mode can amplify scalar perturbations, leading to enhanced SIGWs and potentially primordial black holes. This amplification introduces a feedback mechanism that modifies the scalar power spectrum and alters the GW signal. Meanwhile, the chiral nature of the gauge field-induced tensor modes offers a unique observational signature that could be detected in future GW experiments. Understanding the relative contributions of these two mechanisms is essential for disentangling the sources of the primordial GW background and probing the early Universe's dynamics with high precision.",
+      "stats": {
+        "char_count": 2632,
+        "word_count": 375,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.5.2 Analysis of phenomenological consequences of scalar-induced GWs",
+      "level": 3,
+      "content": "The phenomenological consequences of scalar-induced gravitational waves (SIGWs) are deeply rooted in the nonlinear dynamics of scalar perturbations in the early Universe [1]. These GWs arise as second-order effects from the nonlinear coupling of scalar modes, leading to a stochastic background that can be probed by current and future gravitational wave observatories [13]. The spectral characteristics of SIGWs are determined by the amplitude and scale dependence of the underlying scalar perturbations, which can be significantly enhanced in specific inflationary models or during non-standard cosmological epochs [13]. Such enhancements can lead to detectable GW signals, providing a unique window into the physics of the early Universe, including the nature of primordial density fluctuations and the mechanisms that generated them.\n\nThe interplay between chiral and non-chiral components of SIGWs is a key aspect of their phenomenological implications. In models like double monodromy inflation, the GW signal is a mixture of chiral and non-chiral contributions, with the relative dominance depending on the frequency threshold and the details of the scalar potential [20]. Non-chiral components may dominate at lower frequencies, while chiral contributions become more significant at higher frequencies, exhibiting larger peaks. This frequency-dependent behavior offers a distinctive signature that can be used to distinguish between different models of early Universe dynamics and to constrain the parameters of inflationary or post-inflationary scenarios [11]. The presence of such a mixed signal highlights the importance of considering both chiral and non-chiral contributions in the analysis of SIGWs.\n\nFurthermore, the detection of SIGWs can provide insights into the formation of primordial black holes (PBHs) and the evolution of scalar perturbations on small scales [3]. The amplification of scalar perturbations, which leads to SIGWs, can also result in the formation of PBHs if the density fluctuations are sufficiently large [8]. This connection between SIGWs and PBHs opens new avenues for probing the early Universe through gravitational wave observations [21]. The physical interpretation of SIGWs as a direct consequence of scalar perturbations, combined with their distinct spectral features, makes them a powerful tool for testing cosmological models and understanding the origin of structure in the Universe [1].",
+      "stats": {
+        "char_count": 2438,
+        "word_count": 348,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.6.1 Study of primordial non-Gaussianities in scalar-induced gravitational waves",
+      "level": 3,
+      "content": "The study of primordial non-Gaussianities in scalar-induced gravitational waves (SIGWs) is a critical area of research in modern cosmology, offering a unique window into the early universe's dynamics [6]. Non-Gaussian features in the primordial density perturbations can significantly influence the generation of SIGWs through nonlinear gravitational interactions [3]. These non-Gaussianities, which deviate from the Gaussian distribution of fluctuations, can arise from various early-universe scenarios, including multi-field inflation, phase transitions, and non-standard inflationary models [6]. The presence of such non-Gaussianities modifies the statistical properties of the scalar perturbations, thereby affecting the amplitude and spectral characteristics of the resulting gravitational wave background. Understanding these effects is essential for interpreting potential future observations of SIGWs and distinguishing between different cosmological models.\n\nThe generation of SIGWs is inherently a second-order process, where scalar perturbations induce tensor modes through nonlinear couplings [10]. This process is sensitive to the statistical properties of the primordial scalar field, particularly its non-Gaussian features. Studies have shown that the bispectrum and higher-order correlation functions of the scalar perturbations play a crucial role in determining the amplitude and frequency distribution of the induced gravitational waves. In particular, non-Gaussianities can lead to enhanced or suppressed contributions to the SIGW spectrum, depending on the specific form of the non-Gaussianity [6]. This sensitivity makes the analysis of non-Gaussianities in SIGWs a powerful tool for probing the physics of the early universe and testing inflationary models [3].\n\nRecent theoretical advancements have enabled more precise calculations of SIGWs in the presence of non-Gaussian initial conditions [8]. These studies highlight the importance of accounting for the shape and amplitude of the non-Gaussian features when modeling the gravitational wave background. Additionally, the interplay between non-Gaussianities and other cosmological parameters, such as the spectral index and the amplitude of scalar perturbations, further complicates the analysis. As observational techniques improve, the ability to detect and characterize non-Gaussian features in SIGWs will provide valuable insights into the nature of primordial fluctuations and the mechanisms that generated them [3].",
+      "stats": {
+        "char_count": 2498,
+        "word_count": 327,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.6.2 Statistical analysis of anisotropies in SIGW using cosmological perturbation theory",
+      "level": 3,
+      "content": "The statistical analysis of anisotropies in scalar-induced gravitational waves (SIGW) is a critical component in understanding their cosmological implications, particularly when employing cosmological perturbation theory [1]. Anisotropies in the SIGW background arise from the inhomogeneous distribution of primordial density perturbations, which generate tensor modes through nonlinear gravitational interactions [3]. These anisotropies are typically analyzed using the formalism of second-order cosmological perturbations, where the scalar perturbations act as a source for tensor modes. The resulting GW spectrum is inherently anisotropic, reflecting the statistical properties of the underlying density fluctuations, such as their power spectrum and non-Gaussian features. This analysis is essential for distinguishing SIGW from other GW sources and for constraining early-universe models [5].\n\nA key challenge in this analysis is the gauge dependence of the effective GW energy density, which can lead to ambiguities in interpreting the results. Cosmological perturbation theory reveals that tensor modes at second order contain gauge-dependent, non-propagating components, complicating the identification of physical GW signals [16]. To address this, researchers often focus on gauge-invariant quantities, such as the tensor power spectrum or the energy density, which are derived from the physical observables that remain invariant under gauge transformations. These quantities are computed by solving the second-order Einstein equations in a specific gauge, ensuring consistency with the background FLRW metric. The resulting anisotropies are then characterized using statistical measures, such as the angular power spectrum or the bispectrum, to quantify their spatial distribution.\n\nThe statistical analysis of SIGW anisotropies also involves exploring their dependence on the initial conditions of the primordial perturbations [3]. Different inflationary scenarios produce distinct statistical signatures, such as varying levels of non-Gaussianity or specific spectral features. By comparing the predicted anisotropy patterns with observational data, such as from future GW detectors or CMB experiments, one can constrain the parameters of early-universe models. This approach not only enhances our understanding of the origin of SIGW but also provides a powerful tool for probing the physics of the early universe through the lens of gravitational wave astronomy [1].",
+      "stats": {
+        "char_count": 2479,
+        "word_count": 333,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.7.1 Definition of GW energy density independent of background spacetime",
+      "level": 3,
+      "content": "The definition of gravitational wave (GW) energy density independent of background spacetime is a critical challenge in the study of GWs, particularly in scenarios where the physical spacetime lacks a well-defined background [13]. Traditional approaches often rely on reference manifolds or specific gauges, which introduce gauge dependencies and obscure the physical interpretation of the energy density. This paper proposes a covariant formulation that avoids such dependencies by focusing on the intrinsic properties of the physical spacetime. By constructing the energy density from the tensor perturbations that are gauge-invariant and physically meaningful, this approach ensures that the resulting energy density is a true spacetime tensor, free from the ambiguities associated with background choices [16].\n\nA key aspect of this definition lies in the identification of physical observables that vanish in the homogeneous background and only depend on the first-order vector and tensor perturbations. This ensures that the energy density is not influenced by the choice of coordinates or the presence of a reference manifold. The formulation is grounded in the principle that the energy density should reflect the actual dynamics of the GWs, rather than artifacts of the mathematical framework. This approach also addresses the issue of gauge dependence that arises in cosmological perturbation theory, where second-order tensor modes can contain non-propagating, gauge-dependent components. By focusing on the physical degrees of freedom, the proposed definition provides a robust and consistent measure of the GW energy density.\n\nThe implications of this definition extend beyond theoretical considerations, influencing the interpretation of GW signals in both astrophysical and cosmological contexts. By ensuring that the energy density is independent of background spacetime, the formulation allows for a more accurate assessment of the GW energy content in various scenarios, such as those involving scalar-induced GWs or primordial GWs. This is particularly relevant for studies of the stochastic gravitational wave background, where the ability to isolate genuine GW contributions from gauge artifacts is essential [13]. The proposed method offers a clear and physically meaningful framework for analyzing GW energy density in a wide range of cosmological models.",
+      "stats": {
+        "char_count": 2378,
+        "word_count": 340,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.7.2 Non-perturbative analysis through gauge-invariant projection method",
+      "level": 3,
+      "content": "The gauge-invariant projection method offers a robust framework for non-perturbative analysis in gravitational wave studies by circumventing the complexities introduced by gauge freedom in cosmological perturbation theory [4]. Traditional approaches often rely on perturbative expansions, which become unreliable at higher orders due to the non-uniqueness of gauge-dependent quantities. The gauge-invariant projection method instead constructs observables that are inherently independent of coordinate choices, ensuring consistency across different gauges. This is particularly important for defining physical quantities such as the energy-momentum tensor of gravitational waves, which may not be well-defined in a perturbative context. By focusing on quantities that vanish in the homogeneous background, this method isolates genuine physical effects, making it suitable for studying nonlinear phenomena like primordial black holes or cosmological structure formation.\n\nThe method leverages the fact that certain observables, such as vector and tensor perturbations at first order, remain invariant under gauge transformations. When considering second-order effects induced by linear scalar perturbations, these observables retain their gauge-invariance, allowing for a consistent definition of scalar-induced gravitational waves [4]. This approach ensures that the resulting gravitational wave signals are not affected by the choice of gauge, thus providing a physically meaningful interpretation. The construction of such observables is grounded in the requirement that they vanish in the background, which ensures that only the perturbative components contribute to the signal. This is crucial for distinguishing between genuine gravitational wave effects and spurious gauge artifacts, especially in scenarios involving complex nonlinear interactions.\n\nBy applying the gauge-invariant projection method, researchers can explore the non-perturbative regime of gravitational wave production without the ambiguities associated with gauge-dependent formulations [9]. This is particularly relevant for scenarios where nonlinear effects dominate, such as in the formation of primordial black holes or the generation of scalar-induced gravitational waves. The method provides a systematic way to compute these effects, ensuring that the results are both physically interpretable and numerically tractable. As a result, it opens new avenues for studying the early universe and the generation of gravitational waves in a wide range of cosmological models [1].",
+      "stats": {
+        "char_count": 2554,
+        "word_count": 337,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6 Future Directions",
+      "level": 1,
+      "content": "**Future Work**\n\nThe current research on scalar-induced gravitational waves (SIGWs) has made significant progress in understanding their generation, non-Gaussian features, and observational signatures. However, several limitations and gaps remain. One major limitation is the incomplete characterization of the nonlinear dynamics of scalar perturbations, particularly in scenarios involving complex inflationary models or phase transitions. The current methods often rely on approximations that may not capture the full complexity of the interactions, especially at higher-order perturbations. Additionally, the treatment of gauge dependencies in the calculation of SIGW spectra remains an open issue, as different gauges can lead to inconsistent results, complicating the interpretation of physical observables. Moreover, the impact of damping effects, such as Silk damping, on the high-frequency components of the SIGW spectrum is not yet fully understood, particularly in the context of multi-band gravitational wave observations.\n\nTo address these limitations, future research should focus on developing more accurate and efficient numerical methods for evaluating high-dimensional integrals and higher-order correlation functions. This includes improving Monte Carlo techniques to handle the intricate structure of the (d, s) variables and extending the use of symbolic computation tools for tree diagram generation. Additionally, the integration of advanced computational frameworks, such as the xPand package, could enhance",
+      "stats": {
+        "char_count": 1530,
+        "word_count": 202,
+        "sentence_count": 9,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "7 Conclusion",
+      "level": 1,
+      "content": "**Conclusion**\n\nThis survey paper provides a comprehensive overview of the theoretical and computational aspects of scalar-induced gravitational waves (SIGWs), emphasizing their role in probing the physics of the early Universe. The main findings highlight the significance of higher-order correlation functions, such as the 6- and 8-point functions, which are essential for capturing the non-Gaussian features of SIGWs. Analytical derivations using Wick’s theorem and numerical evaluations via Monte Carlo methods have been instrumental in understanding the energy density spectra of these waves. Additionally, the paper discusses the impact of Silk damping on the frequency-dependent suppression of SIGW spectra, which serves as a unique probe for new physics beyond the Standard Model. The study also explores the framework for higher-order induced gravitational wave scenarios, including vertex and loop diagram approaches, which offer a robust method for analyzing complex interactions in the early Universe.\n\nThe significance of this survey lies in its contribution to the broader field of cosmology and gravitational wave astronomy. By systematically addressing the analytical and numerical challenges in computing SIGW spectra, the paper provides a foundation for future theoretical and observational studies. The insights gained from this work are critical for interpreting data from current and upcoming gravitational wave observatories, such as pulsar timing arrays and space-based interferometers. The study also underscores the",
+      "stats": {
+        "char_count": 1540,
+        "word_count": 214,
+        "sentence_count": 9,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "[1] Silk Damping in Scalar-Induced Gravitational Waves  A Novel Probe for New Physics",
+      "number": null,
+      "title": "silk damping in scalar-induced gravitational waves a novel probe for new physics"
+    },
+    {
+      "text": "[2] Induced gravitational waves for arbitrary higher orders  vertex rules and loop diagrams in cosmologi",
+      "number": null,
+      "title": "induced gravitational waves for arbitrary higher orders vertex rules and loop diagrams in cosmologi"
+    },
+    {
+      "text": "[3] Flattened bispectrum of the scalar-induced gravitational waves",
+      "number": null,
+      "title": "flattened bispectrum of the scalar-induced gravitational waves"
+    },
+    {
+      "text": "[4] Gauge-Invariant Scalar-Induced Gravitational Waves from Physical Observables",
+      "number": null,
+      "title": "gauge-invariant scalar-induced gravitational waves from physical observables"
+    },
+    {
+      "text": "[5] Fully non-Gaussian Scalar-Induced Gravitational Waves",
+      "number": null,
+      "title": "fully non-gaussian scalar-induced gravitational waves"
+    },
+    {
+      "text": "[6] Complete analysis of the background and anisotropies of scalar-induced gravitational waves  primordi",
+      "number": null,
+      "title": "complete analysis of the background and anisotropies of scalar-induced gravitational waves primordi"
+    },
+    {
+      "text": "[7] On the waveform of the scalar induced gravitational waves",
+      "number": null,
+      "title": "on the waveform of the scalar induced gravitational waves"
+    },
+    {
+      "text": "[8] Scalar induced gravitational waves in symmetric teleparallel gravity with a parity-violating term",
+      "number": null,
+      "title": "scalar induced gravitational waves in symmetric teleparallel gravity with a parity-violating term"
+    },
+    {
+      "text": "[9] Gauge Dependence of Scalar-Induced Gravitational Waves from Isocurvature Perturbations  Analytical R",
+      "number": null,
+      "title": "gauge dependence of scalar-induced gravitational waves from isocurvature perturbations analytical r"
+    },
+    {
+      "text": "[10] Scalar-Induced Gravitational Waves from Ghost Inflation and Parity Violation",
+      "number": null,
+      "title": "scalar-induced gravitational waves from ghost inflation and parity violation"
+    },
+    {
+      "text": "[11] Constraining inflation with nonminimal derivative coupling with the Parkes Pulsar Timing Array third",
+      "number": null,
+      "title": "constraining inflation with nonminimal derivative coupling with the parkes pulsar timing array third"
+    },
+    {
+      "text": "[12] Causality Bounds on the Primordial Power Spectrum",
+      "number": null,
+      "title": "causality bounds on the primordial power spectrum"
+    },
+    {
+      "text": "[13] Understanding the Nature of Scalar-Induced Gravitational Waves",
+      "number": null,
+      "title": "understanding the nature of scalar-induced gravitational waves"
+    },
+    {
+      "text": "[14] Geometry of non-Gaussianity in transient non-attractor inflation",
+      "number": null,
+      "title": "geometry of non-gaussianity in transient non-attractor inflation"
+    },
+    {
+      "text": "[15] Limits on scalar-induced gravitational waves from the stochastic background by pulsar timing array o",
+      "number": null,
+      "title": "limits on scalar-induced gravitational waves from the stochastic background by pulsar timing array o"
+    },
+    {
+      "text": "[16] Covariant transverse-traceless projection for secondary gravitational waves",
+      "number": null,
+      "title": "covariant transverse-traceless projection for secondary gravitational waves"
+    },
+    {
+      "text": "[17] Scalar-induced gravitational waves including isocurvature perturbations with lattice simulations",
+      "number": null,
+      "title": "scalar-induced gravitational waves including isocurvature perturbations with lattice simulations"
+    },
+    {
+      "text": "[18] One-loop tensor power spectrum from an excited scalar field during inflation",
+      "number": null,
+      "title": "one-loop tensor power spectrum from an excited scalar field during inflation"
+    },
+    {
+      "text": "[19] Implications for Pulsar Timing Arrays of Sub-solar Black Hole Detections  From LVK to Einstein Teles",
+      "number": null,
+      "title": "implications for pulsar timing arrays of sub-solar black hole detections from lvk to einstein teles"
+    },
+    {
+      "text": "[20] More on gravitational waves from double monodromy inflation",
+      "number": null,
+      "title": "more on gravitational waves from double monodromy inflation"
+    },
+    {
+      "text": "[21] Polynomial Potential Inflation in the ACT Era  From CMB to Primordial Black Holes",
+      "number": null,
+      "title": "polynomial potential inflation in the act era from cmb to primordial black holes"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\InteractiveSurvey\\Physics\\survey_Scalar Induced Gravitational Waves in Physics_split.json",
+    "processed_date": "2025-12-30T20:33:40.793612",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

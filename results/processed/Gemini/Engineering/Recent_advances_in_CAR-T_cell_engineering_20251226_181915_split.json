@@ -1,0 +1,557 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Recent advances in CAR-T cell engineering."
+    ],
+    [
+      1,
+      "Engineering the Next Frontier: A Systematic Review of Recent Advances in CAR-T Cell Engineering"
+    ],
+    [
+      3,
+      "Key Points"
+    ],
+    [
+      2,
+      "1. Introduction and Background"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 CRISPR-Cas9 and Gene Editing"
+    ],
+    [
+      3,
+      "4.2 Logic-Gated Engineering (AND/NOT Gates)"
+    ],
+    [
+      3,
+      "4.3 Armored CARs"
+    ],
+    [
+      3,
+      "4.4 In Vivo Engineering via Lipid Nanoparticles (LNPs)"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Solid Tumors: Breaking the Barrier"
+    ],
+    [
+      3,
+      "5.2 Autoimmune Diseases: Systemic Lupus Erythematosus (SLE)"
+    ],
+    [
+      3,
+      "5.3 Senolysis and Aging"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Safety: Secondary Malignancies"
+    ],
+    [
+      3,
+      "6.2 The Solid Tumor Microenvironment (TME)"
+    ],
+    [
+      3,
+      "6.3 Manufacturing and Cost"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Rapid and Automated Manufacturing"
+    ],
+    [
+      3,
+      "7.2 Allogeneic \"Off-the-Shelf\" Therapies"
+    ],
+    [
+      3,
+      "7.3 Convergence of Modalities"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Recent advances in CAR-T cell engineering.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 18:19:15*\n*Progress: [11/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Recent_advances_in_CAR-T_cell_engineering_20251226_181915.md*\n---",
+      "stats": {
+        "char_count": 173,
+        "word_count": 10,
+        "sentence_count": 2,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "Key Points",
+      "level": 3,
+      "content": "*   **Evolution beyond Blood Cancers:** While CAR-T therapy has revolutionized hematological malignancies, recent breakthroughs in 2024-2025 demonstrate significant progress in solid tumors, particularly targeting Claudin 18.2 in gastric cancer and GPC3 in hepatocellular carcinoma [cite: 1, 2].\n*   **Engineering for \"Smart\" Sensing:** Novel logic-gated mechanisms (e.g., Tmod™) now allow T cells to distinguish tumor cells from healthy tissue based on Loss of Heterozygosity (LOH), addressing the critical challenge of on-target/off-tumor toxicity [cite: 3, 4].\n*   **Expansion into Autoimmunity and Aging:** The application of CAR-T therapy has expanded beyond oncology, showing durable drug-free remission in Systemic Lupus Erythematosus (SLE) and potential for reversing age-related fibrosis by targeting senescent cells (senolytics) [cite: 5, 6].\n*   **Manufacturing and Delivery Revolution:** The field is shifting toward rapid 24-hour manufacturing protocols and *in vivo* engineering using lipid nanoparticles (LNPs), aiming to democratize access and reduce \"vein-to-vein\" time [cite: 7, 8].\n*   **Safety Vigilance:** Despite these advances, the FDA has mandated boxed warnings regarding secondary T-cell malignancies, necessitating long-term surveillance and rigorous risk-benefit analysis [cite: 9, 10].\n\n---",
+      "stats": {
+        "char_count": 1319,
+        "word_count": 172,
+        "sentence_count": 9,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "1. Introduction and Background",
+      "level": 2,
+      "content": "Adoptive cellular therapy (ACT) has emerged as a pillar of modern oncology, with Chimeric Antigen Receptor (CAR) T-cell therapy representing its most transformative modality. First conceptualized in the late 1980s and achieving FDA approval in 2017, CAR-T therapy involves the genetic modification of a patient’s T lymphocytes to express a synthetic receptor that redirects specificity toward a tumor-associated antigen (TAA) independent of Major Histocompatibility Complex (MHC) presentation [cite: 11, 12].\n\nWhile the initial success of anti-CD19 CAR-T therapies in B-cell malignancies—such as acute lymphoblastic leukemia (ALL) and diffuse large B-cell lymphoma (DLBCL)—was unprecedented, the translation of this efficacy to solid tumors has historically been hindered by physical barriers, antigen heterogeneity, and the immunosuppressive tumor microenvironment (TME) [cite: 13, 14]. Furthermore, the logistical complexity and high cost of autologous manufacturing have limited patient access [cite: 15].\n\nThis systematic review synthesizes literature from 2024 and 2025 to analyze the \"next generation\" of CAR-T engineering. It moves beyond the established paradigms of hematological efficacy to explore novel structural designs, gene-editing enhancements (CRISPR/Cas9), logic-gated safety switches, and emerging applications in autoimmune diseases and senolysis.",
+      "stats": {
+        "char_count": 1368,
+        "word_count": 180,
+        "sentence_count": 6,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "2. Key Concepts and Definitions",
+      "level": 2,
+      "content": "To understand recent advances, it is essential to define the structural evolution of the Chimeric Antigen Receptor:\n\n*   **The CAR Construct:** A synthetic fusion protein consisting of an extracellular antigen-binding domain (typically a single-chain variable fragment, scFv), a hinge region, a transmembrane domain, and an intracellular signaling domain [cite: 16].\n*   **Generations of CARs:**\n    *   **First-Generation:** Contained only the CD3$\\zeta$ signaling domain. These exhibited poor persistence and minimal clinical efficacy [cite: 17].\n    *   **Second-Generation:** Incorporated a co-stimulatory domain (e.g., CD28 or 4-1BB) alongside CD3$\\zeta$. This is the standard for currently approved therapies like axicabtagene ciloleucel and tisagenlecleucel, providing necessary signals for proliferation and survival [cite: 11, 18].\n    *   **Third-Generation:** Utilize two distinct co-stimulatory domains (e.g., CD28 and 4-1BB) to combine rapid effector function with long-term persistence [cite: 16].\n    *   **Fourth-Generation (TRUCKs):** \"T cells Redirected for Universal Cytokine-mediated Killing.\" These are engineered to secrete transgenic cytokines (e.g., IL-12) upon antigen binding to remodel the TME and recruit innate immune cells [cite: 17, 19].\n    *   **Fifth-Generation:** Incorporate intracellular domains of cytokine receptors (e.g., IL-2R$\\beta$) to trigger JAK/STAT signaling pathways, mimicking physiological T-cell activation more closely than previous iterations [cite: 18, 20].",
+      "stats": {
+        "char_count": 1511,
+        "word_count": 189,
+        "sentence_count": 17,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The trajectory of CAR-T therapy has been marked by distinct eras of innovation:\n*   **1989-1993:** First generation CARs were developed, establishing the feasibility of redirecting T-cell specificity via antibody-derived domains [cite: 12].\n*   **2010-2012:** Clinical breakthroughs in CLL and ALL using second-generation CARs demonstrated massive expansion and persistence in patients, leading to complete remissions [cite: 11].\n*   **2017:** FDA approval of tisagenlecleucel (Kymriah) and axicabtagene ciloleucel (Yescarta) marked the commercial era of gene-modified cell therapy [cite: 11, 21].\n*   **2024-2025:** The current era is defined by the approval of therapies for earlier lines of treatment, the first randomized positive data in solid tumors (gastric cancer), and the expansion into non-oncological indications like Lupus [cite: 1, 5].",
+      "stats": {
+        "char_count": 849,
+        "word_count": 116,
+        "sentence_count": 4,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "Recent literature highlights a shift from simple structural modifications to complex synthetic biology and genomic engineering.",
+      "stats": {
+        "char_count": 127,
+        "word_count": 16,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.1 CRISPR-Cas9 and Gene Editing",
+      "level": 3,
+      "content": "The integration of CRISPR-Cas9 has allowed for precise \"knockouts\" (KO) of genes that limit T-cell function. A pivotal 2024 study demonstrated that **CD5**, a surface glycoprotein, acts as a checkpoint inhibitor on T cells. Knocking out CD5 using CRISPR enhanced CAR-T cytotoxicity and persistence in both hematological and solid tumor models, surpassing the efficacy of PD-1 knockout strategies [cite: 22, 23]. This suggests that relieving intrinsic inhibitory brakes is as critical as providing activation signals.",
+      "stats": {
+        "char_count": 516,
+        "word_count": 75,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.2 Logic-Gated Engineering (AND/NOT Gates)",
+      "level": 3,
+      "content": "To address on-target/off-tumor toxicity in solid tumors, researchers have developed \"logic-gated\" CARs. A leading example is the **Tmod™ system** (e.g., A2B530). This system uses a \"NOT\" gate logic:\n*   **Activator:** A CAR targeting CEA (Carcinoembryonic Antigen), expressed on both tumor and normal gut tissue.\n*   **Blocker:** A receptor targeting HLA-A*02.\n*   **Mechanism:** Tumors often undergo Loss of Heterozygosity (LOH) and lose HLA-A*02. Normal cells retain it. The Tmod cell kills only if CEA is present *AND* HLA-A*02 is absent. This exploits a genetic difference between tumor and host rather than just antigen expression [cite: 3, 4, 24].",
+      "stats": {
+        "char_count": 653,
+        "word_count": 97,
+        "sentence_count": 10,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "4.3 Armored CARs",
+      "level": 3,
+      "content": "\"Armored\" CARs are designed to resist the hostile TME. For Hepatocellular Carcinoma (HCC), GPC3-targeted CAR-T cells have been engineered to co-express **IL-7 and CCL19** (7 x 19 CAR-T). IL-7 supports T-cell proliferation, while CCL19 acts as a chemokine to recruit other immune cells (dendritic cells and T cells) into the solid tumor mass. Clinical trials (NCT05911217) indicate this strategy significantly improves infiltration and tumor control compared to conventional CARs [cite: 2, 25, 26].",
+      "stats": {
+        "char_count": 497,
+        "word_count": 73,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.4 In Vivo Engineering via Lipid Nanoparticles (LNPs)",
+      "level": 3,
+      "content": "To bypass complex *ex vivo* manufacturing, researchers are developing *in vivo* CAR generation. CD5-targeted lipid nanoparticles (LNPs) carrying mRNA encoding a CAR can reprogram T cells directly within the bloodstream. Recent preclinical data (2025) showed that this method could generate functional CAR-T cells that reduced liver fibrosis by targeting activated fibroblasts, offering a scalable \"off-the-shelf\" solution without the need for viral vectors [cite: 8, 27, 28].",
+      "stats": {
+        "char_count": 475,
+        "word_count": 66,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.1 Solid Tumors: Breaking the Barrier",
+      "level": 3,
+      "content": "Solid tumors have been the \"holy grail\" and the stumbling block for CAR-T therapy. 2024-2025 has seen breakthrough results:\n\n*   **Gastric/Gastroesophageal Cancer (Claudin 18.2):**\n    The phase II trial of **satricabtagene autoleucel (satri-cel)** in Claudin 18.2-positive gastric cancer reported a statistically significant improvement in progression-free survival (PFS) compared to physician's choice of treatment. This represents the first randomized positive trial for CAR-T in solid tumors, with an objective response rate (ORR) of 42.9% in high-dose cohorts [cite: 1, 29, 30].\n\n*   **Glioblastoma (GBM):**\n    Intracerebroventricular (ICV) delivery of bivalent CAR-T cells targeting **EGFR and IL13R$\\alpha$2** has shown feasibility and safety. By delivering cells directly into the cerebrospinal fluid, researchers overcame the blood-brain barrier. Early phase 1 results indicated rapid expansion of CAR-T cells in the CSF and tumor regression in a subset of recurrent GBM patients [cite: 31, 32, 33].\n\n*   **Hepatocellular Carcinoma (HCC):**\n    The **C-CAR031** trial, utilizing a GPC3-specific CAR armored with a dominant-negative TGF-$\\beta$ receptor (to block suppression), reported a 50% objective response rate and a 90.9% disease control rate in advanced HCC patients. This highlights the necessity of \"armoring\" cells against TME suppressors like TGF-$\\beta$ [cite: 34].",
+      "stats": {
+        "char_count": 1387,
+        "word_count": 188,
+        "sentence_count": 12,
+        "line_count": 10
+      }
+    },
+    {
+      "heading": "5.2 Autoimmune Diseases: Systemic Lupus Erythematosus (SLE)",
+      "level": 3,
+      "content": "In a paradigm shift, CD19 CAR-T therapy is proving curative for autoimmune disorders. A landmark *New England Journal of Medicine* study (2024) and subsequent follow-ups showed that a single infusion of CD19 CAR-T cells led to deep B-cell depletion and durable drug-free remission in patients with refractory SLE, idiopathic inflammatory myositis, and systemic sclerosis [cite: 5, 35, 36]. The therapy appears to \"reset\" the immune system; when B cells eventually return, they are naïve and non-autoreactive. *In vivo* LNP delivery of CD19 CARs is also being explored for SLE to reduce costs [cite: 37].",
+      "stats": {
+        "char_count": 603,
+        "word_count": 94,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "5.3 Senolysis and Aging",
+      "level": 3,
+      "content": "Targeting senescent cells (which accumulate with age and drive inflammation) is a novel frontier. **uPAR-targeted CAR-T cells** have been shown to function as senolytics. In murine models, these cells eliminated senescent cells in the liver and pancreas, reversing liver fibrosis and improving metabolic function in aged mice. Remarkably, a single dose provided long-term prophylactic benefits against metabolic decline [cite: 6, 38, 39].",
+      "stats": {
+        "char_count": 438,
+        "word_count": 62,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.1 Safety: Secondary Malignancies",
+      "level": 3,
+      "content": "In 2024, the FDA issued a class-wide **boxed warning** for all approved BCMA- and CD19-directed CAR-T therapies regarding the risk of secondary T-cell malignancies (T-cell lymphoma). While the absolute risk remains low and the benefits for cancer patients generally outweigh the risks, this has necessitated lifelong monitoring protocols and rigorous investigation into insertional mutagenesis caused by viral vectors [cite: 9, 10, 40].",
+      "stats": {
+        "char_count": 436,
+        "word_count": 62,
+        "sentence_count": 2,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.2 The Solid Tumor Microenvironment (TME)",
+      "level": 3,
+      "content": "The TME remains a fortress. Physical barriers (stroma), metabolic starvation (hypoxia, glucose deprivation), and immunosuppressive cytokines (TGF-$\\beta$, IL-10) exhaust CAR-T cells rapidly. While armored CARs (Section 4.3) address this, \"exhaustion\" remains a primary failure mode. The discovery of CD5 as a checkpoint [cite: 23] and the use of PD-1 dominant-negative receptors are attempts to mitigate this, but consistent deep responses in solid tumors are not yet universal.",
+      "stats": {
+        "char_count": 478,
+        "word_count": 67,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.3 Manufacturing and Cost",
+      "level": 3,
+      "content": "Traditional autologous manufacturing takes 2-4 weeks, during which patients may progress. The \"vein-to-vein\" time is a critical bottleneck. Furthermore, the high cost (often exceeding $400,000) limits accessibility [cite: 7, 41].",
+      "stats": {
+        "char_count": 229,
+        "word_count": 30,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.1 Rapid and Automated Manufacturing",
+      "level": 3,
+      "content": "The industry is moving toward **24-hour manufacturing** processes. Platforms like **MARS Atlas** utilize automated isolation, activation, and transduction without the need for extensive *ex vivo* expansion. This preserves the \"stemness\" (Tscm phenotype) of the T cells, which correlates with better *in vivo* persistence and potency, while drastically cutting costs and time [cite: 7, 41, 42].",
+      "stats": {
+        "char_count": 393,
+        "word_count": 55,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.2 Allogeneic \"Off-the-Shelf\" Therapies",
+      "level": 3,
+      "content": "To eliminate patient-specific manufacturing entirely, allogeneic CAR-T cells derived from healthy donors are under intense development. Gene editing (TALEN or CRISPR) is used to remove the endogenous T-cell receptor (TCR) to prevent Graft-versus-Host Disease (GvHD) and CD52 to allow for lymphodepletion. Trials like ALPHA3 (targeting CD19) are positioning allogeneic products for earlier lines of therapy [cite: 15, 43].",
+      "stats": {
+        "char_count": 421,
+        "word_count": 58,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.3 Convergence of Modalities",
+      "level": 3,
+      "content": "Future research will likely converge *in vivo* delivery with logic gating. Imagine an LNP injected intravenously that transfects T cells *in situ* to express a logic-gated CAR that targets a solid tumor while sparing healthy tissue. This \"drug-like\" application of cell therapy represents the ultimate goal of the field [cite: 8, 44].",
+      "stats": {
+        "char_count": 334,
+        "word_count": 52,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "The field of CAR-T cell engineering has transitioned from a proof-of-concept in leukemia to a diverse, sophisticated discipline capable of addressing solid tumors, autoimmune diseases, and even aging. The years 2024 and 2025 have been pivotal, marked by the first randomized success in gastric cancer (satri-cel), the clinical validation of logic-gated safety switches (Tmod), and the \"immunological reset\" observed in Lupus patients.\n\nWhile challenges regarding safety (secondary malignancies) and the immunosuppressive TME persist, the trajectory is clear: the next generation of CAR-T therapies will be smarter (logic-gated), faster (24-hour manufacturing), and more accessible (*in vivo* delivery). These advances promise to transform CAR-T cells from a \"last-line\" rescue therapy into a foundational pillar of medicine for a broad spectrum of human diseases.",
+      "stats": {
+        "char_count": 863,
+        "word_count": 121,
+        "sentence_count": 4,
+        "line_count": 3
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Recent advances in CAR-T cell engineering review",
+      "number": null,
+      "title": "Recent advances in CAR-T cell engineering review"
+    },
+    {
+      "text": "Recent advances in CAR-T cell engineering",
+      "number": null,
+      "title": "Recent advances in CAR-T cell engineering"
+    },
+    {
+      "text": "Recent advances in CAR-T cell engineering review 2024 2025",
+      "number": null,
+      "title": "Recent advances in CAR-T cell engineering review 2024 2025"
+    },
+    {
+      "text": "Next generation CAR-T cell engineering strategies",
+      "number": null,
+      "title": "Next generation CAR-T cell engineering strategies"
+    },
+    {
+      "text": "CRISPR enhances CAR-T cell cancer therapies",
+      "number": null,
+      "title": "CRISPR enhances CAR-T cell cancer therapies"
+    },
+    {
+      "text": "Allogeneic CAR-T cell therapy current status and future 2024",
+      "number": null,
+      "title": "Allogeneic CAR-T cell therapy current status and future 2024"
+    },
+    {
+      "text": "CAR-T Cell Therapy Market Research 2024-2025",
+      "number": null,
+      "title": "CAR-T Cell Therapy Market Research 2024-2025"
+    },
+    {
+      "text": "CAR-T cells show promise against age-related diseases in mice",
+      "number": null,
+      "title": "CAR-T cells show promise against age-related diseases in mice"
+    },
+    {
+      "text": "CAR T cells could slow aging by eliminating senescent cells",
+      "number": null,
+      "title": "CAR T cells could slow aging by eliminating senescent cells"
+    },
+    {
+      "text": "4th and 5th generation CAR-T structure and examples",
+      "number": null,
+      "title": "4th and 5th generation CAR-T structure and examples"
+    },
+    {
+      "text": "Five generations of CAR T-cell structure",
+      "number": null,
+      "title": "Five generations of CAR T-cell structure"
+    },
+    {
+      "text": "Generations of CAR-T cell therapy",
+      "number": null,
+      "title": "Generations of CAR-T cell therapy"
+    },
+    {
+      "text": "Evolution of CAR-T cells from first to fifth generation",
+      "number": null,
+      "title": "Evolution of CAR-T cells from first to fifth generation"
+    },
+    {
+      "text": "CAR-T generations",
+      "number": null,
+      "title": "CAR-T generations"
+    },
+    {
+      "text": "Automated Rapid CAR-T Cell Manufacturing Process",
+      "number": null,
+      "title": "Automated Rapid CAR-T Cell Manufacturing Process"
+    },
+    {
+      "text": "Automated CAR-T cell manufacturing advances 2024",
+      "number": null,
+      "title": "Automated CAR-T cell manufacturing advances 2024"
+    },
+    {
+      "text": "CAR-T cell therapy for autoimmune diseases SLE lupus",
+      "number": null,
+      "title": "CAR-T cell therapy for autoimmune diseases SLE lupus"
+    },
+    {
+      "text": "A breakthrough for lupus treatment study explores CAR-T cell therapy",
+      "number": null,
+      "title": "A breakthrough for lupus treatment study explores CAR-T cell therapy"
+    },
+    {
+      "text": "CAR-T targeting Claudin 18.2 GPC3 solid tumors clinical trials 2024",
+      "number": null,
+      "title": "CAR-T targeting Claudin 18.2 GPC3 solid tumors clinical trials 2024"
+    },
+    {
+      "text": "FDA requires boxed warning T-cell malignancies following treatment BCMA-directed or CD19-directed.",
+      "number": null,
+      "title": "FDA requires boxed warning T-cell malignancies following treatment BCMA-directed or CD19-directed."
+    },
+    {
+      "text": "FDA mandates new CAR-T cell therapy boxed warnings in hematologic cancers",
+      "number": null,
+      "title": "FDA mandates new CAR-T cell therapy boxed warnings in hematologic cancers"
+    },
+    {
+      "text": "FDA warns drugmakers of additional cancer risks associated with CAR-T cell therapy",
+      "number": null,
+      "title": "FDA warns drugmakers of additional cancer risks associated with CAR-T cell therapy"
+    },
+    {
+      "text": "A2B530 harnesses unique mechanism of action to integrate CAR-T in solid tumors",
+      "number": null,
+      "title": "A2B530 harnesses unique mechanism of action to integrate CAR-T in solid tumors"
+    },
+    {
+      "text": "A2B530, an autologous CEA-directed Tmod T-cell therapy",
+      "number": null,
+      "title": "A2B530, an autologous CEA-directed Tmod T-cell therapy"
+    },
+    {
+      "text": "uPAR CAR-T senolytic aging fibrosis recent advances",
+      "number": null,
+      "title": "uPAR CAR-T senolytic aging fibrosis recent advances"
+    },
+    {
+      "text": "Satricabtagene autoleucel Claudin 18.2 gastric cancer results",
+      "number": null,
+      "title": "Satricabtagene autoleucel Claudin 18.2 gastric cancer results"
+    },
+    {
+      "text": "CAR T-Cell Therapy Boosts PFS in Advanced Gastric Cancer",
+      "number": null,
+      "title": "CAR T-Cell Therapy Boosts PFS in Advanced Gastric Cancer"
+    },
+    {
+      "text": "A2B530 Tmod system CEA HLA-A*02 logic gate",
+      "number": null,
+      "title": "A2B530 Tmod system CEA HLA-A*02 logic gate"
+    },
+    {
+      "text": "NEJM paper fills in details on remarkable CAR-T result in autoimmune disease",
+      "number": null,
+      "title": "NEJM paper fills in details on remarkable CAR-T result in autoimmune disease"
+    },
+    {
+      "text": "In Vivo CD19 CAR T-Cell Therapy for Refractory Systemic Lupus Erythematosus",
+      "number": null,
+      "title": "In Vivo CD19 CAR T-Cell Therapy for Refractory Systemic Lupus Erythematosus"
+    },
+    {
+      "text": "CD19 CAR T-Cell Therapy in Autoimmune Disease - A Case Series with Follow-up",
+      "number": null,
+      "title": "CD19 CAR T-Cell Therapy in Autoimmune Disease - A Case Series with Follow-up"
+    },
+    {
+      "text": "Reimagining CAR-T Therapy: In Vivo Engineering with Lipid Nanoparticles",
+      "number": null,
+      "title": "Reimagining CAR-T Therapy: In Vivo Engineering with Lipid Nanoparticles"
+    },
+    {
+      "text": "In vivo CAR-T LNP recent advances",
+      "number": null,
+      "title": "In vivo CAR-T LNP recent advances"
+    },
+    {
+      "text": "New method enables in vivo generation of CAR T cells to treat cancer and autoimmune disease",
+      "number": null,
+      "title": "New method enables in vivo generation of CAR T cells to treat cancer and autoimmune disease"
+    },
+    {
+      "text": "MARS Atlas CAR-T manufacturing 24 hour Blood 2024",
+      "number": null,
+      "title": "MARS Atlas CAR-T manufacturing 24 hour Blood 2024"
+    },
+    {
+      "text": "Researchers streamline way to manufacture CAR-T cells in just 24 hours",
+      "number": null,
+      "title": "Researchers streamline way to manufacture CAR-T cells in just 24 hours"
+    },
+    {
+      "text": "Phase I trial of ICV-delivered bivalent CAR T-cells in glioblastoma",
+      "number": null,
+      "title": "Phase I trial of ICV-delivered bivalent CAR T-cells in glioblastoma"
+    },
+    {
+      "text": "Intracerebroventricular bivalent CAR T cells targeting EGFR and IL-13Rα2 in recurrent glioblastoma",
+      "number": null,
+      "title": "Intracerebroventricular bivalent CAR T cells targeting EGFR and IL-13Rα2 in recurrent glioblastoma"
+    },
+    {
+      "text": "IL13Ra2 CAR-T glioblastoma intracerebroventricular",
+      "number": null,
+      "title": "IL13Ra2 CAR-T glioblastoma intracerebroventricular"
+    },
+    {
+      "text": "GPC3 CAR-T IL-7 CCL19 hepatocellular carcinoma",
+      "number": null,
+      "title": "GPC3 CAR-T IL-7 CCL19 hepatocellular carcinoma"
+    },
+    {
+      "text": "GPC3-IL7-CCL19-CAR-T primes immune microenvironment reconstitution",
+      "number": null,
+      "title": "GPC3-IL7-CCL19-CAR-T primes immune microenvironment reconstitution"
+    },
+    {
+      "text": "New CAR T-Cell Therapy Shows Promise for Treating Advanced Hepatocellular Carcinoma",
+      "number": null,
+      "title": "New CAR T-Cell Therapy Shows Promise for Treating Advanced Hepatocellular Carcinoma"
+    },
+    {
+      "text": "CD5 deletion enhances the antitumor activity of adoptive T cell therapies",
+      "number": null,
+      "title": "CD5 deletion enhances the antitumor activity of adoptive T cell therapies"
+    },
+    {
+      "text": "Knockout of CD5 on CAR T Cells Boosts Anti-Tumor Efficacy",
+      "number": null,
+      "title": "Knockout of CD5 on CAR T Cells Boosts Anti-Tumor Efficacy"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\Gemini\\Engineering\\Recent_advances_in_CAR-T_cell_engineering_20251226_181915_split.json",
+    "processed_date": "2025-12-31T00:13:44.335653",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

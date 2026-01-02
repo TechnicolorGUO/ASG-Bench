@@ -1,0 +1,401 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Practical and Ethical Challenges of Large Language Models in Education- A Systematic Scoping Review."
+    ],
+    [
+      1,
+      "Practical and Ethical Challenges of Large Language Models in Education: A Systematic Scoping Review"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      3,
+      "1.1 Research Motivation"
+    ],
+    [
+      3,
+      "1.2 Objectives"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Large Language Models (LLMs)"
+    ],
+    [
+      3,
+      "2.2 Hallucination and Stochasticity"
+    ],
+    [
+      3,
+      "2.3 Prompt Engineering and Fine-Tuning"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 Pre-Transformer Era (1960s–2017)"
+    ],
+    [
+      3,
+      "3.2 The Transformer Revolution (2017–2022)"
+    ],
+    [
+      3,
+      "3.3 The Generative Era (2022–Present)"
+    ],
+    [
+      2,
+      "4. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "4.1 Retrieval-Augmented Generation (RAG)"
+    ],
+    [
+      3,
+      "4.2 Chain-of-Thought (CoT) Prompting"
+    ],
+    [
+      3,
+      "4.3 Parameter-Efficient Fine-Tuning (PEFT) and LoRA"
+    ],
+    [
+      3,
+      "4.4 LLM-Based Agents"
+    ],
+    [
+      2,
+      "5. Applications and Case Studies"
+    ],
+    [
+      3,
+      "5.1 Automated Assessment and Grading"
+    ],
+    [
+      3,
+      "5.2 Content Generation"
+    ],
+    [
+      3,
+      "5.3 Intelligent Tutoring and Feedback"
+    ],
+    [
+      3,
+      "5.4 Profiling and Prediction"
+    ],
+    [
+      2,
+      "6. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "6.1 Practical Challenges"
+    ],
+    [
+      3,
+      "6.2 Ethical Challenges"
+    ],
+    [
+      2,
+      "7. Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Human-AI Collaboration Frameworks"
+    ],
+    [
+      3,
+      "7.2 Small and Specialized Models (SLMs)"
+    ],
+    [
+      3,
+      "7.3 AI Literacy and Critical Pedagogy"
+    ],
+    [
+      3,
+      "7.4 Robust Evaluation Metrics"
+    ],
+    [
+      2,
+      "8. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Practical and Ethical Challenges of Large Language Models in Education- A Systematic Scoping Review.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 03:20:48*\n*Progress: [1/5]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Practical_and_Ethical_Challenges_of_Large_Language_Models_in_20251226_032048.md*\n---"
+    },
+    {
+      "heading": "Practical and Ethical Challenges of Large Language Models in Education: A Systematic Scoping Review",
+      "level": 1,
+      "content": "**Key Points**\n*   **Transformative Potential:** Large Language Models (LLMs) offer significant automation capabilities in education, including content generation, automated essay scoring (AES), and personalized tutoring, with 53 distinct use cases identified across nine categories [cite: 1, 2].\n*   **Ethical Risks:** Major ethical concerns include algorithmic bias (cultural and demographic), lack of transparency (black-box nature), and data privacy violations (GDPR/FERPA compliance) [cite: 3, 4, 5].\n*   **Practical Limitations:** Implementation is hindered by \"hallucinations\" (factual inaccuracies), high computational costs, and low technological readiness for integration into authentic educational settings [cite: 6, 7].\n*   **Future Directions:** Research emphasizes \"Human-AI Collaboration\" rather than replacement, advocating for human-in-the-loop frameworks, AI literacy, and the use of Retrieval-Augmented Generation (RAG) to improve reliability [cite: 8, 9, 10].\n\n---"
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "The integration of Large Language Models (LLMs) into educational settings represents a paradigm shift in pedagogical technology, offering unprecedented capabilities in natural language understanding and generation. This systematic scoping review examines the current state of LLM applications in education, synthesizing findings from peer-reviewed literature published between 2017 and 2025. While LLMs demonstrate potential in automating laborious tasks—such as question generation, feedback provision, and essay grading—their adoption is fraught with significant practical and ethical challenges. Practical hurdles include the phenomenon of \"hallucination,\" lack of replicability, and high computational resource requirements. Ethical concerns are dominated by issues of algorithmic bias, data privacy, and the opacity of model decision-making. This paper critically analyzes these dimensions, categorizing 53 distinct use cases and identifying a pressing need for human-centered design frameworks. We conclude that while LLMs are powerful tools, their responsible deployment requires robust ethical guidelines, teacher-AI partnership models, and technical innovations like Retrieval-Augmented Generation (RAG) to ensure beneficence and equity in education."
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The advent of generative artificial intelligence, particularly Large Language Models (LLMs) such as OpenAI’s GPT series, has catalyzed a transformative era in educational technology. These models, trained on vast corpora of text data, possess the ability to generate human-like text, write code, and solve complex reasoning problems, thereby offering solutions to scale personalized learning and automate administrative burdens [cite: 1, 11]."
+    },
+    {
+      "heading": "1.1 Research Motivation",
+      "level": 3,
+      "content": "Despite the enthusiasm surrounding tools like ChatGPT, the educational sector faces a \"double-edged sword.\" On one hand, LLMs promise to democratize access to tutoring and streamline assessment [cite: 12]. On the other, they introduce profound risks regarding the reliability of information, the integrity of student data, and the perpetuation of societal biases [cite: 3, 13]. The motivation for this review stems from the urgent need to balance these affordances against the \"stochastic\" nature of these models—often described as \"stochastic parrots\" that mimic language without true comprehension [cite: 14, 15]."
+    },
+    {
+      "heading": "1.2 Objectives",
+      "level": 3,
+      "content": "This review aims to provide a comprehensive analysis of the field by addressing the following objectives:\n1.  To map the historical development and current state-of-the-art technical methods of LLMs relevant to education.\n2.  To categorize existing applications and case studies of LLMs in educational settings.\n3.  To critically evaluate the practical and ethical challenges hindering widespread adoption.\n4.  To identify research gaps and propose future directions for responsible AI integration in education."
+    },
+    {
+      "heading": "2.1 Large Language Models (LLMs)",
+      "level": 3,
+      "content": "LLMs are deep learning algorithms that recognize, summarize, translate, predict, and generate text and other content based on knowledge gained from massive datasets [cite: 16]. They are built on the **Transformer** architecture, which utilizes \"self-attention\" mechanisms to weigh the significance of different parts of the input data [cite: 11, 17]."
+    },
+    {
+      "heading": "2.2 Hallucination and Stochasticity",
+      "level": 3,
+      "content": "A critical concept in educational applications is **hallucination**, where an LLM generates plausible-sounding but factually incorrect information [cite: 6]. This is linked to the concept of **Stochastic Parrots**, a metaphor introduced by Bender et al. (2021), describing LLMs as systems that stitch together linguistic patterns based on probability without reference to meaning or truth [cite: 14, 15]."
+    },
+    {
+      "heading": "2.3 Prompt Engineering and Fine-Tuning",
+      "level": 3,
+      "content": "*   **Prompt Engineering:** The art of crafting inputs (prompts) to guide the model's output, including techniques like **Chain-of-Thought (CoT)** prompting which encourages the model to \"show its work\" [cite: 18, 19].\n*   **Fine-Tuning:** The process of training a pre-trained model on a smaller, domain-specific dataset (e.g., educational texts) to improve performance on specific tasks [cite: 20, 21]."
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The evolution of LLMs in education can be traced through several distinct eras of Natural Language Processing (NLP)."
+    },
+    {
+      "heading": "3.1 Pre-Transformer Era (1960s–2017)",
+      "level": 3,
+      "content": "Early educational chatbots, such as ELIZA (1966), relied on rule-based systems and pattern matching [cite: 11]. The introduction of Recurrent Neural Networks (RNNs) and Long Short-Term Memory (LSTM) networks in the 1990s and 2000s allowed for better handling of sequences but struggled with long-range dependencies in text [cite: 11, 16]."
+    },
+    {
+      "heading": "3.2 The Transformer Revolution (2017–2022)",
+      "level": 3,
+      "content": "The pivotal moment occurred in 2017 with the publication of \"Attention Is All You Need\" by Google researchers, introducing the Transformer architecture [cite: 11, 17]. This led to the development of BERT (Bidirectional Encoder Representations from Transformers) in 2018, which revolutionized context understanding, and the GPT (Generative Pre-trained Transformer) series by OpenAI [cite: 1, 11]."
+    },
+    {
+      "heading": "3.3 The Generative Era (2022–Present)",
+      "level": 3,
+      "content": "The release of ChatGPT (based on GPT-3.5) in late 2022 marked the mass adoption of LLMs in education [cite: 12, 22]. Subsequent models like GPT-4 (2023) introduced multimodal capabilities (processing text and images) and achieved human-level performance on standardized academic benchmarks [cite: 23, 24]. Recent developments in 2024-2025 focus on \"reasoning models\" (e.g., OpenAI's o1) that utilize multi-step deliberation before generating answers [cite: 25]."
+    },
+    {
+      "heading": "4. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "To address the limitations of raw LLMs in education, researchers have developed sophisticated techniques to enhance accuracy and pedagogical utility."
+    },
+    {
+      "heading": "4.1 Retrieval-Augmented Generation (RAG)",
+      "level": 3,
+      "content": "RAG is currently the gold standard for reducing hallucinations in educational contexts. It combines an LLM with an external knowledge retrieval system. When a student asks a question, the system retrieves relevant documents (e.g., textbooks, course notes) and feeds them into the LLM as context [cite: 10, 26].\n*   **Benefit:** Grounds answers in factual sources, crucial for science and history education [cite: 27, 28].\n*   **Recent Advances:** \"GraphRAG\" and knowledge-graph-based retrieval are being used to handle complex, multi-hop reasoning tasks in education [cite: 10, 29]."
+    },
+    {
+      "heading": "4.2 Chain-of-Thought (CoT) Prompting",
+      "level": 3,
+      "content": "CoT prompting enhances the reasoning capabilities of LLMs, particularly in STEM subjects. By instructing the model to decompose a problem into intermediate steps (e.g., \"Let's think step by step\"), CoT significantly improves performance on math word problems and symbolic reasoning [cite: 18, 19].\n*   **Application:** Used in intelligent tutoring systems to generate step-by-step explanations rather than just final answers [cite: 30]."
+    },
+    {
+      "heading": "4.3 Parameter-Efficient Fine-Tuning (PEFT) and LoRA",
+      "level": 3,
+      "content": "Full fine-tuning of models like GPT-4 is computationally prohibitive for most educational institutions. **Low-Rank Adaptation (LoRA)** allows schools to adapt large models to specific curricula by training only a tiny fraction of the parameters [cite: 31, 32].\n*   **Case Study:** Research has shown that smaller, open-source models (e.g., Llama-3, Mistral) fine-tuned with LoRA can match the pedagogical quality of proprietary giants like GPT-4 for specific tasks like programming error explanation [cite: 33, 34]."
+    },
+    {
+      "heading": "4.4 LLM-Based Agents",
+      "level": 3,
+      "content": "Moving beyond simple chatbots, **LLM Agents** utilize tools (calculators, search engines) and memory modules to perform autonomous educational tasks. These agents can plan learning paths, grade assignments, and act as role-playing partners for language learning [cite: 35, 36, 37]."
+    },
+    {
+      "heading": "5. Applications and Case Studies",
+      "level": 2,
+      "content": "A systematic review by Yan et al. (2023) identified 53 use cases for LLMs in education, categorized into nine main themes. This section highlights the most prominent applications [cite: 1, 2, 22]."
+    },
+    {
+      "heading": "5.1 Automated Assessment and Grading",
+      "level": 3,
+      "content": "LLMs are extensively used for **Automated Essay Scoring (AES)**. Unlike traditional systems that rely on surface features (grammar, length), LLMs analyze semantic meaning and argumentation [cite: 8, 38].\n*   **Case Study:** A 2025 study found that fine-tuned LLMs approached human-level agreement in grading elementary school essays, though concerns about bias remain [cite: 38].\n*   **Efficiency:** LLMs can provide instantaneous feedback, reducing the grading burden on teachers and allowing for more frequent writing practice [cite: 39]."
+    },
+    {
+      "heading": "5.2 Content Generation",
+      "level": 3,
+      "content": "LLMs automate the creation of educational materials, including:\n*   **Question Generation:** Creating multiple-choice questions (MCQs) and open-ended prompts based on reading materials [cite: 1, 12].\n*   **Lesson Planning:** Assisting teachers in drafting lesson plans, rubrics, and individualized education programs (IEPs) [cite: 40]."
+    },
+    {
+      "heading": "5.3 Intelligent Tutoring and Feedback",
+      "level": 3,
+      "content": "LLM-powered chatbots serve as 24/7 tutors, providing personalized explanations and scaffolding.\n*   **Programming Education:** Tools like \"GuideLM\" integrate with compilers to explain coding errors in plain language, helping novice programmers overcome frustration [cite: 20, 33].\n*   **Language Learning:** Agents simulate conversation partners, correcting grammar and vocabulary in real-time [cite: 41]."
+    },
+    {
+      "heading": "5.4 Profiling and Prediction",
+      "level": 3,
+      "content": "LLMs analyze student data to predict learning outcomes and identify students at risk of dropping out. They can also label educational content with metadata (e.g., Bloom's Taxonomy levels) to facilitate adaptive learning [cite: 2, 42]."
+    },
+    {
+      "heading": "6. Challenges and Open Problems",
+      "level": 2,
+      "content": "Despite the potential, the integration of LLMs is impeded by severe challenges, categorized into practical and ethical domains."
+    },
+    {
+      "heading": "6.1 Practical Challenges",
+      "level": 3,
+      "content": "*   **Hallucination and Reliability:** The tendency of LLMs to fabricate facts is a critical barrier in education, where accuracy is paramount. Studies show that while RAG mitigates this, it does not eliminate it [cite: 6, 7].\n*   **Technological Readiness:** Many proposed innovations remain at the prototype stage (low Technology Readiness Level). There is a \"utilization gap\" between research capabilities and tools available to average teachers [cite: 1, 2].\n*   **Replicability:** The closed nature of proprietary models (e.g., GPT-4) makes it difficult for researchers to replicate studies, as model behaviors change with updates [cite: 1, 43]."
+    },
+    {
+      "heading": "6.2 Ethical Challenges",
+      "level": 3,
+      "content": "*   **Algorithmic Bias:**\n    *   **Grading Bias:** LLMs have been shown to exhibit bias against non-native English speakers and specific demographic groups in automated grading tasks [cite: 4, 13, 44].\n    *   **Cultural Bias:** LLMs trained primarily on Western internet data often reflect \"WEIRD\" (Western, Educated, Industrialized, Rich, Democratic) values, marginalizing other cultural perspectives in educational content [cite: 3, 45, 46].\n*   **Data Privacy and Compliance:** The use of LLMs in schools intersects with strict regulations like **FERPA** (USA) and **GDPR** (Europe). Sending student essays or records to third-party cloud providers (like OpenAI) raises significant compliance issues regarding data ownership and the \"right to be forgotten\" [cite: 5, 47, 48].\n*   **Transparency and Explainability:** The \"black box\" nature of deep learning makes it difficult to explain *why* a model assigned a specific grade or recommended a specific resource, undermining trust among educators and students [cite: 49, 50].\n*   **Academic Integrity:** The ease of generating essays with AI poses a threat to traditional assessment methods, leading to an \"arms race\" between AI generation and AI detection tools [cite: 51, 52]."
+    },
+    {
+      "heading": "7. Future Research Directions",
+      "level": 2,
+      "content": "To address these challenges, the literature points toward several strategic research directions."
+    },
+    {
+      "heading": "7.1 Human-AI Collaboration Frameworks",
+      "level": 3,
+      "content": "Rather than replacing educators, future research should focus on **Human-in-the-Loop (HITL)** systems. Frameworks like \"Co-Education\" and \"Teacher-AI Partnership\" envision AI as a co-pilot that handles routine tasks (grading, data analysis) while teachers focus on mentorship and emotional support [cite: 8, 9, 53].\n*   **Research Need:** Empirical studies on the long-term effects of these collaborative models on teacher agency and student outcomes [cite: 54]."
+    },
+    {
+      "heading": "7.2 Small and Specialized Models (SLMs)",
+      "level": 3,
+      "content": "To address privacy and cost concerns, there is a growing trend toward developing **Small Language Models (SLMs)** that can run locally on school devices. Fine-tuning these models on high-quality educational data (using techniques like LoRA) can offer a privacy-preserving alternative to cloud-based giants [cite: 27, 33]."
+    },
+    {
+      "heading": "7.3 AI Literacy and Critical Pedagogy",
+      "level": 3,
+      "content": "Research must expand beyond tool development to include **AI Literacy** curricula. Students and teachers need to understand how LLMs work, their limitations (stochasticity), and how to critically evaluate AI-generated outputs [cite: 40, 52, 55]."
+    },
+    {
+      "heading": "7.4 Robust Evaluation Metrics",
+      "level": 3,
+      "content": "Current metrics (like accuracy or BLEU scores) are insufficient for educational contexts. New benchmarks are needed to evaluate \"pedagogical efficacy,\" \"fairness,\" and \"beneficence\" of LLM outputs [cite: 4, 27]."
+    },
+    {
+      "heading": "8. Conclusion",
+      "level": 2,
+      "content": "This systematic scoping review highlights that while Large Language Models hold revolutionary potential for education—offering scalable personalization and efficiency—their practical deployment is currently outpaced by ethical and technical risks. The field is characterized by a tension between the \"stochastic parrot\" nature of the technology and the high-stakes requirement for accuracy and fairness in education.\n\nKey findings suggest that the future of LLMs in education lies not in unmonitored automation, but in **structured Human-AI collaboration**. To move forward, the academic and ed-tech communities must prioritize:\n1.  **Transparency:** Open-sourcing models and datasets to ensure replicability.\n2.  **Equity:** Rigorous auditing of models for cultural and grading biases.\n3.  **Safety:** Implementing RAG and other grounding techniques to minimize hallucinations.\n\nBy adopting a human-centered approach that values pedagogical soundness over mere technological novelty, stakeholders can harness the power of LLMs to enhance, rather than undermine, the educational experience."
+    }
+  ],
+  "references": [
+    "[cite: 1] Yan, L., Sha, L., Zhao, L., Li, Y., Martinez-Maldonado, R., Chen, G., ... & Gašević, D. (2023). Practical and ethical challenges of large language models in education: A systematic scoping review. *British Journal of Educational Technology*. [cite: 1, 2, 22, 56, 57]",
+    "[cite: 49] Hu, A. (2025). Applications of Large Language Models in Education. *Knowledge Update*. [cite: 49]",
+    "[cite: 43] A., A., & MCL, L. (2024). Practical and ethical challenges of large language models in education: a systematic scoping review. *PMC*. [cite: 43]",
+    "[cite: 58] Yan, L., & Sha, L. (2023). Practical and Ethical Challenges of Large Language Models in Education: A Systematic Literature Review. *arXiv preprint*. [cite: 58]",
+    "[cite: 51] Malmivaara, E. (2025). Ethical Issues of Large Language Models: A Systematic Literature Review. *CEUR Workshop Proceedings*. [cite: 51]",
+    "[cite: 59] University of Helsinki. (2023). Ethical issues of large language models: A systematic literature review. [cite: 59]",
+    "[cite: 2] Yan, L., et al. (2025). Practical and ethical challenges of large language models in education: A systematic scoping review. *ResearchGate*. [cite: 2]",
+    "[cite: 12] Han, J., et al. (2025). Large language models in medical education: opportunities, challenges, and future directions. *PMC*. [cite: 12]",
+    "[cite: 52] AI4VET4AI. (2025). Some musings on the challenges of incorporating LLMs in contemporary education. [cite: 52]",
+    "[cite: 50] Scientific Research Publishing. (2025). Challenges and solutions for LLMs in an educational context. [cite: 50]",
+    "[cite: 56] Yan, L., et al. (2023). Practical and Ethical Challenges of Large Language Models in Education: A Systematic Scoping Review. *ResearchGate*. [cite: 56]",
+    "[cite: 60] Monash University. (2023). Practical and ethical challenges of large language models in education. [cite: 60]",
+    "[cite: 22] Yan, L., et al. (2023). Practical and Ethical Challenges of Large Language Models in Education: A Systematic Scoping Review. *arXiv*. [cite: 22]",
+    "[cite: 61] Semantic Scholar. (2023). Practical and ethical challenges of large language models in education. [cite: 61]",
+    "[cite: 39] Warwick University. (2025). Practical and Ethical Challenges of Large Language Models in Education. [cite: 39]",
+    "[cite: 62] ResearchGate. (2025). Milestones in the history of LLMs. [cite: 62]",
+    "[cite: 11] GeeksforGeeks. (2025). History and Evolution of LLMs. [cite: 11]",
+    "[cite: 17] Parsio. (2024). A Brief History of LLM. [cite: 17]",
+    "[cite: 16] Idiot Developer. (2024). A Brief History of Large Language Models (LLMs). [cite: 16]",
+    "[cite: 63] Dataversity. (2023). A Brief History of Large Language Models. [cite: 63]",
+    "[cite: 25] OpenRouter. (2025). State of AI 2025. [cite: 25]",
+    "[cite: 10] Wang, et al. (2024). Knowledge Graph-based RAG framework. [cite: 10]",
+    "[cite: 29] Zouinina, S. (2025). From Embeddings to Graphs: Surveying the Cutting-Edge in RAG (2024–2025). [cite: 29]",
+    "[cite: 27] arXiv. (2025). Context-Augmented Generation (CAG) in Education. [cite: 27]",
+    "[cite: 35] Chu, Z., et al. (2025). LLM Agents for Education: A Survey. *arXiv*. [cite: 35]",
+    "[cite: 36] ACL Anthology. (2025). Large Language Model (LLM) agents in education. [cite: 36]",
+    "[cite: 64] MDPI. (2025). Systematic Literature Review of AI-Powered Educational Agents. [cite: 64]",
+    "[cite: 65] EDM. (2024). LLM-based agents in educational technology. [cite: 65]",
+    "[cite: 41] Chu, Z., et al. (2025). Domain-Specific Educational Agents. *arXiv*. [cite: 41]",
+    "[cite: 66] ResearchGate. (2025). Overview of LLM Agents for Education. [cite: 66]",
+    "[cite: 18] Medium. (2024). Chain-of-Thought Prompting for Math. [cite: 18]",
+    "[cite: 19] Learn Prompting. (2024). What is Chain-of-Thought Prompting? [cite: 19]",
+    "[cite: 30] SabrePC. (2024). Chain-of-Thought Prompting for LLMs. [cite: 30]",
+    "[cite: 67] Gaper. (2024). Chain-of-Thought Prompting Exercises. [cite: 67]",
+    "[cite: 68] Appen. (2024). Chain-of-Thought Prompting Guide. [cite: 68]",
+    "[cite: 20] arXiv. (2025). GuideLM: Fine-tuning LLMs for Programming Education. [cite: 20]",
+    "[cite: 33] Stanford SCALE. (2025). Narrowing the Gap: Supervised Fine-Tuning of Open-Source LLMs. [cite: 33]",
+    "[cite: 69] IEEE. (2024). Fine-Tuning Large Language Models in Education. [cite: 69]",
+    "[cite: 21] Medium. (2024). Fine-tuning LLMs on Educational Datasets. [cite: 21]",
+    "[cite: 70] HackerNoon. (2025). Large Language Models for Educational Applications. [cite: 70]",
+    "[cite: 26] MyScale. (2024). RAG AI in Education: Case Studies. [cite: 26]",
+    "[cite: 71] Llumo. (2024). How to Master RAG in 10 Practical Use Cases. [cite: 71]",
+    "[cite: 72] Novus. (2024). RAG Use Cases: Unlocking Potential. [cite: 72]",
+    "[cite: 28] MDPI. (2025). Retrieval-Augmented Generation Chatbots in Education. [cite: 28]",
+    "[cite: 73] IJCOPI. (2025). Application of RAG Systems in Software Engineering Education. [cite: 73]",
+    "[cite: 3] PNAS Nexus. (2024). Cultural Bias in Large Language Models. [cite: 3]",
+    "[cite: 55] Means, T. (2025). The Push-Back Protocol: Teaching Students. [cite: 55]",
+    "[cite: 45] ResearchGate. (2025). Cultural Bias in Large Language Models: Analysis and Mitigation. [cite: 45]",
+    "[cite: 42] ResearchGate. (2024). Cultural Bias and Cultural Alignment of LLMs. [cite: 42]",
+    "[cite: 46] Ada Lovelace Institute. (2025). Cultural Misalignment in LLMs. [cite: 46]",
+    "[cite: 8] Stanford SCALE. (2024). Human-AI Collaborative Essay Scoring. [cite: 8]",
+    "[cite: 54] Taylor & Francis. (2025). Human-AI Collaboration Patterns. [cite: 54]",
+    "[cite: 9] ResearchGate. (2025). Human-AI Collaboration in Education. [cite: 9]",
+    "[cite: 74] Warwick University. (2025). The Human-AI Handshake Framework. [cite: 74]",
+    "[cite: 53] Doiron, J. (2024). Co-Education: A Human-AI Collaboration Framework. [cite: 53]",
+    "[cite: 75] Keynote Speaker Brian. (2025). Collaborative Classrooms. [cite: 75]",
+    "[cite: 76] World Economic Forum. (2025). How AI and Human Teachers Can Collaborate. [cite: 76]",
+    "[cite: 77] ResearchGate. (2024). Types of Teacher-AI Collaboration. [cite: 77]",
+    "[cite: 78] Makebot. (2025). Teacher-Generative AI Collaboration. [cite: 78]",
+    "[cite: 40] Forbes. (2025). AI in the Classroom: Roadmap for Educators. [cite: 40]",
+    "[cite: 13] ResearchGate. (2025). Automated Essay Scoring in the Presence of Biased Ratings. [cite: 13]",
+    "[cite: 38] ACL Anthology. (2025). Evaluating LLMs for Automated Essay Scoring. [cite: 38]",
+    "[cite: 44] arXiv. (2025). Bias in Automated Essay Scoring. [cite: 44]",
+    "[cite: 4] ACL Anthology. (2024). Fairness in Automated Essay Scoring. [cite: 4]",
+    "[cite: 79] Vice. (2019). Flawed Algorithms are Grading Millions of Students' Essays. [cite: 79]",
+    "[cite: 5] Hurix. (2025). Data Privacy in Education: FERPA and GDPR. [cite: 5]",
+    "[cite: 47] Privacy Pillar. (2024). Data Privacy in Education. [cite: 47]",
+    "[cite: 48] 6B Education. (2025). Building Privacy-Compliant Systems. [cite: 48]",
+    "[cite: 80] Secure Privacy. (2025). Vendor Privacy Agreement Tracker. [cite: 80]",
+    "[cite: 81] Student Discipline Defense. (2025). AI Data Privacy Concerns. [cite: 81]",
+    "[cite: 57] Monash University. (2023). Practical and Ethical Challenges of LLMs. [cite: 57]",
+    "[cite: 82] BERA. (2023). Beyond the Hype: Practical and Ethical Implications. [cite: 82]",
+    "[cite: 22] arXiv. (2023). Practical and Ethical Challenges of LLMs in Education. [cite: 22]",
+    "[cite: 2] Wiley. (2025). Practical and Ethical Challenges of LLMs in Education. [cite: 2]",
+    "[cite: 56] ResearchGate. (2023). Practical and Ethical Challenges of LLMs in Education. [cite: 56]",
+    "[cite: 14] BI Group. (2025). Stochastic Parrots: Language Models. [cite: 14]",
+    "[cite: 83] Humanist's Guide to AI. (2025). Beyond the Stochastic Parrot. [cite: 83]",
+    "[cite: 15] Wikipedia. (2025). Stochastic Parrot. [cite: 15]",
+    "[cite: 84] Science for the People. (2021). Stochastic Parrots. [cite: 84]",
+    "[cite: 85] Iris Van Rooij. (2022). Against Automated Plagiarism. [cite: 85]",
+    "[cite: 37] Taylor & Francis. (2025). The Rise and Potential of LLM Based Agents. [cite: 37]",
+    "[cite: 86] ECNU. (2023). The Rise and Potential of LLM Based Agents. [cite: 86]",
+    "[cite: 87] Wiz.ai. (2023). Voicebots vs LLM Agents. [cite: 87]",
+    "[cite: 88] Medium. (2024). The Rise of AI Agents. [cite: 88]",
+    "[cite: 89] Emergent Mind. (2023). The Rise and Potential of LLM Based Agents. [cite: 89]",
+    "[cite: 23] OpenAI. (2023). GPT-4 Technical Report. [cite: 23]",
+    "[cite: 24] SciSpace. (2023). GPT-4 Technical Report. [cite: 24]",
+    "[cite: 90] Semantic Scholar. (2023). GPT-4 Technical Report. [cite: 90]",
+    "[cite: 91] arXiv. (2024). GPT-4 Technical Report. [cite: 91]",
+    "[cite: 92] PMC. (2024). GPT-4 Technical Report Review. [cite: 92]",
+    "[cite: 31] ResearchGate. (2025). LoRA-Based Approach to Fine-Tuning LLMs. [cite: 31]",
+    "[cite: 34] arXiv. (2025). LoRA Education Applications. [cite: 34]",
+    "[cite: 32] Medium. (2025). LoRA: A Comprehensive Overview. [cite: 32]",
+    "[cite: 93] ACL Anthology. (2025). LoRA Education Applications. [cite: 93]",
+    "[cite: 94] Thinking Machines. (2025). LoRA: Low-Rank Adaptation. [cite: 94]",
+    "[cite: 6] HEP. (2024). Hallucination Challenge in Education. [cite: 6]",
+    "[cite: 7] HEP. (2024). Yan et al. Framework of Promises and Concerns. [cite: 7]"
+  ]
+}

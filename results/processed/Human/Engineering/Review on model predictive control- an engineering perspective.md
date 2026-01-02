@@ -1,0 +1,640 @@
+# Review on model predictive control: an engineering perspective
+
+# Abstract
+
+Model-based predictive control (MPC) describes a set of advanced control methods, which make use of a process model to predict the future behavior of the controlled system. By solving a—potentially constrained—optimization problem, MPC determines the control law implicitly. This shifts the effort for the design of a controller towards modeling of the to-becontrolled process. Since such models are available in many fields of engineering, the initial hurdle for applying control is deceased with MPC. Its implicit formulation maintains the physical understanding of the system parameters facilitating the tuning of the controller. Model-based predictive control (MPC) can even control systems, which cannot be controlled by conventional feedback controllers. With most of the theory laid out, it is time for a concise summary of it and an applicationdriven survey. This review article should serve as such. While in the beginnings of MPC, several widely noticed review paper have been published, a comprehensive overview on the latest developments, and on applications, is missing today. This article reviews the current state of the art including theory, historic evolution, and practical considerations to create intuitive understanding. We lay special attention on applications in order to demonstrate what is already possible today. Furthermore, we provide detailed discussion on implantation details in general and strategies to cope with the computational burden— still a major factor in the design of MPC. Besides key methods in the development of MPC, this review points to the future trends emphasizing why they are the next logical steps in MPC.
+# 1 Introduction
+
+For the automation of technical systems, feedback controllers (also called closed-loop controllers) compare a reference $r$ with a measured variable $\textbf {  { y } }$ determining a suitable value for the manipulated variable $\pmb { u }$ on the basis of the resulting deviation $e = r - y$ (Fig. 1). Based on the working principle, they can be divided into the categories: classical controllers, predictive controllers, and repetitive controllers. Classical controllers, such as PID controllers, bang-bang controllers, or state controllers, only consider past and current system behavior (i.e. they are “reactive” to a deviation). Predictive controllers use a system model to predict the future behavior anticipating deviations from the reference [101]. Repetitive controllers, on the other hand, consider the system behavior of the previous cycle and calculate an optimal trajectory for the next cycle [46].
+
+The PID controller is the best known controller with an outstanding importance and spread in industrial applications [4]. Although there exist several setup rules, it is often difficult to find a parametrization—especially for nonlinear or time-variant systems [131].
+
+“The effectiveness of any feedback design is fundamentally” limited by system dynamics and model accuracy. Hence, even in theory, perfect tracking of time-varying reference trajectories is not possible with feedback control alone—regardless of design methodology [58].
+
+Special cases, such as technical limitations of actuators, require individual solutions that are often heuristically based, hard to understand, and maintain. Higher control methods, such as sliding mode controllers or back-stepping controllers, are similarly abstract and complex in their interpretation [146].
+
+![](images/77a642bc440b29a630b5a092a4b508c50e54d46aeb7048a6d92ad2b826a47175.jpg)  
+Fig. 1 Block diagram of a classical feedback control loop (e.g. PID control)
+
+In fact, the founders of MPC theory ([34] and [104]) stressed that classic control suits $90 \%$ of all control problems perfectly. Only for the remaining fraction advanced control needs to be applied. Instead, we want to argue that MPC is a decent approach in almost all problems—even in those, which have not been controlled so far due to a lack of control theoretic understanding or of missing trust in feasibility. MPC is based on a repeated real-time optimization of a mathematical system model [101]. Based on this system model, the MPC predicts the future system behavior considering it in the optimization that determines the optimal trajectory of the manipulated variable $\pmb { u }$ , Fig. 2. Thus, MPC comes with an intuitive parameterization through adjusting a process model at the cost of a higher computational effort than classical controllers.
+
+The anticipating behavior and the fact that it can consider hard constraints makes the method so valuable for controlling real systems. Aligned with the rise of computational power and as models of complex processes become more and more available for all kinds of different systems, MPC now enables for the control of systems that were previous unthinkable.
+
+MPC relies on models, which are available in almost every discipline. This allows to make use of this longgrown knowledge and saves the tedious formulation of an explicit control law—a task that is usually reserved for control experts. Instead, MPC determines the control law automatically through a model-based optimization. This implicit formulation, the flexibility, and the explicit use of models are the main advantages of MPC and the reasons for us to campaign for MPC in the engineering community. This paper shall give a summary from the application point of view, but it shall not claim the MPC to be the optimal choice over all control algorithms in every particular problem.
+
+![](images/b2187ae158c1793790b5ac329c884b16e01b8a7ba66077e670f11a5ff8266012.jpg)  
+Fig. 2 Simplified block diagram of a MPC-based control loop
+
+When MPC was new, several widely noticed review paper have been published on both, theory [13, 44, 77, 85] and applications [99]. In contrast, this review is driven by the idea that MPC does not remain forever a topic for control engineers. Today, the development of MPC theory is pulled forward by application, in which manufacturing technology just emerged to make an important contribution—often having challenging requirements on reliability, constraints, and time. The work should inspire non-control experts to jump on the bandwagon and to develop new use cases pushing the barriers of technological limitations further.
+
+The article starts with the fundamental theory and a rough sketch of the historic evolution to learn from the visions and detours of the beginnings. The focus lies on practical considerations of feasibility, stability, and robustness together with representative applications. On our way, we discuss the different flavors of MPC, of which related keywords are DMC, model(-based) predictive control, receding horizon control, etc. [12, 70, 101].
+
+# 2 Theory
+
+MPC is a set of advanced control methods, which explicitly use a model to predict the future behavior of the system. Taking this prediction into account, the MPC determines an optimal output $\pmb { u }$ by solving a constrained optimization problem. It is one of the few control methods that directly considers constraints. Often, the cost function is formulated in such a way that the system output y tracks a given reference r for a horizon $N _ { 2 }$ , Fig. 3. Only the first value of the optimized output trajectory is applied to the system. This prediction and optimization is repeated in each time instance. This is why MPC is also referred to as “receding horizon” control. In essence, the idea is that a short-term (predictive) optimization achieves optimality over a long time. This is assumed to be true since the error of a proximal forecast is considered to be small compared to a distant prediction. The combination of prediction and optimization is the main difference from conventional control approaches, which use precomputed control laws [77].
+
+The prediction horizon $N _ { 2 }$ must be long enough to represent the effect of a change in the manipulated variable $\pmb { u }$ on the control variable $\textbf { y }$ . Delays can be considered by the lower prediction horizon $N _ { 1 }$ or by incorporating them into the system model. Often, the latter is more intuitive and the lower prediction horizon is set to $N _ { 1 } = 1$ to account for the computation time (hence the computation is conducted in one time step, the solution $\pmb { u }$ is implemented not before the next time step).
+
+![](images/ce9410fd9e84071035378519154dc689bb430c6e0753bb477f3b749fe15afb65.jpg)  
+Fig. 3 Function principle of a model-based predictive with horizons $N _ { 1 }$ , $N _ { 2 }$ , $N _ { u }$ (in accordance to [105])
+
+Assuming an arbitrary system
+
+$$
+\begin{array} { c } { { { \pmb x } ( { \pmb k } + 1 ) = f ( { \pmb x } ( { \pmb k } ) , { \pmb u } ( { \pmb k } ) ) , } } \\ { { { \pmb y } ( { \pmb k } ) = { \pmb h } ( { \pmb x } ( { \pmb k } ) ) . } } \end{array}
+$$
+
+MPC minimizes a user-defined cost function $J$ , Eq. 3, e.g. the tracking error between the reference vector $r$ and the model output $\textbf {  { y } }$ , Eq. 4:
+
+min u
+
+$$
+J \left( { \pmb x } ( { \pmb k } ) , { \pmb u } ( \cdot ) \right)
+$$
+
+min u
+
+$$
+\sum _ { i = N _ { 1 } } ^ { N _ { 2 } } \| \pmb { r } ( \pmb { k } + i | \pmb { k } ) - \pmb { y } ( \pmb { k } + i | \pmb { k } ) \|
+$$
+
+$$
+{ \pmb u } _ { l b } \le { \pmb u } ( { \pmb k } + j | { \pmb k } ) \le { \pmb u } _ { u b }
+$$
+
+$$
+y _ { l b } \le y ( k + i | k ) \le y _ { u b }
+$$
+
+$$
+\forall i \in \{ N _ { 1 } , \cdot \cdot \cdot , N _ { 2 } \} \mathrm { a n d } j \in \{ ( 0 , \cdot \cdot \cdot , N _ { u } \} .
+$$
+
+This formulation uses an arbitrary norm $\left\| \cdot \right\|$ .
+
+We will refer to the predicted state $k + i$ at time point $\pmb { k }$ as $x ( k + i | k )$ . Bold written variables $\pmb { A }$ indicate higher dimensions, i.e. a vector (lowercase characters) or a matrix (uppercase characters). A sequence of states will be indicated by $\pmb { x } ( \cdot )$ :
+
+$$
+\begin{array} { r l } & { \mathbf { \boldsymbol { \mathsf { \pm } } } ( k + i ) \forall i \in ( 0 , \cdots , N _ { 2 } ) \Rightarrow \mathbf { \boldsymbol { \mathsf { \pm } } } ( \cdot ) , } \\ & { \mathbf { \boldsymbol { \mathsf { \pm } } } ( k + i ) \forall i \in ( 0 , \cdots , N _ { u } ) \Rightarrow \mathbf { \boldsymbol { \mathsf { \pm } } } u ( \cdot ) , } \\ & { \mathbf { \boldsymbol { \mathsf { y } } } ( k + i ) \forall i \in ( N _ { 1 } , \cdots , N _ { 2 } ) \Rightarrow \mathbf { \boldsymbol { \mathsf { y } } } ( \cdot ) . } \end{array}
+$$
+
+In this way, the constraint formulation will be abbreviated by
+
+$$
+\pmb { x } _ { l b } \le \pmb { x } ( \cdot ) \le \pmb { x } _ { u b } \Rightarrow \pmb { x } \in \mathbb { X } _ { f } ,
+$$
+
+indicating that the sequence $\pmb { x } ( \cdot )$ being in the feasible set $\mathbb { X } _ { f }$ .
+
+# 3 History
+
+In the late 1970s, [105] and [24] independently laid the foundation of MPC theory. With the upcoming digital controllers, they were able to efficiently control complex problems demonstrating a massive economic potential. [105] introduced model predictive heuristic control (MPHC) in 1978, which already included all characteristics of a MPC:
+
+an explicit process model, described by impulse response functions (IRFs),   
+a receding horizon,   
+input and output constraints, and   
+an iterative determination of the controls (value of the manipulated variable $\pmb { u }$ ).
+
+However, [105]) did not claim to obtain optimal controls. Instead, the future controls where determined iteratively until they met the constraints. The additional term “heuristic” stressed the missing explicit control law. The technique was developed for the process industry with their multiple input multiple output (MIMO) systems, distinctive delays, and long processing times [105]. They even considered to identify the process model on-line— although only for changes in the set points.
+
+Roughly at the same time, [24] from Shell Oil Company developed dynamic matrix control (DMC). They used a piecewise linear model to predict the future behavior of a catalytic cracking unit. Thus, the controller gained awareness of the plant’s time delay and its dynamic system behavior. Cutler and Ramaker used a receding prediction horizon and updated the model coefficients based on the error between the previously predicted output and the currently measured output. They showed that DMC outperformed classic cascaded PID control claiming that DMC has been applied to control problems at Shell Oil since 1974. The main difference to MPHC was that DMC calculates optimal control variables. However, the matrix formulation of the control problem restricts DMC to linear process models.
+
+Both works laid the basis for a wide and fast spread of MPC in the petrochemical process industry. Even with linear models, the sampling times were several hours [97]. At the beginning, the focus was on simplifying the controller design and establishing a comprehensive theory so that the method could be used in industry [24, 34, 105]. The potential of MPC was not solely based on prediction but also on the fact that it can use non-linear models—both not supported by classic control. In fact, the process model formulation was a hot topic in the beginning of MPC theory: impulse response formulation (IRF) [105], piecewise linear step response functions [24], ARMA models [22, 23], or state space formulations [56]. This flexibility in the choice of model formulation was one of the key reasons for the fast success of MPC.
+
+The first approaches simply neglected model uncertainties and process instabilities—because most chemical engineering processes were open-loop stable [35]. From the late 1980s on, the research focus shifted to robustness and stability of MPC, which was especially pursued by the research group around MANFRED MORARI [13, 18, 19, 53, 144]. A detailed discussion about stability and robustness of MPC provides Section 4.
+
+With a finite horizon, i.e. a fixed moving window, the (linear) estimation problem could be formulated as a quadratic programming problem [100], which was computationally favorable. With computation pressing [14]) introduced “explicit MPC” which shifts the computation to massive a priori optimization (Section 8.1).
+
+With the millennium and computers becoming more and more powerful, research shifted towards application. The trend was coming from large problems and long calculation times towards problems with less control variables and much faster requirements to computational time.
+
+# 4 Feasibility, stability, and robustness
+
+One has to distinguish several aspects of MPC:
+
+feasibility of the open-loop optimization problem, stability of the closed-loop controller, and robustness regarding uncertainties.
+
+The first concerns the formulation of the optimization problem, the second the controller as a whole with regard to disturbances, and the last mainly the accuracy of the process model.
+
+In a stable system, the controller manages to get the output to a constant value at the end of the horizon $N _ { 2 }$ , in spite of disturbances to the control loop. Robustness, in contrast, aims at uncertainties. It is mostly related to model inaccuracies regarding the output prediction. The model is the key element of MPC, but it is never perfect [101]. However, for stability analysis, a perfect model is assumed. Only in a subsequent step robustness is examined. Furthermore, signal noise is an important topic for robustness [13]. Garcia and Morari [34] pointed out early that optimal control improves the control behavior but complicates robustness examination. Robustness does not follow from stability or vice versa [13] but a closed-loop stable system always reduces the effect of disturbances.
+
+This work draws crisp lines in the following between those separated problems of MPC design.
+
+# 4.1 Feasibility
+
+Hard input constraints (on $\pmb { u }$ ) represent physical limitations of, e.g. actuators, which in fact must not be violated. In contrast, hard output constraints (on $\textbf {  { y } }$ ) are often rather desired than required. They may render the optimization problem infeasible. Relaxing these output constraints by introducing slack variables $\pmb { \xi }$ to the optimization problem creates an extra degree of freedom [84]. The extend of violation is penalized in the objective function:
+
+$$
+\operatorname* { m i n } _ { u , \xi } \quad \| r ( k + i | k ) - y ( k + i | k ) \| _ { W _ { w } } + \underbrace { \| \xi ( k + i | k ) \| _ { W _ { \xi } } } _ { } ,
+$$
+
+s.t.
+
+$$
+{ \pmb u } _ { l b } \leqslant { \pmb u } ( { \pmb k } + j | { \pmb k } ) \leqslant { \pmb u } _ { u b } ,
+$$
+
+$$
+y _ { l b } - \pmb { \xi } ( \pmb { k } + i | \pmb { k } ) \leqslant y ( \pmb { k } + i | \pmb { k } ) \leqslant y _ { u b } + \pmb { \xi } ( \pmb { k } + i | \pmb { k } ) ,
+$$
+
+$$
+\forall i \in \{ N _ { 1 } , \cdot \cdot \cdot , N _ { 2 } \} \quad \mathrm { a n d } \quad j \in \{ 0 , \cdot \cdot \cdot , N _ { u } \} .
+$$
+
+Both terms posse an individual weighting matrix $W$ . If the norm is quadratic, it can be resolved to a matrix multiplication: $\| \pmb { x } \| _ { W } ^ { 2 } = \pmb { x } ^ { \top } \pmb { W } \pmb { x }$ .
+
+The weight $W _ { \xi }$ is a trade-off between the amount and duration of a violation [101]. The slack variables $\pmb { \xi }$ do not resemble a function but represent individual series for every time step $\pmb { k }$ . Note that they are vectors of length $N _ { 2 } - N _ { 1 }$ as they cover the prediction horizon.
+
+All commercial (linear) MPC software packages soften hard output constraints through slack variables to guarantee feasibility [85].
+
+Nevertheless, the input constraints are still hard and turn the optimization problem to be non-linear [101]. A nonfeasible desired trajectory $w$ provokes instabilities [112]. To tackle the problem of unfeasible desired trajectories, [39] suggested to filter the trajectory $\pmb { w }$ generating a feasible reference trajectory $r$ . Thereby, the problem of stabilizing a closed-loop system with input constraints was separated from the problem of fulfilling these constraints [13, 39]. This approach was called “reference governor”. It avoided constraint violations on the input by adjusting the desired trajectory beforehand with regard to the response behavior of the plant. This adjustment could be a simple smoothing of abrupt changes [13] or a dynamic optimization of its own [112]. Even a second MPC could be used to build the new reference trajectory $r$ [112]. The separation was charming as it was applicable to non-linear problems in discrete and continuous time.
+
+# 4.2 Stability
+
+In its most basic formulation, stability is the property of a system that a bounded input results in a bounded output: the BIBO stability. In case that the transient behavior converges against an equilibrium, the closed-loop system is called to be asymptotically stable. Furthermore, if the equilibrium is reached from every possible initial state, then the system is labeled “globally asymptotically stable”. This can be guaranteed for all linear time invariant (LTI) discrete time systems with hard input and soft output constraints if the optimization problem is solved over infinite horizons [144]. Infinite prediction and control horizon $N _ { 2 } ~ = ~ N _ { u } ~ = ~ \infty$ results in a linear quadratic GAUSSIAN (LQG) optimal control problem, for which a comprehensive stability theory exists: global asymptotic stability is guaranteed if and only if all eigenvalues of the closed-loop system are located inside the unit disk.
+
+However, finite prediction horizon obviously is an extreme restriction. Computational restrictions limit the MPC in general to a finite horizon. To still guarantee asymptotic stability, the optimal cost function of the MPC must be monotonically decreasing over time.
+
+To illustrate this, let us assume a system behaving as illustrated in Fig. 4. It could constitute a continuous active cooling of glass at the end of the production line. In this case, the measurement $y$ would be the temperature difference between glass and environment. The same way, the optimal control applied at time $t _ { 0 }$ would correspond to $u ^ { 0 }$ , whereas the according value of the objective function would be $J ^ { 0 }$ .
+
+The depicted output $y$ as well as the change in $u ^ { 0 }$ tend towards the system’s equilibrium (as desired for the stable closed-loop behavior).
+
+The cost $J$ is not explicitly a function of time, so the desired monotonically decreasing behavior over time needs to be artificially imposed on it. One way to do this is to formulate an optimization problem that the control function is bounded by a LYAPUNOV function.
+
+A LYAPUNOV function is a continuously differentiable scalar function $V ( \pmb { x } ) : \mathbb { R } ^ { n }  \mathbb { R }$ with $V \left( \mathbf { 0 } \right) = \mathbf { 0 }$ . It is always positive and does not increase over time:
+
+$$
+\begin{array} { l } { V \left( x \right) > 0 , \forall x \neq \mathbf { 0 } , } \\ { \dot { V } \left( x \right) \leq 0 , \forall x \neq \mathbf { 0 } . } \end{array}
+$$
+
+The LYAPUNOV theorem essentially defines a prototypical function resulting in a bounded system state over time. Thus, the state of the art for stability schemes for (nonlinear) MPC is to define the cost function in such a way that the optimal cost behaves as a LYAPUNOV function—or to prove this to be the case respectively. For this purpose, the optimization problem is extended by additional cost terms or constraints.
+
+![](images/5b5d92d6f7a1415a414620dac75075db4512cf2ad78e6b93c879ab2a2d93c6cc.jpg)  
+Fig. 4 Example of an stable closed-loop system with its objective function
+
+An adequate LYAPUNOV function to the optimal cost $J ^ { 0 }$ of Fig. 4 is illustrated in Fig. 5, where the decreasing optimal cost is depicted over two system states.
+
+One approach to make the optimal cost $J ^ { 0 }$ behave like a LYAPUNOV function is to introduce a terminal cost $J ( \pmb { k } + N _ { 2 } )$ . This nullifies the advantage of an infinite horizon, since the cost stays the same until infinity $J ( k + N _ { 2 } ) \approx J ( \infty )$ [75, 77]. Whereby, more constraints to guarantee stability of the controller may again cause feasibility problems of the optimization—especially for short prediction horizons. Therefore, it is common practice to constraint a terminal region instead of, e.g. a zero terminal constraint $\| { \pmb x } ( { \pmb k } + N _ { 2 } ) \| = 0$ .
+
+![](images/36e3e5e7dc3b3d11397d9d5fa55effecdc8ce663f40902ae285335dff4a8ee75.jpg)  
+Fig. 5 Example of an LYAPUNOV function
+
+The most common stability approach, which avoids a LYAPUNOV analysis, is to introduce so-called “contraction constraints” ensuring that (usually the euclidean norm of) the state vector is decreasing over time [13]:
+
+$$
+\| { \pmb x } ( { \pmb k } + 1 | { \pmb k } ) \| < \| { \pmb x } ( { \pmb k } ) \| .
+$$
+
+Some applications even use both, a LYAPUNOV-based cost function and contraction constraints, e.g. [116].
+
+Mayne et al. [75, 77] concluded that stability of MPCcontrolled (linear) systems was at a “mature” stage in 2000, whereas for robustness, only conceptual approaches existed.
+
+With the understanding of stability analysis for linear MPC, [44] pointed out that a stability analysis for non-linear MPC became more urgent.
+
+While the approaches to design a stable system that was elaborated above (LYAPUNOV-based cost function or contraction constraints) apply equally for linear and nonlinear systems, still, many implementations of MPC meet non-linearity by successive linearization avoiding a nonlinear stability analysis [101], Section 7.
+
+For a more complete discussion and mathematical foundation regarding stability, the authors refer to [3, 72, 77, 98] and [31, 81, 87].
+
+# 4.3 Robustness
+
+In contrast to what have been claimed, [35] stressed that MPC is not inherently more or less robust than classic feedback control (e.g. PID controller).
+
+Robustness follows stability of the closed-loop system only if no input constraints are present [106]. “When we say that a control system is robust we mean that stability is maintained and that the performance specifications are met for a specified range of model variations (uncertainty range)” [85].
+
+Essentially, robustness deals with model uncertainty, which can be formulated in several ways [13]:
+
+by uncertainty intervals, by structured feedback, or by using a set of models.
+
+For the latter, one describes the plant by multiple models and optimize, e.g. the worst-case of them ( $L _ { \infty }$ -norm) [19].
+
+A similar approach was pursued by [53] distinguishing different types of uncertainty: uncertainty in the gain, the time constant, and time delay. They considered them all simultaneously. The approach was taken up again later as matrix formulation [25]. This assumes structured noise in the feedback loop so that it can be considered in the model. Assuming a linear time invariant (LTI) system and (linear time invariant (LTI)) uncertainty to be present in the feedback loop, robustness can be guaranteed if the norm of the uncertainty matrix is lower than a defined threshold [13].
+
+Uncertainty intervals can often be assigned to model coefficients of an empirical transfer function. In this idea, the model structure remains the same and only the coefficients change. However, [13] concluded that allowing model coefficients to vary within intervals is not sufficient to achieve robustness. A comprehensible example is that oscillating step responses would be allowed.
+
+For all these approaches you need to quantify uncertainty in the model of the system. The robustness calculations come at the cost of performance (regarding optimality and computation) [13].
+
+An entirely different approach is to define a cost function that favors robustness by design: e.g. minimizing the maximum error in the prediction horizon would result in less extreme control actions, which in turn lead to a smoother process guidance [18]. This suggests to use the $L _ { \infty }$ -norm to formulate the optimization problem instead of a—standard—least squares $( L _ { 2 } )$ formulation.
+
+$$
+\begin{array} { r l } & { \| \textbf { \em x } \| ^ { 2 } = \sqrt { \pmb { x } _ { 1 } ^ { 2 } + \cdot \cdot \cdot + \pmb { x } _ { n } ^ { 2 } } } \\ & { \| \textbf { \em x } \| ^ { \infty } = \operatorname* { m a x } \left\{ \pmb { x } _ { 1 } , \ldots , \pmb { x } _ { n } \right\} } \end{array}
+$$
+
+In this case, the $L _ { \infty }$ norm is the maximum of all errors between the predicted model outcome and the desired reference. [18] motivated its use with the smoothing influence on the control outputs $\pmb { u }$ . Using the $L _ { \infty }$ -norm hinders the controller to make full use of the plant potential due to very conservative control actions [13]. However, if the process model is linear, the optimization problem becomes quadratic if the cost function is expressed as a $L _ { 2 }$ - or a $L _ { \infty }$ -norm [13]—supposed that there are no constraints present. Quadratic problems are favorable because they can be solved efficiently.
+
+Both approaches, a more elaborate model or a special objective function, undermine the key advantage of MPC: optimality. One idea to overcome this is to enforce robustness by introducing a contraction constraint (similar to stability), i.e. requiring the worst-case prediction to contract [85, 144]. This let MPC still implement the optimal trajectory as long as the additional constrained is fulfilled.
+
+# 4.4 Summary on feasibility, stability, and robustness
+
+Garc´ıa et al. [35] noted that for every unconstrained, linear MPC there exist an equivalent classic feedback controller with all benefits of its well-proven stability theory. However, not using constraints loses much of the charm of MPC. Therefore, it is more an academic twitch than a practical option. The same is true for infinite horizon MPC.
+
+There exists an extensive stability theory for linear MPCs. For systems in state space form, the stability analysis is based on eigenvalues and on the unit disk as it is familiar from the stability analysis of conventional (linear) control [144]. However, optimization problems with hard input constraints are often non-linear [101].
+
+Establishing stability—especially robust stability—is extremely difficult for non-linear problems. This is mainly due to the lack of an explicit functional description of the control algorithm, which is required for most stability analysis [84]. Today, stability of non-linear, constrained, finite-horizon MPC is achieved by formulating the cost function as a LYAPUNOV function and introducing a terminal set constraint [75, 77]. Using a terminal set links the stability problem with the constraint satisfaction problem [17]—ironically, additional constraints stabilize a constrained, non-linear MPC.
+
+Robustness is a trade-off to performance. Several approaches increase robustness at the cost of computation and optimality (e.g. $L _ { \infty }$ -norm). Nevertheless, it can only be achieved if the amount of uncertainty can be quantified.
+
+A practical compromise to maintain optimality—the key feature of MPC—is to add the requirement the the worstcase prediction must contract [85, 144].
+
+# 5 Recent developments in MPC theory
+
+Once again, motivated by the chemical process industry, [58] integrated a MPC into an iterative learning control (ILC) building a controller dedicated for batch processing. A classic iterative learning control (ILC) works during the process as open-loop control but adjusts this profile of commands between cycles or “iterations”. In this way, it approaches the ideal profile incrementally from cycle-to-cycle and may react to trends over multiple cycles. The essence is that the “information gathered during previous runs can be used to improve the performance of a present run” [57]. In contrast to this, MPC is a closed-loop controller but considers repetitive tasks as independent of each other.
+
+Combining both methods builds a system that reacts to disturbances within a cycle or process (“as they occur”) and minimizes the tracking error over multiple cycles. However, integrating MPC to iterative learning control (ILC) limits the use to fixed-time operations, i.e. the number of time samples must stay the same over cycles [58]. Splitting both techniques, let the iterative learning control (ILC) work as an upper-level reference governor for the MPC as was conducted, e.g. by [86], and may overcome such limitations. In this combination, MPC introduces constraints to iterative learning control (ILC) [57].
+
+Li et al. [59] presented a third flavor of such a combination effectively being an optimal iterative learning control (ILC): They took the optimization part of MPC, i.e. optimizing the manipulated variable over a horizon, transplanting it into an iterative learning control (ILC). The resulting system determined an optimal profile of the manipulated variable(s) for each cycle. In a subsequent work, [60] suggested to smooth the commands over cycles. This essentially states that the optimal solution is not entirely trusted. Such systems only touch MPC in general, because they lack of a receding horizon and effectively filter their optimal control recursively.
+
+Among the works of [66] and [128] lies the combination of iterative learning MPC and the uprising field of databased learning in control theory. The former extracts new trajectories of a linear-quadratic regulator (LQR) based on overall objectives and data of previous trajectories with the help of the $\mathbf { k }$ -nearest-neighborhood algorithm. The latter extends the idea of an iterative, data-driven adjustment of trajectories to the application of MPC.
+
+Although also applied to a repetitive task, [78] focused on learning a model of the system dynamics rather than a trajectory. The authors took advantage of data and weighted linear BAYESIAN regression to model uncertainties of vehicle dynamics on a repeating path. The same way [50] applied GAUSSIAN process modeling to elaborate confidence intervals on possible trajectories to guarantee safety.
+
+Data-driven modeling, such as machine learning, can be used for the system model that the MPC uses in its optimization, or to approximate the solution space of an explicit MPC, as e.g. in [45, 71, 88], Section 8.1.
+
+The possibilities of learning are enhanced especially for multi-agent systems, where every single agent contributes to the data-acquisition and policy exploration. [68] utilized such a swarm intelligence to learn the trajectory for a distributed MPC. The learning problem for this purpose was defined as a quadratic optimization problem under the condition of collision avoidance as constraint.
+
+# 6 Applications
+
+The idea of optimal control in the presence of constraints and the intuitive design of the control law as an optimization problem has made MPC interesting for many different tasks. Applications have spread wide recently throughout all fields of engineering. The following highlights main movements.
+
+# 6.1 Process industry
+
+For a long time, the process industry used MPC almost exclusively. This is not surprising as the petrochemical industry promoted the development decisively [24, 97, 99, 105]. Motivated by its complex, multi-variable processes with time delay, MPC spread quickly since optimal control lead to significant economic benefit due to the large throughput. Darby et al. [26] acknowledged that MPC is “the standard approach for implementing constrained, multi-variable control in the process industries today”.
+
+In the founding paper of MPC, [105] described three applications: a distillation column of a catalytic cracker in oil refinery, a steam generator, and a polyvinyl chloride (PVC) plant. The catalytic cracker had two manipulated variables (mass flow rates) and three control variables (temperatures), of which only one was constrained. The plant was modeled through twelve impulse response functions and the sample time was $\begin{array} { r l r } { T _ { s } } & { { } = } & { 3 \operatorname* { m i n } \mathrm { ~ - ~ } } \end{array}$ manageable only because it used a heuristic control law.
+
+With the control of the polyvinyl chloride (PVC) plant, they wanted to demonstrate the versatility of MPC by controlling five subprocesses. The results showed a severe reduction in variance of the controlled variables yielding to higher quality and energy savings. The impressive demonstration paved the way for the popularity of MPC. Richalet later also described how a distillation column and a vacuum unit was controlled in a refinery of MOBIL OIL [104]. The objective function was already formulated as a quadratic LYAPUNOV function, which—as was shown—is favorable for stability. He did not address robustness but mentioned a back-up control system in case of failure. The results showed that the controller reduced the variance in the quality criteria resulting in a payout time of less than a year.
+
+Oil companies were the promoters of model-based advanced controllers. Cutler and Ramaker [24] used a piecewise-linear model to control the furnace of a catalytic cracking unit at SHELL OIL. With a prediction horizon of $N _ { 2 } = 3 0$ and a control horizon of $N _ { u } = 1 0$ , they exploited the predictive potential.
+
+Prett and Gillette 97 used even longer horizons $( N _ { 2 } =$ 35, $N _ { u } ~ = ~ 1 5 )$ ) with a sampling time of “a few hours”. They successively linearized a non-linear process model determining the optimal operation point of the reactor and the regenerator of a catalytic cracker.
+
+With distillation being one of the workhorses of the chemical process industry for the separation of molecules, it is still today a popular application examples for MPC, as in [21, 80], which both were a simulation study on linear MPC. Only that [80] successively linearized a non-linear model of a methanol/water mixture to apply linear MPC.
+
+Piche et al. [95] introduced a neural network (NN) in MPC to control the set point change in an polyethylene (PE) reactor. A neural network (NN) is a non-linear empirical model based on historic data. This type of machine learning model is experiencing extraordinary attention nowadays. Linear dynamic models were constructed from conventional (open-loop) plant tests to control the plant at its set points. Piche et al. achieved $30 \%$ faster transitions and an overall reduction in variation of the controlled variables. The idea is still under active research. Li et al. [63] also explored successive linearization of a neural network (NN) in MPC but to control the temperature of a stirred reactor—a common application in process industry, e.g. for bioreactors. Shin et al. [117] used a neural network (NN) (fully connected, 14-15-2) with MPC for a propane devaporizer (e.g. specialized distillation column). Although claiming that neural network (NN)–based nonlinear MPC achieved better performance than linear MPC, they benchmarked the new controller on conventional PI control demonstrating a $60 \%$ quicker settling time (35 min with neural network (NN)-MPC to $9 2 \ \mathrm { m i n }$ with PI control). They further stressed easier modeling of datadriven models as an additional benefit of using NNs in conjunction with MPC. Nunez et al. [89] used a more complicated neural network (NN) structure, a recurrent neural network (RNN) (in fact, an attention-based encoder decoder recurrent neural network (RNN) with 23,000 free parameters) to model an industrial past thickening process. The sampling time was $T _ { s } ~ = ~ 5 m i n$ giving the controller enough time to conduct a global optimization with particle swarm optimization (PSO) – a rather unusual choice – for a prediction and control horizon of $N _ { 2 } ~ = ~ 1 0$ and $N _ { u } \ =$ 5 respectively. Presenting one rare example of an actual industrial deployment, they demonstrated the effectiveness of the control on an industrial plant for a working day. The recurrent neural network (RNN)–based MPC was capable of maintaining the target concentration of the paste thickener in spite of a severe disturbance when a pump failed. A recurrent neural network (RNN) structure was also used to control chained stirred reactors [136]. There are applications with further network types with distinct features, such as echo state networks to model time delay of buffer tanks, e.g. for a refrigerator compressor test rig with (non-linear) MPC [9].
+
+In general, besides oil and gas, and the chemical industry, pharmaceutical and biology industry use MPC to manage the non-linearity coupled with large time-delays of their processes, e.g. in a fermentation process [42]. Ławrynczuk ´ [6] compared linear MPC to non-linear MPC again for a stirred reactor and for a distillation column. He concluded that, in particular for the distillation process, the nonlinear controller was more economic. On this background, he suggested to combine both approaches reducing the computational burden of pure non-linear MPC: applying non-linear optimization only for the first time instant $k = 1$ and using a linearized model for the other steps $1 < \pmb { k } < N _ { 2 }$ . To the knowledge of the authors, such an approach has not been examined further.
+
+Prasad et al. [96] took a different route, preferring to use multiple linear models rather than a single non-linear one. They controlled the filled-height of a conical shaped tank. Since the diameter varies continuously with the height, they suggested to identify three separate linear models at different heights, to design one controller for each and combine the outputs as an ensemble to obtain a general output for the manipulation variable (the inlet flow rate).
+
+In 2003, [99] already counted over 4 600 industrial applications reviewing the available commercial software packages for MPC. They differed in the model structure, its identification, and in how constraints were implemented (as hard constraints or as an additional penalization term in the cost function). Nevertheless, all models were linear, time-invariant, and derived by empirical test data. Online adaption of the model was not supported by any software, although there had been (academic) works on this issue already from the beginning, e.g. [105].
+
+Although stability theory is at a mature level, ASPENTECH as a major vendor of commercial MPC software assumed an infinite horizon control to ensure stability, which was implemented in practice by a prediction horizon much larger than the reaction time of the system [33]. With regard to academia, the software MATLAB/Simulink from THE MATHWORKS is very popular, e.g. [80, 96, 108].
+
+Today, process industry is still the major user of MPC [76] evolving towards faster, mechanical processes such as paper machines [145] or stone mills [108, 124].
+
+Again, a report of an industrial application was presented by the ANGLO AMERICAN PLATIUM company, where a linear MPC (to be more precise: (DMC)) outperformed a back-than famous fuzzy controller [124]. The power consumption of a large stone mill was reduced by $66 \%$ using the commercial system from ASPENTECH. Nevertheless, no fully thrusting the novel control method, the established fuzzy controller was run as back-up option for abnormal states.
+
+Olivier and Craig [92] and coworkers [55] detected faults of actuators within the process to update the available manipulated variables of the MPC maintaining the control performance. They used a particle filter in order to estimate whether a certain actuator could still be used or not (binary decision). Self-awareness was especially important for continuously-running large systems in rough environments. They simulated a mill of a mining facility to grind ore. The simulation demonstrated that the MPC can manage actuator failure if it knew about it.
+
+Table 1 summarizes the key parameters of the discusses works in process industry. Only works are listed that provided their implementation details on MPC. The order has no significance besides order of publication.
+
+MPC often served as a supervisory control of classic PID controllers forming a cascaded control loop. Large multiple input multiple output (MIMO) systems, empirical models—mostly derived through step or impulse tests [99]—and long calculation times $T _ { s } ~ > ~ 1 h$ favored MPC in process industry. Today, the sampling times have largely decreased to the region of minutes and seconds [26], Table 1. Complex couplings between process variables require empirical, nonlinear models, which are at the beginning often linearized.
+
+# 6.2 Power electronics
+
+Not until the mid 2000s, an opposite trend has taken shape in power electronics. These extremely fast single input single output (SISO) systems used pure analytical models to work at sampling frequencies below the ms-range [15, 52, 65, 129]. The characteristics are diametrically different to process industry. Richalet [104] foresaw this counter movement early reporting from an application to control a servo drive with a sampling time of $T _ { s } ~ < ~ 1 m s$ . To achieve such short sample times, relatively simple models, short horizons, and often an explicit solution of the optimization problem were used. Explicit MPC solves the optimization in advance for a variety of cases to obtain a polytope of explicit (linear) control laws [14]. This increases the overall computational effort but shifts it to offline optimization.
+
+Table 1 Overview of the tuning parameters of MPC in process industries   
+
+<html><body><table><tr><td>Reference</td><td>Ts</td><td>N2</td><td>Nu</td><td>sim/exp</td><td>MPC</td></tr><tr><td>[105]</td><td>3 min</td><td>？</td><td>？</td><td>exp</td><td>L</td></tr><tr><td>[24]</td><td>？</td><td>30</td><td>10</td><td>exp</td><td>L</td></tr><tr><td>[97]</td><td>few h</td><td>35</td><td>15</td><td>exp</td><td>L</td></tr><tr><td>[95]</td><td>3 min</td><td>(10)</td><td>？</td><td>sim</td><td>N</td></tr><tr><td>[6]</td><td>1 min</td><td>10</td><td>3</td><td>sim</td><td>L+N</td></tr><tr><td>[124]</td><td>1 min</td><td>60</td><td>(60)</td><td>exp</td><td>L</td></tr><tr><td>[42]</td><td>1s</td><td>6</td><td>2</td><td>sim</td><td>L</td></tr><tr><td>[108]</td><td>？</td><td>50</td><td>20</td><td>sim</td><td>L</td></tr><tr><td>[92]</td><td>1 min</td><td>20</td><td>3</td><td>sim</td><td>N</td></tr><tr><td>[55]</td><td>1 min</td><td>18</td><td>3</td><td>sim</td><td>N</td></tr><tr><td>[9]</td><td>200 ms</td><td>50</td><td>5</td><td>？</td><td>N</td></tr><tr><td>[21]</td><td>1 s</td><td>76</td><td>16</td><td>sim</td><td>L</td></tr><tr><td>[80]</td><td>1 s</td><td>10</td><td>2</td><td>sim</td><td>L</td></tr><tr><td>[63]</td><td>1 min</td><td>10</td><td>2</td><td>sim</td><td>N</td></tr><tr><td>[89]</td><td>5 min</td><td>10</td><td>5</td><td>exp</td><td>N</td></tr><tr><td>[117]</td><td>1 min</td><td>15</td><td>3</td><td>sim</td><td>N</td></tr><tr><td>[96]</td><td>10 s</td><td>150</td><td>2</td><td>exp</td><td>L</td></tr></table></body></html>
+
+sim simulation, exp experiment, $L$ linear, $N$ non-linear, () deduced numbers, ? unknown parameter
+
+Linder and Kennel [65] applied MPC for “field oriented control” of electrical AC drives using such an explicit MPC. The results were sobering: there was hardly any improvement to a conventional PID controller for large signal steps. For small steps, the MPC reached the new target value faster and better, but in summary, Linder and Kennel attributed potential of MPC more due to features like intuitive tuning and constraint satisfaction.
+
+Nevertheless, Bolognani et al. [15] saw MPC as being ideal for electric motor control since there existed analytical linear models describing the motor behavior accurately. They also used an explicit MPC formulation to achieve an sample time of $T _ { s } ~ = ~ 8 3 m s$ . Since the prediction horizon $N _ { 2 } = 5$ was far from covering the complete drive dynamics, the assumption of an infinite prediction horizon did not hold, making stability a major (unconsidered) concern. The control was perfect if the load torque matched the design torque of the MPC design. Otherwise, there occurred an offset between the desired and the actual values (current, voltage, etc.). Nevertheless, the controller worked stable and enforced the current and voltage limits reliably.
+
+Kouro et al. [52] examined MPC regarding control of power converters. Power converters have only a finite number of discrete states $n$ . This handicaps an optimization requiring heuristic approaches (mixed-integer optimization). They took a brute force approach testing every possible control action resulting in an exponential increase of calculations: $n ^ { N _ { 2 } }$ . With $n = 7$ converter states the prediction horizon was limited to $N _ { 2 } ~ = ~ 2$ in order to achieve a sample time of $T _ { s } ~ = ~ 1 0 0 m s$ . Compared to a classic PID control, they concluded that the advantage of MPC is its flexibility regarding control variables and constraints—similar to [65] before.
+
+Geyer et al. [38] used MPC for direct torque control of electrical drives. The control problem consisted of keeping the motor toque, the magnitude of the stator flux, and the inverter’s neutral point potential within their (hysteresis) bounds minimizing the switch frequency of the inverter. To reduce the computational complexity and to solve the MPC within $T _ { s } = 2 5 m s$ , the control and prediction horizon were limited to $N _ { u } = N _ { 2 } = 2$ . As a compromise between computational effort and system behavior, the value of the prediction horizon was extrapolated linearly 100 steps to roughly recognize future system behavior. The simulation results showed that MPC respected the constraints only slightly better but reduced the switching frequency on average by $2 5 \%$ thus reducing the power dissipation.
+
+As an experimental validation for this, Papafotiou et al. [93] implemented MPC for direct torque control on a 1.5 MW motor drive. Again, the major concern was on the computational speed, so that the control horizon was further reduced to a single step $N _ { u } ~ = ~ 1$ . The two control tasks, motor flux and motor speed, were split into separate control tasks with different execution times $2 5 ~ \mathrm { m s }$ and $1 0 0 ~ \mathrm { { m s } }$ respectively). The results could not hold the euphoria of the simulation above. On average the control reduced the inverter’s switching frequency by $1 6 . 5 \%$ maintaining the same output quality as standard control. For motor drives of this size, the achieved faster torque response was even more valuable for certain applications. Especially highvoltage applications, such as motor control, must consider the time delay of the converter [10]. Converters often exhibit a programmed time delay after switching in order to avoid a shoot-through. Model-based predictive control (MPC) can manage this naively, e.g. in the system model [10].
+
+The number of applications in power electronics increased so rapidly that Vazquez et al. [129] felt impelled to give an extensive review of the academic implementations. They concluded that the lack of proper models is still the major obstacle towards an industrial application. And MPC for power converters and rectifiers (electrical devices that convert alternating current (AC) to direct current (DC)) is still subject of active research due to their ubiquity. It is likely to increase even further due to the transformation of society in the context of combating climate change and the accompanying electrification of whole industries. Efficiency is prime and researchers found MPC to provide valuable contribution, e.g. for determining optimal switching sequences of converters and rectifies already for mid-level voltage ratings [40, 83]. Although computation is still an issue, e.g. [2], both formulations are still competing in the this field of very fast control problems in power electronics: The standard implicit formulation of MPC with solving the control problem online and the explicit formulation where the optimization problem is solved a priori for all cases. A detailed general discussion on explicit MPC includes Section 8.1.
+
+Again, Table 2 provides a condensed overview of the works on the application of MPC in power electronics. It emphasizes the diversity of the used parameters of MPC in this field. Having started with the control of individual electrical components, in particular converters, the application in electrical engineering has widened towards the control of systems of multiple components as the next section will show.
+
+# 6.3 Building climate and energy
+
+Since 2010, MPC has attracted notice to the community of building climate control. Analytical and empirical models were combined in non-linear multiple input multiple output (MIMO) systems with long prediction horizons. Typical sample times were in the order of minutes to $^ \mathrm { ~ 1 ~ h ~ }$ with prediction times usually smaller than $4 8 \ \mathrm { ~ h ~ }$ [113]. The objective was always to reduce the energy consumption while maintaining a certain (thermal) comfort. The success of MPC in this field was due to that it allows to incorporate statistical uncertainties and even weather forecasts [5], e.g. as in [90].
+
+Table 2 Overview of the tuning parameters of MPC in power electronics   
+
+<html><body><table><tr><td>Reference</td><td>Ts</td><td>N2</td><td>Nu</td><td>sim/exp</td><td>MPC</td></tr><tr><td>[65]</td><td>10 ms</td><td>3</td><td>(3)</td><td>sim</td><td>L</td></tr><tr><td>[127]</td><td>20 ms</td><td>40</td><td>？</td><td>sim</td><td>L</td></tr><tr><td>[26]</td><td>1 ms</td><td>1</td><td>1</td><td>exp</td><td>N</td></tr><tr><td>[15]</td><td>83 ms</td><td>5</td><td>1</td><td>exp</td><td>L</td></tr><tr><td>[93]</td><td>24 ms</td><td>1</td><td>1</td><td>exp</td><td>L</td></tr><tr><td>[38]</td><td>25 ms</td><td>2/(100)</td><td>2</td><td>sim</td><td>L</td></tr><tr><td>[52]</td><td>100 ms</td><td>2</td><td>？</td><td>sim</td><td>L</td></tr><tr><td>[10]</td><td>62.5 ms</td><td>？</td><td>？</td><td>exp</td><td>L</td></tr><tr><td>[29]</td><td>1 ms</td><td>1</td><td>1</td><td>exp</td><td>L</td></tr><tr><td>[125]</td><td>100 ms</td><td>3</td><td>1</td><td>sim</td><td>L</td></tr><tr><td>[40]</td><td>200 ms</td><td>？</td><td>？</td><td>exp</td><td>L</td></tr><tr><td>[114]</td><td>200 ms</td><td>50</td><td>50</td><td>sim</td><td>L</td></tr></table></body></html>
+
+sim simulation, exp experiment, $L$ linear, $N$ non-linear, () deduced numbers, ? unknown parameter
+
+MPC for heating, ventilation and air conditioning (HVAC) had been applied to a broad range of buildings, starting from a single room to large spaces as airport buildings or multi-room problems as office buildings [1]. The overwhelming majority of the works addressed nonresidential buildings, where only $4 \%$ included residential buildings often as one energy sink among others in a microgrid [74]. In their latest review, they noted that heating, ventilation and air conditioning (HVAC) plays an important role in the field of building energy management systems with more than $50 \%$ of all publications; and that MPC is the most used strategy. The authors ascribed this to its native consideration of weather and occupation forecasts, e.g. demand forecasting. Google reported that MPC increased the efficiency of the air handling in one of their data centers so that they cut cooling costs by $9 \%$ [54].
+
+Most works in the field of climate and energy management were simulations due to the large implementation effort and the risk of discomfort. Gunay et al. [43] actually demonstrated their findings on an actual room of their university offices; and Ma et al. [69] implemented a MPC controller to the cooling system of their university building. The main component was a cold water storage tank, whose operation was controlled (when to fill, how fast to fill, how cold should the water input be—coming from the chillers, etc.). They reduced the energy costs by $19 \%$ , introducing the interesting idea of optimizing financial costs instead of pure energy consumption, [1] later picked-up again in this filed. With “MPC”, nowadays a dedicated term for such formulations exist.
+
+Yu et al. [141] conducted a whole benchmark of different temperature control approaches on a small mockup building in a thermal chamber. Model-based predictive control (MPC) outperformed the other approaches— including a commercial thermostat with a programmable schedule—and reduced the energy consumption by $43 \%$ compared to a constant temperature controller. However, the results suggested that for small buildings the main benefit came from an enhanced temperature measurement.
+
+Industrial applications of MPC in building climate control are still rare, which is due to the enormous modeling effort (being up to $70 \%$ of the control effort) [5, 94].
+
+Often, individual rooms were modeled as capacity resistor elements [82, 90, 91, 107]. Coupled resistancecapacitance models based on physical principles and pure empirical approaches are the two main types of modeling building energy systems for MPC [113].
+
+One way to approach the modeling effort and the related requirement of domain knowledge was to use black box modeling approaches, namely from the field of machine learning. Already Qin and Badgwell [99] noted that NNs were popular to model unknown non-linear behavior for MPC. Afram et al. [1] used NNs to model the individual subsystem of an energy management system, such as ventilation, heat storage, or a heat pump. The increase in model accuracy came at the cost of a non-linear optimization in the MPC. The system was tested on historic weather data—assuming an ideal weather forecast at every point as it is common practice, e.g. also in [36, 90, 91]. Unfortunately, no details on the MPC parameters were given in [1]. The objective was to optimize the cost of the energy consumption and not the amount of consumption itself. For this, the proposed neural network (NN)–based MPC shifted the energy consumption to the off-peak hours of the electricity price using the mass of the building as a storage. This worked excellent for moderate weather conditions but failed at extreme conditions as in midsummer when such passive thermal storage are not sufficient.
+
+The interlaced individual models in building climate control let to a complex optimization problem, where gradientbased algorithms may fail and heuristic-based global optimization were more desirable [82]. This increased the computational effort further and, thus, enlarged the sample time, which was seldom a problem due to the inertial nature of thermal behavior. If the number of rooms became large, the control problem was broken down into multiple decoupled MPCs achieving a near optimal solution at a lower computational cost [82]. Shaltout et al. [5] plead for a distributed network of MPC controllers cooperating with each other.
+
+Gunay et al. [43] claimed that shorter sample time favors temperature control $( T _ { s , s h o r t } = 1 0 m i r$ compared to $T _ { s , l o n g } \ = \ 1 h$ , both $N _ { 2 } ~ = ~ 6$ ) since the model accuracy usually deteriorates with the predicted time. Furthermore, long horizons may be torpedoed by stochastic disturbances such as the occupancy behavior. They claimed that a short prediction horizon of $T _ { N _ { 2 } } = 6 h$ would have even eliminated the need for accurate weather forecasts and make the MPC more reactive. Yu et al. [141] supported the finding that shorter horizons enabled for a more accurate tracking of a given temperature reference. In contrast, [91] argued that $T _ { N _ { 2 } } ~ = ~ 2 4 h$ should be used as a prediction horizon for heating, ventilation and air conditioning (HVAC) systems.
+
+Park and Nagy [94] identified MPC as recent trend in heating, ventilation and air conditioning (HVAC) control through mining the keywords of publications and predict that it will spread towards the control of smart grids. Another recent review on MPC for heating, ventilation and air conditioning (HVAC) systems [113] stressed that it is importance will increase in step with the transformation in power generation towards renewable sources and its higher variability. And in fact, the increasing pressure to integrate flexible sources and sinks into power grids (introduced by renewable energy plants and PEVs) called for advanced control methods, e.g. [126].
+
+In particular, the ability to include stochastic models and, thus, modeling uncertainty explicitly was considered a unique feature especially in the field of energy management [11]. Oldewurtel et al. [91] formulated the MPC problem as a probability problem considering the uncertainty of weather forecast. Instead of using weather forecasts, Morrison et al. [86] learned the day-to-day changes in solar radiation due to seasonal trends. The algorithm learned the behavior of humans in terms of hot water demand over days and weeks, while the MPC implements this learned reference on a lower-level $( T _ { N _ { 2 } } ~ = ~ 1 2 h )$ ). In a simulation study, they mimicked four weeks from midsummer to midwinter for the considered thermal-storage-tank system.
+
+Also in the field of renewable energies, Dickler et al. [27] applied a time-variant MPC for load alleviation and power leveling of wind turbines, where the model for the mechanical demand on the turbine was linearized at every control step for the current prediction and control horizon. The wind speed as one major load on the mechanical structure was handled by incorporating wind speed predictions. Sun et al. [125] used MPC to smooth the effect of fluctuations in wind speed for wind turbines on resulting frequency of the power generation. The idea was to consider both, the dynamics of the turbine and of the wind itself, in a linearized MPC. Shaltout et al. [114] picked up the same idea coupling the wind turbine with an energy storage system. Targeting multiple objectives, some with non-technical motivation, they formulated a so-called economic MPC. Adding fluctuating energy consumers to such a system, [126] simulated a (connected) micro grid with an wind power supplier and 100 PEVs. The objective was to minimize the overall operation costs: maximizing the consumption of wind energy and minimizing the exchange to the main grid, i.e. balancing the energy consumption over consumption and production peaks. PEVs could be used as sources or sinks as long as they were fully charged at the end of a working day. The energy demand of the PEVs was modeled as a truncated GAUSSIAN model; the supply of a wind turbine in an auto-regressive integrated moving average model (ARIMA). They proposed a two-layer MPC where the top layer balanced the overall power demand aggregating the PEVs to a single value, while the underlying MPC handled the energy distribution to the individual PEVs. The top layer optimized the cost of the energy and the risk, which was determined through a MONTE CARLO simulation and stochastic models. A simulation showed that the costs was be reduced by more than $30 \%$ compared to an immediate maximum charge strategy, in which the batteries were charged to full capacity as soon as it was connected to the grid. This may exacerbate the energy imbalance of the micro grid at peak hours. Schmitt et al.
+
+[109] optimized energy management for hybrid electric vehicles by establishing also a two-layer MPC. On the higher level non-linear MPC, the driving strategy including a rule-based gear selection was optimized, and the control and actuation of the physical system were realized on the faster lower level linear MPC.
+
+In the advent of the electrification of the mobility, MPC experiences a new blossom, e.g. in balancing the fuel consumption of a hybrid-electric vehicle taking also the individual driving behavior into account [61], or in healthaware battery charging [147].
+
+Again, the mega trend of energy transition and energy efficiency will lead to an increasing demand of intelligent strategies for energy balancing in (micro) grids and for building energy management systems. This in turn will call for more applications of advanced control strategies, especially MPC [74, 113]. The field has developed from the control of pure heating, ventilation and air conditioning (HVAC) systems to entire consumer-producer systems (or grids). The complexity of the models represent this evolution, Table 3.
+
+# 6.4 Manufacturing
+
+Manufacturing is a comparably new field for MPC and can be considered representative for a new development: MPC does not substitute existing controllers anymore but exploits new control tasks.
+
+Table 3 Overview of the tuning parameters of MPC in building climate and energy   
+
+<html><body><table><tr><td>Reference</td><td>Ts</td><td>N2</td><td>Nu</td><td>sim/exp</td><td>MPC</td></tr><tr><td>[90]</td><td>1h</td><td>24</td><td>24</td><td>sim</td><td>N</td></tr><tr><td>[69]</td><td>1h</td><td>24</td><td>(24)</td><td>exp</td><td>N</td></tr><tr><td>[91]</td><td>1h</td><td>24</td><td>24</td><td>sim</td><td>N</td></tr><tr><td>[43]</td><td>10 min,1 h</td><td>6</td><td>？</td><td>sim</td><td>L</td></tr><tr><td>[36]</td><td>1h</td><td>8</td><td>(8)</td><td>sim</td><td>N</td></tr><tr><td>[1]</td><td>100 ms</td><td>10</td><td>5</td><td>sim</td><td>L</td></tr><tr><td>[141]</td><td>15 min</td><td>(60)</td><td>(60)</td><td>exp</td><td>L</td></tr><tr><td>[54]</td><td>30 s</td><td>？</td><td>？</td><td>exp</td><td>L</td></tr><tr><td>[126]</td><td>5 min</td><td>？</td><td>？</td><td>sim</td><td>L</td></tr><tr><td>[147]</td><td>1s</td><td>10</td><td>？</td><td>exp</td><td>L</td></tr><tr><td>[139]</td><td>1s</td><td>20</td><td>5</td><td>exp</td><td>N</td></tr><tr><td>[125]</td><td>100 ms</td><td>3</td><td>1</td><td>sim</td><td>L</td></tr><tr><td>[27]</td><td>100 ms</td><td>40</td><td>8</td><td>sim</td><td>L</td></tr><tr><td>[114]</td><td>200 ms</td><td>50</td><td>50</td><td>sim</td><td>L</td></tr><tr><td>[109]</td><td>40 ms,1 s</td><td>5</td><td>5</td><td>sim</td><td>L+N</td></tr></table></body></html>
+
+sim simulation, exp experiment, $L$ linear, $N$ non-linear, () deduced numbers, ? unknown parameter
+
+We want to emphasize the field of manufacturing in general and cutting technology in particular, where several papers already showed the potential benefit of advanced control, e.g. on a conceptual basis [28].
+
+Nevertheless first, fixed-gain controllers for the position control loop of machining centers were substituted to achieve higher precision [122, 123]. Compensating the dynamics in high-precision milling with MPC is still an active field of research, e.g. [73]. Nonetheless, the application evolved towards introducing additional highlevel control with MPC. The control turned into process control rather than implementing machine tool settings, creating before unseen benefit. Mehta and Mears [79] described a concept for controlling the deflection of slender bars in turning. And Zhang et al. [142] examined MPC to avoid chatter—an undesired resonance phenomenon— in milling. The MPC used a linearized oscillation model assuming that mass, damping, and stiffness were given. The controller manipulated an external force actuator at the tool holder. In simulation, the system enlarged the chatter-free region by $60 \%$ .
+
+The first constrained MPC for force control in milling was implemented at the RWTH Aachen University, Germany [111, 112, 119, 120]. They manipulated the feed velocity in order to achieve a constant force in this highly dynamic process. Later, a black box model (support vector regression (SVR)) was added to consider non-linearities of machining centers [7, 8].
+
+Staying in the area of metal processing, Liu and Zhang [67] introduced MPC-based control to welding. Predicting the $N _ { 2 } = N _ { u } = 5$ next steps $T _ { s } = 0 . 5 s$ ), they controlled the penetration depth of the weld as a measure of quality. While the first approach relied on a dedicated vision system and a linearized model of the penetration depth, a newer approach dropped the vision system: [148]. The feedback loop was closed by identifying a model online, which described the relation to the penetration depth. This was a similar set-up as for the milling process above. The approaches demonstrated the control of system variables that were hard to impossible to control without MPC.
+
+Wehr et al. [133] applied a linear MPC to control the gap during precision cold rolling of thin and narrow strips. The structure of the given process is anatomically overactuated by the existence of two redundant actuators for gap control. The overactuation and computational effort of the MPC are tackled at the same time by the introduction of a single timevarying optimization variable, which exploits the different availability of the actuators during the process.
+
+A different field of production technology addressed Wu et al. [135], who optimized the air-jet to insert the weft in weaving. This is the key to reduce the energy consumption (in terms of compressed air) of weaving machines.
+
+And for injection molding of plastics, Reiter et al. [103] (conceptual) and later Stemmler et al. [121] built a MPC controlling the pressure within the mold. The idea was to obtain constant weight of the product as a quality criterion. It was standard to control the process with separate controllers for the different phases (injection and packing phases), while MPC was able to handle both phases and optimizing the transition (which was originally a switch of the controller) [121]. The contribution to a higher usability of the MPC was the main driver in this work.
+
+A bit more general, the field of “production” adds automation and handling systems to the scope. These are often graph or state-based modeled, e.g. by Petri Nets as Cataldo et al. [20] did with a palette transportation and processing system. Using an MPC, they enabled the system to adapt to faults on the transportation line such as a blocked section. Automation applications with discrete states present mixed-integer optimization problems. They require dedicated solver, which often are heuristic-based and come with a larger computational burden than gradientbased optimizers.
+
+Table 4 provides a quick overview on the chosen parameters. The sampling times are quite low with rather large prediction horizons compared to the early works on power electronics.
+
+# 6.5 Further applications
+
+Apart from these main movements, the range of applications in engineering is immense. From balancing walking robots [134], hanging crane loads [110], and cruise control for heavy duty trucks [62, 140], to optimizing buffering and quality in video streaming [138]. Even for path tracking of underwater robots, MPC was applied [116]. In almost all applications, MPC outperforms classic controllers.
+
+Table 4 Overview of the tuning parameters of MPC in manufacturing   
+
+<html><body><table><tr><td>Reference</td><td>Ts</td><td>N2</td><td>Nu</td><td>sim/exp</td><td>MPC</td></tr><tr><td>[122, 123]</td><td>100 ms</td><td>50</td><td>4</td><td>exp</td><td>L</td></tr><tr><td>[119]</td><td>20 ms</td><td>12</td><td>12</td><td>exp</td><td>L</td></tr><tr><td>[120]</td><td>10 ms</td><td>13</td><td>13</td><td>exp</td><td>L</td></tr><tr><td>[67]</td><td>500 ms</td><td>5</td><td>5</td><td>exp</td><td>L</td></tr><tr><td>[103]</td><td>8 ms</td><td>25</td><td>1</td><td>sim</td><td>L</td></tr><tr><td>[135]</td><td>1 ms</td><td>25*</td><td>2</td><td>sim</td><td>L</td></tr><tr><td>[121]</td><td>8 ms</td><td>12</td><td>3</td><td>exp</td><td>L</td></tr><tr><td>[20]</td><td>？</td><td>7</td><td>2</td><td>sim</td><td>N</td></tr><tr><td>[8]</td><td>20 ms</td><td>(13)</td><td>(13)</td><td>exp</td><td>L</td></tr><tr><td>[133]</td><td>1 ms</td><td>8</td><td>6/1</td><td>exp</td><td>L</td></tr><tr><td>[148]</td><td>？</td><td>8</td><td>8</td><td>exp</td><td>L</td></tr><tr><td>[73]</td><td>976 ms</td><td>2</td><td>(1)</td><td>exp</td><td>L</td></tr><tr><td>[111]</td><td>20 ms</td><td>10</td><td>10</td><td>exp</td><td>L</td></tr></table></body></html>
+
+sim simulation, exp experiment, $L$ linear, $N$ non-linear, () deduced numbers, ? unknown parameter This work uses a lower prediction horizon: $N _ { 1 } = 5$
+
+In particular, robotics is an emerging field of applications of MPC, e.g. [47, 88, 134]. While humanoid robots are a special case [134], industrial robots are ubiquitous in the shop floors today. The success of light-weight, economic, and collaborating robots has contributed to a significant increase of MPC related works in this field. Nubert et al. [88] improved the tracking robustness in general with a robust MPC. While [47] made use of the force feedback of a lightweight robot to polish the free-form surface of a metal workpiece. The MPC maintained a given pressure on a varying area while moving over the surface.
+
+With the upcoming of new concepts of how vehicles are powered was accompanied with new applications of control strategies and applications of MPC. Be it traction control of in-wheel electric motors [? ], cruise control [61, 62], or path planning for autonomous driving [48]. The focus of advanced cruise control is yet on larger commercial vehicles, such as (hybrid) electric buses [61, 137], due to its faster return on invest. It seems that the electrification of the power train spread electrical-engineering know-how to the development cycle of vehicles and with it, control engineering expertise.
+
+# 6.6 Notes
+
+While many researchers show an extraordinary meticulousness when describing the models they have used, some miss to provide basic information on MPC tuning. We want to emphasize that at least the sample time $T _ { s }$ and all horizons (lower prediction horizon $N _ { 1 }$ , upper prediction horizon $N _ { 2 }$ , and the control horizon $N _ { u }$ ) should be listed, as Table 1 to Table 4 demonstrate.
+
+Ideally, also the cost function should be provided including the weights of the slack variables $\pmb { \xi }$ . With the horizons given, applications can be compared and and the computational effort can be estimated. The exact cost function is required to reproduce the results ensuring good scientific practice.
+
+# 7 Controller design and tuning
+
+The initial hurdle to use MPC is relatively small—provided you have an adequate model describing the process in question. The effort is shifted from controller design towards modeling [35, 104, 105]. Nonetheless, the MPC offers an enormous flexibility regarding its design and tuning [37]. The most significant effect have:
+
+the model, the cost function,
+
+the constraints (what is constrained and how it is: bound, inequality, or non-linear constraints), and the choice of the solver itself.
+
+The model is the essence of a MPC. As [101] put it: “models are not perfect forecasters, and feedback can overcome some effects of poor models, but starting with a poor process model is akin to driving a car at night without headlights; the feedback may be a bit late to be truly effective”.
+
+Both, theory and commercial application software favor linear models or a linear MPC. To apply linear control even to non-linear systems successive lineraization can be used, e.g. [6, 8, 63, 80, 97, 147], or model switching, e.g. [95]. The idea is to take advantage of a linear optimization, i.e. linear MPC, with a comparably low computational burden and a non-linear prediction.
+
+Few applications use non-linear MPC meeting the fact that often the available models are non-linear. However, not all check stability. Others focus explicitly on the stability aspect in their applications, e.g. [116]. In particular with the popularity of machine learning model, non-linear MPC applications increase. A sometimes ignored drawback of non-linear MPC is the larger computation of non-linear optimization. However, there was a new computation scheme introduced recently: RTI. Gros et al. [41] summarizes this approach presenting linear MPC as a special case of it. The main idea is as simple as it is charming, making use of the previous solution. At time step $\pmb { k }$ , the controller calculates a solution for time steps $k + 1$ to $\pmb { k } + N _ { u }$ . A good optimization given, the solution for time step $k + 2$ presents a rationally good starting point for the next optimization at time step $k + 1$ . Thus, one can limit the number of iterations of each optimization assuming that the next optimizations continue improving the solution of the trajectory of the manipulation variable. “The RTI approach consists in performing the NEWTON steps always using the latest information on the system evolution” [41]. This idea of “warm starting” relies on a sufficiently high sampling frequency to ensure only small changes between iterations. Because the RTI scheme implements one single full NEWTON step per time step, it generally works better if the non-linearity between time steps is mild and if the prediction horizon is longer.
+
+Controlling large multiple input multiple output (MIMO) systems with a single MPC may be difficult [32], that is why cascaded or hierarchical MPC structures are some times suggested, e.g. a two-layer MPC [112, 126] running at different sample rates.
+
+Slack variables soften constraints moving it to the cost function where the amount of its violation is penalized. This generates the additional tuning factor $W _ { \xi }$ , which is a weight matrix ensuring feasibility by softening constraints on the model output (and with this, on the reaction of the system).
+
+It is usually an identity matrix, whose entries are several orders higher than the weight matrix of the control error $W _ { w }$ .
+
+A trade-off between accurate tracking of the reference and smooth control behavior can be performed by considering the change of the manipulated variable in the cost function:
+
+$$
+\begin{array} { l } { \displaystyle \operatorname* { m i n } _ { u , \xi } \sum _ { i = N _ { 1 } } ^ { N _ { 2 } } \| r ( k + i | k ) - y ( k + i | k ) \| _ { W _ { w } } + } \\ { \displaystyle } \\ { \displaystyle \sum _ { j = 1 } ^ { N _ { u } - 1 } \| \varDelta u ( k + j | k ) \| _ { W _ { u } } + } \\ { \displaystyle \sum _ { i = N _ { 1 } } ^ { N _ { 2 } } \| \xi ( k + i | k ) \| _ { W _ { \xi } } . } \end{array}
+$$
+
+The same constraints apply as before in Eq. 5. The cost function minimizes the deviation from the reference $r$ over the prediction horizon $N _ { 2 }$ . It additionally considers the change in the manipulated variable $\varDelta { \pmb u } _ { k } = { \pmb u } _ { k } - { \pmb u } _ { k - 1 }$ . The last term includes the slack variables $\pmb { \xi }$ , which quantify the violation of output constraints. It must be tuned manually until the controller reflects the desired behavior. To the experience of the authors, a good starting point lies within $W _ { u } = ( 0 . 0 1 I , 1 I )$ , with the lower values let the MPC use its potential unhindered at the exchange of more (usually small) violations of the boundaries.
+
+Typical solvers are based on linear programming (LP) or quadratic programming (QP) [26]. If one uses the commercial tools, i.e. from the popular program MATLAB by THE MATHWORKS, the choice of an optimization algorithm is not a question. But, for deeper dives into the design, a good option for a solver is quadratic programming online active set strategy (qpOASIS). It is an open-source optimization algorithm for linear problems, which has “several theoretical features that make it particularly suited for model predictive control (MPC) applications” as the project stated [30]. The choice of the solver influences the demand of computational resources.
+
+Besides those major design building blocks, the MPC exhibits a whole slew of tuning parameters: the horizons $( N _ { 1 } , N _ { 2 } , N _ { u } )$ , the weights in the cost function, Eq. 11, and the time step or sampling time $T _ { s }$ . It is unique for every case but this review can provide tips and best practices for the other tuning parameters.
+
+The horizons are crucial of the system’s performance and must be determined for every case. The prediction horizon $N _ { 2 }$ must be long enough to capture the effect of a change of the manipulated variable $\pmb { u }$ . In this way the minimum length of the manipulation horizon $N _ { u }$ can be estimated by
+
+$$
+N _ { u } = N _ { 2 } - \left\lfloor { \frac { T _ { d } } { T _ { s } } } \right\rfloor .
+$$
+
+To reduce the complexity of algorithmic tuning, [118] suggested to neglect the difference of the prediction and the manipulation horizon: $N _ { 2 } = N _ { u }$ . The effect on computation is small if the time delay of the system is small in terms of multiples of the sampling time.
+
+The lower prediction horizon describes the time delay of the system. It is best practice to consider this in the model of the system and, therefore, setting $N _ { 1 } = 1$ . This considers that the manipulated variable is not implemented instantly, which would make the exact moment indeterministic as it depends on the time the MPC requires for solving the optimization problem. Instead, the obtained optimal command $\pmb { u }$ is implemented at the next time step. These considerations reduce the problem of finding suitable prediction horizons to the problem of determining the necessary prediction horizon $N _ { 2 }$ . Its choice can be estimated using the system model by simulating all possible step changes in the manipulated variable(s). If the combination that has the longest effect on the control variable is known, it is sufficient to simulate this.
+
+# 8 Computation
+
+It does not help to talk about MPC, i.e. repeatedly solving an optimization problem online, without talking about its computational effort. In the control of power electronics, the prediction horizon was often limited to $N _ { 2 } ~ = ~ 1$ due to tight time requirements [38]. Nevertheless, there are more sophisticated strategies to reduce computation than wrecking prediction. Morari [84] argued that computational effort was irrelevant based on the computing power in 1994. This is remarkable from today’s perspective: although computing power increased exponentially, Fig. 6, at the same time control intervals have shrunken and thus computation is still an issue.
+
+MOORE’s law states that the number of transistors on a microprocessor doubles roughly every two years [132]. That usually implies that computational performance doubles too – and prices dropped in sync, Fig. 6. This comfortable development may not continue forever; in fact, specialpurpose chips are on the advance (think of low energy CPUs that power smartphones) letting the microprocessor landscape diverge. The tremendous success of machine learning techniques and the increasing parallelization in software were paved by the replacement of CPUs for GPU chips. At the same time, the clock speed had been limited because of the heat dissipation in the resistors. To still keep up with MOORE’s law, multiple cores were integrated on the same chip from the early 2000s on. With this in mind, strategies to reduce the computational load become very well important again. With increasing computational resources, more demanding systems were controlled that were not even imaginable before.
+
+![](images/7bd4806ef1688d59a2cd1bc4ff284f8ddc169b9e6f09f8a540119f195122c4d3.jpg)  
+Fig. 6 Overview of the evolution of the computation power (data taken from [49, 132])
+
+# 8.1 Explicit MPC
+
+In the year 2000, [14] still claimed that MPC was only applicable to slow or small systems due to the computational effort that solving an optimization problem imposes. Parallel to the increasing computational power, many dedicated approaches have been introduced bringing MPC towards more efficiency. As an intermezzo hybrid MPC or explicit MPC approaches popped up [13]. They combine an offline solved optimization problem with online control. The optimization problem—and thereby the control law—is solved for a multitude of possible situations and stored in a look-up table. This shifts the task of computation to a non-time-critical offline calculation. Essentially, MPC in this was becomes an online gain-scheduling algorithm. The advantage is that closed-loop control can be performed at higher rates which, in some cases, made closed-loop control feasible in the first place and, in other cases, improved the control behavior due to quicker feedback.
+
+The major drawback is the increasing computational effort solving the problem for all possible situations in conjunction with the increasing memory demand. It lacks of flexibility regarding unexpected disturbances and of the opportunity to adjust the process model.
+
+Explicit MPC increases the overall computation because every possible state needs to be calculated a priori . This might be the reason why it emerged from the control of power converters with simple (mostly binary) problems, short horizons, and almost no time for calculation [130]. For complex systems, the advantage at execution is somewhat diminished if searching the a priori solved result takes long [122]. The solution space scales exponentially with the problem size making look-up-table-approaches inefficient – this is sometimes dubbed “curse of dimensionality” [102].
+
+One way to reduce the general computational effort is to approximate the solution-space by a non-linear function. Recent studies suggested to use NNs for this [64, 143]. This sped up the required online computation by a factor of 65–100 in [143]. Approximating the solution space by a function let the MPC work with near optimal solutions but shifts the computational burden may allow to decrease the online computation time. [143] built a second model to quantify the approximation error at every point in the solution space. The charm of an approximation through machine learning is that the training can be flexibly stopped if a defined accuracy is reached. Hertneck et al. [45] took this thought focusing on accurate learning of the solution space by the neural network (NN). They quantified the probability of a wrong approximation. In this way, they were able to adjust and extend the training until it reached the desired quality. The procedure was demonstrated on a simple numerical example reducing the computation time by a factor of 200—at the cost of a training effort of 20 days. Only recently the idea was tested on an industrial robot as real system [88]. The to-be-approximated MPC was designed for robust control with regard to the output of the MPC. In this way, measurement noise—or an inaccurate approximation of the solution space through the neural network (NN)—did not affect the stability of the to-becontrolled system.
+
+Maddalena et al. [71] generalized the idea proposing a neural network (NN) with two linear layers and a parametric quadratic program layer in between to learn the control law of any linear MPC with A quadratic cost function. They showed that the resulting explicit MPC was still closed-loop stable in the sense of LYAPUNOV by using out-of-the-box the certification technique proposed by [51]. The technique was applicable because the neural network (NN) structure essentially presented a linear mapping with polynomial inequalities. In fact, [102] concluded that NNs—in particular with rectified linear units (ReLUs)— present a continuous piece-wise linear mapping ideal for approximating large solution spaces of explicit MPC policies.
+
+# 8.2 Move blocking
+
+Move blocking strategy for MPC (in sense of input blocking as its most common formulation) is a scheme, where the degree of freedom for the optimization is reduced by trimming the number of calculated control outputs. Thereby, the control output is held constant at defined steps over the control horizon. In this way, the computational burden decreases because the control output does not have to be calculated at every time step over the control horizon anymore.
+
+Overall, the result of move blocking strongly depends on the choice of blocked time steps. One conceivable approach is to block the later time steps to obtain a higher degree of freedom at the beginning of the control horizon. Such an approach is appealing for uncertain systems, where the predicted system behavior is more trusted at early time steps. Nevertheless, one has to be aware of the aforementioned drawback. A more sophisticated, but also more computationally expensive, approach is to optimize the choice of blocked time steps as a mixed-integer problem [115].
+
+One major drawback of the strategy is that the continuity of the optimization for a receding horizon can no longer be ensured. This is due to the shift of fixed (or blocked) time steps with the receding horizon between iterations. Therefore, the degree of freedom at a certain point in time in the future cannot be guaranteed at the following iteration of the optimization. In the worst case, neither the satisfaction of constraints for the optimization, nor the controller stability can be met. One way to overcome this is to adapt the fixed time steps, such that the degree of freedom is defined at the same time [16].
+
+# 9 Conclusion
+
+Popularity of MPC “comes in great part from the fact that a suitable model being given, the controller can be easily implemented with a direct physical understanding of the parameters to be tuned and easy constraints handling” [104]. With the great advances in microprocessors and the omnipresent availability of models, this is more true than ever. One key characteristic of MPC is the implicit determination of the control law by solving the constrained optimization problem online. The incorporation of physical constraints in the optimization problem shifts the effort of designing a controller towards modeling the to-becontrolled system [35, 104, 105].
+
+The hurdle to overcome for a lasting impact of MPC on industry is the complexity of modeling and algorithmic tuning. In most cases, the potential benefit is not worth the effort of building up expert knowledge in modeling, optimization, and control theory.
+
+Modeling is often the most time consuming activity [44]. As the age of microprocessors removed computational resources as the largest obstacle and paved the way for an enduring success of MPC, the second era may be herald by the use of data-driven modeling lowering the barriers even more. Machine learning enables an easy description of complex systems lowering the hurdle of applying MPC to new processes.
+
+For applications first the extreme have been covered: large and complex multiple input multiple output (MIMO) systems with long sample times (petrochemical industry). Then, almost as a counter movement, fast systems with short sample times and often an explicit formulations were developed (power converters). These days, the craziness has settled leaving the field to reasonable sample times. Although computational power has increased tremendously, even today, an efficient calculation should always be the dictum but requires expert knowledge in programming hindering a plug&play usage. Forbes et al. [32] concluded that a higher usability of existing techniques is required by industry rather than new MPC algorithm. Nowadays, it is almost as if the focus has shifted from theory to application letting both advance in conjunction. The theory becomes application-driven again—as it was in its beginnings.
+
+We are convinced that the global mega trend of decarbonization will further boost MPC applications in electronics, due to the expansion of electrification as well as the constantly pressing demand for high efficiency of electric components. Model-based predictive control (MPC) can contribute to efficiency in many fields, e.g. in climate control systems (precisely heating, ventilation and air conditioning (HVAC)) They deal with sluggish systems and comparably precise forecasting models, e.g. for room occupations or for the weather, what makes MPC predestined for them.
+
+The buds of the new trends and the thick trunks of the established disciplines suggest, to our eyes, that one step way from an exponential increase in the number of MPC applications.
+
+Model-based predictive control (MPC) enables controlling high-level objectives rather than machine tool set points. This review shall encourage domain experts to apply this intelligent control method to their fields seeding the next level of manufacturing.
+
+# References
+
+1. Afram A, Janabi-Sharifi F, Fung AS, Raahemifar K (2017) Artificial neural network (ann) based model predictive control (mpc) and optimization of hvac systems: a state of the art review and case study of a residential hvac system. Energy and Buildings 141:96–113, https://doi.org/10.1016/j.enbuild.2017.02.012   
+2. Akter F, Alam KS, Akter MP (2018) Simplified model predictive control of four-leg inverters for stand-alone power systems. In: 2018 10th International Conference on Electrical and Computer Engineering (ICECE), IEEE, Dhaka, Bangladesh, pp 261–264, https://doi.org/10.1109/ICECE.2018.8636741. https://ieeexplore.ieee.org/document/8636741/   
+3. Allgower F, Zheng A (2000) Nonlinear model predictive control. ¨ Birkhauser Basel, Basel, ¨ https://doi.org/10.1007/978-3-0348- 8407-5   
+4. Ang KH, Chong G, Li Y (2005) Pid control system analysis, design, and technology. IEEE Trans Control Sys Technol 13(4):559–576, https://doi.org/10.1109/tcst.2005.847331   
+5. Atam E (2016) New paths toward energy-efficient buildings: a multiaspect discussion of advanced model-based control. IEEE Ind Electron Mag 10(4):50–66, https://doi.org/10.1109/MIE.201 6.2615127   
+6. Ławrynczuk M (2007) A family of model predictive control ´ algorithms with artificial neural networks. International Journal of Applied Mathematics and Computer Science 17(2):217– 232, https://doi.org/10.2478/v10006-007-0020-5. https://content. sciendo.com/doi/10.2478/v10006-007-0020-5   
+7. Ay M, Stemmler S, Abel D, Schwenzer M, Klocke F (2018) System identification of a cnc machining center with support vector machines. In: 2018 26th Mediterranean Conference on Control and Automation (MED), IEEE, Zadar, Croatia, pp 1–9, https://doi.org/10.1109/MED.2018.8442437   
+8. Ay M, Stemmler S, Schwenzer M, Abel D, Bergs T (2019) Model predictive control in milling based on support vector machines. IFAC-PapersOnLine 52(13):1797–1802, https://doi.org/10.1016/j.ifacol.2019.11.462   
+9. Barancelli Schwedersky B, Costa Flesch RC, Sirino Dangui HA, Arrigoni Iervolino L (2018) Practical nonlinear model predictive control using an echo state network model. In: 2018 International Joint Conference on Neural Networks (IJCNN), IEEE, Rio de Janeiro, pp 1–8, https://doi.org/10.1109/IJCNN.2018.8489446, https://ieeexplore.ieee.org/document/8489446/   
+10. Barisa T, Iles S, Sumina D, Matusko J (2018) Model predictive direct current control of a permanent magnet synchronous generator based on flexible Lyapunov function Ccnsidering converter dead time. IEEE Transactions on Industry Applications 54(3):2899–2912, https://doi.org/10.1109/TIA.2018.2801838, https://ieeexplore.ieee.org/document/8281032/   
+11. Beaudin M, Zareipour H (2015) Home energy management systems: a review of modelling and complexity. Renew and Sustain Energy Rev 45:318–335, https://doi.org/10.1016/j.rser.2015. 01.046   
+12. Bemporad A (2006) Model predictive control design: new trends and tools. Proceedings of the 45th IEEE Conference on Decision and Control pp 6678–6683, https://doi.org/10.1109/CDC.2006. 377490   
+13. Bemporad A, Morari M (1999) Robust model predictive control: a survey. In: Garulli A, Tesi A (eds) Robustness in identification and control, Springer London, London, pp 207– 226, https://doi.org/10.1007/BFb0109870   
+14. Bemporad A, Morari M, Dua V, Pistikopoulos EN (2000) The explicit solution of model predictive control via multiparametric quadratic programming. Proc of the 2010 Am Control Conf 2:872–876 vol.2, https://doi.org/10.1109/ACC.2000.876624   
+15. Bolognani S, Peretti L, Zigliotto M (2009) Design and implementation of model predictive control for electrical motor drives. IEEE Trans Ind Electron 56(6):1925–1936, https://doi.org/10. 1109/TIE.2008.2007547   
+16. Cagienard R, Grieder P, Kerrigan EC, Morari M (2007) Move blocking strategies in receding horizon control. Journal of Process Control 17(6):563–570, https://doi.org/10.1016/j.jprocont. 2007.01.001   
+17. Camacho EF, Bordons C (2004) Model predictive control Advanced textbooks in control and signal processing. Springer, London and New York   
+18. Campo PJ, Morari M (1986) $\infty$ -norm formulation of model predictive control problems. Am Control Conf 1986:339–343   
+19. Campo PJ, Morari M (1987) Robust model predictive control. Am Control Conf 1987:1021–1026   
+20. Cataldo A, Morescalchi M, Scattolini R (2019) Fault-tolerant model predictive control of a de-manufacturing plant. The International Journal of Advanced Manufacturing Technology 104 (9-12):4803–4812, https://doi.org/10.1007/s00170-019-04335-4. http://link.springer.com/10.1007/s00170-019-04335-4   
+21. Chavan S, Birnale N, Deshpande AS (2018) Design and simulation of model predictive control for multivariable distillation column. In: 2018 3rd IEEE International Conference on Recent Trends in Electronics, Information & Communication Technology (RTEICT), IEEE, Bangalore, India, pp 764–768, https://doi.org/10.1109/RTEICT42901.2018.9012517, https://ieeexplore.ieee.org/document/9012517/   
+22. Clarke DW, Mohtadi C, Tuffs PS (1987a) Generalized predictive control—part i. the basic algorithm. Automatica 23(2):137–148, https://doi.org/10.1016/0005-1098(87)90087-2   
+23. Clarke DW, Mohtadi C, Tuffs PS (1987b) Generalized predictive control—part ii extensions and interpretations. Automatica 23(2):149–160, https://doi.org/10.1016/0005-1098(87)90088-4   
+24. Cutler CR, Ramaker BL (1980) Dynamic matrix control - a computer control algorithm. Jt Autom Control Conf 17:72   
+25. Cuzzola FA, Geromel JC, Morari M (2002) An improved approach for constrained robust model predictive control. Automatica 38(7):1183–1189, https://doi.org/10.1016/S0005-1098 (02)00012-2   
+26. Darby ML, Harmse M, Nikolaou M (2009) MPC: current practice and challenges. IFAC Proc Vol 42(11):86– 98, https://doi.org/10.3182/20090712-4-TR-2008.00014, https:// linkinghub.elsevier.com/retrieve/pii/S1474667015302573   
+27. Dickler S, Wiens M, Thonnissen F, Jassmann U, Abel D (2019) Requirements on super-short-term wind speed predictions for model predictive wind turbine control. 2019 18th European Control Conference (ECC), Naples, Italy pp 3346–3352, https://doi.org/10.23919/ECC.2019.8795826   
+28. Djurdjanovic D, Mears L, Niaki FA, Haq AU, Li L (2018) State of the art review on process, system, and operations control in modern manufacturing. J Manuf Sci Eng 140(061010), https://doi.org/10.1115/1.4038074   
+29. Dragicevic T (2018) Model predictive control of power converters for robust and fast pperation of AC microgrids. IEEE Transactions on Power Electronics 33(7):6304–6317, https://doi.org/10.1109/TPEL.2017.2744986. http://ieeexplore. ieee.org/document/8016597/   
+30. Ferreau HJ, Potschka A, Kirches C (2017) qpoasis   
+31. Fontes FA (2001) A general framework to design stabilizing nonlinear model predictive controllers. Systems & Control Letters 42(2):127–143, https://doi.org/10.1016/S0167-6911(00)00084-0   
+32. Forbes MG, Patwardhan RS, Hamadah H, Gopaluni RB (2015) Model predictive control in industry: challenges and opportunities. IFAC-PapersOnLine 48(8):531–538, https://doi.org/10. 1016/j.ifacol.2015.09.022   
+33. Froisy JB (2006) Model predictive control—building a bridge between theory and practice. Comp & Chem Eng 30(10– 12):1426–1435, https://doi.org/10.1016/j.compchemeng.2006. 05.044   
+34. Garcia CE, Morari M (1982) Internal model control. 1. a unifying review and some new results. Industrial & Engineering Chemistry Process Design and Development 21(2):308–323, https://doi.org/10.1021/i200017a016   
+35. Garc´ıa CE, Prett DM, Morari M (1989) Model predictive control: theory and practice—a survey. Automatica 25(3):335– 348, https://doi.org/10.1016/0005-1098(89)90002-2   
+36. Garnier A, Eynard J, Caussanel M, Grieu S (2015) Predictive control of multizone heating, ventilation and air-conditioning systems in non-residential buildings. Applied Soft Computing 37:847–862, https://doi.org/10.1016/j.asoc.2015.09.022   
+37. Garriga JL, Soroush M (2010) Model predictive control tuning methods: a review. Industrial & Engineering Chemistry Research 49(8):3505–3515, https://doi.org/10.1021/ie900323c   
+38. Geyer T, Papafotiou G, Morari M (2009) Model predictive direct torque control—part i: concept, algorithm, and analysis. IEEE Trans Ind Electron 56(6):1894–1905, https://doi.org/10.1109/ TIE.2008.2007030   
+39. Gilbert EG, Kolmanovsky I (1999) Fast reference governors for systems with state and control constraints and disturbance inputs. Int J of Robust and Nonlinear Control 9(15):1117– 1141, https://doi.org/10.1002/(SICI)1099-1239(19991230)9:15 <1117::AID-RNC447 $>$ 3.0.CO;2-I   
+40. Gong Z, Wu X, Dai P, Zhu R (2019) Modulated model predictive control for mmc-based active front-end rectifiers under unbalanced grid conditions. IEEE Trans Ind Electron 66(3):2398–2409, https://doi.org/10.1109/TIE.2018.2844836   
+41. Gros S, Zanon M, Quirynen R, Bemporad A, Diehl M (2020) From linear to nonlinear MPC: bridging the gap via the realtime iteration. International Journal of Control 93(1):62–80, https://doi.org/10.1080/00207179.2016.1222553. https://www. tandfonline.com/doi/full/10.1080/00207179.2016.1222553   
+42. Guicheng W, Jinjin M, Min Z, Zhansheng Z, Jinna L (2013) Model predictive control for fermentation process. In: 2013 25th Chinese Control and Decision Conference (CCDC), IEEE, Guiyang, China, pp 4445–4449, https://doi.org/10.1109/CCDC. 2013.6561735. http://ieeexplore.ieee.org/document/6561735/   
+43. Gunay HB, Bursill J, Huchuk B, O’Brien W, BeausoleilMorrison I (2014) Shortest-prediction-horizon model-based predictive control for individual offices. Build and Environ 82:408–419, https://doi.org/10.1016/j.buildenv.2014.09.011   
+44. Henson MA (1998) Nonlinear model predictive control: current status and future directions. Comp & Chem Eng 23(2):187–202, https://doi.org/10.1016/S0098-1354(98)00260-9   
+45. Hertneck M, Kohler J, Trimpe S, Allg ¨ ower F (2018) Learning ¨ an approximate model predictive controller with guarantees. IEEE Control Sys Letters 2(3):543–548, https://doi.org/10.1109/ LCSYS.2018.2843682   
+46. Hillerstrom G, Walgama K (1996) Repetitive control theory ¨ and applications - a survey. IFAC Proc Vol 29(1):1446–1451, https://doi.org/10.1016/s1474-6670(17)57870-2   
+47. Husmann S, Stemmler S, Hahnel S, Vogelgesang S, Abel D, ¨ Bergs T (2019) Model predictive force control in grinding based on a lightweight robot. IFAC-PapersOnLine 52(13):1779–1784, https://doi.org/10.1016/j.ifacol.2019.11.459   
+48. Ji J, Khajepour A, Melek WW, Huang Y (2017) Path planning and tracking for vehicle collision avoidance based on model predictive control with multiconstraints. IEEE Transactions on Vehicular Technology 66(2):952–964, https://doi.org/10.1109/ TVT.2016.2555853   
+49. Koh H, Magee CL (2006) A functional approach for studying technological progress: application to information technology. Technological Forecasting and Social Change 73(9):1061–1083, https://doi.org/10.1016/j.techfore.2006.06.001   
+50. Koller T, Berkenkamp F, Turchetta M, Krause A (2018) Learning-based Model Predictive Control for Safe Exploration. arXiv:1803.08287[cs]   
+51. Korda M, Jones CN (2017) Stability and performance verification of optimization-based controllers. Automatica 78:34–45, https://doi.org/10.1016/j.automatica.2016.12.008, https:// linkinghub.elsevier.com/retrieve/pii/S0005109816305003   
+52. Kouro S, Cortes P, Vargas R, Ammann U, Rodriguez J (2009) Model predictive control—a simple and powerful method to control power converters. IEEE Trans Ind Electron 56(6):1826– 1838, https://doi.org/10.1109/TIE.2008.2008349   
+53. Laughlin DL, Morari M (1987) Smith predictor design for robust performance. Am Control Conf, 1987 pp 637–642, https://doi.org/10.1080/00207178708933912   
+54. Lazic N, Lu T, Boutilier C, Ryu MK, Wong EJ, Roy B, Imwalle G (2018) Data center cooling using modelpredictive Control. In: Proceedings of the Thirty-second Conference on neural information processing systems (NeurIPS18), Montreal, QC, pp 3818–3827. https://papers.nips.cc/paper/ 7638-data-center-cooling-using-model-predictive-control   
+55. Le Roux JD, Olivier LE, Naidoo MA, Padhi R, Craig IK (2016) Throughput and product quality control for a grinding mill circuit using non-linear mpc. Journal of Process Control 42:35–50, https://doi.org/10.1016/j.jprocont.2016.04.007   
+56. Lee JH, Morari M, Garcia CE (1994) State-space interpretation of model predictive control. Automatica 30(4):707–717, https://doi.org/10.1016/0005-1098(94)90159-7   
+57. Lee KS, Lee JH (2000) Convergence of constrained modelbased predictive control for batch processes. IEEE Trans Autom Control 45(10):1928–1932, https://doi.org/10.1109/TAC.2000. 881002   
+58. Lee KS, Chin IS, Lee HJ, Lee JH (1999) Model predictive control technique combined with iterative learning for batch processes. AIChE Journal 45(10):2175–2187, https://doi.org/10.1002/aic. 690451016   
+59. Li D, Xi Y, Lu J, Gao F (2016a) Synthesis of real-time-feedbackbased 2d iterative learning control–model predictive control for constrained batch processes with unknown input nonlinearity. Industrial & Engineering Chemistry Research 55(51):13074– 13084, https://doi.org/10.1021/acs.iecr.6b03275   
+60. Li D, He S, Xi Y, Liu T, Gao F, Wang Y, Lu J (2020) Synthesis of ilc–mpc controller with data-driven approach for constrained batch processes. IEEE Trans Ind Electron 67(4):3116–3125, https://doi.org/10.1109/TIE.2019.2910034   
+61. Li L, You S, Yang C, Yan B, Song J, Chen Z (2016b) Driving-behavior-aware stochastic model predictive control for plug-in hybrid electric buses. Applied Energy 162:868–879, https://doi.org/10.1016/j.apenergy.2015.10.152   
+62. Li S, Li K, Rajamani R, Wang J (2011) Model predictive multiobjective vehicular adaptive cruise control. IEEE Trans Control Sys Technol 19(3):556–566, https://doi.org/10.1109/TCST.2010. 2049203   
+63. Li S, Jiang P, Han K (2019) RBF neural network based model predictive control algorithm and its application to a CSTR process. In: 2019 Chinese Control Conference (CCC), IEEE, Guangzhou, China, pp 2948–2952, https://doi.org/10.23919/ChiCC.2019.88 65797. https://ieeexplore.ieee.org/document/8865797/   
+64. Li Z, Deng J, Lu R, Xu Y, Bai J, Su CY (2016c) Trajectorytracking control of mobile robot systems incorporating neuraldynamic optimized model predictive approach. IEEE Transactions on Systems, Man, and Cybernetics: Systems 46(6):740–749, https://doi.org/10.1109/TSMC.2015.2465352   
+65. Linder A, Kennel R (2005) Model predictive control for electrical drives. 2005 IEEE 36th Power Electronics Specialists Conference pp 1793–1799, https://doi.org/10.1109/PESC.2005.1581 874   
+66. Liu C, Atkeson CG (2009) Standing balance control using a trajectory library. 2009 IEEE/RSJ International Conference on Intelligent Robots and Systems, St Louis, MO pp 3031–3036, https://doi.org/10.1109/IROS.2009.5354018   
+67. Liu YK, Zhang YM (2014) Model-based predictive control of weld penetration in gas tungsten arc welding. IEEE Trans Control Sys Technol 22(3):955–966, https://doi.org/10.1109/TCST. 2013.2266662   
+68. Luis CE, Vukosavljev M, Schoellig AP (2020) Online trajectory generation with distributed model predictive control for multirobot motion planning. IEEE Robotics and Autom Lett 5(2):604– 611, https://doi.org/10.1109/LRA.2020.2964159   
+69. Ma Y, Borrelli F, Hencey B, Coffey B, Bengea S, Haves P (2012) Model predictive control for the operation of building cooling systems. IEEE Trans Control Sys Technol 20(3):796– 803, https://doi.org/10.1109/TCST.2011.2124461   
+70. Maciejowski JM (2002) Predictive control: with constraints. Prentice Hall, Harlow   
+71. Maddalena E, da S Moraes C, Waltrich G, Jones C (2020) A neural network architecture to learn explicit MPC controllers from data. IFAC-PapersOnLine 53(2):11362–11367, https://doi.org/10.1016/j.ifacol.2020.12.546. https://linkinghub. elsevier.com/retrieve/pii/S2405896320308442   
+72. Magni L, Nicolao G, Magnani L, Scattolini R (2001) A stabilizing model-based predictive control algorithm for nonlinear systems. Automatica 37(9):1351–1362, https://doi.org/10.1016/ S0005-1098(01)00083-8   
+73. Margolis BWL, Farouki RT (2020) Inverse dynamics toolpath compensation for CNC machines based on model predictive control. The International Journal of Advanced Manufacturing Technology 109(7-8):2155–2172, https://doi.org/10.1007/s00170- 020-05719-7. http://link.springer.com/10.1007/s00170-020-057 19-7   
+74. Mariano-Hernandez D, Hern ´ andez-Callejo L, Zorita-Lamadrid ´ A, Duque-Perez O, Santos Garc ´ ´ıa F (2021) A review of strategies for building energy management system: Model predictive control, demand side management, optimization, and fault detect & diagnosis. Journal of Building Engineering 33:101692, https://doi.org/10.1016/j.jobe.2020.101692, https:// linkinghub.elsevier.com/retrieve/pii/S2352710220310627   
+75. Mayne D, Rawlings J (2001) Correction to “constrained model predictive control: stability and optimality”. Automatica 37(3):483, https://doi.org/10.1016/S0005-1098(00)00173-4   
+76. Mayne DQ (2014) Model predictive control: Recent developments and future promise. Automatica 50(12):2967–2986, https://doi.org/10.1016/j.automatica.2014.10.128   
+77. Mayne DQ, Rawlings JB, Rao CV, Scokaert P (2000) Constrained model predictive control: Stability and optimality. Automatica 36(6):789–814, https://doi.org/10.1016/S0005-1098(99) 00214-9   
+78. McKinnon CD, Schoellig AP (2019) Learn fast, forget slow: Safe predictive learning control for systems with unknown and changing dynamics performing repetitive tasks. IEEE Robotics and Autom Lett 4(2):2180–2187, https://doi.org/10.1109/LRA.201 9.2901638   
+79. Mehta P, Mears L (2011) Model based prediction and control of machining deflection error in turning slender bars. In: Proceedings of the ASME International Manufacturing Science and Engineering Conference–2011: presented at ASME 2011 International Manufacturing Science and Engineering Conference, June 13-17, 2011, Corvallis, Oregon, USA, Amer Soc Mechanical Engineers, Corvallis, Oregon, USA, vol 2, pp 263–271, https://doi.org/10.1115/MSEC2011-50154   
+80. Mendis P, Wickramasinghe C, Narayana M, Bayer C (2019) Adaptive model predictive control with successive linearization for distillate composition control in batch distillation. In: 2019 Moratuwa Engineering Research Conference (MERCon), IEEE, Moratuwa, Sri Lanka, pp 366–369, https://doi.org/10.1109/MER Con.2019.8818777, https://ieeexplore.ieee.org/document/88187 77/   
+81. Michalska H, Mayne DQ (1993) Robust receding horizon control of constrained nonlinear systems. IEEE Trans Autom Control 38(11):1623–1633, https://doi.org/10.1109/9.262032   
+82. Mirakhorli A, Dong B (2016) Occupancy behavior based model predictive control for building indoor climate—a critical review. Energy and Buildings 129:499–513, https://doi.org/10.1016/j. enbuild.2016.07.036   
+83. Mora A, Cardenas-Dobson R, Aguilera RP, Angulo A, Donoso F, Rodriguez J (2019) Computationally efficient cascaded optimal switching sequence MPC for grid-connected threeLevel NPC converters. IEEE Transactions on Power Electronics 34(12):12464–12475, https://doi.org/10.1109/TPEL.2019. 2906805. https://ieeexplore.ieee.org/document/8672506/   
+84. Morari M (1994) Model predictive control: multivariable control technique of choice in the 1990s? In: Clarke DW (ed) Advances in model-based predictive control, Oxford science publications, Oxford University Press, Oxford and New York, pp 22–37. http:// resolver.caltech.edu/CaltechCDSTR:1993.024   
+85. Morari M, Lee JH (1999) Model predictive control: past, present and future. Comp & Chem Eng 23(4–5):667–682, https://doi.org/10.1016/S0098-1354(98)00301-9   
+86. Morrison J, Nagamune R, Grebenyuk V (2020) An iterative learning approach to economic model predictive control for an integrated solar thermal system. IFAC-PapersOnLine 53(2):12777–12782, https://doi.org/10.1016/j.ifacol.2020.12.19 30. https://linkinghub.elsevier.com/retrieve/pii/S2405896320325 532   
+87. de Nicolao G, Magni L, Scattolini R (1996) On the robustness of receding-horizon control with terminal constraints. IEEE Trans Autom Control 41(3):451–453, https://doi.org/10.1109/9.486649   
+88. Nubert J, Kohler J, Berenz V, Allg ¨ ower F, Trimpe S (2020) ¨ Safe and fast tracking on a robot manipulator: Robust mpc and neural network control. IEEE Robotics and Autom Lett 5(2):3050–3057, https://doi.org/10.1109/LRA.2020.2975727   
+89. Nunez F, Langarica S, Diaz P, Torres M, Salas JC (2020) Neural network-based model predictive control of a paste thickener over an industrial Internet platform. IEEE Transactions on Industrial Informatics 16(4):2859–2867, https://doi.org/10.1109/ TII.2019.2953275. https://ieeexplore.ieee.org/document/889759 0/   
+90. Oldewurtel F, Parisio A, Jones CN, Morari M, Gyalistras D, Gwerder M, Stauch V, Lehmann B, Wirth K (2010) Energy efficient building climate control using stochastic model predictive control and weather predictions. Proc of the 2010 Am Control Conf pp 5100–5105, https://doi.org/10.1109/ACC.2010.5530680   
+91. Oldewurtel F, Parisio A, Jones CN, Gyalistras D, Gwerder M, Stauch V, Lehmann B, Morari M (2012) Use of model predictive control and weather forecasts for energy efficient building climate control. Energy and Buildings 45:15–27, https://doi.org/10.1016/j.enbuild.2011.09.022   
+92. Olivier LE, Craig IK (2016) Fault-tolerant nonlinear mpc using particle filtering. IFAC-PapersOnLine 49(7):177–182, https://doi.org/10.1016/j.ifacol.2016.07.242   
+93. Papafotiou G, Kley J, Papadopoulos KG, Bohren P, Morari M (2009) Model predictive direct torque control—part ii: implementation and experimental evaluation. IEEE Trans Ind Electron 56(6):1906–1915, https://doi.org/10.1109/TIE.2008.2007032   
+94. Park JY, Nagy Z (2018) Comprehensive analysis of the relationship between thermal comfort and building control research - a data-driven literature review. Renew and Sustain Energy Rev 82:2664–2679, https://doi.org/10.1016/j.rser.2017.09.102   
+95. Piche S, Sayyar-Rodsari B, Johnson D, Gerules M (2000) Nonlinear model predictive control using neural networks. IEEE Control Sys 20(3):53–62, https://doi.org/10.1109/37.845038   
+96. Prasad GM, Kedia V, Rao AS (2020) Multi-model predictive control (MMPC) for non-linear systems with time delay: an experimental investigation. In: 2020 First IEEE International Conference on Measurement, Instrumentation, Control and Automation (ICMICA), IEEE, Kurukshetra, India, pp 1– 5, https://doi.org/10.1109/ICMICA48462.2020.9242772. https:// ieeexplore.ieee.org/document/9242772/   
+97. Prett DM, Gillette RD (1980) Optimization and constrained multivariable control of a catalytic cracking unit. Jt Autom Control Conf 17:73–78, https://doi.org/10.1109/JACC.1980.4232010   
+98. Primbs JA, Nevistic V, Doyle JC (1999) Nonlinear opti- ´ mal control: a control lyapunov function and receding horizon perspective. Asian J of Control 1(1):14–24, https://doi.org/10.1111/j.1934-6093.1999.tb00002.x   
+99. Qin S, Badgwell TA (2003) A survey of industrial model predictive control technology. Control Eng Pract 11(7):733–764, https://doi.org/10.1016/S0967-0661(02)00186-7   
+100. Rao CV, Rawlings JB, Lee JH (2001) Constrained linear state estimation—a moving horizon approach. Automatica 37(10):1619– 1628, https://doi.org/10.1016/S0005-1098(01)00115-7   
+101. Rawlings JB (2000) Tutorial overview of model predictive control. IEEE Control Sys 20(3):38–52, https://doi.org/10.1109/37. 845037   
+102. Rawlings JB, Maravelias CT (2019) Bringing new technologies and approaches to the operation and control of chemical process systems. AIChE Journal 65(6), https://doi.org/10.1002/aic. 16615, https://onlinelibrary.wiley.com/doi/10.1002/aic.16615   
+103. Reiter M, Stemmler S, Hopmann C, Ressmann A, Abel D (2014) Model predictive control of cavity pressure in an injection moulding process. IFAC Proc Vol 47(3):4358–4363, https://doi.org/10.3182/20140824-6-ZA-1003.02505   
+104. Richalet J (1993) Industrial applications of model based predictive control. Automatica 29(5):1251–1274, https://doi.org/10. 1016/0005-1098(93)90049-Y   
+105. Richalet J, Rault A, Testud JL, Papon J (1978) Model predictive heuristic control. Automatica 14(5):413–428, https://doi.org/10. 1016/0005-1098(78)90001-8   
+106. Rouhani R, Mehra RK (1982) Model algorithmic control (mac); basic theoretical properties. Automatica 18(4):401–414, https://doi.org/10.1016/0005-1098(82)90069-3   
+107. Salakij S, Yu N, Paolucci S, Antsaklis P (2016) Model-based predictive control for building energy management. i: Energy modeling and optimal control. Energy and Buildings 133:345– 358, https://doi.org/10.1016/j.enbuild.2016.09.044   
+108. Salazar JL, Valdes-Gonzalez H, Vyhmesiter E, Cubillos F (2014) Model predictive control of semiautogenous mills (sag). Minerals Eng 64:92–96, https://doi.org/10.1016/j.mineng.2014.03.029   
+109. Schmitt L, Keller M, Albin T, Abel D (2020) Real-time nonlinear model predictive control for the energy management of hybrid electric vehicles in a hierarchical framework\*. 2020 Am Control Conf (ACC), Denver, CO, USA pp 1961–1967, https://doi.org/10.23919/ACC45564.2020.9147465   
+110. Schubert P, Stemmler S, Abel D (2019) Towards predictive anti-sway control of hanging loads: model-based controller design for a knuckle boom crane. In: 2019 18th European Control Conference (ECC), IEEE, Naples, Italy, pp 2276–2282, https://doi.org/10.23919/ECC.2019.8795871   
+111. Schwenzer M (2021) Closing the loop of model predictive force control in milling with ensemble Kalman filtering. PhD thesis RWTH Aachen University. Aachen, Germany   
+112. Schwenzer M, Adams O, Klocke F, Stemmler S, Abel D (2017) Model-based predictive force control in milling: determination of reference trajectory. Prod Eng 11(2):107–115, https://doi.org/10.1007/s11740-017-0721-z   
+113. Serale G, Fiorentini M, Capozzoli A, Bernardini D, Bemporad A (2018) Model Predictive Control (MPC) for Enhancing Building and HVAC System Energy Efficiency: Problem Formulation, Applications and Opportunities. Energies 11(3):631, https://doi.org/10.3390/en11030631. http://www.mdpi.com/ 1996-1073/11/3/631   
+114. Shaltout ML, Alhneaish MM, Metwalli SM (2020) An Economic Model Predictive Control Approach for Wind Power Smoothing and Tower Load Mitigation. Journal of Dynamic Systems, Measurement, and Control 142(6):061005, https://doi.org/10.1115/ 1.4046278. https://asmedigitalcollection.asme.org/dynamicsystems/article/doi/10.1115/1.4046278/1074358/An-Economic-Mo del-Predictive-Control-Approach-for   
+115. Shekhar RC, Manzie C (2015) Optimal move blocking strategies for model predictive control. Automatica 61:27–34, https://doi.org/10.1016/j.automatica.2015.07.030   
+116. Shen C, Shi Y, Buckham B (2018) Trajectory tracking control of an autonomous underwater vehicle using Lyapunov-based model predictive control. IEEE Transactions on Industrial Electronics 65(7):5796–5805, https://doi.org/10.1109/TIE.2017.2779442. http://ieeexplore.ieee.org/document/8126875/   
+117. Shin Y, Smith R, Hwang S (2020) Development of model predictive control system using an artificial neural network: a case study with a distillation column. Journal of Cleaner Production 277:124124, https://doi.org/10.1016/j.jclepro.2020.124 124. https://linkinghub.elsevier.com/retrieve/pii/S095965262034 169X   
+118. Stemmler S (2020) Intelligente regelungsstrategien als schl¨usseltechnologie selbstoptimierender fertigungssysteme. Dissertation, RWTH Aachen University, https://doi.org/10. 18154/RWTH-2020-02766   
+119. Stemmler S, Abel D, Adams O, Klocke F (2016) Model predictive feed rate control for a milling machine. IFAC-PapersOnLine 49(12):11–16, https://doi.org/10.1016/j.ifacol.2016.07.542   
+120. Stemmler S, Abel D, Schwenzer M, Adams O, Klocke F (2017) Model predictive control for force control in milling. IFACPapersOnLine 50(1):15871–15876, https://doi.org/10.1016/j.ifacol.2017.08.2336   
+121. Stemmler S, Ay M, Vukovic M, Abel D, Heinisch J, Hopmann C (2019) Cross-phase model-based predictive cavity pressure control in injection molding. In: 2019 IEEE Conf. Control Technol. Appl. (CCTA), IEEE, Hong Kong, China, pp 360–367, https://doi.org/10.1109/CCTA.2019.8920461   
+122. Stephens MA, Manzie C, Good MC (2011) Explicit model predictive control for reference tracking on an industrial machine tool. IFAC Proc Vol 44(1):14513–14518, https://doi.org/10.3182/ 20110828-6-IT-1002.00579   
+123. Stephens MA, Manzie C, Good MC (2013) Model predictive control for reference tracking on an industrial machine tool servo drive. IEEE Trans Ind Inform 9(2):808–816, https://doi.org/10.1109/TII.2012.2223222   
+124. Steyn CW, Sandrock C (2013) Benefits of optimisation and model predictive control on a fully autogenous mill with variable speed. Minerals Eng 53:113–123, https://doi.org/10.1016/j. mineng.2013.07.012   
+125. Sun X, Liao K, Yang J, He Z (2019) Model predictive control based load frequency control for power systems with wind turbine generators. In: 2019 IEEE Innovative Smart Grid Technologies - Asia (ISGT Asia), IEEE, Chengdu, China, pp 1387– 1392, https://doi.org/10.1109/ISGT-Asia.2019.8881147, https:// ieeexplore.ieee.org/document/8881147/   
+126. Tavakoli M, Shokridehaki F, Marzband M, Godina R, Pouresmaeil E (2018) A two stage hierarchical control approach for the optimal energy management in commercial building microgrids based on local wind power and pevs. Sustain Cities Soc 41:332–340, https://doi.org/10.1016/j.scs.2018.05.035   
+127. Vahidi A, Stefanopoulou A, Peng H (2006) Current management in a hybrid fuel cell power system: A model-predictive control approach. IEEE Trans Control Sys Technol 14(6):1047–1057, https://doi.org/10.1109/TCST.2006.880199   
+128. Vallon C, Borrelli F (2020) Task decomposition for iterative learning model predictive control. 2020 Am Control Conf (ACC), Denver, CO, USA pp 2024–2029, https://doi.org/10. 23919/ACC45564.2020.9147625   
+129. Vazquez S, Leon JI, Franquelo LG, Rodriguez J, Young HA, Marquez A, Zanchetta P (2014) Model predictive control: A review of its applications in power electronics. IEEE Ind Electron Mag 8(1):16–31, https://doi.org/10.1109/MIE.2013.2290138   
+130. Vazquez S, Rodriguez J, Rivera M, Franquelo LG, Norambuena M (2017) Model predictive control for power converters and drives: Advances and trends. IEEE Trans Ind Electron 64(2):935–947, https://doi.org/10.1109/TIE.2016.2625238   
+131. Visioli A (2006) Practical PID Control. Springer-Verlag GmbH. https://www.ebook.de/de/product/11430954/antonio visioli practical pid control.html   
+132. Waldrop MM (2016) The chips are down for moore’s law. Nature 530(7589):144–147, https://doi.org/10.1038/530144a   
+133. Wehr M, Schatzler S, Abel D, Hirt G (2020) Model predictive control of an overactuated roll gap with a moving manipulated variable. 2020 Am Control Conf (ACC), Denver, CO, USA pp 1931–1936, https://doi.org/10.23919/ACC45564.2020.9147360   
+134. Wieber Pb (2006) Trajectory free linear model predictive control for stable walking in the presence of strong perturbations. 2006 6th IEEE-RAS Int Conf Humanoid Robots pp 137–142, https://doi.org/10.1109/ICHR.2006.321375   
+135. Wu T, Kemper M, Stemmler S, Abel D, Gries T (2019) Model predictive control of the weft insertion in air-jet weaving. IFAC-PapersOnLine 52(13):630–635, https://doi.org/10.1016/j.ifacol.2019.11.094   
+136. Wu Z, Rincon D, Christofides PD (2020) Process structure-based recurrent neural network modeling for model predictive control of nonlinear processes. Journal of Process Control 89:74–84, https://doi.org/10.1016/j.jprocont.2020.03.013. https://linking hub.elsevier.com/retrieve/pii/S095915241930825X   
+137. Xie S, Hu X, Xin Z, Brighton J (2019) Pontryagin’s Minimum Principle based model predictive control of energy management for a plug-in hybrid electric bus. Applied Energy 236:893– 905, https://doi.org/10.1016/j.apenergy.2018.12.032. https://linking hub.elsevier.com/retrieve/pii/S0306261918318518   
+138. Yin X, Jindal A, Sekar V, Sinopoli B (2015) A control-theoretic approach for dynamic adaptive video streaming over http. In: Proc. 2015 ACM Conf. Special Interest Group on Data Com. - SIGCOMM ’15, ACM Press, London, United Kingdom, pp 325–338, https://doi.org/10.1145/2785956.2787486   
+139. Yin X, Wang X, Liu X, Chi R, Lin M, Wang Y (2018) An iterative learning model predictive control strategy for evaporator. In: 2018 37th Chinese Control Conference (CCC), IEEE, Wuhan, pp 3652–3656, https://doi.org/10.23919/ChiCC.2018.8483834. https://ieeexplore.ieee.org/document/8483834/   
+140. Yoon S, Jeon H, Kum D (2019) Predictive cruise control using radial basis function network-based vehicle motion prediction and chance constrained model predictive control. IEEE Transactions on Intelligent Transportation Systems 20(10):3832–3843, https://doi.org/10.1109/TITS.2019.2928217. https://ieeexplore.ieee.org/document/8792151/   
+141. Yu N, Salakij S, Chavez R, Paolucci S, Sen M, Antsaklis P (2017) Model-based predictive control for building energy management: Part ii – experimental validations. Energy and Buildings 146:19– 26, https://doi.org/10.1016/j.enbuild.2017.04.027   
+142. Zhang HT, Wu Y, He D, Zhao H (2015) Model predictive control to mitigate chatters in milling processes with input constraints. Int J Machine Tools Manuf 91:54–61, https://doi.org/10.1016/j.ijmachtools.2015.01.002   
+143. Zhang X, Bujarbaruah M, Borrelli F (2019) Safe and nearoptimal policy learning for model predictive control using primal-dual neural networks. arXiv:190608257 [cs, eess, stat]   
+144. Zheng A, Morari M (1995) Stability of model predictive control with mixed constraints. IEEE Trans Autom Control 40(10):1818–1823, https://doi.org/10.1109/9.467664   
+145. Zhongjun X, Mengxiao W (2009) Time-delay process Multivariable model predictive function control for basis weight &#x00026; moisture content control system. In: 2009 Chinese Control and Decision Conference, IEEE, Guilin, China, pp 4089–4093, https://doi.org/10.1109/CCDC.2009.5192458. http://ieeexplore.ieee.org/document/5192458/   
+146. Zinober A, Owens DH (2003) Nonlinear and adaptive control: NCN4 2001. Lect. Notes Control Inform. Sci., Springer Berlin Heidelberg, https://books.google.de/books?id=KcxrCQAAQBAJ   
+147. Zou C, Hu X, Wei Z, Wik T, Egardt B (2018) Electrochemical estimation and control for lithium-ion battery health-aware fast charging. IEEE Trans Ind Electron 65(8):6635–6645, https://doi. org/10.1109/TIE.2017.2772154   
+148. Zou S, Wang Z, Hu S, Wang W, Cao Y (2020) Control of weld penetration depth using relative fluctuation coefficient as feedback. J Intell Manuf 31(5):1203–1213, https://doi.org/ 10.1007/s10845-019-01506-8
+
+Publisher’s note Springer Nature remains neutral with regard to jurisdictional claims in published maps and institutional affiliations.

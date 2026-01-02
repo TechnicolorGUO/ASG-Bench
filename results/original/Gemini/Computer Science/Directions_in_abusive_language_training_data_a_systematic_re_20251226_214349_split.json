@@ -1,0 +1,321 @@
+{
+  "outline": [
+    [
+      1,
+      "Literature Review: Directions in abusive language training data, a systematic review- Garbage in, garbage out."
+    ],
+    [
+      1,
+      "Directions in Abusive Language Training Data: A Systematic Review of the \"Garbage In, Garbage Out\" Paradigm"
+    ],
+    [
+      2,
+      "1. Introduction"
+    ],
+    [
+      3,
+      "1.1 Research Motivation and Objectives"
+    ],
+    [
+      2,
+      "2. Key Concepts and Definitions"
+    ],
+    [
+      3,
+      "2.1 Defining the \"Garbage\": Data Quality in NLP"
+    ],
+    [
+      3,
+      "2.2 Taxonomies of Abuse"
+    ],
+    [
+      2,
+      "3. Historical Development and Milestones"
+    ],
+    [
+      3,
+      "3.1 The Keyword Era (2016–2018)"
+    ],
+    [
+      3,
+      "3.2 The Crowdsourcing and Deep Learning Era (2018–2022)"
+    ],
+    [
+      3,
+      "3.3 The Generative Era (2023–Present)"
+    ],
+    [
+      2,
+      "4. The \"Garbage\": Critical Analysis of Data Quality"
+    ],
+    [
+      3,
+      "4.1 Sampling and Topic Bias"
+    ],
+    [
+      3,
+      "4.2 Annotator Bias and Subjectivity"
+    ],
+    [
+      3,
+      "4.3 Racial and Dialectal Bias"
+    ],
+    [
+      3,
+      "4.4 Temporal Degradation"
+    ],
+    [
+      2,
+      "5. Current State-of-the-Art Methods and Techniques"
+    ],
+    [
+      3,
+      "5.1 Synthetic Data Generation and Rewriting"
+    ],
+    [
+      3,
+      "5.2 Cross-Lingual and Low-Resource Approaches"
+    ],
+    [
+      3,
+      "5.3 Active Learning"
+    ],
+    [
+      2,
+      "6. Applications and Case Studies"
+    ],
+    [
+      3,
+      "6.1 Case Study: The \"Waseem & Hovy\" Legacy"
+    ],
+    [
+      3,
+      "6.2 Case Study: LLM-based Content Moderation"
+    ],
+    [
+      2,
+      "7. Challenges and Open Problems"
+    ],
+    [
+      3,
+      "7.1 Model Collapse"
+    ],
+    [
+      3,
+      "7.2 The Subjectivity Bottleneck"
+    ],
+    [
+      3,
+      "7.3 Privacy vs. Utility"
+    ],
+    [
+      2,
+      "8. Future Research Directions"
+    ],
+    [
+      3,
+      "8.1 Data-Centric AI"
+    ],
+    [
+      3,
+      "8.2 Perspectivist Learning"
+    ],
+    [
+      3,
+      "8.3 Safe Synthetic Data"
+    ],
+    [
+      2,
+      "9. Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Literature Review: Directions in abusive language training data, a systematic review- Garbage in, garbage out.",
+      "level": 1,
+      "content": "*Generated on: 2025-12-26 21:43:49*\n*Progress: [33/50]*\n*Saved to: /Users/joanna/Desktop/Literature_Reviews/Directions_in_abusive_language_training_data_a_systematic_re_20251226_214349.md*\n---"
+    },
+    {
+      "heading": "Directions in Abusive Language Training Data: A Systematic Review of the \"Garbage In, Garbage Out\" Paradigm",
+      "level": 1,
+      "content": "**Abstract**\nThe rapid advancement of Natural Language Processing (NLP) has led to sophisticated models capable of detecting abusive language with increasing accuracy. However, the efficacy of these models is fundamentally constrained by the quality of the data upon which they are trained, adhering to the computer science axiom: \"Garbage In, Garbage Out\" (GIGO). This systematic literature review examines the landscape of abusive language training data, building upon foundational surveys to analyze the current state of dataset creation, annotation, and utilization. We critically evaluate the prevalence of sampling, annotator, and demographic biases that compromise model generalizability and fairness. Furthermore, we investigate the emerging paradigm shift toward synthetic data generation and the utilization of Large Language Models (LLMs) for annotation, assessing the risks of \"model collapse\" and the circular propagation of errors. This review synthesizes findings from 2016 to 2025, identifying critical research gaps and proposing a data-centric agenda for the future of online safety technologies.\n\n---"
+    },
+    {
+      "heading": "1. Introduction",
+      "level": 2,
+      "content": "The proliferation of abusive content on social media platforms—ranging from hate speech and cyberbullying to toxicity and harassment—poses significant risks to individual well-being and social cohesion [cite: 1, 2]. To mitigate these harms, the computational linguistics community has increasingly turned to machine learning (ML) and deep learning solutions. While algorithmic architectures have evolved from Support Vector Machines (SVMs) to Transformer-based Large Language Models (LLMs), the performance of these systems remains inextricably linked to the quality of their training data [cite: 2, 3].\n\nThe principle of \"Garbage In, Garbage Out\" (GIGO) posits that flawed, biased, or poor-quality input data inevitably produces unreliable output, regardless of the sophistication of the processing algorithm [cite: 4, 5]. In the context of abusive language detection, \"garbage\" data manifests as ambiguous definitions, low inter-annotator agreement, sampling artifacts, and systematic biases against marginalized groups [cite: 2, 6]."
+    },
+    {
+      "heading": "1.1 Research Motivation and Objectives",
+      "level": 3,
+      "content": "Despite the critical importance of data quality, research has historically prioritized model architecture over dataset curation. A seminal review by Vidgen and Derczynski (2020) highlighted that creating high-quality datasets is \"difficult, laborious and requires deep expertise,\" often leading researchers to rely on flawed public datasets [cite: 2, 7]. Since that review, the landscape has shifted dramatically with the advent of generative AI, which offers new methods for data augmentation but also introduces new risks of synthetic data contamination [cite: 8, 9].\n\nThe objective of this paper is to provide a comprehensive systematic review of abusive language training data, addressing the following questions:\n1.  How has the definition and taxonomy of \"abusive language\" evolved in training datasets?\n2.  What are the primary sources of bias (\"garbage\") in current datasets, and how do they affect model performance?\n3.  How are LLMs and synthetic data reshaping the GIGO paradigm?\n4.  What are the best practices for future dataset creation to ensure robust and fair detection systems?\n\n---"
+    },
+    {
+      "heading": "2. Key Concepts and Definitions",
+      "level": 2,
+      "content": "To understand the GIGO problem, one must first define the input parameters. The field suffers from a lack of terminological consensus, leading to incompatible datasets and models that fail to generalize."
+    },
+    {
+      "heading": "2.1 Defining the \"Garbage\": Data Quality in NLP",
+      "level": 3,
+      "content": "In machine learning, data quality is defined by accuracy, completeness, consistency, and representativeness. \"Garbage\" inputs in abusive language detection typically fall into three categories:\n*   **Noise:** Mislabelled examples due to annotator error or ambiguity.\n*   **Bias:** Systematic skew in data distribution (e.g., over-representing African American English as hateful) [cite: 6].\n*   **Artifacts:** Features that correlate with labels in the training set but not in the real world (e.g., specific keywords like \"sport\" appearing only in non-abusive classes) [cite: 3, 10]."
+    },
+    {
+      "heading": "2.2 Taxonomies of Abuse",
+      "level": 3,
+      "content": "The terminology used to label training data varies widely, often conflating distinct social phenomena.\n*   **Hate Speech:** Language that attacks or demeans a group based on attributes such as race, religion, or sexual orientation [cite: 11, 12]. It is often defined by legal frameworks or platform policies.\n*   **Abusive Language:** An umbrella term encompassing hate speech, but also including insults, aggression, and profanity that may not target a protected group [cite: 11, 13].\n*   **Toxicity:** A concept popularized by the Perspective API, defined as a comment that is \"rude, disrespectful, or unreasonable\" and likely to make someone leave a discussion [cite: 14].\n*   **Cyberbullying:** Repeated, targeted aggression, often involving a power imbalance [cite: 1, 15].\n\nThe lack of standardized definitions means that a model trained on \"toxicity\" (e.g., the Jigsaw dataset) may perform poorly when tested on \"hate speech\" (e.g., the Waseem dataset), as the underlying constructs differ [cite: 3, 14]. This conceptual misalignment is a primary form of \"garbage\" input.\n\n---"
+    },
+    {
+      "heading": "3. Historical Development and Milestones",
+      "level": 2,
+      "content": "The evolution of abusive language datasets can be categorized into three distinct eras, each characterized by specific data collection methodologies and associated quality challenges."
+    },
+    {
+      "heading": "3.1 The Keyword Era (2016–2018)",
+      "level": 3,
+      "content": "Early datasets were primarily constructed using keyword filtering.\n*   **Waseem and Hovy (2016):** One of the first public datasets from Twitter, collected using keywords like \"skank\" and \"nigger.\" While pioneering, this method introduced severe sampling bias, as the dataset contained high concentrations of explicit slurs but lacked implicit abuse [cite: 6, 16].\n*   **Davidson et al. (2017):** Differentiated between \"hate speech\" and \"offensive language.\" This study revealed that keyword-based datasets often conflate profanity with hate, leading to high false positives for communities that use reappropriated slurs [cite: 17, 18]."
+    },
+    {
+      "heading": "3.2 The Crowdsourcing and Deep Learning Era (2018–2022)",
+      "level": 3,
+      "content": "As deep learning models (LSTMs, BERT) required larger datasets, researchers turned to crowdsourcing platforms like Amazon Mechanical Turk.\n*   **Founta et al. (2018):** A large-scale dataset characterizing abusive behavior on Twitter using crowd workers.\n*   **Vidgen and Derczynski (2020):** A landmark systematic review of 63 datasets. They concluded that most datasets were \"locked away,\" small, and biased, formally establishing the GIGO concern in this domain [cite: 2, 7]. They introduced *hatespeechdata.com* to catalog resources [cite: 2].\n*   **OLID/OffensEval (2019):** Introduced hierarchical taxonomies (e.g., Is it offensive? Is it targeted? Who is the target?), moving toward more granular data annotation [cite: 19]."
+    },
+    {
+      "heading": "3.3 The Generative Era (2023–Present)",
+      "level": 3,
+      "content": "The release of ChatGPT and other LLMs transformed dataset creation.\n*   **Synthetic Data:** Researchers began using LLMs to rewrite or generate abusive content to overcome privacy restrictions and data scarcity [cite: 8, 20].\n*   **LLMs as Annotators:** Studies investigated replacing human crowd workers with LLMs (e.g., GPT-4) to label data, raising new questions about machine bias and the circularity of training [cite: 21, 22].\n\n---"
+    },
+    {
+      "heading": "4. The \"Garbage\": Critical Analysis of Data Quality",
+      "level": 2,
+      "content": "The \"Garbage In, Garbage Out\" paradigm is most evident when analyzing the systematic flaws embedded in training data. These flaws are not merely random errors but structural deficiencies that propagate harm."
+    },
+    {
+      "heading": "4.1 Sampling and Topic Bias",
+      "level": 3,
+      "content": "Most datasets are created by querying APIs for specific keywords. This results in **topic bias**, where the model learns to associate specific topics (e.g., sports, politics) with abuse simply because those topics were oversampled in the abusive class [cite: 10, 23].\n*   **Keyword Over-reliance:** Fortuna et al. (2021) found that keyword-based datasets fail to capture implicit abuse (abuse without slurs) and covert hate. Models trained on these data perform poorly on \"in-the-wild\" data where abuse is context-dependent [cite: 3, 10].\n*   **Author Bias:** A small number of prolific users often contribute a disproportionate amount of abusive content in training sets. If a dataset splits comments from the same author between training and test sets, the model may learn to identify the *author's writing style* rather than the concept of abuse [cite: 3, 10, 24]."
+    },
+    {
+      "heading": "4.2 Annotator Bias and Subjectivity",
+      "level": 3,
+      "content": "The \"Ground Truth\" in abusive language is inherently subjective.\n*   **Demographic Mismatch:** Annotators on crowdsourcing platforms often do not represent the demographics of the victims of hate speech. Research shows that annotator identity (race, gender, political alignment) significantly influences whether a post is flagged as abusive [cite: 25, 26].\n*   **Low Agreement:** Inter-annotator agreement (IAA) is notoriously low for hate speech. Traditional metrics like Cohen’s Kappa treat disagreement as \"noise\" to be eliminated. However, recent \"perspectivist\" approaches argue that disagreement reflects legitimate social diversity and should be preserved rather than aggregated into a single majority vote [cite: 21, 27, 28].\n*   **LLM Annotation Bias:** Recent experiments using LLMs (e.g., GPT-4) to annotate data show that while they are cost-effective, they exhibit distinct biases. Okpala and Cheng (2025) demonstrated that classifiers trained on LLM-annotated data flagged African American English (AAE) as abusive at higher rates than those trained on human labels [cite: 22]."
+    },
+    {
+      "heading": "4.3 Racial and Dialectal Bias",
+      "level": 3,
+      "content": "A pervasive form of \"garbage\" is the systematic misclassification of minority dialects.\n*   **The AAE Problem:** Davidson et al. (2019) and Sap et al. (2019) demonstrated that datasets annotated without dialect awareness lead to models that penalize African American English. Tweets containing reappropriated terms (e.g., \"nigga\") used in a non-hateful context are frequently mislabeled as hate speech [cite: 6, 29].\n*   **Propagation:** When these biased datasets are used to train models like BERT, the bias is amplified. Okpala et al. (2022) introduced AAEBERT to mitigate this, but the root cause remains the training data [cite: 29, 30]."
+    },
+    {
+      "heading": "4.4 Temporal Degradation",
+      "level": 3,
+      "content": "Data rot is a significant issue. Social media posts are frequently deleted or accounts are suspended.\n*   **Reproducibility Crisis:** Researchers often release only Tweet IDs to comply with platform terms of service. Over time, the most abusive tweets (the core of the dataset) are deleted by the platform, rendering the dataset useless for future reproduction. This \"data degradation\" means that older datasets lose their most critical examples [cite: 17, 31].\n\n---"
+    },
+    {
+      "heading": "5. Current State-of-the-Art Methods and Techniques",
+      "level": 2,
+      "content": "To address the GIGO challenge, the field is moving from simple data collection to sophisticated data engineering and synthesis."
+    },
+    {
+      "heading": "5.1 Synthetic Data Generation and Rewriting",
+      "level": 3,
+      "content": "Privacy concerns and data scarcity have driven the adoption of synthetic data.\n*   **\"Don't Augment, Rewrite\":** Casula et al. (2024) proposed a method of using generative models to *rewrite* existing abusive texts. This preserves the semantic meaning of the abuse while anonymizing the content and bypassing copyright/privacy issues. Their results showed that models trained on synthetic data could perform on par with or better than those trained on real data, offering a solution to data degradation [cite: 8, 20].\n*   **Adversarial Generation:** Tools like Dynabench use \"human-and-model-in-the-loop\" approaches to generate \"tricky\" examples that fool current classifiers, specifically targeting the \"long tail\" of implicit abuse that keyword searches miss [cite: 32]."
+    },
+    {
+      "heading": "5.2 Cross-Lingual and Low-Resource Approaches",
+      "level": 3,
+      "content": "The field is heavily dominated by English data, creating a \"linguistic GIGO\" problem for other languages.\n*   **Translation and Transfer:** Techniques involving back-translation and cross-lingual embeddings (e.g., XLM-RoBERTa) are used to leverage English datasets for languages like Indonesian, Arabic, and Spanish [cite: 1, 16, 33].\n*   **Multilingual Meta-collections:** Projects like MetaHate and DETESTS aggregate datasets across languages to create more robust, diverse training corpora [cite: 21, 33]."
+    },
+    {
+      "heading": "5.3 Active Learning",
+      "level": 3,
+      "content": "To improve data efficiency, researchers are using active learning to select the most informative examples for human annotation. This reduces the volume of \"garbage\" (redundant or easy examples) and focuses annotation budget on ambiguous cases [cite: 34, 35].\n\n---"
+    },
+    {
+      "heading": "6.1 Case Study: The \"Waseem & Hovy\" Legacy",
+      "level": 3,
+      "content": "The Waseem and Hovy (2016) dataset remains one of the most cited resources. However, its construction via keyword search resulted in a dataset where \"sexism\" was heavily correlated with specific sports commentators (due to a harassment campaign active at the time). Models trained on this data learned that discussing sports was a feature of sexism—a classic GIGO example of topic bias [cite: 6, 10]."
+    },
+    {
+      "heading": "6.2 Case Study: LLM-based Content Moderation",
+      "level": 3,
+      "content": "Platforms are increasingly deploying LLMs for moderation. However, Piot et al. (2025) found that while LLMs can rank the relative performance of detection models, they struggle with instance-level reliability in subjective tasks. They do not fully replicate human nuance, suggesting that replacing human datasets with LLM-generated labels may lower the ceiling of detection quality [cite: 21, 27].\n\n---"
+    },
+    {
+      "heading": "7.1 Model Collapse",
+      "level": 3,
+      "content": "A looming existential threat to abusive language detection is \"model collapse.\" As the internet fills with AI-generated content, future models will be trained on data generated by previous models.\n*   **The Feedback Loop:** If LLMs are used to generate training data (synthetic abuse) and also used to detect it, the variance of the data distribution shrinks. The models \"forget\" the tails of the distribution—the rare, nuanced, or evolving forms of human abuse [cite: 9, 36, 37].\n*   **Poisoning:** Synthetic data, if not carefully curated, acts as \"garbage\" that reinforces the biases of the generator model, leading to a degradation of performance over generations [cite: 37, 38]."
+    },
+    {
+      "heading": "7.2 The Subjectivity Bottleneck",
+      "level": 3,
+      "content": "The field has not solved the problem of disagreement.\n*   **Gold Standard Fallacy:** The assumption that there is a single \"correct\" label for a hateful tweet is flawed.\n*   **Metric Limitations:** Standard metrics (F1-score, Accuracy) do not account for the severity of errors (e.g., censoring a marginalized group vs. missing a slur). New metrics like Cross-Rater Reliability (xRR) are being explored to capture the pluralism of human judgment [cite: 27, 28]."
+    },
+    {
+      "heading": "7.3 Privacy vs. Utility",
+      "level": 3,
+      "content": "Strict privacy laws (GDPR) and platform restrictions (Twitter/X API changes) make sharing raw text difficult. While synthetic rewriting [cite: 8] offers a path forward, it remains unproven whether synthetic data captures the full pragmatic nuance of human abuse (e.g., sarcasm, dog-whistles).\n\n---"
+    },
+    {
+      "heading": "8.1 Data-Centric AI",
+      "level": 3,
+      "content": "Future research must pivot from architectural improvements to data engineering. This involves:\n*   **Data Sheets and Cards:** Mandatory documentation of dataset creation, annotator demographics, and sampling strategies to make \"garbage\" visible [cite: 2, 38].\n*   **Dynamic Benchmarking:** Moving away from static datasets (which rot) to dynamic benchmarks that evolve with language [cite: 32]."
+    },
+    {
+      "heading": "8.2 Perspectivist Learning",
+      "level": 3,
+      "content": "Instead of aggregating labels to eliminate disagreement, future models should learn from the distribution of annotator votes. Systems should be able to predict *who* would find a statement abusive, rather than making a binary determination [cite: 21, 39]."
+    },
+    {
+      "heading": "8.3 Safe Synthetic Data",
+      "level": 3,
+      "content": "Developing rigorous protocols for generating synthetic training data that avoids model collapse. This includes \"watermarking\" synthetic data and ensuring human-in-the-loop validation to maintain diversity and grounding in real-world phenomena [cite: 37, 40].\n\n---"
+    },
+    {
+      "heading": "9. Conclusion",
+      "level": 2,
+      "content": "The domain of abusive language detection has reached a critical inflection point. While model architectures have achieved superhuman performance on some benchmarks, the utility of these systems in the real world is stalled by the \"Garbage In, Garbage Out\" reality. The systematic review of the literature reveals that the \"garbage\" is multifaceted: it is the bias in keyword sampling, the subjectivity of underpaid annotators, the erasure of minority dialects, and the degradation of historical data.\n\nThe widespread adoption of LLMs presents a double-edged sword: it offers tools to clean and augment data (e.g., via rewriting) but threatens to flood the ecosystem with synthetic noise that could induce model collapse. To advance, the field must embrace a data-centric ethos. We must move beyond maximizing F1-scores on flawed static datasets and toward creating living, diverse, and transparent data resources. Only by rigorously addressing the quality of the input can we ensure that the output serves the goal of a safer, more inclusive digital environment.\n\n---"
+    }
+  ],
+  "references": [
+    "[cite: 3] Fortuna, E., et al. (2023). Dataset annotation in abusive language detection. *SSOAR*. [cite: 3]",
+    "[cite: 1] Maity, K., et al. (2025). Survey of abusive language detection datasets and data quality. *arXiv*. [cite: 1]",
+    "[cite: 23] Aluru, S. S., et al. (2020). Deep Learning Models for Multilingual Hate Speech Detection. *PMC*. [cite: 23]",
+    "[cite: 10] Mishra, P., et al. (2019). Detection of Abusive Language: the Problem of Biased Datasets. *NAACL*. [cite: 10]",
+    "[cite: 34] Kirk, H., et al. (2022). Is More Data Better? Re-thinking the Importance of Efficiency in Abusive Language Detection. *ACL*. [cite: 34]",
+    "[cite: 2] Vidgen, B., & Derczynski, L. (2020). Directions in abusive language training data, a systematic review: Garbage in, garbage out. *PLOS ONE*. [cite: 2, 7, 41, 42]",
+    "[cite: 25] Arango Monnar, A., et al. (2024). Bias and reliability in hate speech datasets survey. *ACL Anthology*. [cite: 25]",
+    "[cite: 17] Osho, O., et al. (2020). Racial Bias in Hate Speech and Abusive Language Detection Datasets. *ACL Anthology*. [cite: 17]",
+    "[cite: 43] Wich, M., et al. (2021). Annotator bias and data quality in abusive language detection. *RANLP*. [cite: 43]",
+    "[cite: 24] Wich, M., et al. (2021). Investigating Annotator Bias in Abusive Language Datasets. *PMC*. [cite: 24]",
+    "[cite: 39] Dehghan, S., et al. (2025). Dealing with Annotator Disagreement in Hate Speech Classification. *ResearchGate*. [cite: 39]",
+    "[cite: 44] Chandra, A., & Choi, J. (2025). Abusive text transformation using LLMs. *ResearchGate*. [cite: 44]",
+    "[cite: 36] Arthur.ai. (2023). The Real-World Harms of LLMs Part 2: When LLMs Do Work as Expected. [cite: 36]",
+    "[cite: 21] Piot, P., et al. (2025). Can LLMs Evaluate What They Cannot Annotate? Revisiting LLM Reliability in Hate Speech Detection. *arXiv*. [cite: 21, 45]",
+    "[cite: 27] Piot, P., et al. (2025). LLM for hate speech data annotation reliability. *arXiv*. [cite: 27]",
+    "[cite: 22] Okpala, E., & Cheng, L. (2025). Large Language Model Annotation Bias in Hate Speech Detection. *ICWSM*. [cite: 22]",
+    "[cite: 8] Casula, C., et al. (2024). Don't Augment, Rewrite? Assessing Abusive Language Detection with Synthetic Data. *ACL Findings*. [cite: 8, 20]",
+    "[cite: 31] Casula, C., et al. (2024). Synthetic data for abusive language detection. *ChatPaper*. [cite: 31]",
+    "[cite: 7] Vidgen, B., & Derczynski, L. (2020). Directions in abusive language training data: Garbage in, garbage out. *PLOS ONE*. [cite: 7]",
+    "[cite: 4] Wikipedia. (n.d.). Garbage in, garbage out. [cite: 4]",
+    "[cite: 5] TechTarget. (2023). Definition: Garbage in, garbage out. [cite: 5]",
+    "[cite: 32] Vidgen, B., et al. (2021). Learning from the Worst: Dynamically Generated Datasets to Improve Online Hate Detection. *ACL*. [cite: 32]",
+    "[cite: 6] Davidson, T., et al. (2019). Racial Bias in Hate Speech and Abusive Language Detection Datasets. *ACL*. [cite: 6]",
+    "[cite: 13] Alrashidi, A., et al. (2025). Towards a comprehensive taxonomy of online abusive language informed by machine learning. *ResearchGate*. [cite: 13]",
+    "[cite: 11] Seemann, Y., et al. (2025). Definitions hate speech vs abusive language vs toxicity vs cyberbullying. *arXiv*. [cite: 11]",
+    "[cite: 14] Fortuna, P., et al. (2020). Toxic, Hateful, Offensive or Abusive? What Are We Really Classifying? *LREC*. [cite: 14]",
+    "[cite: 12] Council of Europe. (n.d.). Verbal violence and hate speech. [cite: 12]",
+    "[cite: 28] Emergent Mind. (2025). Cross-Rater Reliability (xRR). [cite: 28]",
+    "[cite: 16] JITECS. (2025). Hate speech detection in the Indonesian language. [cite: 16]",
+    "[cite: 33] Pereira-Kohatsu, J. C., et al. (2025). Systematic review abusive language datasets 2023 2024 2025. *arXiv*. [cite: 33]",
+    "[cite: 29] Okpala, E., et al. (2022). AAEBERT: Debiasing BERT-based Hate Speech Detection Models via Adversarial Learning. *IEEE*. [cite: 29]",
+    "[cite: 9] UK Government. (2025). Future risks of frontier AI annex A. [cite: 9]",
+    "[cite: 40] The Alan Turing Institute. (2023). Exploring responsible applications of Synthetic Data. [cite: 40]",
+    "[cite: 38] EPIC. (2024). Comment on NIST AI Executive Order Mandates. [cite: 38]",
+    "[cite: 37] Spasic, I., & Nenadic, G. (2025). Model collapse abusive language training data. *arXiv*. [cite: 37]",
+    "[cite: 35] Kottke, D., et al. (2024). Re-thinking the importance of efficiency in abusive language detection. *arXiv*. [cite: 35]"
+  ]
+}

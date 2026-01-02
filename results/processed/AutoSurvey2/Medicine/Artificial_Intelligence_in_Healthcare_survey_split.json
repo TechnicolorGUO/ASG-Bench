@@ -1,0 +1,281 @@
+{
+  "outline": [
+    [
+      1,
+      "Artificial Intelligence in Healthcare: A Comprehensive Survey"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "Keywords"
+    ],
+    [
+      2,
+      "Introduction"
+    ],
+    [
+      2,
+      "Background"
+    ],
+    [
+      2,
+      "Current State of the Art"
+    ],
+    [
+      2,
+      "Future Directions"
+    ],
+    [
+      2,
+      "Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Artificial Intelligence in Healthcare: A Comprehensive Survey",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "**Abstract** Artificial Intelligence (AI) has emerged as a transformative force in healthcare, offering innovative solutions to longstanding challenges in diagnostics, treatment, and patient care. This survey paper provides a comprehensive overview of the current state of AI in healthcare, examining its evolution, technical foundations, and practical applications. The paper begins with an introduction that outlines the growing impact of AI, followed by a background section that contextualizes the integration of machine learning, deep learning, and natural language processing into medical systems. The current state of the art is discussed, highlighting advances in AI-driven diagnostics, personalized treatment planning, and clinical decision support, with a focus on the role of large language models and their integration with traditional medical data. The paper also addresses key challenges, including data privacy, model interpretability, and clinical validation. Looking ahead, future directions are explored, emphasizing the need for robust evaluation frameworks, ethical guidelines, and seamless integration into clinical workflows. This survey contributes to the understanding of AI’s potential and limitations in healthcare, offering insights for researchers, clinicians, and policymakers. By synthesizing recent advancements and identifying critical areas for further investigation, this work aims to guide the responsible and effective deployment of AI in the medical field.",
+      "stats": {
+        "char_count": 1493,
+        "word_count": 200,
+        "sentence_count": 8,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Keywords",
+      "level": 2,
+      "content": "large language models, multimodal learning, natural language processing, machine learning, artificial intelligence",
+      "stats": {
+        "char_count": 114,
+        "word_count": 12,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Introduction",
+      "level": 2,
+      "content": "Artificial Intelligence (AI) has emerged as a transformative force in healthcare, offering innovative solutions to long-standing challenges in diagnostics, treatment, and patient care. Over the past decade, the integration of AI into healthcare systems has accelerated, driven by advancements in machine learning, natural language processing, and data science. This surge has led to the development of sophisticated models capable of analyzing vast amounts of medical data, including imaging, electronic health records (EHRs), and genomic information, to support clinical decision-making and improve patient outcomes. However, the deployment of AI in healthcare is not without challenges, particularly concerning data privacy, model interpretability, and the need for robust and generalizable algorithms. As the field continues to evolve, researchers have increasingly focused on addressing these issues through novel frameworks, architectures, and methodologies. For instance, the application of Explainable AI (XAI) techniques has gained prominence, as highlighted in recent studies that emphasize the importance of transparency and accountability in AI-driven medical systems [1]. These efforts are complemented by the development of privacy-preserving approaches, such as Federated Learning (FL), which enable collaborative model training without compromising patient data confidentiality [1]. In addition, the integration of multi-modal data—combining text, images, and sensor information—has become a critical area of research, as it allows for more comprehensive and accurate analysis of complex medical scenarios [2]. Moreover, the rise of large language models (LLMs) has introduced new possibilities for real-time, patient-centered interactions, as demonstrated by systems like Polaris, which showcase the potential of AI to enhance communication and trust in healthcare settings [8]. Despite these advancements, the field still faces significant hurdles, including the need for standardized evaluation metrics, ethical considerations, and the integration of AI into existing clinical workflows. As researchers continue to explore these challenges, the development of explainable, secure, and multi-modal AI systems will play a pivotal role in shaping the future of healthcare. This survey paper aims to provide a comprehensive overview of the current state of AI in healthcare, highlighting key trends, technological innovations, and the broader implications of these developments for the medical community.",
+      "stats": {
+        "char_count": 2518,
+        "word_count": 340,
+        "sentence_count": 12,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Background",
+      "level": 2,
+      "content": "Artificial Intelligence (AI) has increasingly become a transformative force in healthcare, offering novel approaches to diagnosis, treatment, and patient care. The integration of AI into medical systems has been driven by the rapid advancement of machine learning (ML), deep learning (DL), and natural language processing (NLP), which have enabled the analysis of complex and heterogeneous medical data. These technologies have shown remarkable potential in areas such as medical imaging, pathology, genomics, and clinical decision support, often outperforming traditional methods in terms of accuracy and efficiency. However, the adoption of AI in clinical settings remains constrained by challenges related to interpretability, explainability, and trustworthiness. As highlighted in recent studies, the transition from purely data-driven models to systems that are both accurate and interpretable is crucial for their practical implementation [4]. This has led to the emergence of concepts such as XIAI (eXplainable and Interpretable AI), which aims to bridge the gap between model performance and clinical usability [4]. The application of AI in healthcare is not limited to a single domain or modality. For instance, transformers—originally developed for NLP—have found widespread use in medical diagnostics, particularly in thyroid carcinoma detection, where they have demonstrated superior performance in prognosis and risk assessment [10]. Similarly, foundation models and large language models (LLMs) have shown promise in tasks ranging from information retrieval in digital pathology to patient interaction in psychological interventions [9]. These models leverage vast amounts of data and pre-training to generalize across different medical tasks, making them highly adaptable to various clinical scenarios. However, their complexity often comes at the cost of interpretability, necessitating the development of methods that can provide meaningful insights into their decision-making processes. A critical challenge in deploying AI systems in healthcare is ensuring that they are not only accurate but also transparent and accountable. The need for explainable AI (XAI) has been widely recognized, as clinicians and patients require clear justifications for AI-based decisions, particularly in high-stakes scenarios. Studies have emphasized that current XAI methods often lack global modeling capabilities and systematic evaluation, which limits their applicability in real-world settings [4]. Moreover, the evaluation of XAI systems is a multifaceted task that involves technical, user-facing, and social components, requiring a compositional and contextual validation framework [6]. This underscores the importance of developing robust evaluation metrics that can capture the effectiveness of AI explanations in diverse clinical contexts. Beyond explainability, causality has emerged as a key area of interest in AI for healthcare. Causal inference techniques have been proposed as a means to enhance the trustworthiness of AI models by identifying underlying mechanisms rather than merely correlating features with outcomes [3]. This approach aligns with the broader goal of building AI systems that can provide not only accurate predictions but also actionable insights that reflect the true causal relationships in medical data. The integration of causality with AI, deep learning, and reinforcement learning has the potential to revolutionize how we understand and apply machine learning in healthcare. Another important consideration is the need for domain-specific AI models that are tailored to the unique characteristics of healthcare data. While general-purpose models can offer broad applicability, they often struggle with the nuances of medical data, such as class imbalance, missing values, and the need for high interpretability. As a result, there has been a growing emphasis on developing specialized models that are optimized for specific tasks, such as medical image classification, risk stratification, and predictive modeling [7]. These models often incorporate domain knowledge and are validated in collaboration with clinicians to ensure their relevance and effectiveness in real-world settings. In addition to technical challenges, the deployment of AI in healthcare also raises ethical and societal concerns. Issues such as bias, fairness, and the potential for unintended consequences must be carefully addressed to ensure that AI systems are equitable and beneficial to all patients. Recent studies have highlighted the importance of evaluating AI systems for health equity harms and biases, particularly in large language models that may inadvertently perpetuate existing disparities [5]. This calls for a multidisciplinary approach that involves not only AI researchers but also ethicists, policymakers, and healthcare professionals. Overall, the field of AI in healthcare is rapidly evolving, with significant progress being made in both technical capabilities and clinical applications. However, the path to widespread adoption remains challenging, requiring continued innovation in interpretability, causality, and domain-specific modeling, as well as a commitment to ethical and equitable AI development. As the field continues to advance, it is essential to foster collaboration across disciplines and to ensure that AI technologies",
+      "stats": {
+        "char_count": 5377,
+        "word_count": 750,
+        "sentence_count": 31,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Current State of the Art",
+      "level": 2,
+      "content": "Artificial intelligence (AI) has made significant strides in healthcare, with a growing body of research demonstrating its potential to transform diagnostics, treatment, and patient care. The current state of the art in AI for healthcare is characterized by the integration of advanced machine learning (ML) techniques, particularly large language models (LLMs), with traditional medical data analysis. These models are increasingly being deployed in diverse applications, ranging from tele-dermatology to personalized healthcare, while also raising important questions about transparency, trust, and the ethical implications of AI in clinical settings. Recent studies have highlighted both the promise and the challenges of AI in healthcare, with a strong emphasis on the need for explainable and reliable systems that can be effectively integrated into clinical workflows. A major focus of current research is the development of multi-modal AI systems that combine the strengths of different model architectures. For example, the Dermacen Analytica methodology demonstrates the effectiveness of integrating multi-modal large language models with machine learning techniques in tele-dermatology, achieving a diagnostic accuracy of 0.87 [11]. This approach underscores the potential of LLMs to complement traditional models, particularly in handling complex and heterogeneous data sources such as text, images, and structured medical records. Similarly, the AI-SPRINT project illustrates the importance of leveraging the computing continuum—spanning edge and cloud computing—to support real-time and scalable AI applications in personalized healthcare, maintenance, and other domains [14]. These efforts highlight the increasing emphasis on infrastructure that can support the deployment of AI in diverse and dynamic environments. Despite these advancements, the integration of AI into healthcare is not without challenges. One of the most pressing concerns is the issue of transparency and explainability. Saliency maps, which are commonly used to interpret AI decisions, have been shown to be inconsistent and potentially misleading, raising concerns about the reliability of AI systems in clinical settings [16]. This highlights the need for more robust and interpretable methods to ensure that AI models can be trusted by clinicians and patients alike. Furthermore, the use of LLMs in healthcare has sparked debates about the potential for deskilling of healthcare professionals, as over-reliance on these models could lead to a reduction in diagnostic accuracy and clinical expertise [15]. This suggests that while LLMs can enhance productivity and decision-making, their deployment must be carefully managed to maintain the critical thinking and judgment of healthcare practitioners. Another important area of development is the application of LLMs in medical education and clinical support. Research has shown that LLMs can be effectively trained on multi-choice question datasets to classify medical subjects, demonstrating their potential in automated question-answering and knowledge organization [12]. This has implications for improving the efficiency of medical training and decision support systems. Additionally, specialized LLMs such as CBT-LLM have been developed for mental health applications, showcasing the adaptability of these models to specific clinical contexts [17]. These examples illustrate the growing trend of tailoring LLMs to address specific healthcare needs, rather than relying on generic models. The evaluation of AI systems in healthcare is also an active area of research, with recent efforts focusing on the development of automated metrics and benchmarks to assess the clinical capabilities of LLMs [18]. These evaluations are crucial for ensuring that AI models meet the standards required for real-world deployment, particularly in high-stakes environments where errors can have serious consequences. At the same time, there is a growing recognition of the need for rigorous testing and validation, especially in areas such as autonomous systems and cybersecurity, where AI must be robust against adversarial attacks and biased data [13]. Overall, the current state of the art in AI for healthcare reflects a dynamic and rapidly evolving field. While significant progress has been made in developing sophisticated models and integrating them into clinical workflows, there remains a need for continued research into the ethical, technical, and practical challenges of AI deployment. The future of AI in healthcare will likely depend on the ability to balance innovation with accountability, ensuring that these technologies enhance rather than undermine the quality of care.",
+      "stats": {
+        "char_count": 4716,
+        "word_count": 668,
+        "sentence_count": 27,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Future Directions",
+      "level": 2,
+      "content": "The future of artificial intelligence in healthcare is poised to be shaped by a convergence of technical innovation, ethical considerations, and practical integration into clinical workflows. As the field progresses, several key directions are emerging that will define the trajectory of AI research and application in healthcare. One of the most pressing areas is the development of more robust and reliable evaluation frameworks, as highlighted by the SUDO approach [21]. Traditional evaluation methods often rely on ground-truth annotations, which are not always available or feasible in real-world clinical settings. Future research should focus on refining and expanding such label-free evaluation techniques to ensure that AI systems can be assessed accurately and ethically without compromising data privacy or clinical utility. This will be crucial for deploying AI in resource-limited environments or for rare conditions where labeled data is scarce. Another critical direction is the advancement of models that can handle uncertainty and provide interpretable results. The integration of Bayesian methods with deep learning, as seen in the work on cancer imaging diagnosis [27], represents a promising path forward. Future research should explore hybrid architectures that combine probabilistic reasoning with deep learning to enhance model reliability and transparency. Such models will be essential for building trust among clinicians and patients, particularly in high-stakes diagnostic and treatment decisions. Additionally, the use of probabilistic models for sequential inference in electronic health records (EHRs) [25] suggests that there is significant potential for AI to predict patient outcomes and support clinical decision-making in real time. Expanding these approaches to more complex and diverse datasets will be a major challenge and opportunity. The challenge of data scarcity and heterogeneity remains a persistent barrier to AI development in healthcare. Generative AI techniques, such as those explored in medical image analysis [22], offer a potential solution by enabling the synthesis of high-quality, diverse datasets. Future work should focus on improving the generalizability of these models across different populations, imaging modalities, and clinical settings. Moreover, the ethical implications of synthetic data generation, including issues of bias and representativeness, must be carefully addressed to ensure equitable healthcare outcomes. Equity and fairness in AI deployment is another crucial area of future research. Studies on feature selection and model bias in healthcare settings [26] and [28] highlight the need for AI systems that do not exacerbate existing disparities. Future directions should include the development of fairness-aware algorithms, as well as the creation of diverse and representative training datasets. Additionally, the integration of clinical domain knowledge into AI models, as demonstrated in the work on post hoc explanations for pneumothorax classification [24], can help bridge the gap between AI predictions and clinician understanding, leading to more effective and trusted systems. The adoption of AI by domain experts remains a significant hurdle, as evidenced by studies on the resistance to AI in natural science research [20]. Future efforts must focus on designing AI systems that are not only technically sound but also user-friendly and aligned with clinical workflows. This includes improving model explainability, providing training and support for clinicians, and fostering collaboration between AI developers and healthcare professionals. The development of open-source pipelines, such as EndToEndML [23], can also play a role in democratizing AI tools and encouraging broader adoption. Finally, the regulatory landscape is evolving rapidly, with frameworks such as the EU AI Act [19] setting new standards for safety-critical AI systems. Future research must address compliance with these regulations, ensuring that AI models meet the necessary safety, transparency, and accountability requirements. This will require interdisciplinary collaboration between AI researchers, policymakers, and healthcare providers to develop standards that balance innovation with patient safety. In summary, the future of AI in healthcare will be driven by a combination of technical advancements, ethical considerations, and practical implementation strategies. As the field continues to mature, the focus will increasingly shift from developing new algorithms to ensuring that these technologies are reliable, fair, and effectively integrated into clinical practice. The insights from current research provide a strong foundation for these future directions, and continued innovation in this space will be essential for realizing the full potential of AI in improving healthcare outcomes.",
+      "stats": {
+        "char_count": 4871,
+        "word_count": 684,
+        "sentence_count": 30,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Conclusion",
+      "level": 2,
+      "content": "In conclusion, this survey paper has provided a comprehensive overview of the role of Artificial Intelligence (AI) in healthcare, highlighting its transformative potential across various domains such as diagnostics, treatment, and patient care. The integration of AI into healthcare has been driven by advancements in machine learning, deep learning, and natural language processing, enabling the analysis of complex medical data with increasing accuracy and efficiency. Key findings demonstrate that AI has already made significant contributions, including improved diagnostic accuracy, personalized treatment recommendations, and enhanced operational efficiency in healthcare settings. The current state of the art in AI for healthcare is marked by the deployment of sophisticated models, particularly large language models, in clinical applications. These models have shown promising results in areas such as medical imaging, pathology, and telemedicine, underscoring the growing reliance on AI to augment clinical decision-making. However, the field remains in a dynamic phase, with ongoing efforts to refine model performance, ensure interpretability, and address issues related to data quality and generalizability. Looking ahead, several future research directions and open challenges warrant attention. The development of robust evaluation frameworks, such as the SUDO approach, is critical to ensure the reliability and validity of AI systems in real-world clinical settings. Additionally, ethical considerations, including data privacy, algorithmic bias, and the transparency of AI decision-making, must be addressed to foster trust and equitable implementation. Furthermore, the seamless integration of AI into clinical workflows requires interdisciplinary collaboration between technologists, clinicians, and policymakers. As the field continues to evolve, it is essential to strike a balance between innovation and responsibility, ensuring that AI serves as a tool to enhance, rather than replace, the human element in healthcare. With continued research, collaboration, and ethical stewardship, AI holds the promise of revolutionizing healthcare delivery, improving patient outcomes, and addressing some of the most pressing challenges in the medical field. The journey ahead is both exciting and complex, requiring sustained commitment and a patient-centered approach to realize the full potential of AI in healthcare.",
+      "stats": {
+        "char_count": 2433,
+        "word_count": 330,
+        "sentence_count": 13,
+        "line_count": 1
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "1. Explainable Machine Learning-Based Security and Privacy Protection Framework for Internet of Medical Things Systems",
+      "number": null,
+      "title": "explainable machine learning-based security and privacy protection framework for internet of medical things systems"
+    },
+    {
+      "text": "2. Medical Unlearnable Examples: Securing Medical Data from Unauthorized Training via Sparsity-Aware Local Masking",
+      "number": null,
+      "title": "medical unlearnable examples: securing medical data from unauthorized training via sparsity-aware local masking"
+    },
+    {
+      "text": "3. Guiding the generation of counterfactual explanations through temporal background knowledge for predictive process monitoring",
+      "number": null,
+      "title": "guiding the generation of counterfactual explanations through temporal background knowledge for predictive process monitoring"
+    },
+    {
+      "text": "4. From Explainable to Interpretable Deep Learning for Natural Language Processing in Healthcare: How Far from Reality?",
+      "number": null,
+      "title": "from explainable to interpretable deep learning for natural language processing in healthcare: how far from reality?"
+    },
+    {
+      "text": "5. A Toolbox for Surfacing Health Equity Harms and Biases in Large Language Models",
+      "number": null,
+      "title": "a toolbox for surfacing health equity harms and biases in large language models"
+    },
+    {
+      "text": "6. What Does Evaluation of Explainable Artificial Intelligence Actually Tell Us? {A",
+      "number": null,
+      "title": "what does evaluation of explainable artificial intelligence actually tell us? {a"
+    },
+    {
+      "text": "7. Improved EATFormer: A Vision Transformer for Medical Image Classification",
+      "number": null,
+      "title": "improved eatformer: a vision transformer for medical image classification"
+    },
+    {
+      "text": "8. Polaris: A Safety-focused LLM Constellation Architecture for Healthcare",
+      "number": null,
+      "title": "polaris: a safety-focused llm constellation architecture for healthcare"
+    },
+    {
+      "text": "9. VCounselor: a psychological intervention chat agent based on a knowledge-enhanced large language model",
+      "number": null,
+      "title": "vcounselor: a psychological intervention chat agent based on a knowledge-enhanced large language model"
+    },
+    {
+      "text": "10. Machine Learning and Transformers for Thyroid Carcinoma Diagnosis: A Review",
+      "number": null,
+      "title": "machine learning and transformers for thyroid carcinoma diagnosis: a review"
+    },
+    {
+      "text": "11. Dermacen Analytica: A Novel Methodology Integrating Multi-Modal Large Language Models with Machine Learning in tele-dermatology",
+      "number": null,
+      "title": "dermacen analytica: a novel methodology integrating multi-modal large language models with machine learning in tele-dermatology"
+    },
+    {
+      "text": "12. Large Language Models for Multi-Choice Question Classification of Medical Subjects",
+      "number": null,
+      "title": "large language models for multi-choice question classification of medical subjects"
+    },
+    {
+      "text": "13. Testing autonomous vehicles and AI: perspectives and challenges from cybersecurity, transparency, robustness and fairness",
+      "number": null,
+      "title": "testing autonomous vehicles and ai: perspectives and challenges from cybersecurity, transparency, robustness and fairness"
+    },
+    {
+      "text": "14. Harnessing the Computing Continuum Across Personalized Healthcare, Maintenance and Inspection, and Farming 4.0",
+      "number": null,
+      "title": "harnessing the computing continuum across personalized healthcare, maintenance and inspection, and farming 4"
+    },
+    {
+      "text": "15. Large Language Models and User Trust: Consequence of Self-Referential Learning Loop and the Deskilling of Healthcare Professionals",
+      "number": null,
+      "title": "large language models and user trust: consequence of self-referential learning loop and the deskilling of healthcare professionals"
+    },
+    {
+      "text": "16. The Limits of Perception: Analyzing Inconsistencies in Saliency Maps in XAI",
+      "number": null,
+      "title": "the limits of perception: analyzing inconsistencies in saliency maps in xai"
+    },
+    {
+      "text": "17. {CBT-LLM:",
+      "number": null,
+      "title": "{cbt-llm"
+    },
+    {
+      "text": "18. Towards Automatic Evaluation for LLMs' Clinical Capabilities: Metric, Data, and Algorithm",
+      "number": null,
+      "title": "towards automatic evaluation for llms' clinical capabilities: metric, data, and algorithm"
+    },
+    {
+      "text": "19. Navigating the {EU",
+      "number": null,
+      "title": "navigating the {eu"
+    },
+    {
+      "text": "20. \"It is there, and you need it, so why do you not use it?\" Achieving better adoption of AI systems by domain experts, in the case study of natural science research",
+      "number": null,
+      "title": "\"it is there"
+    },
+    {
+      "text": "21. SUDO: a framework for evaluating clinical artificial intelligence systems without ground-truth annotations",
+      "number": null,
+      "title": "sudo: a framework for evaluating clinical artificial intelligence systems without ground-truth annotations"
+    },
+    {
+      "text": "22. Practical Applications of Advanced Cloud Services and Generative AI Systems in Medical Image Analysis",
+      "number": null,
+      "title": "practical applications of advanced cloud services and generative ai systems in medical image analysis"
+    },
+    {
+      "text": "23. EndToEndML: An Open-Source End-to-End Pipeline for Machine Learning Applications",
+      "number": null,
+      "title": "endtoendml: an open-source end-to-end pipeline for machine learning applications"
+    },
+    {
+      "text": "24. Clinical domain knowledge-derived template improves post hoc {AI",
+      "number": null,
+      "title": "clinical domain knowledge-derived template improves post hoc {ai"
+    },
+    {
+      "text": "25. Sequential Inference of Hospitalization Electronic Health Records Using Probabilistic Models",
+      "number": null,
+      "title": "sequential inference of hospitalization electronic health records using probabilistic models"
+    },
+    {
+      "text": "26. Equity in Healthcare: Analyzing Disparities in Machine Learning Predictions of Diabetic Patient Readmissions",
+      "number": null,
+      "title": "equity in healthcare: analyzing disparities in machine learning predictions of diabetic patient readmissions"
+    },
+    {
+      "text": "27. Improving Cancer Imaging Diagnosis with Bayesian Networks and Deep Learning: A Bayesian Deep Learning Approach",
+      "number": null,
+      "title": "improving cancer imaging diagnosis with bayesian networks and deep learning: a bayesian deep learning approach"
+    },
+    {
+      "text": "28. Evaluating Fair Feature Selection in Machine Learning for Healthcare",
+      "number": null,
+      "title": "evaluating fair feature selection in machine learning for healthcare"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\AutoSurvey2\\Medicine\\Artificial_Intelligence_in_Healthcare_survey_split.json",
+    "processed_date": "2025-12-30T20:33:35.694340",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

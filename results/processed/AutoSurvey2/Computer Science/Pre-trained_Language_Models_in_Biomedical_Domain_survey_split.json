@@ -1,0 +1,261 @@
+{
+  "outline": [
+    [
+      1,
+      "Pre-Trained Language Models in Biomedical Domain: A Comprehensive Survey"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "Keywords"
+    ],
+    [
+      2,
+      "Introduction"
+    ],
+    [
+      2,
+      "Background"
+    ],
+    [
+      2,
+      "Current State of the Art"
+    ],
+    [
+      2,
+      "Future Directions"
+    ],
+    [
+      2,
+      "Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Pre-Trained Language Models in Biomedical Domain: A Comprehensive Survey",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "**Abstract** The rapid evolution of pre-trained language models (PLMs) has significantly impacted the biomedical domain, where the complexity and specificity of language pose unique challenges for traditional natural language processing (NLP) approaches. This survey paper provides a comprehensive overview of the current state of PLMs in biomedical text processing, focusing on their adaptation, application, and performance in tasks such as entity recognition, relation extraction, and logical inference. Starting with a background on the challenges inherent in biomedical language, the paper outlines the key developments in domain-specific pre-training and fine-tuning strategies that have enabled PLMs to address these challenges effectively. The current state of the art highlights the success of models like BERT and its variants, which have been tailored for biomedical tasks through specialized training data and architectures. Furthermore, the paper discusses emerging trends, including model efficiency, interpretability, and the integration of external knowledge sources. Looking ahead, future directions emphasize the need for more robust, scalable, and interpretable models that can better support clinical and scientific applications. This survey contributes to the growing body of literature by synthesizing key findings, identifying research gaps, and offering insights into the potential of PLMs in advancing biomedical NLP. By consolidating recent advances and highlighting future opportunities, this work aims to guide researchers and practitioners in the development and application of PLMs within the biomedical domain.",
+      "stats": {
+        "char_count": 1641,
+        "word_count": 222,
+        "sentence_count": 8,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Keywords",
+      "level": 2,
+      "content": "large language models, multimodal learning, natural language processing, machine learning, artificial intelligence",
+      "stats": {
+        "char_count": 114,
+        "word_count": 12,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Introduction",
+      "level": 2,
+      "content": "The rapid advancement of pre-trained language models (PLMs) has significantly influenced various domains, with the biomedical field being one of the most actively explored areas. These models, initially developed for general language understanding, have been adapted and fine-tuned to address specific challenges in biomedical text processing, such as entity recognition, relation extraction, and logical inference. The growing body of research in this area has led to the development of domain-specific models that incorporate biomedical knowledge, improve performance on long documents, and address the unique challenges of medical data, including long-tailed label distributions and the need for efficient inference. A key focus of recent studies has been the integration of external knowledge, such as biomedical ontologies and drug-protein interaction databases, to enhance the semantic understanding of these models. This has been achieved through techniques like decomposable knowledge injection, where knowledge is systematically embedded into the model's architecture to improve its reasoning capabilities [3]. Additionally, efforts have been made to adapt PLMs for low-resource settings, such as the DPRK language, by leveraging cross-lingual transfer and domain-specific corpora [2]. Another significant area of research involves the use of ensemble methods and hybrid architectures, such as combining BERT and T5 models, to improve the accuracy of tasks like drug-protein interaction mining and chemical identification in scientific literature [1]. The importance of fine-tuning and probing has also been emphasized, as these techniques help uncover and enhance specific linguistic and semantic properties of PLMs, making them more effective for complex biomedical tasks. While many studies have demonstrated the potential of these models, challenges remain, particularly in handling long medical documents, improving the performance on rare or tail-end labels, and ensuring model efficiency for real-world applications. As the field continues to evolve, the development of more robust, interpretable, and domain-adapted pre-trained language models will be crucial for advancing biomedical natural language processing and enabling more accurate and reliable applications in healthcare and life sciences.",
+      "stats": {
+        "char_count": 2315,
+        "word_count": 317,
+        "sentence_count": 10,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Background",
+      "level": 2,
+      "content": "Pre-trained language models have emerged as a transformative force in natural language processing, enabling significant advances across various domains, including the biomedical field. In the biomedical domain, the complexity and specificity of language, along with the need for precise information extraction and interpretation, pose unique challenges that traditional models struggle to address. As a result, there has been a growing interest in adapting and enhancing pre-trained language models to better suit the requirements of biomedical tasks. Early studies have demonstrated that domain-specific adaptation is crucial for achieving optimal performance, as general-purpose models often lack the necessary inductive biases and semantic understanding required for biomedical applications. This has led to the development of domain-oriented pre-training strategies that incorporate biomedical knowledge, such as ontologies, entities, and domain-specific linguistic patterns, to improve the models' ability to capture the nuances of biomedical text [6]. One key finding from these studies is that incorporating phrase and entity-level knowledge during pre-training significantly enhances the model's performance on downstream tasks such as relation extraction and synonym prediction [6]. Furthermore, the use of domain-specific data for fine-tuning or pre-training has been shown to be essential, as the biomedical domain often lacks the large-scale labeled datasets that are commonly available in other fields. This has prompted researchers to explore methods for selecting or generating relevant domain-specific data, such as using monolingual texts to identify in-domain sentences for translation tasks or leveraging existing corpora for relation extraction [5]. In addition to domain adaptation, several studies have emphasized the importance of model architecture and training strategies. For instance, hybrid masking techniques that combine word and phrase-level masking have been proposed to better capture the linguistic structures present in biomedical texts [6]. Similarly, the integration of graph-based structures into prompt templates has shown promise in improving the accuracy of biomedical synonym prediction [4]. These approaches highlight the need for a more nuanced understanding of the domain-specific linguistic and semantic characteristics. Another important trend in the literature is the use of ensemble methods and multi-task learning to improve performance on challenging biomedical tasks. For example, the CU-UD system employs an ensemble of BERT-based models to detect drug-protein interactions, demonstrating that combining multiple models can lead to more robust and accurate results [5]. This approach has been complemented by studies that explore the benefits of incorporating domain-specific knowledge into the model's training process, such as through structure contextual pre-training or optimal transport alignment [6]. The overall body of research underscores the importance of tailoring pre-trained language models to the biomedical domain, both in terms of training data and model architecture. While some approaches focus on domain-specific pre-training and knowledge integration, others rely on fine-tuning or ensembling existing models with domain-specific data. Despite these differences, there is a shared recognition of the need for high-quality labeled data and the value of leveraging domain-specific linguistic and semantic structures. As the field continues to evolve, the integration of these insights into more advanced and scalable models will be critical for addressing the complex challenges of biomedical natural language processing.",
+      "stats": {
+        "char_count": 3692,
+        "word_count": 502,
+        "sentence_count": 19,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Current State of the Art",
+      "level": 2,
+      "content": "Pre-trained language models have made significant strides in the biomedical domain, driven by the need to process and understand the vast and complex textual data generated in biological and clinical research. A key development has been the adaptation of large-scale language models, such as BERT and its variants, to biomedical tasks through fine-tuning and domain-specific pretraining. These models have shown promise in various applications, including relation extraction, entity linking, and concept extraction, but they also face challenges in low-resource settings where labeled data is scarce. Studies have demonstrated that while larger models tend to achieve better performance, they often suffer from instability during fine-tuning, necessitating techniques such as layerwise decay and layer freezing to improve training robustness [9]. Additionally, domain-specific pretraining has emerged as a critical factor in enhancing model performance, with models like BLURB and CLIN-X showing significant improvements over general-domain models like BERT and XLM-R [9] [13]. These models are typically trained on biomedical corpora, such as PubMed abstracts or clinical notes, to better capture the linguistic and semantic characteristics of the domain. Another important trend is the exploration of cross-task and cross-domain transfer learning, where models pretrained on one biomedical task can be effectively adapted to others, reducing the need for extensive retraining. For instance, CLIN-X has shown that task- and language-agnostic model architectures can improve performance in low-resource settings, while studies on cross-domain generalization have highlighted the potential of transfer learning in overcoming cold-start problems [13] [10]. Moreover, the integration of non-textual data, such as epigenetic and genomic sequences, has expanded the scope of pre-trained models beyond traditional text processing. Models like EBERT, which combine DNA sequences with epigenetic data, have demonstrated superior performance in tasks such as transcription factor binding prediction, illustrating the potential of multimodal pretraining in the biomedical domain [8]. Despite these advancements, the reliance on high-quality, domain-specific labeled data remains a major bottleneck. Many studies emphasize the need for larger and more diverse annotated datasets to support fine-tuning and model evaluation, particularly in tasks like relation extraction, where the complexity of biomedical relationships demands careful modeling [7]. Techniques such as knowledge augmentation, data augmentation, and model distillation have been proposed to mitigate data scarcity, with some approaches leveraging external knowledge bases to enhance model performance [12] [11]. In addition, recent works have explored the use of prompts and soft prompts for domain adaptation, demonstrating that even small adjustments to the input structure can significantly improve model performance in specialized domains [12]. Overall, the current state of the art in pre-trained language models for biomedical applications reflects a growing emphasis on domain adaptation, transfer learning, and the integration of diverse data sources. While challenges remain, particularly in low-resource and highly specialized settings, the field continues to evolve rapidly, driven by both technical innovations and the increasing availability of biomedical data. These developments suggest that pre-trained language models will play an increasingly central role in advancing biomedical natural language processing and enabling more accurate and interpretable analysis of scientific and clinical text.",
+      "stats": {
+        "char_count": 3668,
+        "word_count": 498,
+        "sentence_count": 17,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Future Directions",
+      "level": 2,
+      "content": "The future of pre-trained language models in the biomedical domain is poised for significant advancements, driven by the need for more efficient, interpretable, and task-specific models that can effectively handle the complexities of clinical and scientific text. A key direction is the continued exploration of model efficiency and adaptation strategies, as seen in works that leverage knowledge distillation to compress large models while maintaining performance [19]. This trend is likely to expand, with a focus on developing lightweight models that can be deployed in resource-constrained environments, such as clinical settings where real-time processing is critical. Additionally, the integration of domain-specific knowledge into pre-training frameworks, as demonstrated by ERNIE 3.0 Titan [20], suggests that future models will increasingly incorporate structured and unstructured biomedical knowledge to enhance their understanding and generation capabilities. This could lead to more accurate and context-aware models for tasks such as clinical documentation, drug discovery, and patient care. Another promising avenue is the development of interactive language modeling systems, as proposed in [18], which emphasizes the role of human-AI collaboration in language learning. Such systems could revolutionize how clinicians and researchers interact with language models, enabling more dynamic and context-sensitive assistance. This shift from static to interactive models may also foster greater transparency and trust, as users can engage with the model to refine outputs and validate results. Furthermore, the importance of the current input in sequence modeling, as highlighted in [16], suggests that future architectures may prioritize direct input-output mappings to improve accuracy and reduce computational overhead, particularly in tasks where real-time performance is essential. In the realm of clinical text mining, the integration of relation extraction with named entity recognition, as demonstrated in [22], points to the need for more sophisticated frameworks that can extract and organize complex relationships from unstructured clinical notes. This will be crucial for building comprehensive knowledge graphs and supporting decision-making in healthcare. Moreover, the emphasis on task-specific adaptations, such as those seen in clinical summarization and disease coding [15], [24], underscores the importance of tailoring pre-trained models to the unique challenges of biomedical data, including domain-specific terminology, varying document structures, and the need for high precision. The future also holds potential for the development of more interpretable models, as seen in the work on pedagogical rule extraction [23]. As the use of language models in critical healthcare applications grows, there will be an increasing demand for models that not only perform well but also provide clear explanations for their outputs. This will be essential for ensuring accountability, compliance, and user confidence. Additionally, the application of domain-specific word embeddings and topic modeling, as explored in [21], indicates that future research may focus on enhancing the semantic representation of biomedical texts through more specialized and context-aware embedding techniques. Finally, the growing interest in few-shot and zero-shot learning, as seen in [14], [17], suggests that future models may become more adaptable to new tasks and domains with minimal supervision. This could be particularly valuable in the biomedical field, where data is often scarce or highly specialized. Overall, the future of pre-trained language models in the biomedical domain will likely be characterized by a balance between scalability, efficiency, and domain-specific customization, all aimed at improving the accuracy, usability, and impact of these models in real-world healthcare and scientific applications.",
+      "stats": {
+        "char_count": 3932,
+        "word_count": 544,
+        "sentence_count": 20,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Conclusion",
+      "level": 2,
+      "content": "The survey paper provides a comprehensive overview of the role and impact of pre-trained language models (PLMs) in the biomedical domain. It highlights the transformative potential of these models in addressing the unique challenges of biomedical text processing, including entity recognition, relation extraction, and logical inference. The paper summarizes key findings, emphasizing the adaptation and fine-tuning of general-purpose PLMs such as BERT for domain-specific tasks, as well as the development of specialized models tailored to biomedical contexts. These advancements have led to improved performance in critical applications such as clinical documentation, drug discovery, and biomedical information retrieval. The current state of the field demonstrates that PLMs have become essential tools in biomedical NLP, with numerous studies showing their effectiveness in handling complex and specialized language. The integration of domain-specific knowledge through pretraining and fine-tuning has significantly enhanced model accuracy and applicability. However, challenges remain, particularly in terms of model efficiency, interpretability, and the ability to generalize across diverse biomedical subdomains. Looking ahead, future research should focus on developing more efficient and scalable models that can operate with limited resources while maintaining high performance. There is also a need for greater interpretability to build trust and facilitate integration into clinical decision-making systems. Additionally, the development of robust evaluation frameworks and standardized benchmarks will be crucial for advancing the field. Addressing these challenges will require interdisciplinary collaboration between NLP researchers, biomedical experts, and clinicians. In conclusion, pre-trained language models have made substantial contributions to the biomedical domain, offering powerful solutions for processing and understanding complex textual data. As the field continues to evolve, further innovation and refinement will be necessary to fully realize the potential of these models in improving healthcare and biomedical research. The ongoing efforts in this area hold great promise for advancing both scientific discovery and clinical practice.",
+      "stats": {
+        "char_count": 2270,
+        "word_count": 299,
+        "sentence_count": 14,
+        "line_count": 1
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "1. Text Mining Drug/Chemical-Protein Interactions using an Ensemble of BERT and T5 Based Models",
+      "number": null,
+      "title": "text mining drug/chemical-protein interactions using an ensemble of bert and t5 based models"
+    },
+    {
+      "text": "2. DPRK-BERT: The Supreme Language Model",
+      "number": null,
+      "title": "dprk-bert: the supreme language model"
+    },
+    {
+      "text": "3. {DKPLM:",
+      "number": null,
+      "title": "{dkplm"
+    },
+    {
+      "text": "4. Interpretable Privacy Preservation of Text Representations Using Vector Steganography",
+      "number": null,
+      "title": "interpretable privacy preservation of text representations using vector steganography"
+    },
+    {
+      "text": "5. CU-UD: text-mining drug and chemical-protein interactions with ensembles of BERT-based models",
+      "number": null,
+      "title": "cu-ud: text-mining drug and chemical-protein interactions with ensembles of bert-based models"
+    },
+    {
+      "text": "6. Domain-oriented Language Pre-training with Adaptive Hybrid Masking and Optimal Transport Alignment",
+      "number": null,
+      "title": "domain-oriented language pre-training with adaptive hybrid masking and optimal transport alignment"
+    },
+    {
+      "text": "7. An Empirical Study on Relation Extraction in the Biomedical Domain",
+      "number": null,
+      "title": "an empirical study on relation extraction in the biomedical domain"
+    },
+    {
+      "text": "8. Epigenomic language models powered by Cerebras",
+      "number": null,
+      "title": "epigenomic language models powered by cerebras"
+    },
+    {
+      "text": "9. Fine-tuning large neural language models for biomedical natural language processing",
+      "number": null,
+      "title": "fine-tuning large neural language models for biomedical natural language processing"
+    },
+    {
+      "text": "10. Cross-Domain Generalization and Knowledge Transfer in Transformers Trained on Legal Data",
+      "number": null,
+      "title": "cross-domain generalization and knowledge transfer in transformers trained on legal data"
+    },
+    {
+      "text": "11. Knowledge-Rich Self-Supervision for Biomedical Entity Linking",
+      "number": null,
+      "title": "knowledge-rich self-supervision for biomedical entity linking"
+    },
+    {
+      "text": "12. Prompt Tuning GPT-2 language model for parameter-efficient domain adaptation of ASR systems",
+      "number": null,
+      "title": "prompt tuning gpt-2 language model for parameter-efficient domain adaptation of asr systems"
+    },
+    {
+      "text": "13. {CLIN-X",
+      "number": null,
+      "title": "{clin-x"
+    },
+    {
+      "text": "14. Few-shot Learning with Multilingual Generative Language Models",
+      "number": null,
+      "title": "few-shot learning with multilingual generative language models"
+    },
+    {
+      "text": "15. Domain Adaptation with Pre-trained Transformers for Query-Focused Abstractive Text Summarization",
+      "number": null,
+      "title": "domain adaptation with pre-trained transformers for query-focused abstractive text summarization"
+    },
+    {
+      "text": "16. The Importance of the Current Input in Sequence Modeling",
+      "number": null,
+      "title": "the importance of the current input in sequence modeling"
+    },
+    {
+      "text": "17. Few-shot Multi-hop Question Answering over Knowledge Base",
+      "number": null,
+      "title": "few-shot multi-hop question answering over knowledge base"
+    },
+    {
+      "text": "18. Towards Interactive Language Modeling",
+      "number": null,
+      "title": "towards interactive language modeling"
+    },
+    {
+      "text": "19. Distilling the Knowledge of Romanian BERTs Using Multiple Teachers",
+      "number": null,
+      "title": "distilling the knowledge of romanian berts using multiple teachers"
+    },
+    {
+      "text": "20. ERNIE 3.0 Titan: Exploring Larger-scale Knowledge Enhanced Pre-training for Language Understanding and Generation",
+      "number": null,
+      "title": "0 titan: exploring larger-scale knowledge enhanced pre-training for language understanding and generation"
+    },
+    {
+      "text": "21. Analyzing Scientific Publications using Domain-Specific Word Embedding and Topic Modelling",
+      "number": null,
+      "title": "analyzing scientific publications using domain-specific word embedding and topic modelling"
+    },
+    {
+      "text": "22. Deeper Clinical Document Understanding using Relation Extraction",
+      "number": null,
+      "title": "deeper clinical document understanding using relation extraction"
+    },
+    {
+      "text": "23. Pedagogical Rule Extraction to Learn Interpretable Models - an Empirical Study",
+      "number": null,
+      "title": "pedagogical rule extraction to learn interpretable models - an empirical study"
+    },
+    {
+      "text": "24. Secondary Use of Clinical Problem List Entries for Neural Network-Based Disease Code Assignment",
+      "number": null,
+      "title": "secondary use of clinical problem list entries for neural network-based disease code assignment"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\AutoSurvey2\\Computer Science\\Pre-trained_Language_Models_in_Biomedical_Domain_survey_split.json",
+    "processed_date": "2025-12-30T20:33:35.090976",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

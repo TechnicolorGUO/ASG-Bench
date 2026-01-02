@@ -1,0 +1,479 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of Precision Cancer Medicine"
+    ],
+    [
+      1,
+      "1 Abstract"
+    ],
+    [
+      1,
+      "2 Introduction"
+    ],
+    [
+      1,
+      "3 Hybrid Quantum-Classical and Multimodal Data Integration"
+    ],
+    [
+      2,
+      "3.1 Data Fusion and Representation Learning"
+    ],
+    [
+      3,
+      "3.1.1 Integration of multi-omics and imaging for cancer subtyping"
+    ],
+    [
+      3,
+      "3.1.2 Hybrid quantum-classical frameworks for biomarker discovery"
+    ],
+    [
+      2,
+      "3.2 Model Interpretability and Explainable AI"
+    ],
+    [
+      3,
+      "3.2.1 Prototypical and part-based models for spatial omics analysis"
+    ],
+    [
+      3,
+      "3.2.2 Context-aware deep learning for personalized cancer prediction"
+    ],
+    [
+      2,
+      "3.3 Knowledge Graphs and Structured Data Modeling"
+    ],
+    [
+      3,
+      "3.3.1 Standardized knowledge graphs for flavonoid and health effect relationships"
+    ],
+    [
+      3,
+      "3.3.2 Graph neural networks for metastasis prediction and biological network analysis"
+    ],
+    [
+      1,
+      "4 Multi-Agent and Bayesian Methods for Clinical Decision-Making"
+    ],
+    [
+      2,
+      "4.1 Multi-Agent Systems for Collaborative Decision-Making"
+    ],
+    [
+      3,
+      "4.1.1 Hierarchical multi-expert inference for multimodal survival prediction"
+    ],
+    [
+      3,
+      "4.1.2 Autonomous multi-agent collaboration in CAR-T development"
+    ],
+    [
+      2,
+      "4.2 Bayesian Inference and Structured Variable Selection"
+    ],
+    [
+      3,
+      "4.2.1 Multivariate Bayesian methods for pharmacogenomic prediction"
+    ],
+    [
+      3,
+      "4.2.2 Structured variable selection for genetic biomarker identification"
+    ],
+    [
+      2,
+      "4.3 Dynamic and Interactive Decision Frameworks"
+    ],
+    [
+      3,
+      "4.3.1 Bandit-driven treatment recommendation using large language models"
+    ],
+    [
+      3,
+      "4.3.2 Sequential clinical decision-making benchmarks for real-world scenarios"
+    ],
+    [
+      1,
+      "5 Attention-Based Architectures and Interpretable AI in Cancer Research"
+    ],
+    [
+      2,
+      "5.1 Attention Mechanisms in Multi-Modal Learning"
+    ],
+    [
+      3,
+      "5.1.1 Cross-modal attention for heterogeneous data integration"
+    ],
+    [
+      3,
+      "5.1.2 Hierarchical attention for biologically informed feature extraction"
+    ],
+    [
+      2,
+      "5.2 Interpretable Deep Learning Models"
+    ],
+    [
+      3,
+      "5.2.1 Hierarchical attention-based networks for cancer diagnosis"
+    ],
+    [
+      3,
+      "5.2.2 SHAP-based feature selection for medical diagnostic accuracy"
+    ],
+    [
+      2,
+      "5.3 Visual and Structural Attention in Medical Imaging"
+    ],
+    [
+      3,
+      "5.3.1 Vision-guided diffusion models for tumor segmentation"
+    ],
+    [
+      3,
+      "5.3.2 3D U-Net with attention for cerebrovascular imaging"
+    ],
+    [
+      1,
+      "6 Future Directions"
+    ],
+    [
+      1,
+      "7 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of Precision Cancer Medicine",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Abstract",
+      "level": 1,
+      "content": "Precision cancer medicine has evolved as a transformative approach in oncology, leveraging advanced computational methods and diverse data sources to enable personalized treatment strategies. This survey paper provides a comprehensive overview of the integration of hybrid quantum-classical and multimodal data approaches in precision cancer medicine, focusing on their applications in cancer subtyping, biomarker discovery, and clinical decision-making. The paper examines recent advances in data fusion, representation learning, and model interpretability, highlighting the role of emerging technologies such as quantum computing, graph neural networks, and attention-based architectures. Key findings include the effectiveness of multimodal integration in capturing tumor heterogeneity, the potential of hybrid quantum-classical frameworks to overcome computational limitations in biomarker discovery, and the importance of interpretable AI in enhancing the clinical utility of predictive models. By synthesizing current research and identifying critical challenges, this paper contributes to the ongoing development of precision oncology and underscores the need for continued innovation in data integration, model robustness, and clinical translation.",
+      "stats": {
+        "char_count": 1256,
+        "word_count": 158,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2 Introduction",
+      "level": 1,
+      "content": "Precision cancer medicine has emerged as a transformative paradigm in oncology, driven by the integration of advanced computational methods and diverse data sources. The field seeks to move beyond traditional, one-size-fits-all approaches to cancer treatment by leveraging individualized patient data to guide therapeutic decisions. This shift has been facilitated by the rapid development of high-throughput sequencing, imaging technologies, and machine learning algorithms, which enable the analysis of complex biological systems at an unprecedented scale. As a result, precision cancer medicine has the potential to significantly improve patient outcomes by identifying the most effective treatments for specific tumor subtypes and individual patient profiles [1]. However, the integration of these diverse data modalities presents significant challenges, including data heterogeneity, computational complexity, and the need for robust and interpretable models. Addressing these challenges is essential for the continued advancement of precision oncology and the translation of research findings into clinical practice.\n\nThis survey paper focuses on the integration of hybrid quantum-classical and multimodal data approaches in precision cancer medicine, with a particular emphasis on their applications in cancer subtyping, biomarker discovery, and clinical decision-making [1]. The paper examines the latest developments in data fusion, representation learning, and model interpretability, highlighting the role of emerging technologies such as quantum computing, graph neural networks, and attention-based architectures. It also explores the use of knowledge graphs, Bayesian inference, and multi-agent systems to enhance the accuracy and clinical relevance of predictive models. By synthesizing current research and identifying key trends, this paper aims to provide a comprehensive overview of the state of the art in precision cancer medicine and to guide future research directions.\n\nThe paper begins by discussing the integration of multi-omics and imaging data for cancer subtyping, emphasizing the importance of multimodal approaches in capturing tumor heterogeneity and improving diagnostic accuracy [2]. It explores the challenges associated with data alignment and the use of deep learning and self-supervised learning techniques to extract biologically meaningful features. The second section examines hybrid quantum-classical frameworks for biomarker discovery, highlighting their potential to overcome computational limitations in high-dimensional data analysis [1]. This includes the use of quantum-enhanced clustering and classification techniques to identify tumor subtypes and discover novel biomarkers. The third section focuses on model interpretability and explainable AI, discussing the application of prototypical and part-based models in spatial omics analysis, as well as context-aware deep learning for personalized cancer prediction. These approaches aim to enhance the transparency and clinical utility of machine learning models, making them more accessible and trustworthy for healthcare professionals.\n\nThe paper also addresses the role of knowledge graphs and structured data modeling in precision cancer medicine, with a focus on standardized knowledge graphs for flavonoid and health effect relationships and the application of graph neural networks for metastasis prediction and biological network analysis [3]. These methods provide a structured and scalable framework for integrating diverse data sources and uncovering complex biological relationships. Additionally, the paper explores multi-agent and Bayesian methods for clinical decision-making, including hierarchical multi-expert inference for multimodal survival prediction and autonomous multi-agent collaboration in CAR-T development [4]. These approaches aim to enhance the efficiency and accuracy of clinical workflows by leveraging distributed intelligence and probabilistic reasoning. Finally, the paper discusses attention-based architectures and interpretable AI in cancer research, emphasizing the use of cross-modal attention for heterogeneous data integration and hierarchical attention for biologically informed feature extraction. These techniques contribute to the development of more accurate, transparent, and clinically relevant models for cancer diagnosis and treatment.\n\nThis survey paper makes several key contributions to the field of precision cancer medicine. It provides a comprehensive overview of the current state of research on hybrid quantum-classical and multimodal data integration, highlighting both the opportunities and challenges associated with these approaches. By synthesizing recent advances in data fusion, model interpretability, and clinical decision-making, the paper offers a valuable resource for researchers, clinicians, and policymakers working in the field of precision oncology. Additionally, the paper identifies important research directions and open challenges, such as the need for standardized data preprocessing pipelines, the development of robust models that generalize across diverse patient populations, and the integration of clinical context into predictive models. These insights will be instrumental in guiding future research and facilitating the translation of precision cancer medicine into routine clinical practice.",
+      "stats": {
+        "char_count": 5382,
+        "word_count": 705,
+        "sentence_count": 27,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "3.1.1 Integration of multi-omics and imaging for cancer subtyping",
+      "level": 3,
+      "content": "The integration of multi-omics and imaging data has emerged as a critical approach in cancer subtyping, enabling a more comprehensive understanding of tumor heterogeneity and biological mechanisms [2]. By combining high-throughput genomic, transcriptomic, and proteomic data with histopathological and radiological imaging, researchers can uncover complex relationships between molecular profiles and spatial phenotypes. This multimodal approach allows for the identification of subtypes that are not discernible through individual data sources, thereby improving diagnostic accuracy and guiding personalized treatment strategies. Recent advances in computational methods, including deep learning and multimodal alignment techniques, have facilitated the joint analysis of these diverse data types, enabling the extraction of biologically meaningful features that reflect both genetic and morphological tumor characteristics.\n\nA key challenge in this integration is the alignment and interpretation of data from different modalities, which often exhibit varying levels of resolution, scale, and noise. To address this, frameworks such as multimodal self-supervised learning and cross-modal alignment models have been developed to jointly model tumor biology from genotype to phenotype. These methods enable the generation of enriched histopathology representations that incorporate multi-omics information, enhancing the predictive power of computational models. Additionally, the use of attention mechanisms and explainable AI techniques has improved the interpretability of these models, allowing clinicians to better understand the biological basis of subtyping decisions. Such advancements are crucial for translating multi-omics and imaging integration into clinical practice, where reliable and interpretable biomarkers are essential for decision-making.\n\nDespite significant progress, several challenges remain in the widespread adoption of multi-omics and imaging integration for cancer subtyping. These include the need for standardized data preprocessing pipelines, the handling of missing or heterogeneous data, and the development of robust models that generalize across diverse patient populations. Furthermore, the integration of clinical context and real-world variability into these models is essential for ensuring their practical utility. Ongoing research is focused on improving the scalability and efficiency of these methods, as well as on exploring the potential of synthetic data and generative models to augment limited datasets. As these challenges are addressed, the integration of multi-omics and imaging is expected to play an increasingly central role in precision oncology, enabling more accurate and personalized cancer care.",
+      "stats": {
+        "char_count": 2756,
+        "word_count": 360,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.1.2 Hybrid quantum-classical frameworks for biomarker discovery",
+      "level": 3,
+      "content": "Hybrid quantum-classical frameworks for biomarker discovery integrate the strengths of quantum computing with classical machine learning techniques to address complex biomedical problems [1]. These frameworks are particularly valuable in scenarios where classical methods face computational limitations, such as in high-dimensional data analysis or optimization tasks. By identifying subroutines that can benefit from quantum acceleration—such as feature selection, pattern recognition, or optimization of biomarker signatures—these hybrid approaches enable more efficient exploration of biological data. The integration of quantum algorithms into clinical data analysis workflows allows for the discovery of biomarkers that may be otherwise undetectable using classical methods alone, offering new insights into disease mechanisms and potential therapeutic targets [1].\n\nThe design of such hybrid frameworks involves careful consideration of the problem domain and the available computational resources. For instance, in cancer research, hybrid models can leverage quantum-enhanced clustering or classification to identify subtypes of tumors based on multimodal data, including genomic, transcriptomic, and imaging data [1]. These models often employ quantum circuits to process specific aspects of the data, such as encoding high-dimensional features into quantum states, while classical components handle the remaining computations. This division of labor ensures that the quantum advantage is maximized without overburdening the quantum hardware, which remains limited in terms of qubit count and coherence times. Moreover, hybrid approaches are adaptable to different biomedical applications, making them a versatile tool for biomarker discovery across various diseases.\n\nRecent advancements in hybrid quantum-classical frameworks have demonstrated their potential to improve the accuracy and interpretability of biomarker identification. By combining quantum-enhanced feature extraction with classical models, these frameworks can uncover hidden patterns in complex datasets, leading to more robust and generalizable biomarkers. Additionally, the integration of quantum computing into existing clinical workflows allows for the development of scalable solutions that can handle the increasing volume and complexity of biomedical data. As quantum technologies continue to evolve, these hybrid approaches are expected to play a crucial role in advancing precision medicine and enabling more effective diagnostic and therapeutic strategies.",
+      "stats": {
+        "char_count": 2543,
+        "word_count": 330,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.1 Prototypical and part-based models for spatial omics analysis",
+      "level": 3,
+      "content": "Prototypical and part-based models have emerged as powerful frameworks for spatial omics analysis, offering structured and interpretable representations of complex biological data [5]. These models leverage the concept of prototypical learning, where representative patterns or \"prototypes\" are identified to capture the essential characteristics of spatially distributed biological features. By decomposing spatial data into distinct parts, such models can effectively model local interactions and relationships, which are critical for understanding tumor heterogeneity and cellular interactions. This approach not only enhances the interpretability of spatial omics data but also enables the identification of region-specific biomarkers that may be missed by global modeling techniques [5]. The integration of part-based reasoning with spatial data allows for a more nuanced understanding of biological processes at the tissue level.\n\nRecent advancements in prototypical and part-based models have focused on improving their ability to handle high-dimensional and multimodal spatial omics data. Techniques such as fragment-aware positional encodings and attention mechanisms have been introduced to preserve spatial structure and enhance the model's capacity to differentiate between distinct tissue regions. These innovations are particularly valuable in applications such as histopathology analysis, where the spatial arrangement of cells and tissues is crucial for accurate diagnosis. Additionally, the use of hierarchical architectures enables the modeling of both local and global patterns, allowing for a more comprehensive analysis of spatial omics data. By incorporating these features, prototypical and part-based models can better capture the complexity of biological systems and support more accurate and reliable predictions.\n\nDespite their advantages, prototypical and part-based models face challenges in scalability and computational efficiency, especially when applied to large-scale spatial omics datasets. The need for efficient parameter estimation and the handling of sparse or noisy data remain open research questions. Furthermore, the integration of these models with other analytical techniques, such as deep learning and graph-based methods, is an active area of exploration. Future work should focus on optimizing these models for real-world applications, ensuring they can effectively process and interpret the vast and complex data generated by modern spatial omics technologies. This will be essential for advancing precision medicine and enabling more personalized and effective therapeutic strategies.",
+      "stats": {
+        "char_count": 2634,
+        "word_count": 351,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.2 Context-aware deep learning for personalized cancer prediction",
+      "level": 3,
+      "content": "Context-aware deep learning for personalized cancer prediction leverages multimodal data to enhance the accuracy and interpretability of cancer diagnostics. By integrating genomic, epigenomic, transcriptomic, and histopathological data, these models capture the complex biological mechanisms underlying tumor development. The use of shared latent spaces allows for the joint representation of diverse data types, enabling a more comprehensive understanding of tumor heterogeneity. This approach not only improves classification performance but also facilitates the identification of biologically relevant features that can inform treatment strategies. The ability to incorporate contextual information from multiple sources makes these models particularly effective in addressing the variability inherent in cancer biology.\n\nRecent advances in deep learning have enabled the development of context-aware models that can process and interpret complex, high-dimensional data from various modalities. Techniques such as self-supervised learning and multimodal alignment have been employed to extract meaningful patterns from whole-slide images and multi-omics data. These models are designed to recognize spatial and molecular relationships that are critical for accurate cancer prediction. Furthermore, the integration of clinical and imaging data enhances the predictive power of these systems, allowing for more personalized and precise treatment recommendations. The incorporation of explainable AI methods also supports clinical adoption by providing insights into model decision-making processes, thereby increasing trust and usability in real-world settings.\n\nThe application of context-aware deep learning in cancer prediction extends beyond traditional diagnostic methods, offering new opportunities for early detection and risk stratification. By leveraging large-scale datasets and advanced computational techniques, these models can uncover hidden patterns that are not easily discernible through conventional approaches. The ability to handle heterogeneous and often sparse data makes these models robust and adaptable to different clinical scenarios. As the field continues to evolve, the integration of context-aware deep learning into clinical workflows holds significant promise for improving patient outcomes through more accurate and personalized cancer care.",
+      "stats": {
+        "char_count": 2375,
+        "word_count": 305,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.1 Standardized knowledge graphs for flavonoid and health effect relationships",
+      "level": 3,
+      "content": "Standardized knowledge graphs have emerged as a critical tool for organizing and interpreting the complex relationships between flavonoids and their health effects [6]. These structured representations enable the integration of diverse data sources, including chemical structures, biological pathways, dietary intake, and clinical outcomes. By formalizing these connections, knowledge graphs provide a unified framework that facilitates data querying, inference, and knowledge discovery. This approach is particularly valuable in the context of flavonoids, which exhibit a wide range of chemical diversity and biological activities, making it challenging to systematically analyze their health impacts without a structured representation.\n\nThe construction of standardized knowledge graphs for flavonoid and health effect relationships involves the aggregation of data from multiple domains, such as pharmacology, nutrition, and genomics. These graphs typically encode entities like flavonoid compounds, their molecular targets, physiological effects, and disease associations, along with the relationships that bind them. Advanced semantic technologies, such as ontologies and linked data principles, are employed to ensure consistency and interoperability across different data sources. This structured approach not only enhances the accessibility of information but also supports the development of predictive models and decision-support systems that can leverage the rich interconnections within the graph.\n\nMoreover, the dynamic and evolving nature of flavonoid research necessitates that knowledge graphs remain adaptable and up-to-date [6]. As new findings emerge, these graphs can be refined and expanded to incorporate additional data, ensuring their relevance and accuracy. This adaptability is crucial for applications in personalized nutrition, drug discovery, and health management, where timely and accurate information is essential. By providing a comprehensive and structured view of flavonoid-related knowledge, standardized knowledge graphs serve as a foundational resource for researchers, clinicians, and policymakers seeking to harness the health benefits of these bioactive compounds [6].",
+      "stats": {
+        "char_count": 2210,
+        "word_count": 288,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.2 Graph neural networks for metastasis prediction and biological network analysis",
+      "level": 3,
+      "content": "Graph neural networks (GNNs) have emerged as a powerful tool for modeling complex relationships in biological systems, particularly in the context of cancer metastasis prediction and network analysis [3]. Unlike traditional machine learning approaches, GNNs are designed to process graph-structured data, making them ideal for capturing interactions between genes, proteins, and other biological entities. By leveraging the inherent connectivity of biological networks, GNNs can uncover hidden patterns and dependencies that are critical for understanding tumor progression and identifying potential therapeutic targets [3]. This capability is especially valuable in metastasis prediction, where the interplay between different molecular and cellular components plays a pivotal role in disease spread.\n\nIn the realm of biological network analysis, GNNs enable the integration of multi-omics data, such as genomic, transcriptomic, and proteomic profiles, into a unified framework. This integration allows for the construction of comprehensive interaction maps that reflect the dynamic nature of cellular processes. By applying GNNs to these networks, researchers can identify key nodes and pathways that are associated with metastatic behavior, leading to more accurate and biologically meaningful predictions [3]. Furthermore, GNNs can incorporate spatial and temporal information, enhancing their ability to model the evolving landscape of cancer progression. This approach not only improves the accuracy of metastasis prediction but also provides insights into the underlying mechanisms driving tumor dissemination.\n\nRecent advancements in GNN architectures have further expanded their applicability in cancer research. Techniques such as graph attention mechanisms and graph convolutional networks have enabled more efficient and interpretable modeling of biological interactions. These methods allow for the prioritization of biologically relevant features, improving the robustness and generalizability of predictive models. Additionally, the integration of explainable AI techniques with GNNs enhances the interpretability of results, making them more accessible to clinicians and researchers. As the field continues to evolve, GNNs are poised to play a central role in advancing our understanding of cancer biology and improving patient outcomes through more precise and personalized treatment strategies.",
+      "stats": {
+        "char_count": 2412,
+        "word_count": 322,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.1 Hierarchical multi-expert inference for multimodal survival prediction",
+      "level": 3,
+      "content": "Hierarchical multi-expert inference for multimodal survival prediction represents a critical advancement in integrating diverse data sources and domain expertise to enhance the accuracy and interpretability of survival analysis [4]. This approach leverages a structured framework where multiple specialized agents, each trained on distinct modalities such as imaging, genomics, and clinical records, collaborate to generate comprehensive survival predictions. By organizing these agents in a hierarchical manner, the system enables progressive refinement of predictions through iterative feedback loops, ensuring that both high-level and low-level features are effectively incorporated. This structure not only improves model robustness but also facilitates transparency, allowing clinicians to trace the reasoning behind each prediction.\n\nThe core mechanism of hierarchical multi-expert inference involves the integration of multimodal data through a series of expert agents that operate at different levels of abstraction. At the lower level, individual agents process specific data types, extracting relevant features and generating initial predictions. These predictions are then aggregated and refined by higher-level agents, which incorporate contextual information and expert knowledge to produce a final, more accurate survival estimate. This multi-step process ensures that the model accounts for the complexity and interdependencies of multimodal data, addressing limitations in traditional single-model approaches that often fail to capture the full spectrum of clinical and biological factors influencing survival outcomes.\n\nFurthermore, the hierarchical structure supports dynamic adaptation and continuous learning, enabling the system to evolve with new data and expert feedback. By embedding mechanisms for expert knowledge distillation and model refinement, the framework ensures that the predictive models remain aligned with clinical best practices and evolving medical insights. This capability is particularly valuable in real-world applications where data variability and domain expertise are paramount. As a result, hierarchical multi-expert inference not only enhances the performance of survival prediction models but also strengthens their clinical relevance and usability in complex healthcare environments.",
+      "stats": {
+        "char_count": 2334,
+        "word_count": 303,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.2 Autonomous multi-agent collaboration in CAR-T development",
+      "level": 3,
+      "content": "Autonomous multi-agent collaboration in CAR-T development represents a critical advancement in leveraging AI to streamline the complex and multi-faceted process of creating personalized cell therapies [7]. This approach involves a network of specialized AI agents that operate in concert to address various stages of CAR-T development, including target discovery, molecular optimization, safety prediction, and clinical translation [7]. These agents are designed to autonomously gather and synthesize domain-specific knowledge, generate hypotheses, and iteratively refine their outputs based on feedback from experts and evolving data [8]. By integrating reasoning capabilities, these agents can navigate the intricate interplay between biological mechanisms, clinical constraints, and therapeutic efficacy, enabling a more systematic and data-driven development pipeline.\n\nThe collaboration among AI agents is facilitated through structured communication protocols and shared knowledge repositories that allow for real-time information exchange and decision-making. Each agent is equipped with domain-specific expertise, such as understanding genomic data, protein structures, or clinical trial outcomes, and collectively they form a distributed intelligence system capable of handling the complexity of CAR-T development [7]. This system not only enhances the efficiency of the development process but also reduces the reliance on manual intervention, thereby accelerating the identification of promising therapeutic candidates. Furthermore, the agents are capable of generating clarifying questions and refining their understanding based on feedback, ensuring that their outputs align with the evolving needs of the research and clinical teams.\n\nThe integration of autonomous multi-agent systems into CAR-T development also introduces new challenges, such as ensuring consistency in knowledge representation, managing conflicting insights from different agents, and maintaining transparency in decision-making processes. To address these challenges, the system must be designed with robust validation mechanisms and explainability features that allow human experts to interpret and verify the agents' recommendations. As the field progresses, the continuous refinement of these collaborative AI systems will be essential to achieving fully automated and reliable CAR-T development pipelines, ultimately improving patient outcomes through more effective and personalized therapies.",
+      "stats": {
+        "char_count": 2483,
+        "word_count": 320,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.1 Multivariate Bayesian methods for pharmacogenomic prediction",
+      "level": 3,
+      "content": "Multivariate Bayesian methods have emerged as a powerful framework for pharmacogenomic prediction, offering a principled approach to model uncertainty and integrate complex, high-dimensional biological data. These methods leverage probabilistic models to capture the joint distribution of genetic variants, drug responses, and clinical outcomes, enabling more robust and interpretable predictions. By incorporating prior knowledge about gene-drug interactions and biological pathways, Bayesian models can effectively handle sparse or noisy data, which is common in pharmacogenomic studies. This approach facilitates the identification of key genetic markers and their interactions, providing insights into the molecular mechanisms underlying drug efficacy and toxicity.\n\nA key advantage of multivariate Bayesian methods lies in their ability to model dependencies among multiple variables, such as gene expressions, SNPs, and drug concentrations, while accounting for measurement errors and biological variability. Techniques such as Bayesian hierarchical modeling and Gaussian processes are particularly well-suited for pharmacogenomic applications, as they allow for flexible modeling of non-linear relationships and structured data. Moreover, these methods support the incorporation of external data sources, such as public genomic databases or clinical trial results, enhancing the generalizability of predictions. The use of Markov chain Monte Carlo (MCMC) and variational inference algorithms further enables efficient posterior estimation, making these models computationally feasible for large-scale genomic datasets.\n\nRecent advancements have extended multivariate Bayesian approaches to incorporate multi-omics data, such as transcriptomics, proteomics, and metabolomics, to improve the accuracy of pharmacogenomic predictions. These integrated models can capture the complex interplay between different biological layers, leading to more comprehensive insights into drug response variability. Additionally, the development of scalable Bayesian inference techniques has enabled the application of these methods to real-world clinical data, supporting personalized medicine initiatives. As the field continues to evolve, the integration of Bayesian frameworks with machine learning and domain-specific knowledge remains a critical area of research for advancing precision pharmacotherapy.",
+      "stats": {
+        "char_count": 2397,
+        "word_count": 302,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.2 Structured variable selection for genetic biomarker identification",
+      "level": 3,
+      "content": "Structured variable selection plays a critical role in the identification of genetic biomarkers by systematically narrowing down the vast space of potential molecular features to those most relevant to the biological question at hand. This process typically involves statistical, computational, and domain-driven methodologies to prioritize variables that exhibit strong associations with the target phenotype or outcome. Techniques such as recursive feature elimination, LASSO regression, and mutual information-based selection are commonly employed to reduce dimensionality while preserving predictive power. In the context of genetic biomarker discovery, structured variable selection is further refined by incorporating prior biological knowledge, such as gene ontology annotations, pathway information, and functional enrichment analyses, to guide the selection process and enhance interpretability.\n\nRecent advances in machine learning have introduced more sophisticated approaches to structured variable selection, including model-agnostic methods that can be applied across diverse data types and modeling frameworks. These approaches often leverage feature importance scores, shapley values, or attention mechanisms to quantify the contribution of individual variables to model predictions. Additionally, ensemble-based strategies have been developed to improve robustness by aggregating results from multiple selection algorithms. In precision medicine applications, structured variable selection is further enhanced by integrating multi-omics data, such as genomics, transcriptomics, and epigenomics, to identify biomarkers that reflect complex biological interactions and regulatory mechanisms.\n\nThe integration of structured variable selection with domain-specific constraints and biological priors is essential for ensuring the clinical relevance and reproducibility of identified genetic biomarkers. This is particularly important in scenarios where the number of variables far exceeds the sample size, a common challenge in high-throughput genomic studies. By systematically reducing noise and focusing on biologically meaningful features, structured variable selection not only improves model performance but also facilitates the translation of findings into actionable insights for diagnostic and therapeutic applications.",
+      "stats": {
+        "char_count": 2340,
+        "word_count": 293,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.1 Bandit-driven treatment recommendation using large language models",
+      "level": 3,
+      "content": "Bandit-driven treatment recommendation using large language models (LLMs) represents a convergence of reinforcement learning and natural language processing, where LLMs are leveraged to process complex clinical narratives and generate actionable insights. This approach enables dynamic decision-making by integrating structured and unstructured clinical data, such as medication dosing patterns, symptom tracking, and temporal relationships. By framing treatment recommendation as a sequential decision-making problem, bandit algorithms can adaptively explore and exploit treatment options, guided by the rich contextual information extracted from LLMs. This synergy allows for personalized treatment strategies that evolve with patient-specific data, enhancing both efficacy and safety in clinical settings.\n\nThe integration of LLMs into bandit frameworks addresses key challenges in clinical decision support, including the cold-start problem and the need for real-time adaptation [9]. LLMs can process unstructured clinical notes and extract meaningful features that inform the bandit's decision-making process, reducing reliance on historical data and enabling early intervention [9]. Additionally, the ability of LLMs to generate interpretable reasoning pathways supports transparency and trust in automated recommendations. This is particularly valuable in complex scenarios such as cancer treatment, where multiple therapeutic options and patient-specific factors must be considered. The combination of LLMs with bandit methods thus provides a robust mechanism for balancing exploration and exploitation in dynamic clinical environments.\n\nDespite the promise of this approach, several technical and practical challenges remain. The integration of unstructured data into bandit mechanisms requires careful feature engineering and model calibration to ensure reliable performance. Furthermore, the interpretability and generalizability of LLM-generated recommendations must be rigorously validated to meet clinical standards. Ongoing research is focused on refining these systems to enhance their adaptability, scalability, and alignment with clinical workflows. As the field advances, the fusion of bandit algorithms with LLMs is expected to play a pivotal role in shaping the next generation of intelligent, data-driven treatment recommendation systems [9].",
+      "stats": {
+        "char_count": 2364,
+        "word_count": 305,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.2 Sequential clinical decision-making benchmarks for real-world scenarios",
+      "level": 3,
+      "content": "Sequential clinical decision-making benchmarks for real-world scenarios are essential for evaluating the effectiveness of AI systems in dynamic and complex healthcare environments. These benchmarks aim to simulate the iterative and context-sensitive nature of clinical workflows, where decisions are influenced by evolving patient conditions, heterogeneous data sources, and domain-specific constraints. By incorporating multi-modal data such as electronic health records, imaging, and unstructured clinical notes, benchmarks like MTBBench provide a comprehensive framework for assessing AI agents' ability to perform longitudinal reasoning and make evidence-based decisions. Such evaluations are critical for ensuring that AI systems can navigate the intricacies of real-world clinical settings, including the integration of expert feedback and the adaptation to changing patient needs.\n\nThe development of these benchmarks also addresses the limitations of traditional evaluation metrics, which often fail to capture the sequential and adaptive nature of clinical decision-making. For instance, in oncology, AI agents must process longitudinal patient data, interpret molecular tumor board workflows, and generate actionable insights that align with clinical guidelines. Benchmarks designed for such tasks emphasize the importance of temporal reasoning, data integration, and decision transparency, ensuring that AI systems can support, rather than replace, clinical expertise. Furthermore, these benchmarks facilitate the comparison of different AI approaches, enabling researchers to identify strengths and weaknesses in model performance under real-world conditions.\n\nA key challenge in creating effective benchmarks is the need to balance realism with computational feasibility. Real-world clinical scenarios involve significant variability, uncertainty, and data sparsity, which can complicate model training and evaluation. To address this, benchmarks often incorporate synthetic data generation, domain-specific constraints, and iterative feedback loops that mimic the decision-making processes of human clinicians. These features ensure that benchmarks not only reflect the complexity of clinical practice but also provide a reliable and reproducible means of assessing AI systems. Ultimately, the continuous refinement of these benchmarks is crucial for advancing the deployment of AI in clinical settings and improving patient outcomes.",
+      "stats": {
+        "char_count": 2448,
+        "word_count": 317,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.1 Cross-modal attention for heterogeneous data integration",
+      "level": 3,
+      "content": "Cross-modal attention mechanisms have emerged as a critical component in integrating heterogeneous data sources, enabling models to dynamically weigh and combine information from diverse modalities. These mechanisms allow for the identification of relevant features across different data types, such as medical images, electronic health records (EHRs), and genomic data, by establishing relationships that traditional models may overlook. By leveraging attention weights, models can prioritize salient features and improve the overall performance of predictive and diagnostic systems. This approach is particularly valuable in healthcare, where the integration of multimodal data can lead to more accurate and patient-centric insights.\n\nRecent advancements in attention-based architectures have extended their applicability to complex, high-dimensional data. Techniques such as multi-head attention, spatial and channel attention modules, and hierarchical attention structures have been developed to enhance the modeling of cross-modal dependencies. These methods not only improve the accuracy of tasks like segmentation and classification but also provide interpretability by highlighting the most relevant features across modalities. In particular, attention mechanisms have been integrated into U-Net and transformer-based frameworks, enabling more robust and context-aware processing of multimodal data in medical imaging and clinical decision support systems.\n\nThe integration of cross-modal attention into deep learning pipelines has also spurred research into more interpretable and biologically plausible models. By incorporating attention sparsity, consistency across layers, and feature attribution modules, these models can generate transparent explanations for their predictions. This is essential in healthcare, where trust and interpretability are paramount. As the availability of heterogeneous patient data continues to grow, the development of attention-based methods that effectively capture cross-modal relationships will play a pivotal role in advancing data-driven healthcare solutions.",
+      "stats": {
+        "char_count": 2107,
+        "word_count": 269,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.2 Hierarchical attention for biologically informed feature extraction",
+      "level": 3,
+      "content": "Hierarchical attention mechanisms have emerged as a powerful tool for biologically informed feature extraction, enabling models to dynamically prioritize relevant features while maintaining interpretability. These architectures are designed to mimic the hierarchical processing observed in biological systems, where attention is allocated across multiple levels of abstraction. By integrating attention modules at different scales, models can capture both local and global dependencies, enhancing their ability to extract meaningful patterns from complex, multimodal data. This approach not only improves predictive performance but also provides insights into the biological relevance of extracted features, aligning with the need for transparent and interpretable machine learning in healthcare.\n\nThe design of hierarchical attention systems often involves multi-granularity attention blocks that operate across layers, allowing for the refinement of feature representations through iterative focus. These blocks can be configured to emphasize biologically relevant regions, such as anatomical structures or molecular pathways, by leveraging domain-specific knowledge. Additionally, the incorporation of sparsity constraints ensures that attention maps remain focused on the most salient features, reducing noise and improving model stability. This structured attention mechanism facilitates the integration of heterogeneous data sources, such as imaging, genomics, and clinical records, by enabling the model to weigh and combine information in a biologically plausible manner.\n\nRecent studies have demonstrated the effectiveness of hierarchical attention in medical imaging tasks, where the ability to localize and interpret features is critical. By incorporating attention mechanisms that reflect known biological processes, these models provide not only accurate predictions but also interpretable explanations that can inform clinical decision-making. The integration of hierarchical attention into deep learning pipelines thus represents a significant step toward developing models that are both powerful and aligned with the biological underpinnings of disease [10]. This approach is particularly valuable in scenarios where model transparency and feature relevance are essential for trust and adoption in clinical practice.",
+      "stats": {
+        "char_count": 2332,
+        "word_count": 303,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.1 Hierarchical attention-based networks for cancer diagnosis",
+      "level": 3,
+      "content": "Hierarchical attention-based networks have emerged as a powerful approach for cancer diagnosis, leveraging the ability to dynamically weigh relevant features across multiple modalities. These architectures enable models to focus on critical regions within medical images or clinical data, thereby improving diagnostic accuracy and interpretability. By integrating attention mechanisms at different hierarchical levels, such networks can capture both local and global dependencies, which is essential for analyzing complex cancer-related data like histopathological images, radiological scans, and electronic health records. This hierarchical structure allows for a more nuanced understanding of disease patterns, facilitating the identification of subtle biomarkers that may be missed by conventional methods.\n\nRecent studies have demonstrated the effectiveness of hierarchical attention mechanisms in enhancing the performance of cancer diagnostic models. For instance, attention modules have been incorporated into U-Net architectures to improve segmentation of brain tumors, where attention helps highlight regions of interest while suppressing irrelevant background noise. These models often employ multi-scale feature extraction and residual connections to maintain spatial and contextual integrity. Additionally, hierarchical attention enables the integration of heterogeneous data sources, such as imaging and clinical data, by assigning appropriate weights to each modality based on their relevance to the diagnostic task. This capability is particularly valuable in precision medicine, where the synthesis of diverse data types is crucial for personalized treatment planning.\n\nThe development of interpretable hierarchical attention networks has also addressed the growing demand for transparency in AI-driven diagnostics. By incorporating feature attribution modules and enforcing attention sparsity, these models provide insights into the decision-making process, making them more trustworthy in clinical settings. This is especially important in high-stakes applications like cancer diagnosis, where the ability to explain model predictions can significantly impact clinical validation and adoption. As research continues to refine these architectures, their potential to enhance diagnostic accuracy, support clinical decision-making, and enable personalized treatment strategies is expected to grow substantially.",
+      "stats": {
+        "char_count": 2426,
+        "word_count": 309,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.2 SHAP-based feature selection for medical diagnostic accuracy",
+      "level": 3,
+      "content": "SHAP-based feature selection has emerged as a powerful technique for enhancing the diagnostic accuracy of medical models by identifying the most relevant features contributing to predictive outcomes. By leveraging the SHAP framework, which provides a unified measure of feature importance through the concept of Shapley values, researchers can systematically evaluate the impact of individual features in complex clinical datasets [11]. This approach not only aids in model interpretation but also facilitates dimensionality reduction, allowing for the construction of more efficient and interpretable diagnostic models. In the context of medical diagnostics, where data often consist of high-dimensional and heterogeneous sources, SHAP-based feature selection helps in isolating clinically meaningful variables, thereby improving model generalizability and reducing overfitting risks [11].\n\nThe application of SHAP in medical feature selection is particularly valuable in scenarios involving multimodal data, such as combinations of imaging, genomic, and electronic health record (EHR) data. By quantifying the contribution of each feature to the model's predictions, SHAP enables clinicians and researchers to focus on variables that are most indicative of disease states [11]. This is crucial in precision medicine, where the ability to identify key biomarkers or risk factors can significantly influence diagnostic and therapeutic decisions [1]. Moreover, SHAP's ability to handle non-linear and complex models makes it well-suited for applications in deep learning-based diagnostic systems, where traditional feature selection methods may fall short.\n\nDespite its advantages, the integration of SHAP into medical diagnostic workflows requires careful validation to ensure that the selected features maintain clinical relevance and statistical significance. Empirical studies have shown that SHAP-based feature selection can lead to improved model performance while maintaining or even enhancing diagnostic accuracy. This makes it a promising approach for developing robust, transparent, and actionable diagnostic tools in clinical practice. As the field of medical AI continues to evolve, the role of SHAP in feature selection is likely to become increasingly integral to achieving reliable and interpretable diagnostic outcomes.",
+      "stats": {
+        "char_count": 2334,
+        "word_count": 317,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.1 Vision-guided diffusion models for tumor segmentation",
+      "level": 3,
+      "content": "Vision-guided diffusion models represent a significant advancement in the field of tumor segmentation, particularly in the context of brain imaging [12]. These models leverage the power of diffusion processes, which iteratively refine noisy data to generate high-quality outputs, combined with vision transformers that capture global contextual dependencies. By embedding a vision transformer at the core of the diffusion process, these models can effectively learn complex spatial relationships in medical images, leading to more accurate tumor boundary delineation. This integration allows for a more holistic understanding of the tumor's structure, which is critical for clinical applications such as neurosurgical planning and treatment monitoring.\n\nUnlike traditional U-Net-based diffusion models, vision-guided diffusion models emphasize global contextual reasoning, which is essential for handling the variability and complexity of tumor morphology [12]. The diffusion process, guided by the vision transformer, progressively refines the segmentation, reducing voxel-level errors and improving boundary precision [12]. This approach is particularly beneficial in challenging scenarios, such as tumor-bearing brains, where the presence of heterogeneous tissue and variable contrast uptake can obscure tumor boundaries. By incorporating attention mechanisms, these models dynamically focus on the most relevant regions, enhancing the robustness of the segmentation process.\n\nThe application of vision-guided diffusion models in tumor segmentation has the potential to significantly improve diagnostic accuracy and clinical decision-making. These models not only enhance the precision of tumor delineation but also provide a more interpretable framework for understanding the underlying features driving the segmentation. As the availability of multimodal medical data continues to grow, the development of such models will play a crucial role in advancing personalized medicine and improving patient outcomes. Their ability to integrate diverse data sources while maintaining high performance makes them a promising direction for future research in medical image analysis.",
+      "stats": {
+        "char_count": 2177,
+        "word_count": 289,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.2 3D U-Net with attention for cerebrovascular imaging",
+      "level": 3,
+      "content": "The 3D U-Net architecture has emerged as a powerful tool for medical image segmentation, particularly in cerebrovascular imaging where precise delineation of complex anatomical structures is critical [13]. By extending the original U-Net design to three dimensions, this architecture effectively captures spatial relationships across volumetric data, enabling accurate segmentation of cerebral vessels and surrounding tissues [13]. The integration of attention mechanisms further enhances the model's ability to focus on relevant regions, improving performance in the presence of noisy or heterogeneous data. This combination of 3D spatial modeling and attention-based feature selection addresses key challenges in cerebrovascular segmentation, such as variable vessel morphology and low contrast between structures.\n\nRecent studies have demonstrated the effectiveness of attention mechanisms in enhancing the performance of 3D U-Net models for cerebrovascular imaging. These mechanisms allow the network to dynamically allocate computational resources to the most informative regions, thereby improving segmentation accuracy and reducing false positives. For example, attention modules have been incorporated to emphasize vessel boundaries and suppress irrelevant background information, leading to more reliable segmentation results. Additionally, the use of multi-scale feature extraction and residual connections further strengthens the model's capacity to capture both local and global contextual information, which is essential for accurate vessel segmentation in complex anatomical environments.\n\nThe application of 3D U-Net with attention in cerebrovascular imaging has shown promising results in both clinical and research settings. By leveraging the strengths of 3D convolutional operations and attention-based feature weighting, these models achieve high Dice similarity coefficients and robust performance across diverse datasets. Furthermore, their ability to generalize across different imaging modalities and patient populations makes them valuable tools for automated cerebrovascular analysis. As the demand for accurate and efficient segmentation methods continues to grow, the integration of attention mechanisms into 3D U-Net architectures represents a significant advancement in the field of medical image analysis.",
+      "stats": {
+        "char_count": 2335,
+        "word_count": 303,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6 Future Directions",
+      "level": 1,
+      "content": "Despite significant advancements in hybrid quantum-classical and multimodal data integration for precision cancer medicine, several limitations and gaps remain. Current approaches often struggle with the integration of heterogeneous data sources, including multi-omics, imaging, and clinical records, due to differences in data structure, resolution, and noise levels. Additionally, many models lack robustness across diverse patient populations, limiting their generalizability and clinical utility. The computational complexity of integrating quantum-enhanced methods with classical machine learning frameworks also poses challenges, particularly in terms of scalability and resource efficiency. Furthermore, the interpretability of models, while improving, remains a critical barrier to their widespread adoption in clinical settings, where transparency and explainability are essential for trust and decision-making.\n\nTo address these limitations, future research should focus on developing more robust and scalable data fusion techniques that can effectively integrate multimodal data while preserving biological and clinical relevance. This includes the exploration of advanced self-supervised and semi-supervised learning methods to handle missing or noisy data, as well as the development of hybrid quantum-classical frameworks that optimize computational efficiency without sacrificing model accuracy. Additionally, there is a need for more interpretable and explainable AI models that can provide clear insights into their decision-making processes, particularly in complex clinical scenarios. Future work should also emphasize the development of standardized preprocessing pipelines and benchmarking frameworks to ensure consistency and reproducibility across studies. Furthermore, the integration of domain-specific knowledge, such as biological pathways and clinical guidelines, into machine learning models can enhance their relevance and applicability in real-world settings.\n\nThe proposed future work has the potential to significantly advance precision cancer medicine by enabling more accurate, interpretable, and clinically relevant models. Improved data integration techniques will allow for a more comprehensive understanding of tumor heterogeneity, leading to better biomarker discovery and personalized treatment strategies. The development of scalable and efficient hybrid quantum-classical models can unlock new possibilities for analyzing high-dimensional biomedical data, accelerating the identification of novel therapeutic targets. Enhanced model interpretability will increase clinician trust and facilitate the adoption of AI-driven decision-making tools in clinical practice. Moreover, the standardization of data processing and evaluation frameworks will promote collaboration and accelerate the translation of research findings into real-world applications. Collectively, these advancements will contribute to more effective and personalized cancer care, ultimately improving patient outcomes and advancing the field of precision oncology.",
+      "stats": {
+        "char_count": 3073,
+        "word_count": 381,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "7 Conclusion",
+      "level": 1,
+      "content": "This survey paper provides a comprehensive overview of the integration of hybrid quantum-classical and multimodal data approaches in precision cancer medicine, highlighting their transformative potential in cancer subtyping, biomarker discovery, and clinical decision-making. The analysis demonstrates that the integration of multi-omics and imaging data enables a more nuanced understanding of tumor heterogeneity, while hybrid quantum-classical frameworks offer new opportunities for overcoming computational limitations in high-dimensional data analysis. Additionally, advancements in model interpretability, such as prototypical and part-based models, attention mechanisms, and SHAP-based feature selection, have significantly enhanced the transparency and clinical utility of machine learning models. The role of knowledge graphs and graph neural networks in structured data modeling, as well as the application of multi-agent and Bayesian methods in clinical decision-making, further underscores the growing importance of interdisciplinary approaches in precision oncology. These developments collectively contribute to the creation of more accurate, robust, and interpretable systems that support personalized cancer care.\n\nThe significance of this survey lies in its synthesis of current research and its identification of key trends and challenges in the field. By examining the state of the art in data fusion, representation learning, and model interpretability, the paper offers a valuable resource for researchers, clinicians, and policymakers. It emphasizes the need for standardized data preprocessing pipelines, the development of models that generalize across diverse patient populations, and the integration of clinical context into predictive models. These insights not only inform ongoing research but also provide a roadmap for advancing precision cancer medicine toward clinical translation. The paper also highlights the importance of interdisciplinary collaboration, as the integration of quantum computing, machine learning, and biomedical knowledge is essential for addressing the complex challenges of modern oncology.\n\nAs the field continues to evolve, there is a pressing need for further research to address existing limitations and to explore new frontiers in precision cancer medicine. Future work should focus on improving the scalability and efficiency of hybrid quantum-classical frameworks, enhancing the interpretability of deep learning models, and developing robust systems for real-world clinical deployment. Additionally, the integration of patient-centered data and the incorporation of ethical and regulatory considerations will be critical for ensuring the responsible and effective use of these technologies. By building on the foundations laid in this survey, the research community can continue to drive innovation and improve outcomes for cancer patients through the development of more accurate, transparent, and clinically relevant systems. The path forward requires sustained collaboration, rigorous validation, and a commitment to translating scientific advances into tangible benefits for patients.",
+      "stats": {
+        "char_count": 3151,
+        "word_count": 416,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "[1] Toward Quantum-Enabled Biomarker Discovery  An Outlook from Q4Bio",
+      "number": null,
+      "title": "toward quantum-enabled biomarker discovery an outlook from q4bio"
+    },
+    {
+      "text": "[2] Subtype-Former  a deep learning approach for cancer subtype discovery with multi-omics data",
+      "number": null,
+      "title": "subtype-former a deep learning approach for cancer subtype discovery with multi-omics data"
+    },
+    {
+      "text": "[3] Genotype-Phenotype Integration through Machine Learning and Personalized Gene Regulatory Networks fo",
+      "number": null,
+      "title": "genotype-phenotype integration through machine learning and personalized gene regulatory networks fo"
+    },
+    {
+      "text": "[4] SurvAgent  Hierarchical CoT-Enhanced Case Banking and Dichotomy-Based Multi-Agent System for Multimo",
+      "number": null,
+      "title": "survagent hierarchical cot-enhanced case banking and dichotomy-based multi-agent system for multimo"
+    },
+    {
+      "text": "[5] ProteinPNet  Prototypical Part Networks for Concept Learning in Spatial Proteomics",
+      "number": null,
+      "title": "proteinpnet prototypical part networks for concept learning in spatial proteomics"
+    },
+    {
+      "text": "[6] Flavonoid Fusion  Creating a Knowledge Graph to Unveil the Interplay Between Food and Health",
+      "number": null,
+      "title": "flavonoid fusion creating a knowledge graph to unveil the interplay between food and health"
+    },
+    {
+      "text": "[7] Bio AI Agent  A Multi-Agent Artificial Intelligence System for Autonomous CAR-T Cell Therapy Develop",
+      "number": null,
+      "title": "bio ai agent a multi-agent artificial intelligence system for autonomous car-t cell therapy develop"
+    },
+    {
+      "text": "[8] FRAGMENTA  End-to-end Fragmentation-based Generative Model with Agentic Tuning for Drug Lead Optimiz",
+      "number": null,
+      "title": "fragmenta end-to-end fragmentation-based generative model with agentic tuning for drug lead optimiz"
+    },
+    {
+      "text": "[9] Prior-informed optimization of treatment recommendation via bandit algorithms trained on large langu",
+      "number": null,
+      "title": "prior-informed optimization of treatment recommendation via bandit algorithms trained on large langu"
+    },
+    {
+      "text": "[10] Unlocking Biomedical Insights  Hierarchical Attention Networks for High-Dimensional Data Interpretat",
+      "number": null,
+      "title": "unlocking biomedical insights hierarchical attention networks for high-dimensional data interpretat"
+    },
+    {
+      "text": "[11] Enhancing Diagnostic Accuracy for Urinary Tract Disease through Explainable SHAP-Guided Feature Sele",
+      "number": null,
+      "title": "enhancing diagnostic accuracy for urinary tract disease through explainable shap-guided feature sele"
+    },
+    {
+      "text": "[12] VGDM  Vision-Guided Diffusion Model for Brain Tumor Detection and Segmentation",
+      "number": null,
+      "title": "vgdm vision-guided diffusion model for brain tumor detection and segmentation"
+    },
+    {
+      "text": "[13] NeuroVascU-Net  A Unified Multi-Scale and Cross-Domain Adaptive Feature Fusion U-Net for Precise 3D",
+      "number": null,
+      "title": "neurovascu-net a unified multi-scale and cross-domain adaptive feature fusion u-net for precise 3d"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\InteractiveSurvey\\Medicine\\survey_Precision Cancer Medicine_split.json",
+    "processed_date": "2025-12-30T20:33:40.508349",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

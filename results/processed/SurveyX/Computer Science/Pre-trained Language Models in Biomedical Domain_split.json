@@ -1,0 +1,1374 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of BioNLP Biomedical Text Mining and Clinical Natural Language Processing"
+    ],
+    [
+      1,
+      "Abstract"
+    ],
+    [
+      1,
+      "1 Introduction"
+    ],
+    [
+      1,
+      "1.1 The Growing Importance of BioNLP and Clinical NLP in Healthcare"
+    ],
+    [
+      1,
+      "1.2 Structure of the Survey"
+    ],
+    [
+      1,
+      "2 Background and Core Concepts"
+    ],
+    [
+      1,
+      "2.1 Foundations of BioNLP and Clinical NLP"
+    ],
+    [
+      1,
+      "2.2 Challenges in Unstructured Biomedical Data Processing"
+    ],
+    [
+      1,
+      "2.3 Significance and Limitations of Electronic Health Records (EHRs)"
+    ],
+    [
+      1,
+      "3 Pre-trained Language Models in Biomedical NLP"
+    ],
+    [
+      1,
+      "3.1 Evolution of Pre-trained Language Models in Biomedicine"
+    ],
+    [
+      1,
+      "3.2 Domain-Specific Adaptations and Architectures"
+    ],
+    [
+      1,
+      "3.4 Advantages and Limitations"
+    ],
+    [
+      1,
+      "4 Transformer Models for Biomedical Text Analysis"
+    ],
+    [
+      1,
+      "4.1 Architectural Innovations in Biomedical Transformer Models"
+    ],
+    [
+      1,
+      "4.2 Training Methodologies and Domain-Specific Adaptations"
+    ],
+    [
+      1,
+      "4.3 Applications in Clinical and Biomedical Tasks"
+    ],
+    [
+      1,
+      "4.4 Performance Comparison with Traditional NLP Methods"
+    ],
+    [
+      1,
+      "5 Deep Learning in Healthcare: Applications and Challenges"
+    ],
+    [
+      1,
+      "5.1 Applications of Deep Learning in Healthcare"
+    ],
+    [
+      1,
+      "5.2 Integration with BioNLP and Clinical NLP"
+    ],
+    [
+      1,
+      "5.3 Challenges in Data Privacy and Security"
+    ],
+    [
+      1,
+      "5.4 Model Interpretability and Bias"
+    ],
+    [
+      1,
+      "6 Electronic Health Records (EHRs) and Biomedical Informatics"
+    ],
+    [
+      1,
+      "6.1 Techniques for Extracting Structured Data from Unstructured EHRs"
+    ],
+    [
+      1,
+      "6.2 De-identification and Privacy-Preserving Methods"
+    ],
+    [
+      1,
+      "6.3 Knowledge Graph Construction and Information Retrieval"
+    ],
+    [
+      1,
+      "6.4 Interoperability and Data Standardization Challenges"
+    ],
+    [
+      1,
+      "6.5 Ethical Considerations and Bias Mitigation"
+    ],
+    [
+      1,
+      "7 Emerging Trends and Future Directions"
+    ],
+    [
+      1,
+      "7.1 Federated Learning and Privacy-Preserving NLP"
+    ],
+    [
+      1,
+      "7.2 Multimodal Models and Data Integration"
+    ],
+    [
+      1,
+      "7.3 Large Language Models (LLMs) in Clinical Decision Support"
+    ],
+    [
+      1,
+      "7.4 Scalability and Real-Time Processing"
+    ],
+    [
+      1,
+      "7.5 Human-AI Collaboration and Ethical Considerations"
+    ],
+    [
+      1,
+      "8 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ],
+    [
+      1,
+      "Disclaimer:"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of BioNLP Biomedical Text Mining and Clinical Natural Language Processing",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 1,
+      "content": "This survey paper comprehensively examines the transformative role of BioNLP, biomedical text mining, and clinical NLP in modern healthcare, focusing on the application of pre-trained language models (PLMs) and transformer architectures. We systematically analyze advancements in processing unstructured biomedical texts and electronic health records (EHRs), highlighting domain-specific adaptations like BioBERT and ClinicalBERT that enhance tasks such as named entity recognition, relation extraction, and automated documentation. The paper explores architectural innovations in transformer models, including temporal and multimodal adaptations, and evaluates their performance against traditional NLP methods. Key challenges in data privacy, model interpretability, and EHR interoperability are critically assessed, alongside emerging trends such as federated learning and multimodal integration. The survey underscores the clinical impact of these technologies in diagnostics, personalized medicine, and workflow optimization while identifying persistent gaps in standardization and ethical deployment. By synthesizing current research and future directions, this work provides a roadmap for advancing biomedical NLP to improve patient care, research, and healthcare delivery through interdisciplinary collaboration.",
+      "stats": {
+        "char_count": 1320,
+        "word_count": 161,
+        "sentence_count": 6,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Introduction",
+      "level": 1,
+      "content": "The rapid advancement of technology has profoundly transformed various sectors, with healthcare being one of the most significantly impacted areas. Among the technological innovations, Natural Language Processing (NLP) has emerged as a pivotal tool, particularly in the biomedical and clinical domains. The ability to process vast amounts of unstructured data from electronic health records (EHRs) and biomedical literature has positioned BioNLP and clinical NLP at the forefront of modern healthcare solutions. This review aims to explore the evolving landscape of BioNLP and clinical NLP, highlighting their importance, applications, and the challenges they face in the healthcare ecosystem. By synthesizing current research and technological advancements, this paper seeks to provide a comprehensive overview of how these tools are reshaping patient care, diagnostics, and medical research.",
+      "stats": {
+        "char_count": 893,
+        "word_count": 124,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1.1 The Growing Importance of BioNLP and Clinical NLP in Healthcare",
+      "level": 1,
+      "content": "The exponential growth of biomedical literature and electronic health records (EHRs) has positioned BioNLP and clinical NLP as indispensable tools in modern healthcare. These technologies address critical challenges in knowledge extraction, diagnostics, and patient care by leveraging advanced neural NLP methods to process unstructured EHR data [1]. The COVID-19 pandemic highlighted their transformative potential, with transformer-based models demonstrating superior performance in ICU resource allocation and patient stratification [2], while multilabel classification systems efficiently managed the surge of biomedical literature [3]. The ability of these models to rapidly analyze and synthesize information has proven vital in responding to public health emergencies, showcasing their relevance in real-time decision-making processes.\n\n[Image]\nFigure 1: chapter structure\n\nThe advent of domain-adapted foundation models, such as BioBERT and ClinicalBERT, has bridged the gap between general NLP and biomedical informatics, enabling tasks ranging from pharmacological entity recognition to automated discharge summary generation [4]. These advancements not only alleviate clinician burnout by reducing administrative burdens but also enhance patient engagement through semantic question-answering systems [5]. For instance, the automation of discharge summaries addresses inefficiencies in healthcare workflows, allowing healthcare professionals to focus more on patient care rather than paperwork [6]. Furthermore, hybrid approaches tackle challenges posed by lengthy clinical documentation and dispersed patient information, thereby improving the overall efficiency of healthcare delivery [7].\n\nIn specialized clinical domains, BioNLP techniques have significantly improved diagnostic precision. Transformer-based architectures like STRAFE enhance time-to-event prediction for chronic conditions such as kidney disease [8], while deep learning models address underdiagnosis in neurodegenerative disorders like dementia [9]. The integration of heterogeneous data sources, including genomics and EHRs, further supports personalized medicine initiatives, allowing for more tailored treatment plans based on individual patient profiles [10]. Applications extend to remote diagnostics, where transformer-based systems mitigate the scarcity of dermatological expertise, thereby improving access to essential healthcare services [11]. In addition, NLP-driven tools enhance patient self-management in epilepsy care, showcasing the diverse applications of these technologies in promoting better health outcomes [12].\n\nInstruction-tuned generative Large Language Models (LLMs) like ChatGPT and Bloomz have shown promise in understanding radiology reports, though their limitations in domain-specific tasks underscore the need for continued innovation [13]. Despite these advancements, challenges persist in data standardization, model interpretability, and ethical deployment. Transfer learning approaches facilitate knowledge sharing across clinical sites, addressing data scarcity and computational costs [14]. NLP methods also improve the identification of active heart failure cases [15] and COVID-19 classification [16], yet interoperability and bias mitigation remain critical concerns. As the field continues to evolve, it is imperative to balance technical innovation with ethical considerations to ensure equitable healthcare outcomes and to foster trust among stakeholders in the healthcare system.",
+      "stats": {
+        "char_count": 3507,
+        "word_count": 439,
+        "sentence_count": 18,
+        "line_count": 10
+      }
+    },
+    {
+      "heading": "1.2 Structure of the Survey",
+      "level": 1,
+      "content": "This survey systematically examines the landscape of BioNLP, biomedical text mining, and clinical NLP, organized into eight cohesive sections that progressively build upon foundational concepts to emerging trends. Section 1 introduces the critical role of these technologies in modern healthcare, highlighting their impact on diagnostics, patient care, and biomedical research through applications of pre-trained language models and transformer architectures. This foundational understanding is crucial as it sets the stage for the detailed discussions that follow, emphasizing the transformative nature of these technologies in addressing contemporary healthcare challenges.\n\nSection 2 establishes the theoretical foundations, addressing core challenges in unstructured biomedical data processing and the dual significance of EHRs as both a resource and a challenge. By exploring these fundamental issues, this section lays the groundwork for understanding the complexities involved in harnessing the potential of BioNLP and clinical NLP. The discussion encompasses various methodologies and frameworks that have been proposed to enhance data processing capabilities, thereby providing insights into the ongoing research efforts aimed at overcoming these obstacles.\n\nSections 3 and 4 delve into significant technical advancements in the field of natural language processing, with Section 3 specifically examining the development of domain-specific pre-trained models such as BioBERT and ClinicalBERT. This section evaluates their effectiveness in critical tasks, including named entity recognition (NER) and relation extraction, while also highlighting the challenges faced in biomedical NERsuch as limited training data and context-dependent entity classification. The discussion is enriched by comparisons to other models like LinkBERT and bioALBERT, which address these challenges through innovative training approaches and demonstrate improved performance on various biomedical benchmarks [17, 18]. Section 4 explores architectural innovations in transformer models, comparing their efficacy with traditional NLP methods in clinical tasks like EHR phenotyping and question answering. This comparative analysis underscores the significance of adopting cutting-edge techniques in enhancing clinical workflows and decision-making processes.\n\nSection 5 explores the extensive applications of deep learning in healthcare, focusing on critical areas such as disease prediction and drug discovery. It also provides a thorough analysis of significant challenges faced in the field, including issues related to data privacy, the interpretability of models, and the complexities of extracting useful information from vast datasets. The section highlights the need for interpretable deep learning methods to enhance clinical decision-making and discusses various architectures and approaches that have been developed to address these challenges, ultimately aiming to improve the integration of deep learning technologies in real-world healthcare settings [19, 20, 21].\n\nSection 6 focuses on EHRs, detailing techniques for structured data extraction, de-identification, and knowledge graph construction, alongside interoperability hurdles. This section emphasizes the importance of effective data management strategies in ensuring that EHRs can be utilized to their fullest potential, thereby contributing to improved patient outcomes and streamlined healthcare processes.\n\nThe survey culminates in Section 7, which identifies emerging paradigms like federated learning for privacy-preserving NLP, multimodal data integration, and the clinical potential of LLMs. These innovative approaches represent the forefront of research in BioNLP and clinical NLP, addressing contemporary challenges while paving the way for future advancements. Section 8 synthesizes key insights, emphasizing open challenges and the imperative for interdisciplinary collaboration to advance equitable healthcare solutions. This structure facilitates an in-depth yet accessible examination of the biomedical field, effectively integrating technical rigor with practical applications, thereby enhancing the understanding of complex concepts and promoting efficient information dissemination [22, 23, 21].The following sections are organized as shown in Figure 1.",
+      "stats": {
+        "char_count": 4328,
+        "word_count": 564,
+        "sentence_count": 21,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "2.1 Foundations of BioNLP and Clinical NLP",
+      "level": 1,
+      "content": "BioNLP and clinical NLP originate from the convergence of computational linguistics, biomedical informatics, and healthcare analytics, which collectively tackle the challenges of unstructured biomedical texts and electronic health records (EHRs). This interdisciplinary field emerged to manage the expanding corpus of biomedical literature and facilitate clinical decision-making through effective data extraction. Early methodologies utilized rule-based systems and statistical models, but these faced scalability issues with fragmented clinical narratives [24]. The advance towards machine learning, particularly through support vector machines (SVMs) and active learning, marked a significant evolution, improving robustness in biomedical named entity recognition (BioNER) tasks despite obstacles like limited annotated corpora and context-dependent entity variations [25]. Traditional pipeline approaches in biomedical event extraction followed sequential phases including trigger identification, argument role recognition, and event construction [26].\n\nA pivotal advancement in BioNLP involved incorporating structured knowledge from ontologies and knowledge graphs into text representation models, enhancing the semantic comprehension of medical concepts [27]. This integration permitted nuanced clinical narrative interpretations, improving the recognition of relationships among medical entities. Transitioning to EHRs demanded efficient biomedical text mining solutions for handling vast digitized medical data [28]. Domain-specific pretrained models like BioBERT and ClinicalBERT addressed general-purpose model limitations by effectively capturing biomedical terminologies and acronyms [29]. These models supported tasks such as entity normalization, mapping biomedical mentions to standardized Concept Unique IDs (CUIs), and literature-based discovery (LBD), organizing information retrieval, extraction, and knowledge discovery [22]. The pharmaceutical industry emphasized the need for sophisticated NER systems, highlighting existing gaps in open-source solutions [30].\n\nClinical NLP shares foundational principles with BioNLP but addresses distinct linguistic and contextual challenges. Language variability across institutions requires adaptable systems capable of processing diverse terminologies and syntactic structures. Initial systems tackled basic tasks like NER and assertion detection, capturing certainty and temporality attributes of medical concepts [31]. Transformer architectures revolutionized the field, facilitating document-level biomedical relation extraction (Bio-RE) to determine entity relationships across lengthy texts [32]. Time-to-event models like MOTOR improved prognostic accuracy in EHRs via timestamped sequence analysis [33]. Multi-modal data integration, including neuroimaging and clinical notes, provided an encompassing patient health perspective, as demonstrated in multiple sclerosis studies [34].\n\nThe evolution from task-specific solutions to interoperable, multimodal frameworks characterizes BioNLP and clinical NLP’s historical trajectory. Tools such as medspaCy epitomize this progress, offering extensible NLP pipelines for clinical applications [24]. Challenges in maintaining model performance across diverse datasets necessitate adaptive fine-tuning strategies and risk stratification techniques [35]. Refining biomedical dictionaries to include social media language underscores the need for domain-specific adaptations [36]. Future directions must unify foundational research with practical application, ensuring advancements yield tangible improvements in patient care and biomedical research, especially in resource-constrained environments [37]. The growing biomedical data complexity and volume drive the creation of specialized models for domain-specific information processing [38].",
+      "stats": {
+        "char_count": 3853,
+        "word_count": 456,
+        "sentence_count": 23,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "2.2 Challenges in Unstructured Biomedical Data Processing",
+      "level": 1,
+      "content": "Unstructured biomedical data processing is fraught with challenges such as linguistic variability and data heterogeneity, which are compounded by inconsistent documentation practices. High dimensionality and sparsity of traditional text representations impede knowledge extraction and predictive modeling [39]. The irregular and noisy nature of EHRs exacerbates these issues, with approximately $80 \\%$ of EHR data being unstructured text [1]. Limitations in machine learning model interpretability and the difficulty of refining models without retraining pose barriers for domain experts [40]. Additionally, the reliance on large labeled datasets for training complicates these challenges, as annotation consumes significant resources [41].\n\nClinical narratives are marked by diverse terminologies, abbreviations, and documentation styles, making robust NLP system development challenging. The classification of biomedical abstracts into categories such as Background and Method remains inefficient for information retrieval [21]. Existing benchmarks inadequately address medical data imbalance, with infrequent labels poorly represented, undermining multi-label classification performance [42]. Annotated record scarcity hampers neural network training, while medical documentation’s informal and inconsistent nature challenges traditional NLP algorithms [43].\n\nBioNER tasks face hurdles due to non-canonical entity forms, orthographic errors, and limited annotation labels. Diagnostic label prediction methods neglect hierarchical structures and medical code co-occurrences, resulting in incomplete predictions [44]. Furthermore, large datasets required to effectively learn temporal dependencies are often infeasible in clinical settings [45]. Current methods inadequately incorporate temporal relationships and visit intervals crucial for accurate predictions [46]. Supervised methods struggle with clinical data complexity, leading to limited recall and generalization [47].\n\nThe lack of comprehensive systems integrating data sources for precise diagnosis and treatment impairs healthcare efficiency [37]. Existing English-centric benchmarks lack the annotations needed for effective NLP applications in other languages [48]. The burgeoning biomedical literature complicates topic annotation due to lexicon and terminology variability, with standardized benchmarks for model evaluation insufficient [49]. Current models fail to optimally utilize unstructured clinical text alongside structured medical data, limiting prediction accuracy in healthcare [50].\n\nAdaptive frameworks are crucial for managing noise and contextual complexity in biomedical data, with scalability and interoperability enhancing large-scale dataset processing. Frontier large language models (LLMs) face challenges with dataset-specific nuances and strict annotation guidelines, revealing performance limitations in discriminative tasks. Algorithms like FastContext showcase scalable implementations for clinical NLP, improving speed and accuracy. The modularity of shared EHR foundation models enables better prediction accuracy while reducing training data needs [51, 52, 53]. Future directions should incorporate temporal dependencies, multilingual support, and robust benchmarks to advance biomedical NLP.",
+      "stats": {
+        "char_count": 3290,
+        "word_count": 402,
+        "sentence_count": 23,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2.3 Significance and Limitations of Electronic Health Records (EHRs)",
+      "level": 1,
+      "content": "Electronic Health Records (EHRs) are pivotal to modern biomedical research and clinical practice, offering longitudinal patient insights and supporting data-driven decision-making. EHRs capture the clinical state over time, serving as rich resources for predictive modeling and personalized medicine [54]. Their applications include early disease diagnosis and phenotype discovery, leveraging clinical embeddings for improved prognostic accuracy [55]. They are instrumental in real-time critical outcome prediction, such as bloodstream infections in ICUs, while representation learning techniques manage sparse, high-dimensional clinical data. Multitask learning (MTL) enhances phenotyping, outperforming single-task approaches [56]. Metalearning frameworks utilizing temporal dynamics show promise, especially in oncology for forecasting clinical events from complex narratives.\n\nEHR challenges include data quality, interoperability, and integration into clinical workflows. Documentation burdens exemplify operational inefficiencies, diverting clinical focus [57]. Data format and vocabulary heterogeneity impedes interoperability, complicating clinical term mapping across resources and yielding incomplete representations. The lack of standardized disease nomenclature hinders cross-institutional research, whilst unstructured clinical notes resist automated processing [58]. Inconsistent coding systems and inadequate training data limit deep learning model generalizability across healthcare contexts. Temporal dependencies remain underutilized, as methods often neglect interval modeling crucial for patient trajectory analysis [59].\n\nWhile multimodal EHR data integration presents opportunities, challenges persist. Benchmarks like SynSUM aim to unify structured and unstructured modalities, yet aligning diverse data for decisionmaking requires further refinement [60]. Semantic query parsing for EHR system queries needs improvement, as do automated progress note generation systems to reduce clinician workloads. Future efforts should focus on hybrid architectures for contextual understanding, federated learning to balance privacy concerns, and unified ontologies harmonizing structured and unstructured information [61]. Scalable deep learning offers potential for personalized medicine, contingent on improvements in data quality, interoperability, and ethical deployment [62]. Comprehensive patient record integration, instead of isolated reports, is critical to overcoming current limitations in biomedical data processing [63].",
+      "stats": {
+        "char_count": 2546,
+        "word_count": 302,
+        "sentence_count": 18,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3 Pre-trained Language Models in Biomedical NLP",
+      "level": 1,
+      "content": "In biomedical NLP, pre-trained language models (PLMs) play a pivotal role, illustrating technological evolution alongside an increased focus on contextual comprehension of complex texts. Early static embeddings evolved into advanced architectures, offering enhanced contextual understanding and clinical applicability, crucial for handling the burgeoning complexity of biomedical data. As these models become integral in data extraction and decision-making within clinical settings, their significance in facilitating improved healthcare outcomes reflects the growing importance of natural language understanding in health-related domains.",
+      "stats": {
+        "char_count": 639,
+        "word_count": 78,
+        "sentence_count": 3,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "3.1 Evolution of Pre-trained Language Models in Biomedicine",
+      "level": 1,
+      "content": "PLMs in biomedicine have advanced from static embeddings, like Word2Vec and GloVe, which initially struggled with contextual nuances, to sophisticated architectures capable of multimodal reasoning and temporal representations [39]. Initial enhancements such as AWE-CM Vectors integrated domain-specific knowledge to boost semantic representation [64]. BERT’s introduction brought transformative change, with contextual embeddings revolutionizing named entity recognition (NER) and complex narrative understanding, tailored through BioBERT and ClinicalBERT’s specialized corpus training [65].\n\nThis evolution is visually summarized in Figure 2, which outlines the progression of pre-trained language models in biomedicine, showcasing key advancements from initial word embeddings to contextual embedding innovations and recent cross-modal adaptations. Further innovations include cross-modal adaptations and hierarchical event extraction models that integrate Unified Medical Language System (UMLS) knowledge for nuanced clinical event comprehension [66]. Models like TimelyGPT advanced temporal representation learning with new extrapolatable position embeddings [67]. The trajectory underscores a shift towards adaptable, generalist biomedical AI, integrating temporal modeling, data fusion, and federated learning to address privacy and interoperability challenges, ultimately enhancing healthcare outcomes [68].\n\n[Image]\nFigure 2: This figure outlines the evolution of pre-trained language models (PLMs) in biomedicine, showcasing key advancements from initial word embeddings to contextual embedding innovations and recent cross-modal adaptations.",
+      "stats": {
+        "char_count": 1651,
+        "word_count": 198,
+        "sentence_count": 8,
+        "line_count": 6
+      }
+    },
+    {
+      "heading": "3.2 Domain-Specific Adaptations and Architectures",
+      "level": 1,
+      "content": "Domain-specific adaptations in PLMs involve innovative architectural modifications and training adjustments to address unique challenges [69]. The integration of graph neural networks with transformer architectures enables robust representation of complex patient trajectories [50]. Phenotyping adaptations like AnchorBERT enhance classification accuracy through specialized learning strategies [70]. Temporal modeling innovations, such as TEE4EHR, tackle irregularly sampled clinical events [71]. MusaNet applies self-attention to address temporal dependencies in patient journeys [46]. Hybrid embedding strategies combine structured ICD codes with transformer representations for comprehensive characterization [72]. These adaptations demonstrate the evolution of biomedical PLMs beyond general-purpose architectures to improve efficacy in healthcare.\n\n3.3 Performance in Core Biomedical NLP Tasks\n\n<html><body><table><tr><td>Benchmark</td><td>Size</td><td>Domain</td><td>Task Format</td><td>Metric</td></tr><tr><td>EHR-SP[73]</td><td>1,381</td><td>Clinical Question Ans wering</td><td>Semantic Parsing</td><td>Accuracy</td></tr><tr><td>CancerBERT[74]</td><td>361,059</td><td>Breast Cancer Phenotype Extrac- tion</td><td>Named Entity Recognition (ner)</td><td>F1 score</td></tr><tr><td>LLM[75]</td><td>170</td><td>Neurology</td><td>Phenotype Classification</td><td>Accuracy,Precision</td></tr><tr><td>FMSM[52]</td><td>2,570,000</td><td>Healthcare</td><td>Clinical Prediction</td><td>AUROC,ECE</td></tr><tr><td>AgentClinic[76]</td><td>1,009</td><td>Medicine</td><td>Clinical Diagnosis</td><td>Diagnostic Accuracy</td></tr><tr><td>BLUE[77]</td><td>1,500</td><td>Biomedical</td><td>Relation Extraction</td><td>F1, Accuracy</td></tr><tr><td>AGCT[78]</td><td>422.070</td><td>Biomedical Terminology</td><td>Definition Generation</td><td>Factuality, Insight</td></tr><tr><td>BELB[79]</td><td>1,000,000</td><td>Biomedical</td><td>Entity Linking</td><td>Recall@1</td></tr></table></body></html>\n\nTable 1: This table provides a comprehensive summary of representative benchmarks used to evaluate the performance of Pre-trained Language Models (PLMs) across various core biomedical Natural Language Processing (NLP) tasks. It highlights the diversity in domain applications, task formats, and evaluation metrics, emphasizing the breadth of PLM utility in biomedical contexts.\n\n<html><body><table><tr><td>Benchmark</td><td>Size</td><td>Domain</td><td>Task Format</td><td>Metric</td></tr><tr><td>EHR-SP[73]</td><td>1,381</td><td>Clinical Question Answering</td><td>Semantic Parsing</td><td>Accuracy</td></tr><tr><td>CancerBERT[74]</td><td>361,059</td><td>Breast Cancer Phenotype Extrac- tion</td><td>Named Entity Recognition (ner)</td><td>F1 score</td></tr><tr><td>LLM[75]</td><td>170</td><td>Neurology</td><td>Phenotype Classfication</td><td>Accuracy,Precision</td></tr><tr><td>FMSM[52]</td><td>2,570,000</td><td>Healthcare</td><td>Clinical Prediction</td><td>AUROC,ECE</td></tr><tr><td>AgentClinic[76]</td><td>1,009</td><td>Medicine</td><td>Clinical Diagnosis</td><td>Diagnostic Accuracy</td></tr><tr><td>BLUE[77]</td><td>1,500</td><td>Biomedical</td><td>Relation Extraction</td><td>F1, Accuracy</td></tr><tr><td>AGCT[78]</td><td>422,070</td><td>Biomedical Terminology</td><td>Definition Generation</td><td>Factuality, Insight</td></tr><tr><td>BELB[79]</td><td>1,000,000</td><td>Biomedical</td><td>Entity Linking</td><td>Recall@1</td></tr></table></body></html>\n\nTable 2: This table provides a comprehensive summary of representative benchmarks used to evaluate the performance of Pre-trained Language Models (PLMs) across various core biomedical Natural Language Processing (NLP) tasks. It highlights the diversity in domain applications, task formats, and evaluation metrics, emphasizing the breadth of PLM utility in biomedical contexts.\n\nPLMs exhibit transformative capabilities across core biomedical NLP tasks, including NER, relation extraction (RE), and text classification, as shown by various benchmarks. Table 2 provides a detailed overview of representative benchmarks employed in evaluating the performance of PLMs across core biomedical NLP tasks, showcasing the diversity in domain, task format, and evaluation metrics. In NER, ClinicalBERT excels in identifying cognitive impairment through clinician notes [9]. The integration of rule-based and machine learning approaches enhances patient classification tasks [15]. For RE, semantic parsing models facilitate systematic evaluation frameworks for diverse dataset analysis [73]. Graph-based methods improve segmentation and extraction from clinical texts [80]. In text classification, PLMs significantly advance clinical text generation and discharge summaries [81]. Continuous development acknowledges data variability and interoperability challenges, emphasizing temporal modeling and multilingual support to enhance real-world clinical application performance.",
+      "stats": {
+        "char_count": 4920,
+        "word_count": 389,
+        "sentence_count": 21,
+        "line_count": 13
+      }
+    },
+    {
+      "heading": "3.4 Advantages and Limitations",
+      "level": 1,
+      "content": "PLMs revolutionize biomedical NLP by enhancing task performance and tackling data efficiency and generalization challenges. Multimodal fusion architectures, like MUFASA, outperform traditional EHR methods, showcasing integrated data source advantages [82]. Domain-specific models, such as Med-BERT and Med2Meta, reduce dependency on extensive annotation while improving prediction accuracy [83]. Transformer-based models enhance information extraction and patient outcome analysis [84]. Nevertheless, PLMs face computational limitations and domain adaptation challenges, requiring substantial resources and exhibiting variable effectiveness across subdomains [85]. Innovations in model distillation, federated learning, and adaptive pretraining strategies are essential to balance performance with clinical utility, ensuring PLMs remain effective in healthcare applications.",
+      "stats": {
+        "char_count": 874,
+        "word_count": 101,
+        "sentence_count": 6,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4 Transformer Models for Biomedical Text Analysis",
+      "level": 1,
+      "content": "Transformers have become integral to advancements in biomedical text analysis, reshaping healthcare informatics by optimizing transformer frameworks to address the unique demands of biomedical data. This section explores these architectural innovations and assesses their impact on processing clinical texts. By adapting traditional transformer structures to suit healthcare applications, we pave the way for a discussion on training methodologies and adaptations enhancing these models in practical settings. As AI and healthcare intersect, sophisticated computational tools emerge to comprehend complex medical narratives.",
+      "stats": {
+        "char_count": 624,
+        "word_count": 80,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "4.1 Architectural Innovations in Biomedical Transformer Models",
+      "level": 1,
+      "content": "Biomedical text analysis has seen transformative architectural advancements in transformer models. The SANSformer utilizes axial mixing in lieu of conventional self-attention, reducing computational complexity while maintaining effectiveness in EHR processing [86]. Similarly, the SAT-Transformer uses learnable kernels to incorporate temporal biases, enhancing the modeling of longitudinal patient data [45]. These innovations reflect ongoing evolution towards structures suited for biomedical applications. TEE4EHR combines deep attention modules and point process theory, addressing irregular clinical event sampling by improving temporal EHR data representation [71]. Assertion detection tasks benefit from in-context learning and Low-Rank Adaptation (LoRA), reducing computational overhead while enhancing certainty and negation capture [87]. This integration of techniques enriches clinical predictions and medical information processing.\n\nTransformers show versatility across healthcare applications by adapting to diverse data types, including clinical notes and genomic sequences [88]. Innovations extend beyond traditional configurations through domain-specific attention heads and hierarchical layers optimized for biomedical text traits. Future architectural developments will focus on multimodal integration, temporal modeling, and federated learning frameworks for privacy-preserving healthcare applications, ensuring transformers remain central to biomedical text analysis in a data-driven healthcare landscape.",
+      "stats": {
+        "char_count": 1526,
+        "word_count": 180,
+        "sentence_count": 10,
+        "line_count": 3
+      }
+    },
+    {
+      "heading": "4.2 Training Methodologies and Domain-Specific Adaptations",
+      "level": 1,
+      "content": "Optimal transformer application in biomedical tasks requires specialized training methodologies. Integrating BiLSTM networks with Conditional Random Fields (CRF) captures biomedical entities and attributes effectively, enhancing NER tasks by maintaining contextual awareness across token sequences [89]. Bootstrapped neural networks, leveraging pretrained embeddings, improve entity extraction from medical texts [90], emphasizing diverse techniques importance in the biomedical domain.\n\nTransfer learning effectively adapts general-purpose transformers to biomedical contexts, allowing cross-site knowledge transfer via large language models (LLMs). Implementing transfer learning involves careful fine-tuning to balance performance across various tasks, enhancing applicability in clinical settings [88, 14, 91]. Pretraining on biomedical corpora followed by task-specific fine-tuning captures domain-specific lexicons while maintaining generalization. Domain-adaptive strategies bridge general language understanding and medical terminology, enhancing performance in concept extraction and relation classification with reduced labeled dataset requirements.\n\nAuxiliary training objectives, including multi-task learning frameworks, improve transformer robustness in biomedical contexts by optimizing for related objectives like entity recognition and document classification. Contrastive learning leverages unlabeled texts to learn discriminative features, valuable in NLP facing limited labeled datasets due to privacy regulations and annotation costs [92, 93]. Refining these methodologies is essential for improved handling of biomedical text complexities.\n\nParameter-efficient fine-tuning techniques, such as adapter layers, address computational challenges in adapting large models to biomedical applications. Tokenization strategies incorporating domainspecific units enhance performance by accurately representing medical terminology. The ability to analyze diverse data types, combined with prompt engineering advancements, facilitates effective implementation across biomedical NLP applications, ensuring computational efficiency and clinical relevance in diagnosis, report generation, and drug synthesis [88, 51].",
+      "stats": {
+        "char_count": 2225,
+        "word_count": 254,
+        "sentence_count": 13,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "4.3 Applications in Clinical and Biomedical Tasks",
+      "level": 1,
+      "content": "Transformers have revolutionized clinical and biomedical applications, from EHR phenotyping to real-time question answering. In EHR phenotyping, retrieval-augmented generation combined with MapReduce paradigms aids disease phenotype identification with high precision [94]. RatchetEHR uses transformers for ICU predictive analysis, processing temporal clinical sequences for critical support [95]. However, genomic risk factor documentation challenges persist, particularly in Alzheimer’s disease marker identification [96].\n\nClinical note summarization has improved with transformer-based approaches, particularly retrievalaugmented generation (RAG) systems, which generate accurate summaries by leveraging expert inputs [97]. This synthesis enhances summarization quality, supporting clinical decision-making with comprehensive patient insights.\n\nQuestion answering systems benefit from transformers bridging natural language queries and structured EHR data. UniQA demonstrates robustness in translating clinical questions into database queries, optimizing information retrieval in healthcare [98]. COVIDASK highlights adaptability in pandemic scenarios, providing accurate COVID-19 responses [99]. These systems enhance clinical information access.\n\nTransformers’ adaptability extends to radiology report generation, discharge summaries automation, and personalized medicine advancements, analyzing diverse data types [88, 100, 101, 50]. Future directions involve integrating multimodal data and federated learning to enhance generalizability while addressing privacy concerns. Collaborations between linguists, clinicians, and informaticians will ensure clinical relevance and feasibility, harnessing transformers in healthcare informatics’ evolution.",
+      "stats": {
+        "char_count": 1755,
+        "word_count": 197,
+        "sentence_count": 13,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "4.4 Performance Comparison with Traditional NLP Methods",
+      "level": 1,
+      "content": "Transformers surpass traditional NLP techniques in biomedical text analysis by improving accuracy, efficiency, and scalability. They consistently outperform rule-based systems, support vector machines, and conditional random fields in clinical tasks, capturing long-range dependencies and contextual relationships crucial in biomedical texts [88]. In accuracy metrics, transformers show significant gains in NER and relation extraction tasks, with BERT variants achieving higher F1 scores than CRF-based pipelines [88, 100, 102]. Self-attention mechanisms effectively disambiguate polysemous terms and uncover implicit relationships, enhancing clinical NLP.\n\nEfficiency comparisons reveal the interplay between computational demands and predictive accuracy. Transformer models, while requiring significant initial resources, enable faster deployment via parallel processing compared to sequential pipelined systems. This eliminates error propagation inherent in traditional multi-stage pipelines [23, 103, 104, 105].\n\nScalability advantages are pronounced in analyzing diverse biomedical data, enabling effective decision-making in personalized medicine and improving disease diagnosis accuracy [10, 106]. Transformers generalize across clinical text types without task-specific feature engineering, unlike traditional methods requiring extensive customization. Properly optimized transformers process hospital-scale datasets with linear complexity increases, contrasting traditional methods’ exponential growth.\n\nPerformance benefits are notable in multilingual contexts, where transformers leverage shared latent spaces for accuracy while traditional methods require language-specific rules [23, 105]. Future research emphasizes hybrid architectures combining transformer strengths with the transparency and efficiency of traditional techniques, ensuring advancements meet healthcare needs. Integrating methodologies is crucial to continue addressing the evolving demands of the healthcare sector.",
+      "stats": {
+        "char_count": 1999,
+        "word_count": 233,
+        "sentence_count": 13,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "5 Deep Learning in Healthcare: Applications and Challenges",
+      "level": 1,
+      "content": "Deep learning’s integration into healthcare has catalyzed transformative applications that address critical challenges across various domains. This section examines how innovative algorithms enhance disease prediction, drug discovery, and personalized medicine, underscoring deep learning’s impact on healthcare delivery and patient outcomes. As illustrated in Figure 3, the hierarchical structure of deep learning applications in healthcare highlights key areas such as disease prediction, drug discovery, personalized medicine, and resource management. The figure further explores integration with BioNLP and Clinical NLP, emphasizing the importance of semantic understanding and public health analyses. Additionally, it outlines challenges related to data privacy and security, as well as model interpretability and bias, while identifying current strategies and future directions for effective implementation. By analyzing these applications alongside the visual representation, we can appreciate the significant strides made through advanced computational techniques.\n\n[Image]\nFigure 3: This figure illustrates the hierarchical structure of deep learning applications in healthcare, highlighting key areas such as disease prediction, drug discovery, personalized medicine, and resource management. It further explores integration with BioNLP and Clinical NLP, addressing semantic understanding and public health analyses. The diagram also outlines challenges in data privacy and security, as well as model interpretability and bias, identifying current strategies and future directions for effective implementation.",
+      "stats": {
+        "char_count": 1620,
+        "word_count": 205,
+        "sentence_count": 9,
+        "line_count": 4
+      }
+    },
+    {
+      "heading": "5.1 Applications of Deep Learning in Healthcare",
+      "level": 1,
+      "content": "Deep learning has significantly advanced healthcare, particularly in disease prediction, drug discovery, and personalized medicine. In disease prediction, models like ExBEHRT enhance traditional transformers with interpretability and feature integration, while approaches such as Time Associated Meta Learning (TAML) and the Time-Aware Heterogeneous Graph Transformer (THAM) improve prediction accuracy by effectively processing longitudinal patient data [101, 107, 108]. TimelyGPT exemplifies advanced temporal processing, handling irregularly-sampled healthcare data for longterm trend extrapolation [67].\n\nIn drug discovery, deep learning reshapes biomedical research by analyzing complex data. GNTeam enhances drug-related entity recognition with feature-augmented neural networks, while synthetic data generation like EHR-D3PM preserves privacy in drug development research [109, 110]. Uncertainty-aware attention mechanisms further improve predictive accuracy and reliability in highrisk decision-making [111]. Comprehensive benchmarks evaluate performance across healthcare tasks, enhancing drug discovery pipelines [112].\n\nPersonalized medicine benefits from deep learning’s ability to process heterogeneous data. The TEE4EHR framework integrates transformer architectures for improved representation learning and predictive accuracy [71]. MedAug addresses data scarcity by generating meaningful training data, while multimodal integration enhances diagnostic accuracy in applications like dermatology [113, 11]. Large-scale cohort studies, such as those using UK Biobank data, demonstrate effectiveness across major disease categories [54].\n\nResource management applications, such as hospital length of stay prediction, leverage deep learning to optimize healthcare resource allocation [114]. Automated tools in scientific publishing reduce manuscript preparation time while maintaining rigor [23]. Standardized benchmarks with simulated datasets provide comprehensive evaluation frameworks, driving innovation in healthcare applications [60].",
+      "stats": {
+        "char_count": 2052,
+        "word_count": 241,
+        "sentence_count": 14,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "5.2 Integration with BioNLP and Clinical NLP",
+      "level": 1,
+      "content": "The integration of deep learning with BioNLP and clinical NLP enhances semantic understanding, predictive modeling, and knowledge extraction from clinical narratives. This convergence addresses challenges in data scarcity and computational efficiency, improving text mining capabilities. Recent innovations demonstrate how deep learning enhances clinical NLP through multimodal fusion, with frameworks unifying structured and unstructured data [91].\n\nHybrid approaches, like the HDSG model, combine neural entity recognition with prompt-tuning for discharge summary generation, maintaining focus on critical patient information [7]. Uncertainty quantification in clinical outcomes enhances model reliability, while the Uncertainty-aware Attention (UA) mechanism dynamically adjusts feature trust based on input variability [115, 111].\n\nIn clinical question answering, the NLQ2Program method handles complex queries and multimodal data, improving integration with BioNLP systems [116]. Description-based Embedding (DescEmb) approaches unify heterogeneous EHR data, while unsupervised techniques enhance integration through pseudo-labeling methods [117, 118].\n\nThis integration is effective in cognitive impairment identification and heart failure case identification, enhancing accuracy in public health analyses [9, 15, 16]. SVM methods remain relevant for handling high-dimensional feature spaces [119].\n\nFuture research should focus on balancing computational efficiency with clinical accuracy, particularly in resource-constrained environments. Frameworks like RAM-EHR and EMERGE demonstrate potential improvements in clinical predictions by integrating diverse knowledge sources [120, 121]. Federated learning frameworks preserve data privacy while maintaining model performance, ensuring responsible deployment in clinical settings.",
+      "stats": {
+        "char_count": 1837,
+        "word_count": 220,
+        "sentence_count": 12,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "5.3 Challenges in Data Privacy and Security",
+      "level": 1,
+      "content": "Deep learning’s integration into healthcare raises privacy and security concerns, particularly in protecting sensitive patient data and addressing ethical implications of model deployment. A significant challenge is the inability of language models to reliably quantify and reduce uncertainty in clinical predictions, risking unsafe decisions [115]. Privacy-preserving techniques like synthetic EHR generation and federated learning introduce trade-offs between data utility and protection, often struggling to preserve complex clinical relationships [111].\n\nEthical dilemmas arise from the conflict between data accessibility and patient confidentiality, especially in rare diseases or underrepresented populations [122, 92, 123]. Strict data access policies limit researchers’ ability to utilize EHRs effectively, hampering advancements in clinical applications. The reliance on unstructured clinical narratives is crucial for accurately addressing eligibility criteria in clinical trials.\n\nFuture directions emphasize developing robust uncertainty quantification frameworks, standardized privacy-preserving benchmarks, and hybrid architectures balancing predictive performance with transparency. Rigorous governance protocols are essential to ensure responsible use of patient data while maintaining deep learning’s transformative potential in healthcare.",
+      "stats": {
+        "char_count": 1358,
+        "word_count": 162,
+        "sentence_count": 8,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.4 Model Interpretability and Bias",
+      "level": 1,
+      "content": "Deep learning models in healthcare face interpretability challenges and bias mitigation needs, influencing clinical trust and equitable outcomes. Current architectures often achieve high accuracy at the expense of transparency, particularly in transformer-based models with complex attention mechanisms [20]. This opacity hinders clinical adoption, as practitioners need understandable rationales for medical decisions [124].\n\nBias arises from dataset limitations and performance disparities across demographic subgroups. Client-centered federated learning and contrastive learning techniques address some representational biases, though data quality variations remain a challenge [125, 126]. Data augmentation methods provide partial solutions but cannot fully compensate for systemic documentation gaps [127].\n\nPrivacy-preserving model development introduces additional challenges, as BERT models on clinical notes may reveal sensitive attributes despite anonymization [128]. The GRAM model’s graphbased attention offers interpretability by incorporating ontological structures, though computational complexity limits real-time use [129]. Early detection systems for post-COVID conditions highlight the precision-accuracy trade-off, achieving superior performance but lacking actionable explanations [130].\n\nMitigation strategies should address technical and operational dimensions. Explainable deep learning frameworks must prioritize consistency and clinical validation for reliability [19]. Future research should focus on hybrid architectures combining transformers’ power with interpretable components, optimized through federated learning paradigms. Developing standardized metrics for fairness and interpretability is critical for responsible deployment in patient care.",
+      "stats": {
+        "char_count": 1779,
+        "word_count": 207,
+        "sentence_count": 13,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "6 Electronic Health Records (EHRs) and Biomedical Informatics",
+      "level": 1,
+      "content": "In the dynamic realm of Electronic Health Records (EHRs), transforming unstructured data into structured formats is crucial for enhancing the functionality of health information systems. This transition goes beyond technical challenges, involving advanced methodologies to improve clinical information accessibility and applicability. Table 3 compares diverse methodologies employed in the transformation and utilization of unstructured data within electronic health records, accentuating the role of structured data extraction, privacy preservation, and knowledge representation in advancing healthcare informatics. The significance of this transformation is emphasized by the growing reliance on data-driven decisions in healthcare, where timely and accurate patient information can significantly impact clinical outcomes and operational efficiency. The following subsection explores various techniques for extracting structured data from unstructured EHRs, focusing on innovative approaches and technologies shaping biomedical informatics.",
+      "stats": {
+        "char_count": 1042,
+        "word_count": 127,
+        "sentence_count": 5,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "6.1 Techniques for Extracting Structured Data from Unstructured EHRs",
+      "level": 1,
+      "content": "Extracting structured data from unstructured EHRs employs diverse methodologies, including advanced natural language processing (NLP) techniques and knowledge graph construction. Large language models (LLMs) like ChatGPT have been utilized to extract patient information from clinical notes and generate structured search queries for clinical trial matching, showcasing generative AI’s potential in EHR data transformation [131]. These models enhance the interpretability of clinical narratives, facilitating efficient data utilization in research and practice. Visual analytics systems, such as ViSFA, complement these techniques by summarizing feature attributions in temporal sequences, providing interpretable visualizations of structured clinical patterns [132]. This integration of LLMs and visual analytics highlights the necessity of combining multiple methodologies to tackle EHR data complexities.\n\nDomain-specific language models, like WisPerMed, effectively generate structured discharge summary components from unstructured EHRs, focusing on sections such as ’Brief Hospital Course’ and ’Discharge Instructions’ [6]. This targeted approach enhances data accuracy and aligns with clinical workflows, improving usability for healthcare providers. The WoLF framework restructures unstructured EHR data, particularly chest X-ray reports, into anatomically clear formats through large language model integration [63]. Graph-based methods, employing spectral graph partition algorithms, segment words in clinical texts to facilitate structured data extraction [80]. These diverse methodologies significantly enhance EHR data quality and utility.\n\nKnowledge graph construction offers a powerful paradigm for structuring heterogeneous EHR data. The iASiS project introduces a unified conceptual schema represented as a knowledge graph, aggregating biomedical big data and facilitating pattern discovery from unstructured sources [10]. This approach streamlines data integration and enhances insight extraction from disparate datasets. MyAURA’s personalized health library integrates diverse data sources into a knowledge graph, providing structured recommendations for epilepsy patients [12]. Domain-adaptive pretraining further enhances these techniques, as seen in radiology report summarization systems that combine preprocessing, specialized pretraining, and fine-tuning to extract structured findings from imaging reports [13]. This synergy between knowledge representation and advanced machine learning is pivotal for advancing biomedical informatics.\n\nContextual extraction methods address the challenge of identifying relevant information from lengthy clinical notes. Recent approaches focus on extracting pertinent context for discharge summary generation, emphasizing the need for selective processing of unstructured EHR data to produce concise, structured outputs [57]. These methodologies advance the field by addressing clinical documentation variability while maintaining computational efficiency and scalability across healthcare systems. Integrating NLP techniques with knowledge representation frameworks continues to push the boundaries of structured data extraction from complex, unstructured clinical narratives.",
+      "stats": {
+        "char_count": 3238,
+        "word_count": 396,
+        "sentence_count": 20,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "6.2 De-identification and Privacy-Preserving Methods",
+      "level": 1,
+      "content": "De-identification of EHRs employs advanced computational techniques to protect patient confidentiality while preserving data utility for research and clinical applications. Current methods are vulnerable to attacks like membership inference and model inversion, which can expose sensitive information, highlighting the need for robust privacy-preserving pipelines [133]. Adversarial learning approaches in text de-identification reduce manual pseudonymization efforts while maintaining high performance through representation learning techniques that balance privacy protection with data utility [134]. This represents a significant advancement in secure and efficient data handling in clinical environments.\n\nRule-based and feature-based methods have traditionally dominated clinical de-identification tasks, addressing privacy regulations like HIPAA and GDPR by systematically removing personal health information (PHI) from unstructured texts [135]. The DreamNLP framework exemplifies how lightweight NLP solutions achieve effective de-identification while extracting clinically relevant features from specialized reports. Physician feedback indicates strong interest in these systems’ analytical capabilities, particularly for treatment outcome analysis and patient similarity comparisons, suggesting well-designed de-identification methods can enhance clinical decision support without compromising privacy [136].\n\nEmerging techniques focus on differential privacy mechanisms and federated learning architectures that enable collaborative model training without centralized data sharing. These approaches offer robust mathematical privacy guarantees, ensuring sensitive information is protected while preserving essential statistical properties for accurate analysis across diverse datasets [134, 135]. Future directions emphasize hybrid systems combining rule-based methods with deep learning approaches, ensuring robust protection against evolving privacy threats in healthcare data ecosystems. Integrating privacy-preserving techniques with clinical NLP pipelines is critical for enabling large-scale biomedical research while upholding ethical standards in patient data protection.",
+      "stats": {
+        "char_count": 2190,
+        "word_count": 254,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6.3 Knowledge Graph Construction and Information Retrieval",
+      "level": 1,
+      "content": "Constructing knowledge graphs from EHRs transforms biomedical data organization and utilization, combining algorithmic concept generation with deep multimodal integration for enhanced information retrieval and decision support. Modern methodologies demonstrate superior performance when leveraging large language models (LLMs), with GPT-4 achieving 0.88 accuracy in knowledge graph construction tasks, surpassing hybrid (0.81) and traditional NLP approaches (0.78) in structured biomedical knowledge extraction [75]. The BIOS framework exemplifies algorithmic concept generation through its automated curation pipeline, grouping biomedical terms into synonym clusters, classifying semantic types, and extracting relations to form comprehensive knowledge structures [137].\n\nAdvanced architectures employ bidirectional fusion mechanisms to integrate textual EHR data with existing knowledge graph structures, creating enriched representations capturing linguistic patterns and ontological relationships [138]. These approaches demonstrate particular efficacy in clinical prediction tasks, improving performance across applications like mortality prediction, decompensation forecasting, and phenotype classification [139]. Tensor decomposition methods enhance knowledge graph scalability, as demonstrated by SWOTTED extensions that efficiently process highdimensional EHR data while maintaining interpretability, validated on COVID-19 patient cohorts from major hospital systems [140].\n\nKnowledge graphs in clinical decision support systems address EHR data utilization challenges by enabling semantic search capabilities and context-aware reasoning. Graph-based representations facilitate efficient traversal of patient histories and medical concepts, supporting complex queries that traditional database architectures struggle to process. Future directions emphasize federated learning paradigms for collaborative knowledge graph construction across institutions while preserving data privacy, alongside developing specialized query languages optimized for clinical knowledge graph interrogation. These advancements enhance unstructured EHR data integration with actionable clinical insights, improving patient eligibility criteria accuracy for clinical trials and streamlining cohort identification and EHR summarization [97, 123, 141].",
+      "stats": {
+        "char_count": 2336,
+        "word_count": 268,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6.4 Interoperability and Data Standardization Challenges",
+      "level": 1,
+      "content": "Achieving interoperability and standardization in EHR systems faces challenges from data heterogeneity, institutional variability, and evolving clinical documentation practices. A significant obstacle is the multiplicity of local disease classifications and data format variations, complicating disease information extraction and analysis across healthcare systems [58]. The dependency on EHR data quality further limits findings’ generalizability to diverse settings [142]. Existing methods require extensive manual effort to map codes between systems or convert EHR data into a common format, often impractical for large-scale deployment [117].\n\nTemporal phenotyping approaches highlight broader interoperability issues, especially in highdimensional outcome spaces where deep learning models struggle to maintain consistent performance across heterogeneous EHR architectures [143]. The absence of labeled data for supervised model training presents another barrier, as creating high-quality annotations demands significant expertise and resources [118]. Synthetic data generation offers a promising alternative by replicating real EHRs’ statistical properties without exposing sensitive information, though current methods face limitations in modeling temporal dependencies between patient visits [144]. Advanced frameworks like EHRPD improve capabilities in capturing temporal relationships while estimating visit intervals, providing comprehensive patient trajectory representations [59].\n\nUncertainty-aware attention mechanisms improve model calibration and enable richer interpretations aligning with clinician insights, though their effectiveness depends on input data quality [111]. Future directions must prioritize adaptive ontology development, federated learning architectures for schema harmonization, and context-aware standardization pipelines balancing clinical specificity with interoperability requirements. These advancements should integrate temporal modeling capabilities with robust quality control mechanisms to address current limitations and emerging EHR data utilization challenges.",
+      "stats": {
+        "char_count": 2109,
+        "word_count": 248,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6.5 Ethical Considerations and Bias Mitigation",
+      "level": 1,
+      "content": "Deploying EHRs in biomedical NLP applications requires rigorous examination of ethical challenges surrounding data privacy, algorithmic bias, and equitable healthcare delivery. A fundamental concern involves synthetic EHR data generation, where approaches like SynEHRGY effectively model irregularly-sampled time series data while addressing high missingness and irregular time points [144]. These methods must balance data utility with regulatory compliance, as shown by detailed data management plans ensuring adherence to EU data protection standards [10].\n\nAlgorithmic bias arises through data collection disparities and model design choices. Current synthetic data approaches exhibit limitations in modeling longitudinal features and vulnerability to sophisticated privacy attacks, highlighting critical gaps in privacy-preserving techniques [144]. Integrating heterogeneous big data sources complicates bias mitigation, requiring systematic evaluation of potential biases during data generation and processing [10]. Ensuring healthcare technologies serve all populations equitably is essential, particularly in diverse clinical settings.\n\nMitigation strategies must integrate technical innovations with governance frameworks for responsible EHR utilization. Future research should prioritize longitudinal privacy-preserving architectures addressing irregular sampling patterns while maintaining data utility [144]. Compliance with evolving data regulations, as demonstrated by the iASiS project’s comprehensive data management plans, provides a foundation for ethical AI deployment in clinical settings [10]. These efforts must be coupled with ongoing audits of model performance across patient subgroups and transparent data provenance documentation to maintain trust in biomedical NLP systems. An ethical approach to\n\ndata utilization is crucial for harnessing EHRs’ full potential while safeguarding patient rights and promoting equitable access to care.\n\n<html><body><table><tr><td>Feature</td><td></td><td>Tehes</td><td></td></tr><tr><td>Data Transformation Method Model Utilization</td><td>Nlp And Graphs LIlms And Domain-specific Not Specified</td><td>Rule-based And Adversarial Nlp And Federated High Privacy Focus</td><td>Graph-based Integration Llms And Tensor Not Specified</td></tr><tr><td>Privacy Considerations</td><td>Table 3: This table presents a comparative analysis of various methodologies utilized in transform-</td><td></td><td></td></tr><tr><td>ing unstructured electronic health records (EHRs) into structured formats, ensuring data privacy,and</td><td></td><td>facilitating knowledge graph construction for enhanced information retrieval. The comparison high-</td><td></td></tr><tr><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td>lights the techniques employed, model utilization,and privacy considerations associated with these</td><td></td></tr></table></body></html>",
+      "stats": {
+        "char_count": 2919,
+        "word_count": 315,
+        "sentence_count": 14,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "7 Emerging Trends and Future Directions",
+      "level": 1,
+      "content": "The intersection of artificial intelligence and healthcare is marked by innovative methodologies that hold significant implications for patient care. This section examines advancements in federated learning and privacy-preserving natural language processing (NLP), which are pivotal in addressing challenges related to sensitive patient data. The exploration of federated learning frameworks reveals their potential to facilitate collaborative model training while ensuring stringent privacy standards, a critical consideration amidst increasing regulatory scrutiny and the demand for effective healthcare solutions. These trends not only guide current research but also pave the way for future innovations poised to reshape healthcare.",
+      "stats": {
+        "char_count": 736,
+        "word_count": 95,
+        "sentence_count": 4,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "7.1 Federated Learning and Privacy-Preserving NLP",
+      "level": 1,
+      "content": "Federated learning has emerged as a key paradigm in privacy-preserving NLP, enabling collaborative model training without centralized data sharing. This approach is crucial in biomedical NLP, where data privacy and regulatory constraints limit large-scale dataset availability. The EHR-Monize framework exemplifies the use of large language models (LLMs) for medical concept categorization while preserving data privacy [145]. Such architectures tackle data heterogeneity and interoperability challenges in EHR processing, harnessing collective intelligence across institutions while keeping patient information secure.\n\nClient-centered federated learning architectures address limitations of global models by tailoring solutions to specific institutions. Federated strategies for medical concept extraction demonstrate the feasibility of utilizing diverse EHR data while ensuring privacy [146]. These strategies benefit from frameworks that integrate document embedding training with privacy-preserving technologies [147]. Future research should extend these methodologies to handle multi-modal data integration, improve prompt engineering, and enhance model effectiveness in clinical applications [116, 131]. This adaptability is crucial for advancing federated learning’s efficacy in diverse healthcare contexts.\n\nPrivacy-preserving techniques in federated learning are evolving beyond traditional de-identification. The explicit blurred memory network (EBmRNN) enhances interpretability in federated settings, providing actionable insights while maintaining confidentiality [139]. Future research should incorporate robustness against missing data through tensor factorization methods [148]. Visualization frameworks like ViSFA could be enhanced for causal inference in federated environments, extending their clinical applications [132]. These refinements are essential for adapting federated learning to real-world clinical data complexities.\n\nIntegrating advanced privacy-preserving techniques with federated learning is critical for collaborative model development across healthcare institutions. Future research should explore genomic data integration to enhance subphenotyping and optimize subtopic strategies in disease contexts [149]. Innovations must balance technical feasibility and clinical utility, improving AI accuracy and user trust [150]. Federated learning’s evolution promises to enhance data security and foster collaborative healthcare innovation.",
+      "stats": {
+        "char_count": 2472,
+        "word_count": 294,
+        "sentence_count": 18,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "7.2 Multimodal Models and Data Integration",
+      "level": 1,
+      "content": "Integrating text with other modalities, such as imaging and genomics, is a transformative frontier in biomedical NLP, enabling comprehensive patient analysis through multimodal models. These approaches overcome limitations of unimodal representations by capturing complementary information across data types, offering a holistic view of patient health [151]. Advances in multimodal fusion architectures, like P-Transformer, unify structured and unstructured data for enhanced predictive performance [50]. The WoLF framework exemplifies this by transforming unstructured EHR data, particularly chest X-ray reports, into anatomically clear formats using large language models [63]. This integration is crucial for advancing biomedical informatics and patient-centric care.\n\nIn radiology, domain-adaptive pretraining integrates imaging reports with visual data, improving diagnostic accuracy and report quality [13]. Dermatological diagnostics benefit from multimodal approaches like DermPrompt, which uses GPT-4V to rank diagnoses based on patient histories and images [11]. These applications highlight vision-language architectures’ potential to bridge textual narratives and medical evidence, though challenges in computational overhead and scalability persist. Effective modality combination can significantly enhance diagnostics, leading to accurate and timely care.\n\nGenomic data integration offers opportunities for personalized medicine, as knowledge graph approaches link EHR text with molecular profiling for precision oncology [10]. The iASiS project exemplifies this with a unified schema aggregating biomedical data, including genomic sequences and clinical notes, into an interoperable knowledge graph [10]. Such integrations enable accurate phenotype-genotype correlations, addressing complexities beyond traditional descriptors [151]. Developing these frameworks is critical for personalized treatment strategies and patient outcomes.\n\nFuture directions emphasize adaptive fusion mechanisms that adjust modality contributions based on quality and clinical context. There is a growing focus on federated learning frameworks that ensure multimodal data privacy while facilitating integration across institutions. These advancements aim to enhance EHR systems’ predictive capabilities by leveraging complementary information from structured and unstructured data, providing a comprehensive understanding of patient health. Novel approaches like neural architecture search (NAS) and multimodal contrastive learning are explored to automate model design and improve feature representation, leading to better healthcare outcomes [152, 153]. Continued refinement of these models requires standardized benchmarks for diverse healthcare scenarios, maintaining clinical interpretability and efficiency. This focus on multimodal integration is crucial for realizing AI’s potential in enhancing patient care.",
+      "stats": {
+        "char_count": 2910,
+        "word_count": 359,
+        "sentence_count": 19,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "7.3 Large Language Models (LLMs) in Clinical Decision Support",
+      "level": 1,
+      "content": "Large Language Models (LLMs) are transformative in clinical decision support, excelling in processing complex medical narratives but facing deployment challenges. Recent advancements highlight their potential in phenotyping physician notes, with GPT-4 achieving superior accuracy in knowledge extraction compared to hybrid methods [75]. Domain-specific knowledge integration through optimized pretraining enhances model performance in clinical coding, as demonstrated by PLM-ICD’s effectiveness in automatic ICD coding [154]. LLMs streamline clinical workflows by generating structured documentation from unstructured notes, reducing clinician workload while maintaining accuracy.\n\nSpecialized LLM adaptations address clinical challenges through architectural innovations. The RadBloomz model, with domain-adaptive pretraining, excels in generating radiology report summaries [13]. The WoLF framework reformulates EHR data into clear formats, outperforming existing models in clinical decision support [63]. Self-explaining hypergraph neural networks provide interpretable predictions while maintaining accuracy, benefiting from self-supervised learning for contextual synonym detection [155, 47]. These models’ adaptability enhances usability and effectiveness in real-world applications.\n\nLLMs extend to predictive analytics, where surrogate-assisted approaches excel in knowledge discovery [156]. Temporal modeling innovations, like TimelyGPT, improve clinical trajectory predictions [67]. These models address uncertainty quantification challenges, particularly through ensemble methods reducing prediction uncertainty [115]. Synthetic data generation supports model development by creating realistic EHR data while preserving privacy [144]. Integrating these methodologies into clinical practice promises to enhance patient care through improved predictive capabilities.\n\nChallenges in model interpretability, data privacy, and deployment persist. Future research emphasizes temporal dependencies in predictions, robust evaluation metrics, and expansion to specialized domains. Refining predictive models in healthcare must balance performance with clinical utility, ensuring seamless integration into workflows. Enhancing accuracy and interpretability is crucial for informed decision-making and patient safety, adhering to privacy standards. Advances like the $\\mathrm { { \\bf S P e C } }$ pipeline for prompt-based calibration and frameworks like EMERGE leverage multimodal data for richer predictive modeling. Models like RETAIN exemplify achieving high accuracy and interpretability, facilitating better outcomes and decision-making [120, 103, 157]. LLMs’ future in clinical decision support is poised for growth, driven by research addressing limitations.",
+      "stats": {
+        "char_count": 2766,
+        "word_count": 333,
+        "sentence_count": 21,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "7.4 Scalability and Real-Time Processing",
+      "level": 1,
+      "content": "Deploying NLP solutions in clinical environments requires addressing scalability and real-time processing challenges, balancing computational efficiency with workflow requirements. Transformerbased architectures excel in processing EHRs but face barriers in real-time deployment due to computational demands [86]. The SANSformer architecture reduces complexity through axial mixing, maintaining forecasting accuracy for scalable clinical NLP applications [86]. The SAT-Transformer optimizes longitudinal patient data processing, addressing efficiency and clinical relevance [45]. Scalability is essential for integrating NLP tools into clinical practice effectively.\n\nReal-time processing demands architectures balancing latency with predictive accuracy. The TEE4EHR framework integrates transformers with point process theory for efficient handling of irregularly-sampled events, improving representation learning for real-time applications [71]. This highlights temporal modeling’s importance in addressing data complexity and speed challenges. The MuViTaNet framework exemplifies balancing multi-view learning for real-time decision support [158]. Developing such frameworks is crucial for achieving necessary speed and accuracy in decision-making.\n\nInfrastructural considerations challenge scaling NLP solutions across healthcare systems. NLPClassification combines rule-based and machine learning approaches for feature extraction, demonstrating robust patient classification performance while maintaining efficiency for diverse environments [15]. Uncertainty-aware attention mechanisms enhance model reliability, allowing dynamic feature trust adjustment based on variability [111]. These techniques address gaps in current implementations where overhead limits deployment. Effective scaling is vital for leveraging AI-driven insights to improve outcomes.\n\nFuture directions prioritize lightweight architectures for edge computing in clinical environments and federated learning frameworks for collaborative model development, ensuring data privacy and compliance. This includes client-centered federated learning tailored to institutions and collaborative graph learning leveraging domain knowledge and text data for predictive accuracy. The adaptability of shared foundation models trained on extensive EHRs is explored for improved prediction with fewer labels and reduced costs across facilities [125, 23, 52, 159]. Temporal modeling and adaptive compression evolution are critical for meeting real-time support latency requirements while maintaining accuracy across populations and contexts. Scalability and real-time processing are essential for harnessing AI’s potential in healthcare delivery.",
+      "stats": {
+        "char_count": 2707,
+        "word_count": 319,
+        "sentence_count": 20,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "7.5 Human-AI Collaboration and Ethical Considerations",
+      "level": 1,
+      "content": "AI integration in healthcare requires robust human-AI collaboration and ethical governance frameworks to ensure responsible deployment and mitigate risks. Effective collaboration necessitates transparent model architectures aligning with clinical workflows and interpretability for end-users [19]. Concept-based explanations, such as CAV-TS, enhance human understanding by refining clinical concept definitions and adapting to diverse architectures [160]. These methodologies address trust and adoption gaps by bridging AI complexity with clinical decision-making. Enhancing humanAI synergy is crucial for optimizing care and outcomes.\n\nEthical challenges in biomedical AI include data privacy, bias, and equitable access. Privacypreserving techniques must evolve beyond encryption to address deep learning pipeline vulnerabilities, focusing on computational efficiency and protection standards [133]. Bias mitigation requires systematic implementation in model development, particularly in automated documentation systems where training data disparities can propagate [161]. Ethical implications of alternative data sources, like social media, necessitate evaluation frameworks for responsible clinical use [92]. Addressing these considerations is vital for fostering trust and responsible AI use in healthcare.\n\nLLM deployment in healthcare amplifies ethical considerations, demanding enhanced transparency and integration protocols. Research must address interpretability challenges while exploring multimodal data fusion for improved decision support [162]. Despite superior performance, transformer architectures require refinement for ethical deployment and efficiency [88]. Biomedical informatics education should incorporate ethical AI principles as foundational, ensuring practitioners critically evaluate and responsibly implement NLP solutions [163]. Education is essential for preparing professionals to navigate AI integration complexities.\n\nScalability and optimization present ethical dimensions in human-AI collaboration. Semisupervised methods reduce annotation burdens but require robust optimization to prevent local optima traps and ensure equitable performance across populations [164]. Future directions emphasize adaptive governance frameworks evolving with technological advancements, ensuring AI systems remain accountable, transparent, and aligned with clinical priorities. Integrating ethical considerations into model design and deployment is critical for realizing AI’s transformative potential in healthcare while maintaining trust and safety. Prioritizing ethical governance allows healthcare to harness AI’s power to enhance care while safeguarding against risks.",
+      "stats": {
+        "char_count": 2695,
+        "word_count": 321,
+        "sentence_count": 20,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "8 Conclusion",
+      "level": 1,
+      "content": "The transformative role of BioNLP, biomedical text mining, and clinical NLP in healthcare is underscored by their contributions to diagnostics, patient care, and research. Through the integration of pre-trained language models and transformer architectures, these technologies have redefined the processing of unstructured biomedical data, providing profound advancements in extracting insights from electronic health records (EHRs). Such models, particularly those that are fine-tuned, not only enhance clinician-patient interaction by minimizing documentation time but also elevate healthcare efficiency. Innovations like hybrid approaches that blend neural entity recognition with prompt-tuning continue to refine clinical concept extraction, while graph-based strategies offer robust capabilities for parsing complex clinical texts.\n\nSignificant strides have been noted across various clinical NLP applications, with systems like iASiS facilitating data-driven decision-making for clinicians and policymakers through effective big data integration. Personalized tools, exemplified by applications such as myAURA, leverage both traditional and novel data sources to aid patients with chronic conditions in self-management. Additionally, frameworks like sEHR-CE set new standards in disease phenotype prediction, outperforming conventional methods by eliminating the need for manual mapping.\n\nDespite these substantial advancements, challenges remain in ensuring model interpretability, managing data heterogeneity, and integrating these tools seamlessly into clinical workflows. This survey identifies the need to improve explanations for multimodal models and the adaptation of large language models for clinical tasks in a resource-efficient manner. Future endeavors should focus on developing robust evaluation metrics, refining methods for handling data noise, and establishing ethical frameworks that harmonize predictive accuracy with clinical applicability.\n\nAddressing these challenges requires a concerted effort from computational, clinical, and biomedical disciplines. Such interdisciplinary collaboration is crucial to overcoming interoperability issues and instituting standards that assure responsible AI deployment. Moreover, emphasizing temporal modeling, federated learning, and adaptive governance will be pivotal in translating these technological advancements into enhanced patient care and operational efficiency within healthcare systems.",
+      "stats": {
+        "char_count": 2463,
+        "word_count": 303,
+        "sentence_count": 13,
+        "line_count": 7
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "Neural natural language processing for unstructured data in electronic health records: a review",
+      "number": null,
+      "title": "Neural natural language processing for unstructured data in electronic health records: a review"
+    },
+    {
+      "text": "Covid-19 signsym: a fast adaptation of a general clinical nlp tool to identify and normalize covid-19 signs and symptoms to omop common data model",
+      "number": null,
+      "title": "Covid-19 signsym: a fast adaptation of a general clinical nlp tool to identify and normalize covid-19 signs and symptoms to omop common data model"
+    },
+    {
+      "text": "Multi-label classification for biomedical literature: an overview of the biocreative vii litcovid track for covid-19 literature topic annotations",
+      "number": null,
+      "title": "Multi-label classification for biomedical literature: an overview of the biocreative vii litcovid track for covid-19 literature topic annotations"
+    },
+    {
+      "text": "Qub-cirdan at \"discharge me!\": Zero shot discharge letter generation by open-source llm",
+      "number": null,
+      "title": "Qub-cirdan at \"discharge me!\": Zero shot discharge letter generation by open-source llm"
+    },
+    {
+      "text": "Question answering on patient medical records with private fine-tuned llms",
+      "number": null,
+      "title": "Question answering on patient medical records with private fine-tuned llms"
+    },
+    {
+      "text": "Wispermed at \"discharge me!\": Advancing text generation in healthcare with large language models, dynamic expert selection, and priming techniques on mimic-iv",
+      "number": null,
+      "title": "Wispermed at \"discharge me!\": Advancing text generation in healthcare with large language models, dynamic expert selection, and priming techniques on mimic-iv"
+    },
+    {
+      "text": "Uf-hobi at \"discharge me!\": A hybrid solution for discharge summary generation through prompt-based tuning of gatortrongpt models",
+      "number": null,
+      "title": "Uf-hobi at \"discharge me!\": A hybrid solution for discharge summary generation through prompt-based tuning of gatortrongpt models"
+    },
+    {
+      "text": "Transformer-based time-to-event prediction for chronic kidney disease deterioration",
+      "number": null,
+      "title": "Transformer-based time-to-event prediction for chronic kidney disease deterioration"
+    },
+    {
+      "text": "Using deep learning to identify patients with cognitive impairment in electronic health records",
+      "number": null,
+      "title": "Using deep learning to identify patients with cognitive impairment in electronic health records"
+    },
+    {
+      "text": "iasis: Towards heterogeneous big data analysis for personalized medicine",
+      "number": null,
+      "title": "iasis: Towards heterogeneous big data analysis for personalized medicine"
+    },
+    {
+      "text": "Dermprompt – a systematic exploration of prompt engineering with gpt-4v for dermatological diagnosis",
+      "number": null,
+      "title": "Dermprompt – a systematic exploration of prompt engineering with gpt-4v for dermatological diagnosis"
+    },
+    {
+      "text": "myaura: Personalized health library for epilepsy management via knowledge graph sparsification and visualization",
+      "number": null,
+      "title": "myaura: Personalized health library for epilepsy management via knowledge graph sparsification and visualization"
+    },
+    {
+      "text": "Domain-adaptive pre-training of instruction-tuned llms for radiology report impression generation",
+      "number": null,
+      "title": "Domain-adaptive pre-training of instruction-tuned llms for radiology report impression generation"
+    },
+    {
+      "text": "Transfer learning with clinical concept embeddings from large language models",
+      "number": null,
+      "title": "Transfer learning with clinical concept embeddings from large language models"
+    },
+    {
+      "text": "Using natural language processing to screen patients with active heart failure: An exploration for hospital-wide surveillance",
+      "number": null,
+      "title": "Using natural language processing to screen patients with active heart failure: An exploration for hospital-wide surveillance"
+    },
+    {
+      "text": "Using natural language processing and structured medical data to phenotype patients hospitalized due to covid-19",
+      "number": null,
+      "title": "Using natural language processing and structured medical data to phenotype patients hospitalized due to covid-19"
+    },
+    {
+      "text": "Bioalbert: A simple and effective pre-trained language model for biomedical named entity recognition",
+      "number": null,
+      "title": "Bioalbert: A simple and effective pre-trained language model for biomedical named entity recognition"
+    },
+    {
+      "text": "Linkbert: Pretraining language models with document links",
+      "number": null,
+      "title": "Linkbert: Pretraining language models with document links"
+    },
+    {
+      "text": "Explainable deep learning in healthcare: A methodological survey from an attribution view",
+      "number": null,
+      "title": "Explainable deep learning in healthcare: A methodological survey from an attribution view"
+    },
+    {
+      "text": "Deep learning in healthcare: An in-depth analysis",
+      "number": null,
+      "title": "Deep learning in healthcare: An in-depth analysis"
+    },
+    {
+      "text": "Sectioning of biomedical abstracts: A sequence of sequence classification task",
+      "number": null,
+      "title": "Sectioning of biomedical abstracts: A sequence of sequence classification task"
+    },
+    {
+      "text": "Literature based discovery (lbd): Towards hypothesis generation and knowledge discovery in biomedical text mining",
+      "number": null,
+      "title": "Literature based discovery (lbd): Towards hypothesis generation and knowledge discovery in biomedical text mining"
+    },
+    {
+      "text": "The future of scientific publishing: Automated article generation",
+      "number": null,
+      "title": "The future of scientific publishing: Automated article generation"
+    },
+    {
+      "text": "Launching into clinical space with medspacy: a new clinical text processing toolkit in python",
+      "number": null,
+      "title": "Launching into clinical space with medspacy: a new clinical text processing toolkit in python"
+    },
+    {
+      "text": "Microtask crowdsourcing for disease mention annotation in pubmed abstracts",
+      "number": null,
+      "title": "Microtask crowdsourcing for disease mention annotation in pubmed abstracts"
+    },
+    {
+      "text": "Pipelined biomedical event extraction rivaling joint learning",
+      "number": null,
+      "title": "Pipelined biomedical event extraction rivaling joint learning"
+    },
+    {
+      "text": "Learning conceptual-contextual embeddings for medical text",
+      "number": null,
+      "title": "Learning conceptual-contextual embeddings for medical text"
+    },
+    {
+      "text": "Rubioroberta: a pretrained biomedical language model for russian language biomedical text mining",
+      "number": null,
+      "title": "Rubioroberta: a pretrained biomedical language model for russian language biomedical text mining"
+    },
+    {
+      "text": "Learning structures of the french clinical language:development and validation of word embedding models using 21 million clinical reports from electronic health records",
+      "number": null,
+      "title": "Learning structures of the french clinical language:development and validation of word embedding models using 21 million clinical reports from electronic health records"
+    },
+    {
+      "text": "Knowledge transfer with medical language embeddings",
+      "number": null,
+      "title": "Knowledge transfer with medical language embeddings"
+    },
+    {
+      "text": "Mapping patient trajectories: Understanding and visualizing sepsis prognostic pathways from patients clinical narratives",
+      "number": null,
+      "title": "Mapping patient trajectories: Understanding and visualizing sepsis prognostic pathways from patients clinical narratives"
+    },
+    {
+      "text": "Medgpt: Medical concept prediction from clinical narratives",
+      "number": null,
+      "title": "Medgpt: Medical concept prediction from clinical narratives"
+    },
+    {
+      "text": "Motor: A time-to-event foundation model for structured medical records",
+      "number": null,
+      "title": "Motor: A time-to-event foundation model for structured medical records"
+    },
+    {
+      "text": "Predicting multiple sclerosis disease severity with multimodal deep neural networks",
+      "number": null,
+      "title": "Predicting multiple sclerosis disease severity with multimodal deep neural networks"
+    },
+    {
+      "text": "Large language model capabilities in perioperative risk prediction and prognostication",
+      "number": null,
+      "title": "Large language model capabilities in perioperative risk prediction and prognostication"
+    },
+    {
+      "text": "Refinement of an epilepsy dictionary through human annotation of health-related posts on instagram",
+      "number": null,
+      "title": "Refinement of an epilepsy dictionary through human annotation of health-related posts on instagram"
+    },
+    {
+      "text": "Semantic rule webbased diagnosis and treatment of vector-borne diseases using swrl rules",
+      "number": null,
+      "title": "Semantic rule webbased diagnosis and treatment of vector-borne diseases using swrl rules"
+    },
+    {
+      "text": "Taiyi: A bilingual fine-tuned large language model for diverse biomedical tasks",
+      "number": null,
+      "title": "Taiyi: A bilingual fine-tuned large language model for diverse biomedical tasks"
+    },
+    {
+      "text": "Secnlp: A survey of embeddings in clinical natural language processing",
+      "number": null,
+      "title": "Secnlp: A survey of embeddings in clinical natural language processing"
+    },
+    {
+      "text": "Snaptogrid: From statistical to interpretable models for biomedical information extraction",
+      "number": null,
+      "title": "Snaptogrid: From statistical to interpretable models for biomedical information extraction"
+    },
+    {
+      "text": "Sparse multidimensional patient modeling using auxiliary confidence labels",
+      "number": null,
+      "title": "Sparse multidimensional patient modeling using auxiliary confidence labels"
+    },
+    {
+      "text": "Seeing the whole patient: Using multi-label medical text classification techniques to enhance predictions of medical codes",
+      "number": null,
+      "title": "Seeing the whole patient: Using multi-label medical text classification techniques to enhance predictions of medical codes"
+    },
+    {
+      "text": "Ontology-driven self-supervision for adverse childhood experiences identification using social media datasets",
+      "number": null,
+      "title": "Ontology-driven self-supervision for adverse childhood experiences identification using social media datasets"
+    },
+    {
+      "text": "Next visit diagnosis prediction via medical code-centric multimodal contrastive ehr modelling with hierarchical regularisation",
+      "number": null,
+      "title": "Next visit diagnosis prediction via medical code-centric multimodal contrastive ehr modelling with hierarchical regularisation"
+    },
+    {
+      "text": "Self attention with temporal prior: Can we learn more from arrow of time?",
+      "number": null,
+      "title": "Self attention with temporal prior: Can we learn more from arrow of time?"
+    },
+    {
+      "text": "Self-attention enhanced patient journey understanding in healthcare system",
+      "number": null,
+      "title": "Self-attention enhanced patient journey understanding in healthcare system"
+    },
+    {
+      "text": "Self-supervised detection of contextual synonyms in a multi-class setting: Phenotype annotation use case",
+      "number": null,
+      "title": "Self-supervised detection of contextual synonyms in a multi-class setting: Phenotype annotation use case"
+    },
+    {
+      "text": "Semclinbr – a multi institutional and multi specialty semantically annotated corpus for portuguese clinical nlp tasks",
+      "number": null,
+      "title": "Semclinbr – a multi institutional and multi specialty semantically annotated corpus for portuguese clinical nlp tasks"
+    },
+    {
+      "text": "Overview of the biolaysumm 2024 shared task on the lay summarization of biomedical research articles",
+      "number": null,
+      "title": "Overview of the biolaysumm 2024 shared task on the lay summarization of biomedical research articles"
+    },
+    {
+      "text": "Ptransformer: A prompt-based multimodal transformer architecture for medical tabular data",
+      "number": null,
+      "title": "Ptransformer: A prompt-based multimodal transformer architecture for medical tabular data"
+    },
+    {
+      "text": "Can frontier llms replace annotators in biomedical text mining? analyzing challenges and exploring solutions",
+      "number": null,
+      "title": "Can frontier llms replace annotators in biomedical text mining? analyzing challenges and exploring solutions"
+    },
+    {
+      "text": "A multi-center study on the adaptability of a shared foundation model for electronic health records",
+      "number": null,
+      "title": "A multi-center study on the adaptability of a shared foundation model for electronic health records"
+    },
+    {
+      "text": "Fastcontext: an efficient and scalable implementation of the context algorithm",
+      "number": null,
+      "title": "Fastcontext: an efficient and scalable implementation of the context algorithm"
+    },
+    {
+      "text": "Language modelling of structured ehr data for efficient and generalizable patient cohort expansion.",
+      "number": null,
+      "title": "Language modelling of structured ehr data for efficient and generalizable patient cohort expansion."
+    },
+    {
+      "text": "Ice-node: Integration of clinical embeddings with neural ordinary differential equations",
+      "number": null,
+      "title": "Ice-node: Integration of clinical embeddings with neural ordinary differential equations"
+    },
+    {
+      "text": "The effectiveness of multitask learning for phenotyping with electronic health records data",
+      "number": null,
+      "title": "The effectiveness of multitask learning for phenotyping with electronic health records data"
+    },
+    {
+      "text": "Generating discharge summary sections with fine-tuned language models",
+      "number": null,
+      "title": "Generating discharge summary sections with fine-tuned language models"
+    },
+    {
+      "text": "Towards system modelling to support diseases data extraction from the electronic health records for physicians research activities",
+      "number": null,
+      "title": "Towards system modelling to support diseases data extraction from the electronic health records for physicians research activities"
+    },
+    {
+      "text": "Synthesizing multimodal electronic health records via predictive diffusion models",
+      "number": null,
+      "title": "Synthesizing multimodal electronic health records via predictive diffusion models"
+    },
+    {
+      "text": "Simsum: Simulated benchmark with structured and unstructured medical records",
+      "number": null,
+      "title": "Simsum: Simulated benchmark with structured and unstructured medical records"
+    },
+    {
+      "text": "Toward cohort intelligence: A universal cohort representation learning framework for electronic health record analysis",
+      "number": null,
+      "title": "Toward cohort intelligence: A universal cohort representation learning framework for electronic health record analysis"
+    },
+    {
+      "text": "Scalable and accurate deep learning for electronic health records",
+      "number": null,
+      "title": "Scalable and accurate deep learning for electronic health records"
+    },
+    {
+      "text": "Wolf: Wide-scope large language model framework for cxr understanding",
+      "number": null,
+      "title": "Wolf: Wide-scope large language model framework for cxr understanding"
+    },
+    {
+      "text": "Awe-cm vectors: Augmenting word embeddings with a clinical metathesaurus",
+      "number": null,
+      "title": "Awe-cm vectors: Augmenting word embeddings with a clinical metathesaurus"
+    },
+    {
+      "text": "A comprehensive survey of foundation models in medicine",
+      "number": null,
+      "title": "A comprehensive survey of foundation models in medicine"
+    },
+    {
+      "text": "Biomedical event extraction with hierarchical knowledge graphs",
+      "number": null,
+      "title": "Biomedical event extraction with hierarchical knowledge graphs"
+    },
+    {
+      "text": "Timelygpt: Extrapolatable transformer pre-training for long-term time-series forecasting in healthcare",
+      "number": null,
+      "title": "Timelygpt: Extrapolatable transformer pre-training for long-term time-series forecasting in healthcare"
+    },
+    {
+      "text": "Must: Multimodal spatiotemporal graph-transformer for hospital readmission prediction",
+      "number": null,
+      "title": "Must: Multimodal spatiotemporal graph-transformer for hospital readmission prediction"
+    },
+    {
+      "text": "Learning the graphical structure of electronic health records with graph convolutional transformer",
+      "number": null,
+      "title": "Learning the graphical structure of electronic health records with graph convolutional transformer"
+    },
+    {
+      "text": "Phenotyping with positive unlabelled learning for genome-wide association studies",
+      "number": null,
+      "title": "Phenotyping with positive unlabelled learning for genome-wide association studies"
+    },
+    {
+      "text": "Tee4ehr: Transformer event encoder for better representation learning in electronic health records",
+      "number": null,
+      "title": "Tee4ehr: Transformer event encoder for better representation learning in electronic health records"
+    },
+    {
+      "text": "Leveraging pretrained and transformer-derived embeddings from ehrs to characterize heterogeneity across alzheimer’s disease and related dementias",
+      "number": null,
+      "title": "Leveraging pretrained and transformer-derived embeddings from ehrs to characterize heterogeneity across alzheimer’s disease and related dementias"
+    },
+    {
+      "text": "Toward a neural semantic parsing system for ehr question answering",
+      "number": null,
+      "title": "Toward a neural semantic parsing system for ehr question answering"
+    },
+    {
+      "text": "A cross-institutional evaluation on breast cancer phenotyping nlp algorithms on electronic health records",
+      "number": null,
+      "title": "A cross-institutional evaluation on breast cancer phenotyping nlp algorithms on electronic health records"
+    },
+    {
+      "text": "A large language model outperforms other computational approaches to the high-throughput phenotyping of physician notes",
+      "number": null,
+      "title": "A large language model outperforms other computational approaches to the high-throughput phenotyping of physician notes"
+    },
+    {
+      "text": "Agentclinic: a multimodal agent benchmark to evaluate ai in simulated clinical environments",
+      "number": null,
+      "title": "Agentclinic: a multimodal agent benchmark to evaluate ai in simulated clinical environments"
+    },
+    {
+      "text": "An empirical study of multi-task learning on bert for biomedical text mining",
+      "number": null,
+      "title": "An empirical study of multi-task learning on bert for biomedical text mining"
+    },
+    {
+      "text": "Automatic glossary of clinical terminology",
+      "number": null,
+      "title": "Automatic glossary of clinical terminology"
+    },
+    {
+      "text": "Belb: a biomedical entity linking benchmark",
+      "number": null,
+      "title": "Belb: a biomedical entity linking benchmark"
+    },
+    {
+      "text": "Word segmentation as graph partition",
+      "number": null,
+      "title": "Word segmentation as graph partition"
+    },
+    {
+      "text": "Towards conditioning clinical text generation for user control",
+      "number": null,
+      "title": "Towards conditioning clinical text generation for user control"
+    },
+    {
+      "text": "Mufasa: Multimodal fusion architecture search for electronic health records",
+      "number": null,
+      "title": "Mufasa: Multimodal fusion architecture search for electronic health records"
+    },
+    {
+      "text": "Med-bert: pre-trained contextualized embeddings on large-scale structured electronic health records for disease prediction",
+      "number": null,
+      "title": "Med-bert: pre-trained contextualized embeddings on large-scale structured electronic health records for disease prediction"
+    },
+    {
+      "text": "Natural language processing for analyzing electronic health records and clinical notes in cancer research: A review",
+      "number": null,
+      "title": "Natural language processing for analyzing electronic health records and clinical notes in cancer research: A review"
+    },
+    {
+      "text": "Joint learning-based causal relation extraction from biomedical literature",
+      "number": null,
+      "title": "Joint learning-based causal relation extraction from biomedical literature"
+    },
+    {
+      "text": "Sansformers: Self-supervised forecasting in electronic health records with attention-free models",
+      "number": null,
+      "title": "Sansformers: Self-supervised forecasting in electronic health records with attention-free models"
+    },
+    {
+      "text": "Assertion detection large language model incontext learning lora fine-tuning",
+      "number": null,
+      "title": "Assertion detection large language model incontext learning lora fine-tuning"
+    },
+    {
+      "text": "Transformers in healthcare: A survey",
+      "number": null,
+      "title": "Transformers in healthcare: A survey"
+    },
+    {
+      "text": "Near: Named entity and attribute recognition of clinical concepts",
+      "number": null,
+      "title": "Near: Named entity and attribute recognition of clinical concepts"
+    },
+    {
+      "text": "Named entity recognition in electronic health records using transfer learning bootstrapped neural networks",
+      "number": null,
+      "title": "Named entity recognition in electronic health records using transfer learning bootstrapped neural networks"
+    },
+    {
+      "text": "Pre-training transformer-based framework on large-scale pediatric claims data for downstream population-specific tasks",
+      "number": null,
+      "title": "Pre-training transformer-based framework on large-scale pediatric claims data for downstream population-specific tasks"
+    },
+    {
+      "text": "A short review of ethical challenges in clinical natural language processing",
+      "number": null,
+      "title": "A short review of ethical challenges in clinical natural language processing"
+    },
+    {
+      "text": "Information extraction from clinical notes: Are we ready to switch to large language models?",
+      "number": null,
+      "title": "Information extraction from clinical notes: Are we ready to switch to large language models?"
+    },
+    {
+      "text": "Large language models with retrieval-augmented generation for zero-shot disease phenotyping",
+      "number": null,
+      "title": "Large language models with retrieval-augmented generation for zero-shot disease phenotyping"
+    },
+    {
+      "text": "Icu bloodstream infection prediction: A transformer-based approach for ehr analysis",
+      "number": null,
+      "title": "Icu bloodstream infection prediction: A transformer-based approach for ehr analysis"
+    },
+    {
+      "text": "Feasibility of identifying factors related to alzheimer’s disease and related dementia in real-world data",
+      "number": null,
+      "title": "Feasibility of identifying factors related to alzheimer’s disease and related dementia in real-world data"
+    },
+    {
+      "text": "Question-answering based summarization of electronic health records using retrieval augmented generation",
+      "number": null,
+      "title": "Question-answering based summarization of electronic health records using retrieval augmented generation"
+    },
+    {
+      "text": "Question answering for complex electronic health records database using unified encoder-decoder architecture",
+      "number": null,
+      "title": "Question answering for complex electronic health records database using unified encoder-decoder architecture"
+    },
+    {
+      "text": "Answering questions on covid-19 in real-time",
+      "number": null,
+      "title": "Answering questions on covid-19 in real-time"
+    },
+    {
+      "text": "Information extraction from swedish medical prescriptions with sig-transformer encoder",
+      "number": null,
+      "title": "Information extraction from swedish medical prescriptions with sig-transformer encoder"
+    },
+    {
+      "text": "Exbehrt: Extended transformer for electronic health records to predict disease subtypes progressions",
+      "number": null,
+      "title": "Exbehrt: Extended transformer for electronic health records to predict disease subtypes progressions"
+    },
+    {
+      "text": "Relation extraction from clinical texts using domain invariant convolutional neural network",
+      "number": null,
+      "title": "Relation extraction from clinical texts using domain invariant convolutional neural network"
+    },
+    {
+      "text": "Spec: A soft prompt-based calibration on performance variability of large language model in clinical notes summarization",
+      "number": null,
+      "title": "Spec: A soft prompt-based calibration on performance variability of large language model in clinical notes summarization"
+    },
+    {
+      "text": "Comparative analysis of text classification approaches in electronic health records",
+      "number": null,
+      "title": "Comparative analysis of text classification approaches in electronic health records"
+    },
+    {
+      "text": "Adapted large language models can outperform medical experts in clinical text summarization",
+      "number": null,
+      "title": "Adapted large language models can outperform medical experts in clinical text summarization"
+    },
+    {
+      "text": "Heteromed: Heterogeneous information network for medical diagnosis",
+      "number": null,
+      "title": "Heteromed: Heterogeneous information network for medical diagnosis"
+    },
+    {
+      "text": "Time associated meta learning for clinical prediction",
+      "number": null,
+      "title": "Time associated meta learning for clinical prediction"
+    },
+    {
+      "text": "Time-aware heterogeneous graph transformer with adaptive attention merging for health event prediction",
+      "number": null,
+      "title": "Time-aware heterogeneous graph transformer with adaptive attention merging for health event prediction"
+    },
+    {
+      "text": "Gnteam at 2018 n2c2: Feature-augmented bilstm-crf for drug-related entity recognition in hospital discharge summaries",
+      "number": null,
+      "title": "Gnteam at 2018 n2c2: Feature-augmented bilstm-crf for drug-related entity recognition in hospital discharge summaries"
+    },
+    {
+      "text": "Guided discrete diffusion for electronic health record generation",
+      "number": null,
+      "title": "Guided discrete diffusion for electronic health record generation"
+    },
+    {
+      "text": "Uncertainty-aware attention for reliable interpretation and prediction",
+      "number": null,
+      "title": "Uncertainty-aware attention for reliable interpretation and prediction"
+    },
+    {
+      "text": "Snomed2vec: Random walk and poincaré embeddings of a clinical knowledge base for healthcare analytics",
+      "number": null,
+      "title": "Snomed2vec: Random walk and poincaré embeddings of a clinical knowledge base for healthcare analytics"
+    },
+    {
+      "text": "Textual data augmentation for patient outcomes prediction",
+      "number": null,
+      "title": "Textual data augmentation for patient outcomes prediction"
+    },
+    {
+      "text": "Temporal pointwise convolutional networks for length of stay prediction in the intensive care unit",
+      "number": null,
+      "title": "Temporal pointwise convolutional networks for length of stay prediction in the intensive care unit"
+    },
+    {
+      "text": "Uncertainty quantification for clinical outcome predictions with (large) language models",
+      "number": null,
+      "title": "Uncertainty quantification for clinical outcome predictions with (large) language models"
+    },
+    {
+      "text": "Uncertainty-aware text-to-program for question answering on structured electronic health records",
+      "number": null,
+      "title": "Uncertainty-aware text-to-program for question answering on structured electronic health records"
+    },
+    {
+      "text": "Unifying heterogeneous electronic health records systems via text-based code embedding",
+      "number": null,
+      "title": "Unifying heterogeneous electronic health records systems via text-based code embedding"
+    },
+    {
+      "text": "Unsupervised pseudo-labeling for extractive summarization on electronic health records",
+      "number": null,
+      "title": "Unsupervised pseudo-labeling for extractive summarization on electronic health records"
+    },
+    {
+      "text": "Using clinical narratives and structured data to identify distant recurrences in breast cancer",
+      "number": null,
+      "title": "Using clinical narratives and structured data to identify distant recurrences in breast cancer"
+    },
+    {
+      "text": "Emerge: Enhancing multimodal electronic health records predictive modeling with retrieval-augmented generation",
+      "number": null,
+      "title": "Emerge: Enhancing multimodal electronic health records predictive modeling with retrieval-augmented generation"
+    },
+    {
+      "text": "Ram-ehr: Retrieval augmentation meets clinical predictions on electronic health records",
+      "number": null,
+      "title": "Ram-ehr: Retrieval augmentation meets clinical predictions on electronic health records"
+    },
+    {
+      "text": "Considerations for health care institutions training large language models on electronic health records",
+      "number": null,
+      "title": "Considerations for health care institutions training large language models on electronic health records"
+    },
+    {
+      "text": "How essential are unstructured clinical narratives and information fusion to clinical trial recruitment?",
+      "number": null,
+      "title": "How essential are unstructured clinical narratives and information fusion to clinical trial recruitment?"
+    },
+    {
+      "text": "Deep learning for temporal data representation in electronic health records: A systematic review of challenges and methodologies",
+      "number": null,
+      "title": "Deep learning for temporal data representation in electronic health records: A systematic review of challenges and methodologies"
+    },
+    {
+      "text": "Client-centered federated learning for heterogeneous ehrs: Use fewer participants to achieve the same performance",
+      "number": null,
+      "title": "Client-centered federated learning for heterogeneous ehrs: Use fewer participants to achieve the same performance"
+    },
+    {
+      "text": "Contrastive learning-based imputation-prediction networks for in-hospital mortality risk modeling using ehrs",
+      "number": null,
+      "title": "Contrastive learning-based imputation-prediction networks for in-hospital mortality risk modeling using ehrs"
+    },
+    {
+      "text": "Data augmentation method for modeling health records with applications to clopidogrel treatment failure detection",
+      "number": null,
+      "title": "Data augmentation method for modeling health records with applications to clopidogrel treatment failure detection"
+    },
+    {
+      "text": "Does bert pretrained on clinical notes reveal sensitive data?",
+      "number": null,
+      "title": "Does bert pretrained on clinical notes reveal sensitive data?"
+    },
+    {
+      "text": "Gram: Graph-based attention model for healthcare representation learning",
+      "number": null,
+      "title": "Gram: Graph-based attention model for healthcare representation learning"
+    },
+    {
+      "text": "Early detection of post-covid19 fatigue syndrome using deep learning models",
+      "number": null,
+      "title": "Early detection of post-covid19 fatigue syndrome using deep learning models"
+    },
+    {
+      "text": "Utilizing chatgpt to enhance clinical trial enrollment",
+      "number": null,
+      "title": "Utilizing chatgpt to enhance clinical trial enrollment"
+    },
+    {
+      "text": "Visual summary of value-level feature attribution in prediction classes with recurrent neural networks",
+      "number": null,
+      "title": "Visual summary of value-level feature attribution in prediction classes with recurrent neural networks"
+    },
+    {
+      "text": "A fully private pipeline for deep learning on electronic health records",
+      "number": null,
+      "title": "A fully private pipeline for deep learning on electronic health records"
+    },
+    {
+      "text": "Adversarial learning of privacy-preserving text representations for de-identification of medical records",
+      "number": null,
+      "title": "Adversarial learning of privacy-preserving text representations for de-identification of medical records"
+    },
+    {
+      "text": "Comparing rule-based, feature-based and deep neural methods for de-identification of dutch medical records",
+      "number": null,
+      "title": "Comparing rule-based, feature-based and deep neural methods for de-identification of dutch medical records"
+    },
+    {
+      "text": "Carepre: An intelligent clinical decision assistance system",
+      "number": null,
+      "title": "Carepre: An intelligent clinical decision assistance system"
+    },
+    {
+      "text": "Bios: An algorithmically generated biomedical knowledge graph",
+      "number": null,
+      "title": "Bios: An algorithmically generated biomedical knowledge graph"
+    },
+    {
+      "text": "Deep bidirectional language-knowledge graph pretraining",
+      "number": null,
+      "title": "Deep bidirectional language-knowledge graph pretraining"
+    },
+    {
+      "text": "Explicit-blurred memory network for analyzing patient electronic health records",
+      "number": null,
+      "title": "Explicit-blurred memory network for analyzing patient electronic health records"
+    },
+    {
+      "text": "Swotted: An extension of tensor decomposition to temporal phenotyping",
+      "number": null,
+      "title": "Swotted: An extension of tensor decomposition to temporal phenotyping"
+    },
+    {
+      "text": "Create: Cohort retrieval enhanced by analysis of text from electronic health records using omop common data model",
+      "number": null,
+      "title": "Create: Cohort retrieval enhanced by analysis of text from electronic health records using omop common data model"
+    },
+    {
+      "text": "Transfer learning in electronic health records through clinical concept embedding",
+      "number": null,
+      "title": "Transfer learning in electronic health records through clinical concept embedding"
+    },
+    {
+      "text": "Temporal phenotyping using deep predictive clustering of disease progression",
+      "number": null,
+      "title": "Temporal phenotyping using deep predictive clustering of disease progression"
+    },
+    {
+      "text": "Synehrgy: Synthesizing mixed-type structured electronic health records using decoder-only transformers",
+      "number": null,
+      "title": "Synehrgy: Synthesizing mixed-type structured electronic health records using decoder-only transformers"
+    },
+    {
+      "text": "Ehrmonize: A framework for medical concept abstraction from electronic health records using large language models",
+      "number": null,
+      "title": "Ehrmonize: A framework for medical concept abstraction from electronic health records using large language models"
+    },
+    {
+      "text": "Federated learning of medical concepts embedding using behrt",
+      "number": null,
+      "title": "Federated learning of medical concepts embedding using behrt"
+    },
+    {
+      "text": "Federated learning for violence incident prediction in a simulated cross-institutional psychiatric setting",
+      "number": null,
+      "title": "Federated learning for violence incident prediction in a simulated cross-institutional psychiatric setting"
+    },
+    {
+      "text": "Multipar: Supervised irregular tensor factorization with multi-task learning",
+      "number": null,
+      "title": "Multipar: Supervised irregular tensor factorization with multi-task learning"
+    },
+    {
+      "text": "Mixehr-nest: Identifying subphenotypes within electronic health records through hierarchical guided-topic modeling",
+      "number": null,
+      "title": "Mixehr-nest: Identifying subphenotypes within electronic health records through hierarchical guided-topic modeling"
+    },
+    {
+      "text": "Effectiveness of chatgpt in explaining complex medical reports to patients",
+      "number": null,
+      "title": "Effectiveness of chatgpt in explaining complex medical reports to patients"
+    },
+    {
+      "text": "Deep representation learning of patient data from electronic health records (ehr): A systematic review",
+      "number": null,
+      "title": "Deep representation learning of patient data from electronic health records (ehr): A systematic review"
+    },
+    {
+      "text": "Contrastive learning on multimodal analysis of electronic health records",
+      "number": null,
+      "title": "Contrastive learning on multimodal analysis of electronic health records"
+    },
+    {
+      "text": "Automated fusion of multimodal electronic health records for better medical predictions",
+      "number": null,
+      "title": "Automated fusion of multimodal electronic health records for better medical predictions"
+    },
+    {
+      "text": "Plm-icd: Automatic icd coding with pretrained language models",
+      "number": null,
+      "title": "Plm-icd: Automatic icd coding with pretrained language models"
+    },
+    {
+      "text": "Self-explaining hypergraph neural networks for diagnosis prediction",
+      "number": null,
+      "title": "Self-explaining hypergraph neural networks for diagnosis prediction"
+    },
+    {
+      "text": "Surrogate-assisted performance prediction for data-driven knowledge discovery algorithms: application to evolutionary modeling of clinical pathways",
+      "number": null,
+      "title": "Surrogate-assisted performance prediction for data-driven knowledge discovery algorithms: application to evolutionary modeling of clinical pathways"
+    },
+    {
+      "text": "Retain: An interpretable predictive model for healthcare using reverse time attention mechanism",
+      "number": null,
+      "title": "Retain: An interpretable predictive model for healthcare using reverse time attention mechanism"
+    },
+    {
+      "text": "Cardiac complication risk profiling for cancer survivors via multi-view multi-task learning",
+      "number": null,
+      "title": "Cardiac complication risk profiling for cancer survivors via multi-view multi-task learning"
+    },
+    {
+      "text": "Collaborative graph learning with auxiliary text for temporal event prediction in healthcare",
+      "number": null,
+      "title": "Collaborative graph learning with auxiliary text for temporal event prediction in healthcare"
+    },
+    {
+      "text": "Concept-based model explanations for electronic health records",
+      "number": null,
+      "title": "Concept-based model explanations for electronic health records"
+    },
+    {
+      "text": "Toward relieving clinician burden by automatically generating progress notes using interim hospital data",
+      "number": null,
+      "title": "Toward relieving clinician burden by automatically generating progress notes using interim hospital data"
+    },
+    {
+      "text": "A scoping review of using large language models (llms) to investigate electronic health records (ehrs)",
+      "number": null,
+      "title": "A scoping review of using large language models (llms) to investigate electronic health records (ehrs)"
+    },
+    {
+      "text": "Introducing information retrieval for biomedical informatics students",
+      "number": null,
+      "title": "Introducing information retrieval for biomedical informatics students"
+    },
+    {
+      "text": "Prediction-constrained training for semisupervised mixture and topic models",
+      "number": null,
+      "title": "Prediction-constrained training for semisupervised mixture and topic models"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\SurveyX\\Computer Science\\Pre-trained Language Models in Biomedical Domain_split.json",
+    "processed_date": "2025-12-31T13:36:00.798063",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

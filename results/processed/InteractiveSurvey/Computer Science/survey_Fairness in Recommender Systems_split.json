@@ -1,0 +1,745 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of Fairness in Recommender Systems"
+    ],
+    [
+      1,
+      "1 Abstract"
+    ],
+    [
+      1,
+      "2 Introduction"
+    ],
+    [
+      1,
+      "3 Fairness-Aware Recommendation Frameworks"
+    ],
+    [
+      2,
+      "3.1 Theoretical and Empirical Foundations of Fairness"
+    ],
+    [
+      3,
+      "3.1.1 Asymptotic consistency and generalization limits in hybrid models"
+    ],
+    [
+      3,
+      "3.1.2 Controlled simulations and feedback loop analysis for bias mitigation"
+    ],
+    [
+      2,
+      "3.2 Model Architectures for Fairness"
+    ],
+    [
+      3,
+      "3.2.1 Transformer-based sequential denoise models with multi-interest routing"
+    ],
+    [
+      3,
+      "3.2.2 Federated learning frameworks for diversity and reproducibility"
+    ],
+    [
+      2,
+      "3.3 Fairness-Enhancing Techniques"
+    ],
+    [
+      3,
+      "3.3.1 Regularization-based loss functions for popularity bias mitigation"
+    ],
+    [
+      3,
+      "3.3.2 Counterfactual and causal inference methods for user-to-user fairness"
+    ],
+    [
+      2,
+      "3.4 Evaluation and Benchmarking"
+    ],
+    [
+      3,
+      "3.4.1 Unlearning scenarios and retained utility metrics"
+    ],
+    [
+      3,
+      "3.4.2 Live user studies and real-world diversity promotion"
+    ],
+    [
+      2,
+      "3.5 Emerging Approaches"
+    ],
+    [
+      3,
+      "3.5.1 Large language models for dynamic reranking and aspect-based recommendations"
+    ],
+    [
+      3,
+      "3.5.2 Hybrid generative and dense retrieval models for sequential recommendations"
+    ],
+    [
+      1,
+      "4 Explainability and Causal Inference in RS"
+    ],
+    [
+      2,
+      "4.1 Graph-Based Methods for Fairness and Transparency"
+    ],
+    [
+      3,
+      "4.1.1 Community detection and filter bubble mitigation via graph convolutional networks"
+    ],
+    [
+      3,
+      "4.1.2 Topological analysis and persistent homology for representation learning"
+    ],
+    [
+      2,
+      "4.2 Causal and Counterfactual Reasoning"
+    ],
+    [
+      3,
+      "4.2.1 Counterfactual reciprocal recommenders and inverse propensity scoring"
+    ],
+    [
+      3,
+      "4.2.2 Causal machine learning for fair prediction and transparency"
+    ],
+    [
+      2,
+      "4.3 Model Interpretability and Auditability"
+    ],
+    [
+      3,
+      "4.3.1 Rule-based explainability frameworks for black-box models"
+    ],
+    [
+      3,
+      "4.3.2 Provenance graphs and traceability in recommendation pipelines"
+    ],
+    [
+      2,
+      "4.4 Evaluation of Causal and Explanatory Methods"
+    ],
+    [
+      3,
+      "4.4.1 Multi-metric composite evaluation and fairness-aware benchmarks"
+    ],
+    [
+      3,
+      "4.4.2 Empirical studies on causal inference and model robustness"
+    ],
+    [
+      1,
+      "5 Ethical and Societal Impacts of Recommender Systems"
+    ],
+    [
+      2,
+      "5.1 Ethical Evaluation and Pessimistic Analysis"
+    ],
+    [
+      3,
+      "5.1.1 Worst-case fairness and lexicographic minimum for robust evaluation"
+    ],
+    [
+      3,
+      "5.1.2 Longitudinal analysis of dataset evolution and fairness implications"
+    ],
+    [
+      2,
+      "5.2 Societal and Stakeholder Implications"
+    ],
+    [
+      3,
+      "5.2.1 Multi-sided fairness in hiring and recommendation scenarios"
+    ],
+    [
+      3,
+      "5.2.2 Stakeholder interviews and qualitative case studies on algorithmic fairness"
+    ],
+    [
+      2,
+      "5.3 Bias and Equity in Data and Models"
+    ],
+    [
+      3,
+      "5.3.1 Fairness evaluation metrics for gender and demographic bias"
+    ],
+    [
+      3,
+      "5.3.2 Systematic fairness assessment of voice and synthetic data"
+    ],
+    [
+      2,
+      "5.4 Policy and Governance of Recommender Systems"
+    ],
+    [
+      3,
+      "5.4.1 Algorithmic auditing and regulatory frameworks for transparency"
+    ],
+    [
+      3,
+      "5.4.2 Ethical and philosophical analysis of synthetic data and AI governance"
+    ],
+    [
+      1,
+      "6 Future Directions"
+    ],
+    [
+      1,
+      "7 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of Fairness in Recommender Systems",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Abstract",
+      "level": 1,
+      "content": "Recommender systems have become essential tools in digital platforms, enabling personalized content delivery and decision-making. However, their increasing reliance on data-driven algorithms has raised significant concerns about fairness and bias, as these systems can inadvertently perpetuate or amplify existing societal disparities. This survey paper provides a comprehensive overview of the current state of research on fairness in recommender systems, focusing on theoretical foundations, model architectures, fairness-enhancing techniques, and evaluation strategies. The paper explores key challenges, including the interplay between model performance and fairness, the impact of data biases, and the need for transparent and interpretable algorithms. It also highlights emerging approaches such as counterfactual reasoning, causal inference, and hybrid generative models, which offer promising solutions for mitigating bias and improving equity. The contributions of this work include a structured synthesis of existing methodologies, an identification of critical research gaps, and a discussion of the multidisciplinary nature of fairness in recommendation systems. By integrating insights from computer science, ethics, and social sciences, this survey aims to guide future research and development toward more equitable and trustworthy recommendation technologies. Ultimately, ensuring fairness in recommender systems is not only a technical challenge but also a societal imperative, requiring ongoing collaboration across disciplines to create systems that benefit all users.",
+      "stats": {
+        "char_count": 1587,
+        "word_count": 206,
+        "sentence_count": 8,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2 Introduction",
+      "level": 1,
+      "content": "The rapid evolution of recommender systems has transformed the way users interact with digital platforms, from personalized content delivery to tailored job and product recommendations [1]. As these systems become increasingly integral to daily life, concerns about fairness and bias have gained significant attention. Recommender systems often reflect and amplify existing societal biases, leading to unequal treatment of users and content. This is particularly problematic when the systems are used in sensitive domains such as hiring, healthcare, and social media, where algorithmic decisions can have far-reaching consequences. The challenge lies in ensuring that these systems not only deliver accurate and relevant recommendations but also do so in a manner that is equitable and just for all users. Addressing these issues requires a deep understanding of the mechanisms that drive bias and the development of strategies to mitigate its impact.\n\nThis survey paper focuses on the topic of fairness in recommender systems, exploring the theoretical foundations, practical implementations, and evaluation strategies that have emerged in response to the growing demand for equitable and transparent algorithms [2]. The paper provides a comprehensive overview of the key challenges and solutions in this field, emphasizing the importance of fairness as a central design principle [3]. By examining the interplay between model architecture, data representation, and evaluation metrics, this work highlights the multidisciplinary nature of fairness in recommendation systems [4]. The goal is to offer a structured and critical analysis of the current state of research, identifying gaps and opportunities for future work.\n\nThe paper begins by reviewing the theoretical and empirical foundations of fairness, including asymptotic consistency and generalization limits in hybrid models, as well as controlled simulations and feedback loop analysis for bias mitigation. These foundational aspects are crucial for understanding how fairness can be systematically addressed in complex recommendation systems [5]. The discussion then moves to model architectures, covering transformer-based sequential denoise models with multi-interest routing and federated learning frameworks for diversity and reproducibility. These approaches represent innovative strategies for balancing fairness with performance, while also addressing the challenges of data heterogeneity and privacy [3]. The paper further explores fairness-enhancing techniques such as regularization-based loss functions for popularity bias mitigation and counterfactual and causal inference methods for user-to-user fairness [1]. These techniques illustrate the diverse ways in which fairness can be embedded into the recommendation process [6].\n\nThe contributions of this survey paper are significant in several respects [7]. First, it provides a structured and comprehensive overview of the current state of research on fairness in recommender systems, synthesizing key findings and methodologies [2]. Second, it identifies critical challenges and research gaps, offering insights into the directions that future work should take. Third, it highlights the importance of interdisciplinary approaches, integrating perspectives from computer science, ethics, and social sciences. By doing so, the paper aims to serve as a valuable resource for researchers, practitioners, and policymakers working to develop fairer and more transparent recommendation systems.",
+      "stats": {
+        "char_count": 3513,
+        "word_count": 483,
+        "sentence_count": 21,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "3.1.1 Asymptotic consistency and generalization limits in hybrid models",
+      "level": 3,
+      "content": "Hybrid models, which integrate traditional machine learning techniques with deep learning or other advanced methodologies, have garnered significant attention for their ability to balance interpretability and performance. A critical aspect of their analysis is their asymptotic consistency, which refers to the property that as the sample size grows, the model's predictions converge to the true underlying function. This consistency is essential for ensuring that hybrid models maintain reliability and validity in real-world applications. However, the interplay between different components of these models can complicate the theoretical analysis of their asymptotic behavior, particularly when non-differentiable or non-convex elements are involved. Understanding this behavior is crucial for assessing the long-term performance and robustness of such models.\n\nGeneralization limits in hybrid models are another key concern, as they determine how well a model performs on unseen data. While hybrid models often benefit from the strengths of multiple approaches, they can also inherit limitations from each component, leading to potential overfitting or underfitting. The generalization capacity of these models is influenced by factors such as model complexity, the quality of the training data, and the integration strategy between different components. For instance, models that rely heavily on pre-trained components may struggle with adapting to new domains or tasks, highlighting the need for careful design and validation. These challenges underscore the importance of rigorous theoretical and empirical analysis to establish the boundaries of what hybrid models can achieve in terms of generalization.\n\nTheoretical frameworks for analyzing asymptotic consistency and generalization in hybrid models often draw from statistical learning theory, including concepts like VC-dimension, Rademacher complexity, and margin-based bounds. These tools help quantify the trade-offs between model complexity and generalization performance. However, the hybrid nature of these models introduces additional layers of complexity, as the interactions between different components can lead to non-linear effects that are difficult to predict. As a result, the development of tailored theoretical guarantees for hybrid models remains an active area of research, with significant implications for their practical deployment and reliability.",
+      "stats": {
+        "char_count": 2431,
+        "word_count": 330,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.1.2 Controlled simulations and feedback loop analysis for bias mitigation",
+      "level": 3,
+      "content": "Controlled simulations play a critical role in evaluating and refining bias mitigation strategies within recommendation systems. These simulations allow researchers to create structured environments where the impact of various interventions can be systematically analyzed. By isolating specific variables and introducing controlled perturbations, such as altering feature dependencies or adjusting model parameters, researchers can assess how different approaches affect fairness, accuracy, and interpretability. These experiments often rely on synthetic datasets or well-defined real-world benchmarks to ensure reproducibility and meaningful comparison across methods. The use of controlled simulations is particularly valuable in scenarios where real-world data may be limited or where the causal relationships between variables are complex and difficult to disentangle.\n\nFeedback loop analysis complements controlled simulations by examining how biases propagate and evolve over time within dynamic systems. Recommendation systems often operate in a closed-loop environment where user interactions influence model updates, which in turn affect future recommendations [8]. This iterative process can amplify existing biases, leading to skewed outcomes that reinforce initial disparities. By modeling these feedback loops, researchers can identify critical points where interventions might effectively mitigate bias without compromising system performance. Techniques such as sensitivity analysis and causal inference are employed to trace the influence of bias across different stages of the recommendation pipeline, ensuring that mitigation strategies are both targeted and sustainable.\n\nTogether, controlled simulations and feedback loop analysis provide a robust framework for understanding and addressing bias in recommendation systems [8]. These methods enable the development of more transparent, equitable, and reliable systems by offering insights into the mechanisms that drive bias and by validating the effectiveness of proposed mitigation techniques. Through rigorous experimentation and iterative refinement, they contribute to the broader goal of creating recommendation systems that are not only accurate but also fair and accountable in their decision-making processes.",
+      "stats": {
+        "char_count": 2287,
+        "word_count": 296,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.1 Transformer-based sequential denoise models with multi-interest routing",
+      "level": 3,
+      "content": "Transformer-based sequential denoise models with multi-interest routing represent a significant advancement in the field of recommendation systems, addressing the limitations of traditional methods in capturing complex user behavior and mitigating biases [9]. These models leverage the self-attention mechanism of Transformers to process sequential interactions, enabling the extraction of nuanced user preferences over time [10]. By incorporating a multi-interest routing mechanism, the models can dynamically identify and aggregate multiple distinct user interests from a single sequence, thereby enhancing the diversity and relevance of recommendations. This approach not only improves the accuracy of predictions but also ensures a more personalized and equitable user experience by accounting for the multifaceted nature of user preferences.\n\nThe integration of denoising techniques into these models further enhances their robustness by filtering out irrelevant or noisy interactions, allowing the system to focus on meaningful patterns. This denoising process is typically achieved through the use of autoencoders or diffusion models, which help in learning a more stable and interpretable latent representation of user behavior. The multi-interest routing mechanism complements this by directing the model's attention to the most salient aspects of user interactions, ensuring that the learned representations are both comprehensive and contextually relevant. This combination of denoising and routing mechanisms results in a more efficient and effective recommendation system that can adapt to evolving user preferences and dynamic environments [9].\n\nFurthermore, the application of these models in real-world scenarios has demonstrated their ability to outperform conventional approaches in terms of both accuracy and fairness. By explicitly modeling multiple user interests and reducing the impact of popularity bias, these models contribute to a more balanced and inclusive recommendation landscape [11]. The two-stage training process, which involves initial denoising followed by interest routing, ensures that the model can effectively learn from noisy data while maintaining the integrity of user preferences. This makes transformer-based sequential denoise models with multi-interest routing a promising direction for future research and development in recommendation systems [9].",
+      "stats": {
+        "char_count": 2397,
+        "word_count": 322,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.2 Federated learning frameworks for diversity and reproducibility",
+      "level": 3,
+      "content": "Federated learning (FL) frameworks have emerged as a critical approach to address the challenges of diversity and reproducibility in machine learning systems, particularly in distributed environments where data is inherently heterogeneous and privacy constraints limit direct data sharing [12]. These frameworks enable collaborative model training across decentralized devices or nodes while preserving data privacy, thereby fostering a more inclusive and representative model development process. By aggregating model updates rather than raw data, FL ensures that diverse data sources contribute to the learning process, mitigating the risk of model bias and enhancing generalizability. This is especially important in domains such as healthcare, finance, and recommendation systems, where data distributions can vary significantly across institutions or user groups. The ability to maintain model diversity through FL is further supported by techniques like personalized federated learning, which allows for local model adaptation while still benefiting from global knowledge sharing.\n\nReproducibility in FL is another key aspect, as it ensures that experiments and model outcomes can be consistently replicated across different settings and configurations. This is crucial for validating the effectiveness of FL approaches and for fostering trust in their deployment. Techniques such as version-controlled model updates, standardized training protocols, and transparent logging mechanisms are essential for achieving reproducibility. Additionally, FL frameworks often incorporate mechanisms for handling non-IID (non-independent and identically distributed) data, which is a common challenge in real-world applications. By leveraging strategies like dynamic client selection, adaptive aggregation, and robustness checks, these frameworks enhance the reliability and consistency of model training. This not only improves the reproducibility of results but also ensures that models are more resilient to distribution shifts and data drift over time.\n\nThe integration of diversity and reproducibility in FL frameworks also extends to the evaluation and benchmarking of models. Standardized evaluation metrics and benchmarking suites are essential for comparing different FL approaches and assessing their performance across various scenarios. These metrics often include measures of model accuracy, fairness, and robustness, as well as the ability to handle heterogeneous data distributions. Furthermore, the development of open-source FL platforms and toolkits has facilitated the adoption of these frameworks, enabling researchers and practitioners to build upon existing work and ensure that findings are reproducible. Overall, the focus on diversity and reproducibility in FL frameworks represents a significant step towards more equitable, transparent, and reliable machine learning systems.",
+      "stats": {
+        "char_count": 2896,
+        "word_count": 386,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.1 Regularization-based loss functions for popularity bias mitigation",
+      "level": 3,
+      "content": "Regularization-based loss functions have emerged as a critical approach for mitigating popularity bias in recommendation systems, addressing the tendency of models to over-represent popular items at the expense of less common or long-tail items [11]. These methods introduce additional constraints or penalties into the training objective, aiming to balance the distribution of item recommendations. By modifying the loss function to account for item popularity, such approaches ensure that the model does not disproportionately favor items with high historical engagement. This is particularly important in scenarios where the training data is skewed, as it helps prevent the reinforcement of existing biases and promotes more equitable exposure across the item space. The integration of regularization techniques allows for a more nuanced control over the learning process, enabling models to better capture user preferences while maintaining fairness.\n\nA key advantage of regularization-based loss functions is their flexibility in adapting to different recommendation scenarios. For instance, methods like popularity bias loss (PBiLoss) explicitly penalize the overrepresentation of popular items, encouraging the model to distribute recommendations more evenly. This is achieved by incorporating a term that adjusts the loss based on the popularity of each item, thereby reducing the model's inclination to favor high-frequency items. Additionally, these approaches can be combined with other fairness-aware techniques, such as re-ranking or adversarial learning, to further enhance the mitigation of bias [13]. The effectiveness of these methods is often validated through empirical studies, where they demonstrate improvements in both fairness metrics and overall recommendation quality [4]. By explicitly addressing popularity bias during training, regularization-based loss functions provide a robust mechanism for achieving more balanced and diverse recommendations [1].\n\nDespite their benefits, regularization-based loss functions also present challenges, particularly in terms of model complexity and the need for careful hyperparameter tuning. The introduction of additional terms into the loss function can affect the convergence behavior of the model, requiring extensive experimentation to find the optimal balance between bias mitigation and performance. Moreover, the effectiveness of these methods may vary depending on the specific characteristics of the dataset and the recommendation task at hand. Therefore, future research should focus on developing more adaptive and data-driven regularization strategies that can dynamically adjust to different scenarios. Overall, regularization-based loss functions represent a promising direction for mitigating popularity bias, offering a principled and effective approach to improving the fairness and diversity of recommendation systems [1].",
+      "stats": {
+        "char_count": 2906,
+        "word_count": 392,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.2 Counterfactual and causal inference methods for user-to-user fairness",
+      "level": 3,
+      "content": "Counterfactual and causal inference methods have emerged as critical tools for addressing user-to-user fairness in recommender systems by enabling the analysis of alternative scenarios and the identification of causal relationships between user actions and system outcomes. These methods allow for the generation of realistic counterfactuals that reflect how users might have been treated under different conditions, thereby facilitating a deeper understanding of fairness in recommendation processes [14]. By leveraging causal models, researchers can isolate the effects of specific interventions or features, ensuring that fairness assessments are not confounded by spurious correlations or biases inherent in observational data [15]. This approach is particularly valuable in scenarios where traditional fairness metrics may fail to capture the nuanced interactions between users and the system [3].\n\nA key challenge in applying counterfactual and causal inference methods to user-to-user fairness is the need to balance realism with interpretability. Counterfactual explanations must not only be plausible but also actionable, aligning with the real-world constraints that users face [16]. For instance, generating a counterfactual that suggests a user could increase their credit score by reducing debt requires an understanding of the causal pathways that connect user behavior to system outcomes [16]. This necessitates the integration of domain-specific knowledge and the use of causal graphs to represent the relationships between variables. Moreover, ensuring that these methods are model-agnostic is essential, as many recommender systems operate as black boxes, making direct access to internal model parameters impractical.\n\nRecent advancements in causal inference, such as the use of structural equation models and propensity score matching, have provided new avenues for addressing fairness in recommendation systems [5]. These techniques help in estimating the average treatment effect (ATE) and other causal estimands, allowing for a more accurate assessment of how different user groups are affected by the system. By incorporating these methods, researchers can develop fairness-aware algorithms that not only mitigate biases but also provide transparent and interpretable explanations for users [3]. This integration of counterfactual and causal reasoning into fairness frameworks represents a significant step toward creating more equitable and trustworthy recommender systems.",
+      "stats": {
+        "char_count": 2498,
+        "word_count": 342,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.4.1 Unlearning scenarios and retained utility metrics",
+      "level": 3,
+      "content": "Unlearning scenarios in machine learning systems involve the process of removing the influence of specific data points from a trained model, often to comply with data privacy regulations or to correct biased training data [17]. These scenarios can vary significantly in complexity, ranging from single data point removal to large-scale data set modifications. The effectiveness of unlearning is typically evaluated through retained utility metrics, which measure how well the model performs on downstream tasks after the unlearning process. Retained utility is critical, as it ensures that the model maintains its predictive accuracy and operational effectiveness despite the removal of certain data. This balance between unlearning completeness and utility retention is a central challenge in the field, particularly when dealing with large-scale models where retraining is computationally prohibitive.\n\nRetained utility metrics are often designed to capture different aspects of model performance, such as accuracy, diversity, and fairness, ensuring that the unlearning process does not inadvertently degrade the model's ability to serve its intended purpose. For instance, in recommendation systems, unlearning might involve removing the influence of a user's past interactions, and the retained utility would then be measured by how well the system continues to provide relevant and diverse recommendations. These metrics are essential for evaluating the trade-offs between privacy and performance, as they provide a quantitative basis for understanding the impact of unlearning on the model's overall behavior. Additionally, the choice of metrics can influence the design of unlearning algorithms, guiding the development of methods that prioritize both efficiency and effectiveness in real-world applications.\n\nThe evaluation of unlearning scenarios and retained utility metrics is further complicated by the dynamic nature of machine learning systems, where models are frequently updated and deployed in real-time environments. This necessitates the development of robust and scalable evaluation frameworks that can handle evolving data distributions and model architectures. Moreover, the integration of unlearning into existing pipelines requires careful consideration of computational costs and the potential for performance degradation. As a result, ongoing research focuses on refining these metrics and developing more efficient unlearning techniques that maintain high levels of utility while ensuring compliance with privacy and fairness standards. This continues to be a critical area of investigation, particularly as the demand for transparent and accountable AI systems grows.",
+      "stats": {
+        "char_count": 2695,
+        "word_count": 373,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.4.2 Live user studies and real-world diversity promotion",
+      "level": 3,
+      "content": "Live user studies play a critical role in evaluating the effectiveness of recommendation systems in real-world scenarios, particularly in promoting diversity and fairness. These studies involve deploying systems in actual environments and observing user interactions to assess how well the systems align with diverse user needs and preferences. By analyzing user behavior across different demographics and contexts, researchers can identify biases and limitations in existing approaches, leading to more equitable and inclusive recommendations [14]. Real-world diversity promotion is further enhanced by incorporating user feedback and adapting to dynamic user preferences, ensuring that the systems remain relevant and beneficial to a broad audience.\n\nThe integration of live user studies with diversity promotion strategies allows for the empirical validation of theoretical models and the refinement of algorithms to better address real-world challenges. For instance, by conducting large-scale experiments on real datasets, researchers can measure the impact of diversity-aware mechanisms on user satisfaction, engagement, and fairness metrics. These studies often reveal insights into how different user groups perceive and interact with recommendations, highlighting the need for personalized and context-aware approaches [18]. Moreover, live user studies help in identifying practical constraints and trade-offs, such as the balance between personalization and diversity, which are crucial for developing robust and scalable recommendation systems.\n\nFinally, the findings from live user studies provide a foundation for continuous improvement in diversity promotion. By leveraging real-world data and user feedback, systems can be iteratively optimized to better serve diverse populations. This iterative process not only enhances the fairness and inclusivity of recommendations but also fosters trust and engagement among users. As recommendation systems become increasingly integral to digital platforms, the importance of live user studies in driving real-world diversity and fairness cannot be overstated. These studies ensure that systems are not only technically sound but also socially responsible, contributing to a more equitable digital landscape.",
+      "stats": {
+        "char_count": 2264,
+        "word_count": 305,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.5.1 Large language models for dynamic reranking and aspect-based recommendations",
+      "level": 3,
+      "content": "Large language models (LLMs) have emerged as a transformative force in the field of recommender systems, particularly in the domains of dynamic reranking and aspect-based recommendations [19]. These models leverage their extensive pretraining on diverse text corpora to capture nuanced user preferences and contextual information, enabling more personalized and context-aware recommendations. Unlike traditional methods that rely on explicit user-item interactions, LLMs can interpret implicit signals and generate recommendations based on natural language queries, making them highly adaptable to evolving user needs. This capability is especially valuable in dynamic reranking, where the goal is to refine and optimize the recommendation list in real-time based on user feedback and changing contexts [20].\n\nIn aspect-based recommendations, LLMs excel by capturing and integrating multiple dimensions of user preferences, such as product features, user sentiments, and contextual factors. By understanding the semantic relationships between items and user queries, LLMs can generate recommendations that align with specific aspects of user interest, leading to more relevant and diverse suggestions [18]. This approach addresses the limitations of traditional methods that often fail to account for the multifaceted nature of user preferences. Additionally, LLMs can dynamically adjust their recommendations based on the evolving semantics of user inputs, ensuring that the recommendations remain aligned with the user's current intent and context [19].\n\nThe integration of LLMs into dynamic reranking and aspect-based recommendation systems also presents new challenges, such as ensuring scalability, maintaining model interpretability, and addressing potential biases in generated recommendations [20]. However, the flexibility and adaptability of LLMs offer significant opportunities for improving the accuracy, fairness, and user satisfaction of recommendation systems [18]. As research in this area continues to evolve, the development of efficient and robust LLM-based frameworks will be crucial for advancing the next generation of intelligent recommendation systems.",
+      "stats": {
+        "char_count": 2176,
+        "word_count": 292,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.5.2 Hybrid generative and dense retrieval models for sequential recommendations",
+      "level": 3,
+      "content": "Hybrid generative and dense retrieval models for sequential recommendations integrate the strengths of generative models and dense retrieval techniques to enhance the accuracy and diversity of recommendations [21]. These models leverage the ability of generative models to create contextually relevant and personalized item sequences while utilizing dense retrieval methods to efficiently search and rank items based on user behavior. This combination allows for more dynamic and adaptive recommendation systems that can handle complex user interactions and evolving preferences. By incorporating both generative and retrieval components, these models can provide more comprehensive and context-aware recommendations, addressing limitations of traditional approaches that often rely on static or limited representations of user preferences [18].\n\nThe integration of generative and dense retrieval models is particularly beneficial in scenarios where user behavior is highly sequential and context-dependent [21]. Generative models, such as those based on transformers or recurrent neural networks, can capture temporal dependencies and generate plausible item sequences that align with user history. Dense retrieval, on the other hand, uses high-dimensional embeddings to quickly identify relevant items from a large corpus. This dual approach ensures that recommendations are not only accurate but also diverse and aligned with real-world constraints. Additionally, hybrid models can be trained to incorporate causal relationships and fairness considerations, leading to more transparent and interpretable recommendations that better reflect user needs and societal values.\n\nRecent advancements in hybrid models have focused on improving scalability and efficiency while maintaining high recommendation quality. Techniques such as contrastive learning and knowledge distillation have been employed to enhance the performance of these models. Furthermore, the use of attention mechanisms and graph-based representations has enabled more nuanced modeling of user-item interactions. These developments highlight the potential of hybrid generative and dense retrieval models to revolutionize sequential recommendation systems, offering a robust and flexible framework for addressing the challenges of modern recommendation tasks [21].",
+      "stats": {
+        "char_count": 2331,
+        "word_count": 307,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.1 Community detection and filter bubble mitigation via graph convolutional networks",
+      "level": 3,
+      "content": "Community detection in graph convolutional networks (GCNs) has emerged as a critical technique for understanding and enhancing the performance of recommendation systems. By leveraging the structural properties of graphs, GCNs can identify densely connected subgraphs or communities, which often correspond to groups of users or items with similar preferences. This capability not only aids in improving the accuracy of recommendations but also plays a pivotal role in mitigating the filter bubble effect, where users are repeatedly exposed to similar content, limiting their discovery of diverse options [22]. Recent advances in GCNs have enabled more efficient and accurate community detection by incorporating spectral graph theory and adaptive learning mechanisms, allowing for dynamic adjustments based on evolving user interactions.\n\nThe integration of GCNs into community detection frameworks has also led to novel approaches for filter bubble mitigation. By reweighting node embeddings based on community attributes, these models can promote diversity in recommendations while maintaining relevance. Techniques such as community-reweighted graph convolutional networks (CR-GCNs) and conditional discriminators have been proposed to counteract the clustering of embeddings within communities, thereby reducing the risk of reinforcing echo chambers [22]. These methods typically involve training a discriminator to distinguish between intra-community and inter-community embeddings, encouraging the model to explore a broader range of items. This dual approach of community detection and bias correction enhances the fairness and robustness of recommendation systems, particularly in scenarios where user preferences are highly polarized or fragmented.\n\nFurthermore, the application of GCNs in community detection and filter bubble mitigation extends beyond traditional recommendation systems to areas such as social network analysis and information retrieval. By capturing both local and global structures of the graph, GCNs provide a more holistic view of user behavior, enabling more nuanced and personalized recommendations. The use of contrastive learning and multi-interest embeddings further enhances the model's ability to balance diversity and relevance. As research continues to evolve, the integration of GCNs with fairness-aware objectives and explainability mechanisms will be crucial in developing recommendation systems that are not only effective but also transparent and equitable for all users.",
+      "stats": {
+        "char_count": 2517,
+        "word_count": 341,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.2 Topological analysis and persistent homology for representation learning",
+      "level": 3,
+      "content": "Topological analysis and persistent homology have emerged as powerful tools for representation learning, offering a unique perspective on the structural properties of data. These methods leverage concepts from algebraic topology to capture the shape and connectivity of data across multiple scales, enabling the extraction of robust and meaningful features. Persistent homology, in particular, quantifies the evolution of topological features such as connected components, loops, and voids as a function of a scale parameter, providing a multi-scale characterization of data [23]. This capability is especially valuable in scenarios where the underlying data structure is complex or noisy, as it allows for the identification of persistent patterns that are resilient to perturbations. By integrating topological features into learning models, researchers can enhance the interpretability and generalization of representations, particularly in high-dimensional and heterogeneous data settings [23].\n\nThe application of topological analysis in representation learning often involves the construction of simplicial complexes or graphs that encode the relationships between data points. These structures are then analyzed using persistent homology to extract topological descriptors that can be used as input features for machine learning models. This approach has been successfully applied in various domains, including image analysis, natural language processing, and graph-based learning. One of the key advantages of this method is its ability to capture higher-order relationships that may not be easily discernible through traditional feature engineering techniques. Additionally, topological features can be combined with deep learning architectures to create hybrid models that leverage both geometric and semantic information, leading to improved performance on tasks such as clustering, classification, and anomaly detection.\n\nDespite their promise, the integration of topological analysis into representation learning presents several challenges, including computational complexity and the need for careful parameter tuning. The construction and analysis of topological structures can be computationally intensive, particularly for large-scale datasets, necessitating efficient algorithms and approximations. Moreover, the interpretation of topological features requires domain-specific knowledge to ensure that the extracted representations are meaningful and relevant to the task at hand. Ongoing research aims to address these challenges by developing scalable algorithms, improving the interpretability of topological features, and exploring their synergy with other representation learning techniques [23]. As the field continues to evolve, topological analysis and persistent homology are expected to play an increasingly important role in advancing the capabilities of modern machine learning systems.",
+      "stats": {
+        "char_count": 2916,
+        "word_count": 382,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.1 Counterfactual reciprocal recommenders and inverse propensity scoring",
+      "level": 3,
+      "content": "Counterfactual reciprocal recommenders aim to address the limitations of traditional recommendation systems by modeling the bidirectional influence between users and items, enabling more accurate and fair recommendations. These systems leverage counterfactual reasoning to simulate what would happen if different items were recommended, thereby capturing the dynamic interactions that shape user preferences. By incorporating reciprocal relationships, such models can better account for the feedback loops that exist in real-world recommendation scenarios, leading to more robust and interpretable outcomes. This approach is particularly valuable in multi-stakeholder settings where both user and provider interests must be balanced.\n\nInverse propensity scoring (IPS) plays a crucial role in mitigating bias in recommendation systems by adjusting for the selection bias inherent in observed interaction data [24]. Traditional recommendation models often rely on historical data that may not represent the true distribution of user preferences, leading to skewed recommendations [11]. IPS addresses this by weighting the observed interactions based on the probability of their occurrence, thereby providing a more accurate estimation of the true performance of recommendation strategies. When combined with counterfactual reasoning, IPS enhances the reliability of recommendation evaluation and helps in identifying more equitable and effective item suggestions.\n\nTogether, counterfactual reciprocal recommenders and inverse propensity scoring offer a powerful framework for improving the fairness and effectiveness of recommendation systems. By explicitly modeling the causal relationships between user actions and item exposures, these techniques enable more nuanced and context-aware recommendations. This integration not only enhances the accuracy of performance metrics but also supports the development of explainable systems that can provide transparent justifications for their recommendations. As a result, these methods contribute significantly to the design of multi-stakeholder recommenders that balance user satisfaction with provider equity [25].",
+      "stats": {
+        "char_count": 2159,
+        "word_count": 281,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.2 Causal machine learning for fair prediction and transparency",
+      "level": 3,
+      "content": "Causal machine learning has emerged as a critical approach for achieving fair prediction and enhancing transparency in complex decision-making systems. By explicitly modeling the underlying causal relationships, these methods enable the identification and mitigation of biases that may be embedded in observational data. Unlike traditional statistical models that focus on correlation, causal machine learning provides a framework for understanding how interventions affect outcomes, thereby supporting more interpretable and equitable predictions. This is particularly important in domains such as healthcare, finance, and recommendation systems, where decisions can have significant societal impacts. The integration of causal reasoning into machine learning models allows for the development of fairer algorithms that are not only accurate but also transparent in their decision-making processes.\n\nA key challenge in applying causal machine learning for fairness is the identification of relevant causal variables and the construction of valid causal graphs that capture the relationships between features, outcomes, and sensitive attributes [26]. Recent advances have focused on techniques such as counterfactual reasoning, causal inference, and structural equation modeling to address these challenges. These methods help in isolating the effects of protected attributes and ensuring that predictions are not unduly influenced by factors such as race, gender, or socioeconomic status. Furthermore, causal models can be used to evaluate the fairness of existing systems by simulating the impact of policy changes or intervention strategies. This not only aids in the development of fairer algorithms but also supports regulatory compliance and ethical AI practices [27].\n\nTransparency in causal machine learning is achieved through the use of interpretable models, causal diagrams, and post-hoc explanation methods that provide insights into the decision-making process. Techniques such as feature attribution, causal effect estimation, and model-agnostic explanations help in making the inner workings of complex models more understandable to stakeholders. This is essential for building trust and ensuring accountability in AI systems. Additionally, the integration of causal reasoning with fairness-aware learning frameworks allows for the development of models that are both accurate and equitable. As the field continues to evolve, the combination of causal machine learning with fairness and transparency principles is expected to play a pivotal role in shaping the next generation of ethical and responsible AI systems [27].",
+      "stats": {
+        "char_count": 2635,
+        "word_count": 363,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.1 Rule-based explainability frameworks for black-box models",
+      "level": 3,
+      "content": "Rule-based explainability frameworks offer a structured approach to interpreting the decisions of black-box models by deriving human-readable rules that capture the underlying logic of the model's predictions. These frameworks typically rely on symbolic reasoning, decision trees, or logic-based representations to provide transparent and interpretable explanations. In the context of job recommender systems, rule-based methods can be particularly effective in aligning recommendations with explicit criteria such as job requirements, user qualifications, and organizational policies. By explicitly encoding these rules, such frameworks enable stakeholders to understand and validate the reasoning behind recommendations, addressing the limitations of opaque black-box models that often lack accountability and transparency.\n\nDespite their interpretability advantages, rule-based frameworks face challenges in scalability and adaptability when applied to complex, high-dimensional models. The manual creation of rules is labor-intensive and may not capture the nuanced decision boundaries of deep learning models. Additionally, the static nature of rule sets can hinder their ability to evolve with changing data distributions or model behaviors. To overcome these limitations, some approaches integrate rule extraction techniques with model training, allowing the system to automatically generate and refine rules based on observed patterns. This hybrid strategy enhances the robustness of explainability while maintaining the flexibility needed for dynamic environments, making rule-based frameworks a viable option for enhancing model transparency in recommendation systems.\n\nThe application of rule-based explainability in black-box models is particularly relevant in domains where accountability and fairness are critical, such as recruitment and healthcare. By providing clear, auditable explanations, these frameworks support ethical AI practices and regulatory compliance. However, their effectiveness depends on the quality and relevance of the rules generated, which must be carefully validated against real-world scenarios. Future research should focus on improving the generalizability of rule-based methods, integrating them with other explainability techniques, and ensuring that they address the diverse needs of all stakeholders involved in the decision-making process.",
+      "stats": {
+        "char_count": 2386,
+        "word_count": 307,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.2 Provenance graphs and traceability in recommendation pipelines",
+      "level": 3,
+      "content": "Provenance graphs and traceability play a critical role in ensuring transparency and accountability within recommendation pipelines, particularly as these systems grow in complexity and scale. A provenance graph captures the lineage of data and processing steps, enabling stakeholders to trace the origin and transformation of recommendations [28]. This is especially important in domains where decisions have significant consequences, such as healthcare or finance. By modeling the flow of data through various stages—such as data collection, preprocessing, model training, and inference—provenance graphs provide a structured representation that supports debugging, auditing, and compliance [28]. These graphs typically include nodes representing data entities, processes, and actors, with edges denoting dependencies and transformations, thus offering a comprehensive view of the recommendation workflow.\n\nThe integration of provenance graphs into recommendation systems also enhances explainability, allowing users and developers to understand how specific recommendations are generated. This is crucial for building trust, particularly when recommendations involve sensitive or high-stakes decisions. Techniques such as ontologies (e.g., PROV and OBI) and schema-based modeling are often used to formalize the relationships within the provenance graph, ensuring consistency and interoperability [28]. Moreover, dynamic traceability mechanisms can be implemented to track real-time changes and updates, which is essential for systems that operate in evolving environments. Such mechanisms support not only post-hoc analysis but also proactive monitoring, enabling the identification of potential biases, errors, or inefficiencies in the recommendation process.\n\nDespite their benefits, the implementation of provenance graphs in recommendation pipelines faces several challenges. These include the computational overhead of maintaining and querying large-scale graphs, the need for standardized formats and tools, and the difficulty of integrating provenance tracking into existing system architectures. Additionally, ensuring that provenance information is both comprehensive and interpretable remains a key research challenge. Future work in this area should focus on developing scalable and efficient methods for provenance management, as well as on creating user-friendly interfaces that allow stakeholders to navigate and interpret the provenance data effectively. This will be essential for realizing the full potential of traceability in recommendation systems.",
+      "stats": {
+        "char_count": 2572,
+        "word_count": 334,
+        "sentence_count": 17,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.4.1 Multi-metric composite evaluation and fairness-aware benchmarks",
+      "level": 3,
+      "content": "Multi-metric composite evaluation has emerged as a critical approach for assessing the performance of recommendation systems, especially when balancing multiple conflicting objectives such as accuracy, diversity, and fairness [29]. Traditional single-metric evaluations often fail to capture the nuanced trade-offs inherent in real-world applications, leading to suboptimal model selection and deployment. By integrating multiple performance indicators into a unified composite score, researchers can better align system objectives with user and provider needs. This approach not only facilitates a more holistic evaluation but also enables the identification of models that perform consistently across diverse scenarios, thereby enhancing the robustness and generalizability of recommendation systems.\n\nFairness-aware benchmarks are essential for ensuring that recommendation systems do not disproportionately favor or disadvantage specific user groups, particularly in sensitive domains such as healthcare, finance, and education [4]. The integration of fairness metrics into evaluation frameworks allows for the systematic measurement of disparities in recommendation outcomes, promoting the development of equitable algorithms [4]. However, existing benchmarks often lack the granularity and adaptability needed to address the complex interplay between different fairness dimensions, such as individual and group fairness [4]. This necessitates the creation of more comprehensive and context-aware benchmarks that reflect real-world fairness challenges and support the continuous improvement of ethical recommendation systems.\n\nThe development of multi-metric composite evaluation and fairness-aware benchmarks requires careful consideration of both technical and ethical dimensions [3]. While computational efficiency and model accuracy remain important, the inclusion of fairness constraints and diverse performance indicators can significantly complicate the optimization process. This calls for the design of adaptive evaluation frameworks that dynamically adjust to changing system requirements and user expectations. Furthermore, the standardization of fairness metrics and the establishment of shared benchmarks are crucial for fostering collaboration among researchers and ensuring that fairness remains a central focus in the evolution of recommendation technologies [5].",
+      "stats": {
+        "char_count": 2384,
+        "word_count": 301,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.4.2 Empirical studies on causal inference and model robustness",
+      "level": 3,
+      "content": "Empirical studies on causal inference and model robustness have increasingly focused on understanding how biases in data and model structures affect outcomes, particularly in domains such as recommendation systems and healthcare. These studies often highlight the presence of urban bias in metrics, where models disproportionately favor urban candidates or entities, leading to unfair outcomes for rural populations [25]. Such biases are exacerbated by the limitations of existing methods, which often fail to account for the complex interplay between graph structures and attribute views. As a result, the robustness of models is compromised, especially when deployed in real-world scenarios with heterogeneous and noisy data.\n\nRecent empirical investigations have explored the effectiveness of causal inference techniques in mitigating such biases and improving model reliability. These studies emphasize the need for robust methods that can handle data heterogeneity and ensure fair predictions across diverse groups. For instance, research has shown that models trained on biased datasets tend to perpetuate existing disparities, highlighting the importance of dataset selection and preprocessing. Furthermore, the integration of causal reasoning into model design has been shown to enhance interpretability and reduce the propagation of biases through the model's decision-making process.\n\nThe evaluation of model robustness in these studies often involves rigorous testing under varying conditions, including the presence of noise, missing data, and shifting distributions. Empirical results indicate that models incorporating causal inference mechanisms tend to perform more consistently across different scenarios, demonstrating improved generalization and fairness. However, challenges remain in balancing accuracy with robustness, as improvements in one aspect often come at the expense of another. Future research must continue to address these trade-offs while ensuring that models are both effective and equitable in their predictions.",
+      "stats": {
+        "char_count": 2048,
+        "word_count": 279,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.1 Worst-case fairness and lexicographic minimum for robust evaluation",
+      "level": 3,
+      "content": "Worst-case fairness and lexicographic minimum approaches provide a rigorous framework for evaluating recommender systems under adversarial or highly variable conditions, ensuring robustness against potential biases and performance degradation [2]. These methods focus on optimizing system behavior under the most unfavorable scenarios, rather than relying on average-case assumptions. By prioritizing the worst-case outcomes, such evaluations ensure that fairness constraints are not only met in typical conditions but also hold under extreme or adversarial distributions of user preferences and data. This is particularly critical in applications where the consequences of unfairness can be severe, such as in resource allocation, content recommendation, or decision-making systems that influence user experiences and opportunities [30].\n\nLexicographic minimum strategies extend this concept by sequentially prioritizing fairness metrics, ensuring that the most critical fairness objectives are satisfied before addressing secondary ones [3]. This hierarchical approach allows for a structured and interpretable evaluation of fairness, where the system’s performance is assessed in a way that aligns with ethical and policy-driven priorities [13]. By formalizing fairness as a multi-objective optimization problem, these methods enable a more transparent and principled evaluation of how well a system adheres to fairness criteria across diverse user groups [3]. This is especially valuable in settings where trade-offs between fairness and other performance metrics, such as accuracy or relevance, are inevitable [31].\n\nThe integration of worst-case fairness and lexicographic minimum into evaluation frameworks offers a robust alternative to traditional metrics that often fail to capture the full spectrum of fairness challenges [3]. These methods are particularly effective in identifying systemic biases that may be masked by average-case evaluations, thereby supporting the development of more equitable and resilient recommender systems [2]. By emphasizing the need for fairness under the most challenging conditions, they contribute to the broader goal of creating systems that are not only effective but also ethically sound and socially responsible [15]. This approach aligns with the increasing demand for transparency and accountability in algorithmic decision-making, especially in the context of sustainability and social responsibility.",
+      "stats": {
+        "char_count": 2452,
+        "word_count": 330,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.2 Longitudinal analysis of dataset evolution and fairness implications",
+      "level": 3,
+      "content": "Longitudinal analysis of dataset evolution is critical for understanding how recommender systems adapt over time and how these changes affect fairness outcomes [32]. As datasets grow and evolve, they may incorporate new biases or reflect shifting societal norms, which can influence the fairness of recommendations [6]. This dynamic nature of data necessitates continuous monitoring and evaluation to ensure that fairness metrics remain relevant and effective [3]. By analyzing the temporal changes in datasets, researchers can uncover patterns of bias emergence, persistence, or mitigation, providing insights into the long-term implications of algorithmic decisions.\n\nThe fairness implications of dataset evolution are particularly significant in the context of recommender systems, where historical biases can be perpetuated or amplified through feedback loops [32]. For instance, if a dataset disproportionately represents certain user groups, the resulting models may favor those groups, leading to systemic unfairness. Longitudinal studies allow for the identification of such trends, enabling the development of strategies to address evolving biases. These analyses also highlight the need for adaptive fairness measures that can account for changes in data distribution and user behavior over time, ensuring that fairness is maintained throughout the system's lifecycle [3].\n\nMoreover, longitudinal analysis facilitates a deeper understanding of the interplay between data evolution and fairness, revealing how different factors—such as user engagement, content updates, and algorithmic interventions—interact to shape fairness outcomes. This perspective is essential for designing robust and equitable recommender systems that can adapt to changing environments. By integrating longitudinal insights into fairness research, the field can move beyond static evaluations and toward more comprehensive, dynamic approaches that support sustainable and socially responsible AI [33].",
+      "stats": {
+        "char_count": 1986,
+        "word_count": 267,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.1 Multi-sided fairness in hiring and recommendation scenarios",
+      "level": 3,
+      "content": "Multi-sided fairness in hiring and recommendation scenarios addresses the complex interplay of fairness across multiple stakeholders, such as job seekers, employers, and users of recommendation systems [13]. Traditional fairness metrics often focus on individual or group-level outcomes, but in multi-sided contexts, fairness must be redefined to account for the competing interests and objectives of all involved parties [13]. For instance, in algorithmic hiring, fairness might involve ensuring equitable opportunities for diverse candidate groups while also maintaining the quality and relevance of job recommendations [34]. This requires a nuanced approach that balances the needs of different stakeholders, such as minimizing bias against underrepresented groups while avoiding over-optimization for specific demographics. The challenge lies in designing systems that are not only fair to individual users but also equitable across the broader ecosystem of actors.\n\nIn recommendation systems, multi-sided fairness extends to scenarios where users, content providers, and platform operators all have distinct expectations and potential conflicts [13]. For example, a dating app’s recommendation system must balance user satisfaction, match quality, and the visibility of diverse profiles, while also considering the interests of content creators and the platform’s business goals [35]. This multi-dimensional fairness requires frameworks that can incorporate diverse fairness criteria, such as exposure equality, diversity in recommendations, and transparency in decision-making [4]. Techniques like fairness-aware ranking, bias mitigation, and interactive feedback mechanisms are being explored to address these challenges [3]. However, the lack of standardized metrics and evaluation protocols complicates the development of universally applicable solutions, highlighting the need for more comprehensive and context-specific approaches.\n\nThe application of multi-sided fairness in real-world systems necessitates a shift from isolated fairness measures to holistic, stakeholder-centric frameworks [3]. This involves integrating fairness considerations into the design, training, and evaluation of algorithms, ensuring that they align with ethical and regulatory standards [36]. Furthermore, the dynamic nature of user preferences and system environments demands adaptive mechanisms that can continuously monitor and adjust for emerging biases. While significant progress has been made in understanding and addressing fairness in single-sided contexts, the multi-sided dimension remains underexplored, particularly in terms of scalable and practical implementation [3]. Future research must focus on developing robust methodologies that can effectively balance the competing demands of multiple stakeholders, ultimately leading to more equitable and trustworthy recommendation and hiring systems.",
+      "stats": {
+        "char_count": 2901,
+        "word_count": 376,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.2 Stakeholder interviews and qualitative case studies on algorithmic fairness",
+      "level": 3,
+      "content": "Stakeholder interviews and qualitative case studies provide critical insights into the practical challenges and nuanced perspectives surrounding algorithmic fairness in recommender systems [2]. These methods allow researchers to explore how different actors—such as developers, users, and policymakers—perceive and experience fairness in algorithmic decision-making [4]. By engaging directly with stakeholders, this approach reveals the contextual and cultural factors that influence fairness perceptions, which are often overlooked in quantitative analyses [34]. Such insights are essential for developing fairness-aware systems that align with real-world values and expectations, beyond the constraints of technical metrics [3].\n\nQualitative case studies further complement stakeholder interviews by offering in-depth examinations of specific instances where algorithmic fairness has been addressed or challenged. These studies highlight the complexities of implementing fairness in practice, including trade-offs between different fairness criteria, the role of organizational culture, and the influence of external pressures. They also uncover the limitations of existing fairness frameworks when applied to real-world scenarios, emphasizing the need for adaptive and context-sensitive approaches [3]. Through these narratives, researchers can identify gaps in current methodologies and propose more holistic strategies that account for both technical and social dimensions of fairness [13].\n\nTogether, stakeholder interviews and qualitative case studies enrich the academic discourse on algorithmic fairness by grounding theoretical concepts in practical realities [36]. They provide a platform for marginalized voices and highlight the societal implications of biased algorithms, fostering a more inclusive and equitable approach to system design. This section synthesizes these findings to underscore the importance of stakeholder engagement in shaping fairness mechanisms that are both technically sound and socially responsible [34]. Ultimately, such research contributes to a more comprehensive understanding of how fairness can be meaningfully integrated into the lifecycle of recommender systems [6].",
+      "stats": {
+        "char_count": 2212,
+        "word_count": 284,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.1 Fairness evaluation metrics for gender and demographic bias",
+      "level": 3,
+      "content": "Fairness evaluation metrics for gender and demographic bias are critical components in ensuring equitable outcomes in recommender systems [5]. These metrics aim to quantify and mitigate disparities in how different demographic groups are represented or treated by algorithms. Common approaches include statistical parity, equalized odds, and disparate impact, each offering distinct perspectives on fairness [3]. Statistical parity measures the proportion of favorable outcomes across groups, while equalized odds focuses on balancing true positive and false positive rates. Disparate impact, on the other hand, assesses whether the probability of a favorable outcome differs significantly between groups. These metrics are essential for identifying and addressing biases that may arise from historical data imbalances or algorithmic design choices.\n\nThe application of fairness metrics in recommender systems is complicated by the dynamic and context-dependent nature of user interactions [1]. For instance, exposure-based fairness metrics consider the visibility of items to different groups, ensuring that no group is systematically underrepresented in recommendations [31]. This is particularly relevant in scenarios where user preferences and behaviors are influenced by social or cultural factors. Additionally, intersectional fairness metrics have emerged to address biases that affect individuals with multiple overlapping identities, such as gender and race [37]. These metrics highlight the need for more nuanced evaluations that go beyond single-axis analyses to capture the complex interplay of various demographic factors in algorithmic outcomes.\n\nDespite their utility, current fairness metrics often face limitations in capturing the full spectrum of biases present in real-world systems [3]. Many metrics are static and fail to account for evolving user behaviors or contextual changes. Furthermore, the trade-offs between fairness and other performance metrics, such as accuracy or relevance, remain a significant challenge [31]. Addressing these limitations requires the development of adaptive and context-aware fairness evaluation frameworks that can dynamically adjust to changing conditions while maintaining equitable outcomes across diverse user groups [3]. This ongoing research is vital for building more inclusive and trustworthy recommender systems.",
+      "stats": {
+        "char_count": 2377,
+        "word_count": 321,
+        "sentence_count": 16,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.2 Systematic fairness assessment of voice and synthetic data",
+      "level": 3,
+      "content": "Systematic fairness assessment of voice and synthetic data is a critical yet underexplored area in the broader discourse on algorithmic fairness [36]. Traditional fairness metrics often fail to account for the unique characteristics of voice data and synthetic datasets, which can introduce or amplify biases in ways that are not easily detectable through conventional evaluation frameworks. Voice data, for instance, may exhibit demographic imbalances in terms of gender, age, or accent, while synthetic data can inherit biases from the training processes that generate it. These issues necessitate the development of specialized fairness assessment methodologies that consider the specific properties of such data types, including their representational accuracy, distributional consistency, and potential for reinforcing societal inequities [3].\n\nThe challenges in assessing fairness for voice and synthetic data are compounded by the dynamic and evolving nature of these datasets. Unlike static datasets, synthetic data can be generated at scale with varying degrees of fidelity, making it difficult to establish consistent benchmarks for fairness evaluation. Similarly, voice data may be subject to contextual and environmental factors that influence its representation and interpretation. These complexities require robust and adaptable evaluation frameworks that can account for both the structural and functional aspects of fairness [13]. Recent efforts have begun to address these gaps by proposing multi-dimensional fairness metrics that incorporate both demographic and contextual variables, enabling a more nuanced understanding of fairness in these domains [3].\n\nFurthermore, the integration of fairness assessment into the lifecycle of voice and synthetic data generation is essential for ensuring long-term accountability and transparency. This involves not only evaluating the fairness of the data itself but also assessing the fairness of the algorithms that process and utilize these data [4]. Such an approach requires interdisciplinary collaboration between data scientists, ethicists, and domain experts to develop comprehensive evaluation strategies. By systematically addressing fairness in voice and synthetic data, researchers can contribute to the development of more equitable and trustworthy AI systems that align with broader societal values and ethical standards [27].",
+      "stats": {
+        "char_count": 2398,
+        "word_count": 330,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.4.1 Algorithmic auditing and regulatory frameworks for transparency",
+      "level": 3,
+      "content": "Algorithmic auditing and regulatory frameworks for transparency represent critical components in ensuring the ethical and responsible deployment of recommender systems. These mechanisms aim to evaluate the fairness, accountability, and explainability of algorithmic decisions, addressing the growing concerns around bias, discrimination, and opacity in automated systems [38]. Auditing processes often involve systematic evaluation of model behavior, data sources, and decision-making pathways to identify and mitigate harmful outcomes. Regulatory frameworks, on the other hand, provide the legal and policy infrastructure necessary to enforce standards of transparency and fairness, guiding developers and organizations in aligning their systems with societal values and ethical guidelines.\n\nThe development of robust auditing tools and regulatory standards is essential for fostering trust in recommender systems, particularly in high-stakes domains such as healthcare, finance, and hiring. Current approaches include the use of fairness-aware metrics, bias detection algorithms, and model-agnostic interpretability techniques to assess and improve system performance. However, the integration of these methods into real-world applications remains challenging due to the complexity of algorithmic interactions and the lack of standardized evaluation protocols. Regulatory efforts must also evolve to keep pace with technological advancements, ensuring that policies are both enforceable and adaptable to emerging risks and use cases.\n\nDespite progress, significant gaps persist between academic research and practical implementation. While numerous frameworks and methodologies have been proposed, their adoption by industry and regulatory bodies is often limited by technical, economic, and institutional barriers. Future work should focus on creating more accessible and scalable auditing solutions, as well as strengthening the alignment between technical innovations and regulatory requirements. This will be crucial in achieving the broader goals of sustainability, social responsibility, and accountable technology use within recommender systems [39].",
+      "stats": {
+        "char_count": 2159,
+        "word_count": 278,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.4.2 Ethical and philosophical analysis of synthetic data and AI governance",
+      "level": 3,
+      "content": "The ethical and philosophical analysis of synthetic data and AI governance is a critical area of inquiry that intersects with broader concerns about the societal implications of artificial intelligence. Synthetic data, while promising for privacy preservation and data augmentation, raises questions about authenticity, representativeness, and the potential for reinforcing existing biases. These concerns are compounded by the lack of standardized frameworks for evaluating the ethical implications of synthetic data generation and deployment. Philosophically, the use of synthetic data challenges traditional notions of truth and accountability, as it introduces a layer of abstraction that may obscure the origins and limitations of the data used to train AI systems. This necessitates a reevaluation of ethical principles to ensure that synthetic data aligns with values such as transparency, fairness, and societal benefit.\n\nAI governance frameworks must address the complex interplay between technological capabilities and ethical responsibilities. Current governance models often struggle to balance innovation with the need for accountability, particularly in domains where AI systems have significant societal impact. The philosophical underpinnings of AI governance involve considerations of justice, autonomy, and the distribution of benefits and harms. These dimensions are further complicated by the global nature of AI development, which requires harmonizing diverse cultural, legal, and ethical perspectives. Effective governance must therefore incorporate mechanisms for continuous monitoring, stakeholder engagement, and adaptive policy-making to ensure that AI systems operate in alignment with societal values and ethical norms.\n\nThe integration of ethical and philosophical analysis into AI governance is essential for addressing the unintended consequences of synthetic data and AI systems. This requires interdisciplinary collaboration between technologists, ethicists, policymakers, and affected communities to develop robust and inclusive governance structures. By embedding ethical considerations into the design, deployment, and evaluation of AI systems, it becomes possible to mitigate risks and enhance public trust. Ultimately, the goal is to create an ecosystem where AI technologies not only advance technical capabilities but also contribute to a more equitable and just society.",
+      "stats": {
+        "char_count": 2411,
+        "word_count": 323,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6 Future Directions",
+      "level": 1,
+      "content": "The current state of research on fairness in recommender systems has made significant strides in understanding the mechanisms of bias and developing strategies to mitigate its impact. However, several critical limitations and gaps remain. First, while many studies focus on isolated fairness metrics or specific types of bias, there is a lack of comprehensive frameworks that integrate multiple fairness dimensions, such as individual and group fairness, exposure fairness, and intersectional fairness, into a unified evaluation and optimization process. Second, the dynamic and evolving nature of user behavior and data distributions is often underrepresented in existing models, leading to suboptimal performance in real-world scenarios. Third, the integration of fairness into complex, large-scale systems remains challenging due to the trade-offs between fairness, accuracy, and computational efficiency. These limitations highlight the need for more holistic, adaptive, and scalable approaches to fairness in recommendation systems.\n\nFuture research should focus on developing more robust and generalizable fairness-aware frameworks that account for the interplay between different fairness dimensions and the dynamic nature of user interactions. This includes the design of adaptive models that can continuously learn and adjust to changing data distributions while maintaining fairness constraints. Additionally, there is a need for more sophisticated evaluation methodologies that go beyond static metrics and incorporate longitudinal and contextual analyses to better capture the long-term implications of algorithmic decisions. Another promising direction is the exploration of hybrid approaches that combine model-based and post-processing techniques to achieve a more balanced and equitable recommendation process. Furthermore, the integration of causal reasoning and counterfactual analysis into fairness-aware models can provide deeper insights into the mechanisms of bias and enable more targeted interventions. These directions will be essential in advancing the field toward more transparent, equitable, and effective recommendation systems.\n\nThe potential impact of these proposed future research directions is substantial. By addressing the current limitations in fairness-aware recommendation systems, the development of more comprehensive and adaptive frameworks can lead to more equitable and trustworthy algorithms that better serve diverse user groups. Enhanced evaluation methodologies will enable more accurate and meaningful assessments of fairness, supporting the creation of systems that are not only technically sound but also socially responsible. The integration of causal and counterfactual reasoning can provide deeper insights into the sources of bias and facilitate the design of interventions that are both effective and interpretable. Ultimately, these advancements will contribute to the broader goal of creating recommendation systems that are fair, transparent, and aligned with ethical and societal values, fostering trust and inclusivity in digital platforms.",
+      "stats": {
+        "char_count": 3102,
+        "word_count": 415,
+        "sentence_count": 17,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "7 Conclusion",
+      "level": 1,
+      "content": "This survey paper provides a comprehensive overview of the current state of research on fairness in recommender systems, highlighting the theoretical foundations, practical implementations, and evaluation strategies that have emerged to address the growing concerns around bias and inequity in algorithmic decision-making. The analysis reveals that fairness in recommendation systems is a multifaceted challenge that requires a deep understanding of model architecture, data representation, and evaluation metrics. The paper discusses various fairness-aware frameworks, including hybrid models that combine traditional and deep learning techniques, transformer-based sequential denoise models with multi-interest routing, and federated learning approaches that promote diversity and reproducibility. Additionally, the survey explores fairness-enhancing techniques such as regularization-based loss functions for mitigating popularity bias and counterfactual and causal inference methods for improving user-to-user fairness. These approaches demonstrate the diverse ways in which fairness can be embedded into the recommendation process, while also emphasizing the importance of interdisciplinary collaboration in addressing the ethical and societal implications of algorithmic systems.\n\nThe significance of this survey lies in its structured and critical analysis of the existing literature, which provides valuable insights into the key challenges and research gaps in the field. By synthesizing findings from a wide range of studies, the paper offers a foundation for future research and development, particularly in areas such as multi-sided fairness, dynamic reranking, and the ethical implications of synthetic data. The survey also underscores the need for robust evaluation frameworks that go beyond traditional accuracy metrics to include fairness-aware benchmarks and multi-metric composite evaluations. These contributions are essential for advancing the design of equitable and transparent recommendation systems that align with ethical and societal values.\n\nLooking ahead, there is a clear need for continued research that addresses the dynamic and evolving nature of fairness in recommendation systems. Future work should focus on developing more adaptive and context-aware fairness mechanisms that can account for changing data distributions and user behaviors. Additionally, there is a pressing need for greater collaboration between researchers, practitioners, and policymakers to ensure that fairness remains a central design principle in the development of AI-driven systems. As recommendation technologies become increasingly integrated into critical domains, the responsibility to ensure their fairness, accountability, and transparency becomes even more urgent. By fostering a culture of ethical innovation and interdisciplinary dialogue, the field can move closer to realizing the vision of recommendation systems that are not only effective but also equitable and socially responsible.",
+      "stats": {
+        "char_count": 3008,
+        "word_count": 396,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "[1] PBiLoss  Popularity-Aware Regularization to Improve Fairness in  Graph-Based Recommender Systems",
+      "number": null,
+      "title": "pbiloss popularity-aware regularization to improve fairness in graph-based recommender systems"
+    },
+    {
+      "text": "[2] RTs != Endorsements  Rethinking Exposure Fairness on Social Media  Platforms",
+      "number": null,
+      "title": "rts != endorsements rethinking exposure fairness on social media platforms"
+    },
+    {
+      "text": "[3] Unmasking Gender Bias in Recommendation Systems and Enhancing  Category-Aware Fairness",
+      "number": null,
+      "title": "unmasking gender bias in recommendation systems and enhancing category-aware fairness"
+    },
+    {
+      "text": "[4] Multistakeholder Fairness in Tourism  What can Algorithms learn from  Tourism Management",
+      "number": null,
+      "title": "multistakeholder fairness in tourism what can algorithms learn from tourism management"
+    },
+    {
+      "text": "[5] Towards Responsible AI in Education  Hybrid Recommendation System for  K-12 Students Case Study",
+      "number": null,
+      "title": "towards responsible ai in education hybrid recommendation system for k-12 students case study"
+    },
+    {
+      "text": "[6] Bias vs Bias -- Dawn of Justice  A Fair Fight in Recommendation Systems",
+      "number": null,
+      "title": "bias vs bias -- dawn of justice a fair fight in recommendation systems"
+    },
+    {
+      "text": "[7] A Deep Dive into Fairness, Bias, Threats, and Privacy in Recommender  Systems  Insights and Future R",
+      "number": null,
+      "title": "a deep dive into fairness, bias, threats"
+    },
+    {
+      "text": "[8] When Algorithms Mirror Minds  A Confirmation-Aware Social Dynamic Model  of Echo Chamber and Homogen",
+      "number": null,
+      "title": "when algorithms mirror minds a confirmation-aware social dynamic model of echo chamber and homogen"
+    },
+    {
+      "text": "[9] Alleviating User-Sensitive bias with Fair Generative Sequential  Recommendation Model",
+      "number": null,
+      "title": "alleviating user-sensitive bias with fair generative sequential recommendation model"
+    },
+    {
+      "text": "[10] A Systematic Replicability and Comparative Study of BSARec and SASRec  for Sequential Recommendation",
+      "number": null,
+      "title": "a systematic replicability and comparative study of bsarec and sasrec for sequential recommendation"
+    },
+    {
+      "text": "[11] Opening the Black Box  Interpretable Remedies for Popularity Bias in  Recommender Systems",
+      "number": null,
+      "title": "opening the black box interpretable remedies for popularity bias in recommender systems"
+    },
+    {
+      "text": "[12] FedFlex  Federated Learning for Diverse Netflix Recommendations",
+      "number": null,
+      "title": "fedflex federated learning for diverse netflix recommendations"
+    },
+    {
+      "text": "[13] Why Multi-Interest Fairness Matters  Hypergraph Contrastive  Multi-Interest Learning for Fair Conver",
+      "number": null,
+      "title": "why multi-interest fairness matters hypergraph contrastive multi-interest learning for fair conver"
+    },
+    {
+      "text": "[14] FairEval  Evaluating Fairness in LLM-Based Recommendations with  Personality Awareness",
+      "number": null,
+      "title": "faireval evaluating fairness in llm-based recommendations with personality awareness"
+    },
+    {
+      "text": "[15] From Models to Systems  A Comprehensive Fairness Framework for  Compositional Recommender Systems",
+      "number": null,
+      "title": "from models to systems a comprehensive fairness framework for compositional recommender systems"
+    },
+    {
+      "text": "[16] MC3G  Model Agnostic Causally Constrained Counterfactual Generation",
+      "number": null,
+      "title": "mc3g model agnostic causally constrained counterfactual generation"
+    },
+    {
+      "text": "[17] Towards a Real-World Aligned Benchmark for Unlearning in Recommender  Systems",
+      "number": null,
+      "title": "towards a real-world aligned benchmark for unlearning in recommender systems"
+    },
+    {
+      "text": "[18] Improving the Performance of Sequential Recommendation Systems with an  Extended Large Language Mode",
+      "number": null,
+      "title": "improving the performance of sequential recommendation systems with an extended large language mode"
+    },
+    {
+      "text": "[19] SPRec  Self-Play to Debias LLM-based Recommendation",
+      "number": null,
+      "title": "sprec self-play to debias llm-based recommendation"
+    },
+    {
+      "text": "[20] LLM4Rerank  LLM-based Auto-Reranking Framework for Recommendations",
+      "number": null,
+      "title": "llm4rerank llm-based auto-reranking framework for recommendations"
+    },
+    {
+      "text": "[21] Unifying Generative and Dense Retrieval for Sequential Recommendation",
+      "number": null,
+      "title": "unifying generative and dense retrieval for sequential recommendation"
+    },
+    {
+      "text": "[22] Mitigating Filter Bubble from the Perspective of Community Detection  A  Universal Framework",
+      "number": null,
+      "title": "mitigating filter bubble from the perspective of community detection a universal framework"
+    },
+    {
+      "text": "[23] PETLS  PErsistent Topological Laplacian Software",
+      "number": null,
+      "title": "petls persistent topological laplacian software"
+    },
+    {
+      "text": "[24] Counterfactual Reciprocal Recommender Systems for User-to-User Matching",
+      "number": null,
+      "title": "counterfactual reciprocal recommender systems for user-to-user matching"
+    },
+    {
+      "text": "[25] OKRA  an Explainable, Heterogeneous, Multi-Stakeholder Job Recommender  System",
+      "number": null,
+      "title": "okra an explainable, heterogeneous, multi-stakeholder job recommender system"
+    },
+    {
+      "text": "[26] Fairness in Graph Learning Augmented with Machine Learning  A Survey",
+      "number": null,
+      "title": "fairness in graph learning augmented with machine learning a survey"
+    },
+    {
+      "text": "[27] Demographic Benchmarking  Bridging Socio-Technical Gaps in Bias  Detection",
+      "number": null,
+      "title": "demographic benchmarking bridging socio-technical gaps in bias detection"
+    },
+    {
+      "text": "[28] Improving the FAIRness and Sustainability of the NHGRI Resources  Ecosystem",
+      "number": null,
+      "title": "improving the fairness and sustainability of the nhgri resources ecosystem"
+    },
+    {
+      "text": "[29] Looking for Fairness in Recommender Systems",
+      "number": null,
+      "title": "looking for fairness in recommender systems"
+    },
+    {
+      "text": "[30] Improving Recommendation Fairness without Sensitive Attributes Using  Multi-Persona LLMs",
+      "number": null,
+      "title": "improving recommendation fairness without sensitive attributes using multi-persona llms"
+    },
+    {
+      "text": "[31] Joint Evaluation of Fairness and Relevance in Recommender Systems with  Pareto Frontier",
+      "number": null,
+      "title": "joint evaluation of fairness and relevance in recommender systems with pareto frontier"
+    },
+    {
+      "text": "[32] User and Recommender Behavior Over Time  Contextualizing Activity,  Effectiveness, Diversity, and Fa",
+      "number": null,
+      "title": "user and recommender behavior over time contextualizing activity, effectiveness, diversity, and fa"
+    },
+    {
+      "text": "[33] Bias is a Math Problem, AI Bias is a Technical Problem  10-year  Literature Review of AI LLM Bias Re",
+      "number": null,
+      "title": "bias is a math problem, ai bias is a technical problem 10-year literature review of ai llm bias re"
+    },
+    {
+      "text": "[34] Mapping Stakeholder Needs to Multi-Sided Fairness in Candidate  Recommendation for Algorithmic Hirin",
+      "number": null,
+      "title": "mapping stakeholder needs to multi-sided fairness in candidate recommendation for algorithmic hirin"
+    },
+    {
+      "text": "[35] FAIR-MATCH  A Multi-Objective Framework for Bias Mitigation in  Reciprocal Dating Recommendations",
+      "number": null,
+      "title": "fair-match a multi-objective framework for bias mitigation in reciprocal dating recommendations"
+    },
+    {
+      "text": "[36] Bridging Research Gaps Between Academic Research and Legal  Investigations of Algorithmic Discrimina",
+      "number": null,
+      "title": "bridging research gaps between academic research and legal investigations of algorithmic discrimina"
+    },
+    {
+      "text": "[37] A Tutorial On Intersectionality in Fair Rankings",
+      "number": null,
+      "title": "a tutorial on intersectionality in fair rankings"
+    },
+    {
+      "text": "[38] From Individual to Multi-Agent Algorithmic Recourse  Minimizing the  Welfare Gap via Capacitated Bip",
+      "number": null,
+      "title": "from individual to multi-agent algorithmic recourse minimizing the welfare gap via capacitated bip"
+    },
+    {
+      "text": "[39] Recommender Systems for Social Good  The Role of Accountability and  Sustainability",
+      "number": null,
+      "title": "recommender systems for social good the role of accountability and sustainability"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\InteractiveSurvey\\Computer Science\\survey_Fairness in Recommender Systems_split.json",
+    "processed_date": "2025-12-30T20:33:39.504171",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

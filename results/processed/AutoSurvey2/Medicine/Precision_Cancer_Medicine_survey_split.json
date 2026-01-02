@@ -1,0 +1,236 @@
+{
+  "outline": [
+    [
+      1,
+      "Precision Cancer Medicine: A Comprehensive Survey"
+    ],
+    [
+      2,
+      "Abstract"
+    ],
+    [
+      2,
+      "Keywords"
+    ],
+    [
+      2,
+      "Introduction"
+    ],
+    [
+      2,
+      "Background"
+    ],
+    [
+      2,
+      "Current State of the Art"
+    ],
+    [
+      2,
+      "Future Directions"
+    ],
+    [
+      2,
+      "Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "Precision Cancer Medicine: A Comprehensive Survey",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Abstract",
+      "level": 2,
+      "content": "**Abstract** Precision cancer medicine represents a transformative paradigm in oncology, shifting from generalized treatment approaches to personalized, data-driven strategies that consider the unique molecular and clinical profiles of individual tumors. This survey paper provides a comprehensive overview of the current state and future directions of precision cancer medicine, with a focus on the integration of advanced imaging technologies, molecular profiling, and artificial intelligence (AI). The paper begins with an introduction to the foundational concepts and evolution of precision medicine, followed by a detailed background on the technological and methodological advancements that have propelled its development. The current state of the art is discussed, highlighting the critical role of deep learning in tumor detection, segmentation, and classification, as well as the ongoing efforts to enhance model robustness and clinical utility. Key challenges, including data heterogeneity, model generalizability, and ethical considerations, are also addressed. Looking ahead, the paper outlines future directions, emphasizing the potential of multimodal data integration, explainable AI, and real-time decision support systems to further personalize cancer care. By synthesizing recent advances and identifying emerging trends, this survey contributes to a deeper understanding of the opportunities and challenges in the field, offering valuable insights for researchers, clinicians, and policymakers engaged in the development and implementation of precision oncology.",
+      "stats": {
+        "char_count": 1581,
+        "word_count": 208,
+        "sentence_count": 7,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Keywords",
+      "level": 2,
+      "content": "large language models, multimodal learning, natural language processing, machine learning, artificial intelligence",
+      "stats": {
+        "char_count": 114,
+        "word_count": 12,
+        "sentence_count": 1,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Introduction",
+      "level": 2,
+      "content": "Precision cancer medicine represents a transformative shift in oncology, moving away from a one-size-fits-all approach toward personalized, data-driven strategies that account for the unique molecular and clinical characteristics of each patient's tumor. This paradigm emphasizes the integration of advanced imaging technologies, molecular profiling, and artificial intelligence (AI) to enable more accurate diagnosis, targeted therapies, and improved patient outcomes. Over the past decade, significant progress has been made in developing computational frameworks that leverage multimodal data to support precision oncology, with a growing emphasis on interpretability, scalability, and clinical applicability. Recent research has demonstrated the potential of deep learning models, such as convolutional neural networks (CNNs), transformers, and large language models (LLMs), to address complex challenges in cancer detection, segmentation, and diagnosis. For instance, graph-structured representations of whole slide images (WSIs) have been introduced to facilitate multi-magnification analysis, offering a novel approach to handling high-resolution histopathological data [4]. Similarly, 3D segmentation techniques incorporating multi-scale information fusion and cross-attention mechanisms have shown promising results in accurately delineating lymphoma lesions in PET/CT scans [2]. These advancements reflect a broader trend in the field, where the integration of diverse imaging modalities and the development of interpretable models are increasingly being prioritized to ensure clinical relevance and translational potential. In addition, novel loss functions, such as the AUROC-based objective for molecular subtype classification, have been proposed to enhance the performance of deep learning models in pediatric low-grade neuroepithelial tumors, demonstrating the value of tailored optimization strategies [3]. The role of AI in clinical decision-making is also expanding, with recent studies evaluating the capabilities of LLMs in generating multimodal diagnoses from medical images and symptom data, highlighting both the potential and the limitations of such systems [1]. Furthermore, innovations in hyperspectral image processing and real-time tumor visualization during surgery underscore the importance of computational methods in improving the precision of surgical interventions [3]. As the field continues to evolve, the focus remains on developing robust, interpretable, and clinically validated models that can seamlessly integrate into the diagnostic and therapeutic workflows of precision cancer medicine. The convergence of AI, imaging, and molecular biology is not only reshaping the landscape of cancer research but also paving the way for more effective and patient-centered care.",
+      "stats": {
+        "char_count": 2810,
+        "word_count": 366,
+        "sentence_count": 12,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Background",
+      "level": 2,
+      "content": "Precision cancer medicine represents a paradigm shift in oncology, moving away from a one-size-fits-all approach toward personalized, data-driven strategies that consider the unique molecular, genetic, and clinical characteristics of each patient. This transformation has been significantly accelerated by the integration of advanced computational techniques, including artificial intelligence (AI), machine learning (ML), and deep learning, which have enabled more accurate diagnosis, improved treatment planning, and enhanced patient outcomes. Over the past few years, a growing body of research has explored the application of these technologies in various aspects of cancer care, from early detection and risk prediction to image analysis and treatment response monitoring. The use of large-scale clinical data, such as electronic health records (EHRs), imaging modalities, and omics data, has become a cornerstone of precision oncology, allowing researchers to uncover complex patterns and associations that were previously undetectable. For instance, unsupervised learning methods have been employed to identify latent disease signatures from EHRs, leading to more effective prediction models for conditions like lung cancer [10]. Similarly, AI-driven approaches have shown promise in early cancer detection, particularly in the context of lung cancer screening using spiral CT scans, where automated analysis can enhance diagnostic accuracy and reduce false negatives [6]. In the realm of histopathology, the development of geometry-aware models has demonstrated the importance of spatial and structural features in improving the accuracy of cancer diagnosis, as seen in the application of the GOAT (Geometry-Aware Transformer) for whole slide image analysis [8]. These models leverage geometric cues to better understand tumor morphology, thereby supporting more precise classification and prognosis. In addition to image analysis, natural language processing (NLP) and large language models (LLMs) have been increasingly used to extract clinically relevant information from unstructured data, such as radiology reports and clinical notes. For example, iterative prompt refinement techniques using teacher-student LLMs have been shown to improve the accuracy of symptom extraction in radiation oncology, facilitating more efficient and accurate documentation of patient conditions [5]. Furthermore, deep learning has been applied to a wide range of imaging tasks, including tumor segmentation, dose prediction, and motion correction, with methods such as self-calibrated convolutions and triplet-constraint transformers demonstrating improved performance in glioma segmentation and radiotherapy planning [7] [9]. The increasing sophistication of these models reflects a broader trend in precision cancer medicine, where the integration of domain-specific knowledge with cutting-edge computational techniques is essential for achieving reliable and clinically useful results. Despite the significant progress made, challenges remain, including the need for high-quality, standardized data, the complexity of model interpretation, and the integration of these technologies into routine clinical practice. Nevertheless, the continued development and refinement of AI and ML-based approaches are expected to play a pivotal role in shaping the future of cancer care, making it more personalized, efficient, and effective.",
+      "stats": {
+        "char_count": 3424,
+        "word_count": 459,
+        "sentence_count": 14,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Current State of the Art",
+      "level": 2,
+      "content": "The current state of the art in precision cancer medicine leverages deep learning for automated tumor detection, segmentation, and classification, significantly enhancing diagnostic accuracy and clinical decision-making. Recent advancements have focused on improving the robustness, generalizability, and clinical applicability of these models through novel architectures, multi-modal data integration, and advanced training strategies. Deep learning models, particularly U-Net, ResNet, and their variants, have become foundational in medical image analysis, enabling precise segmentation of complex anatomical structures and tumor regions. For instance, the use of 3D U-Net architectures has extended the capabilities of traditional 2D models, allowing for more accurate and robust segmentation of planning target volumes in radiotherapy planning [11]. Additionally, the adoption of diffusion models, as demonstrated in Re-DiffiNet, represents a significant departure from conventional segmentation approaches by modeling discrepancies between predicted and ground-truth segmentations, leading to improvements in Dice score and Hausdorff distance metrics [14]. A notable trend in the field is the integration of multi-modal data to enhance diagnostic performance. Studies have shown that combining information from different imaging modalities, such as B-mode and shear wave elastography in transrectal ultrasound, can improve the detection of clinically significant prostate cancer [19]. Similarly, the use of hyperspectral imaging for intraoperative tumor boundary delineation has shown promise through hybrid supervised and unsupervised classification approaches, offering a more comprehensive understanding of tumor morphology during surgery [13]. These multi-modal strategies not only improve model performance but also provide richer contextual information that can aid in treatment planning and prognosis. Another important development is the exploration of weakly supervised learning techniques, which aim to reduce the reliance on costly and time-consuming pixel-level annotations. This approach has been successfully applied in the detection of rare tumors such as pheochromocytomas and paragangliomas, achieving high precision and sensitivity with only bounding box annotations [16]. This shift towards weakly supervised learning is particularly valuable in clinical settings where high-quality annotated data is scarce, making it a critical direction for future research. In addition to segmentation and detection, recent work has also focused on improving the interpretability and robustness of deep learning models. Adversarially robust feature learning has been introduced to enhance the reliability of breast cancer diagnosis by making models less susceptible to adversarial attacks [17]. Similarly, the development of novel loss functions, such as the FESS Loss, has shown improvements in spatial segmentation accuracy, further refining the performance of medical image analysis systems [15]. These advancements underscore the growing emphasis on not only model accuracy but also their reliability and generalizability across diverse clinical scenarios. The integration of domain knowledge and multi-modal data has also been a central theme in molecular property prediction and treatment response modeling. Studies have demonstrated that incorporating biological and clinical insights into deep learning frameworks can lead to more accurate predictions of treatment outcomes, such as survival in glioblastoma patients using multi-parametric MRI [12]. This trend highlights the importance of interdisciplinary collaboration, combining expertise from computer science, biology, and clinical medicine to drive innovation in precision oncology. Despite these advances, several challenges remain. Many models are still limited in their generalizability across different patient populations and imaging modalities. Additionally, the reliance on in-house datasets and the lack of external validation in many studies raise concerns about the real-world applicability of these models. Furthermore, the complexity of some architectures, such as hybrid CNN-Transformer models like BEFUnet, presents challenges in terms of computational efficiency and deployment in clinical settings [18]. Addressing these challenges will be essential for translating these technologies into routine clinical practice. Overall, the current state of the art in precision cancer medicine reflects a dynamic and rapidly evolving field, where deep learning is increasingly being harnessed to improve the accuracy, efficiency, and personalization of cancer care. The ongoing development of robust, interpretable, and multi-modal models is expected to further transform the landscape of cancer diagnosis and treatment in the coming years.",
+      "stats": {
+        "char_count": 4822,
+        "word_count": 640,
+        "sentence_count": 26,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Future Directions",
+      "level": 2,
+      "content": "The future of precision cancer medicine is increasingly shaped by the integration of advanced computational methods, particularly those rooted in artificial intelligence and machine learning. As the field progresses, several key directions are emerging, driven by the need for more accurate, personalized, and clinically actionable solutions. One prominent trend is the continued development and refinement of multimodal data integration strategies. The ability to combine diverse data sources—such as imaging, genomics, and clinical records—has proven essential for improving diagnostic accuracy and treatment outcomes. For instance, frameworks like BioFusionNet demonstrate how the fusion of histopathological, genetic, and clinical data can enhance survival risk stratification in breast cancer, while multi-modality transrectal ultrasound video classification systems show how imaging data can be leveraged for more precise cancer detection. These approaches highlight the importance of developing robust and scalable methods for handling heterogeneous data, ensuring that models can generalize across different patient populations and clinical settings. Another critical direction is the increasing use of deep learning and transformer-based architectures to model complex biological and clinical relationships. Transformers, originally developed for natural language processing, have found significant applications in cancer medicine, particularly in handling variable-length sequences such as mutation profiles and in capturing long-range dependencies in data. The Personalised Drug Identifier paper exemplifies this by using transformers to predict drug response and incorporate auxiliary information, such as patient survival, into the model. Similarly, the NYCTALE model demonstrates how neuro-inspired architectures can be adapted to medical tasks, enabling adaptive and personalized predictions even with limited training data. These developments suggest that future work will focus on further optimizing these models for clinical deployment, ensuring they are not only accurate but also interpretable and reliable in real-world settings. The personalization of treatment strategies remains a central goal in precision cancer medicine, and recent advances in AI are enabling more tailored approaches. This includes the development of decision support systems that integrate patient-specific data to recommend optimal therapies. For example, the clinical treatment recommendation system described in the Personalised Drug Identifier paper has been deployed in a real-world hospital setting, showcasing the potential for AI to directly influence clinical practice. Moreover, the use of reinforcement learning in diagnostic decision-making, as seen in the Deep Reinforcement Learning for Personalized Diagnostic Decision Pathways paper, indicates a shift toward dynamic and adaptive systems that can learn from patient outcomes over time. Such approaches could lead to more efficient and effective treatment pathways, reducing the need for trial-and-error methods and improving patient care. In addition to model development, there is a growing emphasis on addressing challenges such as data imbalances, model generalizability, and ethical considerations. The weighted Cox loss introduced in BioFusionNet represents a step forward in handling imbalanced survival data, a common issue in oncology research. Similarly, the use of semi-supervised learning techniques, as in the Semi-supervised Medical Image Segmentation Method paper, highlights the potential for leveraging both labeled and unlabeled data to improve model performance. These technical advancements are crucial for ensuring that AI models are not only accurate but also fair and robust across diverse patient populations. Furthermore, the integration of AI into clinical workflows requires careful consideration of issues such as data privacy, model interpretability, and clinician acceptance, which will be essential for widespread adoption. Looking ahead, the future of precision cancer medicine will likely involve closer collaboration between computational researchers, clinicians, and data scientists to develop models that are not only technically sound but also clinically relevant. The deployment of AI systems in real-world settings, as seen in the Prostate TRUS and TRS systems, underscores the importance of user-centered design and iterative feedback loops. Additionally, the rise of large language models and their application in medical domains, as explored in the Fine-tuning Large Language Model (LLM) Artificial Intelligence Chatbots paper, suggests new opportunities for natural language processing in clinical documentation, diagnosis, and decision support. As these technologies continue to evolve, they will play an increasingly important role in transforming cancer care into a more precise, personalized, and patient-centered discipline.",
+      "stats": {
+        "char_count": 4933,
+        "word_count": 661,
+        "sentence_count": 25,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "Conclusion",
+      "level": 2,
+      "content": "The conclusion of the survey paper on \"Precision Cancer Medicine\" summarizes the key findings and contributions that have shaped the evolution of this transformative field. The paper highlights how precision cancer medicine has redefined oncology by shifting from a generalized treatment approach to one that is highly personalized, leveraging molecular profiling, advanced imaging, and artificial intelligence. The integration of computational techniques such as machine learning and deep learning has significantly enhanced diagnostic accuracy, therapeutic targeting, and patient outcomes. Notably, the paper emphasizes the role of deep learning models like U-Net and ResNet in improving tumor detection, segmentation, and classification, marking a significant advancement in clinical decision-making. The current state of the field reflects substantial progress in developing robust, generalizable, and clinically applicable models. Researchers are increasingly focusing on multi-modal data integration, which combines genomic, radiomic, and clinical data to provide a more comprehensive understanding of cancer biology. These efforts have led to more accurate predictive models and better-informed treatment strategies. However, challenges remain in ensuring model interpretability, data standardization, and seamless integration into routine clinical workflows. Looking ahead, future research in precision cancer medicine is expected to focus on enhancing the interpretability and generalizability of AI models, addressing data privacy and ethical concerns, and developing more efficient and scalable computational frameworks. The integration of real-time data, federated learning, and edge computing are emerging as promising directions to improve model performance and accessibility. Additionally, the development of patient-centric decision support systems that incorporate both clinical and patient-reported outcomes will be critical for achieving truly personalized care. Despite significant advancements, several open challenges persist, including the need for large, diverse, and well-annotated datasets, the translation of research findings into clinical practice, and the establishment of standardized evaluation metrics. As the field continues to evolve, interdisciplinary collaboration among clinicians, data scientists, and policymakers will be essential to realize the full potential of precision cancer medicine. In conclusion, precision cancer medicine represents a paradigm shift that holds great promise for improving patient outcomes through individualized, data-driven care. While the field has made remarkable strides, ongoing research and innovation will be crucial to overcoming existing challenges and ensuring that these advancements translate into meaningful benefits for patients worldwide.",
+      "stats": {
+        "char_count": 2821,
+        "word_count": 363,
+        "sentence_count": 15,
+        "line_count": 1
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "1. Evaluating LLM -- Generated Multimodal Diagnosis from Medical Images and Symptom Analysis",
+      "number": null,
+      "title": "evaluating llm -- generated multimodal diagnosis from medical images and symptom analysis"
+    },
+    {
+      "text": "2. 3D Lymphoma Segmentation on PET/CT Images via Multi-Scale Information Fusion with Cross-Attention",
+      "number": null,
+      "title": "3d lymphoma segmentation on pet/ct images via multi-scale information fusion with cross-attention"
+    },
+    {
+      "text": "3. Improving Pediatric Low-Grade Neuroepithelial Tumors Molecular Subtype Identification Using a Novel AUROC Loss Function for Convolutional Neural Networks",
+      "number": null,
+      "title": "improving pediatric low-grade neuroepithelial tumors molecular subtype identification using a novel auroc loss function for convolutional neural networks"
+    },
+    {
+      "text": "4. GRASP: GRAph-Structured Pyramidal Whole Slide Image Representation",
+      "number": null,
+      "title": "grasp: graph-structured pyramidal whole slide image representation"
+    },
+    {
+      "text": "5. Iterative Prompt Refinement for Radiation Oncology Symptom Extraction Using Teacher-Student Large Language Models",
+      "number": null,
+      "title": "iterative prompt refinement for radiation oncology symptom extraction using teacher-student large language models"
+    },
+    {
+      "text": "6. Application analysis of ai technology combined with spiral CT scanning in early lung cancer screening",
+      "number": null,
+      "title": "application analysis of ai technology combined with spiral ct scanning in early lung cancer screening"
+    },
+    {
+      "text": "7. Self-calibrated convolution towards glioma segmentation",
+      "number": null,
+      "title": "self-calibrated convolution towards glioma segmentation"
+    },
+    {
+      "text": "8. Unleashing the Infinity Power of Geometry: {A",
+      "number": null,
+      "title": "unleashing the infinity power of geometry: {a"
+    },
+    {
+      "text": "9. Neural Graphics Primitives-based Deformable Image Registration for On-the-fly Motion Extraction",
+      "number": null,
+      "title": "neural graphics primitives-based deformable image registration for on-the-fly motion extraction"
+    },
+    {
+      "text": "10. Unsupervised discovery of clinical disease signatures using probabilistic independence",
+      "number": null,
+      "title": "unsupervised discovery of clinical disease signatures using probabilistic independence"
+    },
+    {
+      "text": "11. Deep Learning-Based Auto-Segmentation of Planning Target Volume for Total Marrow and Lymph Node Irradiation",
+      "number": null,
+      "title": "deep learning-based auto-segmentation of planning target volume for total marrow and lymph node irradiation"
+    },
+    {
+      "text": "12. Treatment-wise Glioblastoma Survival Inference with Multi-parametric Preoperative MRI",
+      "number": null,
+      "title": "treatment-wise glioblastoma survival inference with multi-parametric preoperative mri"
+    },
+    {
+      "text": "13. Spatio-spectral classification of hyperspectral images for brain cancer detection during surgical operations",
+      "number": null,
+      "title": "spatio-spectral classification of hyperspectral images for brain cancer detection during surgical operations"
+    },
+    {
+      "text": "14. Re-DiffiNet: Modeling discrepancies in tumor segmentation using diffusion models",
+      "number": null,
+      "title": "re-diffinet: modeling discrepancies in tumor segmentation using diffusion models"
+    },
+    {
+      "text": "15. {FESS",
+      "number": null,
+      "title": "{fess"
+    },
+    {
+      "text": "16. Weakly Supervised Detection of Pheochromocytomas and Paragangliomas in CT",
+      "number": null,
+      "title": "weakly supervised detection of pheochromocytomas and paragangliomas in ct"
+    },
+    {
+      "text": "17. Adversarially Robust Feature Learning for Breast Cancer Diagnosis",
+      "number": null,
+      "title": "adversarially robust feature learning for breast cancer diagnosis"
+    },
+    {
+      "text": "18. BEFUnet: A Hybrid CNN-Transformer Architecture for Precise Medical Image Segmentation",
+      "number": null,
+      "title": "befunet: a hybrid cnn-transformer architecture for precise medical image segmentation"
+    },
+    {
+      "text": "19. Multi-Modality Transrectal Ultrasound Video Classification for Identification of Clinically Significant Prostate Cancer",
+      "number": null,
+      "title": "multi-modality transrectal ultrasound video classification for identification of clinically significant prostate cancer"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\AutoSurvey2\\Medicine\\Precision_Cancer_Medicine_survey_split.json",
+    "processed_date": "2025-12-30T20:33:35.777577",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

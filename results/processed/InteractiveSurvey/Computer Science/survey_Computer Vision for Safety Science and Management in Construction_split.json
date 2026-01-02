@@ -1,0 +1,474 @@
+{
+  "outline": [
+    [
+      1,
+      "A Survey of Computer Vision for Safety Science and Management in Construction"
+    ],
+    [
+      1,
+      "1 Abstract"
+    ],
+    [
+      1,
+      "2 Introduction"
+    ],
+    [
+      1,
+      "3 Multimodal Vision-Language Integration"
+    ],
+    [
+      2,
+      "3.1 Cross-modal Perception and Reasoning"
+    ],
+    [
+      3,
+      "3.1.1 Integrated multimodal architectures for real-time environmental understanding"
+    ],
+    [
+      3,
+      "3.1.2 Dynamic feedback mechanisms for adaptive vision-language models"
+    ],
+    [
+      2,
+      "3.2 Synthetic Data and Augmentation Strategies"
+    ],
+    [
+      3,
+      "3.2.1 Anomaly-aware data synthesis for robust model training"
+    ],
+    [
+      3,
+      "3.2.2 Pose-driven and context-aware data augmentation techniques"
+    ],
+    [
+      2,
+      "3.3 Spatiotemporal Reasoning and Risk Modeling"
+    ],
+    [
+      3,
+      "3.3.1 Temporal grounded visual question answering for urban environments"
+    ],
+    [
+      3,
+      "3.3.2 Risk field evolution and trajectory planning with spatial-temporal coupling"
+    ],
+    [
+      1,
+      "4 Reinforcement Learning for Autonomous Systems"
+    ],
+    [
+      2,
+      "4.1 End-to-end Policy Learning and Safety Integration"
+    ],
+    [
+      3,
+      "4.1.1 Safe motion planning with probabilistic collision prediction"
+    ],
+    [
+      3,
+      "4.1.2 Reward shaping for socially aware and human-centric behavior"
+    ],
+    [
+      2,
+      "4.2 Multi-agent and Decentralized Control"
+    ],
+    [
+      3,
+      "4.2.1 Interleaved single-agent training for scalable multi-agent systems"
+    ],
+    [
+      3,
+      "4.2.2 Sparse sensor fusion for perception and planning in constrained environments"
+    ],
+    [
+      2,
+      "4.3 Adaptive and Curricular Learning"
+    ],
+    [
+      3,
+      "4.3.1 Curriculum-based reinforcement learning with knowledge retrieval"
+    ],
+    [
+      3,
+      "4.3.2 Symbolic cognitive reasoning for context-aware decision making"
+    ],
+    [
+      1,
+      "5 Evaluation and Safety Analysis of AI Models"
+    ],
+    [
+      2,
+      "5.1 Benchmarking and Real-world Deployment"
+    ],
+    [
+      3,
+      "5.1.1 Multi-modal task evaluation through challenge tracks and edge device testing"
+    ],
+    [
+      3,
+      "5.1.2 Empirical analysis of AI perception in safety-critical scenarios"
+    ],
+    [
+      2,
+      "5.2 Verification and Validation Frameworks"
+    ],
+    [
+      3,
+      "5.2.1 Uncertainty-aware verification through interval Markov decision processes"
+    ],
+    [
+      3,
+      "5.2.2 Probabilistic guarantees for model-based safety analysis"
+    ],
+    [
+      2,
+      "5.3 Generalization and Adaptability"
+    ],
+    [
+      3,
+      "5.3.1 Vision-language-action models for resilient and agile systems"
+    ],
+    [
+      3,
+      "5.3.2 Edge general intelligence through world models and agent orchestration"
+    ],
+    [
+      1,
+      "6 Future Directions"
+    ],
+    [
+      1,
+      "7 Conclusion"
+    ],
+    [
+      1,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Survey of Computer Vision for Safety Science and Management in Construction",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Abstract",
+      "level": 1,
+      "content": "The integration of computer vision into safety science and management within the construction industry has gained significant attention due to the increasing complexity and hazards of modern construction sites. Traditional safety management methods, reliant on manual observation, are insufficient for real-time monitoring and risk assessment. Computer vision technologies, particularly those incorporating multimodal sensing, deep learning, and spatiotemporal reasoning, offer promising solutions to enhance situational awareness, detect anomalies, and support autonomous decision-making. This survey paper provides a comprehensive overview of the current state of research on computer vision applications in construction safety, focusing on key areas such as multimodal integration, synthetic data generation, spatiotemporal reasoning, reinforcement learning, and safety verification. The paper highlights the contributions of recent advancements, including the development of adaptive vision-language models, risk field evolution techniques, and edge computing solutions for real-time processing. It also identifies critical challenges, such as the need for more robust synthetic data, improved multimodal fusion, and reliable safety validation methods. By synthesizing these findings, this work aims to guide future research and development in creating intelligent, safe, and efficient construction systems. The continued evolution of computer vision in construction safety holds the potential to revolutionize industry practices and significantly improve worker safety.",
+      "stats": {
+        "char_count": 1574,
+        "word_count": 199,
+        "sentence_count": 8,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "2 Introduction",
+      "level": 1,
+      "content": "The rapid advancement of computer vision has significantly transformed various domains, including safety science and management in construction. As construction sites become increasingly complex and hazardous, the need for intelligent systems capable of real-time environmental monitoring, risk assessment, and autonomous decision-making has grown substantially. Traditional methods of safety management, which rely heavily on human observation and manual data collection, are often insufficient to address the dynamic and unpredictable nature of construction environments. Computer vision technologies, particularly those integrating multimodal sensing and deep learning, have emerged as a promising solution to enhance situational awareness, detect anomalies, and improve operational efficiency. These systems offer the potential to reduce accidents, optimize resource allocation, and support data-driven safety protocols, thereby contributing to a safer and more sustainable construction industry.\n\nThis survey paper focuses on the application of computer vision in safety science and management within the construction domain, with an emphasis on multimodal integration, spatiotemporal reasoning, and autonomous decision-making. It explores how recent advancements in vision-language models, synthetic data generation, and reinforcement learning are being leveraged to address key challenges in construction safety, such as real-time hazard detection, worker behavior monitoring, and risk prediction. The paper also examines the role of adaptive learning and edge computing in enabling efficient and scalable solutions for on-site applications. By synthesizing the current state of research, this work provides a comprehensive overview of the methodologies, challenges, and opportunities in the field, offering insights into the future directions of computer vision for construction safety.\n\nThe content of this survey paper is structured to provide a thorough exploration of the field, beginning with an overview of multimodal vision-language integration and its applications in environmental understanding. This section discusses the development of integrated architectures that combine visual, thermal, and event-based data to enhance perception accuracy and robustness in complex environments. It also examines dynamic feedback mechanisms that allow vision-language models to adapt to changing input conditions, ensuring more reliable performance in real-time scenarios. The discussion then transitions to synthetic data and augmentation strategies, highlighting how anomaly-aware data synthesis and pose-driven techniques are being used to improve model generalization and robustness. These methods are crucial for training models that can operate effectively in safety-critical construction settings, where real-world data may be limited or challenging to collect.\n\nThe paper further delves into spatiotemporal reasoning and risk modeling, focusing on how temporal grounded visual question answering and spatial-temporal risk field evolution contribute to enhanced decision-making in urban and construction environments. These techniques enable models to understand not only the static elements of a scene but also the dynamic interactions over time, which is essential for predicting and mitigating potential hazards. The discussion on reinforcement learning for autonomous systems includes end-to-end policy learning and safety integration, examining how probabilistic collision prediction and reward shaping are being used to develop safer and more socially aware agents. Additionally, the paper explores multi-agent and decentralized control strategies, emphasizing the importance of scalable and efficient solutions for managing complex construction tasks.\n\nFinally, the survey addresses evaluation and safety analysis, covering benchmarking, real-world deployment, and verification frameworks. It highlights the challenges of testing and validating AI models in safety-critical scenarios, as well as the role of uncertainty-aware verification and probabilistic guarantees in ensuring system reliability. The paper also explores the potential of vision-language-action models and edge general intelligence in enabling more resilient and agile systems. These sections collectively provide a comprehensive understanding of the current state of research and its implications for future developments in computer vision for construction safety.\n\nThis survey paper contributes to the growing body of knowledge by offering a structured and in-depth analysis of the key technologies and methodologies used in computer vision for safety science and management in construction. It identifies critical research gaps, such as the need for more robust synthetic data generation, better integration of multimodal inputs, and improved verification techniques for safety-critical systems. By synthesizing the latest advancements and highlighting emerging trends, this work serves as a valuable reference for researchers and practitioners seeking to develop intelligent and reliable solutions for construction safety. The insights provided in this survey aim to foster further innovation and collaboration in the field, ultimately contributing to safer and more efficient construction practices.",
+      "stats": {
+        "char_count": 5293,
+        "word_count": 696,
+        "sentence_count": 26,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "3.1.1 Integrated multimodal architectures for real-time environmental understanding",
+      "level": 3,
+      "content": "Integrated multimodal architectures for real-time environmental understanding have emerged as a critical component in advancing autonomous systems, particularly in complex and dynamic environments. These architectures combine multiple sensory inputs, such as visual, thermal, and event-based data, to enhance perception accuracy and robustness. By integrating diverse modalities, the system can better handle challenging scenarios, such as varying lighting conditions, sensor failures, and occlusions. The fusion of these inputs enables the model to extract more comprehensive features, leading to improved detection of critical objects, accurate localization, and better differentiation between overlapping agents. This multi-modal approach is essential for real-time decision-making, where the system must process and interpret environmental cues efficiently and reliably.\n\nRecent advancements in multimodal fusion techniques have focused on improving the temporal and spatial alignment of heterogeneous data sources. Methods such as modality-specific encoders, cross-modal attention mechanisms, and hierarchical feature fusion have been proposed to enhance the integration of information. These techniques allow the system to dynamically adjust its focus based on the contextual relevance of different modalities, thereby improving the accuracy of region-sensitive tasks. Additionally, the use of arbitrary-shaped pixel-level visual prompts enables the model to selectively attend to relevant areas, reducing the impact of irrelevant background noise. This selective attention mechanism is particularly beneficial in tasks such as object detection, semantic segmentation, and scene understanding, where precise localization is crucial for safe and effective autonomous operation.\n\nThe development of real-time multimodal architectures also emphasizes the need for efficient computation and low-latency processing. Techniques such as lightweight neural network designs, model compression, and hardware acceleration are employed to ensure that the system can operate within strict time constraints. Furthermore, the integration of these architectures with adaptive decision-making frameworks allows the autonomous system to respond dynamically to changing environmental conditions. This synergy between perception and action is vital for achieving reliable performance in real-world scenarios, where the system must continuously adapt to unpredictable and evolving situations. As research in this area progresses, the focus remains on enhancing the robustness, efficiency, and generalizability of multimodal systems for autonomous applications.",
+      "stats": {
+        "char_count": 2645,
+        "word_count": 338,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.1.2 Dynamic feedback mechanisms for adaptive vision-language models",
+      "level": 3,
+      "content": "Dynamic feedback mechanisms play a critical role in enabling vision-language models (VLMs) to adapt to evolving input conditions and maintain performance across diverse tasks. These mechanisms involve continuous interaction between the model and its environment, allowing it to refine predictions and adjust internal representations based on real-time data. By incorporating feedback loops, models can dynamically recalibrate their outputs, ensuring alignment with changing contextual cues and semantic structures. This adaptability is particularly important in scenarios where input modalities, such as video or sensor data, exhibit temporal variations or uncertainties. The integration of such feedback mechanisms enhances the robustness of VLMs, enabling them to respond more effectively to complex and ambiguous inputs.\n\nA key component of dynamic feedback mechanisms is the use of auxiliary signals or prompts that guide the model's understanding of temporal and spatial relationships. For instance, number prompts can be overlaid on video frames to implicitly encode temporal positions, helping the model associate semantic events with specific time segments [1]. These prompts act as visual cues that do not require architectural modifications or additional training objectives, making them a lightweight yet effective method for improving temporal reasoning. Additionally, specialized tokens, such as the ${ < } \\mathrm { S E G } >$ token, can be introduced to facilitate pixel-wise segmentation, allowing the model to better align visual and linguistic information. Such strategies enable VLMs to handle multimodal inputs more coherently and adaptively.\n\nBeyond static prompts, dynamic feedback mechanisms also involve recurrent and iterative processing to maintain temporal consistency and refine predictions over time. Techniques like the Temporal Consistency Correction (TCC) module utilize deformable convolutions and shifted window self-attention to align frames and capture temporal correlations [2]. These modules operate in a recurrent manner, where each output depends not only on the current input but also on previously processed frames. This iterative refinement ensures that the model preserves essential features while adapting to dynamic changes in the input. By embedding such mechanisms, adaptive VLMs can achieve more accurate and contextually relevant outputs, particularly in applications requiring real-time decision-making and continuous learning.",
+      "stats": {
+        "char_count": 2478,
+        "word_count": 342,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.1 Anomaly-aware data synthesis for robust model training",
+      "level": 3,
+      "content": "Anomaly-aware data synthesis plays a critical role in enhancing the robustness of models trained for safety-critical applications such as autonomous driving. Traditional data generation methods often fail to account for the complex and dynamic nature of anomalies, leading to models that struggle with out-of-distribution scenarios. To address this, recent approaches focus on incorporating anomaly characteristics into synthetic data generation pipelines, ensuring that models are exposed to a wide range of abnormal behaviors during training. This not only improves the generalization capability of models but also enhances their ability to detect and respond to anomalies in real-world settings.\n\nThe synthesis process typically involves generating data that reflects both normal and abnormal conditions, leveraging techniques such as generative adversarial networks (GANs), diffusion models, and hybrid approaches that combine physical simulations with learned representations. These methods aim to capture the temporal and spatial dynamics of anomalies, ensuring that the generated data is not only visually realistic but also semantically meaningful. By integrating anomaly-aware prompts and constraints, synthetic data can be tailored to emphasize rare but critical events, thereby improving the model's sensitivity to such cases without overfitting to common patterns.\n\nFurthermore, anomaly-aware data synthesis is often coupled with quality control mechanisms to ensure the reliability of generated samples. Techniques such as confidence-based filtering and consistency checks help eliminate low-quality or misleading data, maintaining the integrity of the training set. This approach not only enhances the effectiveness of model training but also reduces the need for extensive manual annotation, making the process more scalable and cost-effective. Overall, anomaly-aware data synthesis represents a key enabler for developing robust and reliable models in complex and safety-critical domains.",
+      "stats": {
+        "char_count": 2004,
+        "word_count": 271,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.2.2 Pose-driven and context-aware data augmentation techniques",
+      "level": 3,
+      "content": "Pose-driven and context-aware data augmentation techniques have emerged as critical strategies to enhance the robustness and generalization of computer vision models, particularly in safety-critical applications such as autonomous driving. These methods leverage pose information, such as human or vehicle postures, to guide the generation of synthetic data that preserves spatial and semantic relationships. By incorporating pose cues, the augmentation process ensures that generated samples maintain structural consistency, which is essential for tasks requiring accurate localization and interaction modeling. This approach not only increases the diversity of training data but also improves the model's ability to handle occlusions, varying viewpoints, and complex scene configurations, making it highly suitable for real-world deployment.\n\nContext-aware augmentation extends the concept by integrating environmental and semantic context into the data generation process. This involves using arbitrary-shaped pixel-level visual prompts to guide the model's attention toward relevant regions, thereby enhancing its capacity to filter out noise and irrelevant background elements [1]. Such techniques are particularly beneficial for region-sensitive tasks, such as detecting minor objects or differentiating between overlapping agents. By aligning the augmentation process with the contextual semantics of the scene, models can achieve higher accuracy and reliability, even in challenging scenarios with limited or ambiguous visual cues. This synergy between pose and context ensures that the generated data is both realistic and semantically meaningful, supporting more effective learning and generalization.\n\nFurthermore, these techniques are often combined with advanced generative models, such as diffusion-based architectures, to synthesize high-fidelity training samples. By conditioning the generation process on pose and contextual features, these models can produce diverse yet structurally consistent data that reflects real-world variations. This not only mitigates the limitations of small or imbalanced datasets but also enhances the model's adaptability to unseen scenarios. The integration of quality control mechanisms, such as automated filtering based on learned features, further ensures the reliability of augmented data. Overall, pose-driven and context-aware augmentation represents a powerful approach to improving model performance in complex, dynamic environments.",
+      "stats": {
+        "char_count": 2491,
+        "word_count": 324,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.1 Temporal grounded visual question answering for urban environments",
+      "level": 3,
+      "content": "Temporal grounded visual question answering (VQA) in urban environments represents a critical advancement in the intersection of computer vision, natural language processing, and autonomous systems. This task requires models to not only understand the visual content of a scene but also to reason about its temporal dynamics and spatial relationships. In urban settings, where complex interactions between vehicles, pedestrians, and infrastructure occur, the ability to answer questions grounded in both time and space is essential for safety-critical applications. Recent approaches leverage multimodal architectures that integrate visual, linguistic, and temporal information to provide accurate and context-aware responses [3]. These models often incorporate attention mechanisms and temporal modeling techniques to track object movements and infer event sequences, enabling a deeper understanding of dynamic urban scenes.\n\nThe development of temporal grounded VQA systems is closely tied to the availability of high-quality, annotated datasets that capture the spatiotemporal complexity of real-world environments. Such datasets typically include video sequences with frame-level annotations, pixel-wise object labels, and question-answer pairs that test a model's ability to reason over time. These benchmarks are crucial for evaluating the performance of VQA models in tasks such as accident description, event localization, and region-level reasoning. Additionally, the integration of synthetic data generation techniques, such as those derived from simulation environments like CARLA, has enabled the creation of diverse and scalable datasets that enhance model robustness and generalization. These efforts have significantly advanced the field, allowing researchers to explore more sophisticated models that can handle the challenges of real-world urban driving.\n\nDespite these advancements, temporal grounded VQA in urban environments remains a challenging problem due to the high variability and uncertainty inherent in real-world scenarios. Factors such as changing lighting conditions, occlusions, and sensor noise can severely impact model performance. To address these issues, recent work has focused on improving temporal consistency, enhancing spatial reasoning, and incorporating domain-specific knowledge into the model architecture. Techniques such as state space models, multi-scale feature fusion, and temporal refinement mechanisms have been proposed to improve the accuracy and reliability of VQA systems. As the field continues to evolve, the integration of these methods with large-scale, annotated datasets will be essential for achieving robust and interpretable models capable of supporting autonomous systems in complex urban settings.",
+      "stats": {
+        "char_count": 2765,
+        "word_count": 369,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "3.3.2 Risk field evolution and trajectory planning with spatial-temporal coupling",
+      "level": 3,
+      "content": "The integration of spatial-temporal coupling in risk field evolution and trajectory planning represents a critical advancement in autonomous systems, particularly in dynamic environments such as urban traffic and aviation. Traditional models often fail to account for the interplay between spatial and temporal dimensions, leading to suboptimal or unsafe decisions. By introducing a three-dimensional spatial-temporal risk field (STRF) model, this work establishes a framework that quantifies the evolving risk posed by dynamic obstacles through a spatial-temporal distance index [4]. This approach enables more accurate modeling of risk fields by leveraging real-world trajectory data, calibrated using dynamic risk balance theory, thus enhancing the predictive capabilities of autonomous systems in complex scenarios.\n\nTo achieve robust trajectory planning, a STRF-based framework is proposed that integrates spatial-temporal risk occupancy maps with dynamic iterative sampling techniques [4]. This method generates candidate trajectories by considering both current and future risk distributions, ensuring that decisions are not only locally optimal but also globally safe. The framework emphasizes the importance of foresight in autonomous navigation, allowing systems to anticipate and mitigate potential hazards before they occur. This is particularly crucial in environments where the spatial and temporal dynamics of obstacles can change rapidly, requiring continuous adaptation and real-time decision-making.\n\nThe development of such models also highlights the limitations of conventional left-to-right generation paradigms, which often neglect global spatial relationships and future implications. By incorporating spatial-temporal coupling, the proposed approach enables more comprehensive scene understanding, leading to improved decision-making in safety-critical situations. This shift towards integrated spatial-temporal reasoning not only enhances the reliability of autonomous systems but also paves the way for more sophisticated and adaptive planning algorithms in real-world applications.",
+      "stats": {
+        "char_count": 2108,
+        "word_count": 271,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.1 Safe motion planning with probabilistic collision prediction",
+      "level": 3,
+      "content": "Safe motion planning with probabilistic collision prediction is a critical component in ensuring reliable navigation for autonomous systems, particularly in dynamic and uncertain environments [5]. This approach leverages probabilistic models to estimate the likelihood of collisions, enabling the system to proactively adjust its trajectory and avoid hazardous situations. By integrating these predictions into the planning process, the system can balance exploration and safety, leading to more robust and adaptive behaviors. Probabilistic collision prediction often relies on sensor data, such as depth maps or LiDAR, to infer the spatial distribution of obstacles and their potential movements, providing a foundation for real-time decision-making.\n\nRecent methods in this area have explored various techniques to enhance the accuracy and efficiency of collision prediction. These include the use of deep learning models, such as convolutional neural networks and transformers, to process multi-modal sensor inputs and generate predictive distributions over future states. Additionally, the integration of temporal reasoning and uncertainty quantification allows for more reliable predictions in scenarios with moving obstacles or changing environments. By incorporating these elements, systems can better anticipate potential conflicts and adjust their motion plans accordingly, improving overall safety and performance.\n\nThe challenge lies in effectively combining collision prediction with motion planning in a way that maintains computational efficiency while ensuring safety guarantees [5]. This requires careful design of the reward function, the integration of safety constraints, and the use of optimization techniques that account for uncertainty. Approaches such as Lagrangian relaxation and constrained policy optimization have been employed to balance the trade-off between reward maximization and safety, enabling the system to operate in complex, real-world settings with minimal risk of failure.",
+      "stats": {
+        "char_count": 2013,
+        "word_count": 270,
+        "sentence_count": 11,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.1.2 Reward shaping for socially aware and human-centric behavior",
+      "level": 3,
+      "content": "Reward shaping plays a critical role in guiding agents toward socially aware and human-centric behaviors by encoding domain-specific knowledge into the learning process. Traditional reward functions are often state-centric, focusing on immediate progress and efficiency, but fail to account for the nuanced social and psychological aspects of human interaction. To address this, researchers have introduced reward structures that incorporate social norms, safety constraints, and human comfort metrics. These rewards are designed to encourage behaviors that are not only task-effective but also socially acceptable, such as maintaining appropriate spatial proximity, avoiding abrupt movements, and adhering to implicit social cues. By embedding such considerations into the reward formulation, agents can learn to navigate complex human environments with greater sensitivity and adaptability.\n\nThe challenge in shaping such rewards lies in balancing competing objectives, such as task completion, safety, and social acceptability, while ensuring the learning process remains stable and efficient. This requires careful design of reward components that reflect the multi-faceted nature of human-centric interactions. For instance, submodular reward functions have been proposed to model diminishing returns in exploration, ensuring that agents do not over-optimize for short-term gains at the expense of long-term social harmony. Additionally, incorporating historical trajectory information into reward computation allows agents to evaluate their actions in the context of past interactions, leading to more coherent and socially aware decision-making. These approaches help bridge the gap between purely task-driven policies and those that align with human expectations and values.\n\nRecent advancements in reward shaping have also leveraged symbolic reasoning and cognitive models to encode human-like decision-making patterns. Frameworks such as SCORE integrate motivational drivers derived from human behavior studies into the reward structure, enabling agents to mimic natural social interactions. This human-inspired approach enhances the interpretability and generalizability of the learned policies, allowing them to adapt to diverse and dynamic social contexts. By combining these insights with traditional reinforcement learning techniques, researchers are making significant strides toward developing agents that not only perform tasks effectively but also interact with humans in a safe, intuitive, and socially intelligent manner.",
+      "stats": {
+        "char_count": 2542,
+        "word_count": 338,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.1 Interleaved single-agent training for scalable multi-agent systems",
+      "level": 3,
+      "content": "Interleaved single-agent training has emerged as a promising approach to address the scalability and efficiency challenges in multi-agent reinforcement learning (MARL). This method transforms the complex multi-agent problem into a sequence of single-agent learning tasks by sequentially updating individual agents while maintaining a shared environment. By decoupling the training process, it reduces the computational burden associated with coordinating multiple agents simultaneously, enabling more efficient resource utilization. This approach is particularly beneficial in large-scale systems where agents may have varying model sizes, data schedules, and update budgets, as it allows for flexible and heterogeneous training configurations. The key advantage lies in its ability to maintain the integrity of individual agent policies while leveraging the collective dynamics of the multi-agent system.\n\nThe interleaved training framework also facilitates the integration of diverse learning strategies and improves the stability of the overall training process. By isolating agent updates, it mitigates the non-stationarity issues commonly encountered in traditional MARL, where the environment is constantly changing due to the simultaneous updates of multiple agents. This leads to more predictable and controllable learning dynamics, which is critical for achieving consistent performance in real-world applications. Furthermore, the framework supports the use of different reward structures and safety constraints for individual agents, allowing for tailored optimization that aligns with specific task requirements. This flexibility makes it well-suited for complex, dynamic environments where agents must adapt to changing conditions while maintaining system-wide coordination.\n\nRecent advancements in interleaved single-agent training have demonstrated its effectiveness in achieving scalable and stable multi-agent systems. By reducing the memory and computational overhead associated with concurrent multi-agent updates, this approach enables the deployment of large-scale agent networks without compromising performance. The ability to handle heterogeneous agents and varying update frequencies further enhances its applicability across a wide range of domains, from autonomous vehicle coordination to distributed robotics. As research in this area continues to evolve, the interleaved training paradigm is expected to play a central role in advancing the scalability and practicality of multi-agent systems in real-world scenarios.",
+      "stats": {
+        "char_count": 2546,
+        "word_count": 332,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.2.2 Sparse sensor fusion for perception and planning in constrained environments",
+      "level": 3,
+      "content": "Sparse sensor fusion for perception and planning in constrained environments has emerged as a critical area of research, driven by the need for robust and efficient autonomous systems in complex scenarios. Traditional fusion approaches often struggle with computational overhead and data redundancy, particularly in environments where sensor inputs are limited or noisy. Sparse sensor fusion addresses these challenges by leveraging compressed representations of sensor data, enabling more efficient processing while retaining essential information for perception and decision-making. This approach is particularly beneficial in constrained settings, such as cluttered indoor spaces or narrow passageways, where accurate and timely environmental awareness is crucial for safe navigation and task execution.\n\nRecent advancements in sparse fusion have focused on integrating multiple modalities, including vision, LiDAR, and proprioception, to enhance perception accuracy and planning efficiency [6]. Techniques such as query-based fusion frameworks and symmetric sparse perception modules have demonstrated improved performance in tasks like 3D detection, multi-object tracking, and motion forecasting. These methods often employ compact encoders and selective state-space models to optimize the fusion process, ensuring that only relevant features are retained for downstream planning. By reducing the computational burden, sparse sensor fusion allows for real-time adaptability, which is essential for dynamic and safety-critical applications.\n\nFurthermore, the integration of sparse representations into planning algorithms has led to more resilient and interpretable control policies. Approaches such as model-based SafeRL frameworks and hybrid control strategies combine offline planning with reactive execution, ensuring that decisions are both behaviorally plausible and responsive to environmental changes. These techniques are particularly effective in scenarios where sensor data is sparse or incomplete, as they enable the system to maintain performance while minimizing the risk of collisions or unsafe actions. Overall, sparse sensor fusion represents a promising direction for enhancing the autonomy and reliability of robotic systems in constrained environments.",
+      "stats": {
+        "char_count": 2276,
+        "word_count": 298,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.1 Curriculum-based reinforcement learning with knowledge retrieval",
+      "level": 3,
+      "content": "Curriculum-based reinforcement learning (CRL) has emerged as a powerful paradigm for training agents in complex and dynamic environments by progressively increasing task difficulty. When integrated with knowledge retrieval, CRL leverages external information sources to guide the learning process, ensuring that agents acquire relevant skills in a structured manner. This approach is particularly effective in scenarios where the environment is highly variable or where prior knowledge can significantly accelerate learning. By systematically introducing new challenges and incorporating retrieved knowledge, the agent can build upon previously learned policies, leading to more robust and generalizable behavior. The use of knowledge retrieval also allows for the integration of domain-specific information, which can enhance the agent's understanding of the task and improve decision-making.\n\nIn practice, curriculum design in CRL with knowledge retrieval involves defining a sequence of tasks that gradually increase in complexity, while dynamically selecting and integrating relevant knowledge from external databases or models. This process ensures that the agent is not overwhelmed by the full complexity of the environment from the outset. The retrieval mechanism can be based on semantic similarity, task relevance, or learned representations, enabling the agent to access and apply prior knowledge effectively. Furthermore, the combination of CRL and knowledge retrieval can be enhanced through reward shaping, where retrieved knowledge is used to construct more informative and stable reward signals. This synergy facilitates faster convergence and more reliable policy learning, especially in domains where explicit reward signals are sparse or noisy.\n\nThe integration of knowledge retrieval into CRL also enables agents to adapt to new tasks or environments with minimal additional training. By leveraging pre-existing knowledge, the agent can generalize more effectively and reduce the need for extensive retraining. This is particularly valuable in real-world applications where the environment is constantly changing or where data collection is expensive or impractical. Additionally, the use of knowledge retrieval can help address issues related to exploration and sample efficiency, as the agent can use retrieved information to guide its actions and avoid suboptimal policies. Overall, curriculum-based reinforcement learning with knowledge retrieval represents a promising direction for developing intelligent and adaptive agents capable of handling complex, real-world challenges.",
+      "stats": {
+        "char_count": 2601,
+        "word_count": 354,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "4.3.2 Symbolic cognitive reasoning for context-aware decision making",
+      "level": 3,
+      "content": "Symbolic cognitive reasoning plays a pivotal role in enabling context-aware decision making by integrating high-level semantics and structured knowledge into the decision-making process. Unlike purely data-driven approaches, symbolic reasoning leverages explicit representations of the environment, such as predicates, rules, and logical constraints, to guide actions in a more interpretable and robust manner. This approach is particularly valuable in complex, dynamic scenarios where the agent must reason about multiple interdependent factors, such as safety, task objectives, and environmental constraints. By encoding domain-specific knowledge and cognitive models, symbolic reasoning allows agents to make decisions that align with human-like reasoning patterns, enhancing adaptability and generalization across diverse contexts.\n\nRecent advancements in symbolic cognitive reasoning have focused on embedding human-inspired motivational drivers and semantic predicates into decision-making frameworks. For instance, frameworks like SCORE utilize symbolic models derived from human behavior studies to generate context-aware head orientations, demonstrating the potential of symbolic reasoning in achieving zero-shot generalization [7]. Similarly, models such as ORION integrate vision-language reasoning with trajectory planning, enabling the agent to interpret instructions and generate actions that align with both semantic and spatial constraints [8]. These approaches highlight the importance of combining symbolic reasoning with deep learning techniques to achieve more transparent and controllable decision-making processes, particularly in safety-critical applications.\n\nThe integration of symbolic cognitive reasoning with reinforcement learning and planning algorithms has also shown promise in improving the interpretability and safety of autonomous systems. Techniques such as Semantic Dynamics Models (SDMs) and safety modules enhance the agent’s ability to anticipate hazards and make decisions that balance task performance with safety requirements. By incorporating symbolic representations of the environment, these methods enable agents to reason about future states and potential risks, leading to more informed and reliable decision-making. As the field continues to evolve, the synergy between symbolic reasoning and data-driven approaches is expected to drive significant progress in developing context-aware, human-centric autonomous systems.",
+      "stats": {
+        "char_count": 2470,
+        "word_count": 311,
+        "sentence_count": 12,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.1 Multi-modal task evaluation through challenge tracks and edge device testing",
+      "level": 3,
+      "content": "Multi-modal task evaluation through challenge tracks and edge device testing has emerged as a critical approach for assessing the performance of intelligent systems in complex, real-world scenarios. These evaluations often involve structured competition frameworks, such as the 2025 Challenge, which expanded the scope of tasks to include multi-modal sensor data analysis in traffic scenes and high-fidelity synthetic videos. By imposing real-time or near-real-time constraints, such challenges push the boundaries of algorithmic efficiency and robustness, ensuring that systems can operate effectively under dynamic and uncertain conditions. The use of partially held-out test sets and submission limits further enhances the reliability of benchmarking, promoting reproducibility and preventing overfitting to specific datasets.\n\nEdge device testing plays a pivotal role in evaluating the practical viability of multi-modal systems, particularly in scenarios where computational resources are constrained. Unlike cloud-based solutions, edge devices require algorithms to be optimized for low latency, energy efficiency, and real-time processing. This necessitates the development of lightweight models that can handle multi-modal inputs, such as visual, auditory, and haptic data, while maintaining high accuracy. The integration of edge intelligence with multi-modal tasks is still evolving, with many systems excelling in isolated functions but lacking the cognitive depth needed for autonomous decision-making in complex environments [9]. Challenges such as computational bottlenecks and real-time planning constraints remain significant barriers to widespread deployment.\n\nTo address these challenges, researchers have proposed frameworks that combine multi-modal perception with edge computing, enabling systems to process and interpret diverse data streams efficiently. These approaches often involve semantic mapping, context-aware planning, and robust navigation strategies, as demonstrated by frameworks like OrionNav and VLMap. Additionally, scenario-based testing has been employed to evaluate autonomous mobile robots (AMRs) under various human-robot interaction conditions, ensuring that systems can adapt to unpredictable environments [10]. By incorporating diverse metrics and generating requirement-violating test scenarios, these evaluations help uncover behavioral uncertainties and improve the reliability of multi-modal systems in real-world applications.",
+      "stats": {
+        "char_count": 2476,
+        "word_count": 315,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.1.2 Empirical analysis of AI perception in safety-critical scenarios",
+      "level": 3,
+      "content": "Empirical analysis of AI perception in safety-critical scenarios reveals significant challenges and opportunities in deploying intelligent systems within environments where reliability and precision are paramount. Studies have shown that traditional AI approaches often struggle with generalization in out-of-distribution conditions, limiting their applicability in dynamic and unpredictable settings. This fragility is exacerbated in safety-critical domains such as autonomous driving, robotic surgery, and aircraft control, where the inability to accurately model and verify visual signals can lead to catastrophic failures [11]. The integration of deep vision models into closed-loop systems has improved perception capabilities, yet the verification of these systems remains a formidable challenge due to their complex and non-deterministic nature [11].\n\nRecent advancements in agentic AI and world models have introduced new paradigms for enhancing perception and decision-making in complex environments. Systems like Meta’s V-JEPA v2 demonstrate the potential of leveraging internal world models to anticipate future outcomes and make strategic decisions. These approaches are particularly valuable in scenarios requiring adaptability and anticipatory reasoning. However, empirical validation of such systems in real-world safety-critical applications is still in its early stages, with limited studies addressing the robustness of these models under varying environmental conditions and sensor constraints. The need for comprehensive testing frameworks that account for both simulation and real-world deployment remains a critical research gap.\n\nIn safety-critical applications, the ability of AI to perceive and interpret human behavior is equally important. Vision-Language Models (VLMs) have shown promise in analyzing textual requirements and generating realistic scenarios, which is crucial for testing and validation [10]. However, the variability of human behavior across different environments necessitates adaptive and context-aware perception systems. Simulation-based testing has emerged as a viable alternative to real-world trials, offering a safer and more cost-effective method for evaluating AI perception systems. Despite these advances, the empirical evaluation of AI perception in safety-critical scenarios continues to face challenges related to scenario realism, generalization, and the integration of human-like perceptual biases for improved performance.",
+      "stats": {
+        "char_count": 2484,
+        "word_count": 321,
+        "sentence_count": 14,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.1 Uncertainty-aware verification through interval Markov decision processes",
+      "level": 3,
+      "content": "Uncertainty-aware verification through interval Markov decision processes (IMDPs) provides a structured framework for analyzing and ensuring the reliability of intelligent systems under partial observability and dynamic uncertainties. By incorporating confidence intervals derived from neural perception models, IMDPs abstract the system's behavior into a probabilistic state transition model that accounts for potential variations in sensor readings and environmental conditions. This abstraction enables the formal verification of system-level properties, such as safety and liveness, by overapproximating the true system dynamics with a specified confidence level. The resulting IMDP representation allows for rigorous analysis of worst-case scenarios while maintaining computational tractability, making it particularly suitable for safety-critical applications where uncertainty must be explicitly quantified and managed.\n\nThe verification process involves checking temporal properties on the constructed IMDP using probabilistic model checkers, which compute bounds on the likelihood of property violations. This approach provides a frequentist-style guarantee, ensuring that the system adheres to specified requirements with a high degree of confidence. By integrating uncertainty quantification into the verification pipeline, IMDPs address limitations of traditional verification methods that assume deterministic or fully observable environments. This is especially important in dynamic and unstructured settings where sensor noise, environmental changes, and partial observability can significantly impact system behavior. The ability to reason about uncertainty during verification enhances the robustness of intelligent control systems, enabling them to operate reliably in real-world conditions where perfect information is rarely available.\n\nFurthermore, the use of IMDPs facilitates the development of adaptive and resilient control strategies by explicitly modeling the trade-offs between exploration and exploitation under uncertainty. This is critical in applications such as autonomous navigation, robotic manipulation, and human-robot collaboration, where decisions must be made with incomplete or noisy information. The formal guarantees provided by IMDP-based verification offer a foundation for building trust in intelligent systems, particularly in safety-critical domains where failure can have severe consequences. As the complexity of autonomous systems continues to grow, the integration of uncertainty-aware verification techniques like IMDPs becomes essential for ensuring their reliability, adaptability, and compliance with safety and performance standards.",
+      "stats": {
+        "char_count": 2690,
+        "word_count": 336,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.2.2 Probabilistic guarantees for model-based safety analysis",
+      "level": 3,
+      "content": "Probabilistic guarantees for model-based safety analysis provide a rigorous framework for quantifying and managing uncertainties in autonomous systems. These guarantees are essential in environments where safety-critical decisions must be made under partial observability and dynamic conditions. By leveraging probabilistic models, such as Bayesian networks or Gaussian processes, the system can estimate the likelihood of various outcomes and ensure that safety constraints are met with a high degree of confidence. This approach enables the identification of risk thresholds and the formulation of safety margins that account for model inaccuracies and environmental variability. The integration of probabilistic reasoning into model-based safety analysis allows for more adaptive and resilient systems, particularly in scenarios where traditional deterministic methods fall short.\n\nA key aspect of probabilistic guarantees is their ability to support real-time decision-making while maintaining safety constraints. This is achieved through the use of stochastic simulation and predictive modeling, which allow the system to anticipate potential failures and adjust its behavior accordingly. For example, in autonomous navigation, probabilistic models can predict the likelihood of obstacles appearing in the path and compute the safest trajectory based on these predictions. Additionally, these guarantees facilitate the verification of safety properties through formal methods, such as probabilistic model checking, which can analyze the system's behavior under a range of uncertain conditions. This ensures that safety requirements are not only met in nominal scenarios but also in the presence of unexpected events or model discrepancies.\n\nThe application of probabilistic guarantees in model-based safety analysis is particularly valuable in complex, high-stakes environments where the consequences of failure are severe. By incorporating uncertainty quantification into the safety analysis process, these guarantees enable more reliable and interpretable safety assessments. They also support the development of adaptive safety protocols that can evolve with the system's operational context. This is crucial for applications such as autonomous vehicles, industrial robotics, and aerospace systems, where the ability to reason about and respond to uncertainty is critical for safe operation. Overall, probabilistic guarantees offer a robust and flexible approach to ensuring safety in systems that operate under uncertainty and dynamic conditions.",
+      "stats": {
+        "char_count": 2555,
+        "word_count": 344,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.1 Vision-language-action models for resilient and agile systems",
+      "level": 3,
+      "content": "Vision-language-action (VLA) models represent a critical advancement in the development of resilient and agile autonomous systems, integrating visual perception, language understanding, and action generation to enable more intuitive and adaptive human-robot interaction [12]. These models are designed to interpret complex, natural language instructions, perceive dynamic environments through visual sensors, and generate precise, context-aware motor actions. By bridging the gap between high-level semantic commands and low-level control signals, VLAs facilitate seamless operation in unstructured and high-risk environments, such as disaster response or industrial automation. Their ability to process multimodal inputs and generate actionable outputs enhances system adaptability, allowing robots to respond to changing conditions with greater autonomy and efficiency.\n\nThe integration of VLA models into robotic systems has significant implications for tasks requiring both spatial reasoning and semantic interpretation. For instance, in search and rescue operations, VLAs can process verbal commands from operators, interpret visual scenes to identify obstacles or victims, and execute precise manipulator actions to clear debris or retrieve objects. This capability is particularly valuable in scenarios where traditional control interfaces, such as joysticks, are insufficient due to limited situational awareness or complex task requirements. Furthermore, VLAs support real-time decision-making by combining environmental perception with linguistic context, enabling robots to navigate and interact with their surroundings in a more human-like manner. This synergy between vision, language, and action is essential for achieving resilience in unpredictable and dynamic settings.\n\nRecent advancements in VLA research have focused on improving the robustness and generalizability of these models through enhanced training methodologies and more sophisticated architectures. Techniques such as multi-modal pre-training, reinforcement learning, and environment simulation have been employed to refine the ability of VLAs to handle diverse and challenging scenarios. Additionally, the incorporation of haptic feedback and real-time environmental adaptation further strengthens their applicability in agile systems. As these models continue to evolve, they hold great promise for transforming autonomous systems into more intelligent, responsive, and reliable entities capable of operating in complex, human-centric environments.",
+      "stats": {
+        "char_count": 2531,
+        "word_count": 323,
+        "sentence_count": 13,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "5.3.2 Edge general intelligence through world models and agent orchestration",
+      "level": 3,
+      "content": "Edge general intelligence (EGI) represents a paradigm shift in the design of edge computing systems, aiming to endow them with cognitive capabilities akin to those of cloud-based artificial intelligence [9]. At the core of EGI lies the concept of world models, which serve as the cognitive core of edge systems, enabling foresight, reasoning, and long-term planning [9]. These models simulate the environment and predict potential outcomes, allowing edge agents to make informed decisions without constant reliance on centralized resources. By integrating world models with agent orchestration, EGI facilitates the coordination of multiple autonomous entities, enhancing their collective adaptability and efficiency in dynamic, multi-modal settings. This approach addresses the limitations of traditional task-specific edge solutions, which lack the flexibility and depth required for complex, real-world applications.\n\nAgent orchestration plays a crucial role in realizing EGI by enabling the seamless interaction and collaboration of diverse AI agents. These agents, each equipped with specialized functions, operate within a unified framework that leverages world models to guide their actions and optimize overall system performance. The orchestration process involves dynamic task allocation, resource management, and decision-making, ensuring that each agent contributes effectively to the system's objectives. By combining the predictive power of world models with the flexibility of agent-based systems, EGI supports robust, scalable, and context-aware edge computing. This integration not only enhances the autonomy of individual agents but also improves the system's resilience to environmental uncertainties and operational constraints.\n\nRecent advancements in EGI have focused on improving the scalability and generalization of world models, as well as refining the mechanisms for agent coordination. Researchers have explored various architectures, including modular and hierarchical designs, to balance computational efficiency with cognitive depth. Additionally, the development of decentralized control strategies has enabled edge systems to operate effectively in environments with limited connectivity and high variability. These innovations are critical for applications such as industrial automation, autonomous monitoring, and real-time decision-making in complex scenarios. As EGI continues to evolve, it holds the potential to transform edge computing by enabling intelligent, adaptive, and human-like decision-making at the periphery of the network [9].",
+      "stats": {
+        "char_count": 2577,
+        "word_count": 343,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "6 Future Directions",
+      "level": 1,
+      "content": "Despite significant progress in the application of computer vision to safety science and management in construction, several limitations and gaps remain that hinder the widespread deployment and effectiveness of these systems. One major limitation is the insufficient robustness of current models in handling real-world variability, such as dynamic lighting, occlusions, and sensor noise, which can lead to unreliable performance in critical safety scenarios. Additionally, the integration of multimodal data—such as visual, thermal, and event-based inputs—remains challenging due to the lack of standardized frameworks and efficient fusion mechanisms that can handle heterogeneous data sources in real time. Furthermore, the verification and validation of safety-critical systems are still underdeveloped, with limited methodologies available to ensure the reliability and generalization of AI models in unpredictable environments. These gaps highlight the need for further research to address the limitations of existing approaches and enable more dependable and scalable solutions for construction safety.\n\nTo address these challenges, future research should focus on developing more robust and generalizable models through advanced synthetic data generation techniques that better capture the complexity of real-world environments. This includes the creation of anomaly-aware and context-sensitive data synthesis pipelines that can simulate rare but critical safety events, enhancing model resilience and adaptability. Additionally, the development of efficient and scalable multimodal fusion architectures is essential, with a particular emphasis on lightweight and real-time processing to support on-site applications. Research should also explore novel verification frameworks that integrate probabilistic guarantees and uncertainty-aware analysis to ensure the reliability of AI systems in safety-critical domains. Furthermore, the integration of adaptive learning and edge computing technologies can enable real-time decision-making and reduce the computational burden on centralized systems, making vision-based safety solutions more practical and deployable.\n\nThe proposed future work has the potential to significantly advance the field of computer vision for construction safety, leading to more reliable, efficient, and adaptable systems. Enhanced synthetic data generation and multimodal integration will improve model generalization and robustness, ensuring that vision-based systems can operate effectively in complex and dynamic environments. The development of rigorous verification and validation frameworks will increase trust in AI-driven safety solutions, enabling their adoption in high-risk scenarios. Additionally, the integration of edge computing and adaptive learning will support real-time decision-making, making these systems more responsive and scalable. Overall, these advancements will contribute to safer construction practices, reduce the likelihood of accidents, and promote the use of intelligent systems for continuous environmental monitoring and risk management.",
+      "stats": {
+        "char_count": 3104,
+        "word_count": 400,
+        "sentence_count": 15,
+        "line_count": 5
+      }
+    },
+    {
+      "heading": "7 Conclusion",
+      "level": 1,
+      "content": "This survey paper provides a comprehensive overview of the application of computer vision in safety science and management within the construction domain, emphasizing the integration of multimodal sensing, spatiotemporal reasoning, and autonomous decision-making. The main findings highlight the effectiveness of vision-language models, synthetic data generation, and reinforcement learning in addressing critical safety challenges, such as real-time hazard detection, worker behavior monitoring, and risk prediction. The integration of multimodal architectures and dynamic feedback mechanisms has significantly improved the robustness and adaptability of computer vision systems in complex and unpredictable environments. Furthermore, advancements in spatiotemporal reasoning and risk modeling have enabled more accurate and context-aware decision-making, while reinforcement learning techniques have enhanced the autonomy and safety of intelligent systems. The paper also underscores the importance of edge computing and adaptive learning in achieving efficient and scalable on-site applications. These insights collectively demonstrate the transformative potential of computer vision in enhancing construction safety and operational efficiency.\n\nThe significance of this survey lies in its structured analysis of the current state of research, identifying key technologies, challenges, and opportunities in the field. By synthesizing the latest advancements and emerging trends, this work serves as a valuable reference for researchers and practitioners aiming to develop intelligent and reliable solutions for construction safety. It highlights critical research gaps, such as the need for more robust synthetic data generation, better integration of multimodal inputs, and improved verification techniques for safety-critical systems. These insights are essential for guiding future research and fostering innovation in the application of computer vision to construction safety. The survey also emphasizes the importance of interdisciplinary collaboration, as the integration of computer vision with domain-specific knowledge and safety protocols is crucial for achieving practical and impactful solutions.\n\nLooking ahead, further research should focus on enhancing the generalization and adaptability of computer vision systems in diverse and dynamic construction environments. There is a need for more rigorous evaluation frameworks that account for real-world uncertainties and safety constraints. Additionally, the development of scalable and efficient edge computing solutions will be vital for deploying intelligent systems on-site. Future efforts should also explore the integration of symbolic reasoning and human-centric design principles to improve the interpretability and safety of autonomous decision-making. By addressing these challenges, the field can continue to advance toward safer, more efficient, and more resilient construction practices. This survey not only summarizes current progress but also serves as a foundation for future innovations that will shape the next generation of intelligent safety systems in the construction industry.",
+      "stats": {
+        "char_count": 3165,
+        "word_count": 412,
+        "sentence_count": 17,
+        "line_count": 5
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "[1] SafePLUG  Empowering Multimodal LLMs with Pixel-Level Insight and  Temporal Grounding for Traffic Ac",
+      "number": null,
+      "title": "safeplug empowering multimodal llms with pixel-level insight and temporal grounding for traffic ac"
+    },
+    {
+      "text": "[2] UTA-Sign  Unsupervised Thermal Video Augmentation via Event-Assisted  Traffic Signage Sketching",
+      "number": null,
+      "title": "uta-sign unsupervised thermal video augmentation via event-assisted traffic signage sketching"
+    },
+    {
+      "text": "[3] Towards Effective MLLM Jailbreaking Through Balanced On-Topicness and  OOD-Intensity",
+      "number": null,
+      "title": "towards effective mllm jailbreaking through balanced on-topicness and ood-intensity"
+    },
+    {
+      "text": "[4] Spatial-temporal risk field-based coupled dynamic-static driving risk  assessment and trajectory pla",
+      "number": null,
+      "title": "spatial-temporal risk field-based coupled dynamic-static driving risk assessment and trajectory pla"
+    },
+    {
+      "text": "[5] SIGN  Safety-Aware Image-Goal Navigation for Autonomous Drones via  Reinforcement Learning",
+      "number": null,
+      "title": "sign safety-aware image-goal navigation for autonomous drones via reinforcement learning"
+    },
+    {
+      "text": "[6] LocoMamba  Vision-Driven Locomotion via End-to-End Deep Reinforcement  Learning with Mamba",
+      "number": null,
+      "title": "locomamba vision-driven locomotion via end-to-end deep reinforcement learning with mamba"
+    },
+    {
+      "text": "[7] How Does a Virtual Agent Decide Where to Look  -- Symbolic Cognitive  Reasoning for Embodied Head Ro",
+      "number": null,
+      "title": "how does a virtual agent decide where to look -- symbolic cognitive reasoning for embodied head ro"
+    },
+    {
+      "text": "[8] IRL-VLA  Training an Vision-Language-Action Policy via Reward World  Model",
+      "number": null,
+      "title": "irl-vla training an vision-language-action policy via reward world model"
+    },
+    {
+      "text": "[9] Edge General Intelligence Through World Models and Agentic AI   Fundamentals, Solutions, and Challen",
+      "number": null,
+      "title": "edge general intelligence through world models and agentic ai fundamentals, solutions, and challen"
+    },
+    {
+      "text": "[10] Vision Language Model-based Testing of Industrial Autonomous Mobile  Robots",
+      "number": null,
+      "title": "vision language model-based testing of industrial autonomous mobile robots"
+    },
+    {
+      "text": "[11] Towards Unified Probabilistic Verification and Validation of  Vision-Based Autonomy",
+      "number": null,
+      "title": "towards unified probabilistic verification and validation of vision-based autonomy"
+    },
+    {
+      "text": "[12] Toward General Physical Intelligence for Resilient Agile Manufacturing  Automation",
+      "number": null,
+      "title": "toward general physical intelligence for resilient agile manufacturing automation"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\InteractiveSurvey\\Computer Science\\survey_Computer Vision for Safety Science and Management in Construction_split.json",
+    "processed_date": "2025-12-30T20:33:39.432719",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}

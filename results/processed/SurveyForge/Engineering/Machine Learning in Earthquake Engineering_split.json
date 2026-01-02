@@ -1,0 +1,920 @@
+{
+  "outline": [
+    [
+      1,
+      "A Comprehensive Survey on Machine Learning in Earthquake Engineering"
+    ],
+    [
+      2,
+      "1 Introduction"
+    ],
+    [
+      2,
+      "2 Machine Learning Techniques for Seismic Data Analysis"
+    ],
+    [
+      3,
+      "2.1 Supervised Learning for Seismic Signal Classification and Regression"
+    ],
+    [
+      3,
+      "2.2 Unsupervised Learning for Seismic Data Clustering and Anomaly Detection"
+    ],
+    [
+      3,
+      "2.3 Deep Learning Architectures for Seismic Signal Processing"
+    ],
+    [
+      3,
+      "2.4 Transfer Learning and Semi-Supervised Methods in Seismic Data Analysis"
+    ],
+    [
+      2,
+      "3 Machine Learning in Seismic Hazard and Risk Assessment"
+    ],
+    [
+      3,
+      "3.1 Machine Learning for Ground Motion Prediction"
+    ],
+    [
+      3,
+      "3.2 Data-Driven Vulnerability Assessment of Structures"
+    ],
+    [
+      3,
+      "3.3 Integration with Probabilistic Seismic Hazard Analysis (PSHA)"
+    ],
+    [
+      3,
+      "3.4 Machine Learning for Early Warning Systems and Risk Mapping"
+    ],
+    [
+      3,
+      "3.5 Challenges and Opportunities in Data-Driven Risk Modeling"
+    ],
+    [
+      2,
+      "4 Structural Health Monitoring and Damage Detection"
+    ],
+    [
+      3,
+      "4.1 Sensor Networks and Real-Time Data Acquisition"
+    ],
+    [
+      3,
+      "4.2 Deep Learning for Damage Classification and Localization"
+    ],
+    [
+      3,
+      "4.3 Integration of Physics-Based Models with Machine Learning"
+    ],
+    [
+      3,
+      "4.4 Image and Signal Processing for Post-Earthquake Damage Assessment"
+    ],
+    [
+      3,
+      "4.5 Explainability and Interpretability in Damage Detection Models"
+    ],
+    [
+      3,
+      "4.6 Emerging Trends and Future Directions"
+    ],
+    [
+      2,
+      "5 Machine Learning for Seismic Response Prediction and Control"
+    ],
+    [
+      3,
+      "5.1 Machine Learning Models for Seismic Response Prediction"
+    ],
+    [
+      3,
+      "5.2 Data-Driven Simulation and Surrogate Modeling for Seismic Response"
+    ],
+    [
+      3,
+      "5.3 Real-Time Seismic Response Prediction and Adaptive Control"
+    ],
+    [
+      3,
+      "5.4 Integration of Machine Learning with Traditional Control Methods"
+    ],
+    [
+      3,
+      "5.5 Challenges and Limitations in Seismic Response Prediction and Control"
+    ],
+    [
+      2,
+      "6 Data-Driven Modeling and Simulation of Seismic Processes"
+    ],
+    [
+      3,
+      "6.1 Data-Driven Surrogate Modeling for Seismic Simulations"
+    ],
+    [
+      3,
+      "6.2 Physics-Informed Neural Networks for Seismic Modeling"
+    ],
+    [
+      3,
+      "6.3 Multi-Scale Data-Driven Modeling in Seismic Processes"
+    ],
+    [
+      3,
+      "6.4 Hybrid Models: Integrating Data-Driven and Physics-Based Approaches"
+    ],
+    [
+      3,
+      "6.5 Advanced Techniques for Enhancing Predictive Accuracy"
+    ],
+    [
+      2,
+      "7 Challenges, Limitations, and Future Research Directions"
+    ],
+    [
+      3,
+      "7.1 Data Scarcity, Quality, and Generalizability in Seismic Applications"
+    ],
+    [
+      3,
+      "7.2 Model Interpretability and Explainability in Critical Engineering Decisions"
+    ],
+    [
+      3,
+      "7.3 Integration of Physics-Based Models with Data-Driven Approaches"
+    ],
+    [
+      3,
+      "7.4 Emerging Trends and Technological Advancements"
+    ],
+    [
+      3,
+      "7.5 Computational Efficiency and Scalability"
+    ],
+    [
+      3,
+      "7.6 Ethical, Regulatory, and Societal Implications"
+    ],
+    [
+      2,
+      "8 Conclusion"
+    ],
+    [
+      2,
+      "References"
+    ]
+  ],
+  "content": [
+    {
+      "heading": "A Comprehensive Survey on Machine Learning in Earthquake Engineering",
+      "level": 1,
+      "content": "",
+      "stats": {
+        "char_count": 0,
+        "word_count": 0,
+        "sentence_count": 0,
+        "line_count": 1
+      }
+    },
+    {
+      "heading": "1 Introduction",
+      "level": 2,
+      "content": "The integration of Machine Learning (ML) into earthquake engineering represents a paradigm shift, driven by the increasing complexity of seismic systems and the limitations of conventional methods. Earthquake engineering, traditionally reliant on deterministic and empirical approaches, faces significant challenges in capturing the nonlinear, time-dependent, and uncertain behavior of structures under seismic loading. Conventional methods, such as empirical ground motion prediction equations (GMPEs) and physics-based finite element models, often struggle to account for the vast variability in site conditions, material properties, and structural responses [1]. These limitations have prompted a growing interest in data-driven approaches that leverage ML to enhance predictive accuracy, improve risk assessment, and enable real-time decision-making.\n\nMachine learning offers a powerful alternative by enabling the extraction of complex patterns from large-scale seismic data, which are often too intricate for traditional analytical techniques. Supervised learning algorithms, such as convolutional neural networks (CNNs) and recurrent neural networks (RNNs), have been successfully applied to tasks like earthquake detection, magnitude estimation, and structural health monitoring [2]. Unsupervised techniques, including clustering and autoencoders, are increasingly used to identify hidden patterns in seismic datasets, facilitating the discovery of unclassified events and anomalies [1]. Furthermore, deep learning models have demonstrated remarkable performance in predicting seismic responses and assessing structural vulnerability, reducing the reliance on computationally expensive simulations [3].\n\nDespite these advances, the application of ML in earthquake engineering is not without challenges. The scarcity and heterogeneity of seismic data, the black-box nature of many ML models, and the difficulty in incorporating domain-specific knowledge remain significant barriers. Recent efforts have focused on developing physics-informed neural networks (PINNs) that embed physical laws into the learning process, thereby improving the interpretability and generalizability of ML models [4]. Hybrid approaches that combine data-driven methods with physics-based simulations are also gaining traction, offering a more robust framework for seismic analysis [1].\n\nThe significance of integrating ML with engineering practices extends beyond mere computational efficiency. It facilitates the development of adaptive systems capable of real-time monitoring, early warning, and risk mitigation. For instance, ML-based early warning systems have shown promising results in estimating earthquake parameters and providing timely alerts [5]. Similarly, the use of ML in structural health monitoring (SHM) has enabled the detection of subtle damage indicators, improving the reliability of infrastructure assessments [6].\n\nAs the field continues to evolve, future research should focus on addressing the challenges of data scarcity, model interpretability, and the integration of ML with traditional engineering methodologies. By fostering interdisciplinary collaboration between data scientists and civil engineers, the next generation of ML models can be developed to better serve the needs of earthquake engineering, ultimately enhancing the resilience of critical infrastructure in seismic-prone regions.",
+      "stats": {
+        "char_count": 3408,
+        "word_count": 439,
+        "sentence_count": 18,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2.1 Supervised Learning for Seismic Signal Classification and Regression",
+      "level": 3,
+      "content": "Supervised learning has emerged as a cornerstone in seismic signal classification and regression, enabling the automated detection of earthquakes, estimation of magnitudes, and identification of seismic phases. These tasks rely on labeled seismic data to train models that can generalize across diverse seismic events and conditions. The success of supervised learning in this domain hinges on effective feature engineering, appropriate model selection, and strategies to address challenges such as class imbalance and data scarcity.\n\nFeature engineering remains a critical step in seismic signal processing, as raw seismic data often contain high-dimensional, noisy, and non-stationary information. Time-domain statistics, such as root-mean-square (RMS) and kurtosis, along with frequency-domain transforms like the Fast Fourier Transform (FFT) and wavelet coefficients, have been widely used to extract discriminative features [7]. These features capture the characteristics of seismic waves, enabling models to distinguish between different types of events. In recent years, deep learning has shown promise in automating this process, with convolutional neural networks (CNNs) capable of learning hierarchical features directly from raw waveforms [8].\n\nModel selection in supervised learning involves comparing traditional methods, such as decision trees, support vector machines (SVMs), and ensemble methods like random forests and gradient boosting, with deep learning architectures. While traditional models often require extensive feature engineering and may struggle with high-dimensional data, deep learning models such as recurrent neural networks (RNNs) and transformers excel in capturing temporal dependencies in seismic time series [9]. However, deep learning models demand large labeled datasets and substantial computational resources, which are not always available in seismic applications [10].\n\nHandling imbalanced datasets is another critical challenge in seismic signal classification, as earthquakes are rare events compared to ambient noise and non-earthquake signals. Techniques such as Synthetic Minority Over-sampling Technique (SMOTE), cost-sensitive learning, and threshold adjustment have been proposed to mitigate this issue [11]. These strategies help improve the model's ability to detect rare events while maintaining high overall accuracy.\n\nFinally, the integration of domain knowledge into supervised learning models can significantly enhance their interpretability and performance. For example, incorporating physical constraints or geological insights into the training process has been shown to improve the robustness of models, particularly in scenarios with limited data [12]. As the field progresses, future research will likely focus on developing more interpretable models, improving data efficiency, and leveraging transfer learning to generalize across different seismic regions and conditions.",
+      "stats": {
+        "char_count": 2939,
+        "word_count": 389,
+        "sentence_count": 16,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2.2 Unsupervised Learning for Seismic Data Clustering and Anomaly Detection",
+      "level": 3,
+      "content": "Unsupervised learning has emerged as a critical tool for seismic data analysis, offering the potential to uncover hidden structures and detect anomalies without reliance on labeled data. In the context of seismic data clustering and anomaly detection, these techniques are particularly valuable given the vast, heterogeneous, and often unlabeled nature of seismic datasets. Clustering algorithms such as k-means, DBSCAN, and hierarchical clustering are widely used to group seismic events based on waveform characteristics, allowing researchers to identify patterns that may not be evident through manual inspection [13]. These methods enable the discovery of previously unclassified events, which can inform broader understandings of seismic behavior and improve event categorization. For instance, DBSCAN has been shown to be particularly effective in identifying clusters of similar seismic events, even in the presence of noise, due to its ability to handle varying densities and detect outliers [14].\n\nAnomaly detection, another core application of unsupervised learning in seismic data, plays a crucial role in identifying unclassified events or noise that may be indicative of rare or unusual seismic phenomena. Techniques such as autoencoders, isolation forests, and one-class SVMs have been employed to detect anomalies by learning the underlying distribution of normal seismic signals and identifying deviations from this distribution [15]. Autoencoders, in particular, have gained popularity for their ability to reconstruct input data and identify anomalies through reconstruction error, which can be a powerful indicator of data irregularities. Isolation forests, on the other hand, are effective for high-dimensional data and can efficiently isolate anomalies by randomly selecting features and splitting the data, making them suitable for large seismic datasets [16]. One-class SVMs are also widely used for anomaly detection in seismic data, particularly when the majority of the data belong to a single class, and the goal is to identify deviations that may represent rare events [17].\n\nDimensionality reduction techniques, such as t-SNE, PCA, and UMAP, are often used in conjunction with clustering and anomaly detection to visualize high-dimensional seismic data and uncover underlying structures. These methods are particularly useful for exploratory data analysis, as they allow researchers to identify potential patterns or groupings that may not be apparent in the raw data. For example, t-SNE has been applied to visualize seismic data in lower-dimensional spaces, enabling the identification of distinct clusters corresponding to different seismic sources or types [14]. UMAP, in contrast, has been shown to preserve both local and global data structures, making it a more versatile option for seismic data analysis [13].\n\nIn recent years, hybrid approaches that combine unsupervised clustering with limited labeled data have gained traction, offering a way to enhance detection accuracy and reduce false positives. These semi-supervised methods leverage the strengths of both unsupervised and supervised learning, allowing for more robust anomaly detection and clustering in scenarios where labeled data are scarce or unreliable [18]. As seismic datasets continue to grow in size and complexity, the development of more efficient, scalable, and interpretable unsupervised learning methods remains an important area of research, with significant implications for seismic hazard assessment and early warning systems.",
+      "stats": {
+        "char_count": 3540,
+        "word_count": 505,
+        "sentence_count": 17,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "2.3 Deep Learning Architectures for Seismic Signal Processing",
+      "level": 3,
+      "content": "Deep learning has revolutionized seismic signal processing by enabling automatic feature extraction and classification without the need for manual engineering. Convolutional neural networks (CNNs), recurrent neural networks (RNNs), and their hybrid variants have emerged as powerful tools for analyzing seismic data, offering significant improvements over traditional methods in terms of accuracy and efficiency. This subsection explores the application of deep learning architectures in seismic signal processing, focusing on their ability to capture both spatial and temporal patterns in seismic data.\n\nConvolutional neural networks (CNNs) have gained widespread use in seismic signal processing due to their ability to automatically learn hierarchical features from raw seismic waveforms. By applying 1D or 2D convolutional layers to seismic time-series data or spectrograms, CNNs can effectively capture local patterns and spatial dependencies. For instance, the CRED network [19] utilizes a combination of convolutional layers and bi-directional long short-term memory (LSTM) units to detect earthquake signals with high accuracy. Similarly, the use of deep convolutional autoencoders (CAEs) for unsupervised seismic facies classification [20] demonstrates the potential of CNNs in learning meaningful representations from seismic data without explicit labeling. However, the performance of CNNs is often limited by their inability to model long-range temporal dependencies, which is critical for capturing the dynamic behavior of seismic events.\n\nRecurrent neural networks (RNNs) and their variants, such as long short-term memory (LSTM) and gated recurrent units (GRUs), are specifically designed to model sequential data, making them well-suited for analyzing time-series seismic signals. These networks can capture temporal patterns and dependencies in seismic data, which is essential for tasks such as phase picking, event detection, and magnitude estimation. For example, the CRED model [19] integrates bidirectional LSTMs to learn the time-frequency characteristics of seismic signals, achieving an F-score of 99.95. However, RNNs can suffer from vanishing gradient problems and are computationally expensive for long sequences, which limits their applicability to large-scale seismic data.\n\nTo overcome the limitations of standalone CNNs and RNNs, hybrid architectures that combine the strengths of both have been proposed. For example, the use of CNNs for spatial feature extraction and RNNs for temporal modeling has shown promising results in tasks such as seismic phase picking and event detection. The cascaded region-based CNN [21] demonstrates how hybrid architectures can improve detection accuracy by capturing both spatial and temporal features. Additionally, attention mechanisms [22] have been integrated into deep learning architectures to enhance the model's ability to focus on relevant parts of the input data, further improving performance in seismic signal processing tasks.\n\nDespite the success of deep learning in seismic signal processing, several challenges remain, including the need for large labeled datasets, the risk of overfitting, and the difficulty of interpreting model decisions. Future research should focus on developing more robust and interpretable models, leveraging semi-supervised and self-supervised learning techniques, and exploring the integration of physics-based constraints into deep learning frameworks. By addressing these challenges, deep learning can continue to advance the field of seismic signal processing and contribute to more accurate and reliable earthquake detection and analysis.",
+      "stats": {
+        "char_count": 3653,
+        "word_count": 500,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "2.4 Transfer Learning and Semi-Supervised Methods in Seismic Data Analysis",
+      "level": 3,
+      "content": "Transfer learning and semi-supervised learning have emerged as critical strategies for enhancing the performance of machine learning models in seismic data analysis, particularly in scenarios where labeled data is limited or noisy. These methods address the challenges of data scarcity and high costs of annotation by leveraging pre-trained models and incorporating unlabeled data into the learning process. Transfer learning, in particular, enables the adaptation of models trained on large, well-labeled datasets to specific seismic tasks, such as fault detection or magnitude prediction, by fine-tuning the pre-trained weights with a smaller amount of domain-specific data [19]. This approach not only reduces the need for extensive labeling but also improves generalization by exploiting the rich feature representations learned from diverse data sources.\n\nSemi-supervised learning complements transfer learning by utilizing both labeled and unlabeled data to improve model accuracy. In seismic data analysis, where labeled data is often scarce, semi-supervised techniques such as self-supervised learning and pseudo-labeling have proven effective. Self-supervised learning, for instance, involves training models on pretext tasks like denoising or reconstruction using unlabeled seismic data, which helps the model learn robust features that are transferable to downstream tasks [23]. This method has been successfully applied in seismic data augmentation, where generative models like GANs and diffusion models are used to synthesize additional training data, thereby enhancing the model's ability to generalize [24].\n\nOne of the key advantages of transfer learning in seismic data analysis is its ability to handle domain adaptation, where models trained on data from one region are adapted to another with different geological characteristics. This is particularly important in seismic hazard assessment, where the performance of models can vary significantly across different tectonic regimes [20]. Domain adaptation techniques, such as those employing feature alignment or adversarial training, have been proposed to mitigate the distribution shift between source and target domains [15].\n\nDespite their benefits, both transfer learning and semi-supervised methods face challenges, including the need for careful selection of pre-trained models, the risk of overfitting to the source domain, and the complexity of integrating unlabeled data into the training process. Recent studies have also highlighted the importance of incorporating physical constraints into the learning process to ensure that models respect the underlying geophysical laws [25]. This hybrid approach, combining data-driven models with physics-informed constraints, has shown promise in improving the reliability and interpretability of seismic predictions.\n\nFuture directions in this area include the development of more robust and scalable methods for domain adaptation and the integration of multi-modal data sources, such as satellite imagery and sensor networks, to enhance model performance. Additionally, the exploration of few-shot learning and meta-learning techniques could further reduce the reliance on large labeled datasets in seismic data analysis. As the field continues to evolve, the synergy between transfer learning, semi-supervised methods, and physics-based modeling will play a crucial role in advancing the accuracy and efficiency of seismic data analysis.",
+      "stats": {
+        "char_count": 3462,
+        "word_count": 477,
+        "sentence_count": 17,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "3.1 Machine Learning for Ground Motion Prediction",
+      "level": 3,
+      "content": "Machine learning (ML) has emerged as a powerful tool for predicting ground motion parameters, which are essential for seismic hazard and risk assessment. Traditional ground motion prediction equations (GMPEs) rely on empirical relationships derived from historical data, but they often struggle to capture the complex nonlinear interactions between earthquake sources, propagation paths, and site conditions. ML models, by contrast, offer a data-driven approach that can learn these complex patterns directly from large, heterogeneous datasets. In this subsection, we discuss the application of ML techniques for predicting key ground motion parameters such as peak ground acceleration (PGA), peak ground velocity (PGV), and spectral acceleration, with a focus on both regression and classification models.\n\nSupervised learning approaches, particularly regression models, have been widely used for ground motion prediction. These models, such as random forests, support vector machines, and artificial neural networks, are trained on extensive datasets of recorded ground motion records, along with explanatory variables like earthquake magnitude, source-to-site distance, and site-specific soil properties. One notable example is the work by [7], where a deep learning framework was developed to estimate earthquake magnitude from raw waveforms. This approach demonstrated high accuracy and robustness, showing that ML can effectively capture the nonlinear relationships between input features and ground motion parameters. Similarly, [10] utilized deep learning to predict structural responses, highlighting the potential of ML for large-scale seismic risk assessment.\n\nDeep learning architectures, particularly convolutional neural networks (CNNs) and recurrent neural networks (RNNs), have shown significant promise in capturing both spatial and temporal dependencies in seismic data. [12] introduced a physics-informed neural network (PhyCNN) that integrates domain knowledge with deep learning, leading to improved prediction accuracy and generalizability. This approach not only enhances the interpretability of the model but also reduces the need for large training datasets. Additionally, [26] employed a Fourier Neural Operator (FNO) to predict ground motion time series from 3D geological descriptions, demonstrating the potential of neural operators in capturing complex spatiotemporal dynamics.\n\nDespite these advancements, challenges remain in the generalization of ML models across different tectonic regions and seismic sources. [27] highlights the importance of incorporating physical constraints into ML models to ensure consistency with the underlying geophysical processes. This is particularly important in regions with limited data availability, where model robustness is crucial. Furthermore, [28] underscores the need for explainable AI to improve trust and adoption in critical engineering applications.\n\nLooking ahead, the integration of physics-informed ML models with traditional GMPEs offers a promising direction for improving the accuracy and reliability of ground motion predictions. As data availability continues to grow and computational resources become more accessible, ML is poised to play an increasingly central role in seismic hazard and risk assessment.",
+      "stats": {
+        "char_count": 3295,
+        "word_count": 443,
+        "sentence_count": 19,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "3.2 Data-Driven Vulnerability Assessment of Structures",
+      "level": 3,
+      "content": "Data-driven vulnerability assessment of structures has emerged as a critical area within seismic hazard and risk analysis, driven by the need to accurately quantify the potential damage to infrastructure under seismic loading. Traditional methods, such as empirical fragility curves or physics-based modeling, often rely on limited data and simplifying assumptions that may not capture the complex nonlinear behavior of structures. Machine learning offers a transformative approach by leveraging large-scale datasets, including sensor data, historical earthquake records, and structural characteristics, to identify critical failure mechanisms and predict damage potential with improved accuracy and efficiency [20]. This subsection explores the methodologies, challenges, and opportunities in applying machine learning for vulnerability assessment, highlighting both the current state and future directions.\n\nOne of the primary applications of machine learning in vulnerability assessment is the estimation of structural damage indices from sensor data and historical records. Convolutional neural networks (CNNs) and recurrent neural networks (RNNs) have been effectively used to extract meaningful features from time-series data, such as acceleration and displacement records, to predict the extent of damage [18]. These models can be trained on large datasets to recognize patterns associated with different levels of damage, enabling the development of more accurate and robust vulnerability models. Furthermore, the integration of physics-informed neural networks (PINNs) has shown promise in ensuring that predictions are consistent with the underlying mechanical principles of structural behavior, thus enhancing the interpretability and reliability of the models [29].\n\nFeature selection and engineering play a crucial role in improving the performance of machine learning models for vulnerability assessment. Techniques such as principal component analysis (PCA), autoencoders, and domain-specific feature extraction are commonly used to identify key vulnerability indicators, such as building age, material properties, and design codes [14]. These features help in capturing the most relevant information that influences the vulnerability of structures, enabling the development of more precise and generalizable models.\n\nDespite the significant progress, challenges remain, particularly in handling limited or biased data. Many real-world datasets are imbalanced, with a higher representation of non-damaged structures compared to damaged ones, which can lead to biased predictions [30]. Techniques such as SMOTE, cost-sensitive learning, and self-supervised learning have been explored to address these issues, improving the robustness and generalizability of vulnerability models [31; 32].\n\nLooking ahead, the integration of machine learning with probabilistic frameworks offers a promising avenue for more comprehensive risk modeling. By combining data-driven approaches with traditional probabilistic methods, it is possible to quantify uncertainties more effectively and improve the accuracy of vulnerability assessments [33]. Future research should focus on developing more interpretable models, improving data quality, and exploring hybrid approaches that leverage both physics-based and data-driven methods to enhance the reliability and applicability of vulnerability assessment models.",
+      "stats": {
+        "char_count": 3407,
+        "word_count": 447,
+        "sentence_count": 17,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "3.3 Integration with Probabilistic Seismic Hazard Analysis (PSHA)",
+      "level": 3,
+      "content": "Machine learning (ML) has emerged as a transformative force in seismic hazard and risk assessment, particularly in the integration with probabilistic seismic hazard analysis (PSHA). Traditional PSHA relies on empirical ground motion prediction equations (GMPEs) that are derived from historical earthquake data and incorporate site-specific parameters [1]. However, these GMPEs often face limitations in capturing the complex, nonlinear behavior of seismic waves and the uncertainties associated with seismic sources. ML models, on the other hand, offer a data-driven alternative that can learn intricate patterns from large and diverse datasets, leading to more accurate and scalable predictions of seismic risk.\n\nOne of the key areas where ML enhances PSHA is in improving the accuracy of ground motion predictions. Convolutional neural networks (CNNs) and recurrent neural networks (RNNs) have been successfully applied to extract features from seismic waveforms and predict parameters such as peak ground acceleration (PGA) and spectral acceleration (SA) with high precision [1; 5]. These models can capture non-linear relationships between earthquake magnitude, distance, and site conditions, which are often challenging to model using traditional GMPEs. Moreover, physics-informed neural networks (PINNs) have been proposed to embed physical laws into the training process, ensuring that predictions are not only data-driven but also physically consistent [1].\n\nAnother significant contribution of ML to PSHA is in the fusion of multiple models to quantify uncertainty in hazard maps and risk scenarios. Ensemble learning techniques, such as bagging and boosting, have been employed to combine predictions from different ML models, leading to more robust and reliable hazard assessments [1; 2]. This approach helps in addressing the inherent uncertainties in seismic hazard estimation, such as those arising from epistemic and aleatory uncertainties in seismic source characterization and ground motion modeling.\n\nFurthermore, ML has enabled the development of real-time hazard assessment tools that can quickly update hazard maps and risk scenarios based on incoming seismic data. These tools leverage the computational efficiency of ML models to provide timely and accurate information for emergency response and risk mitigation [1; 5]. However, the integration of ML with PSHA also presents challenges, such as the need for large, high-quality training datasets and the difficulty of validating ML-enhanced PSHA models against real-world seismic data [1].\n\nLooking ahead, the integration of ML with PSHA is expected to benefit from advancements in explainable AI (XAI) and hybrid modeling approaches that combine data-driven and physics-based methods. These developments will further enhance the transparency, interpretability, and generalizability of ML-enhanced PSHA models, making them more suitable for practical applications in seismic risk assessment and management. As the field continues to evolve, the synergy between ML and PSHA holds great promise for improving the accuracy, scalability, and reliability of seismic hazard and risk assessments.",
+      "stats": {
+        "char_count": 3164,
+        "word_count": 447,
+        "sentence_count": 17,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "3.4 Machine Learning for Early Warning Systems and Risk Mapping",
+      "level": 3,
+      "content": "Machine learning (ML) has emerged as a transformative tool in the development of real-time early warning systems and risk mapping for seismic events. Traditional seismic early warning systems rely on manual or semi-automated processing of seismic signals, which can be time-consuming and prone to delays. ML techniques, particularly deep learning models, offer the potential to accelerate hazard detection, location estimation, and risk visualization, thereby enhancing the timeliness and accuracy of warning systems [19; 34; 35]. These systems are crucial for mitigating the impact of earthquakes, especially in densely populated regions or critical infrastructure zones.\n\nOne of the primary applications of ML in early warning systems is the rapid detection and classification of seismic events. Convolutional neural networks (CNNs) and recurrent neural networks (RNNs) have been effectively used to detect and locate earthquakes in real-time. For instance, the CRED model [19] employs a combination of convolutional layers and bidirectional long-short-term memory (LSTM) units to detect seismic events with high accuracy, achieving an F-score of 99.95. Similarly, the PhaseLink framework [34] leverages deep learning to associate seismic phases across different sensors, improving the robustness of earthquake detection. These approaches are particularly valuable in scenarios with high noise levels or overlapping events.\n\nIn addition to event detection, ML plays a vital role in generating probabilistic risk maps. These maps provide spatial and temporal insights into the likelihood of seismic hazards, enabling better-informed decision-making for emergency response and resource allocation. Techniques such as deep neural networks and Bayesian inference have been employed to estimate ground motion intensities and vulnerability indices [36; 7]. For example, the Bayesian neural network approach [36] estimates epicentral distance and P travel time with high precision, while also quantifying uncertainties. This level of detail is essential for creating reliable risk assessments.\n\nMoreover, ML models can integrate multiple data sources, including sensor networks, historical seismic records, and geospatial data, to produce comprehensive risk maps. The application of deep learning for seismic phase detection and picking [19; 34] has also been instrumental in improving the spatial resolution of these maps. By leveraging the power of ML, early warning systems can provide more accurate and timely information, which is critical for minimizing casualties and economic losses.\n\nDespite these advancements, several challenges remain, including the need for robust data quality, model generalizability across different tectonic regimes, and computational efficiency for real-time applications. Future research should focus on developing hybrid models that combine ML with physics-based simulations to enhance predictive accuracy and interpretability. Additionally, the integration of multi-modal data, such as satellite imagery and social media, could further improve the spatial and temporal resolution of risk maps. As the field continues to evolve, ML-based early warning systems and risk mapping will play an increasingly important role in earthquake engineering and disaster risk management.",
+      "stats": {
+        "char_count": 3304,
+        "word_count": 458,
+        "sentence_count": 22,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "3.5 Challenges and Opportunities in Data-Driven Risk Modeling",
+      "level": 3,
+      "content": "Data-driven risk modeling in seismic hazard and risk assessment has gained significant traction due to its ability to handle complex, non-linear relationships and high-dimensional data. However, several challenges persist that hinder the widespread adoption and effectiveness of machine learning (ML) in this domain. One of the primary challenges is data scarcity, as high-quality, labeled seismic datasets are often limited due to the rarity of large earthquakes and the difficulty in collecting comprehensive data [1]. This scarcity is exacerbated by the fact that seismic data can be highly variable across different regions and tectonic settings, making it difficult to generalize models trained on one dataset to another [1]. Moreover, the presence of noisy or incomplete data further complicates model training and validation, requiring sophisticated data augmentation and synthetic data generation techniques to enhance dataset diversity and robustness [1].\n\nAnother critical challenge is the interpretability of ML models, particularly deep learning architectures, which are often considered \"black boxes\" due to their complex and non-transparent decision-making processes. This lack of transparency poses significant barriers to their adoption in safety-critical engineering decisions, where explainability is essential for trust and regulatory compliance [1]. To address this, researchers have explored techniques such as SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-agnostic Explanations) to enhance model interpretability and provide actionable insights [1]. However, these methods are still in their early stages of development and require further refinement to be effectively integrated into seismic risk modeling workflows.\n\nHybrid approaches that combine data-driven and physics-based models offer a promising avenue to overcome these challenges. By embedding physical principles into ML models, such as through physics-informed neural networks (PINNs), researchers can improve the physical consistency and generalizability of predictions [2]. This integration not only enhances model accuracy but also provides a more robust framework for uncertainty quantification and risk assessment [5]. Furthermore, hybrid models can leverage the strengths of both data-driven and physics-based approaches, enabling more reliable and interpretable results in seismic hazard and risk modeling.\n\nEmerging trends such as real-time ML, quantum computing, and edge computing are also poised to transform the field. Real-time ML can enable immediate hazard detection and risk assessment, while quantum computing offers the potential for significantly faster and more efficient simulations [1]. Edge computing, on the other hand, can facilitate decentralized processing and reduce latency in seismic monitoring systems [5]. These advancements, combined with the development of more sophisticated and interpretable ML models, will be crucial for the future of data-driven risk modeling in earthquake engineering. As the field continues to evolve, interdisciplinary collaboration between data scientists, geoscientists, and engineers will remain essential for addressing the complex challenges and opportunities in seismic hazard and risk assessment.",
+      "stats": {
+        "char_count": 3274,
+        "word_count": 443,
+        "sentence_count": 18,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "4.1 Sensor Networks and Real-Time Data Acquisition",
+      "level": 3,
+      "content": "Sensor networks play a crucial role in structural health monitoring (SHM) by enabling continuous data acquisition from various types of sensors deployed on structures. These networks provide the foundation for real-time damage detection and assessment, as they can capture dynamic responses, such as vibrations, strains, and accelerations, which are essential for identifying structural anomalies. The integration of sensor networks with machine learning algorithms enhances the capability of SHM systems to detect and classify damage in real-time, offering a data-driven approach to ensure the safety and integrity of infrastructure [3]. The deployment of these networks involves careful planning to ensure optimal sensor placement, which is critical for capturing meaningful data that reflects the actual structural behavior under different loading conditions [37].\n\nOnce the sensor data is collected, preprocessing becomes a key step in the SHM pipeline. Raw data often contains noise and outliers that can hinder the performance of machine learning models. Techniques such as filtering, normalization, and feature extraction are commonly applied to clean and prepare the data for analysis. For instance, wavelet transforms and Fourier transforms are often used to extract relevant features from time-series data, while principal component analysis (PCA) and t-distributed stochastic neighbor embedding (t-SNE) are utilized for dimensionality reduction [5; 1]. These preprocessing steps are essential for improving the signal-to-noise ratio and ensuring that the data is suitable for machine learning algorithms.\n\nThe analysis of sensor data for real-time damage detection involves the application of machine learning techniques, including supervised and unsupervised learning, as well as deep learning models. Supervised learning algorithms, such as support vector machines (SVMs) and random forests, are used for classifying damage types based on labeled datasets. On the other hand, unsupervised learning approaches, such as clustering and anomaly detection, are employed to identify patterns and outliers in unlabeled data. Deep learning models, particularly convolutional neural networks (CNNs) and recurrent neural networks (RNNs), have shown significant promise in capturing complex spatial and temporal dependencies in sensor data [1; 5]. These models can automatically extract features from raw sensor data, reducing the need for manual feature engineering and improving the overall accuracy of damage detection.\n\nDespite the advancements in sensor networks and machine learning, challenges remain in achieving reliable real-time damage detection. These include the need for robust data transmission in remote or harsh environments, the scalability of sensor networks for large-scale structures, and the computational efficiency of machine learning models for real-time processing [38; 39]. Future research directions include the development of edge computing solutions to reduce latency, the integration of multiple sensor modalities for comprehensive monitoring, and the use of explainable AI to enhance the interpretability of machine learning models in SHM applications. Addressing these challenges will be critical for advancing the practical implementation of real-time SHM systems.",
+      "stats": {
+        "char_count": 3300,
+        "word_count": 457,
+        "sentence_count": 18,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "4.2 Deep Learning for Damage Classification and Localization",
+      "level": 3,
+      "content": "Deep learning has emerged as a transformative tool in structural health monitoring, particularly for the automated classification and localization of damage. By leveraging the representational power of deep neural networks, researchers have developed sophisticated models capable of detecting and quantifying damage from both image and signal data. Among these, convolutional neural networks (CNNs) have gained prominence due to their ability to automatically extract hierarchical features from spatial data, making them highly effective for tasks such as damage identification in images and vibration signal analysis. The integration of CNNs with signal processing techniques has further enhanced their capability to detect subtle structural anomalies, offering a robust solution for real-time monitoring and post-event assessment.\n\nOne of the key strengths of deep learning in damage classification lies in its ability to handle high-dimensional, heterogeneous data. For instance, models trained on images of cracked concrete surfaces or drone-captured structural elements can achieve high accuracy in identifying damage types and locations. This is supported by the work of [1], which demonstrated the effectiveness of CNNs in classifying seismic facies from prestack data, highlighting the adaptability of deep learning to geoscientific applications. Similarly, [1] proposed a CNN-based approach for detecting microearthquakes in noisy data, showcasing the resilience of these models in complex environments.\n\nIn the domain of signal-based damage detection, recurrent neural networks (RNNs) and their variants, such as Long Short-Term Memory (LSTM) networks, have shown promise in capturing temporal dependencies in vibration and acoustic signals. These models are particularly effective for time-series analysis, where the sequential nature of the data is critical for identifying damage-induced changes. The work in [1] demonstrated that combining CNNs and LSTMs can enhance multi-modal damage assessment, improving the accuracy of both classification and localization tasks. Furthermore, [1] introduced a deep residual network (CRED) that leverages the temporal and frequency characteristics of seismic waveforms to improve detection sensitivity, achieving an F-score of 99.95 on a large dataset of seismograms.\n\nDespite these advancements, challenges remain in generalizing deep learning models across different structural types and damage scenarios. The performance of these models often depends on the quality and representativeness of the training data, as highlighted by [1], which emphasizes the importance of addressing class imbalance in damage detection tasks. Techniques such as data augmentation, transfer learning, and physics-informed neural networks (PINNs) have been proposed to enhance model generalizability and robustness. For example, [1] demonstrated that incorporating domain knowledge through PINNs can improve the interpretability and reliability of damage prediction models.\n\nLooking ahead, future research should focus on developing more interpretable deep learning frameworks that can provide actionable insights for engineers. Additionally, the integration of multi-sensor data and the use of hybrid models that combine deep learning with physics-based simulations hold significant potential for improving the accuracy and efficiency of damage detection systems. As the field continues to evolve, the role of deep learning in structural health monitoring is poised to become even more central, driving innovation in the pursuit of safer and more resilient infrastructure.",
+      "stats": {
+        "char_count": 3605,
+        "word_count": 493,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "4.3 Integration of Physics-Based Models with Machine Learning",
+      "level": 3,
+      "content": "The integration of physics-based models with machine learning represents a transformative approach in structural health monitoring and damage detection, aiming to bridge the gap between data-driven insights and domain-specific physical principles. This fusion enhances the interpretability, reliability, and generalizability of damage detection systems, as it allows the incorporation of physical laws and structural behavior into learning algorithms. Physics-informed neural networks (PINNs) have emerged as a prominent framework for embedding governing equations into deep learning models, ensuring that predictions are consistent with the underlying mechanics of structural systems [1]. These models are particularly effective in capturing the nonlinear and time-dependent behavior of structures under seismic loads, where traditional data-driven approaches may lack physical consistency.\n\nHybrid models that combine physics-based simulations with machine learning offer another pathway for improving damage detection. For example, finite element analysis (FEA) can be integrated with deep learning techniques to generate synthetic training data, enabling models to learn from physically accurate simulations rather than purely empirical observations. This approach not only improves the generalization capability of machine learning models but also reduces the dependency on large, annotated datasets, which are often scarce in structural health monitoring applications [1]. Furthermore, the use of physics constraints in training can significantly enhance model robustness, particularly in scenarios with sparse or noisy data, where overfitting is a common challenge [1].\n\nThe incorporation of domain knowledge into machine learning algorithms also extends to the design of feature spaces and loss functions. For instance, certain studies have demonstrated that introducing physical quantities such as strain energy or modal frequencies as features can improve the performance of anomaly detection models in real-time monitoring systems [1]. Additionally, physics-based regularization techniques, such as incorporating constitutive relationships or equilibrium equations into the training process, help to constrain the solution space and improve the interpretability of learned models [1].\n\nDespite the benefits, integrating physics-based models with machine learning presents several challenges. One major limitation is the computational cost associated with coupling high-fidelity physical simulations with complex neural networks. Moreover, the development of such models requires a deep understanding of both the underlying physics and the machine learning methodology, which can be a barrier to broader adoption. Emerging trends, such as the use of surrogate models and reduced-order representations, offer promising solutions to these challenges by enabling more efficient integration of physics and data-driven methods [2].\n\nIn conclusion, the integration of physics-based models with machine learning is a critical direction for advancing structural health monitoring and damage detection. By leveraging domain knowledge and physical laws, these hybrid approaches can overcome the limitations of purely data-driven methods, leading to more accurate, reliable, and interpretable damage detection systems. Future research should focus on developing scalable, computationally efficient frameworks that can effectively combine the strengths of both physics-based and data-driven paradigms.",
+      "stats": {
+        "char_count": 3499,
+        "word_count": 459,
+        "sentence_count": 18,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "4.4 Image and Signal Processing for Post-Earthquake Damage Assessment",
+      "level": 3,
+      "content": "Image and signal processing play a pivotal role in post-earthquake damage assessment, enabling the automated and semi-automated analysis of visual and sensor data to identify and quantify structural damage. These techniques leverage advanced algorithms to process and interpret data from various sources, including satellite imagery, drone footage, and in-situ sensors, to support rapid and reliable damage evaluation [21].\n\nIn the context of image processing, computer vision techniques have become essential for analyzing post-event imagery. Techniques such as convolutional neural networks (CNNs) are used to detect and classify damage features, such as cracks, deformations, and structural failures, from high-resolution images and videos [18]. These methods provide an efficient and accurate way to assess damage across large areas, reducing the need for manual inspections. Additionally, the integration of multi-sensor data fusion techniques allows for a more comprehensive assessment by combining visual and sensor data, enhancing the reliability of damage detection [35].\n\nSignal processing techniques are equally critical for evaluating structural health. Vibration and acoustic signals from sensors are analyzed to identify anomalies that may indicate structural damage. Techniques such as time-series analysis, Fourier transforms, and wavelet decomposition are used to extract meaningful features from the raw signal data [40]. These features are then used to train machine learning models, such as recurrent neural networks (RNNs), to detect and localize damage [23].\n\nThe use of deep learning models has significantly improved the accuracy and robustness of damage detection. For instance, CNNs have been successfully applied to image-based damage detection, while RNNs have shown promise in analyzing temporal patterns in vibration data [18]. However, these models often require large amounts of labeled data for training, which can be challenging to obtain in practice [41].\n\nEmerging trends in this area include the use of attention mechanisms and explainable AI to improve model interpretability and trustworthiness [42]. These techniques help in understanding how models make decisions, which is crucial for engineering applications. Furthermore, the integration of physics-informed neural networks (PINNs) is gaining traction as a way to incorporate domain knowledge into the learning process, enhancing the accuracy and reliability of damage assessment [25].\n\nLooking ahead, the field is likely to benefit from advancements in real-time processing, edge computing, and the use of multi-modal data sources. These developments will enable more efficient and scalable damage assessment systems, ultimately improving the safety and resilience of structures in earthquake-prone regions. As the field continues to evolve, the synergy between image and signal processing techniques will be crucial in advancing the state of the art in post-earthquake damage assessment.",
+      "stats": {
+        "char_count": 2983,
+        "word_count": 419,
+        "sentence_count": 19,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "4.5 Explainability and Interpretability in Damage Detection Models",
+      "level": 3,
+      "content": "The integration of machine learning (ML) in structural health monitoring (SHM) has significantly advanced the automation and accuracy of damage detection. However, the reliance on complex, black-box models such as deep neural networks raises critical concerns regarding model transparency and interpretability, especially in safety-critical applications. Explainability and interpretability are not just academic pursuits but essential for ensuring trust, compliance, and effective decision-making in engineering contexts. This subsection explores the importance of interpretability in damage detection models, the techniques employed to enhance model transparency, and the challenges and opportunities in this domain.\n\nOne of the primary approaches to improving model interpretability is the use of post-hoc explanation techniques such as SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-agnostic Explanations). These methods provide insights into how models make predictions by approximating the behavior of complex models in local regions of the input space. For instance, SHAP has been used in damage classification tasks to identify which features contribute most to a given prediction [19]. Similarly, LIME has been employed to highlight regions in sensor data that are critical for damage detection, offering a more intuitive understanding of the model's decision-making process [19]. These techniques are particularly useful when models are deployed in real-world scenarios where engineers must trust and validate the outcomes.\n\nAnother emerging trend involves the use of attention mechanisms in deep learning architectures. Attention layers allow models to focus on relevant parts of the input data, such as specific sensor readings or image regions, thereby providing visual and numerical explanations of the model’s decisions. For example, in image-based damage detection, attention maps have been shown to highlight regions of structural surfaces that are indicative of damage [43]. This not only improves the model’s interpretability but also supports domain experts in validating the model’s predictions.\n\nIncorporating domain knowledge into model training is another strategy for enhancing interpretability. Physics-informed neural networks (PINNs) and hybrid models that integrate ML with physics-based simulations have been proposed to ensure that predictions align with physical principles [44]. This approach reduces the \"black-box\" nature of purely data-driven models by embedding domain-specific constraints into the learning process.\n\nDespite these advances, challenges remain. The trade-off between model complexity and interpretability is a persistent issue, and the generalization of explainability techniques across different structural types and damage scenarios is still an open research question. Moreover, the need for standardized evaluation metrics and benchmarking frameworks for interpretability in SHM remains unmet.\n\nIn summary, explainability and interpretability are crucial for the adoption of machine learning in damage detection, particularly in applications where decisions have significant safety implications. As the field evolves, a combination of post-hoc explanation techniques, attention mechanisms, and domain-informed modeling will be essential to ensure that ML models are both powerful and transparent.",
+      "stats": {
+        "char_count": 3378,
+        "word_count": 454,
+        "sentence_count": 21,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "4.6 Emerging Trends and Future Directions",
+      "level": 3,
+      "content": "The subsection on emerging trends and future directions in structural health monitoring (SHM) and damage detection using machine learning highlights the transformative potential of integrating advanced computational techniques with domain-specific knowledge. As the field continues to evolve, several innovative approaches are gaining prominence, including real-time machine learning, quantum computing, edge computing, and standardized benchmarking. These trends not only address existing limitations but also open new frontiers for improving the reliability, efficiency, and scalability of SHM systems.\n\nReal-time machine learning is becoming increasingly critical for on-the-fly damage detection and adaptive monitoring. Traditional methods often rely on post-processing, which introduces latency and limits the ability to respond to immediate structural threats. Recent studies [21; 45] have demonstrated the effectiveness of deep learning models in processing continuous sensor data for real-time decision-making. These models can detect anomalies and estimate structural damage with high accuracy, enabling proactive maintenance and reducing the risk of catastrophic failures.\n\nQuantum computing and neuromorphic systems are emerging as promising technologies to enhance computational efficiency in SHM. The complex and high-dimensional nature of structural data often requires significant computational resources, which quantum algorithms can potentially overcome. Studies [46] have explored the potential of quantum-enhanced neural networks for solving partial differential equations and improving signal processing, suggesting a future where quantum-inspired models could significantly reduce training and inference times.\n\nEdge computing and fog computing are also gaining traction as solutions for distributed and low-latency data processing. These technologies enable data to be processed closer to the source, reducing the dependency on centralized cloud infrastructures and improving the responsiveness of SHM systems. Research [23; 46] has shown that edge-based ML models can achieve comparable performance to their cloud-based counterparts while minimizing latency, making them ideal for large-scale, real-time monitoring applications.\n\nThe development of standardized benchmark datasets and evaluation metrics is another critical trend in the field. While numerous studies have demonstrated the effectiveness of ML-based SHM techniques, the lack of standardized benchmarks hinders the reproducibility and comparability of results. Initiatives such as [47; 48] have highlighted the importance of creating comprehensive datasets that reflect real-world conditions. These efforts are essential for accelerating the adoption of ML techniques in practical SHM applications.\n\nLooking ahead, the integration of physics-informed models with deep learning is expected to play a pivotal role in improving the interpretability and robustness of SHM systems. Approaches such as physics-informed neural networks (PINNs) [49; 50] and hybrid models that combine data-driven learning with finite element analysis [51] are paving the way for more reliable and interpretable damage detection systems. These methods not only enhance the accuracy of predictions but also ensure that models adhere to physical laws, making them more trustworthy for critical engineering decisions.\n\nAs the field continues to advance, interdisciplinary collaboration between data scientists, civil engineers, and geoscientists will be essential for addressing the complex challenges of SHM. By combining the strengths of machine learning with domain-specific knowledge, the future of structural health monitoring holds great promise for safer, more resilient infrastructure systems.",
+      "stats": {
+        "char_count": 3760,
+        "word_count": 494,
+        "sentence_count": 22,
+        "line_count": 13
+      }
+    },
+    {
+      "heading": "5.1 Machine Learning Models for Seismic Response Prediction",
+      "level": 3,
+      "content": "Machine learning models for seismic response prediction have emerged as a transformative tool in earthquake engineering, offering the potential to simulate complex structural behavior under seismic excitation with unprecedented accuracy and efficiency. These models, ranging from traditional regression techniques to advanced deep learning architectures, are designed to predict key response metrics such as displacement, velocity, and acceleration, which are critical for assessing structural integrity and safety. The development of these models often involves a careful balance between data-driven learning and the integration of domain-specific knowledge, as highlighted in recent works that emphasize the importance of physics-informed approaches [52]. By embedding physical constraints and governing equations into the learning process, such models not only improve predictive accuracy but also enhance interpretability and generalizability, addressing the limitations of purely data-driven methods [52].\n\nAmong the most widely used machine learning techniques in this context are recurrent neural networks (RNNs) and long short-term memory (LSTM) networks, which are particularly suited for capturing temporal dependencies in seismic time-series data [7]. These models have been successfully applied to predict structural responses based on historical seismic records and sensor data, demonstrating robustness in handling non-linear and time-varying dynamics [7]. Additionally, convolutional neural networks (CNNs) have been employed for feature extraction from seismic sensor data, enabling the identification of critical patterns that correlate with structural damage and degradation [53]. Hybrid architectures, which combine the strengths of CNNs and RNNs, have shown promise in capturing both spatial and temporal features, thereby improving the overall predictive performance of seismic response models [9].\n\nAnother significant advancement is the use of physics-informed neural networks (PINNs), which integrate the laws of physics into the training process to ensure that predictions are consistent with the underlying physical principles [54]. This approach not only enhances the reliability of predictions but also reduces the need for large, high-quality training datasets, making it particularly useful in scenarios where data is scarce or noisy [54]. Furthermore, recent studies have explored the potential of transfer learning to adapt pre-trained models to new or unseen seismic scenarios, improving the generalization capabilities of these models [55].\n\nDespite these advances, several challenges remain, including the need for more interpretable models, the issue of data scarcity, and the computational cost of training complex architectures. Ongoing research aims to address these challenges by developing more efficient training algorithms, improving model explainability, and integrating multi-modal data sources [56]. As the field continues to evolve, the convergence of data-driven methods with physics-based models is expected to play a pivotal role in advancing the accuracy and reliability of seismic response prediction, ultimately contributing to more resilient and safer infrastructure systems.",
+      "stats": {
+        "char_count": 3229,
+        "word_count": 433,
+        "sentence_count": 14,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "5.2 Data-Driven Simulation and Surrogate Modeling for Seismic Response",
+      "level": 3,
+      "content": "Data-driven simulation and surrogate modeling have emerged as critical tools in seismic response prediction, offering efficient alternatives to traditional finite element analysis (FEA), which is computationally expensive and time-consuming. Surrogate models, constructed using machine learning (ML) techniques, approximate the behavior of complex structural systems under seismic loading with high accuracy and significantly reduced computational cost. These models are particularly valuable in scenarios requiring real-time analysis, parametric studies, or optimization, where repeated FEA simulations are infeasible. The development of such models typically involves training ML algorithms on a dataset of input-output pairs, where inputs are seismic excitation signals and structural parameters, and outputs are the corresponding structural responses such as displacements, velocities, or accelerations [1].\n\nOne of the most promising approaches in this area is the use of physics-informed neural networks (PINNs), which integrate physical laws and governing equations into the learning process. This ensures that the surrogate models are not only data-driven but also consistent with the underlying mechanics of seismic response [2]. PINNs have shown remarkable success in capturing the nonlinear and complex dynamics of structural systems, particularly when combined with high-fidelity FEA data for training. Another widely used technique is the application of Gaussian process regression (GPR), which provides probabilistic predictions and quantifies uncertainty in the surrogate model's outputs [1]. GPR is especially advantageous in scenarios where the uncertainty in the input data or model predictions is a critical concern.\n\nReduced-order modeling (ROM) techniques, such as proper orthogonal decomposition (POD) and autoencoders, have also gained attention for their ability to extract low-dimensional representations of structural responses. These methods reduce the dimensionality of the problem, enabling faster computation while preserving the essential features of the structural behavior [1]. The use of convolutional neural networks (CNNs) for feature extraction from raw seismic data has also proven effective in capturing spatial and temporal dependencies, making them suitable for surrogate modeling tasks [2].\n\nRecent advancements in generative models, such as generative adversarial networks (GANs) and variational autoencoders (VAEs), have further expanded the capabilities of data-driven surrogate modeling. These models can synthesize realistic seismic response data for training, which is particularly useful when labeled data is scarce or expensive to obtain [1]. However, the success of these models heavily depends on the quality and representativeness of the training data, as well as the choice of appropriate loss functions and training strategies.\n\nDespite these advancements, challenges remain, including the generalization of surrogate models across different structural configurations, the need for efficient training algorithms, and the integration of domain-specific knowledge into the learning process. Future research should focus on developing hybrid models that combine the strengths of data-driven and physics-based approaches, as well as exploring the potential of emerging techniques such as transfer learning and meta-learning for improving model adaptability and robustness. The integration of surrogate models with real-time monitoring systems also presents a promising direction for advancing seismic response prediction and control.",
+      "stats": {
+        "char_count": 3584,
+        "word_count": 478,
+        "sentence_count": 18,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "5.3 Real-Time Seismic Response Prediction and Adaptive Control",
+      "level": 3,
+      "content": "Real-time seismic response prediction and adaptive control represent a critical frontier in earthquake engineering, where machine learning (ML) techniques are increasingly being leveraged to enhance the resilience of structures during seismic events. Unlike traditional methods that rely on precomputed models, real-time systems require the rapid processing of sensor data and the deployment of dynamic models that can adapt to evolving conditions. These systems typically combine online learning algorithms with control strategies to optimize structural performance under uncertain and rapidly changing seismic loads. For instance, lightweight neural networks, such as those based on long short term memory (LSTM) or convolutional neural networks (CNNs), are often employed to predict displacement, velocity, and acceleration in real-time, enabling immediate decision-making [19]. These models are trained using historical data and can be fine-tuned on-the-fly as new sensor inputs are received, ensuring they remain accurate even as the seismic environment changes.\n\nAdaptive control strategies further enhance the resilience of structures by dynamically adjusting actuation mechanisms, such as base isolators or tuned mass dampers, based on real-time predictions of seismic response. Reinforcement learning (RL) has emerged as a promising approach for this purpose, as it allows control systems to learn optimal mitigation strategies through interaction with the environment. For example, RL agents can be trained to adjust control forces in response to predicted seismic inputs, minimizing damage while maintaining structural integrity [19]. However, the complexity of these models necessitates careful balancing between computational efficiency and predictive accuracy, as real-time applications often operate under strict latency constraints.\n\nAnother key challenge in real-time seismic response prediction is the generalization of models across different seismic scenarios. Transfer learning has been proposed as a solution to this problem, enabling models trained on one set of seismic data to adapt to new or unseen conditions. This is particularly useful in regions with limited historical seismic data, where pre-trained models can be fine-tuned with local sensor readings [24]. Additionally, online learning algorithms, such as incremental neural networks, allow for continuous model updates without the need for retraining from scratch, ensuring that models remain effective even as the seismic environment evolves.\n\nThe integration of machine learning with physics-based models further enhances the reliability of real-time predictions. Physics-informed neural networks (PINNs) embed governing equations of motion into the learning process, ensuring that predictions are consistent with the underlying physical laws of structural dynamics [57]. This hybrid approach not only improves accuracy but also increases interpretability, which is crucial for critical engineering decisions. However, the computational cost of these models remains a challenge, particularly in large-scale applications requiring high-frequency updates.\n\nLooking ahead, the development of edge computing and distributed ML frameworks offers promising avenues for improving real-time performance. These technologies enable data processing and model inference to occur closer to the source, reducing latency and enhancing scalability [58]. Furthermore, the integration of explainable AI (XAI) techniques will be essential to ensure that real-time control decisions are transparent and trustworthy, especially in safety-critical applications. As the field continues to evolve, the convergence of ML, real-time computing, and physics-based modeling will be pivotal in advancing the resilience of infrastructure against seismic hazards.",
+      "stats": {
+        "char_count": 3818,
+        "word_count": 514,
+        "sentence_count": 21,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "5.4 Integration of Machine Learning with Traditional Control Methods",
+      "level": 3,
+      "content": "The integration of machine learning (ML) with traditional control methods represents a significant advancement in seismic response prediction and control. Traditional control strategies, such as Linear Quadratic Regulator (LQR) and Proportional-Integral-Derivative (PID) controllers, rely on precise mathematical models of the system dynamics and are well-suited for linear and well-characterized systems. However, they often struggle to handle the nonlinearities, uncertainties, and high-dimensional state spaces that are prevalent in seismic response prediction. Machine learning, on the other hand, excels at learning complex patterns from data and can adapt to changing conditions, making it a powerful complement to traditional control techniques. The fusion of these two approaches offers a pathway to enhanced robustness, adaptability, and performance in seismic control systems [21].\n\nOne of the most promising integration strategies is the use of model predictive control (MPC) enhanced by machine learning. In this framework, ML models, such as long short-term memory (LSTM) networks or convolutional neural networks (CNNs), are used to predict the future behavior of the system based on historical data and real-time inputs [35]. These predictions are then used by the MPC algorithm to determine the optimal control actions that minimize the risk of structural damage. This hybrid approach not only improves the accuracy of the predictions but also enhances the adaptability of the control strategy to different seismic scenarios [35].\n\nAnother important integration involves the use of data-driven control methods, which do not rely on explicit mathematical models of the system. Instead, they learn the control policy directly from data. This is particularly advantageous in situations where the system dynamics are too complex or uncertain to be modeled accurately. Reinforcement learning (RL) is a prominent example of such an approach, where an agent learns to perform control actions that maximize a reward function based on the system's response [45]. By combining RL with traditional control techniques, it is possible to develop adaptive controllers that can handle a wide range of seismic excitations and system states.\n\nThe integration of machine learning with traditional control methods also presents several challenges. One major issue is the need for large and high-quality datasets to train the ML models effectively. Additionally, the interpretability and reliability of ML models in safety-critical applications remain a concern. Furthermore, the computational complexity of ML models can pose challenges in real-time control scenarios. However, recent advances in efficient neural network architectures and model compression techniques are helping to mitigate these issues [59].\n\nLooking ahead, the continued development of hybrid control systems that seamlessly integrate data-driven and model-based approaches is expected to play a crucial role in advancing seismic response prediction and control. Future research should focus on improving the generalizability and robustness of ML models, as well as on developing more efficient and interpretable control strategies that can be deployed in real-world applications. Such efforts will be essential in ensuring the safety and resilience of structures in the face of seismic hazards.",
+      "stats": {
+        "char_count": 3363,
+        "word_count": 481,
+        "sentence_count": 22,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "5.5 Challenges and Limitations in Seismic Response Prediction and Control",
+      "level": 3,
+      "content": "Seismic response prediction and control using machine learning face significant challenges that hinder their widespread application in real-world engineering scenarios. A primary limitation is the scarcity and poor quality of seismic data, which restricts the ability of models to generalize across different regions and scenarios. Many machine learning models, especially deep learning approaches, require large, well-labeled datasets to achieve high accuracy, but such data are often limited due to the infrequency of large earthquakes and the variability in data collection methods [5; 1]. This data scarcity leads to overfitting, poor generalizability, and unreliable predictions when models are applied to new or unseen seismic conditions. Additionally, the high cost and computational burden of collecting and processing real-world seismic data further exacerbate this issue, making it challenging to train robust and reliable models [60; 61].\n\nAnother critical challenge is the lack of interpretability in complex machine learning models, particularly deep learning architectures, which are often treated as \"black boxes\" in seismic response prediction. This lack of transparency hinders the adoption of these models in safety-critical engineering applications, where decisions must be justifiable and explainable. For instance, models used in real-time control systems must provide clear insights into their decision-making processes to ensure trust and compliance with regulatory standards [3; 1]. Despite efforts to introduce explainable AI (XAI) techniques, such as SHAP and LIME, integrating these methods into seismic response prediction remains a complex task, especially when dealing with high-dimensional data and nonlinear relationships [4].\n\nFurthermore, existing models often struggle to capture the full range of structural nonlinearities and uncertainties that arise during seismic events. While deep learning models can automatically extract features from raw seismic data, they may fail to incorporate physics-based constraints that are crucial for accurate predictions. This limitation is particularly evident in models that rely solely on data-driven approaches without incorporating domain knowledge or physical laws [1; 1]. Hybrid models that integrate physics-informed neural networks (PINNs) or other physics-based constraints offer a promising direction, but they require careful calibration and validation to ensure reliability [1; 62].\n\nIn terms of computational efficiency, real-time seismic response prediction and control demand models that can operate within strict latency and resource constraints. While deep learning models have demonstrated strong performance in offline settings, their deployment in real-time systems is often limited by high computational costs and the need for extensive training [1; 1]. Efficient algorithms, lightweight neural networks, and edge computing solutions are essential to address these challenges and enable the practical implementation of ML-based seismic response prediction and control systems. Overall, while machine learning offers transformative potential in seismic engineering, addressing these challenges through interdisciplinary collaboration, improved data collection, and advanced modeling techniques remains critical for its successful application.",
+      "stats": {
+        "char_count": 3335,
+        "word_count": 447,
+        "sentence_count": 17,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "6.1 Data-Driven Surrogate Modeling for Seismic Simulations",
+      "level": 3,
+      "content": "Data-driven surrogate modeling has emerged as a transformative approach for approximating high-fidelity seismic simulations, offering a balance between computational efficiency and predictive accuracy. This subsection examines the development and application of surrogate models in earthquake engineering, emphasizing their role in enabling real-time applications and large-scale parametric studies. Surrogate models, which replace computationally intensive finite element simulations, are critical for addressing the growing demand for rapid and scalable seismic analysis, especially in scenarios involving iterative optimization, uncertainty quantification, and real-time decision-making.\n\nVarious techniques have been explored for constructing surrogate models, including Gaussian process regression (GPR), artificial neural networks (ANNs), and polynomial chaos expansions (PCEs). Each method offers distinct advantages and limitations. For instance, GPR provides a probabilistic framework that quantifies prediction uncertainty, which is crucial for risk assessment applications [1]. ANNs, particularly deep learning architectures, excel in capturing complex nonlinear relationships in seismic data but often require large training datasets and suffer from overfitting without proper regularization [1]. PCEs, on the other hand, are well-suited for uncertainty quantification in parametric studies, offering a systematic way to propagate input variability through the model [1].\n\nRecent advances have also highlighted the potential of physics-informed neural networks (PINNs) as a novel class of surrogate models that embed governing physical laws into the learning process. By enforcing constraints derived from the equations of motion, PINNs ensure that predictions remain consistent with the underlying physics of seismic wave propagation [1]. This approach is particularly advantageous in scenarios where data scarcity is a concern, as it reduces reliance on extensive training data while improving generalization [3].\n\nThe integration of surrogate models with high-fidelity simulations has also been explored in the context of multiscale modeling. For example, local approximate Gaussian process regression (laGPR) has been proposed as a method to predict stress outputs in multiscale simulations, offering improved accuracy and computational efficiency compared to traditional ANNs [1]. Similarly, the use of reduced-order models (ROMs) in conjunction with data-driven techniques has demonstrated the potential to significantly reduce computational costs while maintaining fidelity in seismic response predictions [5].\n\nDespite these advances, several challenges remain. Surrogate models often struggle with extrapolation beyond the training data domain, limiting their applicability to novel seismic scenarios. Additionally, the integration of physics-based constraints with data-driven models requires careful calibration to ensure consistency and reliability. Future research directions include the development of hybrid models that combine data-driven and physics-based approaches, as well as the exploration of advanced learning strategies such as transfer learning and Bayesian inference to enhance model generalizability and robustness [4; 2].\n\nIn summary, data-driven surrogate modeling represents a promising avenue for improving the efficiency and scalability of seismic simulations. As the field continues to evolve, the development of more accurate, interpretable, and robust surrogate models will be essential for advancing earthquake engineering research and practice.",
+      "stats": {
+        "char_count": 3593,
+        "word_count": 462,
+        "sentence_count": 20,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "6.2 Physics-Informed Neural Networks for Seismic Modeling",
+      "level": 3,
+      "content": "Physics-informed neural networks (PINNs) have emerged as a transformative approach in seismic modeling by integrating the governing physical laws of wave propagation and soil-structure interactions directly into the learning process. Unlike traditional data-driven models that rely solely on empirical patterns, PINNs embed partial differential equations (PDEs), boundary conditions, and physical constraints into the neural network architecture, ensuring predictions are consistent with the underlying physics of seismic phenomena [50]. This fusion of domain knowledge with machine learning not only improves the generalizability of models but also enhances their interpretability, making them particularly valuable in safety-critical applications such as seismic hazard assessment and structural health monitoring.\n\nOne of the primary advantages of PINNs in seismic modeling is their ability to learn from sparse or noisy data while maintaining physical consistency. For example, in the context of seismic wave propagation, PINNs can enforce the wave equation as a hard constraint during training, allowing the model to generalize well even when training data is limited [50]. This is particularly important in regions where high-quality seismic data is scarce or where data collection is expensive and logistically challenging. By incorporating physical laws, PINNs can also mitigate the risks of overfitting and produce more reliable predictions in complex geomechanical systems [29].\n\nRecent advances in PINN formulations have further extended their applicability in seismic modeling. For instance, the integration of physics constraints with deep learning has enabled the development of hybrid models that combine the strengths of data-driven and physics-based methods [50]. These models have been successfully applied to tasks such as seismic inversion, where the goal is to infer subsurface properties from observed seismic data. By leveraging both data and physical laws, PINNs can provide more accurate and robust estimates of velocity models, which are critical for high-resolution imaging and hazard assessment [63].\n\nDespite their promise, PINNs also face several challenges. Training such models requires careful balancing of data fidelity and physical constraints, and the optimization process can be computationally intensive, particularly for large-scale simulations [50]. Moreover, the accurate implementation of PDEs in neural architectures demands domain-specific expertise, limiting the accessibility of these models to non-specialists. Future research should focus on developing more efficient training strategies and improving the interpretability of PINNs through advanced visualization and sensitivity analysis techniques [29].\n\nIn summary, PINNs represent a promising direction in data-driven seismic modeling by bridging the gap between physical theories and machine learning. Their ability to incorporate domain knowledge into the learning process not only enhances predictive accuracy but also ensures that models are grounded in the fundamental principles of geophysics. As the field continues to evolve, the integration of PINNs with other advanced machine learning techniques, such as transfer learning and ensemble methods, is expected to further expand their applicability and impact in earthquake engineering [50; 63].",
+      "stats": {
+        "char_count": 3353,
+        "word_count": 460,
+        "sentence_count": 18,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "6.3 Multi-Scale Data-Driven Modeling in Seismic Processes",
+      "level": 3,
+      "content": "The development of multi-scale data-driven modeling in seismic processes represents a critical frontier in the integration of machine learning with geophysical simulations. This approach seeks to bridge the gap between micro-scale material behavior and macro-scale structural responses, leveraging both data-driven techniques and physical insights to capture the complex dynamics of seismic events across multiple spatial and temporal scales [64]. By combining high-fidelity physics-based models with data-driven methods, researchers can achieve more accurate and interpretable predictions of seismic behavior, particularly in scenarios where traditional numerical methods are computationally prohibitive.\n\nOne of the key challenges in multi-scale modeling is the effective integration of data from disparate sources and scales. For instance, micro-scale laboratory experiments and field observations provide rich, yet localized, information about material properties and failure mechanisms, while macro-scale simulations offer a broader understanding of regional seismic hazards. Recent advances in data-driven techniques, such as physics-informed neural networks (PINNs) and hybrid models, have shown promise in bridging these scales. PINNs, for example, embed governing equations of motion into neural network architectures, ensuring that predictions are consistent with the underlying physics of seismic wave propagation and soil-structure interaction [50]. This approach not only enhances model generalizability but also improves interpretability, which is crucial for engineering applications.\n\nAnother important aspect of multi-scale modeling is the use of dimensionality reduction techniques to handle the high-dimensional data often encountered in seismic simulations. Techniques such as t-SNE, UMAP, and autoencoders have been employed to extract meaningful features from complex datasets, enabling efficient feature extraction and visualization [65]. These methods are particularly useful in seismic facies classification, where the goal is to identify distinct geological units from seismic data [20]. However, the effectiveness of these methods depends on the quality and representativeness of the input data, which remains a significant challenge in seismic applications.\n\nThe integration of multi-scale models with real-time monitoring systems is another promising direction. For example, hybrid models that combine data-driven predictions with physics-based simulations have been used to enhance the accuracy of seismic response predictions and improve the reliability of early warning systems [51]. These models leverage the strengths of both approaches, enabling more robust and adaptive decision-making in dynamic seismic environments.\n\nDespite these advancements, several challenges remain. One of the primary issues is the lack of high-quality, multi-scale datasets that can be used to train and validate these models. Additionally, the computational cost of multi-scale simulations remains a significant barrier, particularly for real-time applications. Addressing these challenges will require further research into efficient data augmentation techniques, scalable algorithms, and the development of standardized benchmark datasets.\n\nIn conclusion, multi-scale data-driven modeling in seismic processes offers a powerful framework for improving the accuracy and reliability of seismic simulations. By integrating data-driven techniques with physical insights, researchers can develop more robust models that capture the complex behavior of seismic systems across multiple scales. Future research should focus on addressing the challenges of data scarcity, computational efficiency, and model interpretability to further advance this field.",
+      "stats": {
+        "char_count": 3762,
+        "word_count": 489,
+        "sentence_count": 22,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "6.4 Hybrid Models: Integrating Data-Driven and Physics-Based Approaches",
+      "level": 3,
+      "content": "Hybrid models that integrate data-driven and physics-based approaches represent a pivotal advancement in the field of seismic process modeling and simulation. These models leverage the strengths of both paradigms—data-driven techniques for capturing complex patterns from large datasets and physics-based methods for enforcing physical consistency and interpretability. This integration addresses the limitations of purely data-driven or physics-based models, offering improved accuracy, robustness, and generalizability in seismic simulations [1; 1].\n\nOne prominent approach is the use of physics-informed neural networks (PINNs), which embed governing equations of seismic wave propagation into the learning process. By incorporating partial differential equations (PDEs) and boundary conditions, PINNs ensure that predictions adhere to the fundamental laws of physics, thereby enhancing model reliability and interpretability [1]. For instance, recent studies have demonstrated the effectiveness of PINNs in modeling seismic wave propagation in semi-infinite domains, where the network is trained to respect the physical constraints of the problem [1]. This approach not only improves the accuracy of predictions but also reduces the need for extensive labeled data, which is often scarce in geophysical applications.\n\nAnother significant development is the integration of deep learning with traditional numerical methods such as finite element analysis (FEA). Hybrid models that combine convolutional neural networks (CNNs) with FEA have shown promise in predicting structural responses under seismic loads. These models leverage the ability of CNNs to extract relevant features from raw seismic data while maintaining the physical fidelity of FEA simulations. This synergy allows for more efficient and accurate predictions, particularly in complex scenarios involving nonlinear material behavior and dynamic interactions [1; 2].\n\nFurthermore, the fusion of data-driven and physics-based methods has been explored in the context of seismic hazard assessment. By combining machine learning models with probabilistic seismic hazard analysis (PSHA), researchers have developed more robust frameworks for estimating ground motion parameters and assessing the vulnerability of structures. These hybrid models integrate the predictive power of data-driven techniques with the rigor of physics-based simulations, leading to more reliable risk assessments [5; 1].\n\nDespite these advancements, challenges remain in the development and deployment of hybrid models. One key challenge is the calibration and validation of these models, which require careful integration of data and physical constraints. Additionally, the computational complexity of hybrid models can be significant, necessitating the development of efficient algorithms and parallel computing strategies [5; 66].\n\nLooking ahead, the future of hybrid models lies in the continued refinement of integration strategies, the development of more scalable and interpretable architectures, and the incorporation of multi-scale and multi-physics approaches. As the field of machine learning in earthquake engineering advances, the integration of data-driven and physics-based methods will play an increasingly critical role in addressing the complex challenges of seismic process modeling and simulation.",
+      "stats": {
+        "char_count": 3357,
+        "word_count": 449,
+        "sentence_count": 19,
+        "line_count": 11
+      }
+    },
+    {
+      "heading": "6.5 Advanced Techniques for Enhancing Predictive Accuracy",
+      "level": 3,
+      "content": "Recent advancements in machine learning have introduced a range of sophisticated techniques aimed at improving the predictive accuracy and reliability of seismic simulations. These techniques, including transfer learning, Bayesian inference, and uncertainty quantification, address the inherent challenges of seismic modeling, such as data scarcity, model generalizability, and the need for robust predictive frameworks. By integrating domain knowledge and leveraging advanced learning paradigms, these methods offer promising avenues for enhancing the fidelity of seismic simulations.\n\nTransfer learning has emerged as a powerful tool for improving the generalizability of seismic models across different geological conditions. By leveraging pre-trained models on well-labeled datasets, transfer learning enables the adaptation of learned features to new or underrepresented regions, reducing the dependency on extensive, region-specific training data [1]. For instance, the use of domain adaptation techniques, such as residual transfer networks, has been shown to improve classification performance in seismic data by aligning feature distributions between source and target domains [1]. This approach is particularly valuable in seismic applications, where data availability is often limited and highly variable.\n\nBayesian inference provides a principled framework for quantifying uncertainty in seismic predictions. By formulating the problem as a probabilistic inference task, Bayesian methods allow for the estimation of posterior distributions over model parameters, capturing both model and data uncertainties. This is particularly important in seismic simulations, where the complexity of the physical processes and the sparsity of observational data necessitate a rigorous treatment of uncertainty [67]. Recent works have explored the use of Bayesian neural networks, where the network's weights are treated as random variables, enabling the propagation of uncertainty through the model [67]. This approach not only enhances the reliability of predictions but also provides valuable insights into the confidence levels of different model outputs.\n\nUncertainty quantification (UQ) is another critical component of advanced seismic modeling. UQ techniques, such as Monte Carlo sampling and polynomial chaos expansions, allow for the systematic assessment of model variability and the propagation of uncertainties through complex simulations [5]. In the context of seismic inversion, UQ is essential for evaluating the reliability of estimated subsurface properties and for guiding model calibration. Recent developments in physics-informed neural networks (PINNs) have further advanced UQ by embedding physical constraints into the learning process, ensuring that predictions remain consistent with the governing equations of the system [66].\n\nThe integration of these advanced techniques into seismic modeling workflows has led to significant improvements in predictive accuracy. However, challenges remain, particularly in the areas of computational efficiency, model interpretability, and the need for large-scale validation. Future research directions should focus on developing more efficient algorithms for UQ, enhancing the interpretability of deep learning models, and exploring hybrid approaches that combine data-driven and physics-based methods. As seismic data continues to grow in volume and complexity, the continued development and refinement of these advanced techniques will be crucial for achieving more accurate and reliable seismic simulations.",
+      "stats": {
+        "char_count": 3573,
+        "word_count": 476,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "7.1 Data Scarcity, Quality, and Generalizability in Seismic Applications",
+      "level": 3,
+      "content": "Seismic applications in earthquake engineering face significant challenges in data scarcity, quality, and generalizability, which directly impact the effectiveness and reliability of machine learning (ML) models. Seismic data, by nature, is rare and often limited in quantity, especially for large-magnitude events, which are infrequent and difficult to record comprehensively [68]. This scarcity is exacerbated by the fact that seismic data is often collected using heterogeneous methods across different regions, leading to inconsistencies that further complicate model training and deployment [69]. The lack of standardized, high-quality, and representative datasets hinders the development of robust ML models that can generalize across diverse seismic conditions.\n\nIn addition to data scarcity, the quality of seismic data remains a critical issue. Sensor noise, calibration errors, and incomplete records are common in real-world seismic datasets, which can degrade model performance and lead to unreliable predictions [70]. Ensuring data integrity and consistency is essential for training accurate and reliable ML models, yet it remains a complex and resource-intensive task. Furthermore, the quality of data can vary significantly depending on the type of seismic event, the location, and the sensor technology used, making it challenging to develop universally applicable models [10].\n\nGeneralizability is another major challenge in seismic applications, as ML models trained on one dataset often fail to perform well on data from different regions or under different geological conditions [54]. This is particularly problematic in earthquake engineering, where the seismic behavior of structures can be highly dependent on local site conditions, soil properties, and tectonic environments. While techniques such as data augmentation, synthetic data generation, and transfer learning have shown promise in addressing these issues [12], they still face limitations in capturing the full complexity of seismic phenomena.\n\nTo overcome these challenges, future research should focus on developing more robust and interpretable ML models that can effectively handle scarce, noisy, and heterogeneous seismic data. This includes exploring hybrid approaches that combine data-driven and physics-based methods to improve model reliability and generalizability [71]. Additionally, the development of standardized, large-scale, and diverse seismic datasets will be crucial for advancing ML applications in earthquake engineering. By addressing these challenges, the field can move closer to building more accurate, trustworthy, and broadly applicable seismic analysis tools.",
+      "stats": {
+        "char_count": 2673,
+        "word_count": 366,
+        "sentence_count": 15,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "7.2 Model Interpretability and Explainability in Critical Engineering Decisions",
+      "level": 3,
+      "content": "Model interpretability and explainability are critical considerations in the deployment of machine learning (ML) models for earthquake engineering, where decisions often have life-or-death consequences. The increasing reliance on data-driven approaches in seismic hazard assessment, structural health monitoring, and early warning systems necessitates models that not only deliver high predictive accuracy but also provide insights into their decision-making processes. This is particularly important in safety-critical applications where stakeholders, including engineers, policymakers, and the public, must understand and trust the model’s outputs [1]. The \"black-box\" nature of many deep learning models, while effective in capturing complex nonlinear relationships, poses a significant barrier to their adoption in engineering contexts where transparency and justifiability are paramount [1].\n\nSeveral approaches have been proposed to enhance model interpretability, including post-hoc explanation methods and inherently interpretable models. Techniques such as SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-agnostic Explanations) have been employed to provide local explanations for individual predictions, offering insights into which features contribute most to a model’s output [1]. In the context of seismic signal processing, attention mechanisms in deep learning models have been used to highlight critical time-domain or frequency-domain features that influence the classification of seismic events [1]. These methods enable engineers to validate model decisions against domain-specific knowledge, ensuring that the model’s behavior aligns with established seismic principles [1].\n\nHowever, these post-hoc methods often provide limited insights into the global behavior of the model and may not fully address the need for interpretability in complex, high-stakes scenarios. As a result, there is a growing interest in developing inherently interpretable models that combine the predictive power of deep learning with the transparency of physics-based approaches. Physics-informed neural networks (PINNs), for example, embed physical laws and constraints directly into the model architecture, ensuring that predictions adhere to known geological and seismological principles [2]. This approach not only enhances interpretability but also improves the reliability of models in extrapolating to unseen scenarios, a critical requirement in earthquake engineering [5].\n\nDespite these advances, significant challenges remain. The trade-off between model complexity and interpretability is a persistent issue, as simpler models often lack the capacity to capture the intricate relationships present in seismic data. Furthermore, the lack of standardized benchmarks for evaluating interpretability in earthquake engineering applications hinders the development of robust and generalizable methods [1]. Future research should focus on creating hybrid models that integrate data-driven and physics-based components, as well as on developing new evaluation metrics that account for both predictive performance and interpretability. By addressing these challenges, the field can move toward more transparent, trustworthy, and effective machine learning solutions for seismic risk management.",
+      "stats": {
+        "char_count": 3318,
+        "word_count": 431,
+        "sentence_count": 17,
+        "line_count": 7
+      }
+    },
+    {
+      "heading": "7.3 Integration of Physics-Based Models with Data-Driven Approaches",
+      "level": 3,
+      "content": "The integration of physics-based models with data-driven approaches represents a pivotal direction for advancing seismic analysis and earthquake engineering. While data-driven methods have demonstrated remarkable success in pattern recognition, anomaly detection, and predictive modeling, their performance is often limited by the quality, quantity, and representativeness of training data. Conversely, physics-based models provide a strong foundation rooted in fundamental laws of mechanics and geophysics but may struggle with capturing complex, non-linear, and uncertain behaviors of real-world seismic systems. Bridging these two paradigms offers a promising avenue to enhance accuracy, robustness, and generalizability in seismic analysis [1].\n\nPhysics-informed neural networks (PINNs) have emerged as a powerful framework for embedding physical constraints into deep learning models. These networks incorporate governing equations, such as the Navier–Stokes equations for wave propagation or the laws of conservation of mass and momentum, directly into the loss function, ensuring that predictions adhere to the underlying physics [1]. This approach not only improves model consistency but also reduces the reliance on large, annotated datasets, making it particularly valuable in data-scarce regions. However, training PINNs remains computationally intensive and requires careful calibration to balance data fidelity and physical constraints.\n\nHybrid models that combine data-driven learning with traditional numerical methods, such as finite element analysis, offer another promising direction. These models leverage the strengths of both approaches, using physics-based simulations to generate synthetic data for training and data-driven techniques to refine predictions. For instance, in seismic response prediction, physics-based simulations can provide high-fidelity training data for neural networks, which in turn can be used to accelerate real-time decision-making and risk assessment [1]. However, integrating these models requires careful handling of parameter space and uncertainty propagation, which remains a significant challenge.\n\nRecent work has also explored the use of domain adaptation and transfer learning to enhance the generalizability of data-driven models across different tectonic regions. Techniques such as self-supervised learning and multi-view learning help bridge the gap between diverse geological conditions and improve model robustness [1]. Furthermore, the incorporation of symbolic reasoning and rule-based systems into machine learning frameworks can improve interpretability and align predictions with engineering principles [1].\n\nDespite these advances, several challenges remain, including the need for efficient computational frameworks, the handling of multi-scale phenomena, and the integration of heterogeneous data sources. Future research should focus on developing scalable and interpretable hybrid models that can effectively leverage both data and domain knowledge. Additionally, the role of uncertainty quantification and robust optimization in hybrid frameworks warrants further investigation. As the field progresses, the fusion of physics-based and data-driven methods is expected to play a central role in achieving more reliable and actionable seismic analysis tools.",
+      "stats": {
+        "char_count": 3330,
+        "word_count": 434,
+        "sentence_count": 19,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "7.4 Emerging Trends and Technological Advancements",
+      "level": 3,
+      "content": "Emerging trends and technological advancements in machine learning for earthquake engineering are reshaping the landscape of seismic analysis, risk assessment, and structural monitoring. One of the most prominent developments is the integration of real-time machine learning systems, which enable immediate response and decision-making during seismic events [1]. These systems leverage lightweight neural network architectures, such as compact convolutional and recurrent networks, to process streaming data from sensor networks with low latency. For instance, the CRED model [1] demonstrates high accuracy in detecting earthquake signals, achieving an F-score of 99.95, and can be deployed for real-time monitoring. Real-time ML is especially critical for early warning systems, where rapid and reliable predictions can save lives and reduce damage [72].\n\nAnother significant advancement is the exploration of quantum computing as a tool for accelerating complex simulations and optimizing model training. Quantum-enhanced algorithms have the potential to solve high-dimensional inverse problems in seismic wave propagation, which are computationally intensive for classical computers [1]. Recent works [1] suggest that quantum computing could revolutionize full waveform inversion (FWI) by drastically reducing the time required for model updates and improving the resolution of subsurface velocity maps. Although still in its infancy, this field holds immense promise for next-generation seismic analysis.\n\nExplainable AI (XAI) is also gaining traction as a critical component in ensuring trust and transparency in AI-driven decision-making processes. Techniques such as SHAP and LIME are being applied to make deep learning models more interpretable, particularly in safety-critical applications like seismic risk assessment and structural health monitoring [2]. The integration of XAI into ML workflows is essential for regulatory compliance and public acceptance, especially when models are used for infrastructure management and disaster response.\n\nFurthermore, the fusion of multi-modal data sources—such as remote sensing, sensor networks, and social media—is enhancing the robustness and predictive capabilities of ML models. For example, the use of satellite imagery and drone data for post-earthquake damage assessment has shown promising results [5]. These data sources provide complementary information that can improve the accuracy of damage classification and risk mapping.\n\nFinally, the development of hybrid models that combine data-driven and physics-based approaches is emerging as a powerful strategy. These models leverage the strengths of both paradigms, offering improved accuracy, interpretability, and generalizability. Techniques such as physics-informed neural networks (PINNs) and hybrid deep learning frameworks are being increasingly adopted to address the limitations of purely data-driven methods [1; 5]. As these technologies continue to evolve, they are expected to play a pivotal role in advancing the resilience and efficiency of earthquake engineering systems.",
+      "stats": {
+        "char_count": 3098,
+        "word_count": 420,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "7.5 Computational Efficiency and Scalability",
+      "level": 3,
+      "content": "Computational efficiency and scalability are critical challenges in deploying machine learning (ML) models for large-scale seismic analysis. The complexity of seismic data, combined with the need for real-time processing and high-resolution simulations, places significant demands on computational resources. Traditional ML models, particularly deep neural networks, often require extensive training times and memory, making them impractical for real-world applications without optimization. Addressing these challenges requires a combination of algorithmic innovations, efficient training strategies, and hardware advancements.\n\nOne major approach to improving computational efficiency is the use of surrogate models and model order reduction techniques. These methods approximate complex simulations with simpler models that retain essential features while reducing computational costs. For example, in seismic inversion tasks, physics-informed neural networks (PINNs) and reduced-order models based on principal component analysis (PCA) have been shown to maintain accuracy while significantly reducing training and inference times [67]. Additionally, techniques such as Bayesian neural networks and variational inference offer ways to quantify uncertainty in predictions without the need for computationally expensive Monte Carlo simulations [67].\n\nEfficient training strategies, such as transfer learning and semi-supervised learning, are also essential for scaling ML models to large seismic datasets. By leveraging pre-trained models on related tasks or utilizing unlabeled data through self-supervised learning, researchers can reduce the need for extensive labeled datasets, which are often scarce in seismic applications [1; 3]. This is particularly valuable in scenarios where data scarcity or domain shifts hinder model performance, as seen in domain adaptation studies that demonstrate improved generalization by adapting models from well-labeled source domains to underrepresented target domains [1; 5].\n\nFurthermore, the integration of parallel computing and distributed architectures is crucial for handling the high-dimensional nature of seismic data. Techniques such as distributed training using multiple GPUs or cloud-based computing platforms enable the processing of large datasets in a scalable manner [1]. Recent advances in model compression, such as pruning and quantization, further contribute to computational efficiency by reducing model size and inference latency without significant loss of accuracy [2].\n\nDespite these advancements, several challenges remain. The trade-off between model complexity and computational efficiency must be carefully managed, as overly simplified models may fail to capture the nonlinear behavior of seismic systems. Additionally, the deployment of ML models in real-time applications, such as earthquake early warning systems, requires not only computational efficiency but also low-latency inference capabilities. Future research should focus on developing hybrid models that integrate data-driven and physics-based approaches to improve both accuracy and efficiency, as well as on leveraging emerging technologies such as quantum computing and neuromorphic systems to further enhance computational scalability [1; 1].",
+      "stats": {
+        "char_count": 3281,
+        "word_count": 428,
+        "sentence_count": 18,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "7.6 Ethical, Regulatory, and Societal Implications",
+      "level": 3,
+      "content": "Machine learning (ML) is increasingly being integrated into earthquake engineering for tasks such as hazard assessment, early warning systems, and structural health monitoring. While these applications offer significant technical advancements, they also introduce a range of ethical, regulatory, and societal implications that must be carefully addressed. The deployment of ML models in critical infrastructure and disaster management requires a multidisciplinary approach that considers not only technical performance but also the trust, accountability, and societal acceptance of these systems.\n\nOne of the primary ethical concerns is the issue of transparency and interpretability. Many ML models, particularly deep learning architectures, are often treated as \"black boxes,\" making it difficult to understand how decisions are made. This lack of transparency can be problematic in safety-critical domains, where stakeholders need to justify and validate the models' outputs [21]. To address this, techniques such as SHAP (SHapley Additive exPlanations) and LIME (Local Interpretable Model-agnostic Explanations) have been proposed to improve model explainability [28]. However, the integration of these techniques into real-world applications remains a challenge, especially in scenarios where computational efficiency is critical.\n\nRegulatory frameworks for ML in earthquake engineering are still in their infancy. Traditional engineering practices are governed by well-established codes and standards, but ML-based systems often operate outside this regulatory landscape. For instance, the use of ML for seismic hazard assessment or structural health monitoring may require new guidelines to ensure that these systems meet safety and reliability standards. The development of such regulations is further complicated by the fact that ML models can evolve over time through retraining and data updates, making it difficult to maintain consistent oversight [71]. There is a growing need for standardized validation protocols that can assess the performance and robustness of ML models under diverse conditions.\n\nFrom a societal perspective, the acceptance of ML-based systems by the public is influenced by factors such as trust in the technology and perceived reliability. While ML can improve the accuracy and speed of earthquake early warning systems, there is a risk that over-reliance on automated systems could lead to complacency among the public or emergency responders [73]. Furthermore, the deployment of ML in disaster-prone regions may raise concerns about data privacy and the potential misuse of seismic data. Public engagement and education are therefore essential to build trust and ensure that ML-based systems are perceived as beneficial and trustworthy.\n\nLooking ahead, the integration of ML into earthquake engineering must be guided by a strong ethical framework that prioritizes transparency, accountability, and public trust. Future research should focus on developing more interpretable models, establishing robust regulatory standards, and fostering interdisciplinary collaboration between data scientists, engineers, and policymakers. By addressing these challenges, the field can ensure that ML technologies are not only technically advanced but also socially responsible and ethically sound [27; 46].",
+      "stats": {
+        "char_count": 3331,
+        "word_count": 462,
+        "sentence_count": 20,
+        "line_count": 9
+      }
+    },
+    {
+      "heading": "8 Conclusion",
+      "level": 2,
+      "content": "The integration of machine learning (ML) into earthquake engineering has fundamentally transformed the way researchers and practitioners approach seismic analysis, risk assessment, and structural health monitoring. This survey has highlighted the transformative potential of ML techniques in addressing the complexities of seismic phenomena, from ground motion prediction to damage detection and early warning systems. By leveraging data-driven methods, ML has enabled more accurate, efficient, and scalable solutions that complement traditional physics-based approaches. The survey has underscored the importance of interdisciplinary collaboration between data science and civil engineering to advance the field and address the unique challenges of seismic analysis.\n\nA wide range of ML techniques has been explored, including supervised learning for seismic signal classification and regression, unsupervised learning for clustering and anomaly detection, deep learning for feature extraction and pattern recognition, and transfer learning for handling limited or noisy datasets. These approaches have demonstrated significant improvements in tasks such as earthquake magnitude estimation [1], ground motion prediction [1], and structural damage detection [1]. For instance, the use of physics-informed neural networks (PINNs) has enabled the integration of physical laws into ML models, improving their reliability and generalizability [1]. Similarly, the application of deep learning for seismic response prediction has shown remarkable performance in capturing complex nonlinear relationships [4].\n\nThe survey has also emphasized the importance of model interpretability and explainability, particularly in safety-critical applications. While deep learning models have achieved high accuracy, their \"black-box\" nature often limits their adoption in engineering decision-making. Techniques such as SHAP and LIME have been introduced to enhance model transparency and align predictions with domain knowledge [5]. Furthermore, the integration of ML with physics-based models has shown promise in bridging the gap between data-driven and mechanistic approaches, offering improved accuracy and interpretability [1].\n\nDespite the progress, several challenges remain, including data scarcity, model generalizability, and the need for robust validation frameworks. Addressing these challenges requires continued research and innovation, particularly in the development of hybrid models that combine the strengths of data-driven and physics-based methods [72; 1]. Emerging trends such as real-time ML, quantum computing, and explainable AI offer exciting opportunities for advancing the field and enabling more resilient infrastructure.\n\nIn conclusion, the survey has demonstrated that machine learning is not merely a complementary tool but a transformative force in earthquake engineering. By fostering interdisciplinary collaboration and addressing current limitations, the field can harness the full potential of ML to enhance seismic risk management, improve infrastructure resilience, and ultimately save lives. The future of earthquake engineering lies in the continued exploration and integration of machine learning techniques, ensuring that they are not only powerful but also reliable, interpretable, and applicable in real-world scenarios.",
+      "stats": {
+        "char_count": 3347,
+        "word_count": 439,
+        "sentence_count": 18,
+        "line_count": 9
+      }
+    }
+  ],
+  "references": [
+    {
+      "text": "[1] Computer Science",
+      "number": null,
+      "title": "computer science"
+    },
+    {
+      "text": "[2] A Speculative Study on 6G",
+      "number": null,
+      "title": "a speculative study on 6g"
+    },
+    {
+      "text": "[3] Proceedings of Symposium on Data Mining Applications 2014",
+      "number": null,
+      "title": "proceedings of symposium on data mining applications"
+    },
+    {
+      "text": "[4] Proceedings 15th Interaction and Concurrency Experience",
+      "number": null,
+      "title": "proceedings 15th interaction and concurrency experience"
+    },
+    {
+      "text": "[5] Paperswithtopic  Topic Identification from Paper Title Only",
+      "number": null,
+      "title": "paperswithtopic topic identification from paper title only"
+    },
+    {
+      "text": "[6] Proceedings of the Eleventh International Workshop on Developments in  Computational Models",
+      "number": null,
+      "title": "proceedings of the eleventh international workshop on developments in computational models"
+    },
+    {
+      "text": "[7] A Machine-Learning Approach for Earthquake Magnitude Estimation",
+      "number": null,
+      "title": "a machine-learning approach for earthquake magnitude estimation"
+    },
+    {
+      "text": "[8] Convolutional neural network for earthquake detection",
+      "number": null,
+      "title": "convolutional neural network for earthquake detection"
+    },
+    {
+      "text": "[9] A Hierarchical Deep Convolutional Neural Network and Gated Recurrent  Unit Framework for Structural Damage Detection",
+      "number": null,
+      "title": "a hierarchical deep convolutional neural network and gated recurrent unit framework for structural damage detection"
+    },
+    {
+      "text": "[10] Deep Learning for Accelerated Reliability Analysis of Infrastructure  Networks",
+      "number": null,
+      "title": "deep learning for accelerated reliability analysis of infrastructure networks"
+    },
+    {
+      "text": "[11] A Review of Vibration-Based Damage Detection in Civil Structures  From  Traditional Methods to Machine Learning and Deep Learning Applications",
+      "number": null,
+      "title": "a review of vibration-based damage detection in civil structures from traditional methods to machine learning and deep learning applications"
+    },
+    {
+      "text": "[12] Physics-guided Convolutional Neural Network (PhyCNN) for Data-driven  Seismic Response Modeling",
+      "number": null,
+      "title": "physics-guided convolutional neural network (phycnn) for data-driven seismic response modeling"
+    },
+    {
+      "text": "[13] Unsupervised seismic facies classification using deep convolutional  autoencoder",
+      "number": null,
+      "title": "unsupervised seismic facies classification using deep convolutional autoencoder"
+    },
+    {
+      "text": "[14] Multi-View Kernels for Low-Dimensional Modeling of Seismic Events",
+      "number": null,
+      "title": "multi-view kernels for low-dimensional modeling of seismic events"
+    },
+    {
+      "text": "[15] Seismic Facies Analysis  A Deep Domain Adaptation Approach",
+      "number": null,
+      "title": "seismic facies analysis a deep domain adaptation approach"
+    },
+    {
+      "text": "[16] A New Strategy of Cost-Free Learning in the Class Imbalance Problem",
+      "number": null,
+      "title": "a new strategy of cost-free learning in the class imbalance problem"
+    },
+    {
+      "text": "[17] A Survey of Predictive Modelling under Imbalanced Distributions",
+      "number": null,
+      "title": "a survey of predictive modelling under imbalanced distributions"
+    },
+    {
+      "text": "[18] CRED  A Deep Residual Network of Convolutional and Recurrent Units for  Earthquake Signal Detection",
+      "number": null,
+      "title": "cred a deep residual network of convolutional and recurrent units for earthquake signal detection"
+    },
+    {
+      "text": "[19] Proof of Reputation",
+      "number": null,
+      "title": "proof of reputation"
+    },
+    {
+      "text": "[20] Seismic facies recognition based on prestack data using deep  convolutional autoencoder",
+      "number": null,
+      "title": "seismic facies recognition based on prestack data using deep convolutional autoencoder"
+    },
+    {
+      "text": "[21] Cascaded Region-based Densely Connected Network for Event Detection  A  Seismic Application",
+      "number": null,
+      "title": "cascaded region-based densely connected network for event detection a seismic application"
+    },
+    {
+      "text": "[22] Transformer models  an introduction and catalog",
+      "number": null,
+      "title": "transformer models an introduction and catalog"
+    },
+    {
+      "text": "[23] Deep learning for denoising",
+      "number": null,
+      "title": "deep learning for denoising"
+    },
+    {
+      "text": "[24] Transfer learning for self-supervised, blind-spot seismic denoising",
+      "number": null,
+      "title": "transfer learning for self-supervised, blind-spot seismic denoising"
+    },
+    {
+      "text": "[25] Seismic wave propagation and inversion with Neural Operators",
+      "number": null,
+      "title": "seismic wave propagation and inversion with neural operators"
+    },
+    {
+      "text": "[26] Fourier Neural Operator Surrogate Model to Predict 3D Seismic Waves  Propagation",
+      "number": null,
+      "title": "fourier neural operator surrogate model to predict 3d seismic waves propagation"
+    },
+    {
+      "text": "[27] A Review of Physics-based Machine Learning in Civil Engineering",
+      "number": null,
+      "title": "a review of physics-based machine learning in civil engineering"
+    },
+    {
+      "text": "[28] Explainable AI models for predicting liquefaction-induced lateral  spreading",
+      "number": null,
+      "title": "explainable ai models for predicting liquefaction-induced lateral spreading"
+    },
+    {
+      "text": "[29] Physically Interpretable Neural Networks for the Geosciences   Applications to Earth System Variability",
+      "number": null,
+      "title": "physically interpretable neural networks for the geosciences applications to earth system variability"
+    },
+    {
+      "text": "[30] Class Imbalance Problem in Data Mining Review",
+      "number": null,
+      "title": "class imbalance problem in data mining review"
+    },
+    {
+      "text": "[31] Cost Sensitive Learning of Deep Feature Representations from Imbalanced  Data",
+      "number": null,
+      "title": "cost sensitive learning of deep feature representations from imbalanced data"
+    },
+    {
+      "text": "[32] Self-paced Ensemble for Highly Imbalanced Massive Data Classification",
+      "number": null,
+      "title": "self-paced ensemble for highly imbalanced massive data classification"
+    },
+    {
+      "text": "[33] Classification of Buildings' Potential for Seismic Damage by Means of  Artificial Intelligence Techniques",
+      "number": null,
+      "title": "classification of buildings' potential for seismic damage by means of artificial intelligence techniques"
+    },
+    {
+      "text": "[34] Distributed Phasers",
+      "number": null,
+      "title": "distributed phasers"
+    },
+    {
+      "text": "[35] Deep-Learning Inversion of Seismic Data",
+      "number": null,
+      "title": "deep-learning inversion of seismic data"
+    },
+    {
+      "text": "[36] Bayesian-Deep-Learning Estimation of Earthquake Location from  Single-Station Observations",
+      "number": null,
+      "title": "bayesian-deep-learning estimation of earthquake location from single-station observations"
+    },
+    {
+      "text": "[37] Abstract Mining",
+      "number": null,
+      "title": "abstract mining"
+    },
+    {
+      "text": "[38] Proceedings 38th International Conference on Logic Programming",
+      "number": null,
+      "title": "proceedings 38th international conference on logic programming"
+    },
+    {
+      "text": "[39] LokiLM: Technical Report",
+      "number": null,
+      "title": "lokilm: technical report"
+    },
+    {
+      "text": "[40] A Machine Learning Benchmark for Facies Classification",
+      "number": null,
+      "title": "a machine learning benchmark for facies classification"
+    },
+    {
+      "text": "[41] Unsupervised Learning of Full-Waveform Inversion  Connecting CNN and  Partial Differential Equation in a Loop",
+      "number": null,
+      "title": "unsupervised learning of full-waveform inversion connecting cnn and partial differential equation in a loop"
+    },
+    {
+      "text": "[42] From Classification to Segmentation with Explainable AI  A Study on  Crack Detection and Growth Monitoring",
+      "number": null,
+      "title": "from classification to segmentation with explainable ai a study on crack detection and growth monitoring"
+    },
+    {
+      "text": "[43] Attention-Based 3D Seismic Fault Segmentation Training by a Few 2D Slice  Labels",
+      "number": null,
+      "title": "attention-based 3d seismic fault segmentation training by a few 2d slice labels"
+    },
+    {
+      "text": "[44] Combining Deep Learning with Physics Based Features in  Explosion-Earthquake Discrimination",
+      "number": null,
+      "title": "combining deep learning with physics based features in explosion-earthquake discrimination"
+    },
+    {
+      "text": "[45] A Novel Approach for Earthquake Early Warning System Design using Deep  Learning Techniques",
+      "number": null,
+      "title": "a novel approach for earthquake early warning system design using deep learning techniques"
+    },
+    {
+      "text": "[46] Physics-informed Neural Networks for Solving Nonlinear Diffusivity and  Biot's equations",
+      "number": null,
+      "title": "physics-informed neural networks for solving nonlinear diffusivity and biot's equations"
+    },
+    {
+      "text": "[47] DAmageNet  A Universal Adversarial Dataset",
+      "number": null,
+      "title": "damagenet a universal adversarial dataset"
+    },
+    {
+      "text": "[48] Building Damage Detection in Satellite Imagery Using Convolutional  Neural Networks",
+      "number": null,
+      "title": "building damage detection in satellite imagery using convolutional neural networks"
+    },
+    {
+      "text": "[49] Physics-Informed Multi-LSTM Networks for Metamodeling of Nonlinear  Structures",
+      "number": null,
+      "title": "physics-informed multi-lstm networks for metamodeling of nonlinear structures"
+    },
+    {
+      "text": "[50] SeismicNet  Physics-informed neural networks for seismic wave modeling  in semi-infinite domain",
+      "number": null,
+      "title": "seismicnet physics-informed neural networks for seismic wave modeling in semi-infinite domain"
+    },
+    {
+      "text": "[51] Integrating Machine Learning with Physics-Based Modeling",
+      "number": null,
+      "title": "integrating machine learning with physics-based modeling"
+    },
+    {
+      "text": "[52] PhyCV  The First Physics-inspired Computer Vision Library",
+      "number": null,
+      "title": "phycv the first physics-inspired computer vision library"
+    },
+    {
+      "text": "[53] Fully convolutional networks for structural health monitoring through  multivariate time series classification",
+      "number": null,
+      "title": "fully convolutional networks for structural health monitoring through multivariate time series classification"
+    },
+    {
+      "text": "[54] Transfer learning based physics-informed neural networks for solving  inverse problems in engineering structures under different loading scenarios",
+      "number": null,
+      "title": "transfer learning based physics-informed neural networks for solving inverse problems in engineering structures under different loading scenarios"
+    },
+    {
+      "text": "[55] A deep transfer learning network for structural condition identification  with limited real-world training data",
+      "number": null,
+      "title": "a deep transfer learning network for structural condition identification with limited real-world training data"
+    },
+    {
+      "text": "[56] Explainable Machine Learning using Real, Synthetic and Augmented Fire  Tests to Predict Fire Resistance and Spalling of RC Columns",
+      "number": null,
+      "title": "explainable machine learning using real, synthetic and augmented fire tests to predict fire resistance and spalling of rc columns"
+    },
+    {
+      "text": "[57] A Comparative Evaluation of Machine Learning Algorithms for the  Prediction of R C Buildings' Seismic Damage",
+      "number": null,
+      "title": "a comparative evaluation of machine learning algorithms for the prediction of r c buildings' seismic damage"
+    },
+    {
+      "text": "[58] Revisiting the Internet of Things  New Trends, Opportunities and Grand  Challenges",
+      "number": null,
+      "title": "revisiting the internet of things new trends, opportunities and grand challenges"
+    },
+    {
+      "text": "[59] Real-Time Well Log Prediction From Drilling Data Using Deep Learning",
+      "number": null,
+      "title": "real-time well log prediction from drilling data using deep learning"
+    },
+    {
+      "text": "[60] The Intelligent Voice 2016 Speaker Recognition System",
+      "number": null,
+      "title": "the intelligent voice 2016 speaker recognition system"
+    },
+    {
+      "text": "[61] 360Zhinao Technical Report",
+      "number": null,
+      "title": "360zhinao technical report"
+    },
+    {
+      "text": "[62] New Approach for Prediction Pre-cancer via Detecting Mutated in Tumor  Protein P53",
+      "number": null,
+      "title": "new approach for prediction pre-cancer via detecting mutated in tumor protein p53"
+    },
+    {
+      "text": "[63] Deep-learning inversion  a next generation seismic velocity-model  building method",
+      "number": null,
+      "title": "deep-learning inversion a next generation seismic velocity-model building method"
+    },
+    {
+      "text": "[64] A time multiscale based data-driven approach in cyclic elasto-plasticity",
+      "number": null,
+      "title": "a time multiscale based data-driven approach in cyclic elasto-plasticity"
+    },
+    {
+      "text": "[65] An Analysis of the t-SNE Algorithm for Data Visualization",
+      "number": null,
+      "title": "an analysis of the t-sne algorithm for data visualization"
+    },
+    {
+      "text": "[66] The 10 Research Topics in the Internet of Things",
+      "number": null,
+      "title": "the 10 research topics in the internet of things"
+    },
+    {
+      "text": "[67] Demanded Abstract Interpretation (Extended Version)",
+      "number": null,
+      "title": "demanded abstract interpretation (extended version)"
+    },
+    {
+      "text": "[68] Distributed archive and single access system for accelerometric event  data   a NERIES initiative",
+      "number": null,
+      "title": "distributed archive and single access system for accelerometric event data a neries initiative"
+    },
+    {
+      "text": "[69] VERCE delivers a productive e-Science environment for seismology  research",
+      "number": null,
+      "title": "verce delivers a productive e-science environment for seismology research"
+    },
+    {
+      "text": "[70] Compressive-Sensing Data Reconstruction for Structural Health  Monitoring  A Machine-Learning Approach",
+      "number": null,
+      "title": "compressive-sensing data reconstruction for structural health monitoring a machine-learning approach"
+    },
+    {
+      "text": "[71] Integrating Scientific Knowledge with Machine Learning for Engineering  and Environmental Systems",
+      "number": null,
+      "title": "integrating scientific knowledge with machine learning for engineering and environmental systems"
+    },
+    {
+      "text": "[72] 6th International Symposium on Attention in Cognitive Systems 2013",
+      "number": null,
+      "title": "6th international symposium on attention in cognitive systems"
+    },
+    {
+      "text": "[73] Real-time Earthquake Early Warning with Deep Learning  Application to  the 2016 Central Apennines, Italy Earthquake Sequence",
+      "number": null,
+      "title": "real-time earthquake early warning with deep learning application to the 2016 central apennines, italy earthquake sequence"
+    }
+  ],
+  "metadata": {
+    "source_file": "results\\original\\SurveyForge\\Engineering\\Machine Learning in Earthquake Engineering_split.json",
+    "processed_date": "2025-12-30T20:33:48.755340",
+    "config": {
+      "normalize_outline": true,
+      "normalize_content": true,
+      "normalize_references": true
+    }
+  }
+}
