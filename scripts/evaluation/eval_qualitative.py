@@ -18,6 +18,7 @@ import logging
 import os
 import re
 import sys
+import time
 from datetime import datetime
 from dataclasses import dataclass, asdict
 from pathlib import Path
@@ -503,6 +504,7 @@ Survey reference titles (cleaned):
     # ----------------------------- Public API ----------------------------- #
 
     def evaluate_file(self, file_path: Path, category: str) -> Dict[str, Any]:
+        start_time = time.time()
         self.logger.info(f"Evaluating {file_path}")
         survey = self._load_survey(file_path)
         criteria = CriteriaSet.load(
@@ -554,16 +556,20 @@ Survey reference titles (cleaned):
         else:
             scores["reference"] = {"score": None, "notes": "skipped by config"}
 
+        duration = time.time() - start_time
+        
         return {
             "file": str(file_path),
             "category": category,
             "scores": scores,
             "prompt_tokens": None,  # can be filled when using usage info
+            "duration_seconds": round(duration, 2),
         }
 
     def evaluate_category(
         self, system: str, category: str, summary: Dict[str, Any]
     ) -> List[Dict[str, Any]]:
+        category_start_time = time.time()
         base = Path(self.config.processed_dir) / system / category
         if not base.exists():
             self.logger.warning(f"Category path missing: {base}")
@@ -595,9 +601,13 @@ Survey reference titles (cleaned):
                 # Update summary and save incrementally
                 if system not in summary["by_system"]:
                     summary["by_system"][system] = {}
+                
+                category_duration = round(time.time() - category_start_time, 2)
+                
                 summary["by_system"][system][category] = {
                     "files": results,
                     "averages": self._compute_aspect_averages(results),
+                    "total_duration_seconds": category_duration,
                 }
                 summary["total"] = sum(
                     len(cat_data.get("files", []))
