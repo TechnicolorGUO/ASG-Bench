@@ -1,0 +1,27 @@
+{
+  "processed_dir": "results/processed",
+  "output_dir": "results/evaluation",
+  "criteria_base_dir": "outputs/criteria",
+  "criteria_filename": "merged_aspects.json",
+
+  "include_criteria_description": true,
+  "include_criteria_example": true,
+  "per_aspect_scoring": true,
+
+  "systems": ["Gemini"],
+  "categories": ["Biology"],
+  "max_files_per_category": 10,
+
+  "llm_model": "qwen/qwen3-30b-a3b",
+  "llm_temperature": 0.0,
+  "llm_api_key": null,
+  "llm_api_base": null,
+
+  "max_total_tokens_in_prompt": 32768,
+  "eval_outline": true,
+  "eval_content": true,
+  "eval_reference": true,
+
+  "resume_from": null
+}
+
