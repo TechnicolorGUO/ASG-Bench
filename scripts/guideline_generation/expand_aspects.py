@@ -186,47 +186,37 @@ def split_survey_into_parts(content: str):
 # ------------------------------------------------------------------------------
 
 class Survey:
-    def __init__(self, survey_md_path, auto_save_split=True):
-        self.survey_md_path = survey_md_path
-        self.survey = self.read_survey(survey_md_path)
+    def __init__(self, survey_json_path):
+        """
+        Initialize Survey from a JSON file containing split results.
         
-        # Split survey into three parts in one call
-        outline, main_content, ref_block = split_survey_into_parts(self.survey)
-        
-        self.outline = outline
-        
-        # Process content: remove headers
-        main_content_wo_headers = re.sub(r'^#+\s+.*$', '', main_content, flags=re.MULTILINE)
-        main_content_wo_headers = re.sub(r'\n{2,}', '\n', main_content_wo_headers)  # Merge empty lines
-        self.content = main_content_wo_headers.strip()
-        
-        # Process reference: parse or return raw block
-        if not ref_block:
-            self.reference = []
-        else:
-            try:
-                _, references = parse_markdown(self.survey)
-                self.reference = references
-            except Exception as e:
-                # If parsing fails, return raw reference block split by lines
-                self.reference = [line.strip() for line in ref_block.split('\n') if line.strip()]
-        
-        # Save split results to JSON file in the same directory as md file
-        if auto_save_split:
-            self.save_split_results()
+        Args:
+            survey_json_path: Path to JSON file with 'outline', 'content', and 'reference' keys
+        """
+        self.survey_json_path = survey_json_path
+        self.load_from_json(survey_json_path)
     
-    def read_survey(self, survey_md_path):
-        with open(survey_md_path, 'r', encoding='utf-8') as f:
-            return f.read()
+    def load_from_json(self, json_path):
+        """Load survey data from JSON file."""
+        with open(json_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+        
+        self.outline = data.get('outline', [])
+        self.content = data.get('content', '')
+        self.reference = data.get('reference', [])
     
-    def get_survey(self) -> str:
-        return self.survey
-
-    def get_survey_md_path(self) -> str:
-        return self.survey_md_path
+    def get_survey_json_path(self) -> str:
+        return self.survey_json_path
 
     def get_survey_name(self) -> str:
-        return os.path.basename(self.survey_md_path).replace('.md', '')
+        """Extract survey name from JSON file path."""
+        basename = os.path.basename(self.survey_json_path)
+        # Remove '_split.json' suffix if present
+        if basename.endswith('_split.json'):
+            return basename.replace('_split.json', '')
+        elif basename.endswith('.json'):
+            return basename.replace('.json', '')
+        return basename
     
     def get_component_content(self, component_name: str) -> str:
         """
@@ -256,29 +246,6 @@ class Survey:
         else:
             raise ValueError(f"Unknown component name: {component_name}")
     
-    def save_split_results(self):
-        """
-        Save split results (outline, content, reference) to a JSON file 
-        in the same directory as the markdown file.
-        """
-        # Get the directory and base name of the md file
-        md_dir = os.path.dirname(self.survey_md_path)
-        md_basename = os.path.basename(self.survey_md_path)
-        json_filename = md_basename.replace('.md', '_split.json')
-        json_path = os.path.join(md_dir, json_filename)
-        
-        # Prepare the data to save
-        split_results = {
-            "outline": self.outline,
-            "content": self.content,
-            "reference": self.reference
-        }
-        
-        # Save to JSON file
-        with open(json_path, 'w', encoding='utf-8') as f:
-            json.dump(split_results, f, indent=2, ensure_ascii=False)
-        
-        print(f"Split results saved to: {json_path}")
 
 def expand_aspect(survey: Survey, component_name: str, aspect_dict: dict, n: int = 3) -> dict:
     """
@@ -359,15 +326,15 @@ def expand_aspect(survey: Survey, component_name: str, aspect_dict: dict, n: int
     
     return None
 
-def expand_with_survey(survey_md_path: str, n: int = 3):
+def expand_with_survey(survey_json_path: str, n: int = 3):
     """
     Expand all aspects for a survey into detailed criteria.
     
     Args:
-        survey_md_path: Path to survey markdown file
+        survey_json_path: Path to survey JSON file (with split results)
         n: Number of criteria to expand each aspect into
     """
-    survey = Survey(survey_md_path)
+    survey = Survey(survey_json_path)
     results = {}
     
     for component_name in aspects:
@@ -389,39 +356,49 @@ def expand_with_survey(survey_md_path: str, n: int = 3):
     
     return results
 
-def save_results(results, survey_md_path, output_dir):
+def save_results(results, survey_json_path, output_dir):
     os.makedirs(output_dir, exist_ok=True)
-    survey_name = os.path.basename(survey_md_path).replace('.md', '').replace(' ', '_')
+    # Extract survey name from JSON path
+    basename = os.path.basename(survey_json_path)
+    if basename.endswith('_split.json'):
+        survey_name = basename.replace('_split.json', '').replace(' ', '_')
+    elif basename.endswith('.json'):
+        survey_name = basename.replace('.json', '').replace(' ', '_')
+    else:
+        survey_name = basename.replace(' ', '_')
     output_path = os.path.join(output_dir, f"expanded_aspects_{survey_name}.json")
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(results, f, indent=2, ensure_ascii=False)
     print(f"\nResults saved to: {output_path}")
 
-def expand_field_of_study(survey_field_of_study: str, n: int = 3) -> dict:
+def expand_field_of_study(survey_field_of_study: str, input_base_dir: str = "Human_json_cleaned_v3", n: int = 3) -> dict:
     """
     Expand the field of study into detailed criteria.
     
     Args:
         survey_field_of_study: Field of study string
+        input_base_dir: Base directory containing the JSON files (default: "Human_json_cleaned_v3")
         n: Number of criteria to expand into
     """
-    dir_name = f"outputs/surveys/{survey_field_of_study}"
+    dir_name = os.path.join(input_base_dir, survey_field_of_study)
     output_dir = f"outputs/criteria/{survey_field_of_study}"
     if not os.path.exists(dir_name):
+        print(f"Directory not found: {dir_name}")
         return None
+    results = None
     for file in os.listdir(dir_name):
-        if file.endswith(".md"):
-            survey_md_path = os.path.join(dir_name, file)
-            print(f"Expanding survey: {survey_md_path}")
-            results = expand_with_survey(survey_md_path, n)
-            save_results(results, survey_md_path, output_dir)
+        if file.endswith("_split.json") or file.endswith(".json"):
+            survey_json_path = os.path.join(dir_name, file)
+            print(f"Expanding survey: {survey_json_path}")
+            results = expand_with_survey(survey_json_path, n)
+            save_results(results, survey_json_path, output_dir)
     return results
 
 if __name__ == "__main__":
     # Example usage
     # survey_field_of_study = "Biology"
-    # expand_field_of_study(survey_field_of_study, n=3)
+    # expand_field_of_study(survey_field_of_study, input_base_dir="Human_json_cleaned_v3", n=3)
     survey_field_of_study = ["Business", "Computer Science", "Education", "Engineering", "Environmental Science", "Medicine", "Physics", "Psychology", "Sociology"]
     for field_of_study in survey_field_of_study:
-        expand_field_of_study(field_of_study, n=3)
+        expand_field_of_study(field_of_study, input_base_dir="Human_json_cleaned_v3", n=3)
     
