@@ -317,7 +317,7 @@ Domain-specific evaluation criteria for REFERENCES (JSON):
 {json.dumps(criteria.reference, ensure_ascii=False)}
 
 Survey reference titles (cleaned):
-{json.dumps([r.get('title') for r in references], ensure_ascii=False)}
+{json.dumps([r.get('text') for r in references], ensure_ascii=False)}
 
 Scoring request:
 - Provide a 1-5 score for the reference quality based on the criteria.
@@ -395,7 +395,7 @@ Domain-specific reference aspects and their criteria (JSON):
 {json.dumps(criteria_payload, ensure_ascii=False)}
 
 Survey reference titles (cleaned):
-{json.dumps([r.get('title') for r in references], ensure_ascii=False)}
+{json.dumps([r.get('text') for r in references], ensure_ascii=False)}
 
 {common_instructions}
 """
