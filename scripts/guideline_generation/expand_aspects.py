@@ -17,6 +17,10 @@ client = OpenAI(
   api_key=os.environ.get("API_KEY"),
 )
 
+# Maximum tokens to include in prompt (to avoid context length errors)
+# Model max is 40960, but we need room for prompt template, so use 15000 for content
+MAX_TOTAL_TOKENS_IN_PROMPT = 40960
+
 def generate_response(prompt):
     from openai import BadRequestError
     
@@ -57,6 +61,35 @@ def robust_json_parse(response_text):
         print(f"Error: {e}")
         print(f"Response: {response_text[:500]}...")
         return None
+
+def truncate_content(content, max_tokens: int = MAX_TOTAL_TOKENS_IN_PROMPT) -> str:
+    """
+    Truncate content to stay within token budget.
+    Uses approximation of 2 characters per token.
+    
+    Args:
+        content: Content to truncate (can be string or list)
+        max_tokens: Maximum number of tokens allowed
+        
+    Returns:
+        str: Truncated content as string
+    """
+    # Convert list to string if necessary
+    if isinstance(content, list):
+        content = "\n".join(str(item) for item in content)
+    else:
+        content = str(content)
+    
+    # Approximate: 2 characters per token
+    max_chars = max_tokens * 2
+    
+    if len(content) <= max_chars:
+        return content
+    
+    # Truncate and add notice
+    truncated = content[:max_chars] + "\n\n... [Content truncated due to length]"
+    print(f"⚠ Content truncated from {len(content)} to {len(truncated)} characters")
+    return truncated
 
 aspects = {
   "outline": [
@@ -264,8 +297,9 @@ def expand_aspect(survey: Survey, component_name: str, aspect_dict: dict, n: int
     aspect_name = list(aspect_dict.keys())[0]
     aspect_description = aspect_dict[aspect_name]
     
-    # Get component content
+    # Get component content and truncate to stay within token budget
     component_content = survey.get_component_content(component_name)
+    component_content = truncate_content(component_content, max_tokens=MAX_TOTAL_TOKENS_IN_PROMPT)
     
     max_retries = 3
     original_component_content = component_content
@@ -301,6 +335,10 @@ def expand_aspect(survey: Survey, component_name: str, aspect_dict: dict, n: int
             
             if is_token_error and retry_count < max_retries - 1:
                 # Content too long, keep the latter half and retry
+                # Ensure component_content is a string
+                if not isinstance(component_content, str):
+                    component_content = str(component_content)
+                
                 content_lines = component_content.split('\n')
                 if len(content_lines) > 1:
                     # Keep the latter half
