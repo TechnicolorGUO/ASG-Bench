@@ -12,6 +12,8 @@ import argparse
 import csv
 import json
 import logging
+import re
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from collections import defaultdict
@@ -32,6 +34,7 @@ class EvaluationResultsAnalyzer:
         """
         self.results_path = Path(results_path)
         self.data = self._load_results()
+        self.timestamp = self._extract_timestamp()
         
     def _load_results(self) -> Dict[str, Any]:
         """Load evaluation results from JSON file."""
@@ -43,6 +46,32 @@ class EvaluationResultsAnalyzer:
         
         logger.info(f"Loaded results from {self.results_path}")
         return data
+    
+    def _extract_timestamp(self) -> str:
+        """
+        Extract timestamp from filename or JSON, or generate a new one.
+        
+        Returns:
+            Timestamp string in format YYYYMMDD_HHMMSS
+        """
+        # Try to extract from filename (e.g., evaluation_summary_20251230_191134.json)
+        filename = self.results_path.stem
+        pattern = r'(\d{8}_\d{6})'
+        match = re.search(pattern, filename)
+        if match:
+            logger.info(f"Extracted timestamp from filename: {match.group(1)}")
+            return match.group(1)
+        
+        # Try to extract from JSON content
+        timestamp_from_json = self.data.get("generated_at")
+        if timestamp_from_json:
+            logger.info(f"Extracted timestamp from JSON: {timestamp_from_json}")
+            return timestamp_from_json
+        
+        # Generate new timestamp
+        new_timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        logger.info(f"Generated new timestamp: {new_timestamp}")
+        return new_timestamp
     
     def aggregate_by_system(self) -> List[Dict[str, Any]]:
         """
@@ -295,10 +324,13 @@ class EvaluationResultsAnalyzer:
         Export all aggregation types to separate CSV files.
         
         Args:
-            output_dir: Directory to save CSV files
+            output_dir: Base directory to save CSV files (will create timestamped subdirectory)
         """
-        output_dir = Path(output_dir)
+        # Create timestamped subdirectory
+        output_dir = Path(output_dir) / f"analysis_{self.timestamp}"
         output_dir.mkdir(parents=True, exist_ok=True)
+        
+        logger.info(f"Exporting results to timestamped directory: {output_dir}")
         
         # Export by system
         by_system = self.aggregate_by_system()
@@ -361,13 +393,17 @@ def main():
     
     if args.aggregation == "all":
         analyzer.export_all(args.output_dir)
+        output_location = Path(args.output_dir) / f"analysis_{analyzer.timestamp}"
     else:
         # Determine output file
         if args.output_file:
             output_path = args.output_file
+            output_location = Path(args.output_file).parent
         else:
-            output_dir = Path(args.output_dir)
+            # Create timestamped subdirectory for single aggregation type too
+            output_dir = Path(args.output_dir) / f"analysis_{analyzer.timestamp}"
             output_dir.mkdir(parents=True, exist_ok=True)
+            output_location = output_dir
             
             if args.aggregation == "system":
                 output_path = output_dir / "aggregated_by_system.csv"
@@ -390,7 +426,7 @@ def main():
             
             analyzer.export_to_csv(data, output_path)
     
-    print(f"Analysis complete. Results saved to {args.output_dir}")
+    print(f"Analysis complete. Results saved to {output_location}")
 
 
 if __name__ == "__main__":
