@@ -55,6 +55,14 @@ class EvaluationConfig:
 
     # When true, ask the model to score each aspect separately and average them.
     per_aspect_scoring: bool = False
+    
+    # When true, ask the model to score each criterion (rubric) separately and average them.
+    # This provides the most granular scoring: aspect > criterion > overall
+    per_criterion_scoring: bool = False
+    
+    # When true, use binary scoring (0 or 1) for each criterion and sum them for aspect score.
+    # Each aspect is evaluated separately with one API call per aspect.
+    binary_scoring: bool = False
 
     systems: Optional[List[str]] = None  # e.g., ["Gemini", "Qwen"]
     categories: Optional[List[str]] = None  # e.g., ["Biology"]
@@ -265,6 +273,8 @@ class QuantitativeEvaluator:
     def _build_prompt(
         self, survey: SurveyData, criteria: CriteriaSet, category: str, aspect: str
     ) -> str:
+        if self.config.per_criterion_scoring:
+            return self._build_prompt_per_criterion(survey, criteria, category, aspect)
         if self.config.per_aspect_scoring:
             return self._build_prompt_per_aspect(survey, criteria, category, aspect)
 
@@ -402,6 +412,173 @@ Survey reference titles (cleaned):
 
         raise ValueError(f"Unsupported aspect: {aspect}")
 
+    def _build_prompt_per_criterion(
+        self, survey: SurveyData, criteria: CriteriaSet, category: str, aspect: str
+    ) -> str:
+        """
+        Build a prompt that asks the model to score each individual criterion (rubric)
+        within each aspect, providing the most granular evaluation.
+        """
+        stats = survey.get_statistics()
+        outline = survey.outline.to_list()
+        content = [c.to_dict() for c in survey.content.sections]
+        references = [r.to_dict() for r in survey.references.entries]
+
+        aspect_map = {
+            "outline": criteria.outline,
+            "content": criteria.content,
+            "reference": criteria.reference,
+        }
+        if aspect not in aspect_map:
+            raise ValueError(f"Unsupported aspect: {aspect}")
+
+        criteria_payload = aspect_map[aspect]
+
+        common_instructions = """
+For EACH criterion below (within each aspect), give:
+- an integer score from 1 to 5
+- a short justification in one sentence
+
+Return JSON exactly in this format:
+{
+  "aspects": [
+    {
+      "aspect_name": "<string>",
+      "criteria": [
+        {"criterion_name": "<string>", "score": <int>, "notes": "<string>"}
+      ]
+    }
+  ]
+}
+"""
+
+        if aspect == "outline":
+            return f"""
+You are a domain reviewer for category: {category}.
+
+Domain-specific outline aspects and their detailed criteria (JSON):
+{json.dumps(criteria_payload, ensure_ascii=False)}
+
+Survey outline (cleaned):
+{json.dumps(outline, ensure_ascii=False)}
+
+{common_instructions}
+"""
+
+        if aspect == "content":
+            return f"""
+You are a domain reviewer for category: {category}.
+
+Domain-specific content aspects and their detailed criteria (JSON):
+{json.dumps(criteria_payload, ensure_ascii=False)}
+
+Survey content sections (trimmed for length):
+{json.dumps(self._trim_sections(content), ensure_ascii=False)}
+
+Quick stats: {json.dumps(stats, ensure_ascii=False)}
+
+{common_instructions}
+"""
+
+        if aspect == "reference":
+            return f"""
+You are a domain reviewer for category: {category}.
+
+Domain-specific reference aspects and their detailed criteria (JSON):
+{json.dumps(criteria_payload, ensure_ascii=False)}
+
+Survey reference titles (cleaned):
+{json.dumps([r.get('text') for r in references], ensure_ascii=False)}
+
+{common_instructions}
+"""
+
+        raise ValueError(f"Unsupported aspect: {aspect}")
+
+    def _build_prompt_binary_criterion(
+        self, survey: SurveyData, single_aspect: Dict[str, Any], category: str, aspect_type: str
+    ) -> str:
+        """
+        Build a prompt for binary scoring (0 or 1) of a single aspect's criteria.
+        Each criterion is evaluated independently and gets 0 (not fulfilled) or 1 (fulfilled).
+        """
+        stats = survey.get_statistics()
+        outline = survey.outline.to_list()
+        content = [c.to_dict() for c in survey.content.sections]
+        references = [r.to_dict() for r in survey.references.entries]
+
+        aspect_name = single_aspect.get("aspect_name", "Unknown Aspect")
+        criteria = single_aspect.get("expanded_criteria", [])
+
+        common_instructions = """
+For EACH criterion below, evaluate whether it is fulfilled:
+- Score 0 if the criterion is NOT met or only partially met
+- Score 1 if the criterion is FULLY met
+- Provide a brief explanation (1-2 sentences) justifying your decision
+
+Return JSON exactly in this format:
+{
+  "aspect_name": "<string>",
+  "criteria": [
+    {
+      "criterion_name": "<string>",
+      "score": <0 or 1>,
+      "fulfilled": <true or false>,
+      "explanation": "<string explaining why the criterion is/isn't fulfilled>"
+    }
+  ]
+}
+"""
+
+        if aspect_type == "outline":
+            return f"""
+You are a domain reviewer for category: {category}.
+
+You are evaluating the aspect: "{aspect_name}"
+
+Criteria to evaluate (with descriptions and examples):
+{json.dumps(criteria, ensure_ascii=False, indent=2)}
+
+Survey outline (cleaned):
+{json.dumps(outline, ensure_ascii=False)}
+
+{common_instructions}
+"""
+
+        if aspect_type == "content":
+            return f"""
+You are a domain reviewer for category: {category}.
+
+You are evaluating the aspect: "{aspect_name}"
+
+Criteria to evaluate (with descriptions and examples):
+{json.dumps(criteria, ensure_ascii=False, indent=2)}
+
+Survey content sections (trimmed for length):
+{json.dumps(self._trim_sections(content), ensure_ascii=False)}
+
+Quick stats: {json.dumps(stats, ensure_ascii=False)}
+
+{common_instructions}
+"""
+
+        if aspect_type == "reference":
+            return f"""
+You are a domain reviewer for category: {category}.
+
+You are evaluating the aspect: "{aspect_name}"
+
+Criteria to evaluate (with descriptions and examples):
+{json.dumps(criteria, ensure_ascii=False, indent=2)}
+
+Survey reference titles (cleaned):
+{json.dumps([r.get('text') for r in references], ensure_ascii=False)}
+
+{common_instructions}
+"""
+
+        raise ValueError(f"Unsupported aspect type: {aspect_type}")
+
     def _score_with_llm(self, prompt: str) -> Dict[str, Any]:
         if not self.llm_client or not self.config.llm_model:
             return {"score": None, "notes": "LLM disabled"}
@@ -475,6 +652,110 @@ Survey reference titles (cleaned):
             "aspects": aspects if isinstance(aspects, list) else [],
         }
 
+    def _score_criteria_with_llm(self, prompt: str, expected_criteria_count: int) -> Dict[str, Any]:
+        """
+        Ask the LLM for per-criterion scores within aspects and compute the mean as the overall score.
+        This provides the most granular evaluation.
+        """
+        base = self._score_with_llm(prompt)
+
+        aspects = base.get("aspects") if isinstance(base, dict) else None
+        all_criterion_scores = []
+        
+        if isinstance(aspects, list):
+            # Collect all criterion scores from all aspects
+            for aspect_data in aspects:
+                if not isinstance(aspect_data, dict):
+                    continue
+                criteria_list = aspect_data.get("criteria", [])
+                if isinstance(criteria_list, list):
+                    for criterion in criteria_list:
+                        score = criterion.get("score") if isinstance(criterion, dict) else None
+                        if isinstance(score, (int, float)):
+                            all_criterion_scores.append(score)
+            
+            if all_criterion_scores:
+                overall = sum(all_criterion_scores) / len(all_criterion_scores)
+                return {
+                    "score": overall,
+                    "notes": f"mean of {len(all_criterion_scores)} criterion scores",
+                    "aspects": aspects,
+                }
+
+        raw_response = base.get("_raw_response") if isinstance(base, dict) else None
+        fallback_avg = self._average_first_numeric_tokens(raw_response, expected_criteria_count)
+        if fallback_avg is not None:
+            return {
+                "score": fallback_avg,
+                "notes": f"mean of first {expected_criteria_count} raw numeric tokens",
+                "raw_excerpt": raw_response[:200] if raw_response else None,
+                "aspects": [],
+            }
+
+        return {
+            "score": None,
+            "notes": base.get("notes", "missing criterion scores")
+            if isinstance(base, dict)
+            else "missing criterion scores",
+            "aspects": aspects if isinstance(aspects, list) else [],
+        }
+
+    def _score_binary_criteria_with_llm(self, prompt: str, expected_criteria_count: int) -> Dict[str, Any]:
+        """
+        Ask the LLM for binary scores (0 or 1) for each criterion and sum them as the aspect score.
+        Returns the sum (not average) of all criterion scores.
+        """
+        base = self._score_with_llm(prompt)
+
+        aspect_name = base.get("aspect_name") if isinstance(base, dict) else None
+        criteria = base.get("criteria") if isinstance(base, dict) else None
+        
+        if isinstance(criteria, list):
+            binary_scores = []
+            for criterion in criteria:
+                if not isinstance(criterion, dict):
+                    continue
+                score = criterion.get("score")
+                # Ensure score is 0 or 1
+                if isinstance(score, (int, float)):
+                    binary_score = 1 if score > 0.5 else 0
+                    criterion["score"] = binary_score
+                    criterion["fulfilled"] = binary_score == 1
+                    binary_scores.append(binary_score)
+            
+            if binary_scores:
+                total_score = sum(binary_scores)
+                return {
+                    "score": total_score,
+                    "max_score": len(binary_scores),
+                    "notes": f"sum of {len(binary_scores)} binary criterion scores (0 or 1 each)",
+                    "aspect_name": aspect_name,
+                    "criteria": criteria,
+                }
+
+        # Fallback: try to extract binary values
+        raw_response = base.get("_raw_response") if isinstance(base, dict) else None
+        if raw_response:
+            matches = re.findall(r"\b[01]\b", raw_response)
+            if len(matches) >= expected_criteria_count:
+                binary_scores = [int(m) for m in matches[:expected_criteria_count]]
+                return {
+                    "score": sum(binary_scores),
+                    "max_score": expected_criteria_count,
+                    "notes": f"sum of {expected_criteria_count} binary scores from raw response",
+                    "raw_excerpt": raw_response[:200],
+                    "criteria": [],
+                }
+
+        return {
+            "score": None,
+            "max_score": expected_criteria_count,
+            "notes": base.get("notes", "missing binary criterion scores")
+            if isinstance(base, dict)
+            else "missing binary criterion scores",
+            "criteria": criteria if isinstance(criteria, list) else [],
+        }
+
     def _average_first_numeric_tokens(
         self, raw_response: Optional[str], expected_count: int
     ) -> Optional[float]:
@@ -501,6 +782,64 @@ Survey reference titles (cleaned):
 
         return None
 
+    def _evaluate_binary_aspect_group(
+        self, survey: SurveyData, aspects: List[Dict[str, Any]], category: str, aspect_type: str
+    ) -> Dict[str, Any]:
+        """
+        Evaluate all aspects in a group (e.g., all content aspects) using binary scoring.
+        Each aspect is evaluated separately with its own API call.
+        Returns aggregated results with aspect-level and overall scores.
+        """
+        all_aspects_results = []
+        total_score = 0
+        total_max_score = 0
+
+        for aspect in aspects:
+            aspect_name = aspect.get("aspect_name", "Unknown")
+            criteria_count = len(aspect.get("expanded_criteria", []))
+            
+            if criteria_count == 0:
+                self.logger.warning(f"Aspect '{aspect_name}' has no criteria, skipping")
+                continue
+
+            try:
+                # Build prompt for this single aspect
+                prompt = self._build_prompt_binary_criterion(survey, aspect, category, aspect_type)
+                
+                # Score this aspect
+                aspect_result = self._score_binary_criteria_with_llm(prompt, criteria_count)
+                
+                # Accumulate scores
+                score = aspect_result.get("score")
+                max_score = aspect_result.get("max_score", criteria_count)
+                
+                if isinstance(score, (int, float)):
+                    total_score += score
+                    total_max_score += max_score
+                
+                all_aspects_results.append(aspect_result)
+                
+                self.logger.info(
+                    f"Evaluated aspect '{aspect_name}': {score}/{max_score} criteria fulfilled"
+                )
+                
+            except Exception as exc:  # noqa: BLE001
+                self.logger.exception(f"Failed to evaluate aspect '{aspect_name}': {exc}")
+                all_aspects_results.append({
+                    "aspect_name": aspect_name,
+                    "score": None,
+                    "max_score": criteria_count,
+                    "notes": f"error: {str(exc)}",
+                    "criteria": [],
+                })
+
+        return {
+            "score": total_score,
+            "max_score": total_max_score,
+            "notes": f"sum of binary scores across {len(all_aspects_results)} aspects",
+            "aspects": all_aspects_results,
+        }
+
     # ----------------------------- Public API ----------------------------- #
 
     def evaluate_file(self, file_path: Path, category: str) -> Dict[str, Any]:
@@ -515,46 +854,90 @@ Survey reference titles (cleaned):
             include_example=self.config.include_criteria_example,
         )
 
-        expected_scores = {
+        # Count expected scores for aspects
+        expected_aspects = {
             "outline": len(criteria.outline),
             "content": len(criteria.content),
             "reference": len(criteria.reference),
         }
+        
+        # Count expected scores for criteria (rubrics)
+        expected_criteria = {
+            "outline": sum(len(a.get("expanded_criteria", [])) for a in criteria.outline),
+            "content": sum(len(a.get("expanded_criteria", [])) for a in criteria.content),
+            "reference": sum(len(a.get("expanded_criteria", [])) for a in criteria.reference),
+        }
 
         scores: Dict[str, Dict[str, Any]] = {}
 
-        if self.config.eval_outline:
-            prompt = self._build_prompt(survey, criteria, category, "outline")
-            if self.config.per_aspect_scoring:
-                scores["outline"] = self._score_aspects_with_llm(
-                    prompt, expected_scores["outline"]
+        # Binary scoring mode: evaluate each aspect separately
+        if self.config.binary_scoring:
+            if self.config.eval_outline:
+                scores["outline"] = self._evaluate_binary_aspect_group(
+                    survey, criteria.outline, category, "outline"
                 )
             else:
-                scores["outline"] = self._score_with_llm(prompt)
-        else:
-            scores["outline"] = {"score": None, "notes": "skipped by config"}
+                scores["outline"] = {"score": None, "notes": "skipped by config"}
 
-        if self.config.eval_content:
-            prompt = self._build_prompt(survey, criteria, category, "content")
-            if self.config.per_aspect_scoring:
-                scores["content"] = self._score_aspects_with_llm(
-                    prompt, expected_scores["content"]
+            if self.config.eval_content:
+                scores["content"] = self._evaluate_binary_aspect_group(
+                    survey, criteria.content, category, "content"
                 )
             else:
-                scores["content"] = self._score_with_llm(prompt)
-        else:
-            scores["content"] = {"score": None, "notes": "skipped by config"}
+                scores["content"] = {"score": None, "notes": "skipped by config"}
 
-        if self.config.eval_reference:
-            prompt = self._build_prompt(survey, criteria, category, "reference")
-            if self.config.per_aspect_scoring:
-                scores["reference"] = self._score_aspects_with_llm(
-                    prompt, expected_scores["reference"]
+            if self.config.eval_reference:
+                scores["reference"] = self._evaluate_binary_aspect_group(
+                    survey, criteria.reference, category, "reference"
                 )
             else:
-                scores["reference"] = self._score_with_llm(prompt)
+                scores["reference"] = {"score": None, "notes": "skipped by config"}
         else:
-            scores["reference"] = {"score": None, "notes": "skipped by config"}
+            # Non-binary scoring modes
+            if self.config.eval_outline:
+                prompt = self._build_prompt(survey, criteria, category, "outline")
+                if self.config.per_criterion_scoring:
+                    scores["outline"] = self._score_criteria_with_llm(
+                        prompt, expected_criteria["outline"]
+                    )
+                elif self.config.per_aspect_scoring:
+                    scores["outline"] = self._score_aspects_with_llm(
+                        prompt, expected_aspects["outline"]
+                    )
+                else:
+                    scores["outline"] = self._score_with_llm(prompt)
+            else:
+                scores["outline"] = {"score": None, "notes": "skipped by config"}
+
+            if self.config.eval_content:
+                prompt = self._build_prompt(survey, criteria, category, "content")
+                if self.config.per_criterion_scoring:
+                    scores["content"] = self._score_criteria_with_llm(
+                        prompt, expected_criteria["content"]
+                    )
+                elif self.config.per_aspect_scoring:
+                    scores["content"] = self._score_aspects_with_llm(
+                        prompt, expected_aspects["content"]
+                    )
+                else:
+                    scores["content"] = self._score_with_llm(prompt)
+            else:
+                scores["content"] = {"score": None, "notes": "skipped by config"}
+
+            if self.config.eval_reference:
+                prompt = self._build_prompt(survey, criteria, category, "reference")
+                if self.config.per_criterion_scoring:
+                    scores["reference"] = self._score_criteria_with_llm(
+                        prompt, expected_criteria["reference"]
+                    )
+                elif self.config.per_aspect_scoring:
+                    scores["reference"] = self._score_aspects_with_llm(
+                        prompt, expected_aspects["reference"]
+                    )
+                else:
+                    scores["reference"] = self._score_with_llm(prompt)
+            else:
+                scores["reference"] = {"score": None, "notes": "skipped by config"}
 
         duration = time.time() - start_time
         
@@ -716,6 +1099,20 @@ def parse_args() -> argparse.Namespace:
         help="Score each criterion aspect separately and average the result.",
     )
     parser.add_argument(
+        "--per-criterion",
+        dest="per_criterion_scoring",
+        action="store_true",
+        default=None,
+        help="Score each individual criterion (rubric) separately and average the result. Most granular scoring level.",
+    )
+    parser.add_argument(
+        "--binary",
+        dest="binary_scoring",
+        action="store_true",
+        default=None,
+        help="Use binary scoring (0 or 1) for each criterion. Each aspect evaluated separately. Scores are summed, not averaged.",
+    )
+    parser.add_argument(
         "--no-criteria-description",
         dest="include_criteria_description",
         action="store_false",
@@ -761,6 +1158,10 @@ def main():
         config.resume_from = args.resume_from
     if args.per_aspect_scoring is not None:
         config.per_aspect_scoring = args.per_aspect_scoring
+    if args.per_criterion_scoring is not None:
+        config.per_criterion_scoring = args.per_criterion_scoring
+    if args.binary_scoring is not None:
+        config.binary_scoring = args.binary_scoring
     if args.include_criteria_description is not None:
         config.include_criteria_description = args.include_criteria_description
     if args.include_criteria_example is not None:
